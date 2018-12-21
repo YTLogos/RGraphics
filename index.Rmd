@@ -1,14 +1,15 @@
 --- 
 title: "R 语言绘图基础"
-subtitle: "R Graphics (foundation)"
+subtitle: "R Graphics Foundations"
 author: "黄湘云"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.time(), tz = 'Asia/Taipei', usetz = TRUE)`"
 site: bookdown::bookdown_site
 documentclass: book
 papersize: b5
 linestretch: 1.25
 lof: yes
 lot: yes
+toccolor: magenta
 fontsize: 10pt
 colorlinks: yes
 classoption: "UTF8,oneside"
@@ -16,12 +17,36 @@ bibliography: [latex/book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 subparagraph: true
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
+description: "R Graphics Foundations."
 ---
 
 \mainmatter
 
 # 准备 {#prerequisites}
+
+R 提供了两套图形系统，分别是 graphics 包提供的基础绘图系统和 grid 包提供的栅格绘图系统，后者主要以两个 R 包为大家所熟知，一个是 lattice 包，另一个是 ggplot2 包。
+
+Trellis graphics are a bit like hash functions: you can be close to the target, but get a far-off result.
+   -- Dieter Menne (about problems with creating a suitable lattice panel function)
+      R-help (August 2008)
+
+
+If you imagine that this pen is Trellis, then Lattice is not this pen.
+   -- Paul Murrell (on the difference of Lattice (which eventually was called grid) and Trellis)
+      DSC 2001, Wien (March 2001)
+      
+
+You're overlooking something like line 800 of the documentation for xyplot. [...] It's probably in the R-FAQ as well, since my original feeling was that this behaviour was chosen in order to confuse people and see how many people read the FAQ... :)
+   -- Barry Rowlingson (about the fact that lattice objects have to be print()ed)
+      R-help (May 2005)
+      
+
+[R图形]{.todo}
+
+::: sidebar
+You _can_ also create non-syntactic bindings using single or double quotes (e.g. `"_abc" <- 1`) instead of backticks, but you shouldn't, because you'll have to use a different syntax to retrieve the values. The ability to use strings on the left hand side of the assignment arrow is an historical artefact, used before R supported backticks.
+:::
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 
@@ -33,12 +58,50 @@ install.packages("bookdown")
 # devtools::install_github("rstudio/bookdown")
 ```
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+## 为什么选择 R 语言
 
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
+不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
+
+[why-r]: https://www.ejwagenmakers.com/misc/HortonEtAl2004.pdf
+
+统计图形：
+
+基本要素
+
+点 pch cex 点的类型和大小  col 
+线 lty lwd 线的类型和宽度  col 
+
+颜色 col 连续型和离散型
+面/多边形 rect 颜色填充
+
+- 散点图
+- 气泡图
+- 条形图
+- 直方图
+- 折线图
+- 时序图
+- 饼图
+- 箱线图
+- 茎叶图
+- 抖动图
+
+
+
+强调图对应的数据类型
+
+raster/sf https://github.com/jafflerbach/spatial-analysis-R
+
+https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html
+https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html
+
+
+
+
+## 软件信息 {#softwares-rsession-info}
 
 ```{r sessioninfo,echo=TRUE}
 xfun::session_info(packages = c(
+  "colorspace", "tikzDevice",
   "bookdown", "rmarkdown"
 ))
 ```

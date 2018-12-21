@@ -7,7 +7,7 @@
 \usepackage[heading,UTF8]{ctex}
 \usepackage[T1]{fontenc}
 \usepackage{times}                                          % Serif Font
-\usepackage[scaled=.95]{helvet}                             % Sans Serif Font  \sf 
+\usepackage[scaled]{helvet}                             % Sans Serif Font  \sf 
 \usepackage{courier}                                        % monospace font best for windows
 \usepackage[scaled=.85]{couriers}                           % Typewriter Font
 % \usepackage{inconsolata}                                  % best for fedora/linux 
@@ -15,5 +15,26 @@
 % https://www.e-learn.cn/content/wangluowenzhang/878670
 % \usepackage[center]{titlesec}
 % \titleformat{\chapter}{\centering\Huge\bfseries}{第\,\thechapter\,章}{1em}{}
+
+\makeatletter
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
 
 \frontmatter

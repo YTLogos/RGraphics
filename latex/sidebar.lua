@@ -8,3 +8,14 @@ function Span(el)
     }
   end
 end
+
+function Div(el)
+  if el.classes:includes("sidebar") then
+    return {
+      pandoc.RawBlock("latex", "\\begin{kframe}"),
+      el,
+      pandoc.RawBlock("latex", "\\end{kframe}")
+    }
+  end
+end
+
