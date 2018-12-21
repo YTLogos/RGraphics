@@ -19,28 +19,12 @@ link-citations: yes
 subparagraph: true
 geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
 description: "R Graphics Foundations."
+keywords: [nothing, nothingness]
 ---
 
 \mainmatter
 
 # 准备 {#prerequisites}
-
-R 提供了两套图形系统，分别是 graphics 包提供的基础绘图系统和 grid 包提供的栅格绘图系统，后者主要以两个 R 包为大家所熟知，一个是 lattice 包，另一个是 ggplot2 包。
-
-Trellis graphics are a bit like hash functions: you can be close to the target, but get a far-off result.
-   -- Dieter Menne (about problems with creating a suitable lattice panel function)
-      R-help (August 2008)
-
-
-If you imagine that this pen is Trellis, then Lattice is not this pen.
-   -- Paul Murrell (on the difference of Lattice (which eventually was called grid) and Trellis)
-      DSC 2001, Wien (March 2001)
-      
-
-You're overlooking something like line 800 of the documentation for xyplot. [...] It's probably in the R-FAQ as well, since my original feeling was that this behaviour was chosen in order to confuse people and see how many people read the FAQ... :)
-   -- Barry Rowlingson (about the fact that lattice objects have to be print()ed)
-      R-help (May 2005)
-      
 
 [R图形]{.todo}
 

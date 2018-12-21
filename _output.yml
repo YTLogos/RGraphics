@@ -21,4 +21,5 @@ bookdown::pdf_book:
   pandoc_args: ["--top-level-division=chapter", "--lua-filter=latex/sidebar.lua"]
   keep_tex: yes
   dev: "cairo_pdf"
+  quote_footer: ["\\hspace*{\\fill} ", ""]
 bookdown::epub_book: default
