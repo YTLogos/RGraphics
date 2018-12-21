@@ -2,11 +2,15 @@ bookdown::gitbook:
   css: css/style.css
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="./">R 语言绘图基础</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
+    edit:
+      link: https://github.com/XiangyunHuang/RGraphics/edit/master/%s
+      text: "Edit"    
 bookdown::pdf_book:
   includes:
     in_header: latex/preamble.tex

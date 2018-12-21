@@ -15,7 +15,7 @@ pre code {
 
 /* Sidebar formating --------------------------------------------*/
 
-.sidebar {
+.sidebar, .base {
   border: 1px solid #ccc;
   border-left-width: 5px;
   border-radius: 5px;
@@ -23,12 +23,27 @@ pre code {
   margin: 1em 0;
 }
 
+.book .book-body .page-wrapper .page-inner section.normal div.base > :first-child,
 .book .book-body .page-wrapper .page-inner section.normal div.sidebar > :first-child {
   margin-top: 0;
 }
 
+.book .book-body .page-wrapper .page-inner section.normal div.base > :last-child,
 .book .book-body .page-wrapper .page-inner section.normal div.sidebar > :last-child {
   margin-bottom: 0;
+}
+
+div.base::before {
+  display: block;
+  content: "In base R";
+}
+
+div.base::before,
+.book .book-body .page-wrapper .page-inner section.normal div.sidebar h3 {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-bottom: 0.25em;
+  color: #333;
 }
 
 .todo {

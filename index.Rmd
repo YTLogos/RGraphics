@@ -12,7 +12,7 @@ lot: yes
 toccolor: magenta
 fontsize: 10pt
 colorlinks: yes
-classoption: "UTF8,oneside"
+classoption: "UTF8,twoside"
 bibliography: [latex/book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
@@ -48,9 +48,11 @@ You're overlooking something like line 800 of the documentation for xyplot. [...
 You _can_ also create non-syntactic bindings using single or double quotes (e.g. `"_abc" <- 1`) instead of backticks, but you shouldn't, because you'll have to use a different syntax to retrieve the values. The ability to use strings on the left hand side of the assignment arrow is an historical artefact, used before R supported backticks.
 :::
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
-
 The **bookdown** package [@xie_2015_knitr] can be installed from CRAN or Github:
+
+::: base
+This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+:::
 
 ```{r eval=FALSE,echo=TRUE}
 install.packages("bookdown")
