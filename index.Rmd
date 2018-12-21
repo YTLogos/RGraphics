@@ -9,7 +9,7 @@ papersize: b5
 linestretch: 1.25 # 1.25 倍行间距
 #lof: yes
 #lot: yes
-indent: 40pt # 段首缩进两个汉字
+#indent: 40pt # 段首缩进两个汉字
 toccolor: magenta
 fontsize: 10pt
 secnumdepth: 2
