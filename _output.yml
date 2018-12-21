@@ -22,4 +22,13 @@ bookdown::pdf_book:
   keep_tex: yes
   dev: "cairo_pdf"
   quote_footer: ["\\hspace*{\\fill} ", ""]
+  toc_unnumbered: false
+  number_sections: true
+  toc_appendix: no
+  toc_bib: no
+  highlight_bw: yes
+#  highlight: default
+  df_print: "default"
+  extra_dependencies:
+    ctex: heading
 bookdown::epub_book: default

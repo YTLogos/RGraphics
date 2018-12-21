@@ -6,11 +6,13 @@ date: "`r format(Sys.time(), tz = 'Asia/Taipei', usetz = TRUE)`"
 site: bookdown::bookdown_site
 documentclass: book
 papersize: b5
-linestretch: 1.25
-lof: yes
-lot: yes
+linestretch: 1.25 # 1.25 倍行间距
+#lof: yes
+#lot: yes
+indent: 40pt # 段首缩进两个汉字
 toccolor: magenta
 fontsize: 10pt
+secnumdepth: 2
 colorlinks: yes
 classoption: "UTF8,twoside"
 bibliography: [latex/book.bib, packages.bib]
@@ -19,12 +21,15 @@ link-citations: yes
 subparagraph: true
 geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
 description: "R Graphics Foundations."
-keywords: [nothing, nothingness]
+keywords: ["graphics", "grid", "lattice", "ggplot2"]
 ---
 
 \mainmatter
 
 # 准备 {#prerequisites}
+\index{bookdown}
+\index{knitr}
+\index{pandoc}
 
 [R图形]{.todo}
 
