@@ -1,9 +1,11 @@
-# 文件与目录管理 {#files-dirs-folder}
+# 文件管理 {#file-manipulation}
 
 查看：列出目录或文件夹下的文件
 权限：操作目录和文件的权限
 
-## 查看 {#list-files-in-dir-or-folder}
+[给出 linux 下的对应命令]{.todo}
+
+## 查看 {#list}
 
 文件夹只包含文件，目录既包含文件又包含文件夹，`list.dirs` 列出目录或文件夹，`list.files` 列出文件或文件夹 
 
@@ -25,3 +27,123 @@
    +  path: 指定完整路径名，默认使用当前路径 `getwd()`
    +  full.names: TRUE 返回相对路径，FALSE 返回目录的名称
    +  recursive: 是否递归的方式列出目录，如果是的话，目录下的子目录也会列出
+
+获取文件信息
+
+file.info(..., extra_cols = TRUE)
+
+file.mode(...)
+file.mtime(...)
+file.size(...)
+
+ 文件访问 
+
+Ascertain File Accessibility
+
+file.access(names, mode = 0)
+
+## 操作 {#manipulation}
+
+file.create(..., showWarnings = TRUE)
+file.exists(...)
+file.remove(...)
+file.rename(from, to)
+file.append(file1, file2)
+file.copy(from, to, overwrite = recursive, recursive = FALSE,
+          copy.mode = TRUE, copy.date = FALSE)
+file.symlink(from, to) creation of symbolic links (and their Windows analogues),
+file.link(from, to)
+Sys.junction(from, to)
+
+Sys.readlink(paths) Read File Symbolic Links
+
+## 路径 {#paths}
+
+环境变量算是路径操作
+
+Sys.getenv  获取环境变量
+Sys.setenv  设置环境变量
+
+操作文件路径
+
+file.path Construct Path to File
+
+basename(path) Manipulate File Paths
+dirname(path)
+
+path.expand(path) Expand File Paths
+
+normalizePath() Express File Paths in Canonical Form
+shortPathName(path)  Express File Paths in Short Form
+
+Sys.glob  Wildcard Expansion on File Paths
+
+```{r}
+Sys.glob(file.path(R.home(), "library", "*", "R", "*.rdx"))
+```
+
+## 查找 {#find}
+
+查找文件、可执行文件的完整路径、R 包
+
+Sys.which Find Full Paths to Executables
+
+system.file  Find Names of R System Files
+R.home
+.libPaths()
+find.package 
+file.exist 
+
+## 权限 {#permissions}
+
+操作目录和文件的权限 Manipulation of Directories and File Permissions
+
+dir.exists(paths)
+dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")
+Sys.chmod(paths, mode = "0777", use_umask = TRUE)
+Sys.umask(mode = NA)
+
+## 区域 {#locale}
+
+Query or Set Aspects of the Locale
+
+Sys.getlocale(category = "LC_ALL")
+Sys.setlocale(category = "LC_ALL", locale = "")
+Sys.localeconv
+
+Find Details of the Numerical and Monetary Representations in the Current Locale
+
+## 进程 {#process}
+
+聊聊什么是进程，线程
+
+Sys.getpid Get the Process ID of the R Session
+
+proc.time()          Running Time of R/ for the timings for the session.
+system.time         for measuring elapsed/CPU time of expressions.
+gc.time             Report Time Spent in Garbage Collection
+
+
+
+
+## 调用 {#system}
+
+system system2 系统命令 Invoke a System Command
+
+## 时间 {#time}
+
+时区 时间
+
+Sys.timezone
+
+Sys.time
+Sys.Date
+
+date
+
+as.POSIX* Date-time Conversion Functions
+
+## 搜索 {#search}
+
+help.search
+?regrex
