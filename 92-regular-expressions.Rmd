@@ -1,0 +1,8 @@
+# 正则表达式 {#regular-expressions}
+
+regex Regular Expressions as used in R
+
+支持正则表达式的函数
+
+grep, apropos, browseEnv, glob2rx, help.search, list.files, ls and strsplit.
+
