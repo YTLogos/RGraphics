@@ -19,8 +19,9 @@ bibliography: [latex/book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 subparagraph: true
+compact-title: true
 geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
-description: "R Graphics Foundations."
+description: "R Graphics Foundations. 学习 R Base Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册"
 keywords: ["graphics", "grid", "lattice", "ggplot2"]
 ---
 
@@ -36,6 +37,8 @@ keywords: ["graphics", "grid", "lattice", "ggplot2"]
 ::: sidebar
 You _can_ also create non-syntactic bindings using single or double quotes (e.g. `"_abc" <- 1`) instead of backticks, but you shouldn't, because you'll have to use a different syntax to retrieve the values. The ability to use strings on the left hand side of the assignment arrow is an historical artefact, used before R supported backticks.
 :::
+
+
 
 The **bookdown** package [@xie_2015_knitr] can be installed from CRAN or Github:
 
@@ -76,17 +79,16 @@ install.packages("bookdown")
 - 茎叶图
 - 抖动图
 
-
+在 base R 中实现的图形，附上 ggplot2 的实现，而 ggplot2 的章节图形提供 base R 实现的图形
 
 强调图对应的数据类型
 
-raster/sf https://github.com/jafflerbach/spatial-analysis-R
 
-https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html
-https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html
+R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
 
-
-
+```{r,echo=TRUE}
+sample(colors(TRUE),20)
+```
 
 ## 软件信息 {#softwares-rsession-info}
 

@@ -20,6 +20,12 @@ new_session: no
 before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"
+  - "01-file-manipulation.Rmd"
+#  - "02-data-import-export.Rmd"
+#  - "03-data-manipulation.Rmd"
+
+#  - "04-base-graph.Rmd"
+
 
   - "06-references.Rmd"
 
