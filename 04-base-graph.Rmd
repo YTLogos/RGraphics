@@ -1,25 +1,36 @@
-# 基本图形元素 {#base-graph}
+# 基本图形 {#base-graph}
 
 点线面
 
-统计图形--图库
+## 要素 {#elements} 
+
+点 pch cex 点的类型和大小  col 
+线 lty lwd 线的类型和宽度  col 
+
+颜色 col 连续型和离散型
+面/多边形 rect 颜色填充
+
+## 图库 {#gallary}
+
+- 散点图
+- 气泡图
+- 条形图
+- 直方图
+- 折线图
+- 时序图
+- 饼图
+- 箱线图
+- 茎叶图
+- 抖动图
+
+在 base R 中实现的图形，附上 ggplot2 的实现，而 ggplot2 的章节图形提供 base R 实现的图形
+
+强调图对应的数据类型
 
 
+## 配色 {#colors}
 
-高级统计图形
+
+## 字体 {#fonts}
 
 
-空间数据相关
-
-地图
-
-用 R 画中国地图并标注城市位置
-https://yihui.name/cn/2008/10/china-map-and-city-locations-with-r/
-
-无法重现但是用 base R 画地图的用法可以借鉴
-
-Introduction to spatial analysis in R (rasters/sf) 
-
-https://github.com/jafflerbach/spatial-analysis-R
-https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html
-https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html
