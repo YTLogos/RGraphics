@@ -8,6 +8,8 @@ subset
 grep
 sub gsub
 
+Pattern Matching and Replacement 模式匹配和替换
+
 ## 变换 {#data-reshape}
 
 reshape 
