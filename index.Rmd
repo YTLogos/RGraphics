@@ -58,30 +58,7 @@ install.packages("bookdown")
 
 [why-r]: https://www.ejwagenmakers.com/misc/HortonEtAl2004.pdf
 
-统计图形：
 
-基本要素
-
-点 pch cex 点的类型和大小  col 
-线 lty lwd 线的类型和宽度  col 
-
-颜色 col 连续型和离散型
-面/多边形 rect 颜色填充
-
-- 散点图
-- 气泡图
-- 条形图
-- 直方图
-- 折线图
-- 时序图
-- 饼图
-- 箱线图
-- 茎叶图
-- 抖动图
-
-在 base R 中实现的图形，附上 ggplot2 的实现，而 ggplot2 的章节图形提供 base R 实现的图形
-
-强调图对应的数据类型
 
 
 R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
