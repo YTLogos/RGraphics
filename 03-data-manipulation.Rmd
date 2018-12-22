@@ -2,7 +2,7 @@
 
 数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象
 
-## 清洗 {#data-clean}
+## 清洗 {#clean}
 
 subset
 grep
@@ -10,7 +10,7 @@ sub gsub
 
 Pattern Matching and Replacement 模式匹配和替换
 
-## 变换 {#data-reshape}
+## 变换 {#reshape}
 
 reshape 
 
@@ -20,7 +20,7 @@ transform
 
 Transform an Object, for Example a Data Frame
 
-## 聚合 {#data-aggregate}
+## 聚合 {#aggregate}
 
 分组统计
 
