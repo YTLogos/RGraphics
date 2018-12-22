@@ -1,0 +1,25 @@
+# 基本图形元素 {#base-graph}
+
+点线面
+
+统计图形--图库
+
+
+
+高级统计图形
+
+
+空间数据相关
+
+地图
+
+用 R 画中国地图并标注城市位置
+https://yihui.name/cn/2008/10/china-map-and-city-locations-with-r/
+
+无法重现但是用 base R 画地图的用法可以借鉴
+
+Introduction to spatial analysis in R (rasters/sf) 
+
+https://github.com/jafflerbach/spatial-analysis-R
+https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html
+https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html
