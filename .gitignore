@@ -7,5 +7,6 @@ packages.bib
 
 _book/
 _bookdown_files/
-Test/
+test/
 r-manuals/
+figures/
