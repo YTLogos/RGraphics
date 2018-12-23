@@ -24,7 +24,7 @@ rmd_files:
 #  - "02-data-import-export.Rmd"
 #  - "03-data-manipulation.Rmd"
 
-#  - "04-base-graph.Rmd"
+  - "04-base-graph.Rmd"
 
 
   - "96-references.Rmd"

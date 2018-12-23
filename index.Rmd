@@ -21,7 +21,7 @@ link-citations: yes
 subparagraph: true
 compact-title: true
 geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
-description: "R Graphics Foundations. 学习 R Base Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册"
+description: "R Graphics Foundations. 学习 R Base Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上或博客上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍"
 keywords: ["graphics", "grid", "lattice", "ggplot2"]
 ---
 
@@ -61,21 +61,51 @@ install.packages("bookdown")
 
 
 
-R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
-
-```{r,echo=TRUE}
-sample(colors(TRUE),20)
-```
 
 ## 软件信息 {#softwares-rsession-info}
 
+编译本书需要的环境
+
 ```{r sessioninfo,echo=TRUE}
 xfun::session_info(packages = c(
-  "colorspace", "tikzDevice",
+  "colorspace", 
   "bookdown", "rmarkdown"
 ))
 ```
 
+重现本书内容需要的 R 包
+
+```{r,eval=FALSE}
+xfun::session_info(packages = c(
+  "colorspace",
+  "bookdown", "rmarkdown",
+  "tikzDevice", "fontcm"
+))
+```
+```
+R version 3.5.2 (2018-12-20)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 8.1 x64 (build 9600)
+
+Locale:
+  LC_COLLATE=Chinese (Simplified)_China.936 
+  LC_CTYPE=Chinese (Simplified)_China.936   
+  LC_MONETARY=Chinese (Simplified)_China.936
+  LC_NUMERIC=C                              
+  LC_TIME=Chinese (Simplified)_China.936    
+
+Package version:
+  base64enc_0.1.3  bookdown_0.9     colorspace_1.4.0 digest_0.6.18   
+  evaluate_0.12    filehash_2.4.1   fontcm_1.1       glue_1.3.0      
+  graphics_3.5.2   grDevices_3.5.2  highr_0.7        htmltools_0.3.6 
+  jsonlite_1.6     knitr_1.21       magrittr_1.5     markdown_0.9    
+  methods_3.5.2    mime_0.6         png_0.1.7        Rcpp_1.0.0      
+  rmarkdown_1.11   stats_3.5.2      stringi_1.2.4    stringr_1.3.1   
+  tikzDevice_0.12  tinytex_0.9      tools_3.5.2      utils_3.5.2     
+  xfun_0.4         yaml_2.2.0      
+
+Pandoc version: 2.5
+```
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

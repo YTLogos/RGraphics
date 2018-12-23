@@ -1,8 +1,10 @@
 # 基本图形 {#base-graph}
 
-点线面
+作为知识介绍，本章所有数据都来源于基础 R 包，即安装 R 软件后自带的数据集
 
 ## 要素 {#elements} 
+
+点线面
 
 点 pch cex 点的类型和大小  col 
 线 lty lwd 线的类型和宽度  col 
@@ -27,10 +29,123 @@
 
 强调图对应的数据类型
 
+### 散点图
+
+```{r,echo=TRUE}
+data(topo, package="MASS")
+```
+
+topo Spatial Topographic Data是地形数据 The topo data frame has 52 rows and 3 columns, of topographic heights within a 310 feet square.
+
+x coordinates (units of 50 feet)
+y coordinates (units of 50 feet)
+z heights (feet)
+
+
+### 气泡图
+
+topo 是地形数据
+
+### 轮廓图
+
+topo 是地形数据
+
+等高线图
+
+### 折线图
+
+函数曲线，样条曲线，核密度曲线，平行坐标图，时序图
+
+
+
 
 ## 配色 {#colors}
 
 
+R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
+
+```{r,echo=TRUE}
+sample(colors(TRUE),20)
+```
+
 ## 字体 {#fonts}
 
+pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体 
 
+```{r font-sans,echo=TRUE,dev.args=list(family = "sans"),out.width = "55%",fig.width=33/7,fig.cap="默认 sans 字体"}
+x <- seq(-4, 4, len = 101)
+y <- cbind(sin(x), cos(x))
+matplot(x, y,
+  type = "l", xaxt = "n",
+  main = expression(paste(
+    plain(sin) * phi, "  and  ",
+    plain(cos) * phi
+  )),
+  ylab = expression("sin" * phi, "cos" * phi), # only 1st is taken
+  xlab = expression(paste("Phase Angle ", phi)),
+  col.main = "blue"
+)
+axis(1,
+  at = c(-pi, -pi / 2, 0, pi / 2, pi),
+  labels = expression(-pi, -pi / 2, 0, pi / 2, pi)
+)
+```
+
+
+```{r,eval=FALSE,echo=TRUE}
+CM <- Type1Font(
+  "CM",
+  c(file.path(
+    system.file("fonts", "metrics", package = "fontcm"),
+    c(
+      "fcmr8a.afm", "fcmb8a.afm", "fcmri8a.afm",
+      "fcmbi8a.afm", "cmsyase.afm"
+    )
+  ))
+)
+pdfFonts(CM = CM)
+```
+
+family 指定字体，默认字体 Helvetica
+
+```{r,eval=FALSE,echo=TRUE}
+pdf("cm.pdf", family = "CM", width = 4, height = 4)
+par(mar = c(4.1, 4.1, 0.5, 0.5)) 
+x <- seq(-4, 4, len = 101)
+y <- cbind(sin(x), cos(x))
+matplot(x, y,
+  type = "l", xaxt = "n",
+  main = expression(paste(
+    plain(sin) * phi, "  and  ",
+    plain(cos) * phi
+  )),
+  ylab = expression("sin" * phi, "cos" * phi), # only 1st is taken
+  xlab = expression(paste("Phase Angle ", phi)),
+  col.main = "blue"
+)
+axis(1,
+  at = c(-pi, -pi / 2, 0, pi / 2, pi),
+  labels = expression(-pi, -pi / 2, 0, pi / 2, pi)
+)
+dev.off()
+```
+
+```{r missing-fonts,fig.cap="字体缺失"}
+knitr::include_graphics(path = "figures/missing-fonts.png")
+```
+
+
+```{r,eval=FALSE,echo=TRUE}
+Sys.setenv(R_GSCMD = "C:/Program Files/gs/gs9.26/bin/gswin64c.exe")
+
+# embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") # GS 默认搜索路径不对
+
+embedFonts(
+  file = "cm.pdf", outfile = "cm-embed.pdf",
+  fontpaths = system.file("fonts", package = "fontcm")  # 指定字体搜索路径
+)
+```
+
+参考 [@Paul_2006_fonts] fontcm 字体
+
+[cmr-fonts]: https://www.stat.auckland.ac.nz/~paul/R/CM/CMR.html
