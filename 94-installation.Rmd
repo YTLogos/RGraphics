@@ -1,0 +1,34 @@
+\cleardoublepage 
+
+# (APPENDIX) 附录 {-}
+
+# 安装 R 软件 {#installation}
+
+## 仓库安装 {#repo-installation}
+
+### Ubuntu
+
+
+### CentOS
+
+同样适用于 CentOS
+
+
+## 源码安装 {#source-installation}
+
+### Ubuntu
+
+
+### CentOS
+
+
+
+## 忍者安装 {#custom-installation}
+
+从源码自定义安装：加速 Intel MKL/Goto Blas/openblas/atlas 大文件支持
+
+### Ubuntu
+
+### CentOS
+
+
