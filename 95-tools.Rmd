@@ -1,0 +1,111 @@
+# 软件工具 {#software-tools}
+
+## 版本控制 {#version-control}
+
+三剑客 Git & Github & Gitlab
+
+```bash
+git config --global user.name "Your Name Comes Here"
+git config --global user.email you@yourdomain.example.com
+```
+数据库
+
+## 动态文档 {#dynamic-documents}
+
+三剑客 Markdown & Pandoc's Markdown & R Markdown
+
+## 集成开发环境 {#ide}
+
+RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Server 开源服务器版
+
+## 容器 {#container}
+
+Docker & 容器管理工具 Docker Swarm
+
+### Docker
+
+Docker & Docker Machine & Docker Swarm
+
+```
+docker --version
+Docker version 18.03.0-ce, build 0520e24302
+```
+
+### Docker Machine
+
+开源贡献站点 https://github.com/docker/machine
+
+基本命令
+
+* 查看 docker machine 版本信息
+
+   ```{r,engine="bash",eval=FALSE,echo=TRUE}
+   docker-machine --version
+   # docker-machine.exe version 0.14.0, build 89b8332
+   ```
+
+* 列出创建的虚拟机
+
+   ```{r, engine = "bash",eval=FALSE,echo=TRUE}
+   # 启动前
+   docker-machine ls
+   # NAME      ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+   # default   -        virtualbox   Stopped                 Unknown
+   # 启动后
+   docker-machine ls
+   # NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+   # default   *        virtualbox   Running   tcp://192.168.99.100:2376           v18.03.0-ce
+   ```
+
+* 查看虚拟机 default 的 ip
+
+   ```{r, engine = "bash",eval=FALSE,echo=TRUE}
+   docker-machine ip default
+   # 192.168.99.100
+   ```
+
+* 启动虚拟机
+
+   ```{r, engine = "bash",eval=FALSE,echo=TRUE}
+   docker-machine start default
+   # Starting "default"...
+   # (default) Check network to re-create if needed...
+   # (default) Windows might ask for the permission to configure a dhcp server. Sometimes, such confirmation window is minimized in the taskbar.
+   # (default) Waiting for an IP...
+   # Machine "default" was started.
+   # Waiting for SSH to be available...
+   # Detecting the provisioner...
+   # Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+   ```
+
+* 查看虚拟机 default 的环境
+
+   ```{r, engine = "bash",eval=FALSE,echo=TRUE}
+   docker-machine env default
+   # export DOCKER_TLS_VERIFY="1"
+   # export DOCKER_HOST="tcp://192.168.99.100:2376"
+   # export DOCKER_CERT_PATH="D:\Docker\machines\default"
+   # export DOCKER_MACHINE_NAME="default"
+   # export COMPOSE_CONVERT_WINDOWS_PATHS="true"
+   # # Run this command to configure your shell:
+   # # eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env default)
+   ```
+
+* 关闭虚拟机 default
+
+   ```{r, engine = "bash",eval=FALSE,echo=TRUE}
+   docker-machine stop default
+   # Stopping "default"...
+   # Machine "default" was stopped.
+   ```
+
+
+帮助文档 https://docs.docker.com/machine/get-started
+
+
+
+### Docker Swarm
+
+### Kubernetes (k8s)
+
+## 数据库 {#database}
