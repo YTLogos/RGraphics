@@ -1,24 +1,88 @@
 # 数据操作 {#data-manipulation}
 
+```{r,include=FALSE}
+library(magrittr) # %>%
+```
+
 数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象
 
 ## 清洗 {#clean}
 
-subset
+
 grep
 sub gsub
 
 Pattern Matching and Replacement 模式匹配和替换
 
-## 变换 {#reshape}
+R 基础包提供了丰富的字符串处理函数
 
-reshape 
+```
+help.search(keyword = "character", package = "base")
+```
+
+操作的数据对象是数据框(data.frame)类型的
+
+## 重塑 {#reshape}
+
+数据框宽格式 wide 变长格式 long
+
+reshape 支持正则表达式
 
 Reshape Grouped Data
 
-transform
+## 转换 {#transform}
 
-Transform an Object, for Example a Data Frame
+transform 对数据框中的某些列做计算，取对数，将计算的结果单存一列加到数据框中
+
+Transform an Object, for Example a Data Frame 支持正则表达式
+
+## 子集 {#subset}
+
+`subset(x, subset, select, drop = FALSE, ...)` 参数 subset 代表行操作，select 代表列操作
+
+subset() 从数据框中提取部分数据
+
+```{r,echo=TRUE}
+subset(iris, Species == "virginica") %>% head(5)
+# summary(iris$Sepal.Length)  mean(iris$Sepal.Length)
+# 且的逻辑
+# subset(iris, Species == "virginica" & Sepal.Length > 5.84333) %>% head(5)
+subset(iris, Species == "virginica" & Sepal.Length > mean(Sepal.Length)) %>% head(5)
+# 在行的子集范围内
+subset(iris, Species %in% c("virginica","versicolor") & Sepal.Length > mean(Sepal.Length)) %>% head(5)
+# 在列的子集内 先选中列
+subset(iris, select = c("Sepal.Length","Species"), Sepal.Length > mean(Sepal.Length)) %>% head(5)
+```
+
+高级操作：加入正则表达式筛选
+
+```{r,echo=TRUE}
+## sometimes requiring a logical 'subset' argument is a nuisance
+nm <- rownames(state.x77)
+start_with_M <- nm %in% grep("^M", nm, value = TRUE)
+subset(state.x77, start_with_M, Illiteracy:Murder)
+# 简化
+# subset(state.x77, subset = grepl("^M", rownames(state.x77)), select = Illiteracy:Murder)
+# 继续简化
+subset(state.x77, grepl("^M", rownames(state.x77)), Illiteracy:Murder)
+```
+
+::: sidebar
+Warning: This is a convenience function intended for use interactively. For programming it is better to use the standard subsetting functions like `[`, and in particular the non-standard evaluation of argument `subset` can have unanticipated consequences.
+:::
+
+## 排序 {#order}
+
+在数据框内，根据(order)某一列或几列对行进行排序(sort)，根据鸢尾花(iris)的类别(Species)对萼片(sepal)的长度进行排序，其余的列随之变化
+
+```{r,echo=TRUE}
+# 对萼片的长度排序
+iris[order(iris$Species,iris$Sepal.Length),] %>% head(5)
+# 对花瓣的长度排序
+iris[order(iris$Species,iris$Petal.Length),] %>% head(5)
+# 先对花瓣的宽度排序，再对花瓣的长度排序
+iris[order(iris$Petal.Width,iris$Petal.Length),] %>% head(5)
+```
 
 ## 聚合 {#aggregate}
 
