@@ -62,3 +62,33 @@ parent.frame(n = 1)
 
 sys.source Parse and Evaluate Expressions from a File
 
+
+## 闭包 {#closures}
+
+An illustration of lexical scoping.
+
+```r
+demo(scoping)
+```
+
+## 递归 {#recursion}
+
+Using recursion for adaptive integration
+
+```r
+demo(recursion)
+```
+
+## 异常捕获和处理 {#catching-and-handling-errors}
+
+
+```r
+demo(error.catching)
+```
+
+## 判断对象属性 {#is-things}
+
+```r
+demo(is.things)
+```
+

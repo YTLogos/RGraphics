@@ -1,6 +1,6 @@
 \cleardoublepage 
 
-# (APPENDIX) 附录 {-}
+# (APPENDIX) 附录 {#appendix .unnumbered}
 
 # 安装 R 软件 {#installation}
 

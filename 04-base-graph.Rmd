@@ -79,6 +79,26 @@ R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地�
 sample(colors(TRUE),20)
 ```
 
+
+调制两个色板
+
+```{r color-pal, fig.cap = "桃色至梨色的渐变"}
+# Colors from https://github.com/johannesbjork/LaCroixColoR
+color_pal <- c("#FF3200", "#E9A17C", "#E9E4A6", "#1BB6AF", "#0076BB", "#172869")
+n <- 16
+more_colors <- (grDevices::colorRampPalette(color_pal))(n)
+scales::show_col(colours = more_colors)
+```
+
+```{r fish-hsv-pal, fig.cap="Hue-Saturation-Value (HSV) color model"}
+# colors in colortools from http://www.gastonsanchez.com/
+fish_pal <- c("#69D2E7", "#6993E7", "#7E69E7", "#BD69E7", 
+              "#E769D2", "#E76993", "#E77E69", "#E7BD69", 
+              "#D2E769", "#93E769", "#69E77E", "#69E7BD")
+more_colors <- (grDevices::colorRampPalette(fish_pal))(n)
+scales::show_col(colours = more_colors)
+```
+
 ## 字体 {#fonts}
 
 pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体 
@@ -160,3 +180,167 @@ embedFonts(
 参考 [@Paul_2006_fonts] fontcm 字体
 
 [cmr-fonts]: https://www.stat.auckland.ac.nz/~paul/R/CM/CMR.html
+
+**knitr** 支持的引擎有：
+
+```{r,echo=TRUE}
+names(knitr::knit_engines$get())
+```
+
+## Graphviz
+
+先安装 Graphviz^[Graphviz 官网 <http://www.graphviz.org/>]，常用于绘制流程图，广泛用于 tensorflow 和 mxnet 的模型描述中，如图 \@ref(fig:dot-ex) 所示
+
+```{r dot-ex, engine = "dot", fig.cap = "Funky dot",eval=FALSE}
+digraph test123 {
+  a -> b -> c;
+  a -> {x y};
+  b [shape=box];
+  c [label="hello\nworld",color=blue,fontsize=24,
+      fontname="Palatino-Italic",fontcolor=red,style=filled];
+  a -> z [label="hi", weight=100];
+  x -> z [label="multi-line\nlabel"];
+  edge [style=dashed,color=red];
+  b -> x;
+  {rank=same; b x}
+}
+```
+
+## TikZ {#tikz}
+
+如图\@ref(fig:demo-tikz)所示，模板来自 `system.file('misc', 'tikz2pdf.tex', package = 'knitr')`
+
+```{tikz demo-tikz, fig.cap='tikz 图形', engine.opts = list(template = "code/chapter_03/tikz2pdf.tex"),eval=F}
+\begin{tikzpicture}[scale=.7]
+\draw [fill=gray!30,very thick] (0,-1) rectangle (5,1);
+\draw [very thick] (5, 0) -- (13,0);
+\node [below] at (2,-1) {\large Hello};
+\node [below, align=center] at (0,-1) {\large Two\\ lines};
+\end{tikzpicture}
+```
+
+再来一张稍微复杂的图形，如图 \@ref(fig:complicated-tikz)所示
+
+```{tikz complicated-tikz, fig.cap='稍复杂的 tikz 图形', engine.opts = list(template = "code/chapter_03/tikz2pdf.tex"),eval=F}
+\usetikzlibrary{arrows}
+\begin{tikzpicture}[node distance=2cm, auto, >=latex, thick, scale = 1.5]
+\node (P) {$P$};
+\node (B) [right of=P] {$B$};
+\node (A) [below of=P] {$A$};
+\node (C) [below of=B] {$C$};
+\node (P1) [node distance=1.4cm, left of=P, above of=P] {$\hat{P}$};
+\draw[->] (P) to node {$f$} (B);
+\draw[->] (P) to node [swap] {$g$} (A);
+\draw[->] (A) to node [swap] {$f$} (C);
+\draw[->] (B) to node {$g$} (C);
+\draw[->, bend right] (P1) to node [swap] {$\hat{g}$} (A);
+\draw[->, bend left] (P1) to node {$\hat{f}$} (B);
+\draw[->, dashed] (P1) to node {$k$} (P);
+\end{tikzpicture}
+```
+
+**tikzDevice** 包 [@R-tikzDevice] 可以方便的把 R 代码转化为 tikz 代码，然后使用 LaTeX 引擎编译成 PDF 文档，特别地，它很好地支持了图里的数学公式
+
+```{r,eval=FALSE}
+library(tikzDevice)
+tf <- file.path(getwd(), "demo-tikzDevice.tex")
+tikz(tf, width = 6, height = 4, pointsize = 30, standAlone = TRUE)
+# 绘图的代码，仅支持 Base R Graphics System
+source(file = "code/chapter_03/matern.R")
+dev.off()
+tools::texi2dvi(tf, pdf = T)
+system("rm demo-tikzDevice.tex *.log *.aux *.dvi")
+system("convert -density 300 -trim demo-tikzDevice.pdf -quality 100 demo-tikzDevice.png")
+system("mv demo-tikzDevice.* figures/")
+# convert test.svg test.png
+```
+
+如图 \@ref(fig:demo-tikzDevice)所示
+
+```{r demo-tikzDevice,fig.cap="tikzDevice绘图",echo=FALSE,eval=FALSE}
+knitr::include_graphics(path = "figures/demo-tikzDevice.png")
+```
+
+
+## Asymptote {#asy}
+
+Asymptote 图形如图 \@ref(fig:demo-asymptote) 所示
+
+```{asy demo-asymptote, fig.cap='Asymptote 图形', echo=FALSE,out.width = "35%",eval=F}
+pair crease(pair z1, pair z2, bool left){
+  pair dz = z2 - z1;
+  if (left)
+    return z1 + dz * (0.5, 0.5);
+  else
+    return z1 + dz * (0.5, -0.5);
+}
+pair[] fold(pair[] oldz){
+  int n = oldz.length;
+  pair[] newz = new pair[2n-1];
+  for (int i = 0; i < n-1; ++i)
+    {
+      newz[2i] = oldz[i];
+      newz[2i+1] = crease(oldz[i], oldz[i+1], i%2==0);
+    }
+  newz[2(n-1)] = oldz[n-1];
+  return newz;
+}
+pair[] dragon(int n, pair[] base={}){
+  if (base.length == 0)
+    if (n%2 == 0)
+      base = new pair[] {(0,0), (1,1) };
+    else
+      base = new pair[] {(0,0), (1,0) };
+
+  pair[] z = base;
+  for (int i = 1; i < n; ++i)
+    z = fold(z);
+
+  return z;
+}
+void drawtris(pair[] z, pen p = currentpen){
+  int n = z.length;
+  for (int i = 0; i < n-2; i+=2)
+    fill(z[i]--z[i+1]--z[i+2]--cycle, p);
+}
+void drawtris(pair[] z, pen p1, pen p2){
+  int n = z.length;
+  for (int i = 0; i < n-2; i+=2)
+    fill(z[i]--z[i+1]--z[i+2]--cycle, 2i < n-1 ? p1 : p2);
+}
+size(500,0);
+int n = 10;
+drawtris(dragon(n, new pair[] {(0,0), (1,0)}), black);
+drawtris(dragon(n, new pair[] {(0,0), (0,-1)}), blue);
+drawtris(dragon(n, new pair[] {(0,0), (-1,0)}), red);
+drawtris(dragon(n, new pair[] {(0,0), (0,1)}),  green);
+```
+
+
+## matplotlib
+
+数学公式是这样的，如图\@ref(fig:matplotlib-math)
+
+```{r matplotlib-math, engine = "python",echo = FALSE, fig.cap = "公式",eval=FALSE}
+from __future__ import unicode_literals
+import numpy as np
+import matplotlib
+matplotlib.rcParams['text.usetex'] = True
+matplotlib.rcParams['text.latex.unicode'] = True
+import matplotlib.pyplot as plt
+plt.switch_backend('agg') # Very Important in R Markdown
+
+t = np.linspace(0.0, 1.0, 100)
+s = np.cos(4 * np.pi * t) + 2
+
+fig, ax = plt.subplots(figsize=(6, 4), tight_layout=True)
+ax.plot(t, s)
+
+ax.set_xlabel(r'\textbf{time (s)}')
+# ax.set_ylabel(r'\textit{Velocity}(\N{DEGREE SIGN}/sec)', fontsize=16)
+ax.set_ylabel(r'\textit{Velocity}($^{\circ}$/sec)', fontsize=16)
+ax.set_title(r'\TeX\ is Number $\displaystyle\sum_{n=1}^\infty'
+             r'\frac{-e^{i\pi}}{2^n}$!', fontsize=16, color='r')
+plt.show()
+#plt.savefig('matplotlib-math.svg')
+```

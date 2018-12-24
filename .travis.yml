@@ -1,0 +1,46 @@
+language: r
+sudo: false
+cache:
+  packages: true
+  directories:
+    - _bookdown_files
+
+latex: false
+branches:
+  only:
+    - master
+    - release
+    - stable
+
+pandoc_version: 2.3.1
+
+git:
+  depth: 5
+  submodules: false
+  
+repos:
+  CRAN: https://cloud.r-project.org
+
+addons:
+  apt:
+    sources:
+      - sourceline: ppa:opencpu/imagemagick
+    packages:
+      - ghostscript
+      - imagemagick
+      - optipng
+      - libosmesa6
+      - libosmesa6-dev
+      - freeglut3
+      - freeglut3-dev
+      - graphviz
+      - asymptote
+    #  - phantomjs
+
+before_script:
+  - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
+  - chmod +x ./_deploy.sh
+
+script:
+  - make gitbook
+  - ./_deploy.sh

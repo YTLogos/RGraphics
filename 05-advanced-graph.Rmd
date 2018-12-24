@@ -16,3 +16,32 @@ Introduction to spatial analysis in R (rasters/sf)
 https://github.com/jafflerbach/spatial-analysis-R
 https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html
 https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html
+
+## raster
+
+星号 * 标记的是 S3 方法
+
+```{r}
+methods(plot)
+```
+
+查看函数的定义
+
+```{r}
+getAnywhere(plot.raster)
+```
+
+rasterImage 函数来绘制图像，如果想知道 `rasterImage` 的内容可以继续看 `getAnywhere(rasterImage)`
+
+```{r}
+getAnywhere(rasterImage)
+```
+
+通过查看函数的帮助 `?rasterImage` ，我们需要重点关注一下
+参数 *image* 传递的 raster 对象
+
+## image
+
+
+
+

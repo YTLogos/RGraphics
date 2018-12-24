@@ -9,4 +9,6 @@ _book/
 _bookdown_files/
 test/
 r-manuals/
+
+code/
 figures/

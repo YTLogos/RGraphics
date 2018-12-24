@@ -28,6 +28,15 @@
    +  full.names: TRUE 返回相对路径，FALSE 返回目录的名称
    +  recursive: 是否递归的方式列出目录，如果是的话，目录下的子目录也会列出
 
+打开文件内容
+
+```{r,echo=TRUE,eval=FALSE}
+# 查看文件
+rinternals <- file.path(R.home("include"),"Rinternals.h")
+file.show(rinternals)
+```
+
+
 获取文件信息
 
 file.info(..., extra_cols = TRUE)

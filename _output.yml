@@ -31,4 +31,4 @@ bookdown::pdf_book:
   df_print: "default"
   extra_dependencies:
     ctex: heading
-bookdown::epub_book: default
+#bookdown::epub_book: default
