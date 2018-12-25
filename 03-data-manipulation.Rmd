@@ -72,11 +72,17 @@ subset(iris, Species == "virginica") %>% head(5)
 # summary(iris$Sepal.Length)  mean(iris$Sepal.Length)
 # 且的逻辑
 # subset(iris, Species == "virginica" & Sepal.Length > 5.84333) %>% head(5)
-subset(iris, Species == "virginica" & Sepal.Length > mean(Sepal.Length)) %>% head(5)
+subset(iris, Species == "virginica" & 
+         Sepal.Length > mean(Sepal.Length)
+       ) %>% head(5)
 # 在行的子集范围内
-subset(iris, Species %in% c("virginica","versicolor") & Sepal.Length > mean(Sepal.Length)) %>% head(5)
+subset(iris, Species %in% c("virginica","versicolor") & 
+         Sepal.Length > mean(Sepal.Length)
+       ) %>% head(5)
 # 在列的子集内 先选中列
-subset(iris, select = c("Sepal.Length","Species"), Sepal.Length > mean(Sepal.Length)) %>% head(5)
+subset(iris, Sepal.Length > mean(Sepal.Length), 
+       select = c("Sepal.Length","Species")
+       ) %>% head(5)
 ```
 
 高级操作：加入正则表达式筛选
@@ -93,8 +99,23 @@ subset(state.x77, grepl("^M", rownames(state.x77)), Illiteracy:Murder)
 ```
 
 ::: sidebar
-Warning: This is a convenience function intended for use interactively. For programming it is better to use the standard subsetting functions like `[`, and in particular the non-standard evaluation of argument `subset` can have unanticipated consequences.
+警告：这是一个为了交互使用打造的便捷函数。对于编程，最好使用标准的子集函数，如 `[`，特别地，参数 `subset` 的非标准计算(non-standard evaluation)[^non-standard-eval]可能带来意想不到的后果。
 :::
+
+使用索引 `[` 
+
+```{r,echo=TRUE}
+iris[iris$Species == "virginica", ] %>% head(5)
+iris[iris$Species == "virginica" &  
+       iris$Sepal.Length > mean(iris$Sepal.Length), 
+     ] %>% head(5)
+
+iris[iris$Species == "virginica" &  
+       iris$Sepal.Length > mean(iris$Sepal.Length), 
+     c("Sepal.Length","Species")] %>% head(5)
+```
+
+[^non-standard-eval]: Thomas Lumley (2003) Standard nonstandard evaluation rules. https://developer.r-project.org/nonstandard-eval.pdf
 
 ## 排序 {#order}
 
@@ -113,7 +134,7 @@ sort 排序
 
 ## 拆分 {#split}
 
-```{r}
+```{r,echo=TRUE}
 ## Notice that assignment form is not used since a variable is being added
 g <- airquality$Month
 l <- split(airquality, g) # 分组
@@ -122,13 +143,13 @@ aq2 <- unsplit(l, g) # 合并
 head(aq2)
 ```
 
-```{r}
+```{r,echo=TRUE}
 with(aq2, tapply(Oz.Z,  Month, sd, na.rm = TRUE))
 ```
 
 以 iris 数据集为例
 
-```{r}
+```{r,echo=TRUE}
 g <- iris$Species
 l <- split(iris, g) # 分组
 l <- lapply(l, transform, scale.sl = scale(Sepal.Length)) # 计算
