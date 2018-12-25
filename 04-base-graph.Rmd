@@ -161,7 +161,7 @@ axis(1,
 dev.off()
 ```
 
-```{r missing-fonts,fig.cap="字体缺失"}
+```{r missing-fonts,fig.cap="字体缺失",eval=FALSE}
 knitr::include_graphics(path = "figures/missing-fonts.png")
 ```
 
@@ -189,7 +189,7 @@ names(knitr::knit_engines$get())
 
 ## Graphviz
 
-先安装 Graphviz^[Graphviz 官网 <http://www.graphviz.org/>]，常用于绘制流程图，广泛用于 tensorflow 和 mxnet 的模型描述中，如图 \@ref(fig:dot-ex) 所示
+先安装 Graphviz^[Graphviz 官网 <http://www.graphviz.org/>]，常用于绘制流程图，广泛用于 tensorflow 和 mxnet 的模型描述中，如图所示
 
 ```{r dot-ex, engine = "dot", fig.cap = "Funky dot",eval=FALSE}
 digraph test123 {
@@ -208,7 +208,7 @@ digraph test123 {
 
 ## TikZ {#tikz}
 
-如图\@ref(fig:demo-tikz)所示，模板来自 `system.file('misc', 'tikz2pdf.tex', package = 'knitr')`
+如图所示，模板来自 `system.file('misc', 'tikz2pdf.tex', package = 'knitr')`
 
 ```{tikz demo-tikz, fig.cap='tikz 图形', engine.opts = list(template = "code/chapter_03/tikz2pdf.tex"),eval=F}
 \begin{tikzpicture}[scale=.7]
@@ -219,7 +219,7 @@ digraph test123 {
 \end{tikzpicture}
 ```
 
-再来一张稍微复杂的图形，如图 \@ref(fig:complicated-tikz)所示
+再来一张稍微复杂的图形，如图所示
 
 ```{tikz complicated-tikz, fig.cap='稍复杂的 tikz 图形', engine.opts = list(template = "code/chapter_03/tikz2pdf.tex"),eval=F}
 \usetikzlibrary{arrows}
@@ -255,16 +255,85 @@ system("mv demo-tikzDevice.* figures/")
 # convert test.svg test.png
 ```
 
-如图 \@ref(fig:demo-tikzDevice)所示
+如图所示
 
 ```{r demo-tikzDevice,fig.cap="tikzDevice绘图",echo=FALSE,eval=FALSE}
 knitr::include_graphics(path = "figures/demo-tikzDevice.png")
 ```
 
+```{r linear-model,dev='tikz',fig.cap="线性回归模型",out.width="35%",fig.asp=1,fig.width=3.5,tikz2png='-quality 100 -density 300',fig.process=to_png,eval=Platform$OS.type=="unix"}
+# 带有图标题
+par(mar = c(4.1, 4.1, 4.5, 1.5), ps = 13, family = "Times")
+x <- rnorm(10)
+y <- x + rnorm(5, sd = 0.25)
+model <- lm(y ~ x)
+rsq <- summary(model)$r.squared
+rsq <- signif(rsq, 4)
+plot(x, y, main = "Hello \\LaTeX!", xlab = "$x$", ylab = "$y$")
+abline(model, col = "red")
+mtext(paste("Linear model: $R^{2}=", rsq, "$"), line = 0.5)
+legend("bottomright", legend = paste("$y = ", round(coef(model)[2], 3),
+  "x +", round(coef(model)[1], 3), "$",
+  sep = ""
+), bty = "n")
+
+plot(x, y, main = "Hello \\LaTeX!", xlab = "$x$", ylab = "$y$")
+abline(model, col = "red")
+mtext(paste("Linear model: $R^{2}=", rsq, "$"), line = 0.5)
+legend("bottomright", legend = paste("$y = ", round(coef(model)[2], 3),
+  "x +", round(coef(model)[1], 3), "$",
+  sep = ""
+), bty = "n")
+```
+
+```{r bessel,dev='tikz',fig.cap="贝塞尔函数",out.width="35%",fig.asp=1,fig.width=2.5,tikz2png='-quality 100 -density 300',fig.process=to_png,eval=Platform$OS.type=="unix"}
+x0 <- 2^(-20:10)
+nus <- c(0:5, 10, 20)
+x <- seq(0, 4, length.out = 501)
+
+plot(x0, x0^-8,frame.plot=TRUE,
+     log = "xy", xlab = "$u$", axes = FALSE,
+     ylab = "$\\mathcal{K}_{\\kappa}(u)$", 
+     type = "n", ann = TRUE, panel.first = grid()
+) # x 和 y 轴都取对数
+
+axis(1,
+     at = c(1e-08, 1e-06, 1e-04, 1e-02, 1, 1e+02),
+     labels = expression(10^-8, 10^-6, 10^-4, 10^-2, 1, 10^2)
+)
+axis(2,
+     at = c(1e-16, 1, 1e+16, 1e+32, 1e+48),
+     labels = expression(10^-16, 1, 10^16, 10^32, 10^48), las = 1
+)
+# 设置线条颜色
+cols <- RColorBrewer::brewer.pal(9,name = "Spectral")
+# gray.colors(9) terrain.colors(9)  RColorBrewer::brewer.pal(9,name = "Spectral")
+for (i in seq(length(nus)))
+  lines(x0, besselK(x0, nu = nus[i]), col = cols[i], lwd = 2)
+legend("topright",legend = paste0("$\\kappa=", rev(nus),"$"),
+       col = rev(cols), lwd = 2, cex = 0.5)
+
+# 数据变化范围太大，因此横纵坐标轴都取了以10为底的对数，数据可以紧凑的在一张图内展示
+x <- seq(0, 40, length.out = 801)
+x <- x[x > 0]
+plot(x, x,frame.plot=TRUE,
+     ylim = c(1e-18, 1e11), log = "y", xlab = "$u$", type = "n",  yaxt = "n",
+     ylab = "$\\mathcal{K}_{\\kappa}(u)$", ann = TRUE, panel.first = grid()
+)
+axis(2,
+     at = c(1e-19, 1e-12, 1e-05, 1e+02, 1e+09),
+     labels = expression(10^-19, 10^-12, 10^-5, 10^2, 10^9), las = 1
+)
+
+for (i in seq(length(nus)))
+  lines(x, besselK(x, nu = nus[i]), col = cols[i], lwd = 2)
+legend("topright", legend = paste0("$\\kappa=", rev(nus),"$"), 
+       col = rev(cols), lwd = 2, cex = 0.5)
+```
 
 ## Asymptote {#asy}
 
-Asymptote 图形如图 \@ref(fig:demo-asymptote) 所示
+Asymptote 图形如图所示
 
 ```{asy demo-asymptote, fig.cap='Asymptote 图形', echo=FALSE,out.width = "35%",eval=F}
 pair crease(pair z1, pair z2, bool left){
@@ -317,30 +386,37 @@ drawtris(dragon(n, new pair[] {(0,0), (0,1)}),  green);
 ```
 
 
-## matplotlib
+## 魔法 {#magick}
 
-数学公式是这样的，如图\@ref(fig:matplotlib-math)
+旋转坐标轴标签
 
-```{r matplotlib-math, engine = "python",echo = FALSE, fig.cap = "公式",eval=FALSE}
-from __future__ import unicode_literals
-import numpy as np
-import matplotlib
-matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['text.latex.unicode'] = True
-import matplotlib.pyplot as plt
-plt.switch_backend('agg') # Very Important in R Markdown
+```{r,eval=FALSE}
+# Rotated axis labels in R plots
+# https://menugget.blogspot.com/2014/08/rotated-axis-labels-in-r-plots.html
+# Example data
+tmin <- as.Date("2000-01-01")
+tmax <- as.Date("2001-01-01")
+tlab <- seq(tmin, tmax, by = "month")
+lab <- format(tlab, format = "%Y-%b")
+set.seed(111)
+x <- seq(tmin, tmax, length.out = 100)
+y <- cumsum(rnorm(100))
 
-t = np.linspace(0.0, 1.0, 100)
-s = np.cos(4 * np.pi * t) + 2
-
-fig, ax = plt.subplots(figsize=(6, 4), tight_layout=True)
-ax.plot(t, s)
-
-ax.set_xlabel(r'\textbf{time (s)}')
-# ax.set_ylabel(r'\textit{Velocity}(\N{DEGREE SIGN}/sec)', fontsize=16)
-ax.set_ylabel(r'\textit{Velocity}($^{\circ}$/sec)', fontsize=16)
-ax.set_title(r'\TeX\ is Number $\displaystyle\sum_{n=1}^\infty'
-             r'\frac{-e^{i\pi}}{2^n}$!', fontsize=16, color='r')
-plt.show()
-#plt.savefig('matplotlib-math.svg')
+# Plot
+# png("plot_w_rotated_axis_labels.png", height = 3, 
+#     width = 6, units = "in", res = 300)
+op <- par(mar = c(6, 4, 1, 1))
+plot(x, y, t = "l", xaxt = "n", xlab = "")
+axis(1, at = tlab, labels = FALSE)
+text(
+  x = tlab, y = par()$usr[3] - 0.1 * (par()$usr[4] - par()$usr[3]),
+  labels = lab, srt = 45, adj = 1, xpd = TRUE
+)
+par(op)
+# dev.off()
 ```
+
+
+
+
+
