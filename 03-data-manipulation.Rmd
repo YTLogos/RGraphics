@@ -211,6 +211,9 @@ Function `by` is an object-oriented wrapper for `tapply` applied to data frames.
 # by(iris[, 1], INDICES = list(iris$Species), FUN = sum)
 # by(iris[, 2], INDICES = list(iris$Species), FUN = sum)
 by(iris[, 3], INDICES = list(iris$Species), FUN = sum)
+by(iris[1:3], INDICES = list(iris$Species), FUN = sum)
+by(iris[1:3], INDICES = list(iris$Species), FUN = summary)
+by(iris, INDICES = list(iris$Species), FUN = summary)
 ```
 
 Group Averages Over Level Combinations of Factors 分组平均
