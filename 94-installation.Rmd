@@ -2,7 +2,7 @@
 
 # (APPENDIX) 附录 {#appendix .unnumbered}
 
-# 安装 R 软件 {#installation}
+# 安装 R {#installation}
 
 主要参考 R-admin
 
@@ -29,9 +29,176 @@ Debian
 
 ### CentOS
 
-涉及各种 R 包依赖
+基于 GCC 4.8.5 ATLAS OpenBLAS 
 
 注意 参考 R-admin 手册
+
+* 下载
+
+  安装最新发布的稳定版
+  
+  ```bash
+  curl -fLo ./R-latest.tar.gz https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-latest.tar.gz
+  ```
+  ```
+    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                   Dload  Upload   Total   Spent    Left  Speed
+   10 28.7M   10 3232k    0     0   107k      0  0:04:34  0:00:30  0:04:04  118k
+  ```
+
+* 安装依赖
+
+  ```bash
+  sudo yum groupinstall "Development Tools" 
+  sudo yum install -y epel-release gcc gcc-objc gcc-objc++ deltarpm
+  sudo yum install -y libcurl-devel openssl-devel libssh2-devel \
+     libgit2-devel libxml2-devel tcl-devel tk-devel \
+     readline-devel v8-314-devel libXmu libXmu-devel \
+     mesa-libGLU mesa-libGLU-devel libicu-devel \
+     libX11 libX11-devel libXt libXt-devel \
+     pango pango-devel pcre pcre-devel pcre2 pcre2-devel \
+     cairo cairo-devel zlib-devel bzip2-devel
+  #   ImageMagick-c++-devel librsvg2-devel fftw-devel \
+  #   netcdf-devel hdf5-devel armadillo-devel unixODBC-devel \
+  ```
+
+* 解压配置
+  
+  ```bash
+  mkdir R-latest && tar -xzf ./R-latest.tar.gz -C ./R-latest && cd R-3.5.2
+  
+  ./configure --enable-R-shlib --enable-byte-compiled-packages \
+    --enable-BLAS-shlib --enable-memory-profiling
+  ```
+  ```
+  R is now configured for x86_64-pc-linux-gnu
+  
+    Source directory:          .
+    Installation directory:    /usr/local
+  
+    C compiler:                gcc -std=gnu99  -g -O2
+    Fortran 77 compiler:       gfortran  -g -O2
+  
+    Default C++ compiler:      g++   -g -O2
+    C++98 compiler:            g++ -std=gnu++98 -g -O2
+    C++11 compiler:            g++ -std=gnu++11 -g -O2
+    C++14 compiler:
+    C++17 compiler:
+    Fortran 90/95 compiler:    gfortran -g -O2
+    Obj-C compiler:            gcc -g -O2 -fobjc-exceptions
+  
+    Interfaces supported:      X11, tcltk
+    External libraries:        readline, curl
+    Additional capabilities:   PNG, JPEG, TIFF, NLS, cairo, ICU
+    Options enabled:           shared R library, shared BLAS, R profiling, memory profiling
+  
+    Capabilities skipped:
+    Options not enabled:
+  
+    Recommended packages:      yes
+  ```
+
+* 编译安装
+
+  ```bash
+  make -j 2 all
+  sudo make install
+  ```
+
+* BLAS 加持（可选）
+
+  BLAS 对于加快矩阵计算至关重要，编译 R 带 [BLAS 支持][BLAS]，添加 OpenBLAS 支持 `--with-blas="-lopenblas"` 或 ATLAS 支持 `--with-blas="-L/usr/lib64/atlas -lsatlas"` 
+
+  ```bash
+  sudo yum install -y openblas openblas-threads openblas-openmp 
+  
+  ./configure --enable-R-shlib --enable-byte-compiled-packages \
+    --enable-BLAS-shlib --enable-memory-profiling \
+    --with-blas="-lopenblas"
+  ```
+  ```
+  R is now configured for x86_64-pc-linux-gnu
+
+  Source directory:          .
+  Installation directory:    /usr/local
+
+  C compiler:                gcc -std=gnu99  -g -O2
+  Fortran 77 compiler:       gfortran  -g -O2
+
+  Default C++ compiler:      g++   -g -O2
+  C++98 compiler:            g++ -std=gnu++98 -g -O2
+  C++11 compiler:            g++ -std=gnu++11 -g -O2
+  C++14 compiler:
+  C++17 compiler:
+  Fortran 90/95 compiler:    gfortran -g -O2
+  Obj-C compiler:            gcc -g -O2 -fobjc-exceptions
+
+  Interfaces supported:      X11, tcltk
+  External libraries:        readline, BLAS(OpenBLAS), curl
+  Additional capabilities:   PNG, JPEG, TIFF, NLS, cairo, ICU
+  Options enabled:           shared R library, shared BLAS, R profiling, memory profiling
+
+  Capabilities skipped:
+  Options not enabled:
+
+  Recommended packages:      yes
+  ```
+
+  配置成功的标志，如 OpenBlas
+  
+  ```
+  checking for dgemm_ in -lopenblas... yes
+  checking whether double complex BLAS can be used... yes
+  checking whether the BLAS is complete... yes
+  ```
+
+  ATLAS 加持
+
+  ```  
+  sudo yum install -y atlas
+  ./configure --enable-R-shlib --enable-byte-compiled-packages \
+    --enable-BLAS-shlib --enable-memory-profiling \
+    --with-blas="-L/usr/lib64/atlas -lsatlas"
+  ```
+  ```
+  R is now configured for x86_64-pc-linux-gnu
+
+  Source directory:          .
+  Installation directory:    /usr/local
+
+  C compiler:                gcc -std=gnu99  -g -O2
+  Fortran 77 compiler:       gfortran  -g -O2
+
+  Default C++ compiler:      g++   -g -O2
+  C++98 compiler:            g++ -std=gnu++98 -g -O2
+  C++11 compiler:            g++ -std=gnu++11 -g -O2
+  C++14 compiler:
+  C++17 compiler:
+  Fortran 90/95 compiler:    gfortran -g -O2
+  Obj-C compiler:            gcc -g -O2 -fobjc-exceptions
+
+  Interfaces supported:      X11, tcltk
+  External libraries:        readline, BLAS(generic), curl
+  Additional capabilities:   PNG, JPEG, TIFF, NLS, cairo, ICU
+  Options enabled:           shared R library, shared BLAS, R profiling, memory profiling
+
+  Capabilities skipped:
+  Options not enabled:
+
+  Recommended packages:      yes
+  ```
+  
+  ATLAS 配置成功
+
+  ```
+  checking for dgemm_ in -L/usr/lib64/atlas -lsatlas... yes
+  checking whether double complex BLAS can be used... yes
+  checking whether the BLAS is complete... yes
+  ```
+
+后续步骤同上
+
+[BLAS]: https://cran.r-project.org/doc/manuals/r-release/R-admin.html#BLAS
 
 ## 忍者安装 {#custom-installation}
 

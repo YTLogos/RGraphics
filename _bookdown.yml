@@ -26,6 +26,7 @@ rmd_files:
 
 #  - "04-base-graph.Rmd"
 
+  - "94-installation.Rmd"
   - "95-tools.Rmd"
   - "96-references.Rmd"
 
