@@ -113,18 +113,9 @@ PR 如何参与改进本书
 
 ## 软件信息 {#softwares-rsession-info}
 
-编译本书需要的环境
-
-```{r sessioninfo,echo=TRUE}
-xfun::session_info(packages = c(
-  "colorspace", 
-  "bookdown", "rmarkdown"
-))
-```
-
 重现本书内容需要的 R 包
 
-```{r,eval=FALSE}
+```{r sessioninfo,eval=FALSE,echo=TRUE}
 xfun::session_info(packages = c(
   "colorspace",
   "bookdown", "rmarkdown",
