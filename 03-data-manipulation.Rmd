@@ -165,21 +165,53 @@ unsplit(l, g) %>% head(5) # 合并
 
 ## 聚合 {#aggregate}
 
-分组统计
-
-aggregate
-
-Compute Summary Statistics of Data Subsets
-
-table
-
-都给出 dplyr 和 purrr 的便捷方式
+分组统计，都给出 dplyr 和 purrr 的便捷方式
 
 ```{r,echo=TRUE}
 apropos("apply")
 ```
 
+```{r,echo=TRUE}
+# 分组求和 colSums colMeans max
+unique(iris$Species)
+# 分类求和
+# colSums(iris[iris$Species == "setosa", -5])
+# colSums(iris[iris$Species == "virginica", -5])
+colSums(iris[iris$Species == "versicolor", -5])
+# apply(iris[iris$Species == "setosa", -5], 2, sum)
+# apply(iris[iris$Species == "setosa", -5], 2, mean)
+# apply(iris[iris$Species == "setosa", -5], 2, min)
+# apply(iris[iris$Species == "setosa", -5], 2, max)
+apply(iris[iris$Species == "setosa", -5], 2, quantile)
+```
+
+aggregate: Compute Summary Statistics of Data Subsets
+
+```{r,echo=TRUE}
+# 按分类变量 Species 分组求和
+# aggregate(subset(iris, select = -Species), by = list(iris[, "Species"]), FUN = sum)
+aggregate(iris[, -5], list(iris[, 5]), sum)
+# 先确定位置，假设有很多分类变量
+ind <- which("Species" == colnames(iris))
+# 分组统计
+aggregate(iris[, -ind], list(iris[, ind]), sum)
+```
+
+table 多个分类变量分组计数统计
+
+```{r,echo=TRUE}
+# 分类变量计数
+with(warpbreaks, table(wool, tension))
+```
+
 Function `by` is an object-oriented wrapper for `tapply` applied to data frames. 
+
+```{r,echo=TRUE}
+# 分组求和
+# by(iris[, 1], INDICES = list(iris$Species), FUN = sum)
+# by(iris[, 2], INDICES = list(iris$Species), FUN = sum)
+by(iris[, 3], INDICES = list(iris$Species), FUN = sum)
+```
 
 Group Averages Over Level Combinations of Factors 分组平均
 
