@@ -9,6 +9,10 @@ library(magrittr) # %>%
 
 [给出 linux 下的对应命令]{.todo}
 
+- sys: Powerful replacements for base::system2 <https://github.com/jeroen/sys>
+- fs: Provide cross platform file operations based on libuv <http://fs.r-lib.org/>
+
+
 ## 查看 {#list}
 
 文件夹只包含文件，目录既包含文件又包含文件夹，`list.dirs` 列出目录或文件夹，`list.files` 列出文件或文件夹 
@@ -40,7 +44,6 @@ rinternals <- file.path(R.home("include"),"Rinternals.h")
 file.show(rinternals)
 ```
 
-
 获取文件信息
 
 file.info(..., extra_cols = TRUE)
@@ -55,7 +58,31 @@ Ascertain File Accessibility
 
 file.access(names, mode = 0)
 
+
+```{r}
+apropos("^dir.")
+```
+
+```{r,echo=TRUE}
+# 获取当前目录
+getwd()
+# 当前目录下的子目录和文件
+dir()
+# 查看指定目录的子目录和文件
+dir(path = "./")
+# 只列出以字母R开头的子目录和文件
+dir(path = "./", pattern = "^R")
+# 列出目录下所有目录和文件，包括隐藏文件
+dir(path = "./", all.files = TRUE)
+```
+
 ## 操作 {#manipulation}
+
+文件增删改查
+
+```{r,echo=TRUE}
+apropos("^file.")
+```
 
 file.create(..., showWarnings = TRUE)
 file.exists(...)
@@ -69,6 +96,28 @@ file.link(from, to)
 Sys.junction(from, to)
 
 Sys.readlink(paths) Read File Symbolic Links
+
+
+`choose.files`  
+
+下载文件
+
+```{r,echo=TRUE}
+apropos("^download.")
+```
+
+```{r,echo=TRUE}
+# 查看当前目录的权限
+file.info(".")
+# 查看指定目录权限
+file.info("./_book/")
+# 在临时目录下递归创建一个目录
+dir.create(paste0(tempdir(), "/_book/tmp"), recursive = TRUE)
+```
+
+## 压缩 {#compression}
+
+`tar/untar` 与 `zip/unzip`
 
 ## 路径 {#paths}
 
@@ -157,6 +206,18 @@ date
 as.POSIX* Date-time Conversion Functions
 
 Sys.setFileTime()
+
+```{r,echo=TRUE}
+# 获取时区信息
+Sys.timezone()
+
+format(Sys.time(), tz = 'America/Los_Angeles', usetz = TRUE)
+format(Sys.time(), tz = 'Canada/Eastern', usetz = TRUE)
+# 存放时区信息的数据库位置
+file.path(R.home("share"), "zoneinfo")
+
+strptime(Sys.time(), format ="%Y-%m-%d %H:%M:%S", tz = "Asia/Taipei")
+```
 
 ## 搜索 {#search}
 

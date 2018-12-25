@@ -1,3 +1,26 @@
 # 数据导入与导出 {#data-import-export}
 
 导入数据与导出数据，各种数据格式，数据库
+
+文件读写
+
+```{r,echo=TRUE}
+apropos("^read.")
+apropos("^write.")
+```
+
+`capture.output` 参数为表达式
+
+`with` 与 `attach`
+`sink`
+
+
+```r
+sink("sink-examp.txt")
+i <- 1:10
+outer(i, i, "*")
+sink()
+```
+
+只将 `outer` 的结果保存到 `sink-examp.txt` 文件
+
