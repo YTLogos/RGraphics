@@ -1,5 +1,9 @@
 # 文件管理 {#file-manipulation}
 
+```{r,include=FALSE}
+library(magrittr) # %>%
+```
+
 查看：列出目录或文件夹下的文件
 权限：操作目录和文件的权限
 
@@ -87,8 +91,8 @@ shortPathName(path)  Express File Paths in Short Form
 
 Sys.glob  Wildcard Expansion on File Paths
 
-```{r}
-Sys.glob(file.path(R.home(), "library", "*", "R", "*.rdx"))
+```{r,echo=TRUE}
+Sys.glob(file.path(R.home(), "library", "*", "R", "*.rdx")) %>% head(5)
 ```
 
 ## 查找 {#find}
