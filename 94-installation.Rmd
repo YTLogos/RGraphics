@@ -14,12 +14,13 @@
 * Ubuntu 16.04.5
 * Ubuntu 18.04.1
 
-Debian
-
+默认版本
+最新版本
+之前版本
 
 ### CentOS
 
-同样适用于 CentOS
+同样适用于 Fedora
 
 
 ## 源码安装 {#source-installation}
@@ -29,13 +30,11 @@ Debian
 
 ### CentOS
 
-基于 GCC 4.8.5 ATLAS OpenBLAS 
+基于 CentOS 7 和 GCC 4.8.5，参考 R-admin 手册
 
-注意 参考 R-admin 手册
+* 下载源码包
 
-* 下载
-
-  安装最新发布的稳定版
+  最新发布的稳定版
   
   ```bash
   curl -fLo ./R-latest.tar.gz https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-latest.tar.gz
@@ -144,7 +143,7 @@ Debian
   Recommended packages:      yes
   ```
 
-  配置成功的标志，如 OpenBlas
+  配置成功的标志，如 OpenBLAS
   
   ```
   checking for dgemm_ in -lopenblas... yes
@@ -202,7 +201,7 @@ Debian
 
 ## 忍者安装 {#custom-installation}
 
-从源码自定义安装：加速 Intel MKL/Goto Blas/openblas/atlas 大文件支持
+从源码自定义安装：加速 Intel MKL 和 大文件支持
 
 ### Ubuntu
 
