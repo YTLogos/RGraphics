@@ -210,9 +210,9 @@ Docker & 容器管理工具 Docker Swarm
 
 Docker & Docker Machine & Docker Swarm
 
-```
+```bash
 docker --version
-Docker version 18.03.0-ce, build 0520e24302
+# Docker version 18.03.0-ce, build 0520e24302
 ```
 
 ### Docker Machine
