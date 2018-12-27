@@ -125,10 +125,10 @@ dir.create(paste0(tempdir(), "/_book/tmp"), recursive = TRUE)
    tar -cjf clientip.tar.bz2 clientip.csv
    ```
 
-1. 当前目录下，将目录 `rstan/` 压缩为 `rstan.tar.gz` 文件
+1. 当前目录下，将目录 `rstan/` 下的所有文件压缩为 `rstan.tar.gz` 文件
 
    ```bash
-   tar -czvf rstan.tar.gz ./rstan/*
+   tar -czf rstan.tar.gz ./rstan/*
    ```
 
 
@@ -137,10 +137,13 @@ dir.create(paste0(tempdir(), "/_book/tmp"), recursive = TRUE)
 tar 解压
 
 ```bash
-tar -xzvf R-3.5.1.tar.gz
+tar -xzf R-3.5.1.tar.gz
 ```
 
-其中，`-v` 解压过程中显示文件
+
+tar
+
+1. `-v` 解压过程中显示文件
 
 
 ## 路径 {#paths}
