@@ -42,35 +42,35 @@ Pandoc 是一个万能文档转化器
 
    ```bash
    sudo apt-get install gdebi-core
-   wget https://github.com/jgm/pandoc/releases/download/2.2.2/pandoc-2.2.2-1-amd64.deb
-   sudo chmod +x pandoc-2.2.2-1-amd64.deb
-   sudo gdebi pandoc-2.2.2-1-amd64.deb
+   wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb
+   sudo chmod +x pandoc-2.5-1-amd64.deb
+   sudo gdebi pandoc-2.5-1-amd64.deb
    ```
    
    rmarkdown 包裹了 Pandoc 工具，所以使用 `rmarkdown::render` 函数，即可将 R Markdown 文档转化为 HTML、LaTeX 和 Markdown 等格式。
 
 ### Markdown
 
-Markdown 基础语法见 RStudio IDE自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 Pandoc's Markdown^[Pandoc 提供了很多对 Markdown 的扩展支持]表格、图片和公式的使用
+Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 Pandoc's Markdown^[Pandoc 提供了很多对 Markdown 的扩展支持]表格、图片和公式的使用
 
 - 表格
 
-插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦
+  插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦
 
-Table: (\#tab:insert-tab) A table caption^[With a footnote]
-
-| First Header | Second Header |
-| :----------- | :------------ |
-| Content Cell | Content Cell  |
-| Content Cell | Content Cell  |
+   Table: (\#tab:insert-tab) A table caption^[With a footnote]
+   
+   | First Header | Second Header |
+   | :----------- | :------------ |
+   | Content Cell | Content Cell  |
+   | Content Cell | Content Cell  |
 
 - 图片
 
-插入图片也很简单的，所示，图、表的标题很长或者需要插入脚注，可以使用[文本引用][text-references]
+   插入图片也很简单的，所示，图、表的标题很长或者需要插入脚注，可以使用[文本引用][text-references]
 
-```{r knitr-footnote, fig.cap='(ref:footnote)', out.width="45%", echo=FALSE}
-knitr::include_graphics(path = "figures/mai.png")
-```
+   ```{r knitr-footnote, fig.cap='(ref:footnote)', out.width="45%", echo=FALSE}
+   knitr::include_graphics(path = "figures/mai.png")
+   ```
 
 (ref:footnote) caption 插入 footnote 但是 ebooks 不支持这样插入脚注[^longnote]
 
@@ -80,56 +80,54 @@ knitr::include_graphics(path = "figures/mai.png")
 
 - 公式
 
-行内公式一对美元符号 $\alpha$ 或者 \(\alpha+\beta\)，行间公式 $$\alpha$$ 或者 \[\alpha + \beta\]
+   行内公式一对美元符号 $\alpha$ 或者 \(\alpha+\beta\)，行间公式 $$\alpha$$ 或者 \[\alpha + \beta\] 对公式编号，如公式 \@ref(eq:likelihood)
 
-对公式编号，如公式 \@ref(eq:likelihood)
+   \begin{equation}
+   L(\beta,\boldsymbol{\theta}) = f(y;\beta,\boldsymbol{\theta}) = \int_{\mathbb{R}^{n}}N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)dt (\#eq:likelihood)
+   \end{equation}
 
-\begin{equation}
-L(\beta,\boldsymbol{\theta}) = f(y;\beta,\boldsymbol{\theta}) = \int_{\mathbb{R}^{n}}N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)dt (\#eq:likelihood)
-\end{equation}
+   多行公式分别编号，如公式\@ref(eq:BL-SGLMM) 和公式\@ref(eq:Poss-SGLMM) 
 
-多行公式分别编号，如公式\@ref(eq:BL-SGLMM) 和公式\@ref(eq:Poss-SGLMM) 
+   \begin{align}
+   \log\{\frac{p_i}{1-p_i}\} & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:BL-SGLMM)\\
+   \log(\lambda_i)           & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM)
+   \end{align}
 
-\begin{align}
-\log\{\frac{p_i}{1-p_i}\} & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:BL-SGLMM)\\
-\log(\lambda_i)           & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM)
-\end{align}
+   多行公式中对某一（些）行编号，如公式 \@ref(eq:align) 和 公式 \@ref(eq:Poss-SGLMM2)
 
-多行公式中对某一（些）行编号，如公式 \@ref(eq:align) 和 公式 \@ref(eq:Poss-SGLMM2)
+   \begin{align} 
+   g(X_{n}) &= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \\
+   \sqrt{n}[g(X_{n})-g(\theta)] &= g'\left({\tilde{\theta}}\right) 
+     \sqrt{n}[X_{n}-\theta ] (\#eq:align) \\
+   \log(\lambda_i)  & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM2)  
+   \end{align} 
 
-\begin{align} 
-g(X_{n}) &= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \\
-\sqrt{n}[g(X_{n})-g(\theta)] &= g'\left({\tilde{\theta}}\right) 
-  \sqrt{n}[X_{n}-\theta ] (\#eq:align) \\
-\log(\lambda_i)  & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM2)  
-\end{align} 
+   多行公式共用一个编号，如公式 \@ref(eq:likelihood2)
 
-多行公式共用一个编号，如公式 \@ref(eq:likelihood2)
+   \begin{equation}
+   \begin{aligned}
+   L(\beta,\boldsymbol{\theta})
+   & = \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))f(y|t)}f(y,t)dt\\
+   & \varpropto \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}f(t|y)dt \\
+   &= E_{T|y}\left[\frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}\right] 
+   \end{aligned}
+   (\#eq:likelihood2)
+   \end{equation}
 
-\begin{equation}
-\begin{aligned}
-L(\beta,\boldsymbol{\theta})
-& = \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))f(y|t)}f(y,t)dt\\
-& \varpropto \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}f(t|y)dt \\
-&= E_{T|y}\left[\frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}\right] 
-\end{aligned}
-(\#eq:likelihood2)
-\end{equation}
+   推荐在 `equation` 公式中，使用 `split` 环境，意思是一个公式很长，需要拆成多行，如公式\@ref(eq:var-beta)
 
-推荐在 `equation` 公式中，使用 `split` 环境，意思是一个公式很长，需要拆成多行，如公式\@ref(eq:var-beta)
+   \begin{equation} 
+   \begin{split}
+   \mathrm{Var}(\hat{\beta}) & =\mathrm{Var}((X'X)^{-1}X'y)\\
+    & =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
+    & =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
+    & =(X'X)^{-1}X'\sigma^{2}IX(X'X)^{-1}\\
+    & =(X'X)^{-1}\sigma^{2}
+   \end{split}
+   (\#eq:var-beta)
+   \end{equation} 
 
-\begin{equation} 
-\begin{split}
-\mathrm{Var}(\hat{\beta}) & =\mathrm{Var}((X'X)^{-1}X'y)\\
- & =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
- & =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
- & =(X'X)^{-1}X'\sigma^{2}IX(X'X)^{-1}\\
- & =(X'X)^{-1}\sigma^{2}
-\end{split}
-(\#eq:var-beta)
-\end{equation} 
-
-注意，`\mathbf` 只对字母 $a,b,c,A,B,C$ 加粗，mathjax 不支持公式中使用 `\bm` 对 $\theta,\alpha,\beta,\ldots,\gamma$ 加粗，应该使用 `\boldsymbol`
+   注意，`\mathbf` 只对字母 $a,b,c,A,B,C$ 加粗，mathjax 不支持公式中使用 `\bm` 对 $\theta,\alpha,\beta,\ldots,\gamma$ 加粗，应该使用 `\boldsymbol`
 
 ### bookdown
 
@@ -198,9 +196,64 @@ tinytex::tlmgr_install(pkgs = c(
 
 
 
-## 集成开发环境 {#ide}
+## RStudio IDE {#rstudio-ide}
 
 RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Server 开源服务器版
+
+1. 下载 RStudio IDE
+ 
+   我们从 RStudio 官网[下载][rstudio-download]开源桌面或服务器版本，服务器版本的使用介绍见[文档](http://docs.rstudio.com/ide/server-pro/)，最常见的就是设置端口
+
+   ```bash
+   wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
+   sudo gdebi rstudio-server-1.1.456-amd64.deb
+   ```
+
+1. 设置端口
+   
+   在文件 `/etc/rstudio/rserver.conf` 下，设置
+
+   ```
+   www-port=8181
+   ```
+
+   注意：修改 `rserver.conf` 文件后需要重启才会生效
+   
+   ```bash
+   sudo rstudio-server stop
+   sudo rstudio-server start
+   ```
+
+   接着获取机器的 IP 地址，如 192.168.141.3
+
+   ```bash
+   ip addr
+   ```
+   ```
+   1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+   2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+       link/ether 08:00:27:59:c0:fb brd ff:ff:ff:ff:ff:ff
+       inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
+          valid_lft 83652sec preferred_lft 83652sec
+       inet6 fe80::a00:27ff:fe59:c0fb/64 scope link
+          valid_lft forever preferred_lft forever
+   3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+       link/ether 08:00:27:09:33:0d brd ff:ff:ff:ff:ff:ff
+       inet 192.168.141.3/24 brd 192.168.141.255 scope global dynamic enp0s8
+          valid_lft 547sec preferred_lft 547sec
+       inet6 fe80::a00:27ff:fe09:330d/64 scope link
+          valid_lft forever preferred_lft forever
+   ```
+
+   然后，就可以从本地浏览器登陆 RStudio 服务器版本，如 <http://192.168.141.3:8181/>
+
+
+[rstudio-download]: https://www.rstudio.com/products/rstudio/download/
 
 ## 容器 {#container}
 
