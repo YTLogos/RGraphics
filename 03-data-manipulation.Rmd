@@ -6,6 +6,36 @@ library(magrittr) # %>%
 
 数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的
 
+## 查看 {#show}
+
+```{r}
+str(iris)
+```
+
+```r
+head(iris,5)
+tail(iris,5)
+```
+
+```bash
+head -n 5 clientip.csv # 查看文件前100行
+tail -n 5 clientip.csv  # 查看文件后20行
+```
+
+```{r}
+object.size(iris)
+mode(iris)
+typeof(iris)
+```
+
+
+```{r}
+object.size(letters)
+object.size(ls)
+format(object.size(library), units = "auto")
+```
+
+
 ## 清洗 {#clean}
 
 清晰目标是提取字段，整理成数据框的数据存储形式 grep sub gsub
