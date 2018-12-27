@@ -10,6 +10,8 @@
 
 ### Ubuntu
 
+只考虑最新的 Ubuntu 18.04 因为本书写成的时候，该版本应该已经大规模使用了
+
 * Ubuntu 14.04.5
 * Ubuntu 16.04.5
 * Ubuntu 18.04.1
@@ -17,6 +19,10 @@
 默认版本
 最新版本
 之前版本
+
+```bash
+sudo apt-get install -y r-base r-base-core r-base-dev
+```
 
 ### CentOS
 
