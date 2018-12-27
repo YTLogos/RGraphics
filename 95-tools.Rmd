@@ -2,34 +2,52 @@
 
 ## 版本控制 {#version-control}
 
+只考虑 Ubuntu 18.04 环境
+
 三剑客 Git & Github & Gitlab
 
-```bash
-git config --global user.name "Your Name Comes Here"
-git config --global user.email you@yourdomain.example.com
-```
+1. 安装[^install-git]
 
-数据库
+   ```bash
+   sudo add-apt-repository -y ppa:git-core/ppa
+   sudo apt update && sudo apt install git
+   ```
+
+1. 配置
+
+   ```bash
+   git config --global user.name "Your Name Comes Here"
+   git config --global user.email you@yourdomain.example.com
+   ```
+
+Git 使用的数据库
+
+[^install-git]: 官网安装指导 https://git-scm.com/download/linux 
 
 ## 动态文档 {#dynamic-documents}
 
 三剑客 Markdown & Pandoc's Markdown & R Markdown
 
-文档万能转化器
-安装 calibre
+Pandoc 是一个万能文档转化器
 
-```bash
-sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
-```
+1. 安装 calibre
 
-安装 pandoc
+   ```bash
+   sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+   ```
 
-```bash
-sudo apt-get install gdebi-core
-wget https://github.com/jgm/pandoc/releases/download/2.2.2/pandoc-2.2.2-1-amd64.deb
-sudo chmod +x pandoc-2.2.2-1-amd64.deb
-sudo gdebi pandoc-2.2.2-1-amd64.deb
-```
+   calibre 可以将 epub 格式电子书文档转化为 mobi 格式，bookdown 已经给这个工具穿上了一件马甲，所以用户只需调用 `bookdown::calibre` 函数即可。
+
+1. 安装 pandoc
+
+   ```bash
+   sudo apt-get install gdebi-core
+   wget https://github.com/jgm/pandoc/releases/download/2.2.2/pandoc-2.2.2-1-amd64.deb
+   sudo chmod +x pandoc-2.2.2-1-amd64.deb
+   sudo gdebi pandoc-2.2.2-1-amd64.deb
+   ```
+   
+   rmarkdown 包裹了 Pandoc 工具，所以使用 `rmarkdown::render` 函数，即可将 R Markdown 文档转化为 HTML、LaTeX 和 Markdown 等格式。
 
 ### Markdown
 
