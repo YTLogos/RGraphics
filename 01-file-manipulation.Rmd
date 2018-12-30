@@ -250,3 +250,79 @@ strptime(Sys.time(), format ="%Y-%m-%d %H:%M:%S", tz = "Asia/Taipei")
 
 help.search
 ?regrex
+
+## R 包 {#package}
+
+```{r,echo=TRUE}
+apropos('packages')
+```
+
+1. `.packages(T)` 已安装的 R 包
+
+    ```{r,echo=TRUE}
+    .packages(T) %>% length()
+    ```
+   
+1. `available.packages` 查询可用的 R 包
+
+    ```{r,echo=TRUE}
+    available.packages()[,"Package"] %>% head()
+    ```
+
+1. `download.packages` 下载 R 包
+
+    ```{r,echo=TRUE,eval=FALSE}
+    download.packages("Rbooks", destdir = "~/", repos = "https://r-forge.r-project.org/")
+    ```
+
+1. `install.packages` 安装 R 包
+
+    ```{r,echo=TRUE,eval=FALSE}
+    install.packages("bookdown")
+    ```
+
+1. `installed.packages` 已安装的 R 包
+
+    ```{r,echo=TRUE,eval=FALSE}
+    installed.packages(fields = c("Package","Version")) %>% head()
+    ```
+
+1. `remove.packages` 卸载/删除/移除已安装的R包
+
+    ```{r,echo=TRUE,eval=FALSE}
+    remove.packages('bookdown')
+    ```
+ 
+1. `update.packages` 更新已安装的 R 包
+
+    ```{r,echo=TRUE,eval=FALSE}
+    update.packages(aask = FALSE)
+    ```
+
+1. `old.packages` 查看过时/可更新的 R 包
+
+    ```{r,echo=TRUE,eval=FALSE}
+    old.packages()
+    ```
+
+1. `new.packages` 还没有安装的 R 包 
+
+    ```{r,echo=TRUE}
+    new.packages() %>% head()
+    ```
+
+1. `packageStatus` 查看已安装的 R 包状态，可更新、可下载等
+
+    ```{r,echo=TRUE,eval=FALSE}
+    packageStatus()
+    ```
+    
+1. `packageDescription` 查询 R 包描述信息
+
+    ```{r,echo=TRUE,eval=FALSE}
+    packageDescription('bookdown')
+    ```
+
+
+
+
