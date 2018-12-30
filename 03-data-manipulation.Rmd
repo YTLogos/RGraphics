@@ -272,8 +272,6 @@ village$prev <- as.vector(tapply(gambia$pos, ind, mean))
 head(village)
 ```
 
-[apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family
-
 ## `[[` {#quote}
 
 which 与引用 `[` 性能比较，在区间 $[0,1]$ 上生成 10 万个服从均匀分布的随机数，随机抽取其中$\frac{1}{4}$。
@@ -287,3 +285,5 @@ microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 ```
 
 with 和 within
+
+
