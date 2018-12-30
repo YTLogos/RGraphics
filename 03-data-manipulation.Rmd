@@ -8,28 +8,30 @@ library(magrittr) # %>%
 
 ## 查看 {#show}
 
-```{r}
+```{r,echo=TRUE}
 str(iris)
 ```
 
-```r
+```{r,echo=TRUE}
 head(iris,5)
 tail(iris,5)
 ```
 
+查看文件前（后）5行
+
 ```bash
-head -n 5 clientip.csv # 查看文件前100行
-tail -n 5 clientip.csv  # 查看文件后20行
+head -n 5 clientip.csv
+tail -n 5 clientip.csv
 ```
 
-```{r}
+```{r,echo=TRUE}
 object.size(iris)
 mode(iris)
 typeof(iris)
 ```
 
 
-```{r}
+```{r,echo=TRUE}
 object.size(letters)
 object.size(ls)
 format(object.size(library), units = "auto")
@@ -271,3 +273,17 @@ head(village)
 ```
 
 [apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family
+
+## `[[` {#quote}
+
+which 与引用 `[` 性能比较，在区间 $[0,1]$ 上生成 10 万个服从均匀分布的随机数，随机抽取其中$\frac{1}{4}$。
+
+```{r,echo=TRUE}
+n = 100000
+x = runif(n)
+i = logical(n)
+i[sample(n, n/4)] = TRUE
+microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
+```
+
+with 和 within
