@@ -323,6 +323,15 @@ apropos('packages')
     packageDescription('bookdown')
     ```
 
+1. 查询 R 包的依赖关系
+
+    ```{r,echo=TRUE,eval=require('bookdown')}
+    # bookdown 依赖的 R 包
+    tools::package_dependencies('bookdown', recursive = TRUE)
+    # 依赖 bookdown 的 R 包
+    tools::dependsOnPkgs('bookdown', recursive = TRUE)
+    ```
+
 
 
 
