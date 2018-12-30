@@ -78,7 +78,20 @@ install.packages("bookdown")
 
 
 
+## 相关书籍 {#related-books}
 
+1. Data Visualisation with R --- 100 Examples Thomas Rahlf http://www.datavisualisation-r.com/
+
+   > I really like this book: those 100 interesting real data examples with the detailed R-scripts for producing beautiful graphical visualisation are particularly helpful for learning R graphics. I will use it as a main textbook for data visualization for my statistics course.  
+   > --- Prof. Qiwei Yao
+  
+   > The images look REALLY nice!  
+   > --- Paul Murrell
+  
+   > The graphics look VERY professional, with some I would not have thought that they come from R.  
+   > --- Uwe Ligges
+
+1. Fundamentals of Data Visualization Claus O. Wilke https://serialmentor.com/dataviz/ https://github.com/clauswilke/dataviz
 
 ## 软件信息 {#softwares-rsession-info}
 
