@@ -10,7 +10,7 @@ library(magrittr) # %>%
 [给出 linux 下的对应命令]{.todo}
 
 - sys: Powerful replacements for base::system2 <https://github.com/jeroen/sys>
-- fs: Provide cross platform file operations based on libuv <http://fs.r-lib.org/>
+- fs: Provide cross platform file operations based on libuv <https://github.com/r-lib/fs>
 
 
 ## 查看 {#list}
