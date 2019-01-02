@@ -43,13 +43,6 @@ keywords: ["graphics", "grid", "lattice", "ggplot2"]
 - [容器技术与 Docker]{.todo}
 - [数据结构与算法基础C++]{.todo}
 
-::: warning
-You _can_ also create non-syntactic bindings using single or double quotes (e.g. `"_abc" <- 1`) instead of backticks, but you shouldn't, because you'll have to use a different syntax to retrieve the values. The ability to use strings on the left hand side of the assignment arrow is an historical artefact, used before R supported backticks.
-:::
-
-```r
-"仿宋字体"
-```
 
 The **bookdown** package [@xie_2015_knitr] can be installed from CRAN or Github:
 
@@ -94,6 +87,58 @@ install.packages("bookdown")
 > --- Uwe Ligges
 
 1. Fundamentals of Data Visualization Claus O. Wilke https://serialmentor.com/dataviz/ https://github.com/clauswilke/dataviz
+
+穷毕生之力修习小无相功，这是一门内家功夫
+
+道家的小无相功
+
+- 高级R语言编程 [Advanced R](https://adv-r.hadley.nz)
+
+编程指南
+
+- R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
+- 高效R语言编程  [Efficient R programming](https://csgillespie.github.io/efficientR)
+
+开发 R 包
+
+- 开发 R 包 [R packages](http://r-pkgs.had.co.nz)
+- 开发 R 包 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+
+数据科学 
+
+- 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)
+- 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
+
+文本挖掘
+
+- 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
+- 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
+- 字符串处理 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/)
+- 文本挖掘 [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
+
+动态文档
+
+- 动态文档 [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+- 写作 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown)
+- 网站 [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
+
+模型部署
+
+- Docker 入门 [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
+- Docker 从入门到实践 [docker practice](https://www.gitbook.com/book/yeasy/docker_practice)
+
+学习 R
+
+- R 安装与管理 [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
+- R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
+- 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
+- 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
+
+学习 Python
+
+- Python 最佳实践指南 [Hitchhiker’s Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
+
+更多在线书籍合集 https://bookdown.org
 
 ## 软件信息 {#softwares-rsession-info}
 
