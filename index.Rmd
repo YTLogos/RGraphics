@@ -69,11 +69,11 @@ install.packages("bookdown")
 
 写作风格，R 包名称都加粗表示，如 **bookdown**， **rmarkdown** 等，软件、编程语言名称保持原样，如 TinyTeX，LyX，TeXLive，R，Python，Stan，C++，SQL等，在代码块中，我们不使用`R>`或`+`，代码输出结果用`#>`注释
 
-## 结构 {#structure-of-book}
+## 本书结构 {#structure-of-book}
 
 
 
-## 资源 {#related-books}
+## 相关资源 {#related-books}
 
 穷毕生之力修习小无相功，这是一门内家功夫
 
@@ -113,6 +113,16 @@ install.packages("bookdown")
    - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
 
 更多在线书籍合集 https://bookdown.org
+
+学习 R 语言，不在编程而在统计，其天花板就是数理统计 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
+
+1. Tony Cai 
+   - Fall 2018: STAT 972: [Advanced Topics in Mathematical Statistics](http://www-stat.wharton.upenn.edu/~tcai/Stat972-Syllabus-Fall18.pdf)
+1. 
+
+## 关于作者 {#about-author}
+
+热心开源事业，目前在统计之都担任副主编 Associated Editor of Captial of Statistics
 
 ## 软件信息 {#softwares-rsession-info}
 
