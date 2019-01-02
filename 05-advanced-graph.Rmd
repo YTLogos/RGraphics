@@ -43,5 +43,16 @@ getAnywhere(rasterImage)
 ## image
 
 
+## sf {#simple-features}
 
+- maps
+- mapdata
+- maptools
+- mapproj
+
+- rgeos
+- rgdal
+
+- sp
+- sf
 

@@ -15,7 +15,7 @@ fontsize: 10pt
 secnumdepth: 2
 colorlinks: yes
 classoption: "UTF8,twoside"
-bibliography: [latex/book.bib, packages.bib]
+bibliography: [latex/book.bib, latex/refer.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 subparagraph: true
