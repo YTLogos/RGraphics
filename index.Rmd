@@ -116,9 +116,11 @@ install.packages("bookdown")
 
 学习 R 语言，不在编程而在统计，其天花板就是数理统计 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
-1. Tony Cai 
+1. Tony Cai
    - Fall 2018: STAT 972: [Advanced Topics in Mathematical Statistics](http://www-stat.wharton.upenn.edu/~tcai/Stat972-Syllabus-Fall18.pdf)
-1. 
+1. Ben Bolker
+   - fall 2018: STAT 4/6c03 [Generalized Linear Models](https://bbolker.github.io/stat4c03/) 
+   - Morelia 2018 workshop [generalized linear/mixed models](https://bbolker.github.io/morelia_2018)
 
 ## 关于作者 {#about-author}
 
