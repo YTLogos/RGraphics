@@ -32,6 +32,8 @@ keywords: ["graphics", "grid", "lattice", "ggplot2"]
 
 \mainmatter
 
+`r if (knitr::is_latex_output()) '<!--'` 
+
 # 准备 {#prerequisites}
 \index{bookdown}
 \index{knitr}
@@ -67,76 +69,48 @@ install.packages("bookdown")
 
 写作风格，R 包名称都加粗表示，如 **bookdown**， **rmarkdown** 等，软件、编程语言名称保持原样，如 TinyTeX，LyX，TeXLive，R，Python，Stan，C++，SQL等，在代码块中，我们不使用`R>`或`+`，代码输出结果用`#>`注释
 
-## 书籍结构 {#structure}
+## 结构 {#structure-of-book}
 
 
 
-## 相关书籍 {#related-books}
-
-1. Data Visualisation with R --- 100 Examples Thomas Rahlf http://www.datavisualisation-r.com/
-
-> I really like this book: those 100 interesting real data examples with the detailed R-scripts for producing beautiful graphical visualisation are particularly helpful for learning R graphics. I will use it as a main textbook for data visualization for my statistics course.  
-> --- Prof. Qiwei Yao
-
-
-> The images look REALLY nice!  
-> --- Paul Murrell
-
-
-> The graphics look VERY professional, with some I would not have thought that they come from R.  
-> --- Uwe Ligges
-
-1. Fundamentals of Data Visualization Claus O. Wilke https://serialmentor.com/dataviz/ https://github.com/clauswilke/dataviz
+## 资源 {#related-books}
 
 穷毕生之力修习小无相功，这是一门内家功夫
 
-道家的小无相功
-
-- 高级R语言编程 [Advanced R](https://adv-r.hadley.nz)
-
-编程指南
-
-- R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
-- 高效R语言编程  [Efficient R programming](https://csgillespie.github.io/efficientR)
-
-开发 R 包
-
-- 开发 R 包 [R packages](http://r-pkgs.had.co.nz)
-- 开发 R 包 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
-
-数据科学 
-
-- 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)
-- 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
-
-文本挖掘
-
-- 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
-- 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
-- 字符串处理 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/)
-- 文本挖掘 [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
-
-动态文档
-
-- 动态文档 [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
-- 写作 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown)
-- 网站 [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
-
-模型部署
-
-- Docker 入门 [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
-- Docker 从入门到实践 [docker practice](https://www.gitbook.com/book/yeasy/docker_practice)
-
-学习 R
-
-- R 安装与管理 [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
-- R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
-- 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
-- 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
-
-学习 Python
-
-- Python 最佳实践指南 [Hitchhiker’s Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
+1. 道家的小无相功
+   - 高级R语言编程 [Advanced R](https://adv-r.hadley.nz)
+1. 编程指南
+   - R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
+   - 高效R语言编程  [Efficient R programming](https://csgillespie.github.io/efficientR)
+1. 开发 R 包
+   - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)
+   - 开发 R 包 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+1. 数据科学 
+   - 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)
+1. 数据可视化   
+   - 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
+   - 数据可视化与R语言 [Data Visualisation with R --- 100 Examples](http://www.datavisualisation-r.com/)
+   - 数据可视化食谱 [R Graphics Cookbook](https://github.com/wch/gcookbook) [PDF](https://raw.githubusercontent.com/irichgreen/GCookBook/master/R%20Graphics%20Cookbook.pdf)
+   - 数据分析与图形艺术 [ggplot2: Elegant Graphics for Data Analysis](https://link.springer.com/book/10.1007%2F978-3-319-24277-4) [PDF](http://moderngraphics11.pbworks.com/f/ggplot2-Book09hWickham.pdf)
+1. 文本挖掘
+   - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
+   - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
+   - 字符串处理 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/)
+   - 文本挖掘 [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
+1. 动态文档
+   - 动态文档 [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+   - 写作 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown)
+   - 网站 [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
+1. 模型部署
+   - Docker 入门 [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
+   - Docker 从入门到实践 [docker practice](https://www.gitbook.com/book/yeasy/docker_practice)
+1. 学习 R
+   - R 安装与管理 [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
+   - R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
+   - 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
+   - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
+1. 学习 Python
+   - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
 
 更多在线书籍合集 https://bookdown.org
 
@@ -194,3 +168,5 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tikzDevice'
 ), 'packages.bib')
 ```
+
+`r if (knitr::is_latex_output()) '-->'`
