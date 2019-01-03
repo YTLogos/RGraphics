@@ -87,19 +87,28 @@ install.packages("bookdown")
    
    1. 开发 R 包
       - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
-   
+      - Git [Pro Git 中文第二版](https://git-scm.com/book/zh/v2)
+      
    1. 数据科学 
       - 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)
       - 可解释的机器学习 [Interpretable Machine Learning: A Guide for Making Black Box Models Explainable](https://christophm.github.io/interpretable-ml-book/)
       - 数据科学入门 [Introduction to Data Science](https://rafalab.github.io/dsbook/) Rafael A. Irizarry
       - 特征工程与特征选择 [Feature Engineering and Selection: A Practical Approach for Predictive Models](http://www.feat.engineering) Max Kuhn and Kjell Johnson
+      - 分类与回归：caret 包 [The caret Package](https://topepo.github.io/caret/)
       - 统计机器学习与应用 [An Introduction to Statistical Learning with Applications in R](https://www-bcf.usc.edu/~gareth/ISL/) [PDF](https://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf)
       - 机器学习与R语言 [Machine Learning in R](https://mlr.mlr-org.com/)
       - 贝叶斯数据分析 [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
       - 空间点模式：理论与应用 [Spatial Point Patterns: Methodology and Applications with R](https://spatstat.org)
+      - 地统计计算与R语言 [Geocomputation with R](https://geocompr.robinlovelace.net/) 
+      - 空间微观模拟与R语言 [Spatial Microsimulation with R](https://spatial-microsim-book.robinlovelace.net/) 
       - 应用时间序列分析与R语言 [Time Series Analysis with Applications in R](http://homepage.divms.uiowa.edu/~kchan/TSA.htm)
       - 时间序列预测预测：原理与实践 [Forecasting: Principles and Practice](https://www.otexts.org/fpp2/) [Rob J Hyndman](https://robjhyndman.com/)
+      - 时间序列分析及其应用 [Time Series Analysis and Its Applications: With R Examples](https://www.stat.pitt.edu/stoffer/tsa4/)
       - 线性模型与R语言 [Extending the Linear Model with R](http://people.bath.ac.uk/jjf23/ELM/) [Julian Faraway](https://farawaystatistics.wordpress.com/)
+      - 统计反思 [Statistical Rethinking](http://xcelab.net/rm/statistical-rethinking/)  [Statistical Rethinking Resources](https://rpruim.github.io/Statistical-Rethinking/)
+      - 回归模型策略 [Regression Modeling Strategies](http://biostat.mc.vanderbilt.edu/wiki/Main/RmS)
+      - 应用预测建模 [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
+      - 应用回归分析与广义线性模型 [Applied Regression Analysis and Generalized Linear Models](https://socialsciences.mcmaster.ca/jfox/)
    
    1. 数据可视化   
       - 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
@@ -150,6 +159,68 @@ install.packages("bookdown")
   - [Paul Murrell](https://www.stat.auckland.ac.nz/~paul/)
   - [统计之都](https://cosx.org/)
   - [谢益辉](https://yihui.name/)
+  - [Simply Statistics](https://simplystatistics.org/)
+  - [Edzer Pebesma](https://www.r-spatial.org/)
+  - [Data Science Plus](https://datascienceplus.com/)
+  - [Stan Core Team](https://mc-stan.org) [case studies](https://mc-stan.org/users/documentation/case-studies.html)
+  - [Håvard Rue](http://www.r-inla.org/) Bayesian computing with INLA
+  - [R Graph Gallery](https://www.r-graph-gallery.com/)
+  - [htmlwidgets Gallery](http://gallery.htmlwidgets.org/)
+
+* 学者
+  - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
+  - [姚琦伟](http://stats.lse.ac.uk/q.yao/)
+  - [范剑青](https://orfe.princeton.edu/~jqfan/index.html) [Jianqing Fan-Fudan](http://www.sds.fudan.edu.cn/wp/?p=1695)
+  - [蔡天文](http://www-stat.wharton.upenn.edu/~tcai/)
+  - [李润泽](http://personal.psu.edu/ril4/)
+  - [孟晓犁](https://statistics.fas.harvard.edu/people/xiao-li-meng)
+
+  - [Peter J. Diggle](https://www.lancaster.ac.uk/staff/diggle/)
+  - [Rob J Hyndman](https://robjhyndman.com/)
+  - [Julian Faraway](https://farawaystatistics.wordpress.com/)
+  - [Andrew Gelman](https://andrewgelman.com/)
+  - [Norm Matloff](https://matloff.wordpress.com/)
+  - [Brian Ripley](http://www.stats.ox.ac.uk/~ripley/)
+  - [John Fox](https://socialsciences.mcmaster.ca/jfox/)
+  - [Charlie Geyer](http://users.stat.umn.edu/~geyer/)
+  - [Michael L. Stein](http://www.stat.uchicago.edu/faculty/stein.shtml)
+
+  - [李航](http://hangli-hl.com)
+
+* 主页
+  - [王江浩](https://jianghao.github.io)
+  - [陈新鹏](https://chenxinpeng.github.io/)
+  - [于淼](https://yufree.cn/)
+  - [朱雪宁](https://xueningzhu.github.io/)
+  - [余光创](https://guangchuangyu.github.io/)
+  - [肖楠](https://nanx.me/)
+  - [高策](https://gaocegege.com)
+  - [赵鹏](http://www.pzhao.org/zh/)
+  - [高涛](https://joegaotao.github.io)
+  
+  - [Liam Huang](https://liam.page/)
+  - [边蓓蕾](http://statsjoke.me)
+  - [郎大为](http://langdawei.com/)
+  - [寇强](http://qkou.info/)
+  - [邱怡轩](https://yixuan.cos.name/cn/) or [Yixuan Qiu-en](https://statr.me/)
+  - [杨洵默](https://tcya.xyz/)
+  - [杜亚蕾](http://yalei.name/)
+  - [冯俊晨](http://www.fengjunchen.com/)
+  - [刘思喆](http://www.bjt.name/)
+  - [陈丽云](http://www.loyhome.com/)
+  - [唐源](https://terrytangyuan.github.io)
+  - [WenSui Liu](https://statcompute.wordpress.com/)
+  - [Yuling Yao](https://www.yulingyao.com/)
+  - [handong1587](https://handong1587.github.io/)
+
+  - [Paula Moraga](https://paula-moraga.github.io)
+  - [John MacFarlane](https://johnmacfarlane.net/)
+  - [Paul Bürkner](https://paul-buerkner.github.io/)
+
+* 搜索
+  - [Sci-Hub: removing barriers in the way of science](https://sci-hub.tw/)
+  - [书籍传送门](http://gen.lib.rus.ec/) 需要科学上网 http://gen.lib.rus.ec/
+  - [Stack Overflow](https://stackoverflow.com/)
 
 ## 关于作者 {#about-author}
 
