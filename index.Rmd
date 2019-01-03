@@ -79,40 +79,60 @@ install.packages("bookdown")
 
 1. 道家的小无相功
    - 高级R语言编程 [Advanced R](https://adv-r.hadley.nz)
+   
 1. 编程指南
    - R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
-   - 高效R语言编程  [Efficient R programming](https://csgillespie.github.io/efficientR)
+   - 高效R语言编程 [Efficient R programming](https://csgillespie.github.io/efficientR)
+
 1. 开发 R 包
-   - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)
-   - 开发 R 包 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+   - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+
 1. 数据科学 
    - 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)
+   - 可解释的机器学习 [Interpretable Machine Learning: A Guide for Making Black Box Models Explainable](https://christophm.github.io/interpretable-ml-book/)
+   - 数据科学入门 [Introduction to Data Science](https://rafalab.github.io/dsbook/) Rafael A. Irizarry
+   - 特征工程与特征选择 [Feature Engineering and Selection: A Practical Approach for Predictive Models](http://www.feat.engineering) Max Kuhn and Kjell Johnson
+   - 统计机器学习与应用 [An Introduction to Statistical Learning with Applications in R](https://www-bcf.usc.edu/~gareth/ISL/) [PDF](https://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf)
+   - 机器学习与R语言 [Machine Learning in R](https://mlr.mlr-org.com/)
+   - 贝叶斯数据分析 [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
+   - 空间点模式：理论与应用 [Spatial Point Patterns: Methodology and Applications with R](https://spatstat.org)
+   - 应用时间序列分析与R语言 [Time Series Analysis with Applications in R](http://homepage.divms.uiowa.edu/~kchan/TSA.htm)
+   - 时间序列预测预测：原理与实践 [Forecasting: Principles and Practice](https://www.otexts.org/fpp2/) [Rob J Hyndman](https://robjhyndman.com/)
+   - 线性模型与R语言 [Extending the Linear Model with R](http://people.bath.ac.uk/jjf23/ELM/) [Julian Faraway](https://farawaystatistics.wordpress.com/)
+
 1. 数据可视化   
    - 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
    - 数据可视化与R语言 [Data Visualisation with R --- 100 Examples](http://www.datavisualisation-r.com/)
-   - 数据可视化食谱 [R Graphics Cookbook](https://github.com/wch/gcookbook) [PDF](https://raw.githubusercontent.com/irichgreen/GCookBook/master/R%20Graphics%20Cookbook.pdf)
+   - R语言绘图手册 [R Graphics Cookbook](https://github.com/wch/gcookbook) [PDF](https://raw.githubusercontent.com/irichgreen/GCookBook/master/R%20Graphics%20Cookbook.pdf)
    - 数据分析与图形艺术 [ggplot2: Elegant Graphics for Data Analysis](https://link.springer.com/book/10.1007%2F978-3-319-24277-4) [PDF](http://moderngraphics11.pbworks.com/f/ggplot2-Book09hWickham.pdf)
+   - 数据可视化：实践指南 [Data Visualization: A practical introduction](https://socviz.co/) [Github](https://github.com/kjhealy/socviz)
+   - 可视化数据分析与R语言 [Graphical Data Analysis with R](http://www.gradaanwr.net/)
+
 1. 文本挖掘
    - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
    - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
    - 字符串处理 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/)
    - 文本挖掘 [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
+
 1. 动态文档
    - 动态文档 [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
    - 写作 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown)
    - 网站 [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
+
 1. 模型部署
    - Docker 入门 [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
    - Docker 从入门到实践 [docker practice](https://www.gitbook.com/book/yeasy/docker_practice)
+
 1. 学习 R
    - R 安装与管理 [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
    - R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
    - 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
    - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
+
 1. 学习 Python
    - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
 
-更多在线书籍合集 https://bookdown.org
+更多在线书籍合集 https://bookdown.org 还有一个[传送门](http://gen.lib.rus.ec/)
 
 学习 R 语言，不在编程而在统计，其天花板就是数理统计 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
@@ -120,7 +140,7 @@ install.packages("bookdown")
    - Fall 2018: STAT 972: [Advanced Topics in Mathematical Statistics](http://www-stat.wharton.upenn.edu/~tcai/Stat972-Syllabus-Fall18.pdf)
 1. Ben Bolker
    - fall 2018: STAT 4/6c03 [Generalized Linear Models](https://bbolker.github.io/stat4c03/) 
-   - Morelia 2018 workshop [generalized linear/mixed models](https://bbolker.github.io/morelia_2018)
+   - Morelia 2018 workshop [Generalized Linear/Mixed models](https://bbolker.github.io/morelia_2018)
 
 ## 关于作者 {#about-author}
 
