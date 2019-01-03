@@ -263,10 +263,65 @@ Docker & 容器管理工具 Docker Swarm
 
 Docker & Docker Machine & Docker Swarm
 
-```bash
-docker --version
-# Docker version 18.03.0-ce, build 0520e24302
-```
+1. 容器与镜像的操作
+
+   ```bash
+   docker --version
+   # Docker version 18.03.0-ce, build 0520e24302
+   ```
+
+   查看容器  
+   
+   ```bash
+   docker ps -a
+   ```
+
+   删除容器 `docker rm 容器 ID`，删除前要确认已经停止该容器的运行
+   
+   ```bash
+   docker rm 6f932357e6ce
+   ```
+
+   查看镜像 
+   
+   ```bash
+   docker images
+   ```
+
+   删除镜像 
+   
+   `docker rmi 镜像 ID`
+   
+   ```bash
+   docker rmi 811281c54b23
+   ```
+
+1. 拉取镜像
+
+   ```bash
+   docker pull rocker/verse:latest
+   ```
+
+1. 运行容器
+
+   ```bash
+   docker run --name verse -d -p 8282:8080 -e ROOT=TRUE \
+      -e USER=rstudio -e PASSWORD=cloud rocker/verse
+   ```
+   
+   将主机端口 8282 映射给虚拟机/容器的 8080 端口，RStudio Server 默认使用的端口是 8787，因此改为 8080 需要修改 `/etc/rstudio/rserver.conf` 文件，添加
+   
+   ```
+   www-port=8080
+   ```
+   
+   然后重启 RStudio Server，之后可以在浏览器中登陆[^rstudio-server-pro]，登陆网址为 <http://ip-addr:8080>，其中 `ip-addr` 可在容器中运行如下一行命令获得
+   
+   ```bash
+   ip addr
+   ```
+   
+[^rstudio-server-pro]: 参考 http://docs.rstudio.com/ide/server-pro/access-and-security.html
 
 ### Docker Machine
 
