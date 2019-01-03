@@ -64,6 +64,15 @@ install.packages("bookdown")
 
 [why-r]: https://www.ejwagenmakers.com/misc/HortonEtAl2004.pdf
 
+在数据科学领域内，选择 R 的理由
+
+> 1. written by statisticians for statisticians
+2. built-in matrix type and matrix manipulations
+3. great graphics, both base and CRAN
+4. excellent parallelization facilities, etc.  
+> Norm Matloff[^matloff] 
+
+[^matloff]: 参考博文 R > Python: A Concrete Example 来自 https://matloff.wordpress.com/
 
 ## 记号约定 {#conventions}
 
