@@ -23,4 +23,3 @@ sink()
 ```
 
 只将 `outer` 的结果保存到 `sink-examp.txt` 文件
-

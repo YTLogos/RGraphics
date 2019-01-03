@@ -70,7 +70,7 @@ install.packages("bookdown")
 2. built-in matrix type and matrix manipulations
 3. great graphics, both base and CRAN
 4. excellent parallelization facilities, etc.  
-> Norm Matloff[^matloff] 
+> --- Norm Matloff[^matloff] 
 
 [^matloff]: 参考博文 R > Python: A Concrete Example 来自 https://matloff.wordpress.com/
 
