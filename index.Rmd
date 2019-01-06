@@ -58,7 +58,7 @@ install.packages("bookdown")
 # devtools::install_github("rstudio/bookdown")
 ```
 
-## 为什么选择 R 语言 {#why-r}
+## why R {#why-r}
 
 不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
 
