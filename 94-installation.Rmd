@@ -12,7 +12,16 @@
 
 只考虑最新的 Ubuntu 18.04 因为本书写成的时候，该版本应该已经大规模使用了
 
-* Ubuntu 14.04.5
+* Ubuntu 14.04.5 安装最新版 R-3.5.x
+
+  ```bash
+  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu trusty-cran35/"
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+  sudo add-apt-repository -y "ppa:marutter/c2d4u3.5"
+  sudo add-apt-repository -y "ppa:marutter/rrutter3.5"
+  ```
+
+
 * Ubuntu 16.04.5
 * Ubuntu 18.04.1
 
@@ -28,6 +37,9 @@ sudo apt-get install -y r-base r-base-core r-base-dev
 
 同样适用于 Fedora
 
+安装指导[^install-r]
+
+[^install-r]: 在 CentOS 7 上打造 R 语言编程环境 
 
 ## 源码安装 {#source-install}
 
