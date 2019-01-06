@@ -162,35 +162,33 @@ docker run --name book -d -p 8282:8787 -e ROOT=TRUE \
  -e USER=rstudio -e PASSWORD=cloud rocker/geospatial
 ```
 
-为方便起见，建议选择就近的站点
+主机端口 8282 分配给容器内 RStudio Server 服务，进入容器后，为方便下载LaTeX宏包和R包起见，建议选择就近的站点
 
 ```bash
 tlmgr option repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet
 echo 'options(repos = c(CRAN = "https://mirrors.tuna.tsinghua.edu.cn/CRAN"))' > ~/.Rprofile.site
 ```
 
-安装软件
+安装常用的软件包依赖
 
 ```bash
-sudo apt-get install libgit2-dev libssh2-1-dev libglu1-mesa-dev libfreetype6-dev
-libxpm-dev libx11-dev libxaw7-dev tk-dev tcl-dev graphviz-dev 
-# for asy
-libosmesa6 libosmesa6-dev freeglut3 freeglut3-dev phantomjs
-# gobjc-5 glibc-source
-./configure --enable-memory-profiling 
-sudo apt-get install imagemagick optipng ghostscript fonts-liberation graphviz
+sudo apt-get install imagemagick optipng ghostscript graphviz \
+   libgit2-dev libssh2-1-dev libglu1-mesa-dev \
+   libfreetype6-dev libxpm-dev libx11-dev libxaw7-dev \
+   tk-dev tcl-dev graphviz-dev phantomjs \
+   libosmesa6 libosmesa6-dev freeglut3 freeglut3-dev 
 ```
 
-imagemagick 用于格式转化，optipng 用于 png 格式的图片优化，ghostscript 字体处理
+imagemagick 用于图片格式转化，optipng 用于 png 格式的图片压缩优化，ghostscript 字体处理
 
-然后安装 TeX 包
+然后安装常用的 LaTeX 宏包
 
-```r
+```{r,eval=FALSE,echo=TRUE}
 tinytex::tlmgr_install(pkgs = c(
-  "ctex", "ms", "xecjk", "ulem"
-  , "environ", "trimspaces", "zhnumber"
-  , "fandol", "filehook", "xcolor", "colortbl"
-  , "jknapltx", "lm-math", "rsfs", "pdfcrop", "subfig"
+  "ctex", "ms", "xecjk", "ulem", "environ", 
+  "trimspaces", "zhnumber", "fandol", "filehook", 
+  "xcolor", "colortbl", "jknapltx", "lm-math", 
+  "rsfs", "pdfcrop", "subfig"
 ))
 ```
 
