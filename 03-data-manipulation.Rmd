@@ -195,6 +195,13 @@ l <- lapply(l, transform, scale.sl = scale(Sepal.Length)) # 计算
 unsplit(l, g) %>% head(5) # 合并
 ```
 
+## 合并 {#merge}
+
+merge 合并两个数据框
+
+cbind
+rbind
+
 ## 聚合 {#aggregate}
 
 分组统计，都给出 dplyr 和 purrr 的便捷方式
