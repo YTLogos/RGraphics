@@ -10,28 +10,45 @@
 
 ### Ubuntu
 
-只考虑最新的 Ubuntu 18.04 因为本书写成的时候，该版本应该已经大规模使用了
+只考虑最新的 Ubuntu 18.04 因为本书写成的时候，该版本应该已经大规模使用了，默认版本的安装和之前版本的安装就不再展示了。安装最新版 R-3.5.x
 
-* Ubuntu 14.04.5 安装最新版 R-3.5.x
+* Ubuntu 14.04.5
 
   ```bash
   sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu trusty-cran35/"
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-  sudo add-apt-repository -y "ppa:marutter/c2d4u3.5"
-  sudo add-apt-repository -y "ppa:marutter/rrutter3.5"
   ```
 
-
 * Ubuntu 16.04.5
+
+  ```bash
+  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu xenial-cran35/"
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+  ```
+  
 * Ubuntu 18.04.1
 
-默认版本
-最新版本
-之前版本
+  ```bash
+  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu bionic-cran35/"
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+  ```
+
+接下来安装 R，详细安装指导见 [CRAN 官网](https://cran.r-project.org/bin/linux/debian/index.html)。 
 
 ```bash
 sudo apt-get install -y r-base r-base-core r-base-dev
 ```
+
+Michael Rutter 维护了编译好的二进制版本 https://launchpad.net/~marutter
+
+```bash
+# R packages for Ubuntu LTS. Based on CRAN Task Views.
+sudo add-apt-repository -y ppa:marutter/c2d4u3.5
+# This is a PPA used to create R 3.5 packages that will be synced to CRAN.
+sudo add-apt-repository -y ppa:marutter/rrutter3.5
+```
+
+安装前一个 PPA 就足够了，因为后一个 PPA 包含最新的基础 R 和 R 包是要推送到 CRAN 上的 
 
 ### CentOS
 
@@ -348,6 +365,7 @@ sudo apt-get install -y r-base r-base-core r-base-dev
    ```
 
 [^curl-dev]: libcurl-dev 是一个虚包 virtual package，由 libcurl4-openssl-dev 或 libcurl4-nss-dev 或 libcurl4-gnutls-dev 实际提供，选择其中一个安装即可。
+
 [curl]: https://github.com/jeroen/curl
 [git2r]: https://github.com/ropensci/git2r
 [openssl]: https://github.com/jeroen/openssl
