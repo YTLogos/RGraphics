@@ -15,40 +15,37 @@
 * Ubuntu 14.04.5
 
   ```bash
-  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu trusty-cran35/"
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu trusty-cran35/"
   ```
 
 * Ubuntu 16.04.5
 
   ```bash
-  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu xenial-cran35/"
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu xenial-cran35/"
   ```
   
-* Ubuntu 18.04.1
+* Ubuntu 18.04.1 提供的默认版本 R 3.4.4，安装目前的最新版本需要
 
   ```bash
-  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu bionic-cran35/"
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+  sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu bionic-cran35/"
   ```
+  
+  接下来安装 R，详细安装指导见 [CRAN 官网](https://cran.r-project.org/bin/linux/debian/index.html)。 
 
-接下来安装 R，详细安装指导见 [CRAN 官网](https://cran.r-project.org/bin/linux/debian/index.html)。 
-
-```bash
-sudo apt-get install -y r-base r-base-core r-base-dev
-```
-
-Michael Rutter 维护了编译好的二进制版本 https://launchpad.net/~marutter
-
-```bash
-# R packages for Ubuntu LTS. Based on CRAN Task Views.
-sudo add-apt-repository -y ppa:marutter/c2d4u3.5
-# This is a PPA used to create R 3.5 packages that will be synced to CRAN.
-sudo add-apt-repository -y ppa:marutter/rrutter3.5
-```
-
-安装前一个 PPA 就足够了，因为后一个 PPA 包含最新的基础 R 和 R 包是要推送到 CRAN 上的 
+  ```bash
+  sudo apt-get install -y r-base r-base-core r-base-dev
+  ```
+  
+  Michael Rutter 维护了编译好的二进制版本 https://launchpad.net/~marutter，比如 rstan 包可以通过安装 r-cran-rstan 完成
+  
+  ```bash
+  # R packages for Ubuntu LTS. Based on CRAN Task Views.
+  sudo add-apt-repository -y ppa:marutter/c2d4u3.5
+  sudo apt-get install r-cran-rstan
+  ```
 
 ### CentOS
 
