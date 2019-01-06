@@ -4,7 +4,7 @@
 library(magrittr) # %>%
 ```
 
-数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的
+数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的，而且如果没有特别说明，文中出现的数据集都是 Base R 内置的，第三方 R 包或者来源于网上的数据集都会加以说明。
 
 ## 查看 {#show}
 
@@ -228,6 +228,74 @@ ind <- which("Species" == colnames(iris))
 # 分组统计
 aggregate(iris[, -ind], list(iris[, ind]), sum)
 ```
+
+按照 Species 划分的类别，分组计算，使用公式表示形式，右边一定是分类变量，否则会报错误或者警告，输出奇怪的结果，请读者尝试运行`aggregate(Species ~ Sepal.Length, data = iris, mean)`。公式法表示分组计算，`~` 左手边可以做加 `+` 减 `-` 乘 `*` 除 `/` 取余 `%%` 等数学运算。下面以数据集 iris 为例，只对 Sepal.Length 按 Species 分组计算
+
+```{r,echo=TRUE}
+aggregate(Sepal.Length ~ Species, data = iris, mean)
+```
+
+与上述分组统计结果一样的命令，在大数据集上， 与 aggregate 相比，tapply 要快很多，by 是 tapply 的包裹，处理速度差不多。读者可以构造伪随机数据集验证。
+
+```{r,echo=TRUE}
+tapply(iris$Sepal.Length, list(iris$Species), mean)
+by(iris$Sepal.Length, iris$Species, mean)
+```
+
+对所有变量按 Species 分组计算 
+
+```{r,echo=TRUE}
+aggregate(. ~ Species, data = iris, mean)
+```
+
+对变量 Sepal.Length 和 Sepal.Width 求和后，按 Species 分组计算
+
+```{r,echo=TRUE}
+aggregate(Sepal.Length + Sepal.Width ~ Species, data = iris, mean)
+```
+
+对多个分类变量做分组计算，在数据集 ChickWeight 中 Chick和Diet都是数字编码的分类变量，其中 Chick 是有序的因子变量，Diet 是无序的因子变量，而 Time 是数值型的变量，表示小鸡出生的天数。
+
+```{r,echo=TRUE}
+# 查看数据
+str(ChickWeight)
+head(ChickWeight)
+# 查看因子Chick变量
+ChickWeight$Chick
+```
+
+对于有序变量Chick，aggregate 会按照既定顺序返回分组计算的结果
+
+```{r,echo=TRUE}
+aggregate(weight ~ Chick, data = ChickWeight, mean)
+aggregate(weight ~ Diet, data = ChickWeight, mean)
+```
+
+分类变量没有用数字编码，以 CO2 数据集为例，该数据集描述草植对二氧化碳的吸收情况，Plant 是具有12个水平的有序的因子变量，Type表示植物的源头分别是魁北克(Quebec)和密西西比(Mississippi)，Treatment表示冷却(chilled)和不冷却(nonchilled)两种处理方式，conc表示周围环境中二氧化碳的浓度，uptake表示植物吸收二氧化碳的速率。
+
+```{r,echo=TRUE}
+# 查看数据集
+head(CO2)
+str(CO2)
+```
+
+对单个变量分组统计
+
+```{r,echo=TRUE}
+aggregate(uptake ~ Plant, data = CO2, mean)
+aggregate(uptake ~ Type, data = CO2, mean)
+aggregate(uptake ~ Treatment, data = CO2, mean)
+```
+
+对多个变量分组统计，查看二氧化碳吸收速率uptake随类型Type和处理方式Treatment
+
+```{r,echo=TRUE}
+aggregate(uptake ~ Type + Treatment, data = CO2, mean)
+tapply(CO2$uptake, list(CO2$Type,CO2$Treatment), mean)
+by(CO2$uptake,list(CO2$Type,CO2$Treatment), mean)
+```
+
+在这个例子中 tapply 和 by 的输出结果的表示形式不一样，aggregate返回一个data.frame数据框，tapply返回一个表格table，by 返回特殊的数据类型 by。
 
 table 多个分类变量分组计数统计
 
