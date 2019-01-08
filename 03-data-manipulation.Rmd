@@ -69,6 +69,8 @@ gsub(" <([^<>]*)>", "", lapply(.packages(TRUE), maintainer) %>%
 
 我安装 Hadley Wickham 维护的 R 包有 33 个
 
+stringr/stringi
+
 ## 重塑 {#reshape}
 
 重复测量数据的变形 Reshape Grouped Data
@@ -201,6 +203,7 @@ merge 合并两个数据框
 
 cbind
 rbind
+
 
 ## 聚合 {#aggregate}
 
@@ -361,4 +364,17 @@ microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 
 with 和 within
 
+## 其它 {#others}
 
+成对的数据操作
+
+list unlist 
+stack unstack 
+class unclass
+attach detach
+
+数据操作，reshape reshape2 plyr dplyr dbplyr sparklyr tidyr
+
+现代数据操作
+
+dplyr 和 sparklyr
