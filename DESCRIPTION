@@ -1,15 +1,17 @@
 Package: placeholder
 Type: Book
-Title: Learn R the Hard Way.
+Title: Learn R Graphics.
 Version: 0.0.1
 Imports: 
-  bookdown, 
-  ggplot2, 
-  gridExtra, 
-  microbenchmark, 
+  bookdown,
+  extrafont,
+  ggplot2,
+  gridExtra,
+  microbenchmark,
   rgdal,
-  rgeos, 
-  sf, 
+  rgeos,
+  sf,
+  showtext,
   sp, 
-  svglite, 
+  svglite,
   tikzDevice
