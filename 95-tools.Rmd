@@ -22,7 +22,7 @@
 
 Git 使用的数据库
 
-[^install-git]: 官网安装指导 https://git-scm.com/download/linux 
+[^install-git]: 根据官网安装指导 https://git-scm.com/download/linux，在 Ubuntu 14.04.5 和 Ubuntu 16.04.5 安装最新版 GIT 
 
 ## 动态文档 {#dynamic-documents}
 
