@@ -55,7 +55,7 @@ to_png <- function(fig_path) {
 }
 
 # copy https://github.com/yihui/knitr-examples/blob/master/085-pdfcrop.Rnw
-# convert-im6.q16: not authorized ubuntu 18.04.1 https://blog.csdn.net/lpwmm/article/details/83313459
+# convert-im6.q16: not authorized ubuntu 16.04.5/18.04.1 https://blog.csdn.net/lpwmm/article/details/83313459
 knitr::knit_hooks$set(tikz2png = function(before, options, envir) {
   # use this hook only for dev='tikz' and externalized tikz graphics
   if (before || options$dev != "tikz" || !options$external || options$fig.num == 0) return()

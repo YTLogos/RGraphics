@@ -242,12 +242,34 @@
 
 ## 安装字体 {#install-mscorefonts}
 
+在 Ubuntu 系统上安装微软字体，由于长期没有维护更新，默认字体下载链接失效了
+
 ```bash
 sudo apt-get install ttf-mscorefonts-installer
+```
+
+因此，需要手动下载字体到目录 `~/msfonts/`下
+
+```r
+baseurl = 'https://nchc.dl.sourceforge.net/project/corefonts/the%20fonts/final'
+fonts <- c('webdin32','verdan32','trebuc32','times32',
+           'impact32','georgi32','courie32','comic32',
+           'arialb32','arial32','andale32')
+fonts_exe = paste0(fonts,'.exe')
+fonts_url = paste(baseurl, fonts_exe, sep='/')
+
+for(i in seq(length(fonts)))
+download.file(url = fonts_url[i], destfile = paste('~/msfonts',fonts_exe[i],sep='/'),
+              method = 'auto')
+```
+
+配置字体
+
+```bash
 sudo dpkg-reconfigure ttf-mscorefonts-installer
 ```
 
-注意要输入字体存放的完整路径`/home/ubuntu/msfonts`
+注意要输入字体存放的完整路径 `/home/ubuntu/msfonts` 而不是相对路径 `~/msfonts`
 
 ```
 checking /home/ubuntu/msfonts/andale32.exe
@@ -365,33 +387,109 @@ All fonts downloaded and installed.
 
 安装完成后，字体存放在目录`/usr/share/fonts/truetype/msttcorefonts/`下
 
+```
+Andale_Mono.ttf              Georgia.ttf
+andalemo.ttf                 georgiaz.ttf
+arialbd.ttf                  impact.ttf
+arialbi.ttf                  Impact.ttf
+Arial_Black.ttf              timesbd.ttf
+Arial_Bold_Italic.ttf        timesbi.ttf
+Arial_Bold.ttf               timesi.ttf
+Arial_Italic.ttf             Times_New_Roman_Bold_Italic.ttf
+ariali.ttf                   Times_New_Roman_Bold.ttf
+arial.ttf                    Times_New_Roman_Italic.ttf
+Arial.ttf                    Times_New_Roman.ttf
+ariblk.ttf                   times.ttf
+comicbd.ttf                  trebucbd.ttf
+Comic_Sans_MS_Bold.ttf       trebucbi.ttf
+Comic_Sans_MS.ttf            Trebuchet_MS_Bold_Italic.ttf
+comic.ttf                    Trebuchet_MS_Bold.ttf
+courbd.ttf                   Trebuchet_MS_Italic.ttf
+courbi.ttf                   Trebuchet_MS.ttf
+Courier_New_Bold_Italic.ttf  trebucit.ttf
+Courier_New_Bold.ttf         trebuc.ttf
+Courier_New_Italic.ttf       Verdana_Bold_Italic.ttf
+Courier_New.ttf              Verdana_Bold.ttf
+couri.ttf                    verdanab.ttf
+cour.ttf                     Verdana_Italic.ttf
+Georgia_Bold_Italic.ttf      verdanai.ttf
+Georgia_Bold.ttf             verdana.ttf
+georgiab.ttf                 Verdana.ttf
+Georgia_Italic.ttf           verdanaz.ttf
+georgiai.ttf                 webdings.ttf
+georgia.ttf                  Webdings.ttf
+```
+
 查看已经安装的字体
 
 ```bash
-fc-list :lang=en | sort
-
 fc-list :lang=zh | sort
+fc-list :lang=en | sort
 ```
 
-下载字体到目录 `~/msfonts/`下
+微软提供的几款免费字体
 
-```r
-baseurl = 'https://nchc.dl.sourceforge.net/project/corefonts/the%20fonts/final'
-fonts <- c('webdin32','verdan32','trebuc32','times32',
-           'impact32','georgi32','courie32','comic32',
-           'arialb32','arial32','andale32')
-fonts_exe = paste0(fonts,'.exe')
-fonts_url = paste(baseurl, fonts_exe, sep='/')
-
-for(i in seq(length(fonts)))
-download.file(url = fonts_url[i], destfile = paste('~/msfonts',fonts_exe[i],sep='/'),
-              method = 'auto')
+```
+Andale Mono
+Arial
+Courier New
+Times New Roman
+Verdana
 ```
 
 安装等宽字体
 
 ```bash
 sudo apt install fonts-inconsolata
+```
+
+导入系统TTF类型字体到 R 环境中，这样绘图可以使用更多的字体
+
+```r
+install.packages('extrafont')
+library(extrafont)
+font_import()
+```
+
+查看可用的字体
+
+```r
+# Vector of font family names
+fonts()
+
+# Show entire table
+fonttable()
+```
+
+加载字体
+
+```r
+# Only necessary in session where you ran font_import()
+loadfonts()
+# For PostScript output, use loadfonts(device="postscript")
+# Suppress output with loadfonts(quiet=TRUE)
+```
+
+测试字体是否被正确调用
+
+```r
+pdf("font_Impact.pdf", family="Impact", width=4, height=4)
+par(mar = c(4.1, 4.1, 2.1, 0.5)) 
+plot(mtcars$mpg, mtcars$wt, 
+     main = "Fuel Efficiency of 32 Cars",
+     xlab = "Weight (x1000 lb)",
+     ylab = "Miles per Gallon")
+dev.off()
+```
+
+PDF 格式图片转 PNG 格式
+
+```bash
+convert -quality 100 -density 300x300 font_Impact.pdf font_Impact.png
+```
+
+```{r fonts-Impact,fig.cap="Impact 字体"}
+knitr::include_graphics(path = "figures/font_Impact.png")
 ```
 
 ## 安装 R 包 {#install-package}
