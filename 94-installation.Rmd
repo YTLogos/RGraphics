@@ -239,6 +239,17 @@
 
 ### CentOS
 
+## 安装 IDE {#install-ide}
+
+在 RStudio 官网下载最新版 RStudio 集成开发环境[^rstudio-download]
+
+```bash
+sudo apt-get install gdebi
+sudo gdebi rstudio*
+```
+
+
+[^rstudio-download]: https://www.rstudio.com/products/rstudio/download/
 
 ## 安装字体 {#install-mscorefonts}
 
