@@ -1,5 +1,15 @@
 # 软件工具 {#software-tools}
 
+## 编辑器 {#editor}
+
+atom
+
+```bash
+sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update
+sudo apt-get install atom
+```
+
 ## 版本控制 {#version-control}
 
 只考虑 Ubuntu 18.04 环境
