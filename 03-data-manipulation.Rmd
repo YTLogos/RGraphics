@@ -207,7 +207,9 @@ rbind
 
 ## 聚合 {#aggregate}
 
-分组统计，都给出 dplyr 和 purrr 的便捷方式
+分组统计
+
+[给出 dplyr 和 purrr 的便捷方式].{todo}
 
 ```{r,echo=TRUE}
 apropos("apply")
@@ -305,13 +307,24 @@ tapply(CO2$uptake, list(CO2$Type,CO2$Treatment), mean)
 by(CO2$uptake,list(CO2$Type,CO2$Treatment), mean)
 ```
 
-在这个例子中 tapply 和 by 的输出结果的表示形式不一样，aggregate返回一个data.frame数据框，tapply返回一个表格table，by 返回特殊的数据类型 by。
+在这个例子中 tapply 和 by 的输出结果的表示形式不一样，aggregate 返回一个 data.frame 数据框，tapply 返回一个表格 table，by 返回特殊的数据类型 by。
 
-table 多个分类变量分组计数统计
+## 列联表 {#cross-table}
+
+table 多个分类变量分组计数统计 
+
+- 介绍 warpbreaks 和 airquality 纽约空气质量监测数据集 二维的数据框
+- UCBAdmissions 1973年加州大学伯克利分校的院系录取数据集 3维的列联表
+- Titanic 4维的列联表数据 泰坦尼克号幸存者数据集
 
 ```{r,echo=TRUE}
-# 分类变量计数
 with(warpbreaks, table(wool, tension))
+```
+
+
+
+```{r,eval=FALSE}
+pairs(airquality, panel = panel.smooth, main = "airquality data")
 ```
 
 Function `by` is an object-oriented wrapper for `tapply` applied to data frames. 
