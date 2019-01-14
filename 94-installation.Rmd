@@ -624,8 +624,17 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    install.packages("rJava")
    ```
   
-1. [gpuR] 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda] 扩展包
+1. [gpuR] 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda] 扩展包，下面安装指导来自其 Wiki
 
+  ```bash
+  # Install OpenCL headers
+  sudo apt-get install opencl-headers opencv-dev
+  
+  # Install NVIDIA Drivers and CUDA
+  sudo add-apt-repository -y ppa:xorg-edgers/ppa
+  sudo apt-get update
+  sudo apt-get install nvidia-346 nvidia-settings
+  ```
   ```bash
   nvidia-smi
   ```
@@ -647,6 +656,15 @@ knitr::include_graphics(path = "figures/font_Impact.png")
   |=============================================================================|
   |    0                    Not Supported                                       |
   +-----------------------------------------------------------------------------+
+  ```
+  ```
+  nvcc --version
+  ```
+  ```
+  nvcc: NVIDIA (R) Cuda compiler driver
+  Copyright (c) 2005-2015 NVIDIA Corporation
+  Built on Tue_Aug_11_14:27:32_CDT_2015
+  Cuda compilation tools, release 7.5, V7.5.17
   ```
 
 [^curl-dev]: libcurl-dev 是一个虚包 virtual package，由 libcurl4-openssl-dev 或 libcurl4-nss-dev 或 libcurl4-gnutls-dev 实际提供，选择其中一个安装即可。
