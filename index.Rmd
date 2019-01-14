@@ -269,6 +269,26 @@ Package version:
   xfun_0.4         yaml_2.2.0      
 
 Pandoc version: 2.5
+
+R version 3.4.4 (2018-03-15)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.5 LTS, RStudio 1.1.463
+
+Locale:
+  LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+  LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+  LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+  LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+Package version:
+  base64enc_0.1.3  bookdown_0.9     colorspace_1.4.0 digest_0.6.18    evaluate_0.12   
+  filehash_2.4.1   fontcm_1.1       glue_1.3.0       graphics_3.4.4   grDevices_3.4.4 
+  highr_0.7        htmltools_0.3.6  jsonlite_1.6     knitr_1.21       magrittr_1.5    
+  markdown_0.9     methods_3.4.4    mime_0.6         png_0.1.7        Rcpp_1.0.0      
+  rmarkdown_1.11   stats_3.4.4      stringi_1.2.4    stringr_1.3.1    tikzDevice_0.12 
+  tinytex_0.10     tools_3.4.4      utils_3.4.4      xfun_0.4         yaml_2.2.0      
+
+Pandoc version: 2.5
 ```
 
 > 为了重复实现，我准备了一个虚拟机，存放在百度云盘上，链接: <https://pan.baidu.com/s/1K7R55QfFHGu6_QsyUlpCJA> 密码: 2ixt
