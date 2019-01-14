@@ -624,7 +624,7 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    install.packages("rJava")
    ```
   
-1. [gpuR] 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda] 扩展包，下面安装指导来自其 Wiki
+1. [gpuR] 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda] 和 [gputools] 扩展包，下面安装指导来自其 Wiki
 
   ```bash
   # Install OpenCL headers
@@ -681,3 +681,4 @@ knitr::include_graphics(path = "figures/font_Impact.png")
 [magick]: https://github.com/ropensci/magick
 [gpuR]: https://github.com/cdeterman/gpuR
 [gpuRcuda]: https://github.com/gpuRcore/gpuRcuda
+[gputools]: https://github.com/nullsatz/gputools
