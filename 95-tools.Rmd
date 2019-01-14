@@ -2,19 +2,35 @@
 
 ## 编辑器 {#editor}
 
-atom
+1. Atom 编辑器^[<https://atom.io/>]
 
-```bash
-sudo add-apt-repository ppa:webupd8team/atom
-sudo apt-get update
-sudo apt-get install atom
-```
+  ```bash
+  sudo add-apt-repository ppa:webupd8team/atom
+  sudo apt-get update
+  sudo apt-get install atom
+  ```
+
+1. Code 编辑器微软出品
+
+  > https://code.visualstudio.com/
+
+1. Notepad++ 开源的 Windows 平台上的编辑器
+  
+  > https://notepad-plus-plus.org/
+
+1. VI & VIM 开源的跨平台编辑器
+
+Atom 和 Code 有商业公司支持的开源免费的跨平台的编辑器
+
+VI/VIM 和 Emacs 是跨平台的编辑器
 
 ## 版本控制 {#version-control}
 
 只考虑 Ubuntu 18.04 环境
 
 三剑客 Git & Github & Gitlab
+
+Ubuntu 16.04.5 默认安装的 Git 版本是 2.7.4，下面安装最新版本Git和配置自己的GitHub账户
 
 1. 安装[^install-git]
 
@@ -205,8 +221,9 @@ tinytex::tlmgr_install(pkgs = c(
 我用了两个 R 包编译这本书，分别是 **knitr**\index{knitr}  和 **bookdown**\index{bookdown}。
 
 
+## 开发环境 {#ide}
 
-## RStudio IDE {#rstudio-ide}
+### RStudio IDE {#rstudio-ide}
 
 RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Server 开源服务器版
 
@@ -264,6 +281,20 @@ RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Serv
 
 
 [rstudio-download]: https://www.rstudio.com/products/rstudio/download/
+
+
+### Eclipse + StatET {#eclipse-plus-statet}
+
+Eclipse 配合 StatET 插件^[<http://www.walware.de/goto/statet>]提供R语言的集成开发环境
+
+### Emacs + ESS {#emacs-plus-ess}
+
+Emacs 配合 ESS 插件^[<https://ess.r-project.org/>] 
+
+
+### Nvim-R {#vim-plus-r}
+
+Nvim-R 是一个基于 Vim 的集成开发环境^[<https://github.com/jalvesaq/Nvim-R>]
 
 ## 容器 {#container}
 

@@ -19,7 +19,7 @@
   sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu trusty-cran35/"
   ```
 
-* Ubuntu 16.04.5  提供的默认版本 R 3.4.4，安装目前的最新版本需要
+* Ubuntu 16.04.5  提供的默认版本 R 3.4.4，这是 R 3.4.x 系列的最新版，安装目前最新的 R 3.5.x 版本需要
 
   ```bash
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
