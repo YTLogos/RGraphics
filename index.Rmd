@@ -58,7 +58,7 @@ install.packages("bookdown")
 # devtools::install_github("rstudio/bookdown")
 ```
 
-## why R {#why-r}
+## Why R? {#why-r}
 
 不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
 
@@ -81,6 +81,23 @@ install.packages("bookdown")
 ## 本书结构 {#structure-of-book}
 
 
+## 历史 {#history-of-r}
+
+1. Ross Ihaka
+
+  维基主页 https://en.wikipedia.org/wiki/Ross_Ihaka
+  
+  Ross Ihaka 的学术族谱
+  https://www.stat.auckland.ac.nz/%7Eihaka/downloads/ihaka.pdf
+  
+  R: Lessons Learned, Directions for the Future.
+  https://www.stat.auckland.ac.nz/%7Eihaka/downloads/JSM-Talk.pdf
+  
+  R语言的前世今生 https://www.cnblogs.com/chenkai/archive/2013/05/16/3082889.html
+
+1. Robert Gentleman
+
+  维基主页 https://en.wikipedia.org/wiki/Robert_Gentleman_(statistician)
 
 ## 相关资源 {#related-books}
 
