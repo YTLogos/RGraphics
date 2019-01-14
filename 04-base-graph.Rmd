@@ -103,7 +103,8 @@ scales::show_col(colours = more_colors)
 
 pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体 
 
-```{r font-sans,echo=TRUE,dev.args=list(family = "sans"),out.width = "55%",fig.width=33/7,fig.cap="默认 sans 字体"}
+```{r font-sans,echo=TRUE,dev.args=list(family = "sans"),out.width = "45%",fig.width=27/7,fig.cap="默认 sans 字体",fig.asp=1}
+par(mar=c(4,4,2,1))
 x <- seq(-4, 4, len = 101)
 y <- cbind(sin(x), cos(x))
 matplot(x, y,
@@ -168,9 +169,7 @@ knitr::include_graphics(path = "figures/missing-fonts.png")
 
 ```{r,eval=FALSE,echo=TRUE}
 Sys.setenv(R_GSCMD = "C:/Program Files/gs/gs9.26/bin/gswin64c.exe")
-
 # embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") # GS 默认搜索路径不对
-
 embedFonts(
   file = "cm.pdf", outfile = "cm-embed.pdf",
   fontpaths = system.file("fonts", package = "fontcm")  # 指定字体搜索路径

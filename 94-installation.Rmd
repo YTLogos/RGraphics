@@ -396,7 +396,7 @@ All done, no errors.
 All fonts downloaded and installed.
 ```
 
-安装完成后，字体存放在目录`/usr/share/fonts/truetype/msttcorefonts/`下
+安装完成后，字体存放在系统目录`/usr/share/fonts/truetype/msttcorefonts/`下
 
 ```
 Andale_Mono.ttf              Georgia.ttf
