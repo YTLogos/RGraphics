@@ -10,33 +10,52 @@
 
 ### Ubuntu
 
-只考虑最新的 Ubuntu 18.04 因为本书写成的时候，该版本应该已经大规模使用了，默认版本的安装和之前版本的安装就不再展示了。安装最新版 R-3.5.x
+安装 openssh zsh 和 Git
 
-* Ubuntu 14.04.5
+```bash
+sudo apt-get install zsh openssh-server
+
+sudo add-apt-repository -y ppa:git-core/ppa
+sudo apt update && sudo apt install git
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+只考虑最新的 Ubuntu 18.04 因为本书写成的时候，该版本应该已经大规模使用了，默认版本的安装和之前版本的安装就不再展示了。安装最新版 R-3.5.x，无论安装哪个版本，都要先导入密钥
+
+```bash
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+```
+
+* Ubuntu 14.04.5 提供的默认版本 R 3.0.2，安装 R 3.5.x 系列之前的版本，如 R 3.4.4
 
   ```bash
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+  sudo apt-add-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu `lsb_release -cs`/"
+  sudo apt-get install r-base-dev
+  ```
+
+  添加完仓库后，都需要更新源`sudo apt-get update`，安装 R 3.5.x 系列最新版
+
+  ```bash
   sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu trusty-cran35/"
   ```
 
 * Ubuntu 16.04.5  提供的默认版本 R 3.4.4，这是 R 3.4.x 系列的最新版，安装目前最新的 R 3.5.x 版本需要
 
   ```bash
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu xenial-cran35/"
   ```
   
 * Ubuntu 18.04.1 提供的默认版本 R 3.4.4，安装目前的最新版本需要
 
   ```bash
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   sudo apt-add-repository -y "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu bionic-cran35/"
   ```
   
   接下来安装 R，详细安装指导见 [CRAN 官网](https://cran.r-project.org/bin/linux/debian/index.html)。 
 
   ```bash
-  sudo apt-get install -y r-base r-base-core r-base-dev
+  sudo apt-get install -y r-base-dev
   ```
   
   Michael Rutter 维护了编译好的二进制版本 https://launchpad.net/~marutter，比如 rstan 包可以通过安装 r-cran-rstan 完成
@@ -59,14 +78,35 @@
 
 ### Ubuntu
 
+1. 首先启用源码仓库，否则执行 `sudo apt-get build-dep r-base` 会报如下错误
+
+  ```
+  E: You must put some 'source' URIs in your sources.list
+  ```
+
+  ```bash
+  sudo sed -i -- 's/#deb-src/deb-src/g' /etc/apt/sources.list && sudo sed -i -- 's/# deb-src/deb-src/g' /etc/apt/sources.list
+  sudo apt-get update
+  ```
+
 1. 安装编译 R 所需的系统依赖
 
   ```bash
-  sudo apt-dep
+  sudo apt-get build-dep r-base-dev
   ```
 
 1. 编译安装 R
 
+  ```bash
+  ./configure
+  make && make install 
+  ```
+  
+1. 自定义编译选项
+
+  ```
+  ./configure --help
+  ```  
 
 ### CentOS
 
