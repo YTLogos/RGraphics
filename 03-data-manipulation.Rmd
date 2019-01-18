@@ -209,7 +209,7 @@ rbind
 
 分组统计
 
-[给出 dplyr 和 purrr 的便捷方式].{todo}
+[给出 dplyr 和 purrr 的便捷方式]{.todo}
 
 ```{r,echo=TRUE}
 apropos("apply")
