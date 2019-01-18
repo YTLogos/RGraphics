@@ -271,14 +271,18 @@ aggregate(Sepal.Length + Sepal.Width ~ Species, data = iris, mean)
 ```{r,echo=TRUE}
 # 查看数据
 str(ChickWeight)
-head(ChickWeight)
-# 查看因子Chick变量
-ChickWeight$Chick
 ```
 
-对于有序变量Chick，aggregate 会按照既定顺序返回分组计算的结果
+查看数据集ChickWeight的前几行
 
-```{r,echo=TRUE}
+```{r, out.lines=6, echo=TRUE}
+# head(ChickWeight)
+ChickWeight
+```
+
+对于数据集ChickWeight中的有序变量Chick，aggregate 会按照既定顺序返回分组计算的结果
+
+```{r,echo=TRUE, out.lines=6}
 aggregate(weight ~ Chick, data = ChickWeight, mean)
 aggregate(weight ~ Diet, data = ChickWeight, mean)
 ```

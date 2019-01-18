@@ -9,6 +9,22 @@ knitr::knit_hooks$set(
   }
 )
 
+knitr::knit_hooks$set(output = local({
+  # the default output hook
+  hook_output = knitr::knit_hooks$get('output')
+  function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+      x = knitr:::split_lines(x)
+      if (length(x) > n) {
+        # truncate the output
+        x = c(head(x, n), '....\n')
+      }
+      x = paste(x, collapse = '\n') # paste first n lines together
+    }
+    hook_output(x, options)
+  }
+}))
+
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
