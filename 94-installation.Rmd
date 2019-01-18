@@ -59,6 +59,14 @@
 
 ### Ubuntu
 
+1. 安装编译 R 所需的系统依赖
+
+  ```bash
+  sudo apt-dep
+  ```
+
+1. 编译安装 R
+
 
 ### CentOS
 
@@ -79,6 +87,10 @@
 
 * 安装依赖
 
+  ```bash
+  sudo yum install yum-utils
+  sudo yum-builddep R
+  ```
   ```bash
   sudo yum groupinstall "Development Tools" 
   sudo yum install -y epel-release gcc gcc-objc gcc-objc++ deltarpm
@@ -253,34 +265,43 @@ sudo gdebi rstudio*
 
 ## 安装字体 {#install-mscorefonts}
 
-在 Ubuntu 系统上安装微软字体，由于长期没有维护更新，默认字体下载链接失效了
+在 Ubuntu 系统上安装微软字体，如果因为网络原因，下载出现问题，也有可能是长期没有维护更新，默认字体下载链接失效了
 
 ```bash
+
 sudo apt-get install ttf-mscorefonts-installer
 ```
 
 因此，需要手动下载字体到目录 `~/msfonts/`下
 
-```r
-baseurl = 'https://nchc.dl.sourceforge.net/project/corefonts/the%20fonts/final'
-fonts <- c('webdin32','verdan32','trebuc32','times32',
-           'impact32','georgi32','courie32','comic32',
-           'arialb32','arial32','andale32')
-fonts_exe = paste0(fonts,'.exe')
-fonts_url = paste(baseurl, fonts_exe, sep='/')
+```{r,eval=FALSE,echo=TRUE}
+baseurl <- "https://nchc.dl.sourceforge.net/project/corefonts/the%20fonts/final"
+fonts <- c(
+  "webdin32", "verdan32", "trebuc32", "times32",
+  "impact32", "georgi32", "courie32", "comic32",
+  "arialb32", "arial32", "andale32"
+)
+fonts_exe <- paste0(fonts, ".exe")
+fonts_url <- paste(baseurl, fonts_exe, sep = "/")
 
-for(i in seq(length(fonts)))
-download.file(url = fonts_url[i], destfile = paste('~/msfonts',fonts_exe[i],sep='/'),
-              method = 'auto')
+if (!dir.exists("~/msfonts")) {
+  dir.create("~/msfonts")
+}
+
+for (i in seq(length(fonts)))
+  download.file(
+    url = fonts_url[i], destfile = paste("~/msfonts", fonts_exe[i], sep = "/"),
+    method = "auto"
+  )
 ```
 
-配置字体
+字体下载完后，手动配置字体
 
 ```bash
 sudo dpkg-reconfigure ttf-mscorefonts-installer
 ```
 
-注意要输入字体存放的完整路径 `/home/ubuntu/msfonts` 而不是相对路径 `~/msfonts`
+注意要输入字体存放的完整路径 `/home/ubuntu/msfonts` 而不是相对路径 `~/msfonts`，下面是字体配置过程产生的中间输出
 
 ```
 checking /home/ubuntu/msfonts/andale32.exe
@@ -396,7 +417,7 @@ All done, no errors.
 All fonts downloaded and installed.
 ```
 
-安装完成后，字体存放在系统目录`/usr/share/fonts/truetype/msttcorefonts/`下
+安装完成后，字体存放在系统目录`/usr/share/fonts/truetype/msttcorefonts/`下，我们可以用`ls`命令查看
 
 ```
 Andale_Mono.ttf              Georgia.ttf
@@ -448,11 +469,13 @@ Times New Roman
 Verdana
 ```
 
-安装等宽字体
+此外，安装常见的等宽字体 inconsolata
 
 ```bash
 sudo apt install fonts-inconsolata
 ```
+
+### 在 R图形中使用字体 {#fonts-in-plots}
 
 导入系统TTF类型字体到 R 环境中，这样绘图可以使用更多的字体
 
