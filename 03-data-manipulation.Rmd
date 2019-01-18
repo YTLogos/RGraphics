@@ -204,6 +204,8 @@ merge 合并两个数据框
 cbind
 rbind
 
+left join
+right join
 
 ## 聚合 {#aggregate}
 
