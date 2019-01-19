@@ -519,13 +519,16 @@ embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf")
 ```bash
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo apt-get update
+sudo apt-get install inkscape
 ```
 
-```
+PDF图片格式转化为 SVG 格式
+
+```bash
 inkscape -l output-filename.svg input-filename.pdf
 ```
 
-pdf2svg PDF格式转化为 SVG 格式
+> 注意 Windows 平台下要把 Inkscape 安装路径添加到系统 PATH 环境变量中，才能使用命令行。其它工具还有[pdf2svg](https://github.com/dawbarton/pdf2svg)，需要自己下载编译然后使用，支持多页 PDF 文件的转化
 
-https://github.com/dawbarton/pdf2svg
+
 
