@@ -527,6 +527,14 @@ optipng -o5 filename.png
 
 ### Ghostscript
 
+grDevices 包提供了如下函数，用于 postscript 和 pdf 图形设备，嵌入字体借助了 [Ghostscript](https://www.ghostscript.com/) 以及 PDF 阅读器 [MuPDF](https://www.mupdf.com/)[@Paul_2006_fonts] 
+
+```r
+postscriptFonts(...)
+pdfFonts(...)
+embedFonts()
+```
+
 Windows 下 GS 默认搜索路径不对，需要手动指定 Linux 平台下不需要关心 GS 的安装路径问题，特别地，需要指定字体搜索路径
 
 ```{r,eval=FALSE,echo=TRUE}
