@@ -492,8 +492,34 @@ Docker & Docker Machine & Docker Swarm
 convert -quality 100 -density 300x300 filename.pdf filename.png
 ```
 
+高质量大图，给定像素，转化 eps 格式图片，需要先安装 Ghostscript
+
+```bash
+convert -geometry 1000x3000 example.eps example.png
+```
+
+
 ### optipng
 
+optipng 是一个非常好的图片压缩、优化工具
+
+现在，我们设置 chunk 选项 `optipng` 为非空(non-`NULL`)的值，例如，`''` 去激活这个 hook （益辉称之为钩子，这里勾的是 optipng 这个图片优化工具）
+
+```{r use-optipng, optipng='',fig.cap="优化"}
+library(ggplot2)
+set.seed(123)
+qplot(rnorm(1e3), rnorm(1e3))
+```
+
+同一幅图，但是没有优化
+
+```{r no-optipng, ref.label='use-optipng',fig.cap="没有优化"}
+```
+
+同一幅图，但是使用最高级别的优化 (传递 `-o7` 参数给 `optipng`):
+
+```{r optipng-o7, ref.label='use-optipng', optipng='-o7',fig.cap="最强优化"}
+```
 
 ```bash
 optipng -o5 filename.png
@@ -512,7 +538,17 @@ embedFonts(
 embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") 
 ```
 
+### pdfcrop 
+
+pdfcrop 可将 PDF 图片中留白的部分裁去，再也不用纠结 par 了
+
 ### Inkscape
+
+> Inkscape is an open source drawing tool with capabilities similar to Illustrator, Freehand, and CorelDraw that uses the W3C standard scalable vector graphics  format (SVG). Some supported SVG features include basic shapes, paths, text, markers, clones, alpha blending, transforms, gradients, and grouping. In addition, Inkscape supports Creative Commons meta-data, node-editing, layers, complex path operations, text-on-path, and SVG XML editing. It also imports several formats like EPS, Postscript, JPEG, PNG, BMP, and TIFF and exports PNG as well as multiple vector-based formats.
+
+> Inkscape's main motivations are to provide the Open Source community with a fully W3C compliant XML, SVG, and CSS2 drawing tool emphasizing a lightweight core with powerful features added as extensions, and the establishment of a friendly, open, community-oriented development processes.
+
+Inkscape^[<https://inkscape.org/zh/>] 是替代 Adobe Illustrator（简称 AI） 最佳工具，没有之一。开源免费，功能齐全，更新快，跨平台。尤其不用面临兼容性问题，说白了，就是厂家在不停地刷版本号，要用户掏钱升级，我早年间也是 Adobe 的忠实粉丝，通过校园先锋以学生身份买了好几套产品，后来看透了这一切，又找到了开源的 Inkscape \index{Inkscape}，现在我没有理由去升级 AI 了，我的电脑现在装的还都是 CS6 系列。最后欣赏来自官网的几个作品，其强大的功能可见一斑^[图片来自 <https://inkscape.org/en/gallery/>]
 
 安装软件
 
@@ -536,5 +572,17 @@ inkscape -f input-filename.svg -A output-filename.pdf
 
 > 注意 Windows 平台下要把 Inkscape 安装路径添加到系统 PATH 环境变量中，才能使用命令行。其它工具还有[pdf2svg](https://github.com/dawbarton/pdf2svg)，需要自己下载编译然后使用，支持多页 PDF 文件的转化。此外，Python 扩展包 [svg42pdf](https://pypi.org/project/svg42pdf/) 也可以将 SVG 转化为 PDF 图片，它要求 Python 3.x 版本
 
+用 rsvg [@Jeroen_2018_rsvg] 包导入 SVG 格式的图片, 再批量转化 svg 文件为 pdf 文件
 
+```{r,eval=FALSE,echo=TRUE}
+library(rsvg)
+tmp <- "figure/Ink" # svgs 存放目录
+input_paths <- paste0(tmp, "/", list.files(tmp))
+output_paths <- paste0("figure/pdf", "/", 
+                       gsub("svg", "pdf", list.files(tmp)))
+
+for (i in seq(length(list.files(tmp)))) {
+  rsvg_pdf(input_paths[i], file = output_paths[i])
+}
+```
 
