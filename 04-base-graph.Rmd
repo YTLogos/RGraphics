@@ -180,6 +180,23 @@ embedFonts(
 
 [cmr-fonts]: https://www.stat.auckland.ac.nz/~paul/R/CM/CMR.html
 
+调用系统字体，安装使用网络字体
+
+```{r,eval=FALSE,echo=TRUE}
+library(showtext,quietly = TRUE)
+showtext_auto()
+pdf("google-fonts.pdf")
+font_add_google("Alegreya Sans", "aleg")
+par(family = "serif")
+plot(0:5,0:5, type="n")
+text(1:4, 1:4, "Serif", font=1:4, cex = 2)
+par(family = "fira-sans")
+plot(0:5,0:5, type="n")
+text(1:4, 1:4, "Sans", font=1:4, cex = 2)
+dev.off()
+```
+
+
 **knitr** 支持的引擎有：
 
 ```{r,echo=TRUE}
