@@ -511,3 +511,21 @@ embedFonts(
 )
 embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") 
 ```
+
+### Inkscape
+
+安装软件
+
+```bash
+sudo add-apt-repository ppa:inkscape.dev/stable
+sudo apt-get update
+```
+
+```
+inkscape -l output-filename.svg input-filename.pdf
+```
+
+pdf2svg PDF格式转化为 SVG 格式
+
+https://github.com/dawbarton/pdf2svg
+
