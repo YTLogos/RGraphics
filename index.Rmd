@@ -214,34 +214,35 @@ install.packages("bookdown")
   - [李航](http://hangli-hl.com)
 
 * 主页
-  - [王江浩](https://jianghao.github.io)
-  - [陈新鹏](https://chenxinpeng.github.io/)
-  - [于淼](https://yufree.cn/)
-  - [朱雪宁](https://xueningzhu.github.io/)
-  - [余光创](https://guangchuangyu.github.io/)
+  - [王江浩](https://jianghao.github.io) 地理信息
+  - [陈新鹏](https://chenxinpeng.github.io/) 腾讯 AI lab 实习生
+  - [于淼](https://yufree.cn/)  COS 执行主编
+  - [朱雪宁](https://xueningzhu.github.io/) COS主编，李润泽高足
+  - [余光创](https://guangchuangyu.github.io/) 生物统计 ggtree 开发者
   - [肖楠](https://nanx.me/)
   - [高策](https://gaocegege.com)
   - [赵鹏](http://www.pzhao.org/zh/)
   - [高涛](https://joegaotao.github.io)
   
-  - [Liam Huang](https://liam.page/)
-  - [边蓓蕾](http://statsjoke.me)
-  - [郎大为](http://langdawei.com/)
-  - [寇强](http://qkou.info/)
-  - [邱怡轩](https://yixuan.cos.name/cn/) or [Yixuan Qiu-en](https://statr.me/)
-  - [杨洵默](https://tcya.xyz/)
+  - [黄晨成](https://liam.page/) TeX 专家
+  - [边蓓蕾](http://statsjoke.me) 上届 COS 副主编
+  - [郎大为](http://langdawei.com/) 词云 recharts
+  - [寇强](http://qkou.info/) Rcpp/mxnet 核心开发者
+  - [邱怡轩](https://yixuan.cos.name/cn/) or [Yixuan Qiu-en](https://statr.me/) 普渡大学博后，人称小轩哥
+  - [杨洵默](https://tcya.xyz/) 化学码农，谷歌工程师
   - [杜亚蕾](http://yalei.name/)
   - [冯俊晨](http://www.fengjunchen.com/)
   - [刘思喆](http://www.bjt.name/)
-  - [陈丽云](http://www.loyhome.com/)
-  - [唐源](https://terrytangyuan.github.io)
+  - [陈丽云](http://www.loyhome.com/) 落园博主
+  - [唐源](https://terrytangyuan.github.io) tensorflow/xgboost/mxnet 活跃贡献者 
   - [WenSui Liu](https://statcompute.wordpress.com/)
   - [Yuling Yao](https://www.yulingyao.com/)
   - [handong1587](https://handong1587.github.io/)
 
   - [Paula Moraga](https://paula-moraga.github.io)
-  - [John MacFarlane](https://johnmacfarlane.net/)
-  - [Paul Bürkner](https://paul-buerkner.github.io/)
+  - [John MacFarlane](https://johnmacfarlane.net/) Pandoc 开发者
+  - [Paul Bürkner](https://paul-buerkner.github.io/) Stan/brms 开发者  
+  - [Francesco Bailo](http://www.francescobailo.net/) 空间数据分析
 
 * 搜索
   - [Sci-Hub: removing barriers in the way of science](https://sci-hub.tw/)
