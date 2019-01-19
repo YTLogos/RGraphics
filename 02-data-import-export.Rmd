@@ -23,3 +23,20 @@ sink()
 ```
 
 只将 `outer` 的结果保存到 `sink-examp.txt` 文件
+
+## 保存数据对象 {#dump-dput}
+
+dump 保存数据对象 iris 到文件 `iris.txt`，文件内容是 R 命令，可把`iris.txt`看作代码文档执行，dput 保存数据对象内容到文件`iris.dat`，文件中不包含变量名 iris。注意到 dump 输入是一个字符串，而 dput 要求输入数据对象的名称，`source` 函数与 dump 对应，而 `dget` 与dput对应。 
+
+```{r,eval=FALSE,echo=TRUE}
+data(iris)
+dump('iris', file = 'iris.txt') 
+source(file = 'iris.txt')
+
+dput(iris, file = 'iris.dat')
+iris <- dget(file = 'iris.dat')
+```
+
+save 
+
+save.image
