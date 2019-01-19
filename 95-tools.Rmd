@@ -64,7 +64,7 @@ Pandoc 是一个万能文档转化器
 
    calibre 可以将 epub 格式电子书文档转化为 mobi 格式，bookdown 已经给这个工具穿上了一件马甲，所以用户只需调用 `bookdown::calibre` 函数即可。
 
-1. 安装 pandoc
+1. 安装 pandoc，下载网址 https://github.com/jgm/pandoc/releases/latest
 
    ```bash
    sudo apt-get install gdebi-core
@@ -522,13 +522,19 @@ sudo apt-get update
 sudo apt-get install inkscape
 ```
 
-PDF图片格式转化为 SVG 格式
+PDF 图片格式转化为 SVG 格式
 
 ```bash
 inkscape -l output-filename.svg input-filename.pdf
 ```
 
-> 注意 Windows 平台下要把 Inkscape 安装路径添加到系统 PATH 环境变量中，才能使用命令行。其它工具还有[pdf2svg](https://github.com/dawbarton/pdf2svg)，需要自己下载编译然后使用，支持多页 PDF 文件的转化
+SVG 转 PDF 格式
+
+```bash
+inkscape -f input-filename.svg -A output-filename.pdf
+```
+
+> 注意 Windows 平台下要把 Inkscape 安装路径添加到系统 PATH 环境变量中，才能使用命令行。其它工具还有[pdf2svg](https://github.com/dawbarton/pdf2svg)，需要自己下载编译然后使用，支持多页 PDF 文件的转化。此外，Python 扩展包 [svg42pdf](https://pypi.org/project/svg42pdf/) 也可以将 SVG 转化为 PDF 图片，它要求 Python 3.x 版本
 
 
 
