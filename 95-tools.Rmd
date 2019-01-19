@@ -482,3 +482,32 @@ Docker & Docker Machine & Docker Swarm
 ### Kubernetes (k8s)
 
 ## 数据库 {#database}
+
+## 常用工具 {#other-tools}
+
+### Imagemagick
+
+
+```bash
+convert -quality 100 -density 300x300 filename.pdf filename.png
+```
+
+### optipng
+
+
+```bash
+optipng -o5 filename.png
+```
+
+### Ghostscript
+
+Windows 下 GS 默认搜索路径不对，需要手动指定 Linux 平台下不需要关心 GS 的安装路径问题，特别地，需要指定字体搜索路径
+
+```{r,eval=FALSE,echo=TRUE}
+Sys.setenv(R_GSCMD = "C:/Program Files/gs/gs9.26/bin/gswin64c.exe")
+embedFonts(
+  file = "cm.pdf", outfile = "cm-embed.pdf",
+  fontpaths = system.file("fonts", package = "fontcm")
+)
+embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") 
+```
