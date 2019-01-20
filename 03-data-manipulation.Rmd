@@ -89,6 +89,16 @@ wide <- reshape(Indometh, v.names = "conc", idvar = "Subject",
 wide[,1:6]
 ```
 
+长 long 变 wide 宽格式
+
+```{r,echo=TRUE,eval=FALSE}
+data(gambia,package = 'geoR')
+# Building a "village-level" data frame
+ind <- paste("x",gambia[,1], "y", gambia[,2], sep="")
+village <- gambia[!duplicated(ind),c(1:2,7:8)]
+village$prev <- as.vector(tapply(gambia$pos, ind, mean))
+head(village)
+```
 
 ## 转换 {#transform}
 
@@ -315,24 +325,6 @@ by(CO2$uptake,list(CO2$Type,CO2$Treatment), mean)
 
 在这个例子中 tapply 和 by 的输出结果的表示形式不一样，aggregate 返回一个 data.frame 数据框，tapply 返回一个表格 table，by 返回特殊的数据类型 by。
 
-## 列联表 {#cross-table}
-
-table 多个分类变量分组计数统计 
-
-- 介绍 warpbreaks 和 airquality 纽约空气质量监测数据集 二维的数据框
-- UCBAdmissions 1973年加州大学伯克利分校的院系录取数据集 3维的列联表
-- Titanic 4维的列联表数据 泰坦尼克号幸存者数据集
-
-```{r,echo=TRUE}
-with(warpbreaks, table(wool, tension))
-```
-
-
-
-```{r,eval=FALSE}
-pairs(airquality, panel = panel.smooth, main = "airquality data")
-```
-
 Function `by` is an object-oriented wrapper for `tapply` applied to data frames. 
 
 ```{r,echo=TRUE}
@@ -358,16 +350,82 @@ with(warpbreaks, ave(breaks, tension, FUN = function(x) sum(x)))
 with(iris,ave(Sepal.Length,Species, FUN = function(x) sum(x)))
 ```
 
-长 long 变 wide 宽格式
 
-```{r,echo=TRUE,eval=FALSE}
-data(gambia,package = 'geoR')
-# Building a "village-level" data frame
-ind <- paste("x",gambia[,1], "y", gambia[,2], sep="")
-village <- gambia[!duplicated(ind),c(1:2,7:8)]
-village$prev <- as.vector(tapply(gambia$pos, ind, mean))
-head(village)
+## 列联表 {#cross-table}
+
+> 介绍 table, addmargins, prop.table 等函数
+
+table 多个分类变量分组计数统计 
+
+- 介绍 warpbreaks 和 airquality 纽约空气质量监测数据集 二维的数据框
+- UCBAdmissions 1973年加州大学伯克利分校的院系录取数据集 3维的列联表
+- Titanic 4维的列联表数据 泰坦尼克号幸存者数据集
+
+```{r,echo=TRUE}
+with(warpbreaks, table(wool, tension))
 ```
+
+以 iris 数据集为例，table 的第一个参数是自己制造的第二个分类变量，原始分类变量是 Species
+
+```{r,echo=TRUE}
+with(iris, table(Sepal.check = Sepal.Length > 7, Species))
+with(iris, table(Sepal.check = Sepal.Length > mean(Sepal.Length), Species))
+```
+
+以 airquality 数据集为例，看看月份中臭氧含量比较高的几天
+
+```{r,echo=TRUE}
+aiq.tab <- with(airquality, table(Oz.high = Ozone > 80, Month))
+aiq.tab
+```
+
+对表格按行和列求和，即求表格的边际，查看总体情况
+
+```{r,echo=TRUE}
+addmargins(aiq.tab, 1:2)
+```
+
+臭氧含量超 80 的天数在每个月的占比，`addmargins` 的第二个参数 1 表示对列求和
+
+```{r,echo=TRUE}
+aiq.prop <- prop.table(aiq.tab, 2)
+aiq.prop
+aiq.marprop <- addmargins(aiq.prop, 1)
+aiq.marprop
+```
+
+转换成百分比，将小数四舍五入转化为百分数，保留两位小数点
+
+```{r,echo=TRUE}
+round(100 * aiq.marprop, 2)
+```
+
+```{r,eval=FALSE}
+pairs(airquality, panel = panel.smooth, main = "airquality data")
+```
+
+以 UCBAdmissions 数据集为例，使用 `xtabs` 函数把数据组织成列联表，先查看数据的内容
+
+```{r,out.lines=6,echo=TRUE}
+UCBAdmissions
+UCBA2DF <- as.data.frame(UCBAdmissions)
+UCBA2DF
+```
+
+接着将 `UCBA2DF` 数据集转化为表格的形式
+
+```{r,echo=TRUE}
+UCBA2DF.tab <- xtabs(Freq ~ Gender + Admit + Dept, data = UCBA2DF)
+ftable(UCBA2DF.tab)
+```
+
+将录取性别和院系进行对比
+
+```{r,echo=TRUE}
+prop.table(margin.table(UCBA2DF.tab, c(1, 3)), 1)
+```
+
+男生倾向于申请院系 A 和 B，女生倾向于申请院系 C 到 F，院系 A 和 B 是最容易录取的。
 
 ## `[[` {#quote}
 

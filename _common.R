@@ -13,7 +13,7 @@ knitr::knit_hooks$set(output = local({
   # the default output hook
   hook_output = knitr::knit_hooks$get('output')
   function(x, options) {
-    if (!is.null(n <- options$out.lines)) {
+    if (!is.null(n <- options$out.lines)) { # out.lines
       x = knitr:::split_lines(x)
       if (length(x) > n) {
         # truncate the output
