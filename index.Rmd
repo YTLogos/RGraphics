@@ -76,7 +76,7 @@ install.packages("bookdown")
 
 ## 记号约定 {#conventions}
 
-写作风格，R 包名称都加粗表示，如 **bookdown**， **rmarkdown** 等，软件、编程语言名称保持原样，如 TinyTeX，LyX，TeXLive，R，Python，Stan，C++，SQL等，在代码块中，我们不使用`R>`或`+`，代码输出结果用`#>`注释
+写作风格，R 包名称都加粗表示，如 **bookdown**， **rmarkdown** 等，软件、编程语言名称保持原样，如 TinyTeX，LyX，TeXLive，R，Python，Stan，C++，SQL等，在代码块中，我们不使用`R>`或`+`，代码输出结果用`#>`注释。**knitr** [@xie_2015_knitr] **bookdown** [@xie_2016_bookdown] 和 Pandoc \index{Pandoc} TinyTeX \index{TinyTeX}，请使用 pdfLaTeX 编译这本书，等宽字体为 [inconsolata](https://ctan.org/pkg/inconsolata) 默认的文本字体为 [Times](https://ctan.org/pkg/mathptmx)
 
 ## 本书结构 {#structure-of-book}
 
@@ -248,6 +248,43 @@ install.packages("bookdown")
   - [Sci-Hub: removing barriers in the way of science](https://sci-hub.tw/)
   - [书籍传送门](http://gen.lib.rus.ec/) 需要科学上网 http://gen.lib.rus.ec/
   - [Stack Overflow](https://stackoverflow.com/)
+
+* RStudio
+  - https://gt.rstudio.com/
+  - https://shiny.rstudio.com/
+  - https://db.rstudio.com
+  - https://spark.rstudio.com/
+  - https://tensorflow.rstudio.com/
+  - https://keras.rstudio.com
+  - https://rmarkdown.rstudio.com/
+  - https://rmarkdown.rstudio.com/flexdashboard/
+  
+* RStudio 成员出品  
+  - https://bookdown.org/yihui/blogdown
+  - https://bookdown.org/yihui/bookdown
+  - https://rstudio.github.io/reticulate/
+  - https://rstudio.github.io/leaflet
+  - https://rstudio.github.io/dygraphs/
+  - https://rstudio.github.io/DT
+  - https://rstudio.github.io/r2d3/
+  - https://rstudio.github.io/radix/
+  - https://rstudio.github.io/learnr/
+  - https://rstudio.github.io/profvis/
+  
+* tidyverse
+  - https://dbplyr.tidyverse.org/
+  - https://dplyr.tidyverse.org
+  - https://purrr.tidyverse.org/
+  - https://lubridate.tidyverse.org
+  - https://ggplot2.tidyverse.org
+  - https://tidyr.tidyverse.org
+  - https://readr.tidyverse.org
+  - https://magrittr.tidyverse.org
+  - https://stringr.tidyverse.org
+  - https://forcats.tidyverse.org
+  - https://style.tidyverse.org
+  - https://glue.tidyverse.org
+  - https://haven.tidyverse.org
 
 ## 关于作者 {#about-author}
 
