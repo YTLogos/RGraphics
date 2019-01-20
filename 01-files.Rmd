@@ -80,7 +80,7 @@ library(magrittr) # 提供管道命令 %>%
     apropos("^dir.")
     ```
     
-   显而易见，`dir.create` 和 `dir.exists` 分别是创建目录和查看目录的存在性。`dirname` 和 `basename` 是一对函数用来操作文件路径。以当前目录`r getwd()`为例，`dirname(getwd())` 返回 `r dirname(getwd())` 而 `basename(getwd())` 返回 `r basename(getwd())`。对于文件路径而言，`dirname(rinternals)` 返回文件所在的目录`r dirname(rinternals)`， `basename(rinternals)` 返回文件名`r basename(rinternals)`。查看指定路径或目录下的文件，支持以模式匹配和递归的方式查找目录下的文件
+   显而易见，`dir.create` 和 `dir.exists` 分别是创建目录和查看目录的存在性。`dirname` 和 `basename` 是一对函数用来操作文件路径。以当前目录`r getwd()`为例，`dirname(getwd())` 返回 `r dirname(getwd())` 而 `basename(getwd())` 返回 `r basename(getwd())`。对于文件路径而言，`dirname(rinternals)` 返回文件所在的目录`r dirname(rinternals)`， `basename(rinternals)` 返回文件名`r basename(rinternals)`。`dir` 函数查看指定路径或目录下的文件，支持以模式匹配和递归的方式查找目录下的文件
 
     ```{r,echo=TRUE,out.lines=6}
     # 当前目录下的子目录和文件
@@ -99,7 +99,7 @@ library(magrittr) # 提供管道命令 %>%
 
 ## 操作 {#manipulation}
 
-文件增删改查
+实现文件增删改查的函数如下
 
 ```{r,echo=TRUE}
 apropos("^file.")
@@ -130,16 +130,13 @@ apropos("^file.")
 
 1. `file.symlink(from, to)` 创建符号链接 `file.link(from, to)` 创建硬链接
 
-```
-Sys.junction(from, to)
-Sys.readlink(paths) Read File Symbolic Links
-```
+1. `Sys.junction(from, to)` windows 平台上的函数，提供类似符号链接的功能
 
-交互式选择文件 `choose.files` 文件下载
+1. `Sys.readlink(paths)` 读取文件的符号链接（软链接）
 
-```{r,echo=TRUE}
-apropos("^download.")
-```
+1. `choose.files` 交互式选择文件 
+
+1. `download.file` 文件下载
 
 
 ```{r,include=FALSE}
@@ -164,17 +161,14 @@ if (any(file.exists(files))) file.remove(files[file.exists(files)])
    tar -czf rstan.tar.gz ./rstan/*
    ```
 
+1. tar 解压
+
+    ```bash
+    tar -xzf R-3.5.1.tar.gz
+    ```
 
 
-
-tar 解压
-
-```bash
-tar -xzf R-3.5.1.tar.gz
-```
-
-
-tar
+tar 参数列表
 
 1. `-v` 解压过程中显示文件
 
