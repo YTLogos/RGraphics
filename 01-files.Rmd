@@ -38,9 +38,9 @@ library(magrittr) # 提供管道命令 %>%
 
    打开文件内容，`file.show` 会在R终端中新开一个窗口显示文件，如图\@ref(fig:show-file)所示
 
-    ```{r,echo=TRUE,eval=FALSE}
+    ```{r,echo=TRUE}
     rinternals <- file.path(R.home("include"), "Rinternals.h")
-    file.show(rinternals)
+    # file.show(rinternals)
     ```
     ```{r show-file,fig.cap = "file.show 打开文件"}
     knitr::include_graphics(path = 'figures/show-file.png')
