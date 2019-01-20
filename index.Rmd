@@ -262,7 +262,7 @@ xfun::session_info(packages = c(
   "colorspace", "magrittr",
   "bookdown", "rmarkdown",
   "tikzDevice", "fontcm",
-  "ggplot2"
+  "ggplot2", "devtools", "sf"
 ))
 ```
 ```
