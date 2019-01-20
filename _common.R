@@ -86,7 +86,7 @@ palette(c(
   "#4285f4", # GoogleBlue
   "#34A853", # GoogleGreen
   "#FBBC05", # GoogleYellow
-  "#EA4335" # GoogleRed
+  "#EA4335"  # GoogleRed
 ))
 
 # system <- function(...) cat(base::system(..., intern = TRUE), sep = '\n')

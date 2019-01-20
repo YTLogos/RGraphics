@@ -259,9 +259,10 @@ install.packages("bookdown")
 
 ```{r sessioninfo,echo=TRUE}
 xfun::session_info(packages = c(
-  "colorspace",
+  "colorspace", "magrittr",
   "bookdown", "rmarkdown",
-  "tikzDevice", "fontcm"
+  "tikzDevice", "fontcm",
+  "ggplot2"
 ))
 ```
 ```

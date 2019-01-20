@@ -21,12 +21,13 @@ before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"
   - "01-files.Rmd"
-#  - "02-data-import-export.Rmd"
+#  - "02-rio.Rmd"
   - "03-manipulate.Rmd"
-
   - "04-base.Rmd"
-
+#  - "05-advanced.Rmd"
+  
+#  - "92-regex.Rmd"
+#  - "93-oo.Rmd"
   - "94-install.Rmd"
   - "95-tools.Rmd"
   - "96-references.Rmd"
-
