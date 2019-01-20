@@ -59,11 +59,11 @@ Ascertain File Accessibility
 file.access(names, mode = 0)
 
 
-```{r}
+```{r,echo=TRUE}
 apropos("^dir.")
 ```
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,out.lines=6}
 # 获取当前目录
 getwd()
 # 当前目录下的子目录和文件
