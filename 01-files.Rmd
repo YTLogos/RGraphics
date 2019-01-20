@@ -1,17 +1,15 @@
 # 文件管理 {#files}
 
-```{r,include=FALSE}
-library(magrittr) # %>%
-```
-
-查看：列出目录或文件夹下的文件
-权限：操作目录和文件的权限
-
 [给出 linux 下的对应命令]{.todo}
 
+```{r,include=FALSE}
+library(magrittr) # 提供管道命令 %>%
+```
+
+::: sidebar
 - sys: Powerful replacements for base::system2 <https://github.com/jeroen/sys>
 - fs: Provide cross platform file operations based on libuv <https://github.com/r-lib/fs>
-
+:::
 
 ## 查看 {#list}
 
@@ -36,45 +34,59 @@ library(magrittr) # %>%
    +  full.names: TRUE 返回相对路径，FALSE 返回目录的名称
    +  recursive: 是否递归的方式列出目录，如果是的话，目录下的子目录也会列出
 
-打开文件内容
+* `file.show(..., header = rep("", nfiles), title = "R Information", delete.file = FALSE, pager = getOption("pager"),encoding = "")` 
 
-```{r,echo=TRUE,eval=FALSE}
-# 查看文件
-rinternals <- file.path(R.home("include"),"Rinternals.h")
-file.show(rinternals)
-```
+   打开文件内容，`file.show` 会在R终端中新开一个窗口显示文件，如图\@ref(fig:show-file)所示
 
-获取文件信息
+    ```{r,echo=TRUE,eval=FALSE}
+    rinternals <- file.path(R.home("include"), "Rinternals.h")
+    file.show(rinternals)
+    ```
+    ```{r show-file}
+    knitr::include_graphics(path = 'figures/show-file.png')
+    ```
 
-file.info(..., extra_cols = TRUE)
+* `file.info(..., extra_cols = TRUE)` 
 
-file.mode(...)
-file.mtime(...)
-file.size(...)
+   获取文件信息，此外 `file.mode(...)` 、 `file.mtime(...)` 和 `file.size(...)` 分别表示文件的读写权限，修改时间和文件大小。
 
- 文件访问 
+    ```{r,echo=TRUE}
+    file.info(rinternals)
+    file.mode(rinternals)
+    file.mtime(rinternals)
+    file.size(rinternals)
+    ```
 
-Ascertain File Accessibility
+* `file.access(names, mode = 0)`  
 
-file.access(names, mode = 0)
+   文件是否可以被访问，第二个参数 mode 一共有四种取值 0，1，2，4，分别表示文件的存在性，可执行，可写和可读四种，返回值 0 表示成功，返回值 -1 表示失败。
 
+    ```{r}
+    file.access(rinternals,mode = 0)
+    file.access(rinternals,mode = 1)
+    file.access(rinternals,mode = 2)
+    file.access(rinternals,mode = 4)
+    ```
 
-```{r,echo=TRUE}
-apropos("^dir.")
-```
+* `dir(path = ".", pattern = NULL, all.files = FALSE, full.names = FALSE, recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)`
+   
+   查看目录，首先看看和目录操作有关的函数列表
 
-```{r,echo=TRUE,out.lines=6}
-# 获取当前目录
-getwd()
-# 当前目录下的子目录和文件
-dir()
-# 查看指定目录的子目录和文件
-dir(path = "./")
-# 只列出以字母R开头的子目录和文件
-dir(path = "./", pattern = "^R")
-# 列出目录下所有目录和文件，包括隐藏文件
-dir(path = "./", all.files = TRUE)
-```
+    ```{r,echo=TRUE}
+    apropos("^dir.")
+    ```
+    显而易见，`dir.create` 和 `dir.exists` 分别是创建目录和查看目录的存在性。`dirname` 和 `basename` 是一对函数用来操作文件路径。以当前目录`r getwd()`为例，`dirname(getwd())` 返回 `r dirname(getwd())` 而 `basename(getwd())` 返回 `r basename(getwd())`。对于文件路径而言，`dirname(rinternals)` 返回文件所在的目录`r dirname(rinternals)`， `basename(rinternals)` 返回文件名`r basename(rinternals)`。查看指定路径或目录下的文件，支持以模式匹配和递归的方式查找目录下的文件
+
+    ```{r,echo=TRUE,out.lines=6}
+    # 当前目录下的子目录和文件
+    dir()
+    # 查看指定目录的子目录和文件
+    dir(path = "./")
+    # 只列出以字母R开头的子目录和文件
+    dir(path = "./", pattern = "^R")
+    # 列出目录下所有目录和文件，包括隐藏文件
+    dir(path = "./", all.files = TRUE)
+    ```
 
 ## 操作 {#manipulation}
 
