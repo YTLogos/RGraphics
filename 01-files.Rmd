@@ -55,6 +55,10 @@ library(magrittr) # 提供管道命令 %>%
     file.mode(rinternals)
     file.mtime(rinternals)
     file.size(rinternals)
+    # 查看当前目录的权限
+    file.info(".")
+    # 查看指定目录权限
+    file.info("./_book/")    
     ```
 
 * `file.access(names, mode = 0)`  
@@ -88,6 +92,10 @@ library(magrittr) # 提供管道命令 %>%
     # 列出目录下所有目录和文件，包括隐藏文件
     dir(path = "./", all.files = TRUE)
     ```
+    ```{r,echo=TRUE}
+    # 在临时目录下递归创建一个目录
+    dir.create(paste0(tempdir(), "/_book/tmp"), recursive = TRUE)
+    ```
 
 ## 操作 {#manipulation}
 
@@ -107,8 +115,8 @@ file.copy(from, to, overwrite = recursive, recursive = FALSE,
           copy.mode = TRUE, copy.date = FALSE)
 file.symlink(from, to) creation of symbolic links (and their Windows analogues),
 file.link(from, to)
-Sys.junction(from, to)
 
+Sys.junction(from, to)
 Sys.readlink(paths) Read File Symbolic Links
 ```
 
@@ -120,14 +128,6 @@ Sys.readlink(paths) Read File Symbolic Links
 apropos("^download.")
 ```
 
-```{r,echo=TRUE}
-# 查看当前目录的权限
-file.info(".")
-# 查看指定目录权限
-file.info("./_book/")
-# 在临时目录下递归创建一个目录
-dir.create(paste0(tempdir(), "/_book/tmp"), recursive = TRUE)
-```
 
 ## 压缩 {#compression}
 
