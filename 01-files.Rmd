@@ -333,7 +333,7 @@ apropos('packages')
     
 1. `packageDescription` 查询 R 包描述信息
 
-    ```{r,echo=TRUE}
+    ```{r,echo=TRUE,out.lines=6}
     packageDescription('bookdown')
     ```
 
