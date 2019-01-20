@@ -351,14 +351,14 @@ with(iris,ave(Sepal.Length,Species, FUN = function(x) sum(x)))
 ```
 
 
-## 列联表 {#cross-table}
+## 表格 {#cross-table}
 
-> 介绍 table, addmargins, prop.table 等函数
+> 介绍操作表格的 table, addmargins, prop.table, xtabs, margin.table, ftabe 等函数
 
 table 多个分类变量分组计数统计 
 
 - 介绍 warpbreaks 和 airquality 纽约空气质量监测数据集 二维的数据框
-- UCBAdmissions 1973年加州大学伯克利分校的院系录取数据集 3维的列联表
+- UCBAdmissions 1973 年加州大学伯克利分校的院系录取数据集 3维的列联表
 - Titanic 4维的列联表数据 泰坦尼克号幸存者数据集
 
 ```{r,echo=TRUE}
@@ -450,8 +450,20 @@ stack unstack
 class unclass
 attach detach
 
-数据操作，reshape reshape2 plyr dplyr dbplyr sparklyr tidyr
+数据操作的语法
 
-现代数据操作
+第一代
 
-dplyr 和 sparklyr
+1. reshape 使用函数 `melt` 和 `cast` 聚合数据
+1. reshape2 是 reshape 的继任者，提供两个函数 `melt` 和 `cast` 聚合数据
+1. plyr 统一拆分(split)，计算(apply)，合并(combine)的数据处理流
+
+第二代
+
+1. dplyr 操作数据的语法
+1. dbplyr 给 dplyr 提供数据库接口支持
+1. sparklyr 给 dplyr 提供 Spark 接口支持
+
+数据清洗
+
+1. tidyr 提供 `spread` 和 `gather` 两个函数清洗数据
