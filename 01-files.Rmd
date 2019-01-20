@@ -42,7 +42,7 @@ library(magrittr) # 提供管道命令 %>%
     rinternals <- file.path(R.home("include"), "Rinternals.h")
     file.show(rinternals)
     ```
-    ```{r show-file}
+    ```{r show-file,fig.cap = "file.show 打开文件"}
     knitr::include_graphics(path = 'figures/show-file.png')
     ```
 
@@ -61,7 +61,7 @@ library(magrittr) # 提供管道命令 %>%
 
    文件是否可以被访问，第二个参数 mode 一共有四种取值 0，1，2，4，分别表示文件的存在性，可执行，可写和可读四种，返回值 0 表示成功，返回值 -1 表示失败。
 
-    ```{r}
+    ```{r,echo=TRUE}
     file.access(rinternals,mode = 0)
     file.access(rinternals,mode = 1)
     file.access(rinternals,mode = 2)
@@ -75,7 +75,8 @@ library(magrittr) # 提供管道命令 %>%
     ```{r,echo=TRUE}
     apropos("^dir.")
     ```
-    显而易见，`dir.create` 和 `dir.exists` 分别是创建目录和查看目录的存在性。`dirname` 和 `basename` 是一对函数用来操作文件路径。以当前目录`r getwd()`为例，`dirname(getwd())` 返回 `r dirname(getwd())` 而 `basename(getwd())` 返回 `r basename(getwd())`。对于文件路径而言，`dirname(rinternals)` 返回文件所在的目录`r dirname(rinternals)`， `basename(rinternals)` 返回文件名`r basename(rinternals)`。查看指定路径或目录下的文件，支持以模式匹配和递归的方式查找目录下的文件
+    
+   显而易见，`dir.create` 和 `dir.exists` 分别是创建目录和查看目录的存在性。`dirname` 和 `basename` 是一对函数用来操作文件路径。以当前目录`r getwd()`为例，`dirname(getwd())` 返回 `r dirname(getwd())` 而 `basename(getwd())` 返回 `r basename(getwd())`。对于文件路径而言，`dirname(rinternals)` 返回文件所在的目录`r dirname(rinternals)`， `basename(rinternals)` 返回文件名`r basename(rinternals)`。查看指定路径或目录下的文件，支持以模式匹配和递归的方式查找目录下的文件
 
     ```{r,echo=TRUE,out.lines=6}
     # 当前目录下的子目录和文件
@@ -96,6 +97,7 @@ library(magrittr) # 提供管道命令 %>%
 apropos("^file.")
 ```
 
+```
 file.create(..., showWarnings = TRUE)
 file.exists(...)
 file.remove(...)
@@ -108,7 +110,7 @@ file.link(from, to)
 Sys.junction(from, to)
 
 Sys.readlink(paths) Read File Symbolic Links
-
+```
 
 `choose.files`  
 
