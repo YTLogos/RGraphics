@@ -249,6 +249,43 @@ install.packages("bookdown")
   - [书籍传送门](http://gen.lib.rus.ec/) 需要科学上网 http://gen.lib.rus.ec/
   - [Stack Overflow](https://stackoverflow.com/)
 
+* RStudio
+  - https://gt.rstudio.com/
+  - https://shiny.rstudio.com/
+  - https://db.rstudio.com
+  - https://spark.rstudio.com/
+  - https://tensorflow.rstudio.com/
+  - https://keras.rstudio.com
+  - https://rmarkdown.rstudio.com/
+  - https://rmarkdown.rstudio.com/flexdashboard/
+  
+* RStudio 成员出品  
+  - https://bookdown.org/yihui/blogdown
+  - https://bookdown.org/yihui/bookdown
+  - https://rstudio.github.io/reticulate/
+  - https://rstudio.github.io/leaflet
+  - https://rstudio.github.io/dygraphs/
+  - https://rstudio.github.io/DT
+  - https://rstudio.github.io/r2d3/
+  - https://rstudio.github.io/radix/
+  - https://rstudio.github.io/learnr/
+  - https://rstudio.github.io/profvis/
+  
+* tidyverse
+  - https://dbplyr.tidyverse.org/
+  - https://dplyr.tidyverse.org
+  - https://purrr.tidyverse.org/
+  - https://lubridate.tidyverse.org
+  - https://ggplot2.tidyverse.org
+  - https://tidyr.tidyverse.org
+  - https://readr.tidyverse.org
+  - https://magrittr.tidyverse.org
+  - https://stringr.tidyverse.org
+  - https://forcats.tidyverse.org
+  - https://style.tidyverse.org
+  - https://glue.tidyverse.org
+  - https://haven.tidyverse.org
+
 ## 关于作者 {#about-author}
 
 热心开源事业，目前在统计之都担任副主编 Associated Editor of Captial of Statistics
