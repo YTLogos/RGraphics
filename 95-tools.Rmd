@@ -567,10 +567,11 @@ webshot("https://www.r-project.org/", "r.png")
 webshot("https://www.r-project.org/", "r.pdf") # Can also output to PDF
 ```
 
-还可以截取 R Markdown 文档内容
+还可以截取 R Markdown 文档内容，注意是先编译 R Markdown 文档为 HTML 文档，然后截取网页
 
 ```{r,eval=FALSE,echo=TRUE}
-rmdshot("document.Rmd", "document.png")
+input_file <- system.file("examples/knitr-minimal.Rmd", package = "knitr")
+rmdshot(input_file, "minimal_rmd.png")
 ```
 
 裁剪出特定大小的图片，需要额外的系统依赖 GraphicsMagick (recommended) or ImageMagick installed
@@ -581,7 +582,29 @@ webshot("https://www.r-project.org/", "r-small.png") %>%
   resize("400x") %>%
   shrink()
 ```
+```
+** Processing: r-small.png
+400x442 pixels, 4x8 bits/pixel, RGB+alpha
+Reducing image to 3x8 bits/pixel, RGB
+Input IDAT size = 70570 bytes
+Input file size = 70867 bytes
 
+Trying:
+  zc = 9  zm = 8  zs = 0  f = 0         IDAT size = 59441
+  zc = 9  zm = 8  zs = 1  f = 0
+  zc = 1  zm = 8  zs = 2  f = 0
+  zc = 9  zm = 8  zs = 3  f = 0
+  zc = 9  zm = 8  zs = 0  f = 5
+  zc = 9  zm = 8  zs = 1  f = 5
+  zc = 1  zm = 8  zs = 2  f = 5
+  zc = 9  zm = 8  zs = 3  f = 5
+                               
+Selecting parameters:
+  zc = 9  zm = 8  zs = 0  f = 0         IDAT size = 59441
+
+Output IDAT size = 59441 bytes (11129 bytes decrease)
+Output file size = 59714 bytes (11153 bytes = 15.74% decrease)
+```
 
 ### Inkscape
 
