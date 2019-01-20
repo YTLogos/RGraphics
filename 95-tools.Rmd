@@ -1,4 +1,4 @@
-# 软件工具 {#software-tools}
+# 软件工具 {#tools}
 
 ## 编辑器 {#editor}
 

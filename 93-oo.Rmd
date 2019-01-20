@@ -1,4 +1,4 @@
-# 面向对象编程 {#object-oriented-programming}
+# 面向对象编程 {#oo}
 
 ## 环境 {#environment-access}
 

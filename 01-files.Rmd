@@ -1,4 +1,4 @@
-# 文件管理 {#file-manipulation}
+# 文件管理 {#files}
 
 ```{r,include=FALSE}
 library(magrittr) # %>%

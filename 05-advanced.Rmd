@@ -1,4 +1,4 @@
-# 复杂图形 {#advanced-graph}
+# 复杂图形 {#advanced}
 
 
 ## raster
