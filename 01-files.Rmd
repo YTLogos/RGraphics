@@ -105,29 +105,48 @@ library(magrittr) # 提供管道命令 %>%
 apropos("^file.")
 ```
 
-```
-file.create(..., showWarnings = TRUE)
-file.exists(...)
-file.remove(...)
-file.rename(from, to)
-file.append(file1, file2)
-file.copy(from, to, overwrite = recursive, recursive = FALSE,
-          copy.mode = TRUE, copy.date = FALSE)
-file.symlink(from, to) creation of symbolic links (and their Windows analogues),
-file.link(from, to)
+1. `file.create(..., showWarnings = TRUE)`
 
+   创建/删除文件，检查文件的存在性
+   
+    ```{r,echo=TRUE}
+    file.create('demo.txt')
+    file.exists('demo.txt')
+    file.remove('demo.txt')
+    file.exists('demo.txt')
+    ```
+
+1. `file.rename(from, to)` 文件重命名
+
+    ```{r,echo=TRUE}
+    file.create('demo.txt')
+    file.rename(from = 'demo.txt', to = 'tmp.txt')
+    file.exists('tmp.txt')
+    ```
+
+1. `file.append(file1, file2)` 追加文件
+
+1. `file.copy(from, to, overwrite = recursive, recursive = FALSE,copy.mode = TRUE, copy.date = FALSE)` 复制文件
+
+1. `file.symlink(from, to)` 创建符号链接 `file.link(from, to)` 创建硬链接
+
+```
 Sys.junction(from, to)
 Sys.readlink(paths) Read File Symbolic Links
 ```
 
-`choose.files`  
-
-下载文件
+交互式选择文件 `choose.files` 文件下载
 
 ```{r,echo=TRUE}
 apropos("^download.")
 ```
 
+
+```{r,include=FALSE}
+# 清理临时创建的文件
+files <- c("demo.txt", "tmp.txt") # 指向文件路径
+if (any(file.exists(files))) file.remove(files[file.exists(files)])
+```
 
 ## 压缩 {#compression}
 
