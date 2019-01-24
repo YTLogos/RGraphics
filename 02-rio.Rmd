@@ -2,6 +2,19 @@
 
 导入数据与导出数据，各种数据格式，数据库
 
+## 导入数据 {#import}
+
+导入数据，也叫读入数据，读取数据，读入到 R 环境中，从磁盘上的文件，变成存储在R环境中的数据对象
+
+写入压缩格式文件
+Hands-On Programming with R
+https://rstudio-education.github.io/hopr/dataio.html
+
+A Swiss-Army Knife for Data I/O
+https://github.com/leeper/rio
+
+
+
 文件读写
 
 ```{r,echo=TRUE}
@@ -23,6 +36,8 @@ sink()
 ```
 
 只将 `outer` 的结果保存到 `sink-examp.txt` 文件
+
+## 导出数据 {#export}
 
 ## 保存数据对象 {#dump-dput}
 

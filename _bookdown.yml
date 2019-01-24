@@ -26,7 +26,7 @@ rmd_files:
   - "04-base.Rmd"
 #  - "05-advanced.Rmd"
   
-#  - "92-regex.Rmd"
+  - "92-regex.Rmd"
 #  - "93-oo.Rmd"
   - "94-install.Rmd"
   - "95-tools.Rmd"

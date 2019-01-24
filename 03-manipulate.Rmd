@@ -467,3 +467,11 @@ attach detach
 数据清洗
 
 1. tidyr 提供 `spread` 和 `gather` 两个函数清洗数据
+
+Garrett Grolemund 在 RStudio 主要从事教育教学
+
+Materials for the Tidyverse Train-the-trainer workshop
+https://github.com/rstudio-education/teach-tidy
+
+The Tidyverse Cookbook
+https://rstudio-education.github.io/tidyverse-cookbook/
