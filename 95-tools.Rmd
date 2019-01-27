@@ -179,7 +179,7 @@ Remember each Rmd file contains one and only one chapter, and a chapter is defin
 
 ### TinyTeX {#tinytex}
 
-[TinyTeX 发行版和LaTeX 包管理器 tlmgr].{todo}
+[TinyTeX 发行版和LaTeX 包管理器 tlmgr]{.todo}
 
 如何编译获取电子版，拉取镜像，安装缺失的依赖
 

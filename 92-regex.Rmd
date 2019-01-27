@@ -1,5 +1,26 @@
 # 正则表达式 {#regex}
 
+  Handling Strings with R 
+
+- https://www.gastonsanchez.com/r4strings/
+
+  Text Mining with R A Tidy Approach
+
+- https://www.tidytextmining.com/
+
+  stringr: Simple, Consistent Wrappers for Common String Operations
+
+- https://stringr.tidyverse.org/
+
+?regex
+
+  入门 字符串处理
+- https://r4ds.had.co.nz/strings.html
+
+stringi: Character String Processing Facilities
+
+- http://www.gagolewski.com/software/stringi/manual/
+
 R 语言中有两套正则表达式
 
 *extended regular expressions* (the default)

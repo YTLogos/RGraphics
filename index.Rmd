@@ -192,7 +192,7 @@ install.packages("bookdown")
   - [Håvard Rue](http://www.r-inla.org/) Bayesian computing with INLA
   - [R Graph Gallery](https://www.r-graph-gallery.com/)
   - [htmlwidgets Gallery](http://gallery.htmlwidgets.org/)
-
+  - [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
 * 学者
   - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
   - [姚琦伟](http://stats.lse.ac.uk/q.yao/)

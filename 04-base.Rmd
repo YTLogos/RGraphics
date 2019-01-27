@@ -41,6 +41,25 @@ x coordinates (units of 50 feet)
 y coordinates (units of 50 feet)
 z heights (feet)
 
+### 箱线图
+
+boxplot
+
+### 钢琴图
+
+Tom Kelly 维护的 vioplot 包
+https://github.com/TomKellyGenetics/vioplot
+
+### 密度图
+
+ggplot2
+
+geom_density()
+
+### 岭线图
+
+ggridges
+
 
 ### 气泡图
 
@@ -547,6 +566,35 @@ par(op)
 ```
 
 
+
+
+图形设备管理
+
+Table: (\#tab:graphics-devices) 图形设备列表
+
+available     | functional
+------------- | -------------
+windows       | cairo\_pdf, cairo\_ps
+pdf           | svg
+postscript    | png
+xfig          | jpeg
+bitmap        | bmp
+pictex        | tiff
+
+
+```r
+apropos("dev.")
+```
+```
+ [1] ".Device"             ".Devices"            "dev.capabilities"   
+ [4] "dev.capture"         "dev.control"         "dev.copy"           
+ [7] "dev.copy2eps"        "dev.copy2pdf"        "dev.cur"            
+[10] "dev.flush"           "dev.hold"            "dev.interactive"    
+[13] "dev.list"            "dev.new"             "dev.next"           
+[16] "dev.off"             "dev.prev"            "dev.print"          
+[19] "dev.set"             "dev.size"            "dev2bitmap"         
+[22] "devAskNewPage"       "deviance"            "deviceIsInteractive"
+```
 
 
 

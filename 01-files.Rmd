@@ -314,7 +314,7 @@ help.search
 ## R 包 {#package}
 
 ```{r,echo=TRUE}
-apropos('packages')
+apropos('package')
 ```
 
 1. `.packages(T)` 已安装的 R 包
@@ -327,6 +327,14 @@ apropos('packages')
 
     ```{r,echo=TRUE}
     available.packages()[,"Package"] %>% head()
+    ```
+    
+    查询 repos 的 R 包
+    
+    ```{r,echo=TRUE,eval=FALSE}
+    rforge <- available.packages(repos = "https://r-forge.r-project.org/")
+    cran <- available.packages(repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
+    setdiff(rforge[, "Package"], cran[, "Package"])
     ```
 
 1. `download.packages` 下载 R 包
@@ -392,6 +400,14 @@ apropos('packages')
     tools::dependsOnPkgs('bookdown', recursive = TRUE)
     ```
 
+1. 重装R包，与 R 版本号保持一致
+
+    ```{r,echo=TRUE,eval=FALSE}
+    db <- installed.packages()
+    db <- as.data.frame(db, stringsAsFactors = FALSE)
+    pkgs <- db[db$Built < getRversion(), "Package"]
+    install.packages(pkgs)
+    ```
 
 
 
