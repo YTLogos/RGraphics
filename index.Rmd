@@ -294,6 +294,17 @@ install.packages("bookdown")
 
 重现本书内容需要的 R 包
 
+```{r,echo=FALSE}
+packages = c(
+  "colorspace", "magrittr", "bookdown", "rmarkdown",
+  "tikzDevice", "fontcm",
+  "sp", "maptools", "maps", "mapdata", "mapproj",
+  "ggplot2", "devtools", "sf", "rgdal"
+)
+lapply(packages, function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
 ```{r sessioninfo,echo=TRUE}
 xfun::session_info(packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
