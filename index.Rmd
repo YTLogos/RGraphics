@@ -144,6 +144,10 @@ install.packages("bookdown")
       - 数据可视化：实践指南 [Data Visualization: A practical introduction](https://socviz.co/) [Github](https://github.com/kjhealy/socviz)
       - 可视化数据分析与R语言 [Graphical Data Analysis with R](http://www.gradaanwr.net/)
    
+   1. 空间数据分析
+      - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
+      - 地质统计计算与 R 语言 [Geocomputation with R](https://geocompr.robinlovelace.net/)
+   
    1. 文本挖掘
       - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
       - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
@@ -285,6 +289,12 @@ install.packages("bookdown")
   - https://style.tidyverse.org
   - https://glue.tidyverse.org
   - https://haven.tidyverse.org
+
+* 博客聚合
+  - https://rweekly.org/
+  - https://www.r-bloggers.com/
+  - https://dailyr.netlify.com/
+  - https://datascienceplus.com/
 
 ## 关于作者 {#about-author}
 
