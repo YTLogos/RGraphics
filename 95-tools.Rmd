@@ -505,7 +505,7 @@ optipng 是一个非常好的图片压缩、优化工具
 
 现在，我们设置 chunk 选项 `optipng` 为非空(non-`NULL`)的值，例如，`''` 去激活这个 hook （益辉称之为钩子，这里勾的是 optipng 这个图片优化工具）
 
-```{r use-optipng, optipng='',fig.cap="优化"}
+```{r use-optipng, optipng= if(knitr::is_html_output()) '',fig.cap="优化"}
 library(ggplot2)
 set.seed(123)
 qplot(rnorm(1e3), rnorm(1e3))
@@ -518,7 +518,7 @@ qplot(rnorm(1e3), rnorm(1e3))
 
 同一幅图，但是使用最高级别的优化 (传递 `-o7` 参数给 `optipng`):
 
-```{r optipng-o7, ref.label='use-optipng', optipng='-o7',fig.cap="最强优化"}
+```{r optipng-o7, ref.label='use-optipng', optipng=if(knitr::is_html_output()) '-o7',fig.cap="最强优化"}
 ```
 
 ```bash
