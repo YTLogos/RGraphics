@@ -485,7 +485,7 @@ Docker & Docker Machine & Docker Swarm
 
 ## 常用工具 {#other-tools}
 
-### Imagemagick
+### ImageMagick
 
 
 ```bash
@@ -499,9 +499,9 @@ convert -geometry 1000x3000 example.eps example.png
 ```
 
 
-### optipng
+### OptiPNG
 
-optipng 是一个非常好的图片压缩、优化工具
+[OptiPNG](http://optipng.sourceforge.net/) 是一个非常好的图片压缩、优化工具
 
 现在，我们设置 chunk 选项 `optipng` 为非空(non-`NULL`)的值，例如，`''` 去激活这个 hook （益辉称之为钩子，这里勾的是 optipng 这个图片优化工具）
 
@@ -546,9 +546,9 @@ embedFonts(
 embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") 
 ```
 
-### pdfcrop 
+### PDFCrop
 
-pdfcrop 可将 PDF 图片中留白的部分裁去，再也不用纠结 par 了
+[PDFCrop](http://pdfcrop.sourceforge.net/) 可将 PDF 图片中留白的部分裁去，再也不用纠结 par 了
 
 ### PhantomJS
 
@@ -605,6 +605,10 @@ Selecting parameters:
 Output IDAT size = 59441 bytes (11129 bytes decrease)
 Output file size = 59714 bytes (11153 bytes = 15.74% decrease)
 ```
+
+### Calibre
+
+[Calibre](https://calibre-ebook.com) 电子书转化器和管理器，bookdown 包提供了 `bookdown::calibre()` 函数去调用
 
 ### Inkscape
 
