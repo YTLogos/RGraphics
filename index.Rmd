@@ -34,6 +34,18 @@ keywords: ["graphics", "grid", "lattice", "ggplot2"]
 
 `r if (knitr::is_latex_output()) '<!--'` 
 
+```{r setup,include=FALSE}
+packages = c(
+  "colorspace", "magrittr", "bookdown", "rmarkdown",
+  "tikzDevice", "fontcm",
+  "sp", "maptools", "maps", "mapdata", "mapproj",
+  "ggplot2", "devtools", "sf", "rgdal"
+)
+lapply(packages, function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
+
 # 准备 {#prerequisites}
 \index{bookdown}
 \index{knitr}
@@ -73,6 +85,10 @@ install.packages("bookdown")
 > --- Norm Matloff[^matloff] 
 
 [^matloff]: 参考博文 R > Python: A Concrete Example 来自 https://matloff.wordpress.com/
+
+## R vs Python
+
+[How GPL makes me leave R for Python :-(](https://r-posts.com/how-gpl-makes-me-leave-r-for-python/)
 
 ## 记号约定 {#conventions}
 
@@ -143,6 +159,10 @@ install.packages("bookdown")
       - 数据分析与图形艺术 [ggplot2: Elegant Graphics for Data Analysis](https://link.springer.com/book/10.1007%2F978-3-319-24277-4) [PDF](http://moderngraphics11.pbworks.com/f/ggplot2-Book09hWickham.pdf)
       - 数据可视化：实践指南 [Data Visualization: A practical introduction](https://socviz.co/) [Github](https://github.com/kjhealy/socviz)
       - 可视化数据分析与R语言 [Graphical Data Analysis with R](http://www.gradaanwr.net/)
+   
+   1. 空间数据分析
+      - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
+      - 地质统计计算与 R 语言 [Geocomputation with R](https://geocompr.robinlovelace.net/)
    
    1. 文本挖掘
       - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
@@ -286,6 +306,12 @@ install.packages("bookdown")
   - https://glue.tidyverse.org
   - https://haven.tidyverse.org
 
+* 博客聚合
+  - https://rweekly.org/
+  - https://www.r-bloggers.com/
+  - https://dailyr.netlify.com/
+  - https://datascienceplus.com/
+
 ## 关于作者 {#about-author}
 
 热心开源事业，目前在统计之都担任副主编 Associated Editor of Captial of Statistics
@@ -294,17 +320,6 @@ install.packages("bookdown")
 
 重现本书内容需要的 R 包
 
-```{r,echo=FALSE}
-packages = c(
-  "colorspace", "magrittr", "bookdown", "rmarkdown",
-  "tikzDevice", "fontcm",
-  "sp", "maptools", "maps", "mapdata", "mapproj",
-  "ggplot2", "devtools", "sf", "rgdal"
-)
-lapply(packages, function(pkg) {
-  if (system.file(package = pkg) == '') install.packages(pkg)
-})
-```
 ```{r sessioninfo,echo=TRUE}
 xfun::session_info(packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
