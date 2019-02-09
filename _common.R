@@ -48,6 +48,7 @@ options(
   BioC_mirror = "https://mirrors.tuna.tsinghua.edu.cn/bioconductor",
   repos = c(
     CRAN = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/",
+    CRANextra = 'https://macos.rbind.org',
     RForge = "https://r-forge.r-project.org",
     inla = "https://inla.r-inla-download.org/R/stable",
     drat = "https://nowosad.github.io/drat"
@@ -55,14 +56,14 @@ options(
   knitr.graphics.auto_pdf = FALSE,
   width = 69,
   str = utils::strOptions(strict.width = "cut"),
-  tikzDefaultEngine = "pdftex",
+  tikzDefaultEngine = "xetex",
   tikzLatexPackages = c(
     "\\usepackage{tikz}",
     "\\usepackage[active,tightpage,psfixbb]{preview}",
     "\\PreviewEnvironment{pgfpicture}",
     "\\setlength\\PreviewBorder{0pt}",
     "\\usepackage[colorlinks, breaklinks]{hyperref}",
-    "\\usepackage{amsmath,amsfonts,mathrsfs,times}"
+    "\\usepackage{amsmath,amsfonts,mathrsfs,times,amssymb}"
   )
 )
 
