@@ -163,6 +163,7 @@ install.packages("bookdown")
    1. 空间数据分析
       - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
       - 地质统计计算与 R 语言 [Geocomputation with R](https://geocompr.robinlovelace.net/)
+      - 空间统计概念入门 [Introduction to Geospatial Concepts](https://datacarpentry.org/organization-geospatial/)
    
    1. 文本挖掘
       - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)

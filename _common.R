@@ -56,14 +56,14 @@ options(
   knitr.graphics.auto_pdf = FALSE,
   width = 69,
   str = utils::strOptions(strict.width = "cut"),
-  tikzDefaultEngine = "xetex",
+  tikzDefaultEngine = "pdftex",
   tikzLatexPackages = c(
     "\\usepackage{tikz}",
     "\\usepackage[active,tightpage,psfixbb]{preview}",
     "\\PreviewEnvironment{pgfpicture}",
-    "\\setlength\\PreviewBorder{0pt}",
-    "\\usepackage[colorlinks, breaklinks]{hyperref}",
-    "\\usepackage{amsmath,amsfonts,mathrsfs,times,amssymb}"
+    "\\setlength\\PreviewBorder{0pt}"
+    # "\\usepackage[colorlinks, breaklinks]{hyperref}",
+    # "\\usepackage{amsmath,amsfonts,mathrsfs,times,amssymb}"
   )
 )
 
