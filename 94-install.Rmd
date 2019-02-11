@@ -730,6 +730,18 @@ knitr::include_graphics(path = "figures/font_Impact.png")
   Cuda compilation tools, release 7.5, V7.5.17
   ```
 
+1. [igraph] 是网络数据分析的必备 R 包，为了发挥其最大性能，需要安装三个系统依赖
+
+  ```bash
+  sudo apt-get install -y libgmp-dev libxml2-dev libglpk-dev
+  ```
+
+  然后安装 R 包
+
+  ```r
+  install.packages('igraph')
+  ```
+
 [^curl-dev]: libcurl-dev 是一个虚包 virtual package，由 libcurl4-openssl-dev 或 libcurl4-nss-dev 或 libcurl4-gnutls-dev 实际提供，选择其中一个安装即可。
 
 [curl]: https://github.com/jeroen/curl
@@ -745,3 +757,4 @@ knitr::include_graphics(path = "figures/font_Impact.png")
 [gpuR]: https://github.com/cdeterman/gpuR
 [gpuRcuda]: https://github.com/gpuRcore/gpuRcuda
 [gputools]: https://github.com/nullsatz/gputools
+[igraph]: https://igraph.org/
