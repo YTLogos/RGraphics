@@ -344,7 +344,7 @@ docker run --name rstudio -d -p 8787:8787 -e ROOT=TRUE \
 
 在本地拉取了一个名叫 rstudio 的镜像，从虚拟机到宿主机的映射端口是，8787 端口是虚拟机中 RStudio IDE 默认占用的，这样就可以在宿主机的浏览器里打开链接 <http://localhost:8787>
 
-```{r include=FALSE}
+```{r include=FALSE,cache=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tikzDevice'

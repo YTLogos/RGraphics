@@ -58,12 +58,13 @@ before_script:
   - chmod +x ./_deploy.sh
 
 script:
-  - make gitbook
-  - ./_deploy.sh
+  - Rscript -e 'bookdown::render_book("index.Rmd")'
+
 
 # deploy 
 after_success:
   - make pdf
+  - ./_deploy.sh
 
 deploy:
   provider: script
