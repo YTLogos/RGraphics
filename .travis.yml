@@ -5,7 +5,8 @@ cache:
   packages: true
   directories:
     - _bookdown_files
-
+    - $HOME/.npm
+    
 latex: false
 branches:
   only:
@@ -54,12 +55,19 @@ before_install:
 
 before_script:
   - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
-#  - chmod +x ./_deploy.sh
+  - chmod +x ./_deploy.sh
 
 script:
   - make gitbook
-#  - ./_deploy.sh
+  - ./_deploy.sh
 
 # deploy 
 after_success:
-  - netlify deploy --prod --dir _book
+  - make pdf
+
+deploy:
+  provider: script
+  script: netlify deploy --prod --dir _book
+  skip_cleanup: true
+  on:
+    branch: master

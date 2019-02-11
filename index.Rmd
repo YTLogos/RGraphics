@@ -25,6 +25,7 @@ description: "R Graphics Foundations.R is a language and environment for statist
 keywords: ["graphics", "grid", "lattice", "ggplot2"]
 # twitter-handle: tom_hengl
 # cover-image: figures/f0_web.png
+favicon: "images/favicon.ico"
 # url: 'http\://soilmapper.org'
 # layout: default
 # comments: true
