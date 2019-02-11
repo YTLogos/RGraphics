@@ -686,7 +686,19 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    ```r
    install.packages("rJava")
    ```
-  
+
+1. [igraph] 是网络数据分析的必备 R 包，为了发挥其最大性能，需要安装三个系统依赖
+
+   ```bash
+   sudo apt-get install -y libgmp-dev libxml2-dev libglpk-dev
+   ```
+
+   然后安装 R 包
+
+   ```r
+   install.packages('igraph')
+   ```
+   
 1. [gpuR] 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda] 和 [gputools] 扩展包，下面安装指导来自其 Wiki
 
   ```bash
@@ -728,18 +740,6 @@ knitr::include_graphics(path = "figures/font_Impact.png")
   Copyright (c) 2005-2015 NVIDIA Corporation
   Built on Tue_Aug_11_14:27:32_CDT_2015
   Cuda compilation tools, release 7.5, V7.5.17
-  ```
-
-1. [igraph] 是网络数据分析的必备 R 包，为了发挥其最大性能，需要安装三个系统依赖
-
-  ```bash
-  sudo apt-get install -y libgmp-dev libxml2-dev libglpk-dev
-  ```
-
-  然后安装 R 包
-
-  ```r
-  install.packages('igraph')
   ```
 
 [^curl-dev]: libcurl-dev 是一个虚包 virtual package，由 libcurl4-openssl-dev 或 libcurl4-nss-dev 或 libcurl4-gnutls-dev 实际提供，选择其中一个安装即可。
