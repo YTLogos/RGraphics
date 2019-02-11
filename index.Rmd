@@ -212,7 +212,8 @@ install.packages("bookdown")
   - [Stan Core Team](https://mc-stan.org) [case studies](https://mc-stan.org/users/documentation/case-studies.html)
   - [Håvard Rue](http://www.r-inla.org/) Bayesian computing with INLA
   - [R Graph Gallery](https://www.r-graph-gallery.com/)
-  - [htmlwidgets Gallery](http://gallery.htmlwidgets.org/)
+  - [htmlwidgets Gallery](https://gallery.htmlwidgets.org/)
+  - [ggplot2 Gallery](https://www.ggplot2-exts.org/gallery/)
   - [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
 * 学者
   - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
