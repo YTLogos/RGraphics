@@ -399,6 +399,15 @@ apropos('package')
     # 依赖 bookdown 的 R 包
     tools::dependsOnPkgs('bookdown', recursive = TRUE)
     ```
+    
+    ggplot2 生态，仅列出以 gg 开头的 R 包
+    
+    ```{r,echo=TRUE}
+    pdb <- available.packages()
+    gg <- tools::dependsOnPkgs("ggplot2", recursive = FALSE, installed = pdb)
+    grep("^gg", gg, value = TRUE)
+    ```
+    
 
 1. 重装R包，与 R 版本号保持一致
 
