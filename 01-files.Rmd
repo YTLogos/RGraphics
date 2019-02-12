@@ -247,18 +247,18 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 操作目录和文件的权限 Manipulation of Directories and File Permissions
 
-dir.exists(paths)
-dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")
-Sys.chmod(paths, mode = "0777", use_umask = TRUE)
-Sys.umask(mode = NA)
+1. `dir.exists(paths)`
+1. `dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")`
+1. `Sys.chmod(paths, mode = "0777", use_umask = TRUE)`
+1. `Sys.umask(mode = NA)`
 
 ## 区域 {#locale}
 
 Query or Set Aspects of the Locale
 
-Sys.getlocale(category = "LC_ALL")
-Sys.setlocale(category = "LC_ALL", locale = "")
-Sys.localeconv
+1. `Sys.getlocale(category = "LC_ALL")`
+1. `Sys.setlocale(category = "LC_ALL", locale = "")`
+1. `Sys.localeconv`
 
 Find Details of the Numerical and Monetary Representations in the Current Locale
 
@@ -266,11 +266,10 @@ Find Details of the Numerical and Monetary Representations in the Current Locale
 
 聊聊什么是进程，线程
 
-Sys.getpid Get the Process ID of the R Session
-
-proc.time()          Running Time of R/ for the timings for the session.
-system.time         for measuring elapsed/CPU time of expressions.
-gc.time             Report Time Spent in Garbage Collection
+- `Sys.getpid` Get the Process ID of the R Session
+- `proc.time()`          Running Time of R/ for the timings for the session.
+- `system.time`         for measuring elapsed/CPU time of expressions.
+- `gc.time`            Report Time Spent in Garbage Collection
 
 
 
