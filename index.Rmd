@@ -215,6 +215,7 @@ install.packages("bookdown")
   - [R Graph Gallery](https://www.r-graph-gallery.com/)
   - [htmlwidgets Gallery](https://gallery.htmlwidgets.org/)
   - [ggplot2 Gallery](https://www.ggplot2-exts.org/gallery/)
+  - [Flowing Data](https://flowingdata.com/)
   - [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
 * 学者
   - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
