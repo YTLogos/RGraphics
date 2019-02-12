@@ -498,7 +498,6 @@ convert -quality 100 -density 300x300 filename.pdf filename.png
 convert -geometry 1000x3000 example.eps example.png
 ```
 
-
 ### OptiPNG
 
 [OptiPNG](http://optipng.sourceforge.net/) 是一个非常好的图片压缩、优化工具
@@ -653,4 +652,10 @@ for (i in seq(length(list.files(tmp)))) {
   rsvg_pdf(input_paths[i], file = output_paths[i])
 }
 ```
+
+### qpdf
+
+[qpdf](https://github.com/ropensci/qpdf) 库[^qpdf-cpp]由搬运狂魔 Jeroen Ooms 搬运至 R 系统中，用于 PDF 文件的拆分，组合和压缩
+
+[^qpdf-cpp]: http://qpdf.sourceforge.net/
 
