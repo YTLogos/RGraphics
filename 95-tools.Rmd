@@ -1,4 +1,4 @@
-# 软件工具 {#tools}
+# 工具 {#tools}
 
 ## 编辑器 {#editor}
 
@@ -485,7 +485,7 @@ Docker & Docker Machine & Docker Swarm
 
 ## 常用工具 {#other-tools}
 
-### Imagemagick
+### ImageMagick
 
 
 ```bash
@@ -498,14 +498,13 @@ convert -quality 100 -density 300x300 filename.pdf filename.png
 convert -geometry 1000x3000 example.eps example.png
 ```
 
+### OptiPNG
 
-### optipng
-
-optipng 是一个非常好的图片压缩、优化工具
+[OptiPNG](http://optipng.sourceforge.net/) 是一个非常好的图片压缩、优化工具
 
 现在，我们设置 chunk 选项 `optipng` 为非空(non-`NULL`)的值，例如，`''` 去激活这个 hook （益辉称之为钩子，这里勾的是 optipng 这个图片优化工具）
 
-```{r use-optipng, optipng='',fig.cap="优化"}
+```{r use-optipng, optipng= if(knitr::is_html_output()) '',fig.cap="优化"}
 library(ggplot2)
 set.seed(123)
 qplot(rnorm(1e3), rnorm(1e3))
@@ -518,7 +517,7 @@ qplot(rnorm(1e3), rnorm(1e3))
 
 同一幅图，但是使用最高级别的优化 (传递 `-o7` 参数给 `optipng`):
 
-```{r optipng-o7, ref.label='use-optipng', optipng='-o7',fig.cap="最强优化"}
+```{r optipng-o7, ref.label='use-optipng', optipng=if(knitr::is_html_output()) '-o7',fig.cap="最强优化"}
 ```
 
 ```bash
@@ -546,9 +545,9 @@ embedFonts(
 embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") 
 ```
 
-### pdfcrop 
+### PDFCrop
 
-pdfcrop 可将 PDF 图片中留白的部分裁去，再也不用纠结 par 了
+[PDFCrop](http://pdfcrop.sourceforge.net/) 可将 PDF 图片中留白的部分裁去，再也不用纠结 par 了
 
 ### PhantomJS
 
@@ -606,6 +605,10 @@ Output IDAT size = 59441 bytes (11129 bytes decrease)
 Output file size = 59714 bytes (11153 bytes = 15.74% decrease)
 ```
 
+### Calibre
+
+[Calibre](https://calibre-ebook.com) 电子书转化器和管理器，bookdown 包提供了 `bookdown::calibre()` 函数去调用
+
 ### Inkscape
 
 > Inkscape is an open source drawing tool with capabilities similar to Illustrator, Freehand, and CorelDraw that uses the W3C standard scalable vector graphics  format (SVG). Some supported SVG features include basic shapes, paths, text, markers, clones, alpha blending, transforms, gradients, and grouping. In addition, Inkscape supports Creative Commons meta-data, node-editing, layers, complex path operations, text-on-path, and SVG XML editing. It also imports several formats like EPS, Postscript, JPEG, PNG, BMP, and TIFF and exports PNG as well as multiple vector-based formats.
@@ -649,4 +652,10 @@ for (i in seq(length(list.files(tmp)))) {
   rsvg_pdf(input_paths[i], file = output_paths[i])
 }
 ```
+
+### qpdf
+
+[qpdf](https://github.com/ropensci/qpdf) 库[^qpdf-cpp]由搬运狂魔 Jeroen Ooms 搬运至 R 系统中，用于 PDF 文件的拆分，组合和压缩
+
+[^qpdf-cpp]: http://qpdf.sourceforge.net/
 

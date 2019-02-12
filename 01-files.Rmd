@@ -1,4 +1,4 @@
-# 文件管理 {#files}
+# 文件 {#files}
 
 [给出 linux 下的对应命令]{.todo}
 
@@ -247,18 +247,18 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 操作目录和文件的权限 Manipulation of Directories and File Permissions
 
-dir.exists(paths)
-dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")
-Sys.chmod(paths, mode = "0777", use_umask = TRUE)
-Sys.umask(mode = NA)
+1. `dir.exists(paths)`
+1. `dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")`
+1. `Sys.chmod(paths, mode = "0777", use_umask = TRUE)`
+1. `Sys.umask(mode = NA)`
 
 ## 区域 {#locale}
 
 Query or Set Aspects of the Locale
 
-Sys.getlocale(category = "LC_ALL")
-Sys.setlocale(category = "LC_ALL", locale = "")
-Sys.localeconv
+1. `Sys.getlocale(category = "LC_ALL")`
+1. `Sys.setlocale(category = "LC_ALL", locale = "")`
+1. `Sys.localeconv`
 
 Find Details of the Numerical and Monetary Representations in the Current Locale
 
@@ -266,50 +266,102 @@ Find Details of the Numerical and Monetary Representations in the Current Locale
 
 聊聊什么是进程，线程
 
-Sys.getpid Get the Process ID of the R Session
-
-proc.time()          Running Time of R/ for the timings for the session.
-system.time         for measuring elapsed/CPU time of expressions.
-gc.time             Report Time Spent in Garbage Collection
+- `Sys.getpid` Get the Process ID of the R Session
+- `proc.time()`          Running Time of R/ for the timings for the session.
+- `system.time`         for measuring elapsed/CPU time of expressions.
+- `gc.time`            Report Time Spent in Garbage Collection
 
 
 
 
 ## 调用 {#system}
 
-system system2 系统命令 Invoke a System Command
+`system` 和 `system2` 系统命令 Invoke a System Command
 
 ## 时间 {#time}
 
-时区 时间
-
-Sys.timezone
-
-Sys.time
-Sys.Date
-
-date
-
-as.POSIX* Date-time Conversion Functions
-
-Sys.setFileTime()
+`Sys.timezone` 获取时区信息
 
 ```{r,echo=TRUE}
-# 获取时区信息
-Sys.timezone()
+Sys.timezone(location = TRUE)
+```
 
+`Sys.time` 系统时间，可以给定时区下，显示当前时间，精确到秒，返回数据类型为 `POSIXct`
+
+```{r,echo=TRUE}
+# 此时美国洛杉矶时间
 format(Sys.time(), tz = 'America/Los_Angeles', usetz = TRUE)
+# 此时加拿大东部时间
 format(Sys.time(), tz = 'Canada/Eastern', usetz = TRUE)
+```
+
+`Sys.Date` 显示当前时区下的日期，精确到日，返回数据类型为 `date`
+
+```{r,echo=TRUE}
+Sys.Date()
+```
+
+`date` 返回当前系统日期和时间，数据类型是字符串
+
+```{r,echo=TRUE}
+date()
+## 也可以这样表示
+format(Sys.time(), "%a %b %d %H:%M:%S %Y")
+```
+
+`as.POSIX*` 是一个 Date-time 转换函数
+
+```{r,echo=TRUE}
+as.POSIXlt(Sys.time(), "GMT") # the current time in GMT
+```
+
+时间计算
+
+```{r,echo=TRUE}
+(z <- Sys.time())             # the current date, as class "POSIXct"
+
+Sys.time() - 3600             # an hour ago
+```
+
+`.leap.seconds` 是内置的日期序列
+
+```{r,echo=TRUE}
+.leap.seconds
+```
+
+计算日期对应的星期`weekdays`，月 `months` 和季度 `quarters`
+
+```{r,echo=TRUE}
+weekdays(.leap.seconds)
+months(.leap.seconds)
+quarters(.leap.seconds)
+```
+
+`Sys.setFileTime()` 使用系统调用 system call 设置文件或目录的时间
+
+```{r,echo=TRUE}
+# 修改时间前
+file.info('./_common.R')
+# 修改时间后，对比一下
+Sys.setFileTime(path = './_common.R', time = Sys.time())
+file.info('./_common.R')
+```
+
+
+`strptime` 用于字符串与 `POSIXlt`、 `POSIXct` 类对象之间的转化，`format` 默认 `tz = ""` 且 `usetz = TRUE` 
+
+```{r,echo=TRUE}
 # 存放时区信息的数据库位置
 file.path(R.home("share"), "zoneinfo")
-
 strptime(Sys.time(), format ="%Y-%m-%d %H:%M:%S", tz = "Asia/Taipei")
+format(Sys.time(), format = "%Y-%m-%d %H:%M:%S") # 默认情形
+format(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "Asia/Taipei", usetz = TRUE)
 ```
 
 ## 搜索 {#search}
 
-help.search
-?regrex
+`help.search`
+`?regrex`
 
 ## R 包 {#package}
 
@@ -364,7 +416,7 @@ apropos('package')
 1. `update.packages` 更新已安装的 R 包
 
     ```{r,echo=TRUE,eval=FALSE}
-    update.packages(aask = FALSE)
+    update.packages(ask = FALSE)
     ```
 
 1. `old.packages` 查看过时/可更新的 R 包
@@ -399,6 +451,15 @@ apropos('package')
     # 依赖 bookdown 的 R 包
     tools::dependsOnPkgs('bookdown', recursive = TRUE)
     ```
+    
+    ggplot2 生态，仅列出以 gg 开头的 R 包
+    
+    ```{r,echo=TRUE}
+    pdb <- available.packages()
+    gg <- tools::dependsOnPkgs("ggplot2", recursive = FALSE, installed = pdb)
+    grep("^gg", gg, value = TRUE)
+    ```
+    
 
 1. 重装R包，与 R 版本号保持一致
 

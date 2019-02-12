@@ -1,4 +1,4 @@
-# 正则表达式 {#regex}
+# 字符 {#regex}
 
   Handling Strings with R 
 
@@ -12,7 +12,7 @@
 
 - https://stringr.tidyverse.org/
 
-?regex
+在 R 控制台输入 `?regex` 查看正则表达式，`?regex` 可以看百八十遍
 
   入门 字符串处理
 - https://r4ds.had.co.nz/strings.html
@@ -31,7 +31,7 @@ There is also `fixed = TRUE` which can be considered to use a *literal regular e
 
 学习正则表达式的路径^[<https://d.cosx.org/d/420410>]
 
-`?regex` 可以看百八十遍
+
 
 regex Regular Expressions as used in R
 
@@ -39,7 +39,7 @@ regex Regular Expressions as used in R
 
 谢益辉常用的操作函数是 `grep()`、`gsub()`、`gregexpr()` 和 `regmatches()`
 
-支持正则表达式的函数 grep, apropos, browseEnv, glob2rx, help.search, list.files, ls and strsplit.
+支持正则表达式的函数 `grep`, `apropos`, `browseEnv`, `glob2rx`, `help.search`, `list.files`, `ls` and `strsplit`.
 
 apropos, browseEnv, help.search, list.files and ls 函数通过使用 grep 使用正则表达式 extended regular expressions.
 
@@ -140,3 +140,14 @@ vec <- paste(vec_a, vec_A, sep = '*',collapse = '+')
 Extract or Replace Matched Substrings
 
 Extract or replace matched substrings from match data obtained by regexpr, gregexpr or regexec.
+
+
+## 扩展阅读 {#more-readings}
+
+[How did Axios rectangle Trump's PDF schedule? A try with R](https://masalmon.eu/2019/02/11/trump-schedule/) 使用 pdftools 和 magick 处理表格，这两个R包分别依赖 Poppler C++ 和 ImageMagick++
+
+如何在 Ubuntu 18.04 上安装 `poppler >= 0.73` [^install-poppler]
+
+[^install-poppler]: https://askubuntu.com/questions/1112856
+
+[Manipulating strings with the {stringr} package](https://www.brodrigues.co/blog/2019-02-10-stringr_package/)

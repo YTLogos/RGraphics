@@ -24,7 +24,8 @@ geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
 description: "R Graphics Foundations.R is a language and environment for statistical computing and graphics. R is similar to the award-winning S system, which was developed at Bell Laboratories by John Chambers et al. It provides a wide variety of statistical and graphical techniques (linear and nonlinear modelling, statistical tests, time series analysis, classification, clustering, ...). R is designed as a true computer language with control-flow constructions for iteration and alternation, and it allows users to add additional functionality by defining new functions. For computationally intensive tasks, C, C++ and Fortran code can be linked and called at run time. 学习 R Base Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上或博客上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础R打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础R中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情"
 keywords: ["graphics", "grid", "lattice", "ggplot2"]
 # twitter-handle: tom_hengl
-# cover-image: figures/f0_web.png
+cover-image: "images/dragon.png"
+favicon: "images/favicon.ico"
 # url: 'http\://soilmapper.org'
 # layout: default
 # comments: true
@@ -33,6 +34,18 @@ keywords: ["graphics", "grid", "lattice", "ggplot2"]
 \mainmatter
 
 `r if (knitr::is_latex_output()) '<!--'` 
+
+```{r setup,include=FALSE}
+packages = c(
+  "colorspace", "magrittr", "bookdown", "rmarkdown",
+  "tikzDevice", "fontcm", "microbenchmark", "rsconnect",
+  "sp", "maptools", "maps", "mapdata", "mapproj",
+  "ggplot2", "devtools", "sf", "rgdal"
+)
+lapply(packages, function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
 
 # 准备 {#prerequisites}
 \index{bookdown}
@@ -85,7 +98,7 @@ install.packages("bookdown")
 ## 本书结构 {#structure-of-book}
 
 
-## 历史 {#history-of-r}
+## 发展历史 {#history-of-r}
 
 1. Ross Ihaka
 
@@ -151,6 +164,7 @@ install.packages("bookdown")
    1. 空间数据分析
       - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
       - 地质统计计算与 R 语言 [Geocomputation with R](https://geocompr.robinlovelace.net/)
+      - 空间统计概念入门 [Introduction to Geospatial Concepts](https://datacarpentry.org/organization-geospatial/)
    
    1. 文本挖掘
       - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
@@ -199,7 +213,9 @@ install.packages("bookdown")
   - [Stan Core Team](https://mc-stan.org) [case studies](https://mc-stan.org/users/documentation/case-studies.html)
   - [Håvard Rue](http://www.r-inla.org/) Bayesian computing with INLA
   - [R Graph Gallery](https://www.r-graph-gallery.com/)
-  - [htmlwidgets Gallery](http://gallery.htmlwidgets.org/)
+  - [htmlwidgets Gallery](https://gallery.htmlwidgets.org/)
+  - [ggplot2 Gallery](https://www.ggplot2-exts.org/gallery/)
+  - [Flowing Data](https://flowingdata.com/)
   - [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
 * 学者
   - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
@@ -308,17 +324,6 @@ install.packages("bookdown")
 
 重现本书内容需要的 R 包
 
-```{r,echo=FALSE}
-packages = c(
-  "colorspace", "magrittr", "bookdown", "rmarkdown",
-  "tikzDevice", "fontcm", "microbenchmark", "rsconnect"
-  "sp", "maptools", "maps", "mapdata", "mapproj",
-  "ggplot2", "devtools", "sf", "rgdal"
-)
-lapply(packages, function(pkg) {
-  if (system.file(package = pkg) == '') install.packages(pkg)
-})
-```
 ```{r sessioninfo,echo=TRUE}
 xfun::session_info(packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
@@ -340,7 +345,7 @@ docker run --name rstudio -d -p 8787:8787 -e ROOT=TRUE \
 
 在本地拉取了一个名叫 rstudio 的镜像，从虚拟机到宿主机的映射端口是，8787 端口是虚拟机中 RStudio IDE 默认占用的，这样就可以在宿主机的浏览器里打开链接 <http://localhost:8787>
 
-```{r include=FALSE}
+```{r include=FALSE,cache=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tikzDevice'

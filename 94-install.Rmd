@@ -2,7 +2,7 @@
 
 # (APPENDIX) 附录 {#appendix .unnumbered}
 
-# 安装 R {#install}
+# 安装 {#install}
 
 主要参考 R-admin
 
@@ -686,7 +686,19 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    ```r
    install.packages("rJava")
    ```
-  
+
+1. [igraph] 是网络数据分析的必备 R 包，为了发挥其最大性能，需要安装三个系统依赖
+
+   ```bash
+   sudo apt-get install -y libgmp-dev libxml2-dev libglpk-dev
+   ```
+
+   然后安装 R 包
+
+   ```r
+   install.packages('igraph')
+   ```
+   
 1. [gpuR] 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda] 和 [gputools] 扩展包，下面安装指导来自其 Wiki
 
   ```bash
@@ -745,3 +757,4 @@ knitr::include_graphics(path = "figures/font_Impact.png")
 [gpuR]: https://github.com/cdeterman/gpuR
 [gpuRcuda]: https://github.com/gpuRcore/gpuRcuda
 [gputools]: https://github.com/nullsatz/gputools
+[igraph]: https://igraph.org/
