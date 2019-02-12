@@ -98,7 +98,7 @@ install.packages("bookdown")
 ## 本书结构 {#structure-of-book}
 
 
-## 历史 {#history-of-r}
+## 发展历史 {#history-of-r}
 
 1. Ross Ihaka
 
