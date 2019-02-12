@@ -1,4 +1,4 @@
-# 数据操作 {#manipulate}
+# 操作 {#manipulate}
 
 ```{r,include=FALSE}
 library(magrittr) # %>%
