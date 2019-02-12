@@ -311,7 +311,7 @@ install.packages("bookdown")
 ```{r,echo=FALSE}
 packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
-  "tikzDevice", "fontcm",
+  "tikzDevice", "fontcm", "microbenchmark", "rsconnect"
   "sp", "maptools", "maps", "mapdata", "mapproj",
   "ggplot2", "devtools", "sf", "rgdal"
 )
