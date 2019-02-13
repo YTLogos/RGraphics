@@ -294,10 +294,31 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 聊聊什么是进程，线程
 
-- `Sys.getpid` Get the Process ID of the R Session
-- `proc.time()`          Running Time of R/ for the timings for the session.
-- `system.time`         for measuring elapsed/CPU time of expressions.
-- `gc.time`            Report Time Spent in Garbage Collection
+- `Sys.getpid` 获取当前运行中的 R 控制台（会话）的进程 ID
+
+    ```{r,echo=TRUE}
+    Sys.getpid()
+    ```
+
+- `proc.time()` R 会话运行时间，常用于计算R程序在当前R控制台的运行时间
+
+    ```{r,echo=TRUE}
+    proc.time()
+    ```
+
+- `system.time` 计算 R 表达式/程序块运行耗费的CPU时间
+
+    ```{r,echo=TRUE}
+    system.time({
+      rnorm(1e6)
+    }, gcFirst = TRUE)
+    ```
+
+- `gc.time`  报告垃圾回收耗费的时间
+
+    ```{r,echo=TRUE}
+    
+    ```
 
 
 
