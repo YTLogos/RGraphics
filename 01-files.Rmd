@@ -283,16 +283,36 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 操作目录和文件的权限 Manipulation of Directories and File Permissions
 
-1. `dir.exists(paths)`
-1. `dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")`
-1. `Sys.chmod(paths, mode = "0777", use_umask = TRUE)`
+1. `dir.exists(paths)` 检查目录是否存在
+
+```{r}
+
+```
+
+1. `dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")` 创建目录
+
+```{r}
+
+```
+
+1. `Sys.chmod(paths, mode = "0777", use_umask = TRUE)` 修改权限
+
+```{r}
+
+```
+
 1. `Sys.umask(mode = NA)`
+
+```{r}
+
+```
+
 
 ## 区域 {#locale}
 
 1. `Sys.getlocale(category = "LC_ALL")` 查看当前区域设置
 
-    ```{r}
+    ```{r,echo=TRUE}
     Sys.getlocale(category = "LC_ALL")
     ```
 
