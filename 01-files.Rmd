@@ -285,21 +285,21 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 1. `dir.exists(paths)` 检查目录是否存在
 
-```{r}
-
-```
+    ```{r,echo=TRUE}
+    dir.exists(c('./_book','./book'))
+    ```
 
 1. `dir.create(path, showWarnings = TRUE, recursive = FALSE, mode = "0777")` 创建目录
 
-```{r}
-
-```
+    ```{r,echo=TRUE}
+    dir.create('./_book/tmp')
+    ```
 
 1. `Sys.chmod(paths, mode = "0777", use_umask = TRUE)` 修改权限
 
-```{r}
-
-```
+    ```{r,echo=TRUE}
+    Sys.chmod('./_book/tmp')
+    ```
 
 1. `Sys.umask(mode = NA)`
 
@@ -357,9 +357,9 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 - `proc.time()` R 会话运行时间，常用于计算R程序在当前R控制台的运行时间
 
     ```{r,echo=TRUE}
-    t1 = proc.time()
-    rnorm(1e6)
-    t2 = proc.time() - t1
+    t1 <- proc.time()
+    tmp <- rnorm(1e6)
+    proc.time() - t1
     ```
 
 - `system.time` 计算 R 表达式/程序块运行耗费的CPU时间
