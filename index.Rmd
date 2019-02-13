@@ -129,7 +129,8 @@ install.packages("bookdown")
       - 高效R语言编程 [Efficient R programming](https://csgillespie.github.io/efficientR)
    
    1. 开发 R 包
-      - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+      - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  第二版 https://r-pkgs.org/
+      - R 扩展 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
       - Git [Pro Git 中文第二版](https://git-scm.com/book/zh/v2)
       
    1. 数据科学 
