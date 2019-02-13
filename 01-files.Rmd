@@ -237,11 +237,47 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 查找文件、可执行文件的完整路径、R 包
 
 1. `Sys.which` Find Full Paths to Executables
+
+    ```{r,echo=TRUE}
+    Sys.which('pandoc')
+    ```
+
 1. `system.file`  Find Names of R System Files
+
+    ```{r,echo=TRUE}
+    system.file('CITATION',package = 'base')
+    ```
+
 1. `R.home`
-1. `.libPaths()`
-1. `find.package`
-1. `file.exist`
+
+    ```{r,echo=TRUE}
+    # R 安装目录
+    R.home()
+    # R执行文件目录
+    R.home('bin')
+    # 配置文件目录
+    R.home('etc')
+    # R 基础扩展包存放目录
+    R.home('library')
+    ```
+
+1. `.libPaths()` R 包存放的路径有哪些
+
+    ```{r,echo=TRUE}
+    .libPaths()
+    ```
+
+1. `find.package` 查找R包所在目录
+
+    ```{r,echo=TRUE}
+    find.package(package = 'MASS')
+    ```
+
+1. `file.exist` 检查文件是否存在
+
+    ```{r,echo=TRUE}
+    file.exists(paste(R.home('etc'),"Rprofile.site",sep = .Platform$file.sep))
+    ```
 
 ## 权限 {#permissions}
 
@@ -292,8 +328,6 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 ## 进程 {#process}
 
-聊聊什么是进程，线程
-
 - `Sys.getpid` 获取当前运行中的 R 控制台（会话）的进程 ID
 
     ```{r,echo=TRUE}
@@ -303,7 +337,9 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 - `proc.time()` R 会话运行时间，常用于计算R程序在当前R控制台的运行时间
 
     ```{r,echo=TRUE}
-    proc.time()
+    t1 = proc.time()
+    rnorm(1e6)
+    t2 = proc.time() - t1
     ```
 
 - `system.time` 计算 R 表达式/程序块运行耗费的CPU时间
@@ -317,11 +353,8 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 - `gc.time`  报告垃圾回收耗费的时间
 
     ```{r,echo=TRUE}
-    
+    gc.time()
     ```
-
-
-
 
 ## 调用 {#system}
 
