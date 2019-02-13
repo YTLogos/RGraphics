@@ -1,7 +1,8 @@
-# 图形 {#advanced}
+# 可视化 {#visualization}
 
+## 空间数据可视化 {#sp-vis}
 
-## raster
+### raster 对象
 
 星号 * 标记的是 S3 方法
 
@@ -24,7 +25,7 @@ getAnywhere(rasterImage)
 通过查看函数的帮助 `?rasterImage` ，我们需要重点关注一下
 参数 *image* 传递的 raster 对象
 
-## sp
+### sp 对象
 
 空间数据对象，以类 sp 方式存储 [@Pebesma_2005_sp]
 
@@ -57,7 +58,7 @@ spplot(nc, c("SID74", "SID79"),
 maptools 提供的 readShapePoly 函数去读取 shp 文件的方式已经过时，推荐使用 `rgdal::readOGR` 或者 `sf::st_read` 方式读取
 :::
 
-## sf {#simple-features}
+### sf 对象 {#simple-features}
 
 - maps
 - mapdata
@@ -70,3 +71,21 @@ maptools 提供的 readShapePoly 函数去读取 shp 文件的方式已经过时
 - sp
 - sf
 
+
+
+
+
+## 网络数据可视化 {#net-vis}
+
+[igraph](https://igraph.org/) 提供了 R 和 Python 接口 <https://github.com/igraph>。
+
+[qgraph](https://github.com/SachaEpskamp/qgraph) 开发者 [Sacha Epskamp](http://sachaepskamp.com) 在个人主页上提供了很多网络数据分析的学习资料
+
+
+[Rgraphviz](https://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html) 基于 [Graphviz](https://www.graphviz.org/)
+
+```{r,echo=TRUE,eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("Rgraphviz", version = "3.8")
+```

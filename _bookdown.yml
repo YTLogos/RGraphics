@@ -23,8 +23,8 @@ rmd_files:
   - "01-files.Rmd"
 #  - "02-rio.Rmd"
   - "03-manipulate.Rmd"
-  - "04-base.Rmd"
-#  - "05-advanced.Rmd"
+  - "04-graph.Rmd"
+#  - "05-visualization.Rmd"
   
   - "92-regex.Rmd"
 #  - "93-oo.Rmd"
