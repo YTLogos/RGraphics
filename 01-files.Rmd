@@ -258,9 +258,39 @@ Query or Set Aspects of the Locale
 
 1. `Sys.getlocale(category = "LC_ALL")`
 1. `Sys.setlocale(category = "LC_ALL", locale = "")`
-1. `Sys.localeconv`
+1. `Sys.localeconv()`
 
-Find Details of the Numerical and Monetary Representations in the Current Locale
+
+```{r}
+Sys.getlocale(category = "LC_ALL")
+```
+```{r,echo=TRUE}
+# 默认设置
+Sys.setlocale(category = "LC_ALL", locale = "")
+# 保存当前区域设置
+old <- Sys.getlocale()
+
+Sys.setlocale("LC_MONETARY", locale = "")
+Sys.localeconv()
+Sys.setlocale("LC_MONETARY", "de_AT")
+Sys.localeconv()
+
+# 恢复区域设置
+Sys.setlocale(locale = old)
+```
+
+当前区域设置下，数字和货币的表示
+
+```{r,echo=TRUE}
+Sys.localeconv()
+```
+
+本地化信息
+
+```{r,echo=TRUE}
+l10n_info()
+```
+
 
 ## 进程 {#process}
 
@@ -347,12 +377,12 @@ Sys.setFileTime(path = './_common.R', time = Sys.time())
 file.info('./_common.R')
 ```
 
-
 `strptime` 用于字符串与 `POSIXlt`、 `POSIXct` 类对象之间的转化，`format` 默认 `tz = ""` 且 `usetz = TRUE` 
 
 ```{r,echo=TRUE}
-# 存放时区信息的数据库位置
-file.path(R.home("share"), "zoneinfo")
+# 存放时区信息的数据库所在目录
+list.files(file.path(R.home("share"), "zoneinfo"))
+# 比较不同的打印方式
 strptime(Sys.time(), format ="%Y-%m-%d %H:%M:%S", tz = "Asia/Taipei")
 format(Sys.time(), format = "%Y-%m-%d %H:%M:%S") # 默认情形
 format(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "Asia/Taipei", usetz = TRUE)
@@ -469,6 +499,4 @@ apropos('package')
     pkgs <- db[db$Built < getRversion(), "Package"]
     install.packages(pkgs)
     ```
-
-
 
