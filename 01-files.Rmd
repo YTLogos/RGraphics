@@ -97,6 +97,124 @@ library(magrittr) # 提供管道命令 %>%
     dir.create(paste0(tempdir(), "/_book/tmp"), recursive = TRUE)
     ```
 
+查看当前目录下的文件和文件夹
+
+1. tree 
+
+```bash
+tree -L 2 .
+```
+```
+.
+├── 01-files.Rmd
+├── 02-rio.Rmd
+├── 03-manipulate.Rmd
+├── 04-graph.Rmd
+├── 05-visualization.Rmd
+├── 92-regex.Rmd
+├── 93-oo.Rmd
+├── 94-install.Rmd
+├── 95-tools.Rmd
+├── 96-references.Rmd
+├── DESCRIPTION
+├── Makefile
+├── README.md
+├── RGraphics-tikzDictionary
+├── RGraphics.Rproj
+├── _book
+│   ├── RGraphics.epub
+│   ├── RGraphics.pdf
+│   ├── RGraphics.tex
+│   ├── RGraphics_files
+│   ├── base.html
+│   ├── css
+│   ├── figures
+│   ├── files.html
+│   ├── index.html
+│   ├── install.html
+│   ├── libs
+│   ├── manipulate.html
+│   ├── references.html
+│   ├── regex.html
+│   ├── search_index.json
+│   └── tools.html
+├── _bookdown.yml
+├── _bookdown_files
+│   ├── RGraphics_cache
+│   └── RGraphics_files
+├── _common.R
+├── _deploy.sh
+├── _output.yml
+├── _render.R
+├── css
+│   └── style.css
+├── figures
+│   ├── by-nc-nd.png
+│   ├── font_Impact.pdf
+│   ├── font_Impact.png
+│   ├── gputools.png
+│   ├── mai.pdf
+│   ├── mai.png
+│   ├── msfonts.png
+│   ├── oma.pdf
+│   ├── show-file.png
+│   └── terminal.png
+├── images
+│   ├── dragon.png
+│   └── favicon.ico
+├── index.Rmd
+├── latex
+│   ├── TeXLive.pkgs
+│   ├── after_body.tex
+│   ├── before_body.tex
+│   ├── book.bib
+│   ├── preamble.tex
+│   ├── refer.bib
+│   └── sidebar.lua
+├── packages.bib
+├── r-packages-logs.md
+```
+
+1. ls 
+
+```bash
+ls -l
+```
+```
+total 448
+-rw-r--r--   1 xiangyun  staff  16793  2 14 17:22 01-files.Rmd
+-rw-r--r--@  1 xiangyun  staff   1289  2 12 11:26 02-rio.Rmd
+-rw-r--r--   1 xiangyun  staff  14096  2 12 11:25 03-manipulate.Rmd
+-rw-r--r--   1 xiangyun  staff  18044  2 14 12:26 04-graph.Rmd
+-rw-r--r--   1 xiangyun  staff   2064  2 14 12:26 05-visualization.Rmd
+-rw-r--r--@  1 xiangyun  staff   7826  2 12 12:10 92-regex.Rmd
+-rw-r--r--@  1 xiangyun  staff   1472  1 29 16:34 93-oo.Rmd
+-rw-r--r--   1 xiangyun  staff  22607  2 12 14:33 94-install.Rmd
+-rw-r--r--   1 xiangyun  staff  21814  2 12 21:29 95-tools.Rmd
+-rw-r--r--@  1 xiangyun  staff     78  1 29 16:34 96-references.Rmd
+-rw-r--r--@  1 xiangyun  staff    210  2 11 13:34 DESCRIPTION
+-rw-r--r--@  1 xiangyun  staff    143  1 29 16:34 Makefile
+-rw-r--r--@  1 xiangyun  staff    704  2 11 13:47 README.md
+-rw-r--r--@  1 xiangyun  staff  13080  2 10 14:46 RGraphics-tikzDictionary
+-rw-r--r--@  1 xiangyun  staff    242  2 14 17:20 RGraphics.Rproj
+drwxr-xr-x  18 xiangyun  staff    576  2 13 17:28 _book
+-rw-r--r--   1 xiangyun  staff    608  2 14 12:26 _bookdown.yml
+drwxr-xr-x   4 xiangyun  staff    128  2 13 17:28 _bookdown_files
+-rw-r--r--   1 xiangyun  staff   2855  2 13 17:26 _common.R
+-rw-r--r--@  1 xiangyun  staff    569  1 29 16:34 _deploy.sh
+-rw-r--r--@  1 xiangyun  staff    977  1 29 16:34 _output.yml
+-rw-r--r--@  1 xiangyun  staff   1639  1 29 16:34 _render.R
+drwxr-xr-x@  3 xiangyun  staff     96  1 29 16:34 css
+drwxr-xr-x   4 xiangyun  staff    128  2 14 16:01 data
+drwxr-xr-x@ 12 xiangyun  staff    384  2 10 14:59 figures
+drwxr-xr-x   4 xiangyun  staff    128  2 11 14:46 images
+-rw-r--r--   1 xiangyun  staff  18150  2 14 12:26 index.Rmd
+drwxr-xr-x@  9 xiangyun  staff    288  2 11 13:41 latex
+-rw-r--r--@  1 xiangyun  staff   1328  2 13 17:26 packages.bib
+-rw-r--r--@  1 xiangyun  staff  18517  1 29 16:34 r-packages-logs.md
+drwxr-xr-x   3 xiangyun  staff     96  2 11 12:58 rsconnect
+```
+
 ## 操作 {#manipulation}
 
 实现文件增删改查的函数如下
@@ -124,9 +242,25 @@ apropos("^file.")
     file.exists('tmp.txt')
     ```
 
-1. `file.append(file1, file2)` 追加文件
+1. `file.append(file1, file2)` 追加文件 `file2` 的内容到文件 `file1` 上
+
+    ```{r,echo=TRUE}
+    # 创建两个临时文件
+    file.create(c('data/tmp1.md','data/tmp2.md'))
+    # 写入内容
+    cat("AAA\n", file = 'data/tmp1.md')
+    cat("BBB\n", file = 'data/tmp2.md')
+    # 追加文件
+    file.append(file1 = 'data/tmp1.md', file2 = 'data/tmp2.md')
+    # 展示文件内容
+    readLines(file('data/tmp1.md'))
+    ```
 
 1. `file.copy(from, to, overwrite = recursive, recursive = FALSE,copy.mode = TRUE, copy.date = FALSE)` 复制文件
+
+    ```{r,echo=TRUE}
+    file.copy(from = 'Makefile', to = 'data/Makefile')
+    ```
 
 1. `file.symlink(from, to)` 创建符号链接 `file.link(from, to)` 创建硬链接
 
@@ -134,9 +268,14 @@ apropos("^file.")
 
 1. `Sys.readlink(paths)` 读取文件的符号链接（软链接）
 
-1. `choose.files` 交互式选择文件 
+1. `choose.files` 交互式选择文件，Windows 环境
 
 1. `download.file` 文件下载
+
+```{r,echo=TRUE,eval=FALSE}
+download.file(url = 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-latest.tar.gz',
+              destfile = 'data/R-latest.tar.gz', method = 'auto')
+```
 
 
 ```{r,include=FALSE}
