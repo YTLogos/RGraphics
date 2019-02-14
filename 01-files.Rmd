@@ -256,7 +256,7 @@ apropos("^file.")
     # 追加文件
     file.append(file1 = 'data/tmp1.md', file2 = 'data/tmp2.md')
     # 展示文件内容
-    readLines(file('data/tmp1.md'))
+    readLines('data/tmp1.md')
     ```
 
 1. `file.copy(from, to, overwrite = recursive, recursive = FALSE,copy.mode = TRUE, copy.date = FALSE)` 复制文件
