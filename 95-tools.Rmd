@@ -20,9 +20,15 @@
 
 1. VI & VIM 开源的跨平台编辑器
 
-Atom 和 Code 有商业公司支持的开源免费的跨平台的编辑器
+1. Atom 和 Code 有商业公司支持的开源免费的跨平台的编辑器
 
-VI/VIM 和 Emacs 是跨平台的编辑器
+1. VI/VIM 和 Emacs 是跨平台的编辑器
+
+1. [GitNote](https://gitnoteapp.com/) 记笔记的工具
+
+
+Markdown 编辑器 + blogdown 记笔记
+
 
 ## 版本控制 {#version-control}
 
