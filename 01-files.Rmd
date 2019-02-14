@@ -244,6 +244,9 @@ apropos("^file.")
 
 1. `file.append(file1, file2)` 追加文件 `file2` 的内容到文件 `file1` 上
 
+    ```{r,include=FALSE}
+    if(!dir.exists(paths = 'data/')) dir.create(path = 'data/')
+    ```
     ```{r,echo=TRUE}
     # 创建两个临时文件
     file.create(c('data/tmp1.md','data/tmp2.md'))
