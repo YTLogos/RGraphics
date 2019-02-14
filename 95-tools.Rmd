@@ -24,10 +24,7 @@
 
 1. VI/VIM 和 Emacs 是跨平台的编辑器
 
-1. [GitNote](https://gitnoteapp.com/) 记笔记的工具
-
-
-Markdown 编辑器 + blogdown 记笔记
+1. [GitNote](https://gitnoteapp.com/) 记笔记的工具，Markdown 编辑器 + blogdown 记笔记
 
 
 ## 版本控制 {#version-control}

@@ -268,7 +268,15 @@ apropos("^file.")
 
 1. `Sys.readlink(paths)` 读取文件的符号链接（软链接）
 
-1. `choose.files` 交互式选择文件，Windows 环境
+1. `choose.files` 在 Windows 环境下交互式地选择一个或多个文件，所以该函数只运行于 Windows 环境
+
+```{r,echo=TRUE,eval=FALSE}
+# 选择 zip 格式的压缩文件或其它
+if (interactive())
+     choose.files(filters = Filters[c("zip", "All"),])
+```
+
+`Filters` 参数传递一个矩阵，用来描述或标记R识别的文件类型，上面这个例子就能筛选出 zip 格式的文件
 
 1. `download.file` 文件下载
 
@@ -286,25 +294,41 @@ if (any(file.exists(files))) file.remove(files[file.exists(files)])
 
 ## 压缩 {#compression}
 
+tar 和 zip 是两种常见的压缩文件工具，具有免费和跨平台的特点，因此应用范围广。^[<https://github.com/libarchive/libarchive/wiki/FormatTar>]
 
-R 函数
+1. `tar/untar` 压缩与解压缩
+
+```r
+tar(tarfile, files = NULL,
+    compression = c("none", "gzip", "bzip2", "xz"),
+    compression_level = 6, tar = Sys.getenv("tar"),
+    extra_flags = "")
+```
+
+比较常用的压缩文件格式是 `.tar.gz` 和 `.tar.bz2`，将目录 `_book/`及其文件分别压缩成 `_book.tar.gz` 和 `_book.tar.bz2` 压缩包的名字可以任意取，后者压缩比率高
+
+```{r,echo=TRUE,eval=FALSE}
+# 文件压缩成 _book.tar.gz 格式
+# tar -czf _book.tar.gz _book
+tar(tarfile = 'data/_book.tar.gz', files = '_book', compression = 'gzip')
+# tar -czf _book.tar.gz _book/*
+tar(tarfile = 'data/_book.tar.gz', files = '_book/*', compression = 'gzip')
+# 文件压缩成 .tar.bz2 格式
+# tar -cjf data/book2.tar.bz2 _book
+tar(tarfile = 'data/_book.tar.bz2', files = '_book', compression = 'bzip2')
+```
+
+```r
+untar(tarfile, files = NULL, list = FALSE, exdir = ".",
+      compressed = NA, extras = NULL, verbose = FALSE,
+      restore_times =  TRUE, tar = Sys.getenv("TAR"))
+```
 
 
-命令行
 
-`tar/untar` 与 `zip/unzip`
+1. `zip/unzip`
 
-1. 将 `.csv` 文件压缩成 `.tar.bz2` 格式
-
-   ```bash
-   tar -cjf clientip.tar.bz2 clientip.csv
-   ```
-
-1. 当前目录下，将目录 `rstan/` 下的所有文件压缩为 `rstan.tar.gz` 文件
-
-   ```bash
-   tar -czf rstan.tar.gz ./rstan/*
-   ```
+命令行形式
 
 1. tar 解压
 

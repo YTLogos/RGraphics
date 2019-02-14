@@ -91,6 +91,7 @@ sunspots               Monthly Sunspot Numbers, 1749-1983
 
 ## 配色 {#colors}
 
+调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板
 
 R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
 
