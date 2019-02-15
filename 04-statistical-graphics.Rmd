@@ -14,22 +14,33 @@
 
 ## 图库 {#gallary}
 
-- 散点图
-- 气泡图
-- 条形图
-- 直方图
-- 折线图
-- 时序图
-- 饼图
-- 箱线图
-- 茎叶图
-- 抖动图
+
+
+
+
+
+
+### 条形图 {#bar-plot}
+
+### 直方图 {#histograms}
+
+
+
+### 时序图 {#time-series-plot}
+
+### 饼图 {#pie-plot}
+
+
+
+### 茎叶图 {#stem-leaf-plot}
+
+### 抖动图 {#jitter-plot}
 
 在 base R 中实现的图形，附上 ggplot2 的实现，而 ggplot2 的章节图形提供 base R 实现的图形
 
 强调图对应的数据类型
 
-### 散点图
+### 散点图 {#scatter-plot}
 
 ```{r,echo=TRUE}
 data(topo, package="MASS")
@@ -41,37 +52,37 @@ x coordinates (units of 50 feet)
 y coordinates (units of 50 feet)
 z heights (feet)
 
-### 箱线图
+### 箱线图 {#box-plot}
 
 boxplot
 
-### 钢琴图
+### 小提琴图 {#violin-plot}
 
 Tom Kelly 维护的 vioplot 包
 https://github.com/TomKellyGenetics/vioplot
 
-### 密度图
+### 密度图 {#density-plot}
 
 ggplot2
 
 geom_density()
 
-### 岭线图
+### 岭线图 {#ridge-lines}
 
 ggridges
 
 
-### 气泡图
+### 气泡图 {#bubble-plot}
 
 topo 是地形数据
 
-### 轮廓图
+### 轮廓图 {#contour-plot}
 
 topo 是地形数据
 
 等高线图
 
-### 折线图
+### 折线图 {#line-plot}
 
 函数曲线，样条曲线，核密度曲线，平行坐标图，时序图
 
@@ -88,6 +99,12 @@ EuStockMarkets         Daily Closing Prices of Major European Stock
 sunspot.month          Monthly Sunspot Data, from 1749 to "Present"
 sunspot.year           Yearly Sunspot Data, 1700-1988
 sunspots               Monthly Sunspot Numbers, 1749-1983
+
+### 马赛克图 {#mosaic-plot}
+
+### 矩阵树图 {#treemap}
+
+### 雷达图 {#}
 
 ## 配色 {#colors}
 

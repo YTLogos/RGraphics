@@ -218,6 +218,7 @@ install.packages("bookdown")
   - [ggplot2 Gallery](https://www.ggplot2-exts.org/gallery/)
   - [Flowing Data](https://flowingdata.com/)
   - [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
+  - [Mick Crawley](http://www.bio.ic.ac.uk/research/mjcraw/crawley.htm) [The R Book](http://www.imperial.ac.uk/bio/research/crawley/therbook) 的作者
 * 学者
   - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
   - [姚琦伟](http://stats.lse.ac.uk/q.yao/)
