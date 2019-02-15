@@ -288,7 +288,7 @@ RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Serv
 
 ### Eclipse + StatET {#eclipse-plus-statet}
 
-Eclipse 配合 StatET 插件^[<http://www.walware.de/goto/statet>]提供R语言的集成开发环境
+Eclipse 配合 StatET 插件^[<http://www.walware.de/goto/statet>]提供R语言的集成开发环境^[<https://projects.eclipse.org/projects/science.statet>]
 
 ### Emacs + ESS {#emacs-plus-ess}
 
