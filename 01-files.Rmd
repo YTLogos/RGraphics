@@ -104,7 +104,7 @@ library(magrittr) # 提供管道命令 %>%
 ```bash
 tree -L 2 .
 ```
-```
+```markdown
 .
 ├── 01-files.Rmd
 ├── 02-rio.Rmd
@@ -249,7 +249,7 @@ apropos("^file.")
     ```
     ```{r,echo=TRUE}
     # 创建两个临时文件
-    file.create(c('data/tmp1.md','data/tmp2.md'))
+    # file.create(c('data/tmp1.md','data/tmp2.md'))
     # 写入内容
     cat("AAA\n", file = 'data/tmp1.md')
     cat("BBB\n", file = 'data/tmp2.md')
@@ -273,21 +273,21 @@ apropos("^file.")
 
 1. `choose.files` 在 Windows 环境下交互式地选择一个或多个文件，所以该函数只运行于 Windows 环境
 
-```{r,echo=TRUE,eval=FALSE}
-# 选择 zip 格式的压缩文件或其它
-if (interactive())
-     choose.files(filters = Filters[c("zip", "All"),])
-```
-
-`Filters` 参数传递一个矩阵，用来描述或标记R识别的文件类型，上面这个例子就能筛选出 zip 格式的文件
+    ```{r,echo=TRUE,eval=FALSE}
+    # 选择 zip 格式的压缩文件或其它
+    if (interactive())
+         choose.files(filters = Filters[c("zip", "All"),])
+    ```
+    
+    `Filters` 参数传递一个矩阵，用来描述或标记R识别的文件类型，上面这个例子就能筛选出 zip 格式的文件
 
 1. `download.file` 文件下载
 
-```{r,echo=TRUE,eval=FALSE}
-download.file(url = 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-latest.tar.gz',
-              destfile = 'data/R-latest.tar.gz', method = 'auto')
-```
-
+    ```{r,echo=TRUE,eval=FALSE}
+    download.file(url = 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-latest.tar.gz',
+                  destfile = 'data/R-latest.tar.gz', method = 'auto')
+    ```
+    
 
 ```{r,include=FALSE}
 # 清理临时创建的文件
