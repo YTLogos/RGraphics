@@ -62,8 +62,6 @@ options(
     "\\usepackage[active,tightpage,psfixbb]{preview}",
     "\\PreviewEnvironment{pgfpicture}",
     "\\setlength\\PreviewBorder{0pt}"
-    # "\\usepackage[colorlinks, breaklinks]{hyperref}",
-    # "\\usepackage{amsmath,amsfonts,mathrsfs,times,amssymb}"
   )
 )
 
