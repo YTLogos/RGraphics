@@ -240,6 +240,47 @@ dev.off()
 names(knitr::knit_engines$get())
 ```
 
+导入系统TTF类型字体到 R 环境中，这样绘图可以使用更多的字体
+
+```{r,echo=TRUE,eval=FALSE}
+install.packages('extrafont')
+library(extrafont)
+font_import()
+# 查看可用的字体
+# Vector of font family names
+fonts()
+# Show entire table
+fonttable()
+# 加载字体
+
+# Only necessary in session where you ran font_import()
+loadfonts()
+# For PostScript output, use loadfonts(device="postscript")
+# Suppress output with loadfonts(quiet=TRUE)
+```
+
+测试字体是否被正确调用
+
+```{r,echo=TRUE,eval=FALSE}
+pdf("font_Impact.pdf", family="Impact", width=4, height=4)
+par(mar = c(4.1, 4.1, 2.1, 0.5)) 
+plot(mtcars$mpg, mtcars$wt, 
+     main = "Fuel Efficiency of 32 Cars",
+     xlab = "Weight (x1000 lb)",
+     ylab = "Miles per Gallon")
+dev.off()
+```
+
+PDF 格式图片转 PNG 格式
+
+```bash
+convert -quality 100 -density 300x300 font_Impact.pdf font_Impact.png
+```
+
+```{r fonts-Impact,fig.cap="Impact 字体"}
+knitr::include_graphics(path = "figures/font_Impact.png")
+```
+
 ## Graphviz
 
 先安装 Graphviz^[Graphviz 官网 <http://www.graphviz.org/>]，常用于绘制流程图，广泛用于 tensorflow 和 mxnet 的模型描述中，如图所示

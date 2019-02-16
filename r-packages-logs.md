@@ -1,4 +1,35 @@
 
+```bash
+nvidia-smi
+```
+```
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 384.130                Driver Version: 384.130                   |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GT 750M     Off  | 00000000:08:00.0 N/A |                  N/A |
+| N/A   41C    P8    N/A /  N/A |    114MiB /  2001MiB |     N/A      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0                    Not Supported                                       |
++-----------------------------------------------------------------------------+
+```
+```
+nvcc --version
+```
+```
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2015 NVIDIA Corporation
+Built on Tue_Aug_11_14:27:32_CDT_2015
+Cuda compilation tools, release 7.5, V7.5.17
+```
+
 1. gpuR
 
 ```bash

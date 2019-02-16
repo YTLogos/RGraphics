@@ -10,13 +10,9 @@
   sudo apt-get install atom
   ```
 
-1. Code 编辑器微软出品
+1. Code 编辑器微软出品 https://code.visualstudio.com/
 
-  > https://code.visualstudio.com/
-
-1. Notepad++ 开源的 Windows 平台上的编辑器
-  
-  > https://notepad-plus-plus.org/
+1. Notepad++ 开源的 Windows 平台上的编辑器 https://notepad-plus-plus.org/
 
 1. VI & VIM 开源的跨平台编辑器
 
@@ -56,27 +52,6 @@ Git 使用的数据库
 ## 动态文档 {#dynamic-documents}
 
 三剑客 Markdown & Pandoc's Markdown & R Markdown
-
-Pandoc 是一个万能文档转化器
-
-1. 安装 calibre
-
-   ```bash
-   sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
-   ```
-
-   calibre 可以将 epub 格式电子书文档转化为 mobi 格式，bookdown 已经给这个工具穿上了一件马甲，所以用户只需调用 `bookdown::calibre` 函数即可。
-
-1. 安装 pandoc，下载网址 https://github.com/jgm/pandoc/releases/latest
-
-   ```bash
-   sudo apt-get install gdebi-core
-   wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb
-   sudo chmod +x pandoc-2.5-1-amd64.deb
-   sudo gdebi pandoc-2.5-1-amd64.deb
-   ```
-   
-   rmarkdown 包裹了 Pandoc 工具，所以使用 `rmarkdown::render` 函数，即可将 R Markdown 文档转化为 HTML、LaTeX 和 Markdown 等格式。
 
 ### Markdown
 
@@ -169,13 +144,6 @@ The **bookdown** package can be installed from CRAN or Github:
 knitr::include_graphics(path = c("figures/mai.png","figures/mai.png"))
 ```
 
-
-```{r eval=FALSE}
-install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
-```
-
 Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
 
 通过 <https://bookdown.org/> 发布书籍
@@ -227,6 +195,19 @@ tinytex::tlmgr_install(pkgs = c(
 ## 开发环境 {#ide}
 
 ### RStudio IDE {#rstudio-ide}
+
+RStudio 桌面版装在服务器上，服务器为 Ubuntu/CentOS/Windows 系统，然后本地是 Windows 系统，可以通过远程桌面连接服务器，使用 RStudio；
+
+```{r,fig.cap="虚拟机里的 RStudio"}
+knitr::include_graphics(path = 'figures/rstudio-vbox.png')
+```
+
+服务器上启动 Docker ，运行 RStudio 镜像，本地通过桌面浏览器，如谷歌浏览器登陆连接。
+
+```{r,fig.cap="容器里的 RStudio"}
+knitr::include_graphics(path = 'figures/rstudio-docker.png')
+```
+
 
 RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Server 开源服务器版
 
@@ -552,6 +533,7 @@ embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf")
 
 [PDFCrop](http://pdfcrop.sourceforge.net/) 可将 PDF 图片中留白的部分裁去，再也不用纠结 par 了
 
+
 ### PhantomJS
 
 Winston Chang 开发了 [webshot](https://github.com/wch/webshot) 包网页截图，它依赖 [PhantomJS](https://github.com/ariya/phantomjs/)，所以首先需要安装
@@ -608,7 +590,28 @@ Output IDAT size = 59441 bytes (11129 bytes decrease)
 Output file size = 59714 bytes (11153 bytes = 15.74% decrease)
 ```
 
+### Pandoc
+
+1. Pandoc 是一个万能文档转化器，安装 pandoc，下载网址 https://github.com/jgm/pandoc/releases/latest
+
+   ```bash
+   sudo apt-get install gdebi-core
+   wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb
+   sudo chmod +x pandoc-2.5-1-amd64.deb
+   sudo gdebi pandoc-2.5-1-amd64.deb
+   ```
+   
+   rmarkdown 包裹了 Pandoc 工具，所以使用 `rmarkdown::render` 函数，即可将 R Markdown 文档转化为 HTML、LaTeX 和 Markdown 等格式。
+
 ### Calibre
+
+1. 安装 calibre
+
+   ```bash
+   sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+   ```
+
+   calibre 可以将 epub 格式电子书文档转化为 mobi 格式，bookdown 已经给这个工具穿上了一件马甲，所以用户只需调用 `bookdown::calibre` 函数即可。
 
 [Calibre](https://calibre-ebook.com) 电子书转化器和管理器，bookdown 包提供了 `bookdown::calibre()` 函数去调用
 

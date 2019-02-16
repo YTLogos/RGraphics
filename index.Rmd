@@ -260,7 +260,7 @@ This is a _sample_ book written in **Markdown**. You can use anything that Pando
   - [高策](https://gaocegege.com) 交大，可视化
   - [赵鹏](http://www.pzhao.org/zh/) 德国
   - [高涛](https://joegaotao.github.io)
-  
+  - [黄俊文](https://www.fyears.org) Python 和 R
   - [黄晨成](https://liam.page/) TeX 专家
   - [边蓓蕾](http://statsjoke.me) 上届 COS 副主编
   - [郎大为](http://langdawei.com/) 词云 recharts

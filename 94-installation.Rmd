@@ -58,7 +58,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   sudo apt-get install -y r-base-dev
   ```
   
-  Michael Rutter 维护了编译好的二进制版本 https://launchpad.net/~marutter，比如 rstan 包可以通过安装 r-cran-rstan 完成
+  Michael Rutter 维护了编译好的二进制版本 <https://launchpad.net/~marutter>，比如 rstan 包可以通过安装 r-cran-rstan 完成
   
   ```bash
   # R packages for Ubuntu LTS. Based on CRAN Task Views.
@@ -300,7 +300,6 @@ sudo apt-get install gdebi
 sudo gdebi rstudio*
 ```
 
-
 [^rstudio-download]: https://www.rstudio.com/products/rstudio/download/
 
 ## 安装字体 {#install-mscorefonts}
@@ -308,7 +307,6 @@ sudo gdebi rstudio*
 在 Ubuntu 系统上安装微软字体，如果因为网络原因，下载出现问题，也有可能是长期没有维护更新，默认字体下载链接失效了
 
 ```bash
-
 sudo apt-get install ttf-mscorefonts-installer
 ```
 
@@ -341,229 +339,17 @@ for (i in seq(length(fonts)))
 sudo dpkg-reconfigure ttf-mscorefonts-installer
 ```
 
-注意要输入字体存放的完整路径 `/home/ubuntu/msfonts` 而不是相对路径 `~/msfonts`，下面是字体配置过程产生的中间输出
-
-```
-checking /home/ubuntu/msfonts/andale32.exe
-checking /home/ubuntu/msfonts/arial32.exe
-checking /home/ubuntu/msfonts/arialb32.exe
-checking /home/ubuntu/msfonts/comic32.exe
-checking /home/ubuntu/msfonts/courie32.exe
-checking /home/ubuntu/msfonts/georgi32.exe
-checking /home/ubuntu/msfonts/impact32.exe
-checking /home/ubuntu/msfonts/times32.exe
-checking /home/ubuntu/msfonts/trebuc32.exe
-checking /home/ubuntu/msfonts/verdan32.exe
-checking /home/ubuntu/msfonts/webdin32.exe
-
-These fonts were provided by Microsoft "in the interest of cross-
-platform compatibility".  This is no longer the case, but they are
-still available from third parties.
-
-You are free to download these fonts and use them for your own use,
-but you may not redistribute them in modified form, including changes
-to the file name or packaging format.
-
-Extracting cabinet: /home/ubuntu/msfonts/andale32.exe
-  extracting fontinst.inf
-  extracting andale.inf
-  extracting fontinst.exe
-  extracting AndaleMo.TTF
-  extracting ADVPACK.DLL
-  extracting W95INF32.DLL
-  extracting W95INF16.DLL
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/arial32.exe
-  extracting FONTINST.EXE
-  extracting fontinst.inf
-  extracting Ariali.TTF
-  extracting Arialbd.TTF
-  extracting Arialbi.TTF
-  extracting Arial.TTF
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/arialb32.exe
-  extracting fontinst.exe
-  extracting fontinst.inf
-  extracting AriBlk.TTF
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/comic32.exe
-  extracting fontinst.inf
-  extracting Comicbd.TTF
-  extracting Comic.TTF
-  extracting fontinst.exe
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/courie32.exe
-  extracting cour.ttf
-  extracting courbd.ttf
-  extracting courbi.ttf
-  extracting fontinst.inf
-  extracting couri.ttf
-  extracting fontinst.exe
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/georgi32.exe
-  extracting fontinst.inf
-  extracting Georgiaz.TTF
-  extracting Georgiab.TTF
-  extracting Georgiai.TTF
-  extracting Georgia.TTF
-  extracting fontinst.exe
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/impact32.exe
-  extracting fontinst.exe
-  extracting Impact.TTF
-  extracting fontinst.inf
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/times32.exe
-  extracting fontinst.inf
-  extracting Times.TTF
-  extracting Timesbd.TTF
-  extracting Timesbi.TTF
-  extracting Timesi.TTF
-  extracting FONTINST.EXE
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/trebuc32.exe
-  extracting FONTINST.EXE
-  extracting trebuc.ttf
-  extracting Trebucbd.ttf
-  extracting trebucbi.ttf
-  extracting trebucit.ttf
-  extracting fontinst.inf
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/verdan32.exe
-  extracting fontinst.exe
-  extracting fontinst.inf
-  extracting Verdanab.TTF
-  extracting Verdanai.TTF
-  extracting Verdanaz.TTF
-  extracting Verdana.TTF
-
-All done, no errors.
-Extracting cabinet: /home/ubuntu/msfonts/webdin32.exe
-  extracting fontinst.exe
-  extracting Webdings.TTF
-  extracting fontinst.inf
-  extracting Licen.TXT
-
-All done, no errors.
-All fonts downloaded and installed.
-```
-
-安装完成后，字体存放在系统目录`/usr/share/fonts/truetype/msttcorefonts/`下，我们可以用`ls`命令查看
-
-```
-Andale_Mono.ttf              Georgia.ttf
-andalemo.ttf                 georgiaz.ttf
-arialbd.ttf                  impact.ttf
-arialbi.ttf                  Impact.ttf
-Arial_Black.ttf              timesbd.ttf
-Arial_Bold_Italic.ttf        timesbi.ttf
-Arial_Bold.ttf               timesi.ttf
-Arial_Italic.ttf             Times_New_Roman_Bold_Italic.ttf
-ariali.ttf                   Times_New_Roman_Bold.ttf
-arial.ttf                    Times_New_Roman_Italic.ttf
-Arial.ttf                    Times_New_Roman.ttf
-ariblk.ttf                   times.ttf
-comicbd.ttf                  trebucbd.ttf
-Comic_Sans_MS_Bold.ttf       trebucbi.ttf
-Comic_Sans_MS.ttf            Trebuchet_MS_Bold_Italic.ttf
-comic.ttf                    Trebuchet_MS_Bold.ttf
-courbd.ttf                   Trebuchet_MS_Italic.ttf
-courbi.ttf                   Trebuchet_MS.ttf
-Courier_New_Bold_Italic.ttf  trebucit.ttf
-Courier_New_Bold.ttf         trebuc.ttf
-Courier_New_Italic.ttf       Verdana_Bold_Italic.ttf
-Courier_New.ttf              Verdana_Bold.ttf
-couri.ttf                    verdanab.ttf
-cour.ttf                     Verdana_Italic.ttf
-Georgia_Bold_Italic.ttf      verdanai.ttf
-Georgia_Bold.ttf             verdana.ttf
-georgiab.ttf                 Verdana.ttf
-Georgia_Italic.ttf           verdanaz.ttf
-georgiai.ttf                 webdings.ttf
-georgia.ttf                  Webdings.ttf
-```
-
-查看已经安装的字体
+注意要输入字体存放的完整路径 `/home/ubuntu/msfonts` 而不是相对路径 `~/msfonts`，安装完成后，字体存放在系统目录`/usr/share/fonts/truetype/msttcorefonts/`下，接下来可以查看已经安装的字体
 
 ```bash
 fc-list :lang=zh | sort
 fc-list :lang=en | sort
 ```
 
-微软提供的几款免费字体
-
-```
-Andale Mono
-Arial
-Courier New
-Times New Roman
-Verdana
-```
-
 此外，安装常见的等宽字体 inconsolata
 
 ```bash
 sudo apt install fonts-inconsolata
-```
-
-### 在 R图形中使用字体 {#fonts-in-plots}
-
-导入系统TTF类型字体到 R 环境中，这样绘图可以使用更多的字体
-
-```r
-install.packages('extrafont')
-library(extrafont)
-font_import()
-```
-
-查看可用的字体
-
-```r
-# Vector of font family names
-fonts()
-
-# Show entire table
-fonttable()
-```
-
-加载字体
-
-```r
-# Only necessary in session where you ran font_import()
-loadfonts()
-# For PostScript output, use loadfonts(device="postscript")
-# Suppress output with loadfonts(quiet=TRUE)
-```
-
-测试字体是否被正确调用
-
-```r
-pdf("font_Impact.pdf", family="Impact", width=4, height=4)
-par(mar = c(4.1, 4.1, 2.1, 0.5)) 
-plot(mtcars$mpg, mtcars$wt, 
-     main = "Fuel Efficiency of 32 Cars",
-     xlab = "Weight (x1000 lb)",
-     ylab = "Miles per Gallon")
-dev.off()
-```
-
-PDF 格式图片转 PNG 格式
-
-```bash
-convert -quality 100 -density 300x300 font_Impact.pdf font_Impact.png
-```
-
-```{r fonts-Impact,fig.cap="Impact 字体"}
-knitr::include_graphics(path = "figures/font_Impact.png")
 ```
 
 ## 安装 R 包 {#install-package}
@@ -599,7 +385,7 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    
    这样也同时解决了 [udunits2]、 [rgdal] 和 [rgeos] 等 3个R包的系统依赖，其中 udunits2 使用如下命令安装
    
-   ```r
+   ```{r,eval=FALSE,echo=TRUE}
    install.packages("udunits2",configure.args='--with-udunits2-include=/usr/include/udunits2')
    ```
    
@@ -609,7 +395,7 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    sudo apt-get install -y libcairo2-dev libjpeg-dev libpng-dev libtiff-dev 
    ```
 
-1. 图像处理 [imager] 和 [magick]
+1. 图像处理 [imager](https://github.com/dahtah/imager) 和 [magick](https://github.com/ropensci/magick)
 
    ```bash
    sudo yum install fftw-devel # CentOS
@@ -632,7 +418,7 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    
    然后安装 R 包 `install.packages(c('imager','magick'))`
 
-1. [rgl] 是绘制真三维图形的重量级 R 包
+1. [rgl](https://r-forge.r-project.org/projects/rgl/) 是绘制真三维图形的重量级 R 包
 
    ```bash
    sudo apt-get install libcgal-dev libglu1-mesa-dev libglu1-mesa-dev libx11-dev # Ubuntu
@@ -653,41 +439,17 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    sudo apt-get install r-cran-rgl
    ```
 
-1. [rJava] 是 Java 语言和 R 语言之间实现通信交流的桥梁
+1. [rJava](https://github.com/s-u/rJava) 是 Java 语言和 R 语言之间实现通信交流的桥梁
 
    ```bash
    sudo apt-get install -y default-jdk
    sudo R CMD javareconf
    ```
-   ```
-   Java interpreter : /usr/bin/java
-   Java version     : 1.8.0_171
-   Java home path   : /usr/lib/jvm/java-8-openjdk-amd64/jre
-   Java compiler    : /usr/bin/javac
-   Java headers gen.: /usr/bin/javah
-   Java archive tool: /usr/bin/jar
-  
-   trying to compile and link a JNI program
-   detected JNI cpp flags    : -I$(JAVA_HOME)/../include -I $(JAVA_HOME)/../include/linux
-   detected JNI linker flags : -L$(JAVA_HOME)/lib/amd64/ser ver -ljvm
-   gcc -I"/usr/local/lib/R/include" -DNDEBUG -I/usr/lib/jvm /java-8-openjdk-amd64/jre/../include -I/usr/lib/jvm/java -8-openjdk-amd64/jre/../include/linux  -I/usr/local/incl ude   -fpic  -g -O2  -c conftest.c -o conftest.o
-   gcc -shared -L/usr/local/lib -o conftest.so conftest.o - L/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server  -ljvm
-
-   JAVA_HOME        : /usr/lib/jvm/java-8-openjdk-amd64/jre
-   Java library path: $(JAVA_HOME)/lib/amd64/server
-   JNI cpp flags    : -I$(JAVA_HOME)/../include -I$(JAVA_HO ME)/../include/linux
-   JNI linker flags : -L$(JAVA_HOME)/lib/amd64/server -ljvm
-   Updating Java configuration in /usr/local/lib/R
-   Done.
-   ```
    
-   然后安装 rJava 包
-   
-   ```r
-   install.packages("rJava")
-   ```
+   然后安装 rJava 包 `install.packages("rJava")`
 
-1. [igraph] 是网络数据分析的必备 R 包，为了发挥其最大性能，需要安装三个系统依赖
+
+1. [igraph](https://igraph.org/) 是网络数据分析的必备 R 包，为了发挥其最大性能，需要安装三个系统依赖
 
    ```bash
    sudo apt-get install -y libgmp-dev libxml2-dev libglpk-dev
@@ -699,48 +461,17 @@ knitr::include_graphics(path = "figures/font_Impact.png")
    install.packages('igraph')
    ```
    
-1. [gpuR] 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda] 和 [gputools] 扩展包，下面安装指导来自其 Wiki
+1. [gpuR](https://github.com/cdeterman/gpuR) 是基于 GPU 进行矩阵计算的扩展包，依赖 RcppEigen 确保安装 OpenCL 和 RViennaCL 或者 安装 Nvidia 驱动和 CUDA，使用 [gpuRcuda](https://github.com/gpuRcore/gpuRcuda) 和 [gputools](https://github.com/nullsatz/gputools) 扩展包，下面安装指导来自其 Wiki
 
-  ```bash
-  # Install OpenCL headers
-  sudo apt-get install opencl-headers opencv-dev
-  
-  # Install NVIDIA Drivers and CUDA
-  sudo add-apt-repository -y ppa:xorg-edgers/ppa
-  sudo apt-get update
-  sudo apt-get install nvidia-346 nvidia-settings
-  ```
-  ```bash
-  nvidia-smi
-  ```
-  ```
-  Mon Jan 14 15:26:35 2019       
-  +-----------------------------------------------------------------------------+
-  | NVIDIA-SMI 384.130                Driver Version: 384.130                   |
-  |-------------------------------+----------------------+----------------------+
-  | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-  | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-  |===============================+======================+======================|
-  |   0  GeForce GT 750M     Off  | 00000000:08:00.0 N/A |                  N/A |
-  | N/A   41C    P8    N/A /  N/A |    114MiB /  2001MiB |     N/A      Default |
-  +-------------------------------+----------------------+----------------------+
-                                                                                 
-  +-----------------------------------------------------------------------------+
-  | Processes:                                                       GPU Memory |
-  |  GPU       PID   Type   Process name                             Usage      |
-  |=============================================================================|
-  |    0                    Not Supported                                       |
-  +-----------------------------------------------------------------------------+
-  ```
-  ```
-  nvcc --version
-  ```
-  ```
-  nvcc: NVIDIA (R) Cuda compiler driver
-  Copyright (c) 2005-2015 NVIDIA Corporation
-  Built on Tue_Aug_11_14:27:32_CDT_2015
-  Cuda compilation tools, release 7.5, V7.5.17
-  ```
+    ```bash
+    # Install OpenCL headers
+    sudo apt-get install opencl-headers opencv-dev
+    
+    # Install NVIDIA Drivers and CUDA
+    sudo add-apt-repository -y ppa:xorg-edgers/ppa
+    sudo apt-get update
+    sudo apt-get install nvidia-346 nvidia-settings
+    ```
 
 [^curl-dev]: libcurl-dev 是一个虚包 virtual package，由 libcurl4-openssl-dev 或 libcurl4-nss-dev 或 libcurl4-gnutls-dev 实际提供，选择其中一个安装即可。
 
