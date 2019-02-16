@@ -14,7 +14,8 @@
 
 在 R 控制台输入 `?regex` 查看正则表达式，`?regex` 可以看百八十遍
 
-  入门 字符串处理
+入门字符串处理
+
 - https://r4ds.had.co.nz/strings.html
 
 stringi: Character String Processing Facilities
