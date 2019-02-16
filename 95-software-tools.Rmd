@@ -217,6 +217,7 @@ RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Serv
 
    ```bash
    wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
+   sudo apt-get install gdebi
    sudo gdebi rstudio-server-1.1.456-amd64.deb
    ```
 
