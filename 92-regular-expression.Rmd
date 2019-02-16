@@ -153,6 +153,7 @@ Extract or replace matched substrings from match data obtained by regexpr, grege
 
 [Manipulating strings with the {stringr} package](https://www.brodrigues.co/blog/2019-02-10-stringr_package/)
 
+PDF 表格抽取工具 [tabulizer](https://github.com/ropensci/tabulizer)
 
 在 Ubuntu 上安装 pdftools 和 magick
 
