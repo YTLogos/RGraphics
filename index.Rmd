@@ -65,12 +65,6 @@ The **bookdown** package [@xie_2015_knitr] can be installed from CRAN or Github:
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 :::
 
-```{r eval=FALSE,echo=TRUE}
-install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
-```
-
 ## Why R? {#why-r}
 
 不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
@@ -87,9 +81,26 @@ install.packages("bookdown")
 
 [^matloff]: 参考博文 R > Python: A Concrete Example 来自 https://matloff.wordpress.com/
 
-## R vs Python
+-  Python over R
+   1. [How GPL makes me leave R for Python](https://r-posts.com/how-gpl-makes-me-leave-r-for-python/)
 
-[How GPL makes me leave R for Python :-(](https://r-posts.com/how-gpl-makes-me-leave-r-for-python/)
+-  R over Python
+   1. [R > Python: A Concrete Example](https://matloff.wordpress.com/)
+
+
+* 我的 Python 学习路径，零基础学习 Python
+
+1. 找本100页左右的Python导论书籍，力求对 Python 有个大致的了解和印象，知道它是什么，善于干什么，不善于干什么。大约进行两周时间
+   1. [A Byte of Python](https://python.swaroopch.com/) 及其中文翻译版 [简明 Python 教程](https://bop.mol.uno/)
+   1. Python 入门视频一套
+1. 就目前工作内容，找本比较贴合的 Python 书籍下手，这个阶段主要是为了完成任务。大约进行两周时间
+1. 深入系统学习 Python，这个阶段主要看系统手册，博客，论坛
+
+## 目标读者 {#who-read-this-book}
+
+## 关于本书 {#what-talk-about}
+
+
 
 ## 记号约定 {#conventions}
 
@@ -102,19 +113,19 @@ install.packages("bookdown")
 
 1. Ross Ihaka
 
-  维基主页 https://en.wikipedia.org/wiki/Ross_Ihaka
-  
-  Ross Ihaka 的学术族谱
-  https://www.stat.auckland.ac.nz/%7Eihaka/downloads/ihaka.pdf
-  
-  R: Lessons Learned, Directions for the Future.
-  https://www.stat.auckland.ac.nz/%7Eihaka/downloads/JSM-Talk.pdf
-  
-  R语言的前世今生 https://www.cnblogs.com/chenkai/archive/2013/05/16/3082889.html
+    维基主页 https://en.wikipedia.org/wiki/Ross_Ihaka
+    
+    Ross Ihaka 的学术族谱
+    https://www.stat.auckland.ac.nz/%7Eihaka/downloads/ihaka.pdf
+    
+    R: Lessons Learned, Directions for the Future.
+    https://www.stat.auckland.ac.nz/%7Eihaka/downloads/JSM-Talk.pdf
+    
+    R语言的前世今生 https://www.cnblogs.com/chenkai/archive/2013/05/16/3082889.html
 
 1. Robert Gentleman
 
-  维基主页 https://en.wikipedia.org/wiki/Robert_Gentleman_(statistician)
+    维基主页 https://en.wikipedia.org/wiki/Robert_Gentleman_(statistician)
 
 ## 相关资源 {#related-books}
 
