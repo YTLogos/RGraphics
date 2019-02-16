@@ -517,6 +517,16 @@ system2(command = 'g++', args = '--version')
     format(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "Asia/Taipei", usetz = TRUE)
     ```
 
+1. 设置时区
+
+    ```{r,echo=TRUE}
+    Sys.timezone()
+    Sys.setenv(TZ = "Asia/Shanghai")
+    Sys.timezone()
+    ```
+    
+    全局修改，在文件 `r paste(R.home('etc'),'Rprofile.site',sep = '/')` 内添加`Sys.setenv(TZ="Asia/Shanghai")`。 局部修改，就是在本地R项目下，创建 `.Rprofile`，然后同样添加 `Sys.setenv(TZ="Asia/Shanghai")`。
+
 ## 搜索 {#search}
 
 `help.search`

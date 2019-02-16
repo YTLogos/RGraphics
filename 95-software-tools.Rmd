@@ -501,10 +501,13 @@ con <- dbConnect(odbc::odbc(),
   pwd = "password",
   host = "localhost",
   port = 5432)
+# host 可以是云端的地址也可以是本地局域网IP地址，
+# 例如"192.168.1.200"这样的。
 # 列出数据库中的所有表
 dbListTables(con)
 ```
 
+参考 <https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql/>
 
 ## 常用工具 {#other-tools}
 
