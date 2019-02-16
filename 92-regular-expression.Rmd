@@ -119,11 +119,11 @@ The backreference `\N`, where N = 1 ... 9, matches the substring previously matc
 帮助页面是基于 TRE 文档和 POSIX 标准
 
 
-[^char-byte]: read ‘character’ as ‘byte’ if `useBytes = TRUE` 字符和位什么关系
+[^char-byte]: read ‘character’ 字符 as ‘byte’ 字节 if `useBytes = TRUE` 字符、字节、位 bit什么关系 
 
 ## grep
 
-```{r}
+```{r,echo=TRUE}
 vec_a <- sample(letters, 100, replace = T)
 vec_A <- sample(LETTERS, 100, replace = T)
 vec_d <- sample(1:10, 100, replace = T)
@@ -151,3 +151,16 @@ Extract or replace matched substrings from match data obtained by regexpr, grege
 [^install-poppler]: https://askubuntu.com/questions/1112856
 
 [Manipulating strings with the {stringr} package](https://www.brodrigues.co/blog/2019-02-10-stringr_package/)
+
+
+在 Ubuntu 上安装 pdftools 和 magick
+
+```bash
+sudo apt-get install libpoppler-cpp-dev libmagick++-dev
+```
+
+```{r,echo=TRUE,eval=FALSE}
+install.packages(c('pdftools', 'magick'))
+```
+
+

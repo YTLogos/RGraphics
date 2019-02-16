@@ -58,13 +58,6 @@ lapply(packages, function(pkg) {
 - [容器技术与 Docker]{.todo}
 - [数据结构与算法基础C++]{.todo}
 
-
-The **bookdown** package [@xie_2015_knitr] can be installed from CRAN or Github:
-
-::: base
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
-:::
-
 ## Why R? {#why-r}
 
 不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
@@ -77,9 +70,8 @@ This is a _sample_ book written in **Markdown**. You can use anything that Pando
 2. built-in matrix type and matrix manipulations
 3. great graphics, both base and CRAN
 4. excellent parallelization facilities, etc.  
-> --- Norm Matloff[^matloff] 
+> --- Norm Matloff
 
-[^matloff]: 参考博文 R > Python: A Concrete Example 来自 https://matloff.wordpress.com/
 
 -  Python over R
    1. [How GPL makes me leave R for Python](https://r-posts.com/how-gpl-makes-me-leave-r-for-python/)

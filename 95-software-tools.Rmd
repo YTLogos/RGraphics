@@ -660,9 +660,9 @@ for (i in seq(length(list.files(tmp)))) {
 }
 ```
 
-### qpdf
+### QPDF
 
-[qpdf](https://github.com/ropensci/qpdf) 库[^qpdf-cpp]由搬运狂魔 Jeroen Ooms 搬运至 R 系统中，用于 PDF 文件的拆分，组合和压缩
+[qpdf](https://github.com/ropensci/qpdf) 库[^qpdf-cpp]由搬运狂魔 Jeroen Ooms 搬运至 R 系统中，用于 PDF 文件的拆分，组合，加密，优化和压缩等。
 
-[^qpdf-cpp]: http://qpdf.sourceforge.net/
+[^qpdf-cpp]: https://github.com/qpdf/qpdf
 
