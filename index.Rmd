@@ -75,10 +75,11 @@ lapply(packages, function(pkg) {
 
 -  Python over R
    1. [How GPL makes me leave R for Python](https://r-posts.com/how-gpl-makes-me-leave-r-for-python/)
-
+   1. [Top 10 reasons R is bad for you](https://decisionstats.com/2009/01/10/top-ten-rrreasons-r-is-bad-for-you/)
 -  R over Python
    1. [R > Python: A Concrete Example](https://matloff.wordpress.com/)
 
+   
 
 * 我的 Python 学习路径，零基础学习 Python
 
