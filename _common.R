@@ -87,6 +87,3 @@ palette(c(
   "#FBBC05", # GoogleYellow
   "#EA4335"  # GoogleRed
 ))
-
-# system <- function(...) cat(base::system(..., intern = TRUE), sep = '\n')
-# system2 <- function(...) cat(base::system2(..., stdout = TRUE), sep = "\n")

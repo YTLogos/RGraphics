@@ -1,15 +1,8 @@
 # 文件 {#files}
 
-[给出 linux 下的对应命令]{.todo}
-
 ```{r,include=FALSE}
 library(magrittr) # 提供管道命令 %>%
 ```
-
-::: sidebar
-- sys: Powerful replacements for base::system2 <https://github.com/jeroen/sys>
-- fs: Provide cross platform file operations based on libuv <https://github.com/r-lib/fs>
-:::
 
 ## 查看 {#list}
 
@@ -97,123 +90,8 @@ library(magrittr) # 提供管道命令 %>%
     dir.create(paste0(tempdir(), "/_book/tmp"), recursive = TRUE)
     ```
 
-查看当前目录下的文件和文件夹
+查看当前目录下的文件和文件夹 `tree -L 2 .` 或者 `ls -l .` 
 
-1. tree 
-
-```bash
-tree -L 2 .
-```
-```markdown
-.
-├── 01-files.Rmd
-├── 02-rio.Rmd
-├── 03-manipulate.Rmd
-├── 04-graph.Rmd
-├── 05-visualization.Rmd
-├── 92-regex.Rmd
-├── 93-oo.Rmd
-├── 94-install.Rmd
-├── 95-tools.Rmd
-├── 96-references.Rmd
-├── DESCRIPTION
-├── Makefile
-├── README.md
-├── RGraphics-tikzDictionary
-├── RGraphics.Rproj
-├── _book
-│   ├── RGraphics.epub
-│   ├── RGraphics.pdf
-│   ├── RGraphics.tex
-│   ├── RGraphics_files
-│   ├── base.html
-│   ├── css
-│   ├── figures
-│   ├── files.html
-│   ├── index.html
-│   ├── install.html
-│   ├── libs
-│   ├── manipulate.html
-│   ├── references.html
-│   ├── regex.html
-│   ├── search_index.json
-│   └── tools.html
-├── _bookdown.yml
-├── _bookdown_files
-│   ├── RGraphics_cache
-│   └── RGraphics_files
-├── _common.R
-├── _deploy.sh
-├── _output.yml
-├── _render.R
-├── css
-│   └── style.css
-├── figures
-│   ├── by-nc-nd.png
-│   ├── font_Impact.pdf
-│   ├── font_Impact.png
-│   ├── gputools.png
-│   ├── mai.pdf
-│   ├── mai.png
-│   ├── msfonts.png
-│   ├── oma.pdf
-│   ├── show-file.png
-│   └── terminal.png
-├── images
-│   ├── dragon.png
-│   └── favicon.ico
-├── index.Rmd
-├── latex
-│   ├── TeXLive.pkgs
-│   ├── after_body.tex
-│   ├── before_body.tex
-│   ├── book.bib
-│   ├── preamble.tex
-│   ├── refer.bib
-│   └── sidebar.lua
-├── packages.bib
-├── r-packages-logs.md
-```
-
-1. ls 
-
-```bash
-ls -l
-```
-```
-total 448
--rw-r--r--   1 xiangyun  staff  16793  2 14 17:22 01-files.Rmd
--rw-r--r--@  1 xiangyun  staff   1289  2 12 11:26 02-rio.Rmd
--rw-r--r--   1 xiangyun  staff  14096  2 12 11:25 03-manipulate.Rmd
--rw-r--r--   1 xiangyun  staff  18044  2 14 12:26 04-graph.Rmd
--rw-r--r--   1 xiangyun  staff   2064  2 14 12:26 05-visualization.Rmd
--rw-r--r--@  1 xiangyun  staff   7826  2 12 12:10 92-regex.Rmd
--rw-r--r--@  1 xiangyun  staff   1472  1 29 16:34 93-oo.Rmd
--rw-r--r--   1 xiangyun  staff  22607  2 12 14:33 94-install.Rmd
--rw-r--r--   1 xiangyun  staff  21814  2 12 21:29 95-tools.Rmd
--rw-r--r--@  1 xiangyun  staff     78  1 29 16:34 96-references.Rmd
--rw-r--r--@  1 xiangyun  staff    210  2 11 13:34 DESCRIPTION
--rw-r--r--@  1 xiangyun  staff    143  1 29 16:34 Makefile
--rw-r--r--@  1 xiangyun  staff    704  2 11 13:47 README.md
--rw-r--r--@  1 xiangyun  staff  13080  2 10 14:46 RGraphics-tikzDictionary
--rw-r--r--@  1 xiangyun  staff    242  2 14 17:20 RGraphics.Rproj
-drwxr-xr-x  18 xiangyun  staff    576  2 13 17:28 _book
--rw-r--r--   1 xiangyun  staff    608  2 14 12:26 _bookdown.yml
-drwxr-xr-x   4 xiangyun  staff    128  2 13 17:28 _bookdown_files
--rw-r--r--   1 xiangyun  staff   2855  2 13 17:26 _common.R
--rw-r--r--@  1 xiangyun  staff    569  1 29 16:34 _deploy.sh
--rw-r--r--@  1 xiangyun  staff    977  1 29 16:34 _output.yml
--rw-r--r--@  1 xiangyun  staff   1639  1 29 16:34 _render.R
-drwxr-xr-x@  3 xiangyun  staff     96  1 29 16:34 css
-drwxr-xr-x   4 xiangyun  staff    128  2 14 16:01 data
-drwxr-xr-x@ 12 xiangyun  staff    384  2 10 14:59 figures
-drwxr-xr-x   4 xiangyun  staff    128  2 11 14:46 images
--rw-r--r--   1 xiangyun  staff  18150  2 14 12:26 index.Rmd
-drwxr-xr-x@  9 xiangyun  staff    288  2 11 13:41 latex
--rw-r--r--@  1 xiangyun  staff   1328  2 13 17:26 packages.bib
--rw-r--r--@  1 xiangyun  staff  18517  1 29 16:34 r-packages-logs.md
-drwxr-xr-x   3 xiangyun  staff     96  2 11 12:58 rsconnect
-```
 
 ## 操作 {#manipulation}
 
@@ -325,22 +203,25 @@ untar(tarfile, files = NULL, list = FALSE, exdir = ".",
       restore_times =  TRUE, tar = Sys.getenv("TAR"))
 ```
 
-
-
-1. `zip/unzip`
-
-命令行形式
-
-1. tar 解压
+1. tar 命令行方式解压文件
 
     ```bash
     tar -xzf R-3.5.1.tar.gz
     ```
 
-
 tar 参数列表
 
-1. `-v` 解压过程中显示文件
+  -  `-v` 解压过程中显示文件
+
+
+1. `zip/unzip` 压缩与解压缩
+
+
+zip 参数列表
+
+  - `-v` 解压过程中显示文件
+    
+
 
 
 ## 路径 {#paths}
@@ -467,9 +348,9 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 1. `Sys.umask(mode = NA)`
 
-```{r}
-
-```
+    ```{r}
+    
+    ```
 
 
 ## 区域 {#locale}
@@ -542,7 +423,19 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 ## 调用 {#system}
 
-`system` 和 `system2` 系统命令 Invoke a System Command
+`system` 和 `system2` 调用系统命令，推荐使用后者，它更灵活更便携。此外，Jeroen Ooms 开发的 [sys 包](https://github.com/jeroen/sys) 可看作 `base::system2` 的替代品
+
+```{r}
+system <- function(...) cat(base::system(..., intern = TRUE), sep = '\n')
+system2 <- function(...) cat(base::system2(..., stdout = TRUE), sep = "\n")
+```
+```{r,echo=TRUE}
+system(command = "gcc --version")
+system2(command = 'g++', args = '--version')
+```
+
+对于文件操作，Jim Hester 开发了 [fs 包](https://github.com/r-lib/fs) 目的是统一文件操作的命令，由于时间和历史原因，R内置的文件操作函数的命名很不统一，如 `path.expand()` 和 `normalizePath()`，`Sys.chmod()` 和 `file.access()` 等
+
 
 ## 时间 {#time}
 
