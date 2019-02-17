@@ -467,6 +467,8 @@ sudo apt install fonts-inconsolata
 
 1. [nloptr](https://github.com/jyypma/nloptr) 是 [NLopt](https://github.com/stevengj/NLopt/) 的 R 语言接口，首先安装 NLopt 程序库 `sudo apt-get install libnlopt-dev` 然后安装 R 包`install.packages('nloptr')`，nloptr 被 700+ R 包依赖，如 lme4， spaMM， glmmTMB， rstanarm等。
 
+1. [rstan](https://github.com/stan-dev/rstan) 是 Stan 的 R 语言接口，在 Windows 环境下安装[^install-rstan-win]
+
 [curl]: https://github.com/jeroen/curl
 [git2r]: https://github.com/ropensci/git2r
 [openssl]: https://github.com/jeroen/openssl
@@ -481,3 +483,5 @@ sudo apt install fonts-inconsolata
 [gpuRcuda]: https://github.com/gpuRcore/gpuRcuda
 [gputools]: https://github.com/nullsatz/gputools
 [igraph]: https://igraph.org/
+
+[^install-rstan-win]: https://github.com/stan-dev/rstan/wiki/Using-RStan-with-the-R-3.6.0-Prerelease-on-Windows

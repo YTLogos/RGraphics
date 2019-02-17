@@ -212,7 +212,7 @@ untar(tarfile, files = NULL, list = FALSE, exdir = ".",
       restore_times =  TRUE, tar = Sys.getenv("TAR"))
 ```
 
-[^rtools40]: 继 Rtools35 之后， [RTools40](https://cloud.r-project.org/bin/windows/testing/rtools40.html) 主要为 R 3.6.0 准备的，包含有 GCC 8 及其它编译R包需要的[工具包](https://github.com/r-windows/rtools-packages)
+[^rtools40]: 继 Rtools35 之后， [RTools40](https://cloud.r-project.org/bin/windows/testing/rtools40.html) 主要为 R 3.6.0 准备的，包含有 GCC 8 及其它编译R包需要的[工具包](https://github.com/r-windows/rtools-packages)，详情请看的[幻灯片](https://jeroen.github.io/uros2018)
 
 
 ## 路径 {#paths}
