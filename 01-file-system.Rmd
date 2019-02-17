@@ -135,7 +135,7 @@ apropos("^file.")
     readLines('data/tmp1.md')
     ```
 
-1. `file.copy(from, to, overwrite = recursive, recursive = FALSE,copy.mode = TRUE, copy.date = FALSE)` 复制文件
+1. `file.copy(from, to, overwrite = recursive, recursive = FALSE,copy.mode = TRUE, copy.date = FALSE)` 复制文件，参考 <https://blog.csdn.net/wzj_110/article/details/86497860>
 
     ```{r,echo=TRUE}
     file.copy(from = 'Makefile', to = 'data/Makefile')
@@ -173,9 +173,7 @@ if (any(file.exists(files))) file.remove(files[file.exists(files)])
 
 ## 压缩 {#compression}
 
-tar 和 zip 是两种常见的压缩文件工具，具有免费和跨平台的特点，因此应用范围广。^[<https://github.com/libarchive/libarchive/wiki/FormatTar>]
-
-1. `tar/untar` 压缩与解压缩
+tar 和 zip 是两种常见的压缩文件工具，具有免费和跨平台的特点，因此应用范围广^[<https://github.com/libarchive/libarchive/wiki/FormatTar>]。 R 内对应的压缩与解压缩命令是 `tar/untar` 
 
 ```r
 tar(tarfile, files = NULL,
@@ -184,17 +182,28 @@ tar(tarfile, files = NULL,
     extra_flags = "")
 ```
 
-比较常用的压缩文件格式是 `.tar.gz` 和 `.tar.bz2`，将目录 `_book/`及其文件分别压缩成 `_book.tar.gz` 和 `_book.tar.bz2` 压缩包的名字可以任意取，后者压缩比率高
+比较常用的压缩文件格式是 `.tar.gz` 和 `.tar.bz2`，将目录 `_book/`及其文件分别压缩成 `_book.tar.gz` 和 `_book.tar.bz2` 压缩包的名字可以任意取，后者压缩比率高。`.tar.xz` 的压缩比率最高，需要确保系统中安装了 gzip，bzip2 和 xz-utils 软件，R 软件自带的 tar 软件来自 [Rtools](https://github.com/rwinlib/rtools35)[^rtools40]，我们可以通过设置系统环境变量 `Sys.setenv(tar="path/to/tar")` 指定外部 tar。`tar` 实际支持的压缩类型只有 `.tar.gz`^[<https://github.com/rwinlib/utils>]。`zip/unzip` 压缩与解压缩就不赘述了。
 
 ```{r,echo=TRUE,eval=FALSE}
+# 打包目录 _book
+tar(tarfile = 'data/_book.tar', files = '_book', compression = 'none')
+# 文件压缩成 _book.xz 格式
+tar(tarfile = 'data/_book.tar.xz', files = 'data/_book', compression = 'xz')
+# tar -cf data/_book.tar _book 然后 xz -z data/_book.tar.xz data/_book.tar
+# 或者一次压缩到位 tar -Jcf data/_book.tar.xz _book/
+
+# 解压 xz -d data/_book.tar.xz 再次解压 tar -xf data/_book.tar
+# 或者一次解压 tar -Jxf data/_book.tar.xz
+
 # 文件压缩成 _book.tar.gz 格式
-# tar -czf _book.tar.gz _book
+# tar -czf data/_book.tar.gz _book
 tar(tarfile = 'data/_book.tar.gz', files = '_book', compression = 'gzip')
-# tar -czf _book.tar.gz _book/*
-tar(tarfile = 'data/_book.tar.gz', files = '_book/*', compression = 'gzip')
+# 解压 tar -xzf data/_book.tar.gz
+
 # 文件压缩成 .tar.bz2 格式
 # tar -cjf data/book2.tar.bz2 _book
 tar(tarfile = 'data/_book.tar.bz2', files = '_book', compression = 'bzip2')
+# 解压 tar -xjf data/book2.tar.bz2
 ```
 
 ```r
@@ -203,25 +212,7 @@ untar(tarfile, files = NULL, list = FALSE, exdir = ".",
       restore_times =  TRUE, tar = Sys.getenv("TAR"))
 ```
 
-1. tar 命令行方式解压文件
-
-    ```bash
-    tar -xzf R-3.5.1.tar.gz
-    ```
-
-tar 参数列表
-
-  -  `-v` 解压过程中显示文件
-
-
-1. `zip/unzip` 压缩与解压缩
-
-
-zip 参数列表
-
-  - `-v` 解压过程中显示文件
-    
-
+[^rtools40]: 继 Rtools35 之后， [RTools40](https://cloud.r-project.org/bin/windows/testing/rtools40.html) 主要为 R 3.6.0 准备的，包含有 GCC 8 及其它编译R包需要的[工具包](https://github.com/r-windows/rtools-packages)
 
 
 ## 路径 {#paths}
