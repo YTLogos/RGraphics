@@ -36,12 +36,12 @@ addons:
       - freeglut3
       - freeglut3-dev
       - graphviz
-      - asymptote
+      #- asymptote
       - libudunits2-dev	
       - libproj-dev 	
       - libgeos-dev 	
       - libgdal-dev      
-      - phantomjs
+      #- phantomjs
 
 before_install:
 #  - mkdir ~/.R
