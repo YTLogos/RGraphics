@@ -294,72 +294,12 @@ convert -quality 100 -density 300x300 font_Impact.pdf font_Impact.png
 knitr::include_graphics(path = "figures/font_Impact.png")
 ```
 
-## Graphviz
-
-先安装 Graphviz^[Graphviz 官网 <http://www.graphviz.org/>]，常用于绘制流程图，广泛用于 tensorflow 和 mxnet 的模型描述中，如图所示
-
-```{r dot-ex, engine = "dot", fig.cap = "Funky dot",eval=FALSE}
-digraph test123 {
-  a -> b -> c;
-  a -> {x y};
-  b [shape=box];
-  c [label="hello\nworld",color=blue,fontsize=24,
-      fontname="Palatino-Italic",fontcolor=red,style=filled];
-  a -> z [label="hi", weight=100];
-  x -> z [label="multi-line\nlabel"];
-  edge [style=dashed,color=red];
-  b -> x;
-  {rank=same; b x}
-}
-```
 
 ## TikZ {#tikz}
 
 > 用 Base R 绘制带有复杂数学公式的图形，tikzDevice 包结合 R Markdown 的使用
 
 以 tikzDevice 绘图， `out.width='35%'` 设置一幅子图占页面的宽度，在 `_common.R` 设置页面宽度为 `out.width='70%'`，即全宽图占页面 70\% 的宽度。 `fig.asp=1` 设置子图的长宽比例为 1:1，即正方形。设置图片的宽度，默认是 `fig.width = 6` 相应地，图片的高度是 `fig.height = fig.width * fig.asp = 6 * 0.618 = 3.708` 但是这个比例使得图片上的字很小，所以设置`fig.width=2.5`。设置图形设备 `dev='tikz'`，此时会自动调用 tikzDevice 包处理图上的数学公式，tikzDevice 包将 LaTeX 中的 TikZ 绘图引擎引入到基础 R 绘图中，由于该引擎将R代码块转化为 `.tex` 文件，接着调用 LaTeX 编译，默认生成 PDF 格式图片，因此设置 `tikz2png='-density 300'` 调用 ImageMgick 的 `convert` 命令将 PDF 格式图片转化为 PNG 格式图片，转化前需要用 Ghostscript 读取该 PDF 文件，转化成功后，需要将该 PNG 格式文件路径返回，以插入到文档中。`bessel-function` 是给该图片的命名，这段代码生成两张图片，两个图片就分别叫做 `bessel-function-1.pdf` 和 `bessel-function-2.pdf`。在 LaTeX 里并排插入两个图片，需要在导言区加载 `subfig` 宏包。
-
-pictex/tikz 都是与 LaTeX 直接相关的图形保存设备
-
-```{r,eval=FALSE,echo=TRUE}
-pictex(file = "images/sine.tex", width = 5, height = 4)
-sines <- outer(1:20, 1:4, function(x, y) sin(x / 20 * pi * y))
-matplot(sines, pch = 1:4, type = "o", col = rainbow( ncol(sines) ),
-        xlab = "x", ylab = "y", main = "Sines Function" )
-dev.off()
-```
-
-在生成的 tex 文件中，可以更改横纵坐标轴标签，图标题，图例内容，尤其当包含数学公式时，这种基于 tex 绘图的方式显得特别灵活，操作也比较简单，表达式不能用在这种 pictex 图形保存设备
-
-```tex
-% 保存为 device-pictex.tex
-\documentclass[12pt,preview]{standalone}
-\usepackage{pictex}
-\usepackage{graphics} % for \rotatebox
-\begin{document}
-%...
-\begin{figure}[h]
-  \centerline{\input{images/sine.tex}}
-  % \caption{sine}
-\end{figure}
-%...
-\end{document}
-```
-
-编译 `.tex` 文件
-
-```{r,eval=FALSE,echo=TRUE}
-tinytex::xelatex('images/device-pictex.tex')
-```
-
-```{r sine-fun,fig.cap="常用的",fig.asp=1,out.width = "45%",fig.width=27/7}
-par(mar = c(4, 4, 2, 1))
-sines <- outer(1:20, 1:4, function(x, y) sin(x / 20 * pi * y))
-matplot(sines,
-  pch = 1:4, type = "o", col = rainbow(ncol(sines)),
-  xlab = "x", ylab = "y", main = "Sines Function"
-)
-```
 
 如图所示，模板来自 `system.file('misc', 'tikz2pdf.tex', package = 'knitr')`
 
@@ -369,26 +309,6 @@ matplot(sines,
 \draw [very thick] (5, 0) -- (13,0);
 \node [below] at (2,-1) {\large Hello};
 \node [below, align=center] at (0,-1) {\large Two\\ lines};
-\end{tikzpicture}
-```
-
-再来一张稍微复杂的图形，如图所示
-
-```{tikz complicated-tikz, fig.cap='稍复杂的 tikz 图形',eval=identical(.Platform$OS.type,'unix')}
-\usetikzlibrary{arrows}
-\begin{tikzpicture}[node distance=2cm, auto, >=latex, thick, scale = 1.5]
-\node (P) {$P$};
-\node (B) [right of=P] {$B$};
-\node (A) [below of=P] {$A$};
-\node (C) [below of=B] {$C$};
-\node (P1) [node distance=1.4cm, left of=P, above of=P] {$\hat{P}$};
-\draw[->] (P) to node {$f$} (B);
-\draw[->] (P) to node [swap] {$g$} (A);
-\draw[->] (A) to node [swap] {$f$} (C);
-\draw[->] (B) to node {$g$} (C);
-\draw[->, bend right] (P1) to node [swap] {$\hat{g}$} (A);
-\draw[->, bend left] (P1) to node {$\hat{f}$} (B);
-\draw[->, dashed] (P1) to node {$k$} (P);
 \end{tikzpicture}
 ```
 
@@ -496,62 +416,8 @@ legend("topright", legend = paste0("$\\kappa=", rev(nus),"$"),
        col = rev(cols), lwd = 2, cex = 0.5)
 ```
 
-## Asymptote {#asy}
 
-Asymptote 图形如图所示
-
-```{asy demo-asymptote, fig.cap='Asymptote 图形', echo=FALSE,out.width = "35%",eval=F}
-pair crease(pair z1, pair z2, bool left){
-  pair dz = z2 - z1;
-  if (left)
-    return z1 + dz * (0.5, 0.5);
-  else
-    return z1 + dz * (0.5, -0.5);
-}
-pair[] fold(pair[] oldz){
-  int n = oldz.length;
-  pair[] newz = new pair[2n-1];
-  for (int i = 0; i < n-1; ++i)
-    {
-      newz[2i] = oldz[i];
-      newz[2i+1] = crease(oldz[i], oldz[i+1], i%2==0);
-    }
-  newz[2(n-1)] = oldz[n-1];
-  return newz;
-}
-pair[] dragon(int n, pair[] base={}){
-  if (base.length == 0)
-    if (n%2 == 0)
-      base = new pair[] {(0,0), (1,1) };
-    else
-      base = new pair[] {(0,0), (1,0) };
-
-  pair[] z = base;
-  for (int i = 1; i < n; ++i)
-    z = fold(z);
-
-  return z;
-}
-void drawtris(pair[] z, pen p = currentpen){
-  int n = z.length;
-  for (int i = 0; i < n-2; i+=2)
-    fill(z[i]--z[i+1]--z[i+2]--cycle, p);
-}
-void drawtris(pair[] z, pen p1, pen p2){
-  int n = z.length;
-  for (int i = 0; i < n-2; i+=2)
-    fill(z[i]--z[i+1]--z[i+2]--cycle, 2i < n-1 ? p1 : p2);
-}
-size(500,0);
-int n = 10;
-drawtris(dragon(n, new pair[] {(0,0), (1,0)}), black);
-drawtris(dragon(n, new pair[] {(0,0), (0,-1)}), blue);
-drawtris(dragon(n, new pair[] {(0,0), (-1,0)}), red);
-drawtris(dragon(n, new pair[] {(0,0), (0,1)}),  green);
-```
-
-
-## 魔法 {#magick}
+## 魔法 {#magic}
 
 旋转坐标轴标签
 
