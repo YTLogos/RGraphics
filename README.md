@@ -3,7 +3,7 @@
 
 本书采用 [知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/) 许可，请君自重，别没事儿拿去传个什么新浪爱问、百度文库以及 XX 经济论坛，项目中代码使用 [MIT 协议](https://github.com/XiangyunHuang/RGraphics/blob/master/LICENSE) 开源
 
-<img src="figures/by-nc-nd.png" width="120" align="left" />
+<img src="figures/by-nc-nd.png" width="120" align="right" />
 
 
 ---
@@ -14,3 +14,10 @@
 
 - 获取帮助 [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336)
 
+
+## 学习 R 语言
+
+- Martin Mächler [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) https://github.com/mmaechler
+
+
+- R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
