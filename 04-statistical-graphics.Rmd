@@ -76,7 +76,18 @@ https://github.com/TomKellyGenetics/vioplot
 
 ggplot2
 
-geom_density()
+geom\_density()
+
+
+```{r,eval=FALSE}
+install.packages("redR")
+library(redR)
+data(lenna)
+im <- lenna
+y <- degrade(im, noise = 0.05)
+par(mar = c(0, 0, 0, 0) + 0.1)
+plot(y, interp = FALSE, axes = FALSE)
+```
 
 ### 岭线图 {#ridge-lines}
 
