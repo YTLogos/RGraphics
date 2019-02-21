@@ -4,6 +4,12 @@
 library(magrittr) # 提供管道命令 %>%
 ```
 
+::: sidebar
+[fs](https://github.com/r-lib/fs) 由 [Jim Hester](https://www.jimhester.com/) 开发，提供文件系统操作的统一接口，相比于 R 默认的文件系统的操作函数有显而易见的优点，详情请看 <https://fs.r-lib.org/>
+:::
+
+
+
 ## 查看 {#list}
 
 文件夹只包含文件，目录既包含文件又包含文件夹，`list.dirs` 列出目录或文件夹，`list.files` 列出文件或文件夹 
