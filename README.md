@@ -88,7 +88,12 @@
       - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
    
    1. 学习 Python
+      - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
+      - [廖雪峰的Python3.x教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
+      
+      - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/)
       - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
+      - [Python Cheatsheet](https://www.pythonsheets.com/) Python 英文版作弊手册集合
 
    更多在线书籍合集 https://bookdown.org 还有一个[传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可参考 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
