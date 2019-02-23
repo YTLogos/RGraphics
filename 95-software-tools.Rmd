@@ -193,7 +193,15 @@ tinytex::tlmgr_install(pkgs = c(
 
 ### RStudio IDE {#rstudio-ide}
 
-RStudio 桌面版装在服务器上，服务器为 Ubuntu/CentOS/Windows 系统，然后本地是 Windows 系统，可以通过远程桌面连接服务器，使用 RStudio；
+#### RStudio 开源桌面版 {#open-source-rstudio-desktop-ide}
+
+```{r,fig.cap="开源桌面版 RStudio 集成开发环境"}
+knitr::include_graphics(path = 'figures/rstudio-ide.png')
+```
+
+#### RStudio Server 开源服务器版 {#open-source-rstudio-server-ide}
+
+RStudio Server 开源服务器版可以放在虚拟机里或者容器里，RStudio 桌面版装在服务器上，服务器为 Ubuntu/CentOS/Windows 系统，然后本地是 Windows 系统，可以通过远程桌面连接服务器，使用 RStudio；
 
 ```{r,fig.cap="虚拟机里的 RStudio"}
 knitr::include_graphics(path = 'figures/rstudio-vbox.png')
@@ -204,9 +212,6 @@ knitr::include_graphics(path = 'figures/rstudio-vbox.png')
 ```{r,fig.cap="容器里的 RStudio"}
 knitr::include_graphics(path = 'figures/rstudio-docker.png')
 ```
-
-
-RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Server 开源服务器版
 
 1. 下载 RStudio IDE
  
@@ -264,6 +269,9 @@ RStudio 开源桌面版 & RStudio Server 开源服务器版 & RStudio Shiny Serv
 
 [rstudio-download]: https://www.rstudio.com/products/rstudio/download/
 
+####  Shiny Server 开源服务器版 {#open-source-shiny-server}
+
+shiny 开源服务器版
 
 ### Eclipse + StatET {#eclipse-plus-statet}
 
