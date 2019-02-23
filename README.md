@@ -14,7 +14,7 @@
 
 - 获取帮助 [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336)
 
-## 相关资源 {#related-books}
+## 相关资源
 
 分为 Github、书籍、课程和博客等四个方面介绍学习 R 语言的资料
 

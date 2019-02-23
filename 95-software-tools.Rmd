@@ -57,81 +57,81 @@ Git 使用的数据库
 
 Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 Pandoc's Markdown^[Pandoc 提供了很多对 Markdown 的扩展支持]表格、图片和公式的使用
 
-- 表格
+#### 表格 {#table}
 
-  插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦
+插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦，复杂的表格制作可以借助 R 包 knitr 提供的 kable 函数以及 kableExtra 包^[<https://xiangyunhuang.github.io/bookdown-kableExtra/>]
 
-   Table: (\#tab:insert-tab) A table caption^[With a footnote]
-   
-   | First Header | Second Header |
-   | :----------- | :------------ |
-   | Content Cell | Content Cell  |
-   | Content Cell | Content Cell  |
+Table: (\#tab:insert-tab) 表格标题^[附有脚注]
 
-- 图片
+| First Header | Second Header |
+| :----------- | :------------ |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
 
-   插入图片也很简单的，所示，图、表的标题很长或者需要插入脚注，可以使用[文本引用][text-references]
+#### 图片 {#figure}
 
-   ```{r knitr-footnote, fig.cap='(ref:footnote)', out.width="45%", echo=FALSE}
-   knitr::include_graphics(path = "figures/mai.png")
-   ```
+插入图片也很简单的，所示，图、表的标题很长或者需要插入脚注，可以使用[文本引用][text-references]
 
-(ref:footnote) caption 插入 footnote 但是 ebooks 不支持这样插入脚注[^longnote]
+```{r knitr-footnote, fig.cap='(ref:footnote)', out.width="45%", echo=FALSE}
+knitr::include_graphics(path = "figures/mai.png")
+```
+
+(ref:footnote) 表格标题里插入脚注，但是 ebooks 不支持这样插入脚注[^longnote]
 
 [^longnote]: Here's one with multiple blocks.
 
 [text-references]: https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references
 
-- 公式
+#### 公式 {#formula}
 
-   行内公式一对美元符号 $\alpha$ 或者 \(\alpha+\beta\)，行间公式 $$\alpha$$ 或者 \[\alpha + \beta\] 对公式编号，如公式 \@ref(eq:likelihood)
+行内公式一对美元符号 $\alpha$ 或者 \(\alpha+\beta\)，行间公式 $$\alpha$$ 或者 \[\alpha + \beta\] 对公式编号，如公式 \@ref(eq:likelihood)
 
-   \begin{equation}
-   L(\beta,\boldsymbol{\theta}) = f(y;\beta,\boldsymbol{\theta}) = \int_{\mathbb{R}^{n}}N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)dt (\#eq:likelihood)
-   \end{equation}
+\begin{equation}
+L(\beta,\boldsymbol{\theta}) = f(y;\beta,\boldsymbol{\theta}) = \int_{\mathbb{R}^{n}}N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)dt (\#eq:likelihood)
+\end{equation}
 
-   多行公式分别编号，如公式\@ref(eq:BL-SGLMM) 和公式\@ref(eq:Poss-SGLMM) 
+多行公式分别编号，如公式\@ref(eq:BL-SGLMM) 和公式\@ref(eq:Poss-SGLMM) 
 
-   \begin{align}
-   \log\{\frac{p_i}{1-p_i}\} & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:BL-SGLMM)\\
-   \log(\lambda_i)           & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM)
-   \end{align}
+\begin{align}
+\log\{\frac{p_i}{1-p_i}\} & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:BL-SGLMM)\\
+\log(\lambda_i)           & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM)
+\end{align}
 
-   多行公式中对某一（些）行编号，如公式 \@ref(eq:align) 和 公式 \@ref(eq:Poss-SGLMM2)
+多行公式中对某一（些）行编号，如公式 \@ref(eq:align) 和 公式 \@ref(eq:Poss-SGLMM2)
 
-   \begin{align} 
-   g(X_{n}) &= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \\
-   \sqrt{n}[g(X_{n})-g(\theta)] &= g'\left({\tilde{\theta}}\right) 
-     \sqrt{n}[X_{n}-\theta ] (\#eq:align) \\
-   \log(\lambda_i)  & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM2)  
-   \end{align} 
+\begin{align} 
+g(X_{n}) &= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \\
+\sqrt{n}[g(X_{n})-g(\theta)] &= g'\left({\tilde{\theta}}\right) 
+  \sqrt{n}[X_{n}-\theta ] (\#eq:align) \\
+\log(\lambda_i)  & = T_{i} = d(x_i)'\beta + S(x_i) + Z_i (\#eq:Poss-SGLMM2)  
+\end{align} 
 
-   多行公式共用一个编号，如公式 \@ref(eq:likelihood2)
+多行公式共用一个编号，如公式 \@ref(eq:likelihood2)
 
-   \begin{equation}
-   \begin{aligned}
-   L(\beta,\boldsymbol{\theta})
-   & = \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))f(y|t)}f(y,t)dt\\
-   & \varpropto \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}f(t|y)dt \\
-   &= E_{T|y}\left[\frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}\right] 
-   \end{aligned}
-   (\#eq:likelihood2)
-   \end{equation}
+\begin{equation}
+\begin{aligned}
+L(\beta,\boldsymbol{\theta})
+& = \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))f(y|t)}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))f(y|t)}f(y,t)dt\\
+& \varpropto \int_{\mathbb{R}^{n}} \frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}f(t|y)dt \\
+&= E_{T|y}\left[\frac{N(t;D\beta,\Sigma(\boldsymbol{\theta}))}{N(t;D\beta_{0},\Sigma(\boldsymbol{\theta}_{0}))}\right] 
+\end{aligned}
+(\#eq:likelihood2)
+\end{equation}
 
-   推荐在 `equation` 公式中，使用 `split` 环境，意思是一个公式很长，需要拆成多行，如公式\@ref(eq:var-beta)
+推荐在 `equation` 公式中，使用 `split` 环境，意思是一个公式很长，需要拆成多行，如公式\@ref(eq:var-beta)
 
-   \begin{equation} 
-   \begin{split}
-   \mathrm{Var}(\hat{\beta}) & =\mathrm{Var}((X'X)^{-1}X'y)\\
-    & =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
-    & =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
-    & =(X'X)^{-1}X'\sigma^{2}IX(X'X)^{-1}\\
-    & =(X'X)^{-1}\sigma^{2}
-   \end{split}
-   (\#eq:var-beta)
-   \end{equation} 
+\begin{equation} 
+\begin{split}
+\mathrm{Var}(\hat{\beta}) & =\mathrm{Var}((X'X)^{-1}X'y)\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
+ & =(X'X)^{-1}X'\sigma^{2}IX(X'X)^{-1}\\
+ & =(X'X)^{-1}\sigma^{2}
+\end{split}
+(\#eq:var-beta)
+\end{equation} 
 
-   注意，`\mathbf` 只对字母 $a,b,c,A,B,C$ 加粗，mathjax 不支持公式中使用 `\bm` 对 $\theta,\alpha,\beta,\ldots,\gamma$ 加粗，应该使用 `\boldsymbol`
+注意，`\mathbf` 只对字母 $a,b,c,A,B,C$ 加粗，mathjax 不支持公式中使用 `\bm` 对 $\theta,\alpha,\beta,\ldots,\gamma$ 加粗，应该使用 `\boldsymbol`
 
 ### bookdown
 
@@ -139,12 +139,9 @@ The **bookdown** package can be installed from CRAN or Github:
 
 `par()` 图形版面设置，如图\@ref(fig:par) 所示
 
-
 ```{r par,fig.cap="图形参数设置",fig.subcap=c("单图环境","多图环境"),out.width="33%",echo=FALSE, fig.link='https://github.com/rstudio/rmarkdown'}
 knitr::include_graphics(path = c("figures/mai.png","figures/mai.png"))
 ```
-
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
 
 通过 <https://bookdown.org/> 发布书籍
 
