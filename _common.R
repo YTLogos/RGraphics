@@ -48,7 +48,7 @@ options(
   BioC_mirror = "https://mirrors.tuna.tsinghua.edu.cn/bioconductor",
   repos = c(
     CRAN = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/",
-    CRANextra = 'https://macos.rbind.org',
+    CRANextra = if(Sys.info()["sysname"] == "Darwin") 'https://macos.rbind.org',
     RForge = "https://r-forge.r-project.org",
     inla = "https://inla.r-inla-download.org/R/stable",
     drat = "https://nowosad.github.io/drat"
