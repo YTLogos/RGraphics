@@ -16,7 +16,7 @@ language:
     chapter_name: ["第 ", " 章"]
 
 output_dir: _book
-new_session: no    
+new_session: yes   
 before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"

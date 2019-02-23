@@ -9,6 +9,11 @@ library(magrittr) # 提供管道命令 %>%
 :::
 
 
+```{r,echo=TRUE}
+# 加载 R 包
+library(fs)
+```
+
 
 ## 查看 {#list}
 

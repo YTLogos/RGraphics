@@ -14,6 +14,7 @@ Imports:
   showtext,
   sp, 
   svglite,
+  tidyverse,
   tikzDevice
 URL: https://ggplot.netlify.com/, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
