@@ -26,6 +26,7 @@ bookdown::pdf_book:
   number_sections: true
   toc_appendix: no
   toc_bib: no
+  toc_depth: 3
 #  highlight_bw: yes
 #  highlight: default
   df_print: "default"

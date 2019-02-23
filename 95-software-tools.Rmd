@@ -55,11 +55,11 @@ Git 使用的数据库
 
 ### Markdown
 
-Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 Pandoc's Markdown^[Pandoc 提供了很多对 Markdown 的扩展支持]表格、图片和公式的使用
+Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 Pandoc's Markdown，其实是 Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍一下被 Pandoc 加强后的 Markdown 表格、图片和公式的使用
 
 #### 表格 {#table}
 
-插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦，复杂的表格制作可以借助 R 包 knitr 提供的 kable 函数以及 kableExtra 包^[<https://xiangyunhuang.github.io/bookdown-kableExtra/>]
+插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦，复杂的表格制作可以借助 R 包 knitr 提供的 kable 函数以及 kableExtra 包^[<https://xiangyunhuang.github.io/bookdown-kableExtra/>]，此外谢益辉的书籍 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/) 中也有一节专门介绍表格 <https://bookdown.org/yihui/bookdown/tables.html>
 
 Table: (\#tab:insert-tab) 表格标题^[附有脚注]
 
@@ -67,6 +67,19 @@ Table: (\#tab:insert-tab) 表格标题^[附有脚注]
 | :----------- | :------------ |
 | Content Cell | Content Cell  |
 | Content Cell | Content Cell  |
+
+`kable` 支持多个表格并排，如表 \@ref(tab:table-multi) 所示
+
+```{r table-multi, tidy=FALSE}
+knitr::kable(
+  list(
+    head(iris[, 1:2], 3),
+    head(mtcars[, 1:3], 5)
+  ),
+  caption = 'A Tale of Two Tables.', booktabs = TRUE
+)
+```
+
 
 #### 图片 {#figure}
 

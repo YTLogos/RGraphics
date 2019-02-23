@@ -7,8 +7,8 @@ site: bookdown::bookdown_site
 documentclass: book
 papersize: a4
 linestretch: 1.25 # 1.25 倍行间距
-#lof: yes
-#lot: yes
+lof: yes
+lot: yes
 #indent: 40pt # 段首缩进两个汉字
 toccolor: magenta
 fontsize: 10pt
@@ -20,13 +20,12 @@ biblio-style: apalike
 link-citations: yes
 subparagraph: true
 compact-title: true
-geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
+#geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
 description: "R Graphics Foundations.R is a language and environment for statistical computing and graphics. R is similar to the award-winning S system, which was developed at Bell Laboratories by John Chambers et al. It provides a wide variety of statistical and graphical techniques (linear and nonlinear modelling, statistical tests, time series analysis, classification, clustering, ...). R is designed as a true computer language with control-flow constructions for iteration and alternation, and it allows users to add additional functionality by defining new functions. For computationally intensive tasks, C, C++ and Fortran code can be linked and called at run time. 学习 R Base Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上或博客上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础R打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础R中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情"
 keywords: ["graphics", "grid", "lattice", "ggplot2"]
-# twitter-handle: tom_hengl
 cover-image: "images/dragon.png"
 favicon: "images/favicon.ico"
-# url: 'http\://soilmapper.org'
+url: 'https\://bookdown.org/xiangyun/RGraphics/'
 # layout: default
 # comments: true
 ---
@@ -40,7 +39,7 @@ packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
   "tikzDevice", "fontcm", "microbenchmark", "rsconnect",
   "sp", "maptools", "maps", "mapdata", "mapproj",
-  "ggplot2", "devtools", "sf", "rgdal"
+  "ggplot2", "devtools", "sf", "rgdal", "fs", "tidyverse"
 )
 lapply(packages, function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
@@ -66,10 +65,12 @@ lapply(packages, function(pkg) {
 
 在数据科学领域内，选择 R 的理由
 
-> 1. written by statisticians for statisticians
-2. built-in matrix type and matrix manipulations
-3. great graphics, both base and CRAN
+
+> 1. written by statisticians for statisticians  
+2. built-in matrix type and matrix manipulations  
+3. great graphics, both base and CRAN  
 4. excellent parallelization facilities, etc.  
+> 
 > --- Norm Matloff
 
 
@@ -132,7 +133,7 @@ lapply(packages, function(pkg) {
 ```{r sessioninfo,echo=TRUE}
 xfun::session_info(packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
-  "tikzDevice", "fontcm",
+  "tikzDevice", "fontcm", "fs", "tidyverse",
   "sp", "maptools", "maps", "mapdata", "mapproj",
   "ggplot2", "devtools", "sf", "rgdal"
 ))
