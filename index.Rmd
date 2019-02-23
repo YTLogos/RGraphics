@@ -5,16 +5,16 @@ author: "黄湘云"
 date: "`r format(Sys.time(), tz = 'Asia/Taipei', usetz = TRUE)`"
 site: bookdown::bookdown_site
 documentclass: book
-papersize: b5
+papersize: a4
 linestretch: 1.25 # 1.25 倍行间距
 #lof: yes
 #lot: yes
 #indent: 40pt # 段首缩进两个汉字
 toccolor: magenta
 fontsize: 10pt
-secnumdepth: 2
+secnumdepth: 3
 colorlinks: yes
-classoption: "UTF8,twoside"
+classoption: "UTF8,oneside"
 bibliography: [latex/book.bib, latex/refer.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
