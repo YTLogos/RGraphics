@@ -1,26 +1,51 @@
-# 接口 {#rio}
+# 数据 {#data}
 
 导入数据与导出数据，各种数据格式，数据库
 
-## 导入数据 {#import}
-
-导入数据，也叫读入数据，读取数据，读入到 R 环境中，从磁盘上的文件，变成存储在R环境中的数据对象
-
-写入压缩格式文件
-Hands-On Programming with R
-https://rstudio-education.github.io/hopr/dataio.html
-
-A Swiss-Army Knife for Data I/O
-https://github.com/leeper/rio
-
-
-
-文件读写
+## 读写数据集 {#read-write-data}
 
 ```{r,echo=TRUE}
 apropos("^read.")
 apropos("^write.")
 ```
+
+
+### `read.csv` 与 `write.csv` {#read-write-csv}
+
+`read.csv2` 与 `write.csv2` 
+
+### `read.table` 与 `write.table` {#read-write-table}
+
+### `readLines` 与 `writeLines` {#read-write-lines}
+
+### `readRDS` 与 `saveRDS` {#read-save-rds}
+
+
+### `read.ftable` 与 `write.ftable` {#read-write-ftable}
+
+
+### `readBin` 与 `writeBin` {#read-write-bin}
+
+
+### `readChar` 与 `writeChar` {#read-write-char}
+
+
+### `read.dcf` 与 `write.dcf` {#read-write-dcf}
+
+
+### `readClipboard` 与 `writeClipboard` {#read-write-clipboard}
+
+
+### `read.socket` 与 `write.socket` {#read-write-socket}
+
+### `load` 与 `save` {#load-save}
+
+
+
+导入数据，也叫读入数据，读取数据，读入到 R 环境中，从磁盘上的文件，变成存储在R环境中的数据对象
+
+写入压缩格式文件
+
 
 `capture.output` 参数为表达式
 
@@ -37,21 +62,101 @@ sink()
 
 只将 `outer` 的结果保存到 `sink-examp.txt` 文件
 
-## 导出数据 {#export}
 
-## 保存数据对象 {#dump-dput}
 
-dump 保存数据对象 iris 到文件 `iris.txt`，文件内容是 R 命令，可把`iris.txt`看作代码文档执行，dput 保存数据对象内容到文件`iris.dat`，文件中不包含变量名 iris。注意到 dump 输入是一个字符串，而 dput 要求输入数据对象的名称，`source` 函数与 dump 对应，而 `dget` 与dput对应。 
+### `source` 与 `dump` {#source-dump}
+
+`dump` 保存数据对象 iris 到文件 `iris.txt`，文件内容是 R 命令，可把`iris.txt`看作代码文档执行，dput 保存数据对象内容到文件`iris.dat`，文件中不包含变量名 iris。注意到 `dump` 输入是一个字符串，而 `dput` 要求输入数据对象的名称，`source` 函数与 `dump` 对应，而 `dget` 与 `dput`对应。 
 
 ```{r,eval=FALSE,echo=TRUE}
 data(iris)
 dump('iris', file = 'iris.txt') 
 source(file = 'iris.txt')
+```
 
+### `dget` 与 `dput` {#dget-dput}
+
+```{r,eval=FALSE,echo=TRUE}
 dput(iris, file = 'iris.dat')
 iris <- dget(file = 'iris.dat')
 ```
 
-save 
 
-save.image
+读取 SPSS Matlab SAS 等软件生成的数据文件
+
+戏称 [rio](https://github.com/leeper/rio) 包是数据导入导出 Input/Output  的瑞士军刀
+
+
+## 读写数据库 {#read-write-database}
+
+[Hands-On Programming with R](https://rstudio-education.github.io/hopr) 数据读写章节[^dataio]
+
+[^dataio]: https://rstudio-education.github.io/hopr/dataio.html
+
+### ODBC 与 DBI
+
+制作一个表格，左边数据库右边 R 接口，都包含链接，如表 \@ref(tab:dbi) 所示
+
+```{r dbi}
+db2r <- data.frame(
+  db = c("MySQL", "SQLite", "PostgreSQL", "MariaDB"),
+  db_urls = c(
+    "https://www.mysql.com/",
+    "https://www.sqlite.org",
+    "https://www.postgresql.org/",
+    "https://mariadb.org/"),
+  dbi = c("RMySQL", "RSQLite", "RPostgres", "RMariaDB"),
+  dbi_urls = c(
+    "https://github.com/r-dbi/RMySQL",
+    "https://github.com/r-dbi/RSQLite",
+    "https://github.com/r-dbi/RPostgres",
+    "https://github.com/r-dbi/RMariaDB"
+  )
+)
+# db <-  paste0("[", db2r$db, "](", db2r$db_urls, ")")
+# dbi <- paste0("[", db2r$dbi, "](", db2r$dbi_urls, ")")
+knitr::kable(db2r, col.names = c("数据库","官网","R接口","开发仓"), caption = "数据库接口")
+```
+
+
+### PostgreSQL
+
+[odbc](https://github.com/r-dbi/odbc) 可以支持很多数据库，下面以连接 [PostgreSQL](https://www.postgresql.org/) 数据库为例介绍其过程
+
+在 MacOS 上安装
+
+```bash
+# 安装 unixODBC 库
+brew install unixodbc
+# 安装 PostgreSQL
+brew install psqlodbc
+```
+
+在 Ubuntu 上配置
+
+```bash
+# Install the unixODBC library
+sudo apt-get install unixodbc unixodbc-dev
+# PostgreSQL ODBC ODBC Drivers
+sudo apt-get install odbc-postgresql
+```
+
+建立连接
+
+```{r,echo=TRUE,eval=FALSE}
+library(DBI)
+con <- dbConnect(odbc::odbc(),
+  driver = "PostgreSQL Driver",
+  database = "test_db",
+  uid = "postgres",
+  pwd = "password",
+  host = "localhost",
+  port = 5432)
+# host 可以是云端的地址也可以是本地局域网IP地址，
+# 例如"192.168.1.200"这样的。
+# 列出数据库中的所有表
+dbListTables(con)
+```
+
+参考 <https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql/>
+

@@ -21,7 +21,7 @@ before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"
   - "01-file-system.Rmd"
-#  - "02-import-export.Rmd"
+  - "02-import-export.Rmd"
   - "03-data-manipulation.Rmd"
   - "04-statistical-graphics.Rmd"
 #  - "05-data-visualization.Rmd"

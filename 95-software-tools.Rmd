@@ -473,46 +473,7 @@ Docker & Docker Machine & Docker Swarm
 
 ## 数据库 {#database}
 
-### PostgreSQL
 
-[odbc](https://github.com/r-dbi/odbc) 可以支持很多数据库，下面以连接 [PostgreSQL](https://www.postgresql.org/) 数据库为例介绍其过程
-
-在 MacOS 上安装
-
-```bash
-# 安装 unixODBC 库
-brew install unixodbc
-# 安装 PostgreSQL
-brew install psqlodbc
-```
-
-在 Ubuntu 上配置
-
-```bash
-# Install the unixODBC library
-sudo apt-get install unixodbc unixodbc-dev
-# PostgreSQL ODBC ODBC Drivers
-sudo apt-get install odbc-postgresql
-```
-
-建立连接
-
-```{r,echo=TRUE,eval=FALSE}
-library(DBI)
-con <- dbConnect(odbc::odbc(),
-  driver = "PostgreSQL Driver",
-  database = "test_db",
-  uid = "postgres",
-  pwd = "password",
-  host = "localhost",
-  port = 5432)
-# host 可以是云端的地址也可以是本地局域网IP地址，
-# 例如"192.168.1.200"这样的。
-# 列出数据库中的所有表
-dbListTables(con)
-```
-
-参考 <https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql/>
 
 ## 常用工具 {#other-tools}
 
