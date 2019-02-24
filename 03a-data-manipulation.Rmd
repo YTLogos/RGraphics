@@ -1,13 +1,10 @@
 # 操作 {#manipulate}
 
-数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的，而且如果没有特别说明，文中出现的数据集都是 Base R 内置的，第三方 R 包或者来源于网上的数据集都会加以说明。
-
-```{r, R.options = list(tidyverse.quiet = TRUE),echo=TRUE,message=FALSE}
-# 加载 R 包
-library(tidyverse)
+```{r,include=FALSE}
+library(magrittr) # %>%
 ```
 
-tidyverse 用来操作数据 data wrangling
+数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的，而且如果没有特别说明，文中出现的数据集都是 Base R 内置的，第三方 R 包或者来源于网上的数据集都会加以说明。
 
 ## 查看 {#show}
 
@@ -452,34 +449,4 @@ list unlist
 stack unstack 
 class unclass
 attach detach
-
-数据操作的语法
-
-第一代
-
-1. reshape 使用函数 `melt` 和 `cast` 聚合数据
-1. reshape2 是 reshape 的继任者，提供两个函数 `melt` 和 `cast` 聚合数据
-1. plyr 统一拆分(split)，计算(apply)，合并(combine)的数据处理流
-
-第二代
-
-1. dplyr 操作数据的语法
-1. dbplyr 给 dplyr 提供数据库接口支持
-1. sparklyr 给 dplyr 提供 Spark 接口支持
-
-数据清洗
-
-1. tidyr 提供 `spread` 和 `gather` 两个函数清洗数据
-
-Garrett Grolemund 在 RStudio 主要从事教育教学
-
-Materials for the Tidyverse Train-the-trainer workshop
-https://github.com/rstudio-education/teach-tidy
-
-The Tidyverse Cookbook
-https://rstudio-education.github.io/tidyverse-cookbook/
-
-## 高阶函数 {#high-order-function}
-
-apply Map Reduce
 

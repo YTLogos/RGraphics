@@ -1,0 +1,33 @@
+# 数据变换 {#data-wrangeling}
+
+
+数据操作的语法
+
+第一代
+
+1. reshape 使用函数 `melt` 和 `cast` 聚合数据
+1. reshape2 是 reshape 的继任者，提供两个函数 `melt` 和 `cast` 聚合数据
+1. plyr 统一拆分(split)，计算(apply)，合并(combine)的数据处理流
+
+第二代
+
+1. dplyr 操作数据的语法
+1. dbplyr 给 dplyr 提供数据库接口支持
+1. sparklyr 给 dplyr 提供 Spark 接口支持
+
+数据清洗
+
+1. tidyr 提供 `spread` 和 `gather` 两个函数清洗数据
+
+Garrett Grolemund 在 RStudio 主要从事教育教学
+
+Materials for the Tidyverse Train-the-trainer workshop
+https://github.com/rstudio-education/teach-tidy
+
+The Tidyverse Cookbook
+https://rstudio-education.github.io/tidyverse-cookbook/
+
+## 高阶函数 {#high-order-function}
+
+apply Map Reduce
+
