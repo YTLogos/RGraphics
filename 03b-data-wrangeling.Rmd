@@ -31,3 +31,28 @@ https://rstudio-education.github.io/tidyverse-cookbook/
 
 apply Map Reduce
 
+Playing Map() and Reduce() in R – By-Group Calculation
+
+https://statcompute.wordpress.com/2018/09/03/playing-map-and-reduce-in-r-by-group-calculation/
+
+Playing Map() and Reduce() in R – Subsetting
+
+https://statcompute.wordpress.com/2018/09/08/playing-map-and-reduce-in-r-subsetting/
+
+From functional programming to MapReduce in R
+
+https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
+
+Functional programming and unit testing for data munging with R 特别是第三章
+https://b-rodrigues.github.io/fput/
+
+Modeling data with functional programming in R 函数式编程与数据建模
+https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
+
+Pivot tables in R 数据透视表
+https://digitheadslabnotebook.blogspot.com/2010/01/pivot-tables-in-r.html
+
+[Easily Make Multi-tabbed .xlsx Files with openxlsx](https://trinkerrstuff.wordpress.com/2018/02/14/easily-make-multi-tabbed-xlsx-files-with-openxlsx/) Map 函数
+
+[apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family
+
