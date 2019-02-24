@@ -227,5 +227,6 @@
 
 - Martin Mächler [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) https://github.com/mmaechler
 
+- A book about trouble spots, oddities, traps, glitches in R.  Many of the same problems are in S+. If you are using R and you think you’re in hell, this is a map for you. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
 
 - R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
