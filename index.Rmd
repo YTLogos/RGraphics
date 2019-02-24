@@ -39,7 +39,8 @@ packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
   "tikzDevice", "fontcm", "microbenchmark", "rsconnect",
   "sp", "maptools", "maps", "mapdata", "mapproj", "DAAG",
-  "ggplot2", "devtools", "sf", "rgdal", "fs", "tidyverse"
+  "ggplot2", "devtools", "sf", "rgdal", "fs", "tidyverse",
+  "DBI", "odbc"
 )
 lapply(packages, function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)

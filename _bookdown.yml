@@ -23,7 +23,7 @@ rmd_files:
   - "01-file-system.Rmd"
   - "02-import-export.Rmd"
   - "03a-data-manipulation.Rmd"
-#  - "03b-data-wrangeling.Rmd"
+  - "03b-data-wrangeling.Rmd"
   - "04-statistical-graphics.Rmd"
 #  - "05-data-visualization.Rmd"
   

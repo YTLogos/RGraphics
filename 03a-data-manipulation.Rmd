@@ -219,9 +219,7 @@ right join
 
 ## 聚合 {#aggregate}
 
-分组统计
-
-[给出 dplyr 和 purrr 的便捷方式]{.todo}
+主要是分组统计
 
 ```{r,echo=TRUE}
 apropos("apply")
@@ -450,3 +448,4 @@ stack unstack
 class unclass
 attach detach
 
+[^apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family

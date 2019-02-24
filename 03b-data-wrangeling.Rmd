@@ -1,5 +1,8 @@
 # 重塑 {#data-wrangeling}
 
+```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
+library(tidyverse)
+```
 
 数据操作的语法
 
@@ -19,40 +22,16 @@
 
 1. tidyr 提供 `spread` 和 `gather` 两个函数清洗数据
 
-Garrett Grolemund 在 RStudio 主要从事教育教学
+Garrett Grolemund 在 RStudio 主要从事教育教学，参考 [Materials for the Tidyverse Train-the-trainer workshop](https://github.com/rstudio-education/teach-tidy) 和 [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/)
 
-Materials for the Tidyverse Train-the-trainer workshop
-https://github.com/rstudio-education/teach-tidy
 
-The Tidyverse Cookbook
-https://rstudio-education.github.io/tidyverse-cookbook/
+## `Map` 与 `Reduce` {#high-order-function}
 
-## 高阶函数 {#high-order-function}
+在 R 语言里玩转`apply`， `Map()` 和 `Reduce()`，下面分别以提取合并多张 XLSX 表格[^openxl-map]，分组计算[^by-group-calculation] 和子集操作 [^subsetting] 为例，从函数式编程到 MapReduce [^funcprog-map-reduce]，制作数据透视表[^pivot-tables]，用于数据处理的函数式编程和单元测试 Functional programming and unit testing for data munging with R 特别是第三章 <https://b-rodrigues.github.io/fput/>，然后是函数式编程与数据建模 Modeling data with functional programming in R[^modeling-funcprog]
 
-apply Map Reduce
-
-Playing Map() and Reduce() in R – By-Group Calculation
-
-https://statcompute.wordpress.com/2018/09/03/playing-map-and-reduce-in-r-by-group-calculation/
-
-Playing Map() and Reduce() in R – Subsetting
-
-https://statcompute.wordpress.com/2018/09/08/playing-map-and-reduce-in-r-subsetting/
-
-From functional programming to MapReduce in R
-
-https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
-
-Functional programming and unit testing for data munging with R 特别是第三章
-https://b-rodrigues.github.io/fput/
-
-Modeling data with functional programming in R 函数式编程与数据建模
-https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
-
-Pivot tables in R 数据透视表
-https://digitheadslabnotebook.blogspot.com/2010/01/pivot-tables-in-r.html
-
-[Easily Make Multi-tabbed .xlsx Files with openxlsx](https://trinkerrstuff.wordpress.com/2018/02/14/easily-make-multi-tabbed-xlsx-files-with-openxlsx/) Map 函数
-
-[apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family
-
+[^modeling-funcprog]: https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
+[^funcprog-map-reduce]: https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
+[^pivot-tables]: https://digitheadslabnotebook.blogspot.com/2010/01/pivot-tables-in-r.html
+[^openxl-map]: https://trinkerrstuff.wordpress.com/2018/02/14/easily-make-multi-tabbed-xlsx-files-with-openxlsx/)
+[^by-group-calculation]: https://statcompute.wordpress.com/2018/09/03/playing-map-and-reduce-in-r-by-group-calculation/
+[^subsetting]: https://statcompute.wordpress.com/2018/09/08/playing-map-and-reduce-in-r-subsetting/

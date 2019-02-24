@@ -2,6 +2,14 @@
 
 作为知识介绍，本章所有数据都来源于基础 R 包，即安装 R 软件后自带的数据集，图库在以 base R 中的数据集介绍完后，以相应真实数据扩展为案列
 
+准备好以下绘制统计图形的 R 包
+
+```{r load-pkgs,echo=TRUE}
+library(grid)
+library(lattice)
+library(ggplot2)
+```
+
 ## 要素 {#elements} 
 
 点线面
@@ -12,7 +20,9 @@
 颜色 col 连续型和离散型
 面/多边形 rect 颜色填充
 
-```{r,fig.cap="多边形和符号元素",echo=TRUE}
+点、线、多边形和圆聚集在图 \@ref(fig:symbols) 中
+
+```{r symbols,fig.cap="多边形和符号元素",echo=TRUE}
 # https://jeroen.github.io/uros2018/#23
 plot.new()
 plot.window(xlim = c(0, 100), ylim = c(0, 100))
@@ -86,7 +96,6 @@ legend(300, 35,
 ```
 
 ```{r category-ggplot,fig.cap="分类散点图"}
-library(ggplot2)
 ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
   geom_point() +
   theme_bw()
@@ -181,10 +190,10 @@ scales::show_col(colours = more_colors)
 
 ## 字体 {#fonts}
 
-以常用的新罗马字体为例，在 R 绘图代码中全局设置字体 `par(family="Times")` 或者 `par(family="serif")`，数据集 ais 的含义，散点图表达的统计意义
+以常用的新罗马字体为例，在 R 绘图代码中全局设置字体 `par(family="Times")` 或者 `par(family="serif")`，数据集 ais 的含义，散点图\@ref(fig:font-times)表达的统计意义
  
-```{r times-font,dev.args=list(family = "serif"),out.width = "45%",fig.width=27/7,fig.asp=1}
-library(DAAG)
+```{r font-times,dev.args=list(family = "serif"),out.width = "45%",fig.width=27/7,fig.asp=1}
+data(ais, package = 'DAAG')
 plot(hg ~ rcc,
   data = ais,
   xlab = expression("Red cell count (" * 10^12 * italic(l)^{

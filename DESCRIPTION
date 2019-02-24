@@ -5,10 +5,12 @@ Version: 0.0.1
 Imports: 
   bookdown,
   DAAG,
+  DBI,
   extrafont,
   ggplot2,
   gridExtra,
   microbenchmark,
+  odbc,
   rgdal,
   rgeos,
   sf (>= 0.7.2),
