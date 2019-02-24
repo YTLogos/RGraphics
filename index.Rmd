@@ -38,7 +38,7 @@ url: 'https\://bookdown.org/xiangyun/RGraphics/'
 packages = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
   "tikzDevice", "fontcm", "microbenchmark", "rsconnect",
-  "sp", "maptools", "maps", "mapdata", "mapproj",
+  "sp", "maptools", "maps", "mapdata", "mapproj", "DAAG",
   "ggplot2", "devtools", "sf", "rgdal", "fs", "tidyverse"
 )
 lapply(packages, function(pkg) {

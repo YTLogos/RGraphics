@@ -63,6 +63,35 @@ x coordinates (units of 50 feet)
 y coordinates (units of 50 feet)
 z heights (feet)
 
+
+#### 分类散点图  
+
+在图中用不同颜色或符号标记数据点所属类别，即在普通散点图的基础上添加一分类变量的描述
+
+```{r category-base, fig.cap="分类散点图"}
+plot(mpg ~ hp,
+  data = subset(mtcars, am == 1), pch = 16, col = "blue",
+  xlim = c(50, 350), ylim = c(10, 35)
+)
+points(mpg ~ hp,
+  col = "red", pch = 16,
+  data = subset(mtcars, am == 0)
+)
+legend(300, 35,
+  c("1", "0"),
+  title = "am",
+  col = c("blue", "red"),
+  pch = c(16, 16)
+)
+```
+
+```{r category-ggplot,fig.cap="分类散点图"}
+library(ggplot2)
+ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
+  geom_point() +
+  theme_bw()
+```
+
 ### 箱线图 {#box-plot}
 
 boxplot
@@ -78,16 +107,6 @@ ggplot2
 
 geom\_density()
 
-
-```{r,eval=FALSE}
-install.packages("redR")
-library(redR)
-data(lenna)
-im <- lenna
-y <- degrade(im, noise = 0.05)
-par(mar = c(0, 0, 0, 0) + 0.1)
-plot(y, interp = FALSE, axes = FALSE)
-```
 
 ### 岭线图 {#ridge-lines}
 
@@ -161,6 +180,21 @@ scales::show_col(colours = more_colors)
 ```
 
 ## 字体 {#fonts}
+
+以常用的新罗马字体为例，在 R 绘图代码中全局设置字体 `par(family="Times")` 或者 `par(family="serif")`，数据集 ais 的含义，散点图表达的统计意义
+ 
+```{r times-font,dev.args=list(family = "serif"),out.width = "45%",fig.width=27/7,fig.asp=1}
+library(DAAG)
+plot(hg ~ rcc,
+  data = ais,
+  xlab = expression("Red cell count (" * 10^12 * italic(l)^{
+    -1
+  } * ")"),
+  ylab = expression("Hemaglobin (" * g * dot(" ") * daL^{
+    -1
+  } * ")")
+)
+```
 
 pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体 
 
@@ -308,7 +342,7 @@ knitr::include_graphics(path = "figures/font_Impact.png")
 
 ## TikZ {#tikz}
 
-> 用 Base R 绘制带有复杂数学公式的图形，tikzDevice 包结合 R Markdown 的使用
+> 用 Base R 绘制带有复杂数学公式的图形，tikzDevice 包结合 R Markdown 的使用，引入 LaTeX 绘图引擎 TikZ 主要是借助 LaTeX 对数学符号的强大支持，让R 语言绘制的图形上出现优美的复杂的数学符号表达式 
 
 以 tikzDevice 绘图， `out.width='35%'` 设置一幅子图占页面的宽度，在 `_common.R` 设置页面宽度为 `out.width='70%'`，即全宽图占页面 70\% 的宽度。 `fig.asp=1` 设置子图的长宽比例为 1:1，即正方形。设置图片的宽度，默认是 `fig.width = 6` 相应地，图片的高度是 `fig.height = fig.width * fig.asp = 6 * 0.618 = 3.708` 但是这个比例使得图片上的字很小，所以设置`fig.width=2.5`。设置图形设备 `dev='tikz'`，此时会自动调用 tikzDevice 包处理图上的数学公式，tikzDevice 包将 LaTeX 中的 TikZ 绘图引擎引入到基础 R 绘图中，由于该引擎将R代码块转化为 `.tex` 文件，接着调用 LaTeX 编译，默认生成 PDF 格式图片，因此设置 `tikz2png='-density 300'` 调用 ImageMgick 的 `convert` 命令将 PDF 格式图片转化为 PNG 格式图片，转化前需要用 Ghostscript 读取该 PDF 文件，转化成功后，需要将该 PNG 格式文件路径返回，以插入到文档中。`bessel-function` 是给该图片的命名，这段代码生成两张图片，两个图片就分别叫做 `bessel-function-1.pdf` 和 `bessel-function-2.pdf`。在 LaTeX 里并排插入两个图片，需要在导言区加载 `subfig` 宏包。
 
