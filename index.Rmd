@@ -51,9 +51,15 @@ lapply(packages, function(pkg) {
 \index{knitr}
 \index{pandoc}
 
-- [字符串处理与正则表达式]{.todo}
-- [动手学习Python]{.todo}
-- [自然语言处理与Python实现]{.todo}
+::: warning
+小伙子，你应该先学习下面的技术
+
+1. 字符串处理与正则表达式，用以提取
+1. 动手学习 Python，搞明白 MemectExtractor 提取工具
+1. 自然语言处理与 Python 实现
+1. 一天一个 R 函数介绍，从正则表达式开始
+:::
+
 - [容器技术与 Docker]{.todo}
 - [数据结构与算法基础C++]{.todo}
 

@@ -46,8 +46,8 @@ div.base::before {
 
 div.warning::before {
   display: block;
-  content: "Warning";
-  color: blue;
+  content: "警告";
+  color: red;
   font-size: 1.1em;
   font-weight: bold;
   margin-bottom: 0.25em;
@@ -55,7 +55,7 @@ div.warning::before {
 
 .todo {
   display: block;
-  border: 1px solid red;
+  border: 1px solid #ccc;
   border-left-width: 5px;
   border-radius: 5px;
   padding: 0.5em 1em;
@@ -65,7 +65,7 @@ div.warning::before {
 .todo::before {
   content: "TO DO: ";
   font-weight: bold;
-  color: red;
+  color: blue;
 }
 
 blockquote > p:last-child {

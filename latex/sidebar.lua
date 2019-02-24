@@ -28,7 +28,7 @@ function Div(el)
 
   if el.classes:includes("warning") then
     return {
-      pandoc.RawBlock("latex", "\\begin{kframe} \\textbf{Warning}"),
+      pandoc.RawBlock("latex", "\\begin{kframe} \\textbf{警告}"),
       el,
       pandoc.RawBlock("latex", "\\end{kframe}")
     }
