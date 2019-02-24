@@ -37,10 +37,13 @@ addons:
       - freeglut3-dev
       - graphviz
       #- asymptote
-      - libudunits2-dev	
-      - libproj-dev 	
-      - libgeos-dev 	
-      - libgdal-dev      
+      - libudunits2-dev
+      - libproj-dev
+      - libgeos-dev
+      - libgdal-dev
+      - unixodbc 
+      - unixodbc-dev
+      - odbc-postgresql
       #- phantomjs
 
 before_install:
