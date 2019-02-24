@@ -190,9 +190,9 @@ scales::show_col(colours = more_colors)
 
 ## 字体 {#fonts}
 
-以常用的新罗马字体为例，在 R 绘图代码中全局设置字体 `par(family="Times")` 或者 `par(family="serif")`，数据集 ais 的含义，散点图\@ref(fig:font-times)表达的统计意义
+以常用的新罗马字体为例，在 R 绘图代码中全局设置字体 `par(family="Times")` 或者 `par(family="serif")`，数据集 ais 的含义，散点图 \@ref(fig:times) 表达的统计意义
  
-```{r font-times,dev.args=list(family = "serif"),out.width = "45%",fig.width=27/7,fig.asp=1}
+```{r times,out.width = "45%",fig.width=27/7,fig.asp=1,dev.args=list(family = "serif")}
 data(ais, package = 'DAAG')
 plot(hg ~ rcc,
   data = ais,
@@ -205,9 +205,9 @@ plot(hg ~ rcc,
 )
 ```
 
-pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体 
+pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体，添加代码块设置 `dev.args=list(family = "sans")`
 
-```{r font-sans,echo=TRUE,dev.args=list(family = "sans"),out.width = "45%",fig.width=27/7,fig.cap="默认 sans 字体",fig.asp=1}
+```{r sans,echo=TRUE,out.width = "45%",fig.width=27/7,fig.cap="默认 sans 字体",fig.asp=1}
 par(mar=c(4,4,2,1))
 x <- seq(-4, 4, len = 101)
 y <- cbind(sin(x), cos(x))
