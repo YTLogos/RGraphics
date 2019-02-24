@@ -352,7 +352,7 @@ knitr::include_graphics(path = "figures/demo-tikzDevice.png")
 
 两个利用 tikzDevice 包的例子
 
-```{r linear-model,dev='tikz',fig.cap="线性回归模型",out.width="35%",fig.asp=1,fig.width=3.5,tikz2png='-quality 100 -density 300',fig.process=to_png,echo=TRUE,eval=identical(.Platform$OS.type,'unix')}
+```{r linear-model,dev='tikz',fig.cap="线性回归模型",out.width="35%",fig.asp=1,fig.width=3.5,tikz2png='-quiet -quality 100 -density 300',fig.process=to_png,echo=TRUE,eval=identical(.Platform$OS.type,'unix')}
 # 带有图标题
 par(mar = c(4.1, 4.1, 4.5, 1.5), ps = 13, family = "Times")
 x <- rnorm(10)
