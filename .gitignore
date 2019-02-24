@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 *.rds
+*.log
 rsconnect
 packages.bib
 
