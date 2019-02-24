@@ -77,7 +77,7 @@ knitr::knit_hooks$set(tikz2png = function(before, options, envir) {
   figs <- knitr:::all_figs(options, ext = "pdf") # all figure names
   # note the tikz2png option is the extra parameters passed to 'convert'
   for (fig in figs) {
-    system(sprintf("convert %s %s %s", options$tikz2png, fig, sub("\\.pdf$", ".png", fig)))
+    system(sprintf("convert %s %s +profile 'icc' %s", options$tikz2png, fig, sub("\\.pdf$", ".png", fig)))
   }
 })
 
