@@ -1,6 +1,54 @@
 # 可视化 {#visualization}
 
+
+Top 50 ggplot2 Visualizations - The Master List (With Full R Code)
+
+http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
+
+https://data-se.netlify.com/2017/11/20/great-dataviz-examples-in-rstats/
+
+Why I use ggplot2
+http://varianceexplained.org/r/why-I-use-ggplot2/
+
+
 ## 空间数据可视化 {#sp-vis}
+
+数据类型复杂，空间数据相关，地图
+
+用 R 画中国地图并标注城市位置
+https://yihui.name/cn/2008/10/china-map-and-city-locations-with-r/
+
+无法重现但是用 base R 画地图的用法可以借鉴
+
+Introduction to spatial analysis in R (rasters/sf) 
+
+https://github.com/jafflerbach/spatial-analysis-R
+https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html
+https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html
+
+An Introduction to Spatial Econometrics in R
+http://www.econ.uiuc.edu/~lab/workshop/Spatial_in_R.html
+https://ignaciomsarmiento.github.io/2017/02/07/An-Introduction-to-Spatial-Econometrics-in-R
+
+[Data wrangling visualisation and spatial analysis: R Workshop](https://www.seascapemodels.org/data/data-wrangling-spatial-course.html)
+
+
+[sp-gallery]: https://edzer.github.io/sp/
+
+- [Spatial Data in R: New Directions](https://edzer.github.io/UseR2017/) 
+- [Mapping unemployment data](http://sharpsightlabs.com/blog/map-unemployment-nov-2016/)
+- [Areal data. Lung cancer risk in Pennsylvania](https://paula-moraga.github.io/tutorial-areal-data/)
+- [Geostatistical data. Malaria in The Gambia](https://paula-moraga.github.io/tutorial-geostatistical-data/)
+- [GeoSpatial Data Visualization in R](https://bhaskarvk.github.io/user2017.geodataviz/)
+- [Ecological Models and Data in R](http://ms.mcmaster.ca/~bolker/emdbook/)
+- [Geographic Data Science in Python](https://data.cdrc.ac.uk/dataset/geographic-data-science-in-python)
+- [Spatial](https://data.cdrc.ac.uk/)
+- [Fast GeoSpatial Analysis in Python](http://matthewrocklin.com/blog/work/2017/09/21/accelerating-geopandas-1)
+- [A gentle INLA tutorial](https://www.precision-analytics.ca/blog-1/inla)
+
+- Reproducible road safety research: an exploration of the shifting spatial and temporal distribution of car-pedestrian crashes
+
+https://github.com/Robinlovelace/stats19-gisruk
 
 ### raster 对象
 
