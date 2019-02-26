@@ -61,8 +61,8 @@ lapply(packages, function(pkg) {
 1. 一天一个 R 函数介绍，从正则表达式开始
 :::
 
-- [容器技术与 Docker]{.todo}
-- [数据结构与算法基础C++]{.todo}
+[容器技术与 Docker]{.todo}
+[数据结构与算法基础C++]{.todo}
 
 ## Why R? {#why-r}
 

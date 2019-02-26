@@ -1,4 +1,4 @@
-# 重塑 {#data-wrangeling}
+# 数据变形者 {#data-transformer}
 
 ```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 library(tidyverse)

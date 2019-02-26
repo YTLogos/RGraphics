@@ -192,7 +192,7 @@ scales::show_col(colours = more_colors)
 
 以常用的新罗马字体为例，在 R 绘图代码中全局设置字体 `par(family="Times")` 或者 `par(family="serif")`，数据集 ais 的含义，散点图 \@ref(fig:times) 表达的统计意义
  
-```{r times,out.width = "45%",fig.width=27/7,fig.asp=1,dev.args=list(family = "serif")}
+```{r times,out.width="45%",fig.width=27/7,fig.asp=1,dev.args=list(family = "serif"),cache=FALSE}
 data(ais, package = 'DAAG')
 plot(hg ~ rcc,
   data = ais,

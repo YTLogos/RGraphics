@@ -32,6 +32,8 @@ https://ignaciomsarmiento.github.io/2017/02/07/An-Introduction-to-Spatial-Econom
 
 [Data wrangling visualisation and spatial analysis: R Workshop](https://www.seascapemodels.org/data/data-wrangling-spatial-course.html)
 
+[Regional smoothing using R](https://pudding.cool/process/regional_smoothing/)
+ 
 
 [sp-gallery]: https://edzer.github.io/sp/
 
