@@ -535,16 +535,6 @@ set.seed(123)
 qplot(rnorm(1e3), rnorm(1e3))
 ```
 
-同一幅图，但是没有优化
-
-```{r no-optipng, ref.label='use-optipng',fig.cap="没有优化"}
-```
-
-同一幅图，但是使用最高级别的优化 (传递 `-o7` 参数给 `optipng`):
-
-```{r optipng-o7, ref.label='use-optipng', optipng=if(knitr::is_html_output()) '-o7',fig.cap="最强优化"}
-```
-
 ```bash
 optipng -o5 filename.png
 ```

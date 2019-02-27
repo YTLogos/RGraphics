@@ -86,6 +86,14 @@ iris <- dget(file = 'iris.dat')
 
 戏称 [rio](https://github.com/leeper/rio) 包是数据导入导出 Input/Output  的瑞士军刀
 
+### JSON
+
+jsonlite
+
+###  YAML
+
+yaml
+
 
 ## 读写数据库 {#read-write-database}
 
@@ -117,7 +125,6 @@ db2r <- data.frame(
 # dbi <- paste0("[", db2r$dbi, "](", db2r$dbi_urls, ")")
 knitr::kable(db2r, col.names = c("数据库","官网","R接口","开发仓"), caption = "数据库接口")
 ```
-
 
 ### PostgreSQL
 

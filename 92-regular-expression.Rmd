@@ -1,4 +1,4 @@
-# 字符 {#regex}
+# 正则表达式 {#regex}
 
   Handling Strings with R 
 

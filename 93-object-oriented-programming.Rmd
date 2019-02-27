@@ -96,3 +96,20 @@ demo(is.things)
 ## 除虫 {#debug}
 
 [Debugging with RStudio](https://support.rstudio.com/hc/en-us/articles/205612627)
+
+
+## 测试 {#test}
+
+
+单元测试 testthat
+
+静态代码检查 lintr
+
+覆盖测试 covr
+
+
+集成测试 Travis-CI
+
+
+
+
