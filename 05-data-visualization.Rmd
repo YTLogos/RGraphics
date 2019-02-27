@@ -1,5 +1,11 @@
 # 数据可视化 {#visualization}
 
+Nice Bar Graph from Data Visualisation with R: 100 Examples
+https://rpubs.com/chidungkt/392980
+
+Comprehensive list of color palettes available in r
+https://github.com/EmilHvitfeldt/r-color-palettes
+
 
 Top 50 ggplot2 Visualizations - The Master List (With Full R Code)
 
