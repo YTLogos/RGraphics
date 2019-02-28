@@ -31,6 +31,7 @@
       - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  第二版 https://r-pkgs.org/
       - R 扩展 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
       - Git [Pro Git 中文第二版](https://git-scm.com/book/zh/v2)
+      - R 用户愉快地使用 Git/Github [Happy Git and GitHub for the useR](https://happygitwithr.com/)
       
    1. 数据科学 
       - 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)

@@ -55,7 +55,12 @@ before_install:
   - tar -xzf /tmp/tinytex.tar.gz -C $HOME
   - export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
   - tlmgr install $(cat latex/TeXLive.pkgs | tr '\n' ' ') || true
-
+  
+  - export COMMIT_MSG=$(git log -1 --format='%h %<(50,trunc)%s')
+  - echo $COMMIT_MSG
+  - export DEPLOY_MSG=${COMMIT_MSG//[\'\"\`]/}
+  - echo $DEPLOY_MSG
+  
 before_script:
   - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
   - chmod +x ./_deploy.sh
@@ -70,8 +75,14 @@ after_success:
   - ./_deploy.sh
 
 deploy:
-  provider: script
-  script: netlify deploy --prod --dir _book
-  skip_cleanup: true
-  on:
-    branch: master
+  - provider: script
+    script: netlify deploy --dir _book --prod --message "$DEPLOY_MSG"
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: script
+    script: netlify deploy --dir _book --message "$DEPLOY_MSG"
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH != "master"
