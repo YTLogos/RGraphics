@@ -53,6 +53,7 @@
       - 回归模型策略 [Regression Modeling Strategies](http://biostat.mc.vanderbilt.edu/wiki/Main/RmS)
       - 应用预测建模 [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
       - 应用回归分析与广义线性模型 [Applied Regression Analysis and Generalized Linear Models](https://socialsciences.mcmaster.ca/jfox/)
+      - 数据融合，理论、方法和应用 [Data Fusion Theory, Methods, and Applications](http://www.gagolewski.com/publications/datafusion/)
    
    1. 数据可视化   
       - 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
@@ -234,3 +235,5 @@
 - A book about trouble spots, oddities, traps, glitches in R.  Many of the same problems are in S+. If you are using R and you think you’re in hell, this is a map for you. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
 
 - R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
+
+

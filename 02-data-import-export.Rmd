@@ -86,11 +86,9 @@ iris <- dget(file = 'iris.dat')
 
 戏称 [rio](https://github.com/leeper/rio) 包是数据导入导出 Input/Output  的瑞士军刀
 
-### JSON
+### jsonlite 与 yaml
 
-jsonlite
-
-###  YAML
+json
 
 yaml
 

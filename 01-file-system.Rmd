@@ -534,6 +534,8 @@ system2(command = 'g++', args = '--version')
 `help.search`
 `?regrex`
 
+`apropos`,`browseEnv`, `help.search` 
+
 ## R 包 {#package}
 
 ```{r,echo=TRUE}
@@ -569,7 +571,7 @@ apropos('package')
 1. `install.packages` 安装 R 包
 
     ```{r,echo=TRUE,eval=FALSE}
-    install.packages("bookdown")
+    install.packages("rmarkdown")
     ```
 
 1. `installed.packages` 已安装的 R 包
@@ -581,7 +583,7 @@ apropos('package')
 1. `remove.packages` 卸载/删除/移除已安装的R包
 
     ```{r,echo=TRUE,eval=FALSE}
-    remove.packages('bookdown')
+    remove.packages('rmarkdown')
     ```
  
 1. `update.packages` 更新已安装的 R 包
@@ -611,16 +613,16 @@ apropos('package')
 1. `packageDescription` 查询 R 包描述信息
 
     ```{r,echo=TRUE,out.lines=6}
-    packageDescription('bookdown')
+    packageDescription('rmarkdown')
     ```
 
 1. 查询 R 包的依赖关系
 
-    ```{r,echo=TRUE,eval=require('bookdown')}
-    # bookdown 依赖的 R 包
-    tools::package_dependencies('bookdown', recursive = TRUE)
-    # 依赖 bookdown 的 R 包
-    tools::dependsOnPkgs('bookdown', recursive = TRUE)
+    ```{r,echo=TRUE,eval=require('rmarkdown')}
+    # rmarkdown 依赖的 R 包
+    tools::package_dependencies('rmarkdown', recursive = TRUE)
+    # 依赖 rmarkdown 的 R 包
+    tools::dependsOnPkgs('rmarkdown', recursive = TRUE)
     ```
     
     ggplot2 生态，仅列出以 gg 开头的 R 包
