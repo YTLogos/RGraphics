@@ -89,6 +89,11 @@ knitr::kable(
 knitr::include_graphics(path = "figures/mai.png")
 ```
 
+如图 \@ref(fig:insert-fig) 所示
+
+![(\#fig:insert-fig) 插入图^[这里是脚注]](figures/mai.png){ width=45% }
+
+
 (ref:footnote) 表格标题里插入脚注，但是 ebooks 不支持这样插入脚注[^longnote]
 
 [^longnote]: Here's one with multiple blocks.
@@ -161,6 +166,12 @@ knitr::include_graphics(path = c("figures/mai.png","figures/mai.png"))
 ### TinyTeX {#tinytex}
 
 [TinyTeX 发行版和LaTeX 包管理器 tlmgr]{.todo}
+
+MacOS 添加 GPG 支持
+
+```
+tlmgr --repository http://www.preining.info/tlgpg/ install tlgpg
+```
 
 如何编译获取电子版，拉取镜像，安装缺失的依赖
 
