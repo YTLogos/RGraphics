@@ -4,6 +4,10 @@
 
 [stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包
 
+[re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2) 
+
+[正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
+
 在 R 控制台输入 `?regex` 查看正则表达式，`?regex` 可以看百八十遍
 
 R 语言中有两套正则表达式
