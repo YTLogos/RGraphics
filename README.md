@@ -5,7 +5,6 @@
 
 <img src="figures/by-nc-nd.png" width="120" align="right" />
 
-
 ---
 
 ## 参考材料
@@ -26,7 +25,7 @@
    1. 编程指南
       - R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
       - 高效R语言编程 [Efficient R programming](https://csgillespie.github.io/efficientR)
-   
+
    1. 开发 R 包
       - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  第二版 https://r-pkgs.org/
       - R 扩展 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
@@ -53,7 +52,7 @@
       - 回归模型策略 [Regression Modeling Strategies](http://biostat.mc.vanderbilt.edu/wiki/Main/RmS)
       - 应用预测建模 [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
       - 应用回归分析与广义线性模型 [Applied Regression Analysis and Generalized Linear Models](https://socialsciences.mcmaster.ca/jfox/)
-   
+
    1. 数据可视化   
       - 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
       - 数据可视化与R语言 [Data Visualisation with R --- 100 Examples](http://www.datavisualisation-r.com/)
@@ -61,40 +60,42 @@
       - 数据分析与图形艺术 [ggplot2: Elegant Graphics for Data Analysis](https://link.springer.com/book/10.1007%2F978-3-319-24277-4) [PDF](http://moderngraphics11.pbworks.com/f/ggplot2-Book09hWickham.pdf)
       - 数据可视化：实践指南 [Data Visualization: A practical introduction](https://socviz.co/) [Github](https://github.com/kjhealy/socviz)
       - 可视化数据分析与R语言 [Graphical Data Analysis with R](http://www.gradaanwr.net/)
-   
+
    1. 空间数据分析
       - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
       - 地质统计计算与 R 语言 [Geocomputation with R](https://geocompr.robinlovelace.net/)
       - 空间统计概念入门 [Introduction to Geospatial Concepts](https://datacarpentry.org/organization-geospatial/)
-   
+      - 用于生态学家的数据分析与可视化 [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/)
+
    1. 文本挖掘
       - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
       - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
       - 字符串处理 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/)
       - 文本挖掘 [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
-   
+
    1. 动态文档
       - 动态文档 [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
       - 写作 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown)
       - 网站 [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
-   
+
    1. 模型部署
       - Docker 入门 [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
       - Docker 从入门到实践 [docker practice](https://www.gitbook.com/book/yeasy/docker_practice)
-   
+
    1. 学习 R
       - R 安装与管理 [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
       - R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
       - 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
       - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
-   
+
    1. 学习 Python
-      - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
-      - [廖雪峰的Python3.x教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
-      
-      - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/)
-      - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
-      - [Python Cheatsheet](https://www.pythonsheets.com/) Python 英文版作弊手册集合
+       - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
+       - [廖雪峰的Python3.x教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
+       - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python
+       - [Python Cookbook 3rd Edition](https://python3-cookbook.readthedocs.io/zh_CN/latest/) 中文版
+       - [笨办法学Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) 
+       - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
+       - [Python Cheatsheet](https://www.pythonsheets.com/) Python 英文版作弊手册集合
 
    更多在线书籍合集 https://bookdown.org 还有一个[传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可参考 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
