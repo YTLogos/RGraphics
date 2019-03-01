@@ -36,11 +36,14 @@ addons:
   apt:
     sources:
       - sourceline: ppa:opencpu/imagemagick
+      - sourceline: ppa:git-core/ppa
     packages:
       - ghostscript
       - imagemagick
       - optipng
       - graphviz
+      # git2r
+      - libgit2-dev
       # for sf rgdal
       - libudunits2-dev
       - libproj-dev
