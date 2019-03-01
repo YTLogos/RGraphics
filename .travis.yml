@@ -7,7 +7,7 @@ matrix:
     - dist: xenial
       r: 3.5.2
     - os: osx
-      os_image: xcode9.4
+      os_image: xcode10.1
       env:
         - CC=clang
         - CXX=clang++
@@ -35,49 +35,52 @@ git:
 repos:
   CRAN: https://cloud.r-project.org
 
-addons:
-  apt:
-    sources:
-      - sourceline: ppa:opencpu/imagemagick
-      - sourceline: ppa:git-core/ppa
-    packages:
-      - ghostscript
-      - imagemagick
-      - optipng
-      - graphviz
-      # git2r
-      - libgit2-dev
-      # for sf rgdal
-      - libudunits2-dev
-      - libproj-dev
-      - libgeos-dev
-      - libgdal-dev
-      # for odbc
-      - unixodbc 
-      - unixodbc-dev
-      - odbc-postgresql
+- os: linux
+  addons:
+    apt:
+      sources:
+        - sourceline: ppa:opencpu/imagemagick
+        - sourceline: ppa:git-core/ppa
+      packages:
+        - ghostscript
+        - imagemagick
+        - optipng
+        - graphviz
+        # git2r
+        - libgit2-dev
+        # for sf rgdal
+        - libudunits2-dev
+        - libproj-dev
+        - libgeos-dev
+        - libgdal-dev
+        # for odbc
+        - unixodbc 
+        - unixodbc-dev
+        - odbc-postgresql
 
+  
 brew_packages: 
-      - ghostscript
-      - imagemagick
-      - optipng
-      - graphviz
-      # for sf
-      - gdal
-      # for odbc
-      - unixodbc
-      # PostgreSQL ODBC ODBC Drivers
-      - psqlodbc
+  - ghostscript
+  - imagemagick
+  - optipng
+  - graphviz
+  # for sf
+  - gdal
+  # for odbc
+  - unixodbc
+  # PostgreSQL ODBC ODBC Drivers
+  - psqlodbc
 
 before_install:
 #  - mkdir ~/.R
 #  - cp Makevars ~/.R
   - nvm install stable
   - npm install netlify-cli -g
-  - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
-  - tar -xzf /tmp/tinytex.tar.gz -C $HOME
-  - export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
-  - tlmgr install $(cat latex/TeXLive.pkgs | tr '\n' ' ') || true
+ # for TinyTeX 
+#  - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
+#  - tar -xzf /tmp/tinytex.tar.gz -C $HOME
+#  - export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
+#  - tlmgr install $(cat latex/TeXLive.pkgs | tr '\n' ' ') || true
   
   - export COMMIT_MSG=$(git log -1 --format='%h %<(50,trunc)%s')
   - echo $COMMIT_MSG
@@ -85,6 +88,8 @@ before_install:
   - echo $DEPLOY_MSG
   
 before_script:
+  - Rscript -e 'tinytex::install_tinytex()' 
+  - tlmgr install $(cat latex/TeXLive.pkgs | tr '\n' ' ') || true
   - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
   - chmod +x ./_deploy.sh
 
