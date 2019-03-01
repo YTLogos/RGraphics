@@ -7,8 +7,11 @@ matrix:
     - dist: xenial
       r: 3.5.2
     - os: osx
-      os_image: xcode10.1
-    
+      os_image: xcode9.4
+      env:
+        - CC=clang
+        - CXX=clang++
+
 sudo: true
 cache:
   packages: true
@@ -59,6 +62,12 @@ brew_packages:
       - imagemagick
       - optipng
       - graphviz
+      # for sf
+      - gdal
+      # for odbc
+      - unixodbc
+      # PostgreSQL ODBC ODBC Drivers
+      - psqlodbc
 
 before_install:
 #  - mkdir ~/.R
