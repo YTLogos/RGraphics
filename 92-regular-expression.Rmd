@@ -1,26 +1,10 @@
 # 正则表达式 {#regex}
 
-  Handling Strings with R 
+[Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
 
-- https://www.gastonsanchez.com/r4strings/
-
-  Text Mining with R A Tidy Approach
-
-- https://www.tidytextmining.com/
-
-  stringr: Simple, Consistent Wrappers for Common String Operations
-
-- https://stringr.tidyverse.org/
+[stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包
 
 在 R 控制台输入 `?regex` 查看正则表达式，`?regex` 可以看百八十遍
-
-入门字符串处理
-
-- https://r4ds.had.co.nz/strings.html
-
-stringi: Character String Processing Facilities
-
-- http://www.gagolewski.com/software/stringi/manual/
 
 R 语言中有两套正则表达式
 
@@ -32,17 +16,13 @@ There is also `fixed = TRUE` which can be considered to use a *literal regular e
 
 学习正则表达式的路径^[<https://d.cosx.org/d/420410>]
 
-
-
 regex Regular Expressions as used in R
 
 > grep and related functions grepl, regexpr, gregexpr, sub and gsub, as well as by strsplit.
 
 谢益辉常用的操作函数是 `grep()`、`gsub()`、`gregexpr()` 和 `regmatches()`
 
-支持正则表达式的函数 `grep`, `apropos`, `browseEnv`, `glob2rx`, `help.search`, `list.files`, `ls` and `strsplit`.
-
-apropos, browseEnv, help.search, list.files and ls 函数通过使用 grep 使用正则表达式 extended regular expressions.
+支持正则表达式的函数 `grep`, `glob2rx` and `strsplit` 函数通过使用 `grep` 使用正则表达式 extended regular expressions.
 
 
 正则表达式的构造方式类似算术表达式，通过各种操作组合子（更小的）表达式，整个表达式匹配一个或多个字符。[^char-byte]
@@ -78,21 +58,21 @@ apropos, browseEnv, help.search, list.files and ls 函数通过使用 grep 使�
   ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~`
   ```
 
-- `[:space:]` 表示空格字符 tab（水平制表符）, newline 换行符, 垂直制表符 vertical tab, form feed 换页符, carriage return回车符, space 空格
+- `[:space:]` 表示空格字符 tab（水平制表符）, newline 换行符, 垂直制表符 vertical tab, form feed 换页符， carriage return回车符, space 空格
 - `[:xdigit:]` 表示 16 进制数字 0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f.
-- `[[:alnum:]]` 的含义是 `[0-9A-Za-z]`，但是前者与区域和字符集无关，后者依赖于当前的区域设置和字符编码。要注意在这些字符集名 class names 中，中括号`[]`是符号名的一部分,是必须要包含的。在字符集中，大多数元字符 metacharacters 失去它们特殊的意义。
+- `[[:alnum:]]` 的含义是 `[0-9A-Za-z]`，但是前者与区域和字符集无关，后者依赖于当前的区域设置和字符编码。要注意在这些字符集名 class names 中，中括号 `[]` 是符号名的一部分，是必须要包含的。在字符集中，大多数元字符 metacharacters 失去它们特殊的意义。
 
 To include a literal ], place it first in the list. Similarly, to include a literal ^, place it anywhere but first. Finally, to include a literal -, place it first or last (or, for perl = TRUE only, precede it by a backslash). (Only ^ - \ ] are special inside character classes.)
 
-点号 . 匹配任意单个字符，`\w` 匹配一个词 word 字符(是[[:alnum:]_]的同义词，一个扩展) ，而 `\W` 是 `\w` 取反，意味着 [^[:alnum:]_]。 `\d`, `\s`, `\D` 和 `\S` 表示数字和空格类和它们的取反
+点号 . 匹配任意单个字符，`\w` 匹配一个词 word 字符(是`[[:alnum:]_]`的同义词，一个扩展) ，而 `\W` 是 `\w` 取反，意味着 [^[:alnum:]_]。 `\d`, `\s`, `\D` 和 `\S` 表示数字和空格类和它们的取反
 
 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
 一个正则表达式可能跟着重复量词 repetition quantifiers
 
-- `?` 前面的项目匹配至多1次
-- `*` 前面的项目匹配0次或多次
-- `+` 前面的项目匹配至少1次
+- `?` 前面的项目匹配至多 1 次
+- `*` 前面的项目匹配 0 次或多次
+- `+` 前面的项目匹配至少 1 次
 - `{n}` 前面的项目匹配 n 次.
 - `{n,}` 前面的项目匹配至少 n 次.
 - `{n,m}` 前面的项目匹配至少 n 次 至多 m 次
@@ -105,12 +85,12 @@ Regular expressions may be concatenated; the resulting regular expression matche
 
 > 高级特性
 
-Two regular expressions may be joined by the infix operator |; the resulting regular expression matches any string matching either subexpression. For example, abba|cde matches either the string abba or the string cde. Note that alternation does not work inside character classes, where | has its literal meaning.
+Two regular expressions may be joined by the infix operator `|`; the resulting regular expression matches any string matching either subexpression. For example, abba|cde matches either the string abba or the string cde. Note that alternation does not work inside character classes, where `|` has its literal meaning.
 
-两个正则表达式可以通过中缀符号 | 联合，用两个子表达式的任意一个去匹配字符串，例如 `abba | cde` 要么匹配字符串 abba 要么匹配字符串 cde，要注意在字符集内，二选一的匹配不凑效，因为中缀符 | 有它的字面意思 literal meaning
+两个正则表达式可以通过中缀符号 `|` 联合，用两个子表达式的任意一个去匹配字符串，例如 `abba | cde` 要么匹配字符串 abba 要么匹配字符串 cde，要注意在字符集内，二选一的匹配不凑效，因为中缀符 `|` 有它的字面意思 literal meaning
 
 
-重复匹配的优先级高于级联，级联高于 | 。 整个子表达式可以括号括起来覆盖这些优先级规则。
+重复匹配的优先级高于级联，级联高于 `|` 。 整个子表达式可以括号括起来覆盖这些优先级规则。
 Repetition takes precedence over concatenation, which in turn takes precedence over alternation. A whole subexpression may be enclosed in parentheses to override these precedence rules.
 
 反向引用 `\N` 这里 N 可取 1,2,...,9 匹配被之前第 N 个括起来的子表达式匹配的子字符串
