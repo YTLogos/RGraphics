@@ -1,5 +1,10 @@
 language: r
-dist: trusty
+
+matrix:
+  include:
+    - dist: trusty
+    - dist: xenial
+    
 sudo: true
 cache:
   packages: true
@@ -31,20 +36,16 @@ addons:
       - ghostscript
       - imagemagick
       - optipng
-      - libosmesa6
-      - libosmesa6-dev
-      - freeglut3
-      - freeglut3-dev
       - graphviz
-      #- asymptote
+      # for sf rgdal
       - libudunits2-dev
       - libproj-dev
       - libgeos-dev
       - libgdal-dev
+      # for odbc
       - unixodbc 
       - unixodbc-dev
       - odbc-postgresql
-      #- phantomjs
 
 before_install:
 #  - mkdir ~/.R
