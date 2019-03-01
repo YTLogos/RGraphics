@@ -3,7 +3,11 @@ language: r
 matrix:
   include:
     - dist: trusty
+      r: 3.5.2 
     - dist: xenial
+      r: 3.5.2
+    - os: osx
+      os_image: xcode10.1
     
 sudo: true
 cache:
@@ -47,6 +51,12 @@ addons:
       - unixodbc-dev
       - odbc-postgresql
 
+brew_packages: 
+      - ghostscript
+      - imagemagick
+      - optipng
+      - graphviz
+
 before_install:
 #  - mkdir ~/.R
 #  - cp Makevars ~/.R
@@ -87,3 +97,8 @@ deploy:
     on:
       all_branches: true
       condition: $TRAVIS_BRANCH != "master"
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
