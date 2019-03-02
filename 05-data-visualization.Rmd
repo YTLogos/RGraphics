@@ -6,10 +6,12 @@
 
 50 个 ggplot2 数据可视化例子[^fifty-ggplot2] 为何使用 ggplot2 [^why-ggplot2]
 
-
 [^fifty-ggplot2]: https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 
+## 基本使用 {#ggplot2-base}
+
+首先我们加载 R 包 ggplot2 
 
 ```{r,echo=TRUE}
 library(ggplot2)
@@ -45,13 +47,57 @@ ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(color = "steelblue")
 ```
 
-
 让另一变量 cut 作为颜色分类指标
 
 ```{r scatter-color-2,fig.cap="分类散点图",echo=TRUE}
 ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
   geom_point()
 ```
+
+当然还有一种类似的表示就是分组，默认情况下，ggplot2将所有观测点视为一组，以分类变量 cut 来分组
+
+```{r scatter-group,echo=TRUE,fig.cap="分组",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
+  geom_point()
+```
+
+在图\@ref(fig:scatter-group) 上没有体现出来分组的意思，下面以 cut 分组线性回归为例
+
+```{r group-lm,fig.cap="分组线性回归",echo=TRUE,fig.ncol=1}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+我们当然可以选择更加合适的拟合方式，如局部多项式平滑 `loess` 但是该方法不太适用观测值比较多的情况，因为它会占用比较多的内存，建议使用广义可加模型作平滑拟合
+
+```{r,eval=FALSE,echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
+  geom_point() +
+  geom_smooth(method = "loess")
+```
+```{r group-gam,fig.cap="数据分组应用广义可加平滑",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs"))
+```
+
+为了更好地区分开组别，我们在图\@ref(fig:group-gam)的基础上分面或者配色
+
+```{r group-facet,fig.cap=c("分组分面","分组配色"),echo=TRUE,fig.ncol=1}
+ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs")) +
+  facet_grid(~cut)
+ggplot(diamonds, aes(x = carat, y = price, group = cut, color = cut)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs"))
+```
+
+
 
 在分类散点图的另一种表示方法就是分面图，以 cut 变量作为分面的依据
 
