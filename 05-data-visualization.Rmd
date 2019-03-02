@@ -9,7 +9,7 @@
 [^fifty-ggplot2]: https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 
-## 基本使用 {#ggplot2-base}
+## 散点图 {#ggplot2-scatter}
 
 首先我们加载 R 包 ggplot2 
 
@@ -97,8 +97,6 @@ ggplot(diamonds, aes(x = carat, y = price, group = cut, color = cut)) +
   geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs"))
 ```
 
-
-
 在分类散点图的另一种表示方法就是分面图，以 cut 变量作为分面的依据
 
 ```{r scatter-facet,fig.cap="分面散点图",echo=TRUE}
@@ -129,6 +127,35 @@ ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
 ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
   geom_point(show.legend = FALSE) +
   facet_grid(~cut)
+```
+
+图层、分组、分面和散点图介绍完了，接下来就是其它统计图形，如箱线图，小提琴图和条形图
+
+## 箱线图 {#ggplot2-boxplot}
+
+以钻石切割质量 cut 为分面依据，以钻石颜色类别 color 为 x 轴，钻石价格为 y 轴，绘制箱线图\@ref(fig:boxplot-facet-color)
+
+```{r boxplot-facet-color,fig.cap="箱线图"}
+ggplot(diamonds, aes(x = color, y = price, color = cut)) +
+  geom_boxplot(show.legend = FALSE) +
+  facet_grid(~cut)
+```
+
+我们当然还可以添加钻石的纯净度 clarity 作为分面依据，那么箱线图可以为图 \@ref(fig:boxplot-facet-color-clarity-1)，但是经过观察，我们发现水平分类过多，考虑用切割质量 cut 替换钻石颜色 color 绘图，但是由于分类过细，图信息展示不简练，反而不好，如图 \@ref(fig:boxplot-facet-color-clarity-2)
+
+```{r boxplot-facet-color-clarity-1,fig.cap="复合分面箱线图"}
+ggplot(diamonds, aes(x = color, y = price, color = cut)) +
+  geom_boxplot(show.legend = FALSE) +
+  facet_grid(clarity~cut)
+```
+
+```{r boxplot-facet-color-clarity-2,echo=TRUE,fig.cap=c("切割质量cut上色","钻石颜色配色"),fig.ncol=1}
+ggplot(diamonds, aes(x = cut, y = price, color = cut)) +
+  geom_boxplot(show.legend = FALSE) +
+  facet_grid(clarity~color)
+ggplot(diamonds, aes(x = cut, y = price, color = color)) +
+  geom_boxplot(show.legend = FALSE) +
+  facet_grid(clarity~color)
 ```
 
 
