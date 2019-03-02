@@ -299,16 +299,23 @@ shiny 开源服务器版
 
 ### Eclipse + StatET {#eclipse-plus-statet}
 
-Eclipse 配合 StatET 插件^[<http://www.walware.de/goto/statet>]提供R语言的集成开发环境^[<https://projects.eclipse.org/projects/science.statet>]
+Eclipse 配合 StatET 插件 <http://www.walware.de/goto/statet> 提供R语言的集成开发环境 <https://projects.eclipse.org/projects/science.statet>
+
+```{r eclipse-statet,fig.cap="基于 Eclipse 的 R 集成开发环境 StatET"}
+knitr::include_graphics(path = "figures/StatET-06.png")
+```
+
+StatET 基于 Eclipse 首次建立索引很慢，估计半小时到一个小时，添加新的 R 包后，每次启动 StatET 也会建立索引缓存，此外，Eclipse 开发环境占用内存比较多，配置 StatET 的过程如下
+
 
 ### Emacs + ESS {#emacs-plus-ess}
 
-Emacs 配合 ESS 插件^[<https://ess.r-project.org/>] 
+Emacs 配合 ESS 插件 <https://ess.r-project.org/>
 
 
 ### Nvim-R {#vim-plus-r}
 
-Nvim-R 是一个基于 Vim 的集成开发环境^[<https://github.com/jalvesaq/Nvim-R>]
+Nvim-R 是一个基于 Vim 的集成开发环境 <https://github.com/jalvesaq/Nvim-R>
 
 ## 容器 {#container}
 
@@ -703,7 +710,7 @@ for (i in seq(length(list.files(tmp)))) {
 
 ### QPDF
 
-[qpdf](https://github.com/ropensci/qpdf) 库[^qpdf-cpp]由搬运狂魔 Jeroen Ooms 搬运至 R 系统中，用于 PDF 文件的拆分，组合，加密，优化和压缩等。
+[qpdf](https://github.com/ropensci/qpdf) 库[^qpdf-cpp] 由搬运狂魔 Jeroen Ooms 搬运至 R 系统中，用于 PDF 文件的拆分，组合，加密，优化和压缩等。
 
 [^qpdf-cpp]: https://github.com/qpdf/qpdf
 

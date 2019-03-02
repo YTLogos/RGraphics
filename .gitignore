@@ -6,7 +6,7 @@
 *.log
 rsconnect
 packages.bib
-
+.project
 _book/
 _bookdown_files/
 test/
