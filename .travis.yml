@@ -6,15 +6,7 @@ matrix:
       r: 3.5.2 
     - dist: xenial
       r: 3.5.2
-    
-    #- os: osx
-    #  os_image: xcode10.1
-    #  r: 
-    #   - 3.5.2
-    #   - devel
-    #  env:
-    #    - CC=clang
-    #    - CXX=clang++
+
 
 sudo: true
 cache:
@@ -39,28 +31,27 @@ git:
 repos:
   CRAN: https://cloud.r-project.org
 
-- os: linux
-  addons:
-    apt:
-      sources:
-        - sourceline: ppa:opencpu/imagemagick
-        - sourceline: ppa:git-core/ppa
-      packages:
-        - ghostscript
-        - imagemagick
-        - optipng
-        - graphviz
-        # git2r
-        - libgit2-dev
-        # for sf rgdal
-        - libudunits2-dev
-        - libproj-dev
-        - libgeos-dev
-        - libgdal-dev
-        # for odbc
-        - unixodbc 
-        - unixodbc-dev
-        - odbc-postgresql
+addons:
+  apt:
+    sources:
+      - sourceline: ppa:opencpu/imagemagick
+      - sourceline: ppa:git-core/ppa
+    packages:
+      - ghostscript
+      - imagemagick
+      - optipng
+      - graphviz
+      # git2r
+      - libgit2-dev
+      # for sf rgdal
+      - libudunits2-dev
+      - libproj-dev
+      - libgeos-dev
+      - libgdal-dev
+      # for odbc
+      - unixodbc 
+      - unixodbc-dev
+      - odbc-postgresql
 
   
 #brew_packages: 
@@ -68,11 +59,9 @@ repos:
 #  - imagemagick
 #  - optipng
 #  - graphviz
-  # for sf
+
 #  - gdal
-  # for odbc
 #  - unixodbc
-  # PostgreSQL ODBC ODBC Drivers
 #  - psqlodbc
 
 before_install:
@@ -80,7 +69,6 @@ before_install:
 #  - cp Makevars ~/.R
   - nvm install stable
   - npm install netlify-cli -g
- # for TinyTeX 
   - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
   - tar -xzf /tmp/tinytex.tar.gz -C $HOME
   - export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
@@ -93,7 +81,7 @@ before_install:
   
 before_script:
  # - Rscript -e 'tinytex::install_tinytex()' 
- # - tlmgr install $(cat latex/TeXLive.pkgs | tr '\n' ' ') || true
+ # - Rscript -e 'tinytex::tlmgr_install(readLines("latex/TeXLive.pkgs"))'
   - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
 
 script:
