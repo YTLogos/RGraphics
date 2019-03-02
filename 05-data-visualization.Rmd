@@ -1,51 +1,107 @@
-# 数据可视化 {#visualization}
+# 数据可视化 {#data-visualization}
 
-Nice Bar Graph from Data Visualisation with R: 100 Examples
-https://rpubs.com/chidungkt/392980
+[条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
 
-Comprehensive list of color palettes available in r
-https://github.com/EmilHvitfeldt/r-color-palettes
+[R语言调色版合集](https://github.com/EmilHvitfeldt/r-color-palettes)
+
+50 个 ggplot2 数据可视化例子[^fifty-ggplot2] 为何使用 ggplot2 [^why-ggplot2]
 
 
-Top 50 ggplot2 Visualizations - The Master List (With Full R Code)
+[^fifty-ggplot2]: https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
+[^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 
-http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
-https://data-se.netlify.com/2017/11/20/great-dataviz-examples-in-rstats/
-
-Why I use ggplot2
-http://varianceexplained.org/r/why-I-use-ggplot2/
-
-[Lemniscate of Bernoulli](https://www.wikiwand.com/en/Lemniscate_of_Bernoulli) 双纽线
-
-```r
-x = a*sqrt(2*cos(2*theta))*cos(theta)
-y = a*sqrt(2*cos(2*theta))*sin(theta)
-theta = -pi/4 pi/4 
-theta = 3/4*pi 5/4*pi
+```{r,echo=TRUE}
+library(ggplot2)
 ```
+
+下面以 diamonds 数据集为例展示 ggplot2 的绘图过程，首先加载 diamonds 数据集，查看数据集的内容
+
+```{r load-data,echo=TRUE}
+data(diamonds)
+str(diamonds)
+```
+
+数值型变量 carat 作为 x 轴
+
+```{r diamonds-axis,fig.cap=c("指定 x 轴","数值变量 price 作为纵轴","有序分类变量 cut 指定颜色","指定统一颜色"),echo=TRUE,out.width="35%",fig.align='center',fig.ncol=2,fig.width=3}
+ggplot(diamonds, aes(x = carat))
+ggplot(diamonds, aes(x = carat, y = price))
+ggplot(diamonds, aes(x = carat, color = cut))
+ggplot(diamonds, aes(x = carat), color = "steelblue")
+```
+
+图 \@ref(fig:diamonds-axis) 的基础上添加数据图层
+
+```{r scatter,fig.cap="添加数据图层"}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point()
+```
+
+给散点图\@ref(fig:scatter)上色
+
+```{r scatter-color-1,fig.cap="散点图配色" }
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(color = "steelblue")
+```
+
+
+让另一变量 cut 作为颜色分类指标
+
+```{r scatter-color-2,fig.cap="分类散点图",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
+  geom_point()
+```
+
+在分类散点图的另一种表示方法就是分面图，以 cut 变量作为分面的依据
+
+```{r scatter-facet,fig.cap="分面散点图",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point() +
+  facet_grid(~cut)
+```
+
+给图 \@ref(fig:scatter-facet) 上色
+
+```{r scatter-facet-color-1,fig.cap="给分面散点图上色",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(color = "steelblue") +
+  facet_grid(~cut)
+```
+
+在图\@ref(fig:scatter-facet-color-1)的基础上，给不同的类上不同的颜色
+
+```{r scatter-facet-color-2,fig.cap="给不同的类上不同的颜色",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
+  geom_point() +
+  facet_grid(~cut)
+```
+
+去掉图例，此时图例属于冗余信息了
+
+```{r scatter-facet-color-3,fig.cap="去掉图例",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
+  geom_point(show.legend = FALSE) +
+  facet_grid(~cut)
+```
+
 
 
 ## 空间数据可视化 {#sp-vis}
 
 数据类型复杂，空间数据相关，地图
 
-用 R 画中国地图并标注城市位置
-https://yihui.name/cn/2008/10/china-map-and-city-locations-with-r/
-
-无法重现但是用 base R 画地图的用法可以借鉴
-
 Introduction to spatial analysis in R (rasters/sf) 
 
-https://github.com/jafflerbach/spatial-analysis-R
-https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html
-https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html
+<https://github.com/jafflerbach/spatial-analysis-R>
+<https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html>
+<https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html>
 
 An Introduction to Spatial Econometrics in R
-http://www.econ.uiuc.edu/~lab/workshop/Spatial_in_R.html
-https://ignaciomsarmiento.github.io/2017/02/07/An-Introduction-to-Spatial-Econometrics-in-R
+<http://www.econ.uiuc.edu/~lab/workshop/Spatial_in_R.html>
+<https://ignaciomsarmiento.github.io/2017/02/07/An-Introduction-to-Spatial-Econometrics-in-R>
 
-[Data wrangling visualisation and spatial analysis: R Workshop](https://www.seascapemodels.org/data/data-wrangling-spatial-course.html)
+数据清洗，可视化和空间分析 [Data wrangling visualisation and spatial analysis: R Workshop](https://www.seascapemodels.org/data/data-wrangling-spatial-course.html)
 
 [Regional smoothing using R](https://pudding.cool/process/regional_smoothing/)
  
@@ -63,9 +119,9 @@ https://ignaciomsarmiento.github.io/2017/02/07/An-Introduction-to-Spatial-Econom
 - [Fast GeoSpatial Analysis in Python](http://matthewrocklin.com/blog/work/2017/09/21/accelerating-geopandas-1)
 - [A gentle INLA tutorial](https://www.precision-analytics.ca/blog-1/inla)
 
-- Reproducible road safety research: an exploration of the shifting spatial and temporal distribution of car-pedestrian crashes
+- Reproducible road safety research: an exploration of the shifting spatial and temporal distribution of car-pedestrian crashes <https://github.com/Robinlovelace/stats19-gisruk>
 
-https://github.com/Robinlovelace/stats19-gisruk
+出租车地理信息可视化 <https://data-se.netlify.com/2017/11/20/great-dataviz-examples-in-rstats/>
 
 ### raster 对象
 
@@ -120,7 +176,7 @@ spplot(nc, c("SID74", "SID79"),
 ```
 
 ::: warning
-maptools 提供的 readShapePoly 函数去读取 shp 文件的方式已经过时，推荐使用 `rgdal::readOGR` 或者 `sf::st_read` 方式读取
+maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过时，推荐使用 `rgdal::readOGR` 或者 `sf::st_read` 方式读取
 :::
 
 ### sf 对象 {#simple-features}
@@ -135,10 +191,6 @@ maptools 提供的 readShapePoly 函数去读取 shp 文件的方式已经过时
 
 - sp
 - sf
-
-
-
-
 
 ## 网络数据可视化 {#net-vis}
 

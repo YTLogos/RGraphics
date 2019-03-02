@@ -136,7 +136,7 @@
   - [Erich Leo Lehmann](https://en.wikipedia.org/wiki/Erich_Leo_Lehmann) 1917-2019 https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-985X.2010.00645_1.x
   - [Peter Hall](https://en.wikipedia.org/wiki/Peter_Gavin_Hall) 1951-2016 https://royalsocietypublishing.org/doi/pdf/10.1098/rsbm.2017.0035
 
-
+  - [Sebastian Sauer](https://data-se.netlify.com)
   - [Peter J. Diggle](https://www.lancaster.ac.uk/staff/diggle/)
   - [Rob J Hyndman](https://robjhyndman.com/)
   - [Julian Faraway](https://farawaystatistics.wordpress.com/)

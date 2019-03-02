@@ -25,7 +25,7 @@ rmd_files:
   - "03a-data-manipulation.Rmd"
   - "03b-data-wrangeling.Rmd"
   - "04-statistical-graphics.Rmd"
-#  - "05-data-visualization.Rmd"
+  - "05-data-visualization.Rmd"
   
   - "92-regular-expression.Rmd"
 #  - "93-object-oriented-programming.Rmd"
