@@ -8,7 +8,9 @@ matrix:
       r: 3.5.2
     - os: osx
       os_image: xcode10.1
-      r: 3.5.2
+      r: 
+       - 3.5.2
+       - devel
       env:
         - CC=clang
         - CXX=clang++
