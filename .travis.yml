@@ -89,7 +89,7 @@ script:
 
 # deploy 
 after_success:
-  - make pdf
+#  - make pdf
   - ./_deploy.sh
 
 deploy:
