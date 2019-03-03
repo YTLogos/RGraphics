@@ -3,6 +3,7 @@ Type: Book
 Title: R Graphics.
 Version: 0.0.1
 Imports: 
+  BiocManager,
   bookdown,
   DAAG,
   DBI,

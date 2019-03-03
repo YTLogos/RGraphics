@@ -227,7 +227,17 @@ with(diamonds, table(color, clarity, cut))
 
 ## 直方图 {#ggplot2-histogram}
 
-查看连续变量的分布
+直方图用来查看连续变量的分布
+
+```{r,fig.cap="钻石价格的分布",echo=TRUE}
+ggplot(diamonds,aes(price)) + geom_histogram(bins=30)
+```
+
+堆积直方图
+
+```{r,fig.cap="钻石价格随切割质量的分布",echo=TRUE}
+ggplot(diamonds,aes(x = price, fill = cut)) + geom_histogram(bins=30)
+```
 
 ## 箱线图的替代品 {#violin-jitter-ridge}
 
@@ -388,8 +398,6 @@ maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过�
 
 [Rgraphviz](https://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html) 基于 [Graphviz](https://www.graphviz.org/)
 
-```{r,echo=TRUE,eval=FALSE}
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+```{r,echo=TRUE,eval=!require(Rgraphviz)}
 BiocManager::install("Rgraphviz", version = "3.8")
 ```
