@@ -90,6 +90,8 @@ script:
 # deploy 
 after_success:
 #  - make pdf
+
+after_script:
   - ./_deploy.sh
 
 deploy:
