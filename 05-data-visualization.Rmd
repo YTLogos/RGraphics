@@ -143,7 +143,7 @@ ggplot(diamonds, aes(x = color, y = price, color = cut)) +
 
 我们当然还可以添加钻石的纯净度 clarity 作为分面依据，那么箱线图可以为图 \@ref(fig:boxplot-facet-color-clarity-1)，但是经过观察，我们发现水平分类过多，考虑用切割质量 cut 替换钻石颜色 color 绘图，但是由于分类过细，图信息展示不简练，反而不好，如图 \@ref(fig:boxplot-facet-color-clarity-2)
 
-```{r boxplot-facet-color-clarity-1,fig.cap="复合分面箱线图"}
+```{r boxplot-facet-color-clarity-1,fig.cap="复合分面箱线图",echo=TRUE}
 ggplot(diamonds, aes(x = color, y = price, color = cut)) +
   geom_boxplot(show.legend = FALSE) +
   facet_grid(clarity~cut)
@@ -164,7 +164,7 @@ ggplot(diamonds, aes(x = cut, y = price, color = color)) +
 
 ```{r,echo=TRUE,eval=FALSE}
 # 需要映射数据框的两个变量，相当于自己先计算了每类的数量
-table(diamonds$cut)
+with(diamonds, table(cut))
 cut_df <- as.data.frame(table(diamonds$cut))
 ggplot(cut_df, aes(x = Var1, y = Freq)) + geom_bar(stat = "identity")
 ```
@@ -231,8 +231,33 @@ with(diamonds, table(color, clarity, cut))
 
 ## 箱线图的替代品 {#violin-jitter-ridge}
 
-小提琴图，抖动图和岭线图
+小提琴图，抖动图和岭线图/密度图
 
+```{r violin,fig.cap=c("箱线图","小提琴图"),echo=TRUE,fig.ncol=1}
+ggplot(diamonds, aes(x = cut, y = price)) + geom_boxplot()
+ggplot(diamonds, aes(x = cut, y = price)) + geom_violin()
+```
+
+添加透明度，解决遮挡
+
+```{r density,fig.cap=c("密度图","添加透明度的密度图"),echo=TRUE,fig.ncol=1}
+ggplot(diamonds, aes(x = price, fill = cut)) + geom_density()
+ggplot(diamonds, aes(x = price, fill = cut)) + geom_density(alpha = 0.5)
+```
+
+堆积密度图
+
+```{r stack-density,fig.cap="堆积密度图",echo=TRUE}
+ggplot(diamonds, aes(x = price, fill = cut)) + geom_density(position = "stack")
+```
+
+条件密度估计
+
+```{r,fig.cap="条件密度估计图",echo=TRUE}
+# You can use position="fill" to produce a conditional density estimate
+ggplot(diamonds, aes(carat, stat(count), fill = cut)) +
+  geom_density(position = "fill")
+```
 
 ## 玫瑰图 {#nightingale-rose}
 
@@ -289,19 +314,19 @@ An Introduction to Spatial Econometrics in R
 
 星号 * 标记的是 S3 方法
 
-```{r}
+```{r,echo=TRUE}
 methods(plot)
 ```
 
 查看函数的定义
 
-```{r}
+```{r,echo=TRUE}
 getAnywhere(plot.raster)
 ```
 
 rasterImage 函数来绘制图像，如果想知道 `rasterImage` 的内容可以继续看 `getAnywhere(rasterImage)`
 
-```{r}
+```{r,echo=TRUE}
 getAnywhere(rasterImage)
 ```
 
@@ -312,7 +337,7 @@ getAnywhere(rasterImage)
 
 空间数据对象，以类 sp 方式存储 [@Pebesma_2005_sp]
 
-```{r,eval=FALSE}
+```{r,eval=FALSE,echo=TRUE}
 library(sp)
 data(meuse)
 coords <- SpatialPoints(meuse[c("x", "y")])
