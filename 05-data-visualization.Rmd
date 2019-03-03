@@ -233,6 +233,9 @@ with(diamonds, table(color, clarity, cut))
 
 时间序列数据的展示，时序图
 
+```{r,fig.cap="时序图",echo=TRUE}
+ggplot(economics, aes(date, unemploy)) + geom_line()
+```
 
 
 ## 直方图 {#ggplot2-histogram}
@@ -249,14 +252,41 @@ ggplot(diamonds,aes(price)) + geom_histogram(bins=30)
 ggplot(diamonds,aes(x = price, fill = cut)) + geom_histogram(bins=30)
 ```
 
-## 箱线图的替代品 {#violin-jitter-ridge}
+## 提琴图{#violin}
 
-小提琴图，抖动图和岭线图/密度图
+提琴图
 
 ```{r violin,fig.cap=c("箱线图","小提琴图"),echo=TRUE,fig.ncol=1}
 ggplot(diamonds, aes(x = cut, y = price)) + geom_boxplot()
 ggplot(diamonds, aes(x = cut, y = price)) + geom_violin()
 ```
+
+## 抖动图 {#jitter}
+
+```{r,fig.cap="抖动图",echo=TRUE}
+ggplot(diamonds, aes(x = cut, y = price)) + geom_jitter()
+```
+
+分面抖动图
+
+```{r,fig.cap=c("抖动图","根据钻石颜色上色"),fig.ncol=1,echo=TRUE}
+ggplot(diamonds, aes(x = color, y = price)) + 
+  geom_jitter() +
+  facet_grid(~cut)
+ggplot(diamonds, aes(x = color, y = price, color=color)) + 
+  geom_jitter() +
+  facet_grid(~cut)
+```
+
+筛选钻石颜色为 D 纯净度为 SI2 的数据集，全数据集太大，不适合用抖动图表示
+
+```{r,fig.cap="抖动图的反例",echo=TRUE}
+ggplot(diamonds, aes(x = color, y = price)) +
+  geom_boxplot() + geom_jitter() +
+  facet_grid(cut~clarity)
+```
+
+## 密度图 {#ridge}
 
 添加透明度，解决遮挡
 
