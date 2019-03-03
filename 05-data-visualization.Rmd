@@ -1,14 +1,18 @@
 # 数据可视化 {#data-visualization}
 
-[条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
-
-[R语言调色版合集](https://github.com/EmilHvitfeldt/r-color-palettes)
-
-50 个 ggplot2 数据可视化例子[^fifty-ggplot2] 为何使用 ggplot2 [^why-ggplot2]
+50 个 ggplot2 数据可视化例子[^fifty-ggplot2] 
 
 [^fifty-ggplot2]: https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
+
+## Why ggplot2? {#why-ggplot2}
+
+为何使用 ggplot2 [^why-ggplot2]
+
+
+
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 
+## ggplot2 简介 {#intro-ggplot2}
 
 首先我们加载 R 包 ggplot2 
 
@@ -77,14 +81,14 @@ ggplot(diamonds, aes(x = carat), color = "steelblue")
 
 图 \@ref(fig:diamonds-axis) 的基础上添加数据图层
 
-```{r scatter,fig.cap="添加数据图层"}
+```{r scatter,fig.cap="添加数据图层",echo=TRUE}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point()
 ```
 
 给散点图\@ref(fig:scatter)上色
 
-```{r scatter-color-1,fig.cap="散点图配色" }
+```{r scatter-color-1,fig.cap="散点图配色",echo=TRUE}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(color = "steelblue")
 ```
@@ -294,7 +298,7 @@ ggplot(diamonds, aes(price)) + geom_histogram(bins = 30)
 ggplot(diamonds, aes(x = price, fill = cut)) + geom_histogram(bins = 30)
 ```
 
-## 提琴图{#violin}
+## 提琴图 {#violin}
 
 提琴图
 

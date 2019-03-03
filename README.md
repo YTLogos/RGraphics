@@ -12,6 +12,8 @@
 - 作者 [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf)  后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得
 
 - 获取帮助 [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336)
+- [R语言调色版合集](https://github.com/EmilHvitfeldt/r-color-palettes)
+- [条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
 
 ## 相关资源
 
