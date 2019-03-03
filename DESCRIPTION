@@ -19,5 +19,5 @@ Imports:
   svglite,
   tidyverse,
   tikzDevice
-URL: https://ggplot.netlify.com/, https://bookdown.org/xiangyun/RGraphics/
+URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
