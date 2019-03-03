@@ -366,41 +366,46 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 
 [^nightingale-rose]: https://mbostock.github.io/protovis/ex/crimea-rose-full.html
 
-## 空间数据可视化 {#sp-vis}
+## 空间数据 {#sp-vis}
 
-数据类型复杂，空间数据相关，地图
+美国各州的犯罪率数据 USArrests
 
-Introduction to spatial analysis in R (rasters/sf) 
+准备数据集
 
-<https://github.com/jafflerbach/spatial-analysis-R>
-<https://jafflerbach.github.io/spatial-analysis-R/intro_spatial_data_R.html>
-<https://jafflerbach.github.io/spatial-analysis-R/intro_to_sf.html>
+```{r,echo=TRUE}
+crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
+crimesm <- reshape2::melt(crimes, id = 1)
+head(crimesm)
+```
 
-An Introduction to Spatial Econometrics in R
-<http://www.econ.uiuc.edu/~lab/workshop/Spatial_in_R.html>
-<https://ignaciomsarmiento.github.io/2017/02/07/An-Introduction-to-Spatial-Econometrics-in-R>
+添加地图数据
 
-数据清洗，可视化和空间分析 [Data wrangling visualisation and spatial analysis: R Workshop](https://www.seascapemodels.org/data/data-wrangling-spatial-course.html)
+```{r,echo=TRUE}
+library(maps)
+states_map <- map_data("state")
+head(states_map)
+```
 
-[Regional smoothing using R](https://pudding.cool/process/regional_smoothing/)
- 
+绘图
+
+```{r,echo=TRUE,fig.cap="1973年美国各州的犯罪率数据",echo=TRUE}
+ggplot(crimes, aes(map_id = state)) +
+  geom_map(aes(fill = Murder), map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) + 
+  coord_map()
+```
+
+
+```{r,fig.cap="四类犯罪在各州的分布",echo=TRUE}
+ggplot(crimesm, aes(map_id = state)) +
+  geom_map(aes(fill = value), map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  facet_wrap(~variable)
+```
+
 
 [sp-gallery]: https://edzer.github.io/sp/
 
-- [Spatial Data in R: New Directions](https://edzer.github.io/UseR2017/) 
-- [Mapping unemployment data](http://sharpsightlabs.com/blog/map-unemployment-nov-2016/)
-- [Areal data. Lung cancer risk in Pennsylvania](https://paula-moraga.github.io/tutorial-areal-data/)
-- [Geostatistical data. Malaria in The Gambia](https://paula-moraga.github.io/tutorial-geostatistical-data/)
-- [GeoSpatial Data Visualization in R](https://bhaskarvk.github.io/user2017.geodataviz/)
-- [Ecological Models and Data in R](http://ms.mcmaster.ca/~bolker/emdbook/)
-- [Geographic Data Science in Python](https://data.cdrc.ac.uk/dataset/geographic-data-science-in-python)
-- [Spatial](https://data.cdrc.ac.uk/)
-- [Fast GeoSpatial Analysis in Python](http://matthewrocklin.com/blog/work/2017/09/21/accelerating-geopandas-1)
-- [A gentle INLA tutorial](https://www.precision-analytics.ca/blog-1/inla)
-
-- Reproducible road safety research: an exploration of the shifting spatial and temporal distribution of car-pedestrian crashes <https://github.com/Robinlovelace/stats19-gisruk>
-
-出租车地理信息可视化 <https://data-se.netlify.com/2017/11/20/great-dataviz-examples-in-rstats/>
 
 ### raster 对象
 
@@ -429,21 +434,24 @@ getAnywhere(rasterImage)
 
 空间数据对象，以类 sp 方式存储 [@Pebesma_2005_sp]
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,fig.cap="气泡图",echo=TRUE}
 library(sp)
 data(meuse)
 coords <- SpatialPoints(meuse[c("x", "y")])
 meuse <- SpatialPointsDataFrame(coords, meuse)
 plot(meuse, pch = 1, cex = .05 * sqrt(meuse$zinc))
+```
 
+```{r,echo=TRUE}
 library(maptools)
 fname <- system.file("shapes/sids.shp", package = "maptools")
 p4s <- CRS("+proj=longlat +datum=NAD27")
 nc <- readShapePoly(fname, proj4string = p4s)
 plot(nc, axes = TRUE, col = grey(1 - nc$SID79 / 57))
+```
 
+```{r,echo=TRUE}
 # Trellis maps
-
 arrow <- list("SpatialPolygonsRescale",
   layout.north.arrow(2),
   offset = c(-76, 34), scale = 0.5, which = 2
@@ -467,18 +475,14 @@ maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过�
 
 - rgeos
 - rgdal
-
 - sp
+
+- ggmap
 - sf
 
-## 网络数据可视化 {#net-vis}
+## 网络数据 {#net-vis}
 
-[igraph](https://igraph.org/) 提供了 R 和 Python 接口 <https://github.com/igraph>。
-
-[qgraph](https://github.com/SachaEpskamp/qgraph) 开发者 [Sacha Epskamp](http://sachaepskamp.com) 在个人主页上提供了很多网络数据分析的学习资料
-
-
-[Rgraphviz](https://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html) 基于 [Graphviz](https://www.graphviz.org/)
+[igraph](https://igraph.org/) 提供了 R 和 Python 接口 <https://github.com/igraph>。 [qgraph](https://github.com/SachaEpskamp/qgraph) 开发者 [Sacha Epskamp](http://sachaepskamp.com) 在个人主页上提供了很多网络数据分析的学习资料， [Rgraphviz](https://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html) 基于 [Graphviz](https://www.graphviz.org/)
 
 ```{r,echo=TRUE,eval=!require(Rgraphviz)}
 BiocManager::install("Rgraphviz", version = "3.8")
