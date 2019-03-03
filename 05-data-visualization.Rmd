@@ -172,6 +172,14 @@ ggplot(cut_df, aes(x = Var1, y = Freq)) + geom_bar(stat = "identity")
 ggplot(diamonds, aes(x = cut)) + geom_bar()
 ```
 
+还有另外三种表示方法
+
+```{r,eval=FALSE,echo=TRUE}
+ggplot(diamonds, aes(x = cut)) + geom_bar(stat = "count")
+ggplot(diamonds, aes(x = cut, y = ..count..)) + geom_bar()
+ggplot(diamonds, aes(x = cut, y = stat(count))) + geom_bar()
+```
+
 我们还可以在图 \@ref(fig:diamonds-barplot-1) 的基础上再添加一个分类变量钻石的纯净度 clarity，形成堆积条形图
 
 ```{r diamonds-barplot-2,echo=TRUE,fig.cap="堆积条形图"}
@@ -224,6 +232,8 @@ with(diamonds, table(color, clarity, cut))
 ## 折线图 {#ggplot2-line}
 
 时间序列数据的展示，时序图
+
+
 
 ## 直方图 {#ggplot2-histogram}
 
