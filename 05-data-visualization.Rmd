@@ -158,7 +158,68 @@ ggplot(diamonds, aes(x = cut, y = price, color = color)) +
   facet_grid(clarity~color)
 ```
 
+## 条形图 {#ggplot2-barplot}
 
+条形图特别适合分类变量的展示，我们这里展示钻石切割质量 cut 不同等级的数量，当然我们可以直接展示各类的数目，在图层 `geom_bar` 中指定 `stat="identity"`
+
+```{r,echo=TRUE,eval=FALSE}
+# 需要映射数据框的两个变量，相当于自己先计算了每类的数量
+table(diamonds$cut)
+cut_df <- as.data.frame(table(diamonds$cut))
+ggplot(cut_df, aes(x = Var1, y = Freq)) + geom_bar(stat = "identity")
+```
+```{r diamonds-barplot-1,fig.cap="频数条形图",echo=TRUE}
+ggplot(diamonds, aes(x = cut)) + geom_bar()
+```
+
+我们还可以在图 \@ref(fig:diamonds-barplot-1) 的基础上再添加一个分类变量钻石的纯净度 clarity，形成堆积条形图
+
+```{r diamonds-barplot-2,echo=TRUE,fig.cap="堆积条形图"}
+ggplot(diamonds, aes(x = cut, fill = clarity)) + geom_bar()
+```
+
+再添加一个分类变量钻石颜色 color 比较好的做法是分面
+
+```{r diamonds-barplot-3,fig.cap="分面堆积条形图"}
+ggplot(diamonds, aes(x = color, fill = clarity)) +
+  geom_bar() +
+  facet_grid(~cut)
+```
+
+实际上，绘制图\@ref(fig:diamonds-barplot-3)包含了对分类变量的分组计数过程，如下
+
+```{r,echo=TRUE}
+with(diamonds, table(cut, color))
+```
+
+还有一种堆积的方法是按比例，而不是按数量，如图\@ref(fig:diamonds-barplot-4)
+
+```{r diamonds-barplot-4,fig.cap="比例堆积条形图"}
+ggplot(diamonds, aes(x = color, fill = clarity)) +
+  geom_bar(position = "fill") +
+  facet_grid(~cut)
+```
+
+接下来就是复合条形图
+
+```{r diamonds-barplot-5,fig.cap="复合条形图"}
+ggplot(diamonds, aes(x = color, fill = clarity)) +
+  geom_bar(position = "dodge")
+```
+
+再添加一个分类变量，就是需要分面大法了，图 \@ref(fig:diamonds-barplot-5) 展示了三个分类变量，其实我们还可以再添加一个分类变量用作分面的列依据
+
+```{r diamonds-barplot-5,fig.cap="分面复合条形图"}
+ggplot(diamonds, aes(x = color, fill = clarity)) +
+  geom_bar(position = "dodge") +
+  facet_grid(rows = vars(cut))
+```
+
+图 \@ref(fig:diamonds-barplot-5) 展示的数据如下
+
+```{r,echo=TRUE}
+with(diamonds, table(color, clarity, cut))
+```
 
 ## 空间数据可视化 {#sp-vis}
 
