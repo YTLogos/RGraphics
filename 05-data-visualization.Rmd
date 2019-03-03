@@ -180,7 +180,7 @@ ggplot(diamonds, aes(x = cut, fill = clarity)) + geom_bar()
 
 再添加一个分类变量钻石颜色 color 比较好的做法是分面
 
-```{r diamonds-barplot-3,fig.cap="分面堆积条形图"}
+```{r diamonds-barplot-3,fig.cap="分面堆积条形图",echo=TRUE}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar() +
   facet_grid(~cut)
@@ -194,7 +194,7 @@ with(diamonds, table(cut, color))
 
 还有一种堆积的方法是按比例，而不是按数量，如图\@ref(fig:diamonds-barplot-4)
 
-```{r diamonds-barplot-4,fig.cap="比例堆积条形图"}
+```{r diamonds-barplot-4,fig.cap="比例堆积条形图",echo=TRUE}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar(position = "fill") +
   facet_grid(~cut)
@@ -202,24 +202,51 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 
 接下来就是复合条形图
 
-```{r diamonds-barplot-5,fig.cap="复合条形图"}
+```{r diamonds-barplot-5,fig.cap="复合条形图",echo=TRUE}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar(position = "dodge")
 ```
 
 再添加一个分类变量，就是需要分面大法了，图 \@ref(fig:diamonds-barplot-5) 展示了三个分类变量，其实我们还可以再添加一个分类变量用作分面的列依据
 
-```{r diamonds-barplot-5,fig.cap="分面复合条形图"}
+```{r diamonds-barplot-6,fig.cap="分面复合条形图",echo=TRUE}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar(position = "dodge") +
   facet_grid(rows = vars(cut))
 ```
 
-图 \@ref(fig:diamonds-barplot-5) 展示的数据如下
+图 \@ref(fig:diamonds-barplot-6) 展示的数据如下
 
 ```{r,echo=TRUE}
 with(diamonds, table(color, clarity, cut))
 ```
+
+## 折线图 {#ggplot2-line}
+
+时序图
+
+## 直方图 {#ggplot2-histogram}
+
+
+## 箱线图的替代品 {#violin-jitter-ridge}
+
+小提琴图，抖动图和岭线图
+
+
+## 南丁格尔玫瑰图 {#nightingale-rose}
+
+风玫瑰图[^nightingale-rose] 可以作为堆积条形图，分组条形图
+
+```{r stack-to-rose,fig.cap="堆积条形图转风玫瑰图",echo=TRUE}
+ggplot(diamonds, aes(x = color,fill = clarity)) + 
+  geom_bar()
+ggplot(diamonds, aes(x = color,fill = clarity)) + 
+  geom_bar() + 
+  coord_polar()
+```
+
+
+[^nightingale-rose]: https://mbostock.github.io/protovis/ex/crimea-rose-full.html
 
 ## 空间数据可视化 {#sp-vis}
 
