@@ -174,7 +174,7 @@
   - [WenSui Liu](https://statcompute.wordpress.com/)
   - [Yuling Yao](https://www.yulingyao.com/)
   - [handong1587](https://handong1587.github.io/)
-
+  - [杜雨](http://raindu.com/) ggplot2 数据可视化 左手R右手Python
   - [Paula Moraga](https://paula-moraga.github.io) Peter J. Diggle 的学生，研究 Geostatistics 
   - [John MacFarlane](https://johnmacfarlane.net/) Pandoc 开发者
   - [Paul Bürkner](https://paul-buerkner.github.io/) Stan/brms 开发者  
