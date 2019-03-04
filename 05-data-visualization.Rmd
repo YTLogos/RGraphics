@@ -411,7 +411,9 @@ ggplot(crimesm, aes(map_id = state)) +
 [sp-gallery]: https://edzer.github.io/sp/
 
 
-### raster 对象
+### raster
+
+[raster](https://github.com/rspatial/raster) 包的开发已经被作者 [Robert J. Hijmans](https://desp.ucdavis.edu/people/robert-j-hijmans) 迁移到 Github 上啦，官方文档 <https://www.rspatial.org/>
 
 星号 * 标记的是 S3 方法
 
@@ -434,7 +436,17 @@ getAnywhere(rasterImage)
 通过查看函数的帮助 `?rasterImage` ，我们需要重点关注一下
 参数 *image* 传递的 raster 对象
 
-### sp 对象
+```{r,echo=TRUE,fig.cap="raster 图像",dev.args=list(bg = "thistle"),warning=FALSE,fig.asp=1,out.width="50%",fig.width=30/7}
+plot(c(100, 250), c(300, 450), type = "n", xlab = "", ylab = "")
+image <- as.raster(matrix(0:1, ncol = 5, nrow = 3))
+rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
+rasterImage(image, 100, 400, 150, 450)
+rasterImage(image, 200, 300, 200 + xinch(.5), 300 + yinch(.3),
+            interpolate = FALSE)
+rasterImage(image, 200, 400, 250, 450, angle = 15, interpolate = FALSE)
+```
+
+### sp
 
 空间数据对象，以类 sp 方式存储 [@Pebesma_2005_sp]
 
@@ -470,7 +482,7 @@ spplot(nc, c("SID74", "SID79"),
 maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过时，推荐使用 `rgdal::readOGR` 或者 `sf::st_read` 方式读取
 :::
 
-### sf 对象 {#simple-features}
+### sf {#simple-features}
 
 - maps
 - mapdata
