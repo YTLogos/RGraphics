@@ -8,7 +8,7 @@
 
 为何使用 ggplot2 [^why-ggplot2]
 
-
+[优雅的ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2)
 
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 

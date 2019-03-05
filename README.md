@@ -44,9 +44,6 @@
       - 统计机器学习与应用 [An Introduction to Statistical Learning with Applications in R](https://www-bcf.usc.edu/~gareth/ISL/) [PDF](https://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf)
       - 机器学习与R语言 [Machine Learning in R](https://mlr.mlr-org.com/)
       - 贝叶斯数据分析 [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
-      - 空间点模式：理论与应用 [Spatial Point Patterns: Methodology and Applications with R](https://spatstat.org)
-      - 地统计计算与R语言 [Geocomputation with R](https://geocompr.robinlovelace.net/) 
-      - 空间微观模拟与R语言 [Spatial Microsimulation with R](https://spatial-microsim-book.robinlovelace.net/) 
       - 应用时间序列分析与R语言 [Time Series Analysis with Applications in R](http://homepage.divms.uiowa.edu/~kchan/TSA.htm)
       - 时间序列预测预测：原理与实践 [Forecasting: Principles and Practice](https://www.otexts.org/fpp2/) [Rob J Hyndman](https://robjhyndman.com/)
       - 时间序列分析及其应用 [Time Series Analysis and Its Applications: With R Examples](https://www.stat.pitt.edu/stoffer/tsa4/)
@@ -66,6 +63,8 @@
 
    1. 空间数据分析
       - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
+      - 空间点模式：理论与应用 [Spatial Point Patterns: Methodology and Applications with R](https://spatstat.org)
+      - 空间微观模拟与R语言 [Spatial Microsimulation with R](https://spatial-microsim-book.robinlovelace.net/)       
       - 地质统计计算与 R 语言 [Geocomputation with R](https://geocompr.robinlovelace.net/)
       - 空间统计概念入门 [Introduction to Geospatial Concepts](https://datacarpentry.org/organization-geospatial/)
       - 用于生态学家的数据分析与可视化 [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/)
