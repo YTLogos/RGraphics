@@ -447,5 +447,3 @@ list unlist
 stack unstack 
 class unclass
 attach detach
-
-[^apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family

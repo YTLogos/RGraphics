@@ -1,5 +1,7 @@
 # 数据变形者 {#data-transformer}
 
+函数式编程 Functional Programming Languages 用于数据处理
+
 ```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 library(tidyverse)
 ```
@@ -24,10 +26,25 @@ library(tidyverse)
 
 Garrett Grolemund 在 RStudio 主要从事教育教学，参考 [Materials for the Tidyverse Train-the-trainer workshop](https://github.com/rstudio-education/teach-tidy) 和 [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/)
 
+## 高阶函数 {#Higher-Order-Functions}
+
+参数为函数，返回值也是函数
+
+
+
 
 ## `Map` 与 `Reduce` {#high-order-function}
 
 在 R 语言里玩转`apply`， `Map()` 和 `Reduce()`，下面分别以提取合并多张 XLSX 表格[^openxl-map]，分组计算[^by-group-calculation] 和子集操作 [^subsetting] 为例，从函数式编程到 MapReduce [^funcprog-map-reduce]，制作数据透视表[^pivot-tables]，用于数据处理的函数式编程和单元测试 Functional programming and unit testing for data munging with R 特别是第三章 <https://b-rodrigues.github.io/fput/>，然后是函数式编程与数据建模 Modeling data with functional programming in R[^modeling-funcprog]
+
+
+```{r,echo=TRUE}
+add <- function(x) Reduce("+", x)
+add(list(1, 2, 3))
+add_accuml <- function(x) Reduce("+", x, accumulate = TRUE)
+add_accuml(list(1, 2, 3))
+```
+
 
 [^modeling-funcprog]: https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
 [^funcprog-map-reduce]: https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
@@ -35,3 +52,4 @@ Garrett Grolemund 在 RStudio 主要从事教育教学，参考 [Materials for t
 [^openxl-map]: https://trinkerrstuff.wordpress.com/2018/02/14/easily-make-multi-tabbed-xlsx-files-with-openxlsx/)
 [^by-group-calculation]: https://statcompute.wordpress.com/2018/09/03/playing-map-and-reduce-in-r-by-group-calculation/
 [^subsetting]: https://statcompute.wordpress.com/2018/09/08/playing-map-and-reduce-in-r-subsetting/
+[^apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family
