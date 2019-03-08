@@ -120,6 +120,13 @@ grepl(x = c("apple", "banana"), pattern = "b")
 - `fixed=TRUE` 表示启用原生字符raw strings匹配，或者 literal regular expression 字面正则表达式，默认情况下 `fixed=FALSE`
 
 ```{r,echo=TRUE}
+# 分别表示两个和一个反斜杠
+writeLines(c("a\\\\b", "a\\b"))
+
+# 匹配字符串中的一个反斜杠
+grep(x = c("a\\\\b", "a\\b"), pattern = "\\", value = TRUE, fixed = FALSE)
+grep(x = c("a\\\\b", "a\\b"), pattern = "\\", value = TRUE, fixed = TRUE)
+
 # 匹配字符串中的两个反斜杠
 grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = FALSE)
 grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = TRUE)
