@@ -1,16 +1,19 @@
 # 正则表达式 {#regex}
 
-**reg**ular **exp**ression (aka ‘regexp’) 
+::: sidebar
+以下所述，都不考虑 `perl=TRUE` 的情况，R 语言中提供了扩展的（默认的）和类似 Perl 的两套正则表达式。作为入门，我们这里只关注前者，启用 Perl 正则表达式只需在函数如 `grep` 中将选项 `perl = TRUE` 即可，并将后者统一命名为 Perl 正则表达式[^learn-regex]。
+:::
+
+正则表达式 (**reg**ular **exp**ression，简称 regexp)， 函数 `regexpr` 和 `gregexpr` 的名称就好理解了
 
 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
 
 [stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包，[re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份，[正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
 
-在控制台输入 `?regex` 查看 R 支持的正则表达式，谢老大建议把 `?regex` 至少看百八十遍。R 语言中提供了扩展的（默认的）和类似 Perl 的两套正则表达式。作为入门，我们这里只关注前者，启用 Perl 正则表达式只需在函数如 `grep` 中将选项 `perl = TRUE` 即可，并将后者统一命名为 Perl 正则表达式[^learn-regex]。
+在控制台输入 `?regex` 查看 R 支持的正则表达式，谢老大建议把 `?regex` 至少看百八十遍。
 
 常用的字符串处理函数有 `grep`、`grepl`、`sub`、`gsub`、`regexpr`、`gregexpr` 、 `regmatches` 和 `strsplit` 它们都支持正则表达式语法，其中，函数 `grep`, `glob2rx` 和 `strsplit` 其实是通过 `grep` 使用正则表达式的。
 
-[^learn-regex]: 推荐的学习正则表达式的路径可以见统计之都论坛 <https://d.cosx.org/d/420410>
 
 正则表达式的构造方式类似算术表达式，通过各种操作组合子（更小的）表达式，整个表达式匹配一个或多个字符。[^char-byte]
 
@@ -45,13 +48,13 @@
   ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~`
   ```
 
-- `[:space:]` 表示空格字符 tab（水平制表符）, newline 换行符, 垂直制表符 vertical tab, form feed 换页符， carriage return回车符, space 空格
+- `[:space:]` 表示空格字符 tab（水平制表符）, newline 换行符, 垂直制表符 vertical tab, form feed 换页符， carriage return 回车符, space 空格
 - `[:xdigit:]` 表示 16 进制数字 0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f.
-- `[[:alnum:]]` 的含义是 `[0-9A-Za-z]`，但是前者与区域和字符集无关，后者依赖于当前的区域设置和字符编码。要注意在这些字符集名 class names 中，中括号 `[]` 是符号名的一部分，是必须要包含的。在字符集中，大多数元字符 metacharacters 失去它们特殊的意义。
+- `[[:alnum:]]` 的含义是 `[0-9A-Za-z]`，但是前者与区域和字符集无关，后者依赖于当前的区域设置和字符编码。要注意在这些字符集名 class names 中，中括号 `[]` 是符号名的一部分，是必须要包含的。在字符集中，大多数元字符 (metacharacters) 失去它们特殊的意义。
 
-To include a literal ], place it first in the list. Similarly, to include a literal ^, place it anywhere but first. Finally, to include a literal -, place it first or last (or, for perl = TRUE only, precede it by a backslash). (Only ^ - \ ] are special inside character classes.)
+要包含字面的 `]` 就把它放在列表的开头，类似地，要包含字面 `^`，除了开头可以放在任意位置。要包含字面 `-` 把它放在开头或者结尾。只有 `^ - \ ]` 在字符集内是特殊的
 
-点号 . 匹配任意单个字符，`\w` 匹配一个词 word 字符(是`[[:alnum:]_]`的同义词，一个扩展) ，而 `\W` 是 `\w` 取反，意味着 [^[:alnum:]_]。 `\d`, `\s`, `\D` 和 `\S` 表示数字和空格类和它们的取反
+点号 `.` 匹配任意单个字符，`\w` 匹配一个词 word 字符(是`[[:alnum:]_]`的同义词，一个扩展) ，而 `\W` 是 `\w` 取反，意味着 `[^[:alnum:]_]`。 `\d`, `\s`, `\D` 和 `\S` 表示数字和空格类和它们的取反
 
 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
@@ -64,17 +67,15 @@ caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结�
 - `{n,}` 前面的项目匹配至少 n 次.
 - `{n,m}` 前面的项目匹配至少 n 次 至多 m 次
 
-默认情况下， repetition 是贪婪的，会使用最大可能的重复匹配，这个可以变为最小的匹配次数，通过在其之后添加 ?
+默认情况下， 匹配方式是贪婪的，会使用最大可能的匹配，这个可以变为最小的匹配次数，通过在其之后添加 `?`
 
-Regular expressions may be concatenated; the resulting regular expression matches any string formed by concatenating the substrings that match the concatenated subexpressions.
+> Regular expressions may be concatenated; the resulting regular expression matches any string formed by concatenating the substrings that match the concatenated subexpressions.
 
 正则表达式可以是级联的，是不是在讲一个正则表达式里面嵌套一个正则表达式
 
-> 高级特性
+> Two regular expressions may be joined by the infix operator `|`; the resulting regular expression matches any string matching either subexpression. For example, abba|cde matches either the string abba or the string cde. Note that alternation does not work inside character classes, where `|` has its literal meaning.
 
-Two regular expressions may be joined by the infix operator `|`; the resulting regular expression matches any string matching either subexpression. For example, abba|cde matches either the string abba or the string cde. Note that alternation does not work inside character classes, where `|` has its literal meaning.
-
-两个正则表达式可以通过中缀符号 `|` 联合，用两个子表达式的任意一个去匹配字符串，例如 `abba | cde` 要么匹配字符串 abba 要么匹配字符串 cde，要注意在字符集内，二选一的匹配不凑效，因为中缀符 `|` 有它的字面意思 literal meaning
+两个正则表达式可以通过中缀符号 `|` 联合，用两个子表达式的任意一个去匹配字符串，例如 `abba | cde` 要么匹配字符串 abba 要么匹配字符串 cde，要注意在字符集内，二选一的匹配不凑效，因为中缀符 `|` 有它的字面意思
 
 
 重复匹配的优先级高于级联，级联高于 `|` 。 整个子表达式可以括号括起来覆盖这些优先级规则。
@@ -86,15 +87,12 @@ The backreference `\N`, where N = 1 ... 9, matches the substring previously matc
 
 帮助页面是基于 TRE 文档和 POSIX 标准
 
-
-[^char-byte]: `useBytes = TRUE` 表示把字符看作字节。字符、字节和比特的关系是，一个字节 byte 八个比特 bit，一个英文字符 character 用一个字节表示，而一个中、日、韩文字符需要两个字节表示 
-
-
-
 - `(?...)` 命名组 name group
 - `(?=...)` 与 `(?!...)` 正向查找
 - `(?<=...)` 与 `(?<!...)` 反向查找
 
+[^char-byte]: `useBytes = TRUE` 表示把字符看作字节。字符、字节和比特的关系是，一个字节 byte 八个比特 bit，一个英文字符 character 用一个字节表示，而一个中、日、韩文字符需要两个字节表示 
+[^learn-regex]: 推荐的学习正则表达式的路径可以见统计之都论坛 <https://d.cosx.org/d/420410>
 
 
 ## `grep` 和 `grepl` {#grep-grepl}
@@ -119,26 +117,31 @@ grepl(x = c("apple", "banana"), pattern = "b")
 
 - `fixed=TRUE` 表示启用原生字符raw strings匹配，或者 literal regular expression 字面正则表达式，默认情况下 `fixed=FALSE`
 
-```{r,echo=TRUE}
-# 分别表示两个和一个反斜杠
-writeLines(c("a\\\\b", "a\\b"))
+::: sidebar
+R 是用字符串来表示正则表达式的，但是正则表达式不是字符串，字符串的构造类似算术表达式
+::: 
 
+在 R 里面分别表示 `a\\b` 和 `a\b`
+
+```{r,echo=TRUE}
+writeLines(c("a\\\\b", "a\\b"))
+```
+
+下面在 R 里面分别匹配字符串 `a\\b` 和 `a\b` 中的 `\\` 和 `\`
+
+```{r,echo=TRUE}
 # 匹配字符串中的一个反斜杠
-grep(x = c("a\\\\b", "a\\b"), pattern = "\\", value = TRUE, fixed = FALSE)
 grep(x = c("a\\\\b", "a\\b"), pattern = "\\", value = TRUE, fixed = TRUE)
+grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = FALSE)
 
 # 匹配字符串中的两个反斜杠
-grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = FALSE)
 grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = TRUE)
+grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\\\\\", value = TRUE, fixed = FALSE)
 
-# 匹配字符串中的四个反斜杠 \\\\
+# 匹配字符串中的两个反斜杠 \\
 grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = FALSE)
 grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = TRUE)
 grepl(x = "a\\\\b", pattern = "\\\\", fixed = TRUE)
-
-# 匹配字符串中的反斜杠 \
-grep(x = "a\b", pattern = "\\\\")
-grep(x = "a\b", pattern = "\\\\", value = TRUE)
 ```
 
 此外，还有一个函数 `grepRaw` 用于匹配 Raw Vectors 
