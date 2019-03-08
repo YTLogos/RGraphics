@@ -149,6 +149,16 @@ Extract or Replace Matched Substrings
 
 Extract or replace matched substrings from match data obtained by regexpr, gregexpr or regexec.
 
+## stringi 和 stringr {#stringi-stringr}
+
+
+## RCurl 和 XML {#rcurl-xml}
+
+用 R 语言写爬虫 解析网页
+
+web 服务都会用到正则吧
+
+curl 和 xml2 以及 rvest
 
 ## 扩展阅读 {#more-readings}
 
