@@ -6,7 +6,7 @@
 
 [stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包，[re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份，[正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
 
-在控制台输入 `?regex` 查看R支持的正则表达式，谢老大建议把 `?regex` 至少看百八十遍。R 语言中提供了扩展的（默认的）和类似 Perl 的两套正则表达式。作为入门，我们这里只关注前者，启用 Perl 正则表达式只需在函数如 `grep` 中将选项 `perl = TRUE` 即可，并将后者统一命名为 Perl 正则表达式[^learn-regex]。
+在控制台输入 `?regex` 查看 R 支持的正则表达式，谢老大建议把 `?regex` 至少看百八十遍。R 语言中提供了扩展的（默认的）和类似 Perl 的两套正则表达式。作为入门，我们这里只关注前者，启用 Perl 正则表达式只需在函数如 `grep` 中将选项 `perl = TRUE` 即可，并将后者统一命名为 Perl 正则表达式[^learn-regex]。
 
 常用的字符串处理函数有 `grep`、`grepl`、`sub`、`gsub`、`regexpr`、`gregexpr` 、 `regmatches` 和 `strsplit` 它们都支持正则表达式语法，其中，函数 `grep`, `glob2rx` 和 `strsplit` 其实是通过 `grep` 使用正则表达式的。
 
@@ -87,7 +87,7 @@ The backreference `\N`, where N = 1 ... 9, matches the substring previously matc
 帮助页面是基于 TRE 文档和 POSIX 标准
 
 
-[^char-byte]: read ‘character’ 字符 as ‘byte’ 字节 if `useBytes = TRUE` 字符、字节、位 bit什么关系 
+[^char-byte]: `useBytes = TRUE` 表示把字符看作字节。字符、字节和比特的关系是，一个字节 byte 八个比特 bit，一个英文字符 character 用一个字节表示，而一个中、日、韩文字符需要两个字节表示 
 
 
 
@@ -99,14 +99,7 @@ The backreference `\N`, where N = 1 ... 9, matches the substring previously matc
 
 ## `grep` 和 `grepl` {#grep-grepl}
 
-```{r,echo=TRUE}
-vec_a <- sample(letters, 100, replace = T)
-vec_A <- sample(LETTERS, 100, replace = T)
-vec_d <- sample(1:10, 100, replace = T)
-vec <- paste(vec_a, vec_A, sep = "*", collapse = "+")
-```
-
-- `ignore.case`: `TRUE` 表示忽略大小写，`FALSE` 表达大小写敏感^[case sensitive]的，匹配的时候区分大小写
+- `ignore.case`: `TRUE` 表示忽略大小写，`FALSE` 表示大小写敏感^[case sensitive]的，匹配的时候区分大小写
 
 `grep` 返回匹配到的字符串向量x的元素的下标，如果 `value=TRUE` 则返回下标对应的值
 
@@ -124,20 +117,24 @@ grepl(x = c("apple", "banana"), pattern = "a")
 grepl(x = c("apple", "banana"), pattern = "b")
 ```
 
-
-原生字符匹配 raw strings
-
-- `fixed=TRUE` 表示启用原生字符匹配，默认情况下 `fixed=FALSE`
+- `fixed=TRUE` 表示启用原生字符raw strings匹配，或者 literal regular expression 字面正则表达式，默认情况下 `fixed=FALSE`
 
 ```{r,echo=TRUE}
+# 匹配字符串中的两个反斜杠
 grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = FALSE)
 grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = TRUE)
 
+# 匹配字符串中的四个反斜杠 \\\\
 grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = FALSE)
 grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = TRUE)
 grepl(x = "a\\\\b", pattern = "\\\\", fixed = TRUE)
+
+# 匹配字符串中的反斜杠 \
+grep(x = "a\b", pattern = "\\\\")
+grep(x = "a\b", pattern = "\\\\", value = TRUE)
 ```
 
+此外，还有一个函数 `grepRaw` 用于匹配 Raw Vectors 
 
 ## sub 与 gsub {#sub-gsub}
 
