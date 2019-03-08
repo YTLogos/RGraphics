@@ -106,13 +106,15 @@
       - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
 
    1. 学习 Python
-       - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
-       - [廖雪峰的Python3.x教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
-       - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python
-       - [Python Cookbook 3rd Edition](https://python3-cookbook.readthedocs.io/zh_CN/latest/) 中文版
-       - [笨办法学Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) 
-       - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
-       - [Python Cheatsheet](https://www.pythonsheets.com/) Python 英文版作弊手册集合
+        - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
+        - [Python 代码风格PEP8](https://www.python.org/dev/peps/pep-0008/)
+        -  [Python Tutorial](https://docs.python.org/3/tutorial/index.html) 初识 Python
+        - [廖雪峰的Python3.x教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
+        - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python
+        - [Python Cookbook 3rd Edition](https://python3-cookbook.readthedocs.io/zh_CN/latest/) 中文版
+        - [笨办法学Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) 
+        - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
+        - [Python Cheatsheet](https://www.pythonsheets.com/) Python 英文版作弊手册集合
 
    更多在线书籍合集 https://bookdown.org 还有一个[传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可参考 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
@@ -210,7 +212,7 @@
   - https://keras.rstudio.com
   - https://rmarkdown.rstudio.com/
   - https://rmarkdown.rstudio.com/flexdashboard/
-  
+
 * RStudio 成员出品  
   - https://bookdown.org/yihui/blogdown
   - https://bookdown.org/yihui/bookdown
@@ -222,7 +224,7 @@
   - https://rstudio.github.io/radix/
   - https://rstudio.github.io/learnr/
   - https://rstudio.github.io/profvis/
-  
+
 * tidyverse
   - https://dbplyr.tidyverse.org/
   - https://dplyr.tidyverse.org
@@ -248,9 +250,8 @@
 ## 学习 R 语言
 
 - Martin Mächler [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) https://github.com/mmaechler
-
 - A book about trouble spots, oddities, traps, glitches in R.  Many of the same problems are in S+. If you are using R and you think you’re in hell, this is a map for you. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
-
 - R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
+- https://blog.rsquaredacademy.com/getting-help-in-r-updated/
 
 

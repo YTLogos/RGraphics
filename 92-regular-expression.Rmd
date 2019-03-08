@@ -1,5 +1,7 @@
 # 正则表达式 {#regex}
 
+**reg**ular **exp**ression (aka ‘regexp’) 
+
 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
 
 [stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包，[re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份，[正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
@@ -87,13 +89,53 @@ The backreference `\N`, where N = 1 ... 9, matches the substring previously matc
 
 [^char-byte]: read ‘character’ 字符 as ‘byte’ 字节 if `useBytes = TRUE` 字符、字节、位 bit什么关系 
 
-## grep
+
+
+- `(?...)` 命名组 name group
+- `(?=...)` 与 `(?!...)` 正向查找
+- `(?<=...)` 与 `(?<!...)` 反向查找
+
+
+
+## `grep` 和 `grepl` {#grep-grepl}
 
 ```{r,echo=TRUE}
 vec_a <- sample(letters, 100, replace = T)
 vec_A <- sample(LETTERS, 100, replace = T)
 vec_d <- sample(1:10, 100, replace = T)
-vec <- paste(vec_a, vec_A, sep = '*',collapse = '+')
+vec <- paste(vec_a, vec_A, sep = "*", collapse = "+")
+```
+
+- `ignore.case`: `TRUE` 表示忽略大小写，`FALSE` 表达大小写敏感^[case sensitive]的，匹配的时候区分大小写
+
+`grep` 返回匹配到的字符串向量x的元素的下标，如果 `value=TRUE` 则返回下标对应的值
+
+```{r,echo=TRUE}
+grep(x = c("apple", "banana"), pattern = "a")
+grep(x = c("apple", "banana"), pattern = "b")
+grep(x = c("apple", "banana"), pattern = "a", value = TRUE)
+grep(x = c("apple", "banana"), pattern = "b", value = TRUE)
+```
+
+`grepl` 返回一个逻辑向量，字符串向量x中的每个元素是否匹配到，匹配到返回 `TRUE`，没有匹配到返回 `FALSE`
+
+```{r,echo=TRUE}
+grepl(x = c("apple", "banana"), pattern = "a")
+grepl(x = c("apple", "banana"), pattern = "b")
+```
+
+
+原生字符匹配 raw strings
+
+- `fixed=TRUE` 表示启用原生字符匹配，默认情况下 `fixed=FALSE`
+
+```{r,echo=TRUE}
+grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = FALSE)
+grep(x = c("a\\\\b", "a\\b"), pattern = "\\\\", value = TRUE, fixed = TRUE)
+
+grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = FALSE)
+grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = TRUE)
+grepl(x = "a\\\\b", pattern = "\\\\", fixed = TRUE)
 ```
 
 
@@ -127,7 +169,7 @@ sudo apt-get install libpoppler-cpp-dev libmagick++-dev
 ```
 
 ```{r,echo=TRUE,eval=FALSE}
-install.packages(c('pdftools', 'magick'))
+install.packages(c("pdftools", "magick"))
 ```
 
 

@@ -26,6 +26,8 @@ library(tidyverse)
 
 Garrett Grolemund 在 RStudio 主要从事教育教学，参考 [Materials for the Tidyverse Train-the-trainer workshop](https://github.com/rstudio-education/teach-tidy) 和 [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/)
 
+Dirk Eddelbuettel 的[Getting Started in R -- Tinyverse Edition](https://github.com/eddelbuettel/gsir-te)
+
 ## 高阶函数 {#Higher-Order-Functions}
 
 参数为函数，返回值也是函数
