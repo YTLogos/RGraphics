@@ -14,7 +14,7 @@
 常用的字符串处理函数有 `grep`、`grepl`、`sub`、`gsub`、`regexpr`、`gregexpr` 、 `regmatches` 和 `strsplit` 它们都支持正则表达式语法，其中，函数 `grep`, `glob2rx` 和 `strsplit` 其实是通过 `grep` 使用正则表达式的。
 
 
-正则表达式的构造方式类似算术表达式，通过各种操作组合子（更小的）表达式，整个表达式匹配一个或多个字符[^char-byte]。大多数字符，包括所有的字母和数字，是匹配自身的正则表达式。带有特定意义的任何元字符可以通过反斜杠引用。在常用正则表达式中，元字符是 
+正则表达式的构造方式类似算术表达式，通过各种操作组合子（更小的）表达式，整个表达式匹配一个或多个字符[^char-byte]。大多数字符，包括所有的字母和数字，是匹配自身的正则表达式。带有特定意义的任何元字符可以通过反斜杠引用。在常用正则表达式中，元字符 metacharacters 是 
 
 ```
 . \ | ( ) [ { ^ $ * + ? 
@@ -31,7 +31,8 @@
 
 某些命名的字符类是预定义的，它们的解释 interpretation 依赖于区域 locale，下面的解释是  POSIX locale
 
-- `[:alnum:]` 表示  `[:alpha:]` 和 `[:digit:]`
+- `[:alnum:]` 表示  `[:alpha:]` 和 `[:digit:]`，含义是 `[0-9A-Za-z]`，但是前者与区域和字符集无关，后者依赖于当前的区域设置和字符编码。要注意在这些字符集名 class names 中，中括号 `[]` 是符号名的一部分，是必须要包含的。在字符集中，大多数元字符失去它们特殊的意义。
+
 - `[:alpha:]` 表示 `[:lower:]` 和 `[:upper:]`
 - `[:blank:]` 表示 空格 space 制表符 tab
 - `[:cntrl:]` 表示控制符，在 ASCII 字符集里里，这些字符有八进制代码，从 000 到 037，和 177(DEL)。 
@@ -45,9 +46,9 @@
   ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~`
   ```
 
-- `[:space:]` 表示空格字符 tab（水平制表符）, newline 换行符, 垂直制表符 vertical tab, form feed 换页符， carriage return 回车符, space 空格
+- `[:space:]` 表示空格字符： 水平制表符 tab， 换行符 newline，垂直制表符 vertical tab，换页符 form feed，回车符 carriage return，空格符 space 
 - `[:xdigit:]` 表示 16 进制数字 0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f.
-- `[[:alnum:]]` 的含义是 `[0-9A-Za-z]`，但是前者与区域和字符集无关，后者依赖于当前的区域设置和字符编码。要注意在这些字符集名 class names 中，中括号 `[]` 是符号名的一部分，是必须要包含的。在字符集中，大多数元字符 (metacharacters) 失去它们特殊的意义。
+
 
 要包含字面的 `]` 就把它放在列表的开头，类似地，要包含字面 `^`，除了开头可以放在任意位置。要包含字面 `-` 把它放在开头或者结尾。只有 `^ - \ ]` 在字符集内是有特殊的含义
 
@@ -55,7 +56,10 @@
 
 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
-一个正则表达式可能跟着重复量词 repetition quantifiers
+
+## 贪婪匹配 {#repetition-quantifiers}
+
+默认情况下， 匹配方式是贪婪的，会使用最大可能的匹配，这个可以变为最小的匹配次数，通过在其之后添加 `?`，一个正则表达式可能跟着重复量词，下面的限定符都是限定跟在它前面的正则表达式
 
 - `?` 前面的项目匹配至多 1 次
 - `*` 前面的项目匹配 0 次或多次
@@ -64,31 +68,45 @@ caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结�
 - `{n,}` 前面的项目匹配至少 n 次.
 - `{n,m}` 前面的项目匹配至少 n 次 至多 m 次
 
-默认情况下， 匹配方式是贪婪的，会使用最大可能的匹配，这个可以变为最小的匹配次数，通过在其之后添加 `?`
+## 级联 {#concatenation}
 
 > Regular expressions may be concatenated; the resulting regular expression matches any string formed by concatenating the substrings that match the concatenated subexpressions.
 
-正则表达式可以是级联的，是不是在讲一个正则表达式里面嵌套一个正则表达式
-
+正则表达式可以是级联 concatenation 的，是不是在讲一个正则表达式里面嵌套一个正则表达式
 
 两个正则表达式可以通过中缀符号 `|` 联合，用两个子表达式的任意一个去匹配字符串，例如 `abba | cde` 要么匹配字符串 `abba` 要么匹配字符串 `cde`，要注意在字符集内，即 `abba|cde`，二选一的匹配不凑效，因为中缀符 `|` 有它的字面意思。
 
+重复匹配 Repetition 的优先级高于级联，级联高于 `|` 。 整个子表达式可以括号括起来覆盖这些优先级规则。
 
-重复匹配的优先级高于级联，级联高于 `|` 。 整个子表达式可以括号括起来覆盖这些优先级规则。
-Repetition takes precedence over concatenation, which in turn takes precedence over alternation. A whole subexpression may be enclosed in parentheses to override these precedence rules.
+## 反向引用 {#backreference}
 
 反向引用 `\N` 这里 N 可取 1,2,...,9 匹配被之前第 N 个括起来的子表达式匹配的子字符串
-The backreference `\N`, where N = 1 ... 9, matches the substring previously matched by the Nth parenthesized subexpression of the regular expression. 
-(This is an extension for extended regular expressions: POSIX defines them only for basic ones.)
 
-帮助页面是基于 TRE 文档和 POSIX 标准
+## 命名组 {#groups}
+
+The pattern `(?:...)` groups characters just as parentheses do but does not make a backreference.
+
+Patterns `(?=...)` and `(?!...)` are zero-width positive and negative lookahead assertions: they match if an attempt to match the `...` forward from the current position would succeed (or not), but use up no characters in the string being processed. Patterns `(?<=...)` and `(?<!...)` are the lookbehind equivalents: they do not allow repetition quantifiers nor `\C` in `...`.
 
 - `(?...)` 命名组 name group
 - `(?=...)` 与 `(?!...)` 正向查找
 - `(?<=...)` 与 `(?<!...)` 反向查找
 
+
+函数 `regexpr` 和 `gregexpr` 支持 named capture. If groups are named, e.g., `(?<first>[A-Z][a-z]+)` then the positions of the matches are also returned by name. 函数 `sub` 不支持 Named backreferences
+
+Atomic grouping, possessive qualifiers and conditional and recursive patterns are not covered here.
+
+
 [^char-byte]: `useBytes = TRUE` 表示把字符看作字节。字符、字节和比特的关系是，一个字节 byte 八个比特 bit，一个英文字符 character 用一个字节表示，而一个中、日、韩文字符需要两个字节表示 
 [^learn-regex]: 推荐的学习正则表达式的路径可以见统计之都论坛 <https://d.cosx.org/d/420410>
+
+
+## 注释 {#comment}
+
+The sequence `(?#` marks the start of a comment which continues up to the next closing parenthesis. Nested parentheses are not permitted. The characters that make up a comment play no part at all in the pattern matching.
+
+If the extended option is set, an unescaped `#` character outside a character class introduces a comment that continues up to the next newline character in the pattern.
 
 
 ## `grep` 和 `grepl` {#grep-grepl}
