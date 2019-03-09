@@ -108,7 +108,7 @@ knitr::include_graphics(path = "figures/regexp.png")
 ```
 
 ```{r,echo=TRUE}
-data(acq, package = 'tm')
+data(acq, package = "tm")
 writeLines(acq$content[[1]]$content)
 ```
 
@@ -117,14 +117,16 @@ regexpr(pattern = "<.*>", text = acq$content[[1]]$content)
 ```
 
 ```{r,echo=TRUE}
-txt <- c("The", "licenses", "for", "most", "software", "are",
+txt <- c(
+  "The", "licenses", "for", "most", "software", "are",
   "designed", "to", "take", "away", "your", "freedom",
   "to", "share", "and", "change", "it.",
   "", "By", "contrast,", "the", "GNU", "General", "Public", "License",
   "is", "intended", "to", "guarantee", "your", "freedom", "to",
   "share", "and", "change", "free", "software", "--",
   "to", "make", "sure", "the", "software", "is",
-  "free", "for", "all", "its", "users")
+  "free", "for", "all", "its", "users"
+)
 # gregexpr("en", txt)
 regexpr("en", txt)
 ```
@@ -144,6 +146,11 @@ regexpr("en", txt)
 pcre_config()
 ```
 
+查看系统的PCRE配置
+
+```{r,echo=TRUE}
+sapply(c("PCRE_limit_recursion", "PCRE_study", "PCRE_use_JIT"), getOption)
+```
 
 ## stringi 和 stringr {#stringi-stringr}
 
