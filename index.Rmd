@@ -35,13 +35,7 @@ url: 'https\://bookdown.org/xiangyun/RGraphics/'
 `r if (knitr::is_latex_output()) '<!--'` 
 
 ```{r setup,include=FALSE}
-packages = c(
-  "colorspace", "magrittr", "bookdown",
-  "tikzDevice", "fontcm", "microbenchmark",
-  "sp", "maptools", "maps", "mapdata", "mapproj", 
-  "ggplot2", "devtools", "sf", "rgdal", "fs", "tidyverse",
-  "DBI", "odbc", "tm"
-)
+packages = desc::desc_get_deps()$package
 lapply(packages, function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
@@ -162,10 +156,7 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 重现本书内容需要的 R 包
 
 ```{r sessioninfo,echo=TRUE}
-sessioninfo::session_info(pkgs = c(
-  "bookdown", "tikzDevice", "fontcm", "fs", "tidyverse",
-  "sf", "grid"
-))
+sessioninfo::session_info(pkgs = desc::desc_get_deps()$package)
 ```
 
 > 为了重复实现，我准备了一个虚拟机，存放在百度云盘上，链接: <https://pan.baidu.com/s/1K7R55QfFHGu6_QsyUlpCJA> 密码: 2ixt

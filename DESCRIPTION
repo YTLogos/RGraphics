@@ -13,6 +13,7 @@ Imports:
   maptools,
   microbenchmark,
   sessioninfo,
+  desc,
   sf (>= 0.7.2),
   tidyverse,
   tikzDevice
