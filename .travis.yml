@@ -56,6 +56,9 @@ addons:
       - odbc-postgresql
       - libmagick++-dev
       - libpoppler-cpp-dev
+      - libtesseract-dev 
+      - libleptonica-dev 
+      - tesseract-ocr-eng
 
   
 #brew_packages: 
