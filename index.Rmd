@@ -163,9 +163,8 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 
 ```{r sessioninfo,echo=TRUE}
 sessioninfo::session_info(pkgs = c(
-  "colorspace", "magrittr", "bookdown",
-  "tikzDevice", "fontcm", "fs", "tidyverse",
-  "ggplot2", "devtools", "sf", "grid"
+  "bookdown", "tikzDevice", "fontcm", "fs", "tidyverse",
+  "sf", "grid"
 ))
 ```
 

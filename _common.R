@@ -55,7 +55,7 @@ options(
   ),
   knitr.graphics.auto_pdf = FALSE,
   tidyverse.quiet = TRUE,
-  width = 69,
+  width = 79,
   str = utils::strOptions(strict.width = "cut"),
   tikzDefaultEngine = "pdftex",
   tikzLatexPackages = c(

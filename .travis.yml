@@ -35,12 +35,14 @@ addons:
   apt:
     sources:
       - sourceline: ppa:opencpu/imagemagick
+      - sourceline: ppa:opencpu/poppler
       - sourceline: ppa:git-core/ppa
     packages:
       - ghostscript
       - imagemagick
       - optipng
       - graphviz
+      - qpdf
       # git2r
       - libgit2-dev
       # for sf rgdal
@@ -52,6 +54,8 @@ addons:
       - unixodbc 
       - unixodbc-dev
       - odbc-postgresql
+      - libmagick++-dev
+      - libpoppler-cpp-dev
 
   
 #brew_packages: 
