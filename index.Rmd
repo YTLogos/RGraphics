@@ -40,7 +40,7 @@ packages = c(
   "tikzDevice", "fontcm", "microbenchmark", "rsconnect",
   "sp", "maptools", "maps", "mapdata", "mapproj", "DAAG",
   "ggplot2", "devtools", "sf", "rgdal", "fs", "tidyverse",
-  "DBI", "odbc"
+  "DBI", "odbc", "tm"
 )
 lapply(packages, function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
@@ -162,11 +162,11 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 重现本书内容需要的 R 包
 
 ```{r sessioninfo,echo=TRUE}
-xfun::session_info(packages = c(
+sessionInfo(package = c(
   "colorspace", "magrittr", "bookdown", "rmarkdown",
   "tikzDevice", "fontcm", "fs", "tidyverse",
   "sp", "maptools", "maps", "mapdata", "mapproj",
-  "ggplot2", "devtools", "sf", "rgdal"
+  "ggplot2", "devtools", "sf", "rgdal", "grid"
 ))
 ```
 

@@ -1,4 +1,4 @@
-# 正则表达式 {#regex}
+# 正则表达式 {#regular-expression}
 
 ::: sidebar
 有几个名词需要单独拎出来解释的
@@ -27,7 +27,7 @@ cat("\\.")
 cat("\\\n") # 注意 \n 表示换行
 ```
 
-## 引用 {#quotes}
+## 字符常量 {#character-constants}
 
 单引号 `'` 双引号 `"` 和反引号 \` 三种类型的引用 (quotes) 是 R 语法的一部分[^quotes]，此外反斜杠 `\` 用来转义下面的字符
 
@@ -54,7 +54,7 @@ Table: (\#tab:character-constants) 字符常量表
 
 [^quotes]: https://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html
 
-## 环境 {#environments}
+## 软件环境 {#environments}
 
 R 内置的正则表达式实现是基于 PCRE ICU TRE iconv 等第三方库，搞清楚自己使用的版本信息是重要的，一些字符集的解释与区域环境有关，如 `[:alnum:]` 和 `[:alpha:]`等，所以获取当前的区域设置也很重要
 
@@ -80,7 +80,7 @@ foo <- Sys.getlocale()
 Sys.setlocale("LC_ALL", locale = foo)
 ```
 
-## 基础 {#foundations}
+## 基本概念 {#foundations}
 
 正则表达式的构造方式类似算术表达式，通过各种操作组合子（更小的）表达式，整个表达式匹配一个或多个字符[^char-byte]。大多数字符，包括所有的字母和数字，是匹配自身的正则表达式。元字符 `. \ | ( ) [ { ^ $ * + ?` 需要转义才能表达其自身的含义，转义的方式是在元字符前面添加反斜杠，如要表达点号 `.` 需要使用 `\.`。要注意，它们是否有特殊意义取决于所在的内容。
 
@@ -114,8 +114,24 @@ Sys.setlocale("LC_ALL", locale = foo)
 
 脱字符 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
+## 字符串翻译 {#character-translations}
 
-## 贪婪匹配 {#repetition-quantifiers}
+`tolower`, `toupper` and `chartr` for character translations.
+
+## 匹配 {#match}
+
+
+近似匹配
+`agrep` for approximate matching.
+
+部分匹配
+
+`charmatch`, `pmatch` for partial matching,
+
+`match` for matching to whole strings, 
+`startsWith` for matching of initial parts of strings.
+
+贪婪匹配
 
 默认的匹配方式是贪婪的，会使用尽可能多的匹配次数，这个可以变为最小的匹配次数，通过在其之后添加 `?`，一个正则表达式可能跟着重复量词，下面的限定符都是限定在它前面的正则表达式
 
@@ -140,7 +156,7 @@ Sys.setlocale("LC_ALL", locale = foo)
 
 反向引用 `\N` 这里 N 可取 1,2,...,9 匹配被之前第 N 个括起来的子表达式匹配的子字符串
 
-## 命名组 {#groups}
+## 命名组 {#name-groups}
 
 The pattern `(?:...)` groups characters just as parentheses do but does not make a backreference.
 
@@ -218,20 +234,49 @@ grepl(x = "a\\\\b", pattern = "\\\\", fixed = TRUE)
 
 此外，还有一个函数 `grepRaw` 用于匹配 Raw Vectors 
 
-## sub 与 gsub {#sub-gsub}
+## `sub` 与 `gsub` {#sub-gsub}
 
 
 ```{r,echo=TRUE}
 sub(" .*", "", extSoftVersion()["PCRE"])
 ```
 
-## regexpr 与 gregexpr {#regexpr-gregexpr}
+## `regexpr` 与 `gregexpr` {#regexpr-gregexpr}
 
-## regmatches 
+函数 `regexpr` 和 `gregexpr` 支持 named capture. If groups are named, e.g., `(?<first>[A-Z][a-z]+)` then the positions of the matches are also returned by name. 函数 `sub` 不支持 Named backreferences
 
-Extract or Replace Matched Substrings
+```r
+regexpr(pattern, text, ignore.case = FALSE, perl = FALSE,
+        fixed = FALSE, useBytes = FALSE)
+```
 
-Extract or replace matched substrings from match data obtained by regexpr, gregexpr or regexec.
+```{r,echo=TRUE}
+data(acq, package = 'tm')
+writeLines(acq$content[[1]]$content)
+```
+
+```{r,echo=TRUE}
+regexpr(pattern = "<.*>", text = acq$content[[1]]$content)
+```
+
+```{r,echo=TRUE}
+txt <- c("The", "licenses", "for", "most", "software", "are",
+  "designed", "to", "take", "away", "your", "freedom",
+  "to", "share", "and", "change", "it.",
+  "", "By", "contrast,", "the", "GNU", "General", "Public", "License",
+  "is", "intended", "to", "guarantee", "your", "freedom", "to",
+  "share", "and", "change", "free", "software", "--",
+  "to", "make", "sure", "the", "software", "is",
+  "free", "for", "all", "its", "users")
+# gregexpr("en", txt)
+regexpr("en", txt)
+```
+
+## regmatches
+
+提取正则表达式匹配到的结果
+
+`regmatches` for extracting matched substrings based on the results of `regexpr`, `gregexpr` and `regexec`.
 
 ## stringi 和 stringr {#stringi-stringr}
 
