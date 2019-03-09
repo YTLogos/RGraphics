@@ -1,4 +1,4 @@
-# 工具 {#tools}
+# 工具 {#software-tools}
 
 ## 编辑器 {#editor}
 
@@ -92,6 +92,9 @@ knitr::include_graphics(path = "figures/mai.png")
 如图 \@ref(fig:insert-fig) 所示
 
 ![(\#fig:insert-fig) 插入图^[这里是脚注]](figures/mai.png){ width=45% }
+
+
+
 
 
 (ref:footnote) 表格标题里插入脚注，但是 ebooks 不支持这样插入脚注[^longnote]

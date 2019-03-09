@@ -1,6 +1,7 @@
 .caption {
   color: #777;
   margin-top: 10px;
+  text-align: center;
 }
 p code {
   white-space: inherit;
@@ -13,6 +14,17 @@ pre code {
   white-space: inherit;
 }
 
+/* markdown 插入图片居中 */
+img {
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+}
+
+caption {
+    text-align: center;
+    padding-bottom: 10px;
+}
 /* Sidebar formating --------------------------------------------*/
 
 .sidebar, .base, .warning {

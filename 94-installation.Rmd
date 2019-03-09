@@ -2,7 +2,7 @@
 
 # (APPENDIX) 附录 {#appendix .unnumbered}
 
-# 安装 {#install}
+# 安装 {#install-r-packages}
 
 主要参考 R-admin
 
