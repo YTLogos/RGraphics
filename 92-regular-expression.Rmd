@@ -67,6 +67,8 @@ extSoftVersion()
 l10n_info()
 # 表示数字、货币的细节
 Sys.localeconv()
+# PCRE 启用的配置选项
+pcre_config()
 ```
 
 需要临时改变区域环境设置，配合特殊的画图和文本输出要求。
@@ -218,6 +220,11 @@ grepl(x = "a\\\\b", pattern = "\\\\", fixed = TRUE)
 
 ## sub 与 gsub {#sub-gsub}
 
+
+```{r,echo=TRUE}
+sub(" .*", "", extSoftVersion()["PCRE"])
+```
+
 ## regexpr 与 gregexpr {#regexpr-gregexpr}
 
 ## regmatches 
@@ -239,6 +246,12 @@ Extract or replace matched substrings from match data obtained by regexpr, grege
 web 服务都会用到正则吧
 
 curl 和 xml2 以及 rvest
+
+libcurl 库的版本
+
+```{r,echo=TRUE}
+libcurlVersion()
+```
 
 ## 扩展阅读 {#more-readings}
 
