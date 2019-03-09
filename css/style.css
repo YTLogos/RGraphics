@@ -21,10 +21,6 @@ img {
     display: block;
 }
 
-caption {
-    text-align: center;
-    padding-bottom: 10px;
-}
 /* Sidebar formating --------------------------------------------*/
 
 .sidebar, .base, .warning {
