@@ -22,13 +22,28 @@ rmd_files:
   - "index.Rmd"
   - "01-file-system.Rmd"
   - "02-data-import-export.Rmd"
+  
+  - "03-data-cleaner.Rmd"
   - "03a-data-manipulation.Rmd"
   - "03b-data-wrangeling.Rmd"
+
   - "04-statistical-graphics.Rmd"
   - "05-data-visualization.Rmd"
   
+# 动态文档生成，部署  
+  - "88-git-github-gitlab.Rmd"
+  - "89-container.Rmd"
+  - "90-dynamic-documents.Rmd"
+
+  
   - "92-regular-expression.Rmd"
 #  - "93-object-oriented-programming.Rmd"
+
+
   - "94-installation.Rmd"
-  - "95-software-tools.Rmd"
-  - "96-references.Rmd"
+  - "95-tools.Rmd"
+
+  - "96-editor.Rmd"
+  - "97-rstudio-ide.Rmd"  
+  
+  - "99-references.Rmd"

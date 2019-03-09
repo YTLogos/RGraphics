@@ -1,0 +1,208 @@
+# 常用工具 {#common-tools}
+
+## Graphviz
+
+先安装 Graphviz^[Graphviz 官网 <http://www.graphviz.org/>]，常用于绘制流程图，广泛用于 tensorflow 和 mxnet 的模型描述中，如图所示
+
+```{r dot-ex, engine = "dot", fig.cap = "Funky dot",eval=identical(.Platform$OS.type,'unix')}
+digraph test123 {
+  a -> b -> c;
+  a -> {x y};
+  b [shape=box];
+  c [label="hello\nworld",color=white,fontsize=24,
+      fontname="Palatino-Italic",fontcolor=red,style=filled];
+  a -> z [label="hi", weight=100];
+  x -> z [label="multi-line\nlabel"];
+  edge [style=dashed,color=red];
+  b -> x;
+  {rank=same; b x}
+}
+```
+
+
+## ImageMagick
+
+
+```bash
+convert -quality 100 -density 300x300 filename.pdf filename.png
+```
+
+高质量大图，给定像素，转化 eps 格式图片，需要先安装 Ghostscript
+
+```bash
+convert -geometry 1000x3000 example.eps example.png
+```
+
+## OptiPNG
+
+[OptiPNG](http://optipng.sourceforge.net/) 是一个非常好的图片压缩、优化工具
+
+现在，我们设置 chunk 选项 `optipng` 为非空(non-`NULL`)的值，例如，`''` 去激活这个 hook （益辉称之为钩子，这里勾的是 optipng 这个图片优化工具）
+
+```{r use-optipng, optipng= if(knitr::is_html_output()) '',fig.cap="优化"}
+library(ggplot2)
+set.seed(123)
+qplot(rnorm(1e3), rnorm(1e3))
+```
+
+```bash
+optipng -o5 filename.png
+```
+
+## Ghostscript
+
+grDevices 包提供了如下函数，用于 postscript 和 pdf 图形设备，嵌入字体借助了 [Ghostscript](https://www.ghostscript.com/) 以及 PDF 阅读器 [MuPDF](https://www.mupdf.com/)[@Paul_2006_fonts] 
+
+```r
+postscriptFonts(...)
+pdfFonts(...)
+embedFonts()
+```
+
+Windows 下 GS 默认搜索路径不对，需要手动指定 Linux 平台下不需要关心 GS 的安装路径问题，特别地，需要指定字体搜索路径
+
+```{r,eval=FALSE,echo=TRUE}
+Sys.setenv(R_GSCMD = "C:/Program Files/gs/gs9.26/bin/gswin64c.exe")
+embedFonts(
+  file = "cm.pdf", outfile = "cm-embed.pdf",
+  fontpaths = system.file("fonts", package = "fontcm")
+)
+embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") 
+```
+
+## PDFCrop
+
+[PDFCrop](http://pdfcrop.sourceforge.net/) 可将 PDF 图片中留白的部分裁去，再也不用纠结 par 了
+
+
+## PhantomJS
+
+Winston Chang 开发了 [webshot](https://github.com/wch/webshot) 包网页截图，它依赖 [PhantomJS](https://github.com/ariya/phantomjs/)，所以首先需要安装
+
+```{r,eval=FALSE,echo=TRUE}
+install.packages("webshot")
+webshot::install_phantomjs()
+```
+
+以截取网页 https://www.r-project.org/ 为例，
+
+```{r,eval=FALSE,echo=TRUE}
+library(webshot)
+webshot("https://www.r-project.org/", "r.png")
+webshot("https://www.r-project.org/", "r.pdf") # Can also output to PDF
+```
+
+还可以截取 R Markdown 文档内容，注意是先编译 R Markdown 文档为 HTML 文档，然后截取网页
+
+```{r,eval=FALSE,echo=TRUE}
+input_file <- system.file("examples/knitr-minimal.Rmd", package = "knitr")
+rmdshot(input_file, "minimal_rmd.png")
+```
+
+裁剪出特定大小的图片，需要额外的系统依赖 GraphicsMagick (recommended) or ImageMagick installed
+
+```{r,eval=FALSE,echo=TRUE}
+# Can specify pixel dimensions for resize()
+webshot("https://www.r-project.org/", "r-small.png") %>%
+  resize("400x") %>%
+  shrink()
+```
+```
+** Processing: r-small.png
+400x442 pixels, 4x8 bits/pixel, RGB+alpha
+Reducing image to 3x8 bits/pixel, RGB
+Input IDAT size = 70570 bytes
+Input file size = 70867 bytes
+
+Trying:
+  zc = 9  zm = 8  zs = 0  f = 0         IDAT size = 59441
+  zc = 9  zm = 8  zs = 1  f = 0
+  zc = 1  zm = 8  zs = 2  f = 0
+  zc = 9  zm = 8  zs = 3  f = 0
+  zc = 9  zm = 8  zs = 0  f = 5
+  zc = 9  zm = 8  zs = 1  f = 5
+  zc = 1  zm = 8  zs = 2  f = 5
+  zc = 9  zm = 8  zs = 3  f = 5
+                               
+Selecting parameters:
+  zc = 9  zm = 8  zs = 0  f = 0         IDAT size = 59441
+
+Output IDAT size = 59441 bytes (11129 bytes decrease)
+Output file size = 59714 bytes (11153 bytes = 15.74% decrease)
+```
+
+## Pandoc
+
+1. Pandoc 是一个万能文档转化器，安装 pandoc，下载网址 https://github.com/jgm/pandoc/releases/latest
+
+   ```bash
+   sudo apt-get install gdebi-core
+   wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb
+   sudo chmod +x pandoc-2.5-1-amd64.deb
+   sudo gdebi pandoc-2.5-1-amd64.deb
+   ```
+   
+   rmarkdown 包裹了 Pandoc 工具，所以使用 `rmarkdown::render` 函数，即可将 R Markdown 文档转化为 HTML、LaTeX 和 Markdown 等格式。
+
+## Calibre
+
+1. 安装 calibre
+
+   ```bash
+   sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+   ```
+
+   calibre 可以将 epub 格式电子书文档转化为 mobi 格式，bookdown 已经给这个工具穿上了一件马甲，所以用户只需调用 `bookdown::calibre` 函数即可。
+
+[Calibre](https://calibre-ebook.com) 电子书转化器和管理器，bookdown 包提供了 `bookdown::calibre()` 函数去调用
+
+## Inkscape
+
+> Inkscape is an open source drawing tool with capabilities similar to Illustrator, Freehand, and CorelDraw that uses the W3C standard scalable vector graphics  format (SVG). Some supported SVG features include basic shapes, paths, text, markers, clones, alpha blending, transforms, gradients, and grouping. In addition, Inkscape supports Creative Commons meta-data, node-editing, layers, complex path operations, text-on-path, and SVG XML editing. It also imports several formats like EPS, Postscript, JPEG, PNG, BMP, and TIFF and exports PNG as well as multiple vector-based formats.
+
+> Inkscape's main motivations are to provide the Open Source community with a fully W3C compliant XML, SVG, and CSS2 drawing tool emphasizing a lightweight core with powerful features added as extensions, and the establishment of a friendly, open, community-oriented development processes.
+
+Inkscape^[<https://inkscape.org/zh/>] 是替代 Adobe Illustrator（简称 AI） 最佳工具，没有之一。开源免费，功能齐全，更新快，跨平台。尤其不用面临兼容性问题，说白了，就是厂家在不停地刷版本号，要用户掏钱升级，我早年间也是 Adobe 的忠实粉丝，通过校园先锋以学生身份买了好几套产品，后来看透了这一切，又找到了开源的 Inkscape \index{Inkscape}，现在我没有理由去升级 AI 了，我的电脑现在装的还都是 CS6 系列。最后欣赏来自官网的几个作品，其强大的功能可见一斑^[图片来自 <https://inkscape.org/en/gallery/>]
+
+安装软件
+
+```bash
+sudo add-apt-repository ppa:inkscape.dev/stable
+sudo apt-get update
+sudo apt-get install inkscape
+```
+
+PDF 图片格式转化为 SVG 格式
+
+```bash
+inkscape -l output-filename.svg input-filename.pdf
+```
+
+SVG 转 PDF 格式
+
+```bash
+inkscape -f input-filename.svg -A output-filename.pdf
+```
+
+> 注意 Windows 平台下要把 Inkscape 安装路径添加到系统 PATH 环境变量中，才能使用命令行。其它工具还有[pdf2svg](https://github.com/dawbarton/pdf2svg)，需要自己下载编译然后使用，支持多页 PDF 文件的转化。此外，Python 扩展包 [svg42pdf](https://pypi.org/project/svg42pdf/) 也可以将 SVG 转化为 PDF 图片，它要求 Python 3.x 版本
+
+用 rsvg [@Jeroen_2018_rsvg] 包导入 SVG 格式的图片, 再批量转化 svg 文件为 pdf 文件
+
+```{r,eval=FALSE,echo=TRUE}
+library(rsvg)
+tmp <- "figure/Ink" # svgs 存放目录
+input_paths <- paste0(tmp, "/", list.files(tmp))
+output_paths <- paste0("figure/pdf", "/", 
+                       gsub("svg", "pdf", list.files(tmp)))
+
+for (i in seq(length(list.files(tmp)))) {
+  rsvg_pdf(input_paths[i], file = output_paths[i])
+}
+```
+
+## QPDF
+
+[qpdf](https://github.com/ropensci/qpdf) 库[^qpdf-cpp] 由搬运狂魔 Jeroen Ooms 搬运至 R 系统中，用于 PDF 文件的拆分，组合，加密，优化和压缩等。
+
+[^qpdf-cpp]: https://github.com/qpdf/qpdf
+

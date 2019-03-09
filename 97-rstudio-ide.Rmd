@@ -1,0 +1,102 @@
+# 集成开发环境 {#ide}
+
+## RStudio 开源桌面版 {#open-source-rstudio-desktop-ide}
+
+```{r,fig.cap="开源桌面版 RStudio 集成开发环境"}
+knitr::include_graphics(path = 'figures/rstudio-ide.png')
+```
+
+## RStudio Server 开源服务器版 {#open-source-rstudio-server-ide}
+
+RStudio Server 开源服务器版可以放在虚拟机里或者容器里，RStudio 桌面版装在服务器上，服务器为 Ubuntu/CentOS/Windows 系统，然后本地是 Windows 系统，可以通过远程桌面连接服务器，使用 RStudio；
+
+```{r,fig.cap="虚拟机里的 RStudio"}
+knitr::include_graphics(path = 'figures/rstudio-vbox.png')
+```
+
+服务器上启动 Docker ，运行 RStudio 镜像，本地通过桌面浏览器，如谷歌浏览器登陆连接。
+
+```{r,fig.cap="容器里的 RStudio"}
+knitr::include_graphics(path = 'figures/rstudio-docker.png')
+```
+
+1. 下载 RStudio IDE
+ 
+   我们从 RStudio 官网[下载][rstudio-download]开源桌面或服务器版本，服务器版本的使用介绍见[文档](http://docs.rstudio.com/ide/server-pro/)，最常见的就是设置端口
+
+   ```bash
+   wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
+   sudo apt-get install gdebi
+   sudo gdebi rstudio-server-1.1.456-amd64.deb
+   ```
+
+1. 设置端口
+   
+   在文件 `/etc/rstudio/rserver.conf` 下，设置
+
+   ```
+   www-port=8181
+   ```
+
+   注意：修改 `rserver.conf` 文件后需要重启才会生效
+   
+   ```bash
+   sudo rstudio-server stop
+   sudo rstudio-server start
+   ```
+
+   接着获取机器的 IP 地址，如 192.168.141.3
+
+   ```bash
+   ip addr
+   ```
+   ```
+   1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+   2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+       link/ether 08:00:27:59:c0:fb brd ff:ff:ff:ff:ff:ff
+       inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
+          valid_lft 83652sec preferred_lft 83652sec
+       inet6 fe80::a00:27ff:fe59:c0fb/64 scope link
+          valid_lft forever preferred_lft forever
+   3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+       link/ether 08:00:27:09:33:0d brd ff:ff:ff:ff:ff:ff
+       inet 192.168.141.3/24 brd 192.168.141.255 scope global dynamic enp0s8
+          valid_lft 547sec preferred_lft 547sec
+       inet6 fe80::a00:27ff:fe09:330d/64 scope link
+          valid_lft forever preferred_lft forever
+   ```
+
+   然后，就可以从本地浏览器登陆 RStudio 服务器版本，如 <http://192.168.141.3:8181/>
+
+
+[rstudio-download]: https://www.rstudio.com/products/rstudio/download/
+
+##  Shiny Server 开源服务器版 {#open-source-shiny-server}
+
+shiny 开源服务器版
+
+## Eclipse + StatET {#eclipse-plus-statet}
+
+Eclipse 配合 StatET 插件 <http://www.walware.de/goto/statet> 提供R语言的集成开发环境 <https://projects.eclipse.org/projects/science.statet>
+
+```{r eclipse-statet,fig.cap="基于 Eclipse 的 R 集成开发环境 StatET"}
+knitr::include_graphics(path = "figures/StatET-06.png")
+```
+
+StatET 基于 Eclipse 首次建立索引很慢，估计半小时到一个小时，添加新的 R 包后，每次启动 StatET 也会建立索引缓存，此外，Eclipse 开发环境占用内存比较多，配置 StatET 的过程如下
+
+
+## Emacs + ESS {#emacs-plus-ess}
+
+Emacs 配合 ESS 插件 <https://ess.r-project.org/>
+
+
+## Nvim-R {#vim-plus-r}
+
+Nvim-R 是一个基于 Vim 的集成开发环境 <https://github.com/jalvesaq/Nvim-R>
+
