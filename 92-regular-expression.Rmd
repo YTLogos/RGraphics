@@ -1,35 +1,47 @@
 # 正则表达式 {#regex}
 
 ::: sidebar
-以下所述，都不考虑 `perl=TRUE` 的情况，R 语言中提供了扩展的（默认的）和类似 Perl 的两套正则表达式。作为入门，我们这里只关注前者，启用 Perl 正则表达式只需在函数如 `grep` 中将选项 `perl = TRUE` 即可，并将后者统一命名为 Perl 正则表达式[^learn-regex]。
+有几个名词需要单独拎出来解释的
+
+- literal character strings 
+- metacharacters 元字符
+- extended regular expressions 在下文中约定翻译为默认正则表达式
+- character class 字符集 `[abc]`
+- Perl-like regular expressions  Perl 风格的正则表达式
+
+以下所述，都不考虑函数中参数 `perl=TRUE` 的情况，R 语言中提供了扩展的（默认的）和 Perl 风格 的两套正则表达式。作为入门，我们这里只关注前者，启用 Perl 正则表达式只需在函数如 `grep` 中将选项 `perl = TRUE` 即可，并将后者统一命名为 Perl 正则表达式[^learn-regex]。
 :::
 
-正则表达式 (**reg**ular **exp**ression，简称 regexp)， 函数 `regexpr` 和 `gregexpr` 的名称就好理解了，在控制台输入 `?regex` 查看 R 支持的正则表达式，谢老大建议把 `?regex` 至少看百八十遍。
+正则表达式 (**reg**ular **exp**ression，简称 regexp)， 函数 `regexpr` 和 `gregexpr` 的名称就好理解了，在控制台输入 `?regex` 查看 R 支持的正则表达式，这个文档看上百八十回也不过分。R 内支持正则表达式的函数有 `grep`、`grepl`、`sub`、`gsub`、`regexpr`、`gregexpr` 、 `regexec` 和 `strsplit`。函数 `apropos`，`browseEnv`，`help.search`，`list.files` 和 `ls` 是通过函数 `grep` 来使用正则表达式的，它们全都使用 extended regular expressions
 
-[Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
+R 内置的正则表达式实现是基于 PCRE ICU TRE iconv 等第三方库，搞清楚自己使用的版本信息是重要的，一些字符集的解释与区域环境有关，如 `[:alnum:]` 和 `[:alpha:]`等，所以获取当前的区域设置也很重要
 
-[stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包，[re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份，[正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
-
-
-常用的字符串处理函数有 `grep`、`grepl`、`sub`、`gsub`、`regexpr`、`gregexpr` 、 `regmatches` 和 `strsplit` 它们都支持正则表达式语法，其中，函数 `grep`, `glob2rx` 和 `strsplit` 其实是通过 `grep` 使用正则表达式的。
-
-
-正则表达式的构造方式类似算术表达式，通过各种操作组合子（更小的）表达式，整个表达式匹配一个或多个字符[^char-byte]。大多数字符，包括所有的字母和数字，是匹配自身的正则表达式。带有特定意义的任何元字符可以通过反斜杠引用。在常用正则表达式中，元字符 metacharacters 是 
-
+```{r,echo=TRUE}
+# find a suitable coding for the current locale
+localeToCharset(locale = Sys.getlocale("LC_CTYPE"))
+# 软件版本信息
+extSoftVersion()
+# 区域及其编码信息
+l10n_info()
+# 表示数字、货币的细节
+Sys.localeconv()
 ```
-. \ | ( ) [ { ^ $ * + ? 
+
+需要临时改变区域环境设置，配合特殊的画图和文本输出要求。
+
+```{r,echo=TRUE,eval=FALSE}
+# 获取当前默认的区域设置
+foo <- Sys.getlocale()
+# 恢复默认的区域设置
+Sys.setlocale("LC_ALL", locale = foo)
 ```
 
-要注意，它们是否有特殊意义取决于所在的内容。
+正则表达式的构造方式类似算术表达式，通过各种操作组合子（更小的）表达式，整个表达式匹配一个或多个字符[^char-byte]。大多数字符，包括所有的字母和数字，是匹配自身的正则表达式。元字符 `. \ | ( ) [ { ^ $ * + ?` 需要转义才能表达其自身的含义，转义的方式是在元字符前面添加反斜杠，如要表达点号 `.` 需要使用 `\.`。要注意，它们是否有特殊意义取决于所在的内容。
 
-一个字符集 character class 是用一对中括号`[]`括起来的字符列表，用来匹配在哪个列表中的任意一（单）个字符，除非列表中的第一个字符是 `^`，它用来匹配任意的不在这个列表中的字符。 `[0123456789]` 用来匹配任意单个数字，`[^abc]` 用来匹配除字符 `a,b,c` 以外的任意字符。
-
-字符范围可以通过第一个和最后一个字符指定，中间用连字符连接，但是由于这种解释依赖于区域和具体实现，所以指定字符范围这个方式最好避免。
-
-唯一可移植（便携）的方式是作为字符类，在列表中列出所有的 ASCII 字母，
+一个字符集 (character class) 是用一对中括号`[]`括起来的字符列表，用来匹配列表中的任意单个字符，除非列表中的第一个字符是 `^`，它用来匹配不在这个列表中的字符。 `[0123456789]` 用来匹配任意单个数字，`[^abc]` 用来匹配除字符 `a,b,c` 以外的任意字符。字符范围 (character ranges) 可以通过第一个和最后一个字符指定， 中间用连字符 (hyphen) 连接， 由于这种解释依赖于区域和具体实现，所以指定字符范围的使用方式最好避免。唯一可移植（便携，通用）的方式是作为字符集，在列表中列出所有的 ASCII 字母，
 `[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz]`.
 
-某些命名的字符类是预定义的，它们的解释 interpretation 依赖于区域 locale，下面的解释是  POSIX locale
+预定义的一些字符类，它们的解释依赖于当前的语言区域，下面是 POSIX locale 环境下的解释
 
 - `[:alnum:]` 表示  `[:alpha:]` 和 `[:digit:]`，含义是 `[0-9A-Za-z]`，但是前者与区域和字符集无关，后者依赖于当前的区域设置和字符编码。要注意在这些字符集名 class names 中，中括号 `[]` 是符号名的一部分，是必须要包含的。在字符集中，大多数元字符失去它们特殊的意义。
 
@@ -54,12 +66,12 @@
 
 点号 `.` 匹配任意单个字符，`\w` 匹配一个词 word 字符(是`[[:alnum:]_]`的同义词，一个扩展) ，而 `\W` 是 `\w` 取反，意味着 `[^[:alnum:]_]`。 `\d`, `\s`, `\D` 和 `\S` 表示数字和空格类和它们的取反
 
-caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
+脱字符 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
 
 ## 贪婪匹配 {#repetition-quantifiers}
 
-默认情况下， 匹配方式是贪婪的，会使用最大可能的匹配，这个可以变为最小的匹配次数，通过在其之后添加 `?`，一个正则表达式可能跟着重复量词，下面的限定符都是限定在它前面的正则表达式
+默认的匹配方式是贪婪的，会使用尽可能多的匹配次数，这个可以变为最小的匹配次数，通过在其之后添加 `?`，一个正则表达式可能跟着重复量词，下面的限定符都是限定在它前面的正则表达式
 
 - `?` 匹配至多 1 次
 - `*` 匹配 0 次或多次
@@ -172,6 +184,9 @@ Extract or replace matched substrings from match data obtained by regexpr, grege
 
 ## stringi 和 stringr {#stringi-stringr}
 
+[Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
+
+[stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包，[re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份，[正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
 
 ## RCurl 和 XML {#rcurl-xml}
 
