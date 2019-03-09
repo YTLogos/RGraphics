@@ -79,12 +79,18 @@ regexec(pattern, text, ignore.case = FALSE, perl = FALSE,
 ```
 
 
-regexpr returns an integer vector of the same length as text giving the starting position of the first match or -1 if there is none, with attribute "match.length", an integer vector giving the length of the matched text (or -1 for no match). The match positions and lengths are in characters unless useBytes = TRUE is used, when they are in bytes (as they are for an ASCII-only matching: in either case an attribute useBytes with value TRUE is set on the result). If named capture is used there are further attributes "capture.start", "capture.length" and "capture.names".
+`regexpr` 返回一个整型向量，第一次匹配的初始位置，-1 表示没有匹配到
 
-gregexpr returns a list of the same length as text each element of which is of the same form as the return value for regexpr, except that the starting positions of every (disjoint) match are given.
+returns an integer vector of the same length as text giving the starting position of the first match or -1 if there is none, with attribute "match.length", an integer vector giving the length of the matched text (or -1 for no match). 
+
+The match positions and lengths are in characters unless `useBytes = TRUE` is used, when they are in bytes (as they are for an ASCII-only matching: in either case an attribute useBytes with value TRUE is set on the result). 
+
+If named capture is used there are further attributes "capture.start", "capture.length" and "capture.names".
+
+`gregexpr` 返回一个列表，returns a list of the same length as text each element of which is of the same form as the return value for `regexpr`, except that the starting positions of every (disjoint) match are given.
 
 
-regexec returns a list of the same length as text each element of which is either -1 if there is no match, or a sequence of integers with the starting positions of the match and all substrings corresponding to parenthesized subexpressions of pattern, with attribute "match.length" a vector giving the lengths of the matches (or -1 for no match). The interpretation of positions and length and the attributes follows regexpr.
+`regexec` 返回一个列表，长度 returns a list of the same length as text each element of which is either -1 if there is no match, or a sequence of integers with the starting positions of the match and all substrings corresponding to parenthesized subexpressions of pattern, with attribute "match.length" a vector giving the lengths of the matches (or -1 for no match). 位置、长度和属性的解释与 `regexpr` 一致
 
 ::: sidebar
 Where matching failed because of resource limits (especially for PCRE) this is regarded as a non-match, usually with a warning.
