@@ -1,5 +1,12 @@
 # 正则表达式 {#regular-expression}
 
+R 内置的三种匹配模式
+
+1. `fixed = TRUE`: use exact matching.
+1. `perl = TRUE`: use Perl-style regular expressions.
+1. `fixed = FALSE, perl = FALSE`: use POSIX 1003.2 extended regular expressions (the default).
+
+
 ::: sidebar
 有几个名词需要单独拎出来解释的
 
