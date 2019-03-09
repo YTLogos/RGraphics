@@ -54,6 +54,7 @@ options(
     drat = "https://nowosad.github.io/drat"
   ),
   knitr.graphics.auto_pdf = FALSE,
+  tidyverse.quiet = TRUE,
   width = 69,
   str = utils::strOptions(strict.width = "cut"),
   tikzDefaultEngine = "pdftex",

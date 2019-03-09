@@ -36,9 +36,9 @@ url: 'https\://bookdown.org/xiangyun/RGraphics/'
 
 ```{r setup,include=FALSE}
 packages = c(
-  "colorspace", "magrittr", "bookdown", "rmarkdown",
-  "tikzDevice", "fontcm", "microbenchmark", "rsconnect",
-  "sp", "maptools", "maps", "mapdata", "mapproj", "DAAG",
+  "colorspace", "magrittr", "bookdown",
+  "tikzDevice", "fontcm", "microbenchmark",
+  "sp", "maptools", "maps", "mapdata", "mapproj", 
   "ggplot2", "devtools", "sf", "rgdal", "fs", "tidyverse",
   "DBI", "odbc", "tm"
 )
@@ -162,11 +162,10 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 重现本书内容需要的 R 包
 
 ```{r sessioninfo,echo=TRUE}
-sessionInfo(package = c(
-  "colorspace", "magrittr", "bookdown", "rmarkdown",
+sessioninfo::session_info(pkgs = c(
+  "colorspace", "magrittr", "bookdown",
   "tikzDevice", "fontcm", "fs", "tidyverse",
-  "sp", "maptools", "maps", "mapdata", "mapproj",
-  "ggplot2", "devtools", "sf", "rgdal", "grid"
+  "ggplot2", "devtools", "sf", "grid"
 ))
 ```
 

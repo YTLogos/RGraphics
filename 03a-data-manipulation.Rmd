@@ -42,15 +42,6 @@ format(object.size(library), units = "auto")
 
 清晰目标是提取字段，整理成数据框的数据存储形式 grep sub gsub
 
-Pattern Matching and Replacement 模式匹配和替换
-
-正则表达式 is ervrywhere，is 高级/hacker's skill 技能
-
-- [正则表达式速查表 -- Python3](https://www.dataquest.io/blog/large_files/python-regular-expressions-cheat-sheet.pdf)
-- [Online regex tester and debugger](https://regex101.com/)
-- [Regular expression operations](https://docs.python.org/3/library/re.html)
-- [Handling Strings with R](http://www.gastonsanchez.com/r4strings/) 字符串处理
-
 R 基础包提供了丰富的字符串处理函数
 
 ```{r,eval=FALSE,echo=TRUE}
