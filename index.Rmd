@@ -86,8 +86,32 @@ lapply(packages, function(pkg) {
    1. [Top 10 reasons R is bad for you](https://decisionstats.com/2009/01/10/top-ten-rrreasons-r-is-bad-for-you/)
 -  R over Python
    1. [R > Python: A Concrete Example](https://matloff.wordpress.com/)
+   1. [Choosing R or Python for Data Analysis? An Infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis) 
 
-   
+
+Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，不完善之处还请大家指出并补充[^r-python-notes]
+
+-----------------------------------------------------------------------------------------------------------------------
+  比较内容      具体范围                    R 包                                   Python 模块
+--------------- --------------------------- -------------------------------------- ------------------------------------
+  数据获取      本地、数据库、远程          内置，RCurl、XML、rvest、data.table、  scrapy
+                                            odbc
+
+  数据清理      正则表达式                  内置，stringi、stringr、tidyr          re
+
+  数据聚合      SQL支持的所有操作           内置，dplyr、purrr、dbplyr、sparklyr   Numpy、Scipy、Pandas
+
+  数据分析      统计推断的所有方法          内置，lme4、rstan、mxnet、xgoost、     xgboost、scikit-learn、tensorflow、mxnet  
+                                            tensorflow               
+
+  数据展示      数据可视化                  内置，ggplot2、plotly                  matplotlib、bokeh、plotly
+
+  数据报告      网页文档、幻灯片            rmarkdown、bookdown、blogdown 
+
+  数据落地      模型部署，调优，维护        plumber、opencpu、fiery
+-----------------------------------------------------------------------------------------------------------------------
+
+[^r-python-notes]: 所有的 R 包和 Python 模块必须处于活跃维护，拥有大批粉丝，维护者在社区内享有声誉，有厂子或科研经费支持
 
 * 我的 Python 学习路径，零基础学习 Python
 
