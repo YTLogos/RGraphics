@@ -37,7 +37,7 @@ Dirk Eddelbuettel 的[Getting Started in R -- Tinyverse Edition](https://github.
 
 ## `Map` 与 `Reduce` {#high-order-function}
 
-在 R 语言里玩转`apply`， `Map()` 和 `Reduce()`，下面分别以提取合并多张 XLSX 表格[^openxl-map]，分组计算[^by-group-calculation] 和子集操作 [^subsetting] 为例，从函数式编程到 MapReduce [^funcprog-map-reduce]，制作数据透视表[^pivot-tables]，用于数据处理的函数式编程和单元测试 Functional programming and unit testing for data munging with R 特别是第三章 <https://b-rodrigues.github.io/fput/>，然后是函数式编程与数据建模 Modeling data with functional programming in R[^modeling-funcprog]
+在 R 语言里玩转`apply`， `Map()` 和 `Reduce()`[^apply-family]，下面分别以提取合并多张 XLSX 表格[^openxl-map]，分组计算[^by-group-calculation] 和子集操作 [^subsetting] 为例，从函数式编程到 MapReduce [^funcprog-map-reduce]，制作数据透视表[^pivot-tables]，用于数据处理的函数式编程和单元测试 Functional programming and unit testing for data munging with R 特别是第三章 <https://b-rodrigues.github.io/fput/>，然后是函数式编程与数据建模 Modeling data with functional programming in R[^modeling-funcprog]
 
 
 ```{r,echo=TRUE}
