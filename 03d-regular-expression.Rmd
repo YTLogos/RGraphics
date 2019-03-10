@@ -169,16 +169,16 @@ The pattern `(?:...)` groups characters just as parentheses do but does not make
 
 Patterns `(?<=...)` and `(?<!...)` are the lookbehind equivalents: they do not allow repetition quantifiers nor `\C` in `...`.
 
-
+如表\@ref(tab:group-lookaround)所示，
 
 Table: (\#tab:group-lookaround) 环顾四周查找
 
-    符号      | 描述
-:-----------: | :-----------:
-    `?=`      | 正向肯定查找
-    `?!`      | 正向否定查找
-    `?<=`     | 反向肯定查找
-    `?<!`     | 反向否定查找
+|    符号      |     描述     |
+|:-----------: | :-----------:|
+|    `?=`      | 正向肯定查找 |
+|    `?!`      | 正向否定查找 |
+|    `?<=`     | 反向肯定查找 |
+|    `?<!`     | 反向否定查找 |
 
 函数 `regexpr` 和 `gregexpr` 支持 named capture. If groups are named, e.g., `(?<first>[A-Z][a-z]+)` then the positions of the matches are also returned by name. 函数 `sub` 不支持 Named backreferences
 

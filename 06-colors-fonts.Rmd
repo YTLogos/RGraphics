@@ -1,0 +1,54 @@
+# 字体和颜色 {#colors-fonts}
+
+## 颜色 {#colors}
+
+## 安装字体 {#fonts}
+
+在 Ubuntu 系统上安装微软字体，如果因为网络原因，下载出现问题，也有可能是长期没有维护更新，默认字体下载链接失效了
+
+```bash
+sudo apt-get install ttf-mscorefonts-installer
+```
+
+因此，需要手动下载字体到目录 `~/msfonts/`下
+
+```{r,eval=FALSE,echo=TRUE}
+baseurl <- "https://nchc.dl.sourceforge.net/project/corefonts/the%20fonts/final"
+fonts <- c(
+  "webdin32", "verdan32", "trebuc32", "times32",
+  "impact32", "georgi32", "courie32", "comic32",
+  "arialb32", "arial32", "andale32"
+)
+fonts_exe <- paste0(fonts, ".exe")
+fonts_url <- paste(baseurl, fonts_exe, sep = "/")
+
+if (!dir.exists("~/msfonts")) {
+  dir.create("~/msfonts")
+}
+
+for (i in seq(length(fonts)))
+  download.file(
+    url = fonts_url[i], 
+    destfile = paste("~/msfonts", fonts_exe[i], sep = "/"),
+    method = "auto"
+  )
+```
+
+字体下载完后，手动配置字体
+
+```bash
+sudo dpkg-reconfigure ttf-mscorefonts-installer
+```
+
+注意要输入字体存放的完整路径 `/home/ubuntu/msfonts` 而不是相对路径 `~/msfonts`，安装完成后，字体存放在系统目录`/usr/share/fonts/truetype/msttcorefonts/`下，接下来可以查看已经安装的字体
+
+```bash
+fc-list :lang=zh | sort
+fc-list :lang=en | sort
+```
+
+此外，安装常见的等宽字体 inconsolata
+
+```bash
+sudo apt install fonts-inconsolata
+```

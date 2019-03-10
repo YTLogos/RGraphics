@@ -1,4 +1,4 @@
-# 集成开发环境 {#ide}
+# 开发环境 {#ide}
 
 ## RStudio 开源桌面版 {#open-source-rstudio-desktop-ide}
 

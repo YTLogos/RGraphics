@@ -20,30 +20,35 @@ new_session: yes
 before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"
+  - "00-installation.Rmd"
+  # 文件系统
   - "01-file-system.Rmd"
+  # 数据接口
   - "02-data-import-export.Rmd"
   
-  - "03-data-cleaner.Rmd"
   - "03a-data-manipulation.Rmd"
   - "03b-data-wrangeling.Rmd"
-
+  
+  - "03c-data-cleaner.Rmd"
+  - "03d-regular-expression.Rmd"  
+  # 统计图形
   - "04-statistical-graphics.Rmd"
   - "05-data-visualization.Rmd"
+  - "06-colors-fonts.Rmd"
+  # 动态文档
+  - "10-dynamic-documents.Rmd"
   
-# 动态文档生成，部署  
-  - "88-git-github-gitlab.Rmd"
-  - "89-container.Rmd"
-  - "90-dynamic-documents.Rmd"
 
-  
-  - "92-regular-expression.Rmd"
-#  - "93-object-oriented-programming.Rmd"
+#  - "20-OO.Rmd"
 
-
-  - "94-installation.Rmd"
-  - "95-tools.Rmd"
-
+# 附录
+  - "95-r-packages.Rmd"
   - "96-editor.Rmd"
-  - "97-rstudio-ide.Rmd"  
+  - "97-rstudio.Rmd"  
+  - "98-git-github-gitlab.Rmd"
+  - "99-container.Rmd"
   
+  - "99-other-tools.Rmd"
+  
+# 参考文献  
   - "99-references.Rmd"
