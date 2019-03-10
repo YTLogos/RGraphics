@@ -41,7 +41,9 @@ addons:
       - ghostscript
       - imagemagick
       - optipng
+      # Rgraphviz igraph
       - graphviz
+      # qpdf
       - qpdf
       # git2r
       - libgit2-dev
@@ -54,8 +56,11 @@ addons:
       - unixodbc 
       - unixodbc-dev
       - odbc-postgresql
+      # magick
       - libmagick++-dev
+      # pdftools
       - libpoppler-cpp-dev
+      # tesseract
       - libtesseract-dev 
       - libleptonica-dev 
       - tesseract-ocr-eng
