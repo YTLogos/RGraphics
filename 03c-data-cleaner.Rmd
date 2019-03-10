@@ -2,9 +2,20 @@
 
 ## `grep` 和 `grepl` {#grep-grepl}
 
+
+```r
+grep(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
+     fixed = FALSE, useBytes = FALSE, invert = FALSE)
+```
+
 - `ignore.case`: `TRUE` 表示忽略大小写，`FALSE` 表示匹配的时候区分大小写
 
-`grep` 返回匹配到的字符串向量x的元素的下标，如果 `value=TRUE` 则返回下标对应的值
+- `grep` 返回匹配到的字符串向量x的元素的下标，如果 `value=TRUE` 则返回下标对应的值
+
+```{r,echo=TRUE}
+grep("[a-z]", letters)
+grep("[a-z]", letters, value = TRUE)
+```
 
 ```{r,echo=TRUE}
 grep(x = c("apple", "banana"), pattern = "a")
@@ -13,7 +24,13 @@ grep(x = c("apple", "banana"), pattern = "a", value = TRUE)
 grep(x = c("apple", "banana"), pattern = "b", value = TRUE)
 ```
 
-`grepl` 返回一个逻辑向量，字符串向量x中的每个元素是否匹配到，匹配到返回 `TRUE`，没有匹配到返回 `FALSE`
+
+```r
+grepl(pattern, x, ignore.case = FALSE, perl = FALSE,
+      fixed = FALSE, useBytes = FALSE)
+```
+
+- `grepl` 返回一个逻辑向量，字符串向量x中的每个元素是否匹配到，匹配到返回 `TRUE`，没有匹配到返回 `FALSE`
 
 ```{r,echo=TRUE}
 grepl(x = c("apple", "banana"), pattern = "a")
@@ -59,6 +76,11 @@ grepl(x = "a\\\\b", pattern = "\\\\", fixed = TRUE)
 sub(" .*", "", extSoftVersion()["PCRE"])
 ```
 
+
+```{r,echo=TRUE}
+gsub(pattern =  "([ab])", replacement = "\\1_\\1_", x = "abc and ABC")
+```
+
 ## `regexpr`  `gregexpr`  `regexec` 和 `regmatches` {#regexpr-gregexpr-regexec-regmatches}
 
 ::: sidebar
@@ -79,9 +101,7 @@ regexec(pattern, text, ignore.case = FALSE, perl = FALSE,
 ```
 
 
-`regexpr` 返回一个整型向量，第一次匹配的初始位置，-1 表示没有匹配到
-
-returns an integer vector of the same length as text giving the starting position of the first match or -1 if there is none, with attribute "match.length", an integer vector giving the length of the matched text (or -1 for no match). 
+`regexpr` 返回一个整型向量，第一次匹配的初始位置，-1 表示没有匹配到，返回的属性 `match.length`  表示匹配的字符数量，是一个整型向量，向量长度是匹配的文本的长度，-1 表示没有匹配到
 
 The match positions and lengths are in characters unless `useBytes = TRUE` is used, when they are in bytes (as they are for an ASCII-only matching: in either case an attribute useBytes with value TRUE is set on the result). 
 
@@ -112,6 +132,38 @@ regmatches(x, m)
 ```{r regex101,fig.cap="正则表达式匹配结果",fig.link="https://regex101.com/"}
 knitr::include_graphics(path = "figures/regexp.png")
 ```
+
+进一步，我们可以用 `regmatches` 函数抽取 URL 的部分内容，如前面提到的传输协议，主机等
+
+```{r,echo=TRUE}
+URL_parts <- function(x) {
+  m <- regexec("^(([^:]+)://)?([^:/]+)(:([0-9]+))?(/.*)", x)
+  parts <- do.call(
+    rbind,
+    lapply(regmatches(x, m), `[`, c(3L, 4L, 6L, 7L))
+    # 3,4,6,7是索引位置
+  )
+  colnames(parts) <- c("protocol", "host", "port", "path")
+  parts
+}
+URL_parts(x)
+```
+
+目前还没有 `gregexec` 函数，但是可以模拟一个，首先用 `gregexpr` 函数返回匹配的位置，`regmatches` 抽取相应的值，然后用 `regexec` 作用到每一个提取的值，做再一次匹配和值的抽取。另一个例子
+
+```{r,echo=TRUE}
+## There is no gregexec() yet, but one can emulate it by running
+## regexec() on the regmatches obtained via gregexpr().  E.g.:
+pattern <- "([[:alpha:]]+)([[:digit:]]+)"
+s <- "Test: A1 BC23 DEF456"
+gregexpr(pattern, s)
+regmatches(s, gregexpr(pattern, s))
+lapply(
+  regmatches(s, gregexpr(pattern, s)),
+  function(e) regmatches(e, regexec(pattern, e))
+)
+```
+
 
 ```{r,echo=TRUE}
 data(acq, package = "tm")
