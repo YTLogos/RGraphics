@@ -9,6 +9,7 @@ apropos("^read.")
 apropos("^write.")
 ```
 
+### `scan` {#scan}
 
 ### `read.csv` 与 `write.csv` {#read-write-csv}
 
@@ -17,6 +18,14 @@ apropos("^write.")
 ### `read.table` 与 `write.table` {#read-write-table}
 
 ### `readLines` 与 `writeLines` {#read-write-lines}
+
+让我们折腾一波，读进来又写出去
+
+```{r,echo=TRUE}
+writeLines(readLines("latex/TeXLive.pkgs"),"latex/TeXLive.pkgs")
+```
+
+
 
 ### `readRDS` 与 `saveRDS` {#read-save-rds}
 

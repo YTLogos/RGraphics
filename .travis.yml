@@ -3,9 +3,9 @@ language: r
 matrix:
   include:
     - dist: trusty
-      r: 3.5.2 
+      r: devel
     - dist: xenial
-      r: 3.5.2
+      r: devel
 
 
 sudo: true
