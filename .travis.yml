@@ -1,11 +1,6 @@
 language: r
-
-matrix:
-  include:
-    - dist: trusty
-      r: devel
-    - dist: xenial
-      r: devel
+dist: xenial
+r: devel
 
 
 sudo: true
