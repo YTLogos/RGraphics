@@ -290,3 +290,5 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 ## 配置 {#settings}
 
 查看帮助 `?.Rprofile`
+
+`commandArgs` 命令行参数传递

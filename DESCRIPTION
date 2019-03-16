@@ -34,6 +34,4 @@ Suggests:
   qpdf,
   tesseract,
   tm,
-  XML,
-  vioplot,
-  webshot
+  XML
