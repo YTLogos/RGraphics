@@ -31,7 +31,5 @@ Suggests:
   rsvg,
   showtext,
   svglite,
-  qpdf,
-  tesseract,
   tm,
   XML

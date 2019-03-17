@@ -260,3 +260,6 @@ sudo apt-get install libpoppler-cpp-dev libmagick++-dev
 ```{r,echo=TRUE,eval=FALSE}
 install.packages(c("pdftools", "magick"))
 ```
+
+OCR 扫描 PDF 文字识别 tesseract
+  
