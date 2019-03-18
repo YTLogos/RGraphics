@@ -10,7 +10,7 @@ R 内置的三种匹配模式
 ::: sidebar
 有几个名词需要单独拎出来解释的
 
-- literal character strings 
+- literal character strings 原始字符串
 - metacharacters 元字符
 - extended regular expressions 在下文中约定翻译为默认正则表达式
 - character class 字符集 `[abc]`
@@ -29,7 +29,7 @@ grep(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
 匹配模式 pattern 的内容 可以用函数 `cat` 打印出来，注意反斜杠进入 R 字符串中时，需要用两个，反斜杠 `\` 本身是转义符，否则会报错。
 
 ```{r,echo=TRUE}
-cat("\\")
+cat("\\") # \ 反斜杠是转义字符
 cat("\\.")
 cat("\\\n") # 注意 \n 表示换行
 ```
