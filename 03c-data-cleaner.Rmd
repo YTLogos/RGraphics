@@ -1,5 +1,10 @@
 # 数据清洁工 {#data-cleaner}
 
+
+Concatenate Strings 连接字符串，`paste/c/bfile/bracket` 函数性能比较
+<https://wch.github.io/string_builder/index.html>
+
+
 ## `grep` 和 `grepl` {#grep-grepl}
 
 
