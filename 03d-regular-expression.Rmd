@@ -1,6 +1,6 @@
 # 正则表达式 {#regular-expression}
 
-R 内置的三种匹配模式
+维基百科关于 [正则表达式的描述](https://www.wikiwand.com/en/Regular_expression) R 内置的三种匹配模式
 
 1. `fixed = TRUE`: use exact matching.
 1. `perl = TRUE`: use Perl-style regular expressions.
@@ -10,7 +10,7 @@ R 内置的三种匹配模式
 ::: sidebar
 有几个名词需要单独拎出来解释的
 
-- literal character strings 原始字符串
+- literal character strings 字面字符串
 - metacharacters 元字符
 - extended regular expressions 在下文中约定翻译为默认正则表达式
 - character class 字符集 `[abc]`
