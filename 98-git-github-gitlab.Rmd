@@ -24,3 +24,16 @@ Git 使用的数据库
 
 [^install-git]: 根据官网安装指导 https://git-scm.com/download/linux，在 Ubuntu 14.04.5 和 Ubuntu 16.04.5 安装最新版 GIT 
 
+
+
+以 Fedora 为例 [安装 tig](https://github.com/jonas/tig/blob/master/INSTALL.adoc)，首先安装必要的依赖，然后从官网下载源码，编译安装，之后切到任意本地 Git 仓库下，输入 `tig` 就可以看到如图 \@ref(fig:tig) 所示的样子了
+
+```bash
+sudo yum install readline-devel ncurses-devel asciidoc docbook-utils xmlto
+```
+
+tig 主要用于查看 git 提交的历史日志
+
+```{r tig,fig.cap="Git日志查看器"}
+knitr::include_graphics(path = 'figures/tig.png')
+```
