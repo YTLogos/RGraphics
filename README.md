@@ -104,6 +104,7 @@
       - R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
       - 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
       - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
+      - 学习统计与 R 语言 [Learning Statistics with R](https://github.com/djnavarro/rbook)
 
    1. 学习 Python
         - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版

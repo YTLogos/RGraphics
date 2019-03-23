@@ -29,6 +29,22 @@ knitr::kable(
 )
 ```
 
+在表格中引入数学符号
+
+```{r scalescont, tidy=FALSE, echo=FALSE}
+knitr::kable(
+  rbind(c("", "continuous", "discrete"),
+        c("nominal", "", "$\\checkmark$"),
+        c("ordinal", "", "$\\checkmark$"),
+        c("interval", "$\\checkmark$", "$\\checkmark$"),
+        c("ratio", "$\\checkmark$", "$\\checkmark$")
+    
+  )
+  , caption = 'The relationship between the scales of measurement and the discrete/continuity distinction. Cells with a tick mark correspond to things that are possible.', align="lcc",
+  booktabs = TRUE
+)
+```
+
 
 ### 图片 {#figure}
 
