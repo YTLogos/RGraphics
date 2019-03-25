@@ -2,9 +2,9 @@
 
 维基百科关于 [正则表达式的描述](https://www.wikiwand.com/en/Regular_expression) R 内置的三种匹配模式
 
-1. `fixed = TRUE`: use exact matching.
-1. `perl = TRUE`: use Perl-style regular expressions.
-1. `fixed = FALSE, perl = FALSE`: use POSIX 1003.2 extended regular expressions (the default).
+1. `fixed = TRUE`: 字面意思匹配 exact matching.
+1. `perl = TRUE`: 使用 Perl 正则表达式.
+1. `fixed = FALSE, perl = FALSE`: 使用 POSIX 1003.2 extended 正则表达式 (默认设置).
 
 
 ::: sidebar
@@ -121,21 +121,35 @@ Sys.setlocale("LC_ALL", locale = foo)
 
 脱字符 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
-## 字符串翻译 {#character-translations}
+## 字符串转换 {#character-translations}
 
-`tolower`, `toupper` and `chartr` for character translations.
+`tolower` 将字符串或字符串向量中含有的大写字母全都转化为小写， `toupper` 函数正好与之相反，`chartr` 是对应字符的替换操作.
+
+```{r,echo=TRUE}
+tolower(c("HELLO", "Hello, R", "hello"))
+toupper(c("HELLO", "Hello, R", "hello"))
+```
+
+`chartr` 支持正则表达式的替换
+
+```{r,echo=TRUE}
+x <- "MiXeD cAsE 123"
+# 将字符 iXs 替换为 why
+chartr("iXs", "why", x)
+# 将字符串 a-cX 中的字符挨个对应地替换为 D-Fw
+chartr("a-cX", "D-Fw", x)
+```
+
+
 
 ## 匹配 {#match}
 
+近似匹配 `agrep` for approximate matching.
 
-近似匹配
-`agrep` for approximate matching.
-
-部分匹配
-
-`charmatch`, `pmatch` for partial matching,
+部分匹配 `charmatch`  `pmatch` for partial matching,
 
 `match` for matching to whole strings, 
+
 `startsWith` for matching of initial parts of strings.
 
 贪婪匹配
@@ -165,9 +179,9 @@ Sys.setlocale("LC_ALL", locale = foo)
 
 ## 命名组 {#name-groups}
 
-The pattern `(?:...)` groups characters just as parentheses do but does not make a backreference.
+The pattern `(?:...)` groups characters 就是括号，但是不做反向查找
 
-Patterns `(?<=...)` and `(?<!...)` are the lookbehind equivalents: they do not allow repetition quantifiers nor `\C` in `...`.
+模式 `(?<=...)` and `(?<!...)` 都是反向查找，它们不允许限制符， they do not allow repetition quantifiers nor `\C` in `...`.
 
 如表\@ref(tab:group-lookaround)所示，
 
@@ -180,7 +194,26 @@ Table: (\#tab:group-lookaround) 环顾四周查找
 |    `?<=`     | 反向肯定查找 |
 |    `?<!`     | 反向否定查找 |
 
-函数 `regexpr` 和 `gregexpr` 支持 named capture. If groups are named, e.g., `(?<first>[A-Z][a-z]+)` then the positions of the matches are also returned by name. 函数 `sub` 不支持 Named backreferences
+函数 `regexpr` 和 `gregexpr` 支持命名捕捉 (named capture). 如果一个组被命名了，如 `(?<first>[A-Z][a-z]+)` 那么，匹配的位置是按名字返回。
+
+下面举个例子说明，从字符串向量 `notables` 中获得了三组匹配 `name.rex` 是一段正则表达式，描述的模式是人名
+
+```{r,echo=TRUE}
+## named capture
+notables <- c("  Ben Franklin and Jefferson Davis",
+              "\tMillard Fillmore")
+# name groups 'first' and 'last'
+name.rex <- "(?<first>[[:upper:]][[:lower:]]+) (?<last>[[:upper:]][[:lower:]]+)"
+parsed <- regexpr(name.rex, notables, perl = TRUE)
+parsed
+```
+
+`notables` 是一个长度为2的字符串向量，所以获得两组匹配，捕捉到匹配开始的位置 `capture.start` 和匹配的长度 `capture.length` 都是两组，按列来看，字符 B 出现在字符串 `  Ben Franklin and Jefferson Davis` 的第三个位置，匹配的长度 Ben 是三个字符，长度是 3，如图 \@ref(fig:name-capture) 所示，需要注意的是一定要设置 `perl = TRUE` 才能使用命名捕捉功能，函数 `sub` 不支持命名反向引用 Named backreferences
+
+```{r name-capture,fig.cap="命名捕捉"}
+knitr::include_graphics(path = "figures/name-capture.png")
+```
+
 
 ::: sidebar
 Atomic grouping, possessive qualifiers and conditional and recursive patterns are not covered here.
