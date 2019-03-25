@@ -108,16 +108,28 @@
 
    1. 学习 Python
         - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
-        - [Python 代码风格PEP8](https://www.python.org/dev/peps/pep-0008/)
-        -  [Python Tutorial](https://docs.python.org/3/tutorial/index.html) 初识 Python
-        - [廖雪峰的Python3.x教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
-        - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python
-        - [Python Cookbook 3rd Edition](https://python3-cookbook.readthedocs.io/zh_CN/latest/) 中文版
-        - [笨办法学Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) 
-        - Python 最佳实践指南 [Hitchhiker's Guide to Python](https://pythonguidecn.readthedocs.io/zh/latest/)
-        - [Python Cheatsheet](https://www.pythonsheets.com/) Python 英文版作弊手册集合
+        - [廖雪峰的 Python3.x 教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
+        - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python 中文版
+        - [Python 食谱第三版](https://python3-cookbook.readthedocs.io/zh_CN/latest/) Python Cookbook 3rd Edition 中文版
+        - [笨办法学 Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) Learn Python 3 The Hard Way 中文版
+        - [Python 最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/) Python Best Practices Guidebook 中文版
+        - [深入 Python 3](https://woodpecker.org.cn/diveintopython3/) dive into python3 中文版
+        - [高效的 Python：编写高质量Python代码的59个有效方法](https://guoruibiao.gitbooks.io/effective-python/content/) Effective Python: 59 Specific Ways to Write Better Python 中文版
+        - [Python 官方中文文档](https://docs.python.org/zh-cn/3/)
+        
+        1. 英文材料
+        - [Python 小抄](https://www.pythonsheets.com/) Python 英文版
+        - [Python 3 标准库](https://pymotw.com/3/)  Python 3 Standard Library 英文版
+        - [Think Python 2nd Edition](https://greenteapress.com/wp/think-python-2e/) 英文版        
+        - [Python 代码风格 PEP8](https://www.python.org/dev/peps/pep-0008/) PEP 8 -- Style Guide for Python Code 官方英文文档
+        - [初识 Python](https://docs.python.org/3/tutorial/index.html) Python 官方入门材料
+        - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) 自动化无聊的工作
+        
+    1. 机器学习与数据科学    
+        - [Sklearn 与 TensorFlow 机器学习实用指南](https://hand2st.apachecn.org/#/) 
+        - [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/) Python Data Science Handbook
 
-   更多在线书籍合集 https://bookdown.org 还有一个[传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可参考 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
+   更多在线书籍合集 <https://bookdown.org> 还有一个 [传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可参考 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
 * 课程
    1. Tony Cai
