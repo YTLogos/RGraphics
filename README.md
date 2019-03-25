@@ -267,4 +267,8 @@
 - R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
 - https://blog.rsquaredacademy.com/getting-help-in-r-updated/
 
+## 与 R 语言相关的工作
+
+- 美团喻灿 yucan@meituan.com https://tech.meituan.com/2018/08/02/mt-r-practice.html
+
 
