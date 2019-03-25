@@ -167,7 +167,7 @@ chartr("a-cX", "D-Fw", x)
 
 > Regular expressions may be concatenated; the resulting regular expression matches any string formed by concatenating the substrings that match the concatenated subexpressions.
 
-正则表达式可以是级联 concatenation 的，是不是在讲一个正则表达式里面嵌套一个正则表达式
+正则表达式可以是级联 concatenation 的，是不是在讲一个正则表达式里面嵌套一个正则表达式？
 
 两个正则表达式可以通过中缀符号 `|` 联合，用两个子表达式的任意一个去匹配字符串，例如 `abba | cde` 要么匹配字符串 `abba` 要么匹配字符串 `cde`，要注意在字符集内，即 `abba|cde`，二选一的匹配不凑效，因为中缀符 `|` 有它的字面意思。
 
@@ -179,11 +179,7 @@ chartr("a-cX", "D-Fw", x)
 
 ## 命名组 {#name-groups}
 
-The pattern `(?:...)` groups characters 就是括号，但是不做反向查找
-
-模式 `(?<=...)` and `(?<!...)` 都是反向查找，它们不允许限制符， they do not allow repetition quantifiers nor `\C` in `...`.
-
-如表\@ref(tab:group-lookaround)所示，
+模式 `(?:...)` 包住的字符就是括号分组，但是不做反向查找。模式 `(?<=...)` 和 `(?<!...)` 都是反向查找，它们不允许跟限制符，在 `...` 也不允许出现 `\C`。表 \@ref(tab:group-lookaround) 展示四个反向引用
 
 Table: (\#tab:group-lookaround) 环顾四周查找
 
@@ -214,15 +210,13 @@ parsed
 knitr::include_graphics(path = "figures/name-capture.png")
 ```
 
-
 ::: sidebar
-Atomic grouping, possessive qualifiers and conditional and recursive patterns are not covered here.
+Atomic grouping 原子分组, possessive qualifiers 占有限定 and conditional 条件 and recursive 递归等模式超出介绍的范围，不在此处详述，感兴趣的读者可参考，此外，插播一条漫画 \@ref(fig:regex-xkcd) 
 :::
 
 [^char-byte]: `useBytes = TRUE` 表示把字符看作字节。字符、字节和比特的关系是，一个字节 byte 八个比特 bit，一个英文字符 character 用一个字节表示，而一个中、日、韩文字符需要两个字节表示 
 [^learn-regex]: 推荐的学习正则表达式的路径可以见统计之都论坛 <https://d.cosx.org/d/420410>
 
-如图 \@ref(fig:regex-xkcd) 所示
 
 ![(\#fig:regex-xkcd) 正则表达式漫画](https://imgs.xkcd.com/comics/regular_expressions.png)
 
