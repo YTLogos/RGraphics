@@ -1,10 +1,12 @@
 # 数据变形者 {#data-transformer}
 
-函数式编程 Functional Programming Languages 用于数据处理
+函数式编程 Functional Programming Languages 用于数据处理，向量化运算、并行运算和分布式运算
 
-future.apply: Apply Function to Elements in Parallel using Futures
+- [future.apply](https://github.com/HenrikBengtsson/future.apply) 可以替代 base R 提供的 apply 族函数
+- [multidplyr](https://github.com/hadley/multidplyr) 是 dplyr 的后端，多核环境下实现数据分块，提高并行处理性能
+- [disk.frame](https://github.com/xiaodaigh/disk.frame) 是基于磁盘的超出内存容量的快速并行数据操作框架
+- [future](https://github.com/HenrikBengtsson/future) 在 R 语言中提供统一的并行和分布式处理框架
 
-<https://github.com/HenrikBengtsson/future.apply>
 
 ```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 library(tidyverse)
@@ -21,7 +23,6 @@ library(tidyverse)
 第二代
 
 1. dplyr 操作数据的语法
-1. dbplyr 给 dplyr 提供数据库接口支持
 1. sparklyr 给 dplyr 提供 Spark 接口支持
 
 数据清洗
@@ -30,7 +31,7 @@ library(tidyverse)
 
 Garrett Grolemund 在 RStudio 主要从事教育教学，参考 [Materials for the Tidyverse Train-the-trainer workshop](https://github.com/rstudio-education/teach-tidy) 和 [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/)
 
-Dirk Eddelbuettel 的[Getting Started in R -- Tinyverse Edition](https://github.com/eddelbuettel/gsir-te)
+Dirk Eddelbuettel 的 [Getting Started in R -- Tinyverse Edition](https://github.com/eddelbuettel/gsir-te)
 
 ## 高阶函数 {#Higher-Order-Functions}
 
