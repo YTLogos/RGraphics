@@ -49,14 +49,14 @@ lapply(packages, function(pkg) {
 ::: warning
 小伙子，你应该先学习下面的技术
 
-1. 字符串处理与正则表达式，用以提取
-1. 动手学习 Python，搞明白 MemectExtractor 提取工具
+1. R 语言数据处理和正则表达式
 1. 自然语言处理与 Python 实现
-1. 一天一个 R 函数介绍，从正则表达式开始
-:::
 
 [容器技术与 Docker]{.todo}
 [数据结构与算法基础C++]{.todo}
+:::
+
+
 
 ## Why R? {#why-r}
 
@@ -117,9 +117,11 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 
 ## 目标读者 {#who-read-this-book}
 
+接触过 R 语言的读者，本书起源于自己的学习笔记，侧重全面覆盖
+
 ## 关于本书 {#what-talk-about}
 
-
+这里写每章的主要内容介绍
 
 ## 记号约定 {#conventions}
 
