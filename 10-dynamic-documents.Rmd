@@ -4,7 +4,7 @@
 
 ## Markdown
 
-Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 Pandoc's Markdown，其实是 Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍一下被 Pandoc 加强后的 Markdown 表格、图片和公式的使用
+Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 [Pandoc's Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown)，其实是 Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍一下被 Pandoc 加强后的 Markdown 表格、图片和公式的使用
 
 ### 表格 {#table}
 
@@ -31,7 +31,7 @@ knitr::kable(
 
 在表格中引入数学符号
 
-```{r scalescont, tidy=FALSE, echo=FALSE}
+```{r scalescont, tidy=FALSE, echo=TRUE}
 knitr::kable(
   rbind(c("", "continuous", "discrete"),
         c("nominal", "", "$\\checkmark$"),
@@ -46,17 +46,45 @@ knitr::kable(
 ```
 
 
-### 图片 {#figure}
+### 图片 {#image}
 
-插入图片也很简单的，所示，图、表的标题很长或者需要插入脚注，可以使用[文本引用][text-references]
+插入图片大体遵循的语法如下
 
-```{r knitr-footnote, fig.cap='(ref:footnote)', out.width="45%", echo=FALSE}
+```markdown
+![...](...){...}
+```
+
+中括号包含图片的标题，小括号是图片插入路径，大括号控制图片属性 
+
+利用 `knitr::include_graphics` 函数在代码块中插入图片是很简单的，如图\@ref(fig:knitr-footnote)所示，图、表的标题很长或者需要插入脚注，可以使用[文本引用][text-references]
+
+```{r knitr-footnote, fig.cap='(ref:footnote)', out.width="45%", echo=TRUE}
 knitr::include_graphics(path = "figures/mai.png")
 ```
 
-如图 \@ref(fig:insert-fig) 所示
+插入一幅普通图片，如图 \@ref(fig:left-fig) 和图 \@ref(fig:full-fig) 所示分别控制图片插入的宽度[^css-position]
 
-![(\#fig:insert-fig) 插入图^[这里是脚注]](figures/mai.png){ width=45% }
+```markdown
+![(\#fig:left-fig) 默认图片位置居左^[这里是脚注]](figures/mai.png){ width=45% }
+```
+
+![(\#fig:left-fig) 默认图片位置居左^[这里是脚注]](figures/mai.png){ width=45% }
+
+```markdown
+![(\#fig:full-fig) 一幅全宽的图片](figures/mai.png){.full}
+```
+
+![(\#fig:full-fig) 一幅全宽的图片](figures/mai.png){.full}
+
+
+-   One
+
+-   Two
+
+     ![还可以在列表环境中插入图片](figures/mai.png){ width=25% }
+
+-   Three
+
 
 根据代码动态生成图片，并插入文档中；外部图片插入文档中
 
@@ -69,7 +97,7 @@ plot(pressure)
 plot(AirPassengers)
 ```
 
-```{r two-cols,fig.cap="1行2列布局",fig.subcap=c("压力与温度的关系","时间序列图"),small.mar=TRUE,out.width="35%",fig.show='hold',fig.asp=1,fig.width=4.5}
+```{r two-cols,fig.cap="1行2列布局",fig.subcap=c("压力与温度的关系","时间序列图"),out.width="35%",fig.show='hold',fig.asp=1,fig.width=4.5}
 plot(pressure)
 plot(AirPassengers)
 ```
@@ -87,6 +115,8 @@ plot(AirPassengers)
 [^longnote]: Here's one with multiple blocks.
 
 [text-references]: https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references
+
+[^css-position]: 参考谢益辉的博客： CSS 的位置属性以及如何居中对齐超宽元素 https://yihui.name/cn/2018/05/css-position/
 
 ### 公式 {#formula}
 
