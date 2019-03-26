@@ -58,8 +58,28 @@ knitr::include_graphics(path = "figures/mai.png")
 
 ![(\#fig:insert-fig) 插入图^[这里是脚注]](figures/mai.png){ width=45% }
 
+根据代码动态生成图片，并插入文档中；外部图片插入文档中
 
+```{r air-passengers,fig.cap="时间序列图",echo=TRUE}
+plot(AirPassengers)
+```
 
+```{r two-rows,fig.cap="2行1列布局",fig.subcap=c("压力与温度的关系","时间序列图"),fig.ncol=1,fig.sep="\\\\"}
+plot(pressure)
+plot(AirPassengers)
+```
+
+```{r two-cols,fig.cap="1行2列布局",fig.subcap=c("压力与温度的关系","时间序列图"),small.mar=TRUE,out.width="35%",fig.show='hold',fig.asp=1,fig.width=4.5}
+plot(pressure)
+plot(AirPassengers)
+```
+
+```{r two-rows-two-cols,fig.cap="2x2图布局",fig.subcap=rep("压力与温度的关系",4),out.width="35%",fig.asp=1,fig.width=4.5,fig.ncol=2,fig.sep = c("","\\\\","","")}
+plot(pressure)
+plot(AirPassengers)
+plot(pressure)
+plot(AirPassengers)
+```
 
 
 (ref:footnote) 表格标题里插入脚注，但是 ebooks 不支持这样插入脚注[^longnote]

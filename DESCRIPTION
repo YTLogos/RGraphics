@@ -24,6 +24,7 @@ Suggests:
   DBI,
   extrafont,
   fontcm,
+  ISLR,
   magick,
   odbc,
   pdftools,

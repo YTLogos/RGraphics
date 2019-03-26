@@ -1,6 +1,10 @@
 # 统计图形 {#basic-graphics}
 
-作为知识介绍，本章所有数据都来源于基础 R 包，即安装 R 软件后自带的数据集，图库在以 base R 中的数据集介绍完后，以相应真实数据扩展为案列
+::: sidebar
+作为知识介绍，本章所有数据都来源于基础 R 包，即安装 R 软件后自带的数据集，图库在以 base R 中的数据集介绍完后，以相应真实数据扩展为案列，结合统计意义和探索性数据分析介绍各种常见统计图形
+:::
+
+数据可视化是一种重要的数据分析手段，Claus O. Wilke 目前正在写《Fundamentals of Data Visualization》，并且给出了在线网络版^[<https://serialmentor.com/dataviz/>]。 
 
 准备好以下绘制统计图形的 R 包
 
@@ -20,6 +24,32 @@ library(ggplot2)
 颜色 col 连续型和离散型
 面/多边形 rect 颜色填充
 
+各种符号
+
+```{r}
+# 符号
+
+op <- par(mar = c(1, 1, 4, 1) + .1)
+plot(0, 0,
+  xlim = c(1, 5), ylim = c(-.5, 4),
+  axes = F,
+  xlab = "", ylab = "",
+  main = "Available symbols"
+)
+for (i in 0:4) {
+  for (j in 1:5) {
+    n <- 5 * i + j
+    points(j, i,
+      pch = n,
+      cex = 3
+    )
+    text(j, i - .25, as.character(n))
+  }
+}
+par(op)
+```
+
+
 点、线、多边形和圆聚集在图 \@ref(fig:symbols) 中
 
 ```{r symbols,fig.cap="多边形和符号元素",echo=TRUE}
@@ -33,21 +63,148 @@ symbols(c(70, 80, 90), c(20, 50, 80), circles = c(10, 20, 10),
 ```
 
 
+在介绍各种统计图形之前，先介绍几个绘图函数 `plot` 和 `text` 还有 `par` 参数设置， 作为最简单的开始， 尽量依次介绍其中的每个参数的含义并附上图形对比。
+
+```{r pos,fig.height=4.5,fig.asp=.8}
+x <- 1:4
+y <- x
+plot(x, y, ann = F, col = "blue", pch = 16)
+text(x, y,
+  labels = c("1st", "2nd", "3rd", "4th"),
+  col = "red", pos = c(3, 4, 4, 1), offset = 0.6
+)
+ahat = "sigma"
+# title(substitute(hat(a) == ahat, list(ahat = ahat)))
+title(bquote(hat(a) == .(ahat)))
+```
+
+其中 labels， pos 都是向量化的参数
+
 ## 图库 {#gallary}
 
 
 
-
+```{r plot,echo=FALSE,fig.width=7,fig.height=9,fig.cap='plot函数对象',fig.asp=1}
+# pdf(file = 'plot.pdf',width=10,height=6)
+# layout(matrix(seq(6), 2, 3, byrow = TRUE))
+# 矩阵图 自带 layout 
+# plot(iris[,-5],col = iris$Species)
+par(mfrow = c(3,2),mar=c( 2.5, 2.5, .5, .5))
+# 分类散点图
+plot(Sepal.Length~Sepal.Width,data=iris,col = Species,pch=16 )
+legend('topright',legend = unique(iris$Species),box.col = "gray",
+		pch=16,col = unique(iris$Species) )
+box(col="gray")
+# 气泡图
+plot(Volume~Height,data = trees,pch =16,cex = Girth/8,
+	 col = rev(terrain.colors(nrow(trees), alpha = .5)))
+box(col="gray")
+# 折线图
+plot(AirPassengers)
+box(col="gray")
+# 柱形图
+set.seed(123456)
+barPois <- table(stats::rpois(1000, lambda = 5))
+plot(barPois,col = "lightblue",type = 'h',lwd=10,main = "")
+box(col="gray")
+# 马赛克图
+# par(mar=c(2,2,.5,.5))
+plot(HairEyeColor,col = "lightblue",border = 'white',main = '')
+# box(col="gray")
+## 直方图
+set.seed(1234)
+n <- 2^24
+x <- runif(n,0,1)
+delta <- 0.01
+len <- diff(c(0,which(x < delta),n+1))-1
+ylim <- seq( 0, 1800, by = 300)
+xlim <- seq( 0, 100, by = 20)
+p <- hist(len[len < 101], breaks = -1:100+0.5,plot = FALSE)
+plot(p,ann = FALSE,axes = FALSE,col="lightblue",border = "white",main = "")	 
+axis( 1, labels = xlim, at = xlim, las = 1) # x 轴
+axis( 2, labels = ylim, at = ylim, las = 0) # y 轴
+box(col="gray")
+```
 
 
 
 ### 条形图 {#bar-plot}
 
+```{r ISLR,fig.width=5,fig.height=4,fig.cap='条形图'}
+data(NCI60, package ="ISLR") # 加载数据		
+myData <- sort(table(NCI60$labs), decreasing = TRUE)		
+par(mar=c(2,7,1,1))
+barCenters <- barplot(myData,col = "lightblue",axes = FALSE,
+			axisnames=FALSE,horiz=TRUE,border ="white")				
+text(y = barCenters, x = par("usr")[3],
+     adj = 1, labels = names(myData), xpd = TRUE)
+axis(1, labels = seq(0,9,by=1), at = seq(0,9,by=1),  las = 1 , col = "gray")
+```
+
+
 ### 直方图 {#histograms}
 
+```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布"}
+with(data = faithful, {
+  hist(eruptions, seq(1.6, 5.2, 0.2), prob = TRUE)
+  lines(density(eruptions, bw = 0.1))
+  rug(eruptions) # show the actual data points
+})
+```
+
+```{r}
+hist(longley$Unemployed,
+  probability = TRUE, # Change the vertical units,
+  # to overlay a density estimation
+  col = "light blue"
+)
+lines(density(longley$Unemployed),
+  col = "red",
+  lwd = 3
+)
+```
+
+直方图有很多花样的
+
+```{r}
+hist(longley$Unemployed, density = 3, angle = 45)
+```
+
+### 经验累积分布图 {#ecdf}
+
+```{r faithful}
+with(data = faithful, {
+  long <- eruptions[eruptions > 3]
+  plot(ecdf(long), do.points = FALSE, verticals = TRUE)
+  x <- seq(3, 5.4, 0.01)
+  lines(x, pnorm(x, mean = mean(long), sd = sqrt(var(long))), lty = 3)
+})
+```
+
+### QQ 正态分布图 {#qqnorm}
+
+```{r faithful-eruptions}
+with(data = faithful, {
+  long <- eruptions[eruptions > 3]
+  par(pty = "s") # arrange for a square figure region
+  qqnorm(long)
+  qqline(long)
+})
+```
 
 
 ### 时序图 {#time-series-plot}
+
+时序图最适合用来描述股价走势
+
+```{r}
+matplot(time(EuStockMarkets), EuStockMarkets,
+  main = "Daily Closing Prices of Major European Stock Indices, 1991–1998\nGermany DAX (Ibis), Switzerland SMI, France CAC, and UK FTSE",
+  xlab = "Date", ylab = "closing prices",
+  pch = 17, type = "l", col = 1:4
+)
+legend("topleft", colnames(EuStockMarkets), pch = 17, lty = 1, col = 1:4)
+```
 
 ### 饼图 {#pie-plot}
 
@@ -63,20 +220,29 @@ symbols(c(70, 80, 90), c(20, 50, 80), circles = c(10, 20, 10),
 
 ### 散点图 {#scatter-plot}
 
-```{r,echo=TRUE}
-data(topo, package="MASS")
+这种点图
+
+```{r}
+# 一维云图/点图
+stripchart(longley$Unemployed)
 ```
 
-topo Spatial Topographic Data是地形数据 The topo data frame has 52 rows and 3 columns, of topographic heights within a 310 feet square.
 
-x coordinates (units of 50 feet)
-y coordinates (units of 50 feet)
-z heights (feet)
+```{r,echo=TRUE}
+# 加载数据集
+data(topo, package="MASS")
+# 查看数据集
+str(topo)
+```
 
+topo 是空间地形数据集，包含有52行3列，数据点是310平方英尺范围内的海拔高度数据，x 坐标每单位50英尺，y 坐标单位同 x 坐标，海拔高度 z 单位是英尺
 
-#### 分类散点图  
+```{r,echo=TRUE,fig.cap=""}
+plot(y~x, cex = (960-z)/(960-690), data = topo, 
+     xlab = "X Coordinates", ylab = "Y coordinates")
+```
 
-在图中用不同颜色或符号标记数据点所属类别，即在普通散点图的基础上添加一分类变量的描述
+散点图也适合分类数据的展示，在图中用不同颜色或符号标记数据点所属类别，即在普通散点图的基础上添加一分类变量的描述
 
 ```{r category-base, fig.cap="分类散点图"}
 plot(mpg ~ hp,
@@ -101,9 +267,116 @@ ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
   theme_bw()
 ```
 
-### 箱线图 {#box-plot}
 
-boxplot
+高亮某些点，按类别绘散点图^[<https://stackoverflow.com/questions/51804892/use-vectorized-plotting-arguments-when-plotting-by-factor-in-r>]
+
+```{r wrong-scatter, fig.cap="错误的散点图画法",fig.height=4.5,fig.asp=.8}
+data("iris")
+pch <- rep(16, length(iris$Petal.Length))
+pch[which(iris$Petal.Length < 1.4)] <- 17
+stripchart(Petal.Length ~ Species,
+  data = iris,
+  vertical = TRUE, method = "jitter",
+  pch = pch
+)
+```
+
+pch 没有向量化，实际只是取了前三个值 16 16 17 对应于 Species 的三类 ，高亮区分某些点 ，关键是让高亮的分界点是由区分意义的
+
+```{r right-scatter,fig.cap="正确的散点图",fig.height=4.5,fig.asp=.8}
+data("iris")
+stripchart(Petal.Length ~ Species,
+  data = iris, subset = Petal.Length > 1.4,
+  vertical = TRUE, method = "jitter", ylim = c(1, 7),
+  pch = 16
+)
+stripchart(Petal.Length ~ Species,
+  data = iris, subset = Petal.Length < 1.4,
+  vertical = TRUE, method = "jitter", add = TRUE,
+  pch = 17, col = "red"
+)
+```
+
+大量散点图如何绘制
+
+```r
+densCols(x, y = NULL, nbin = 128, bandwidth,
+         colramp = colorRampPalette(blues9[-(1:3)]))
+```
+
+`densCols` 函数根据点的局部密度生成颜色，密度估计采用核平滑法，由 **KernSmooth** 包的 `bkde2D` 函数实现
+
+参数 colramp 传递一个函数，`colorRampPalette` 根据给定的几种颜色生成函数
+
+参数 bandwidth 实际上是传给 `bkde2D` 函数
+
+```{r densCols,fig.cap="根据点的密度生成颜色",fig.asp=1,out.width="45%",fig.width=4.5}
+x1 <- matrix(rnorm(1e3), ncol = 2)
+x2 <- matrix(rnorm(1e3, mean = 3, sd = 1.5), ncol = 2)
+x <- rbind(x1, x2)
+dcols <- densCols(x)
+graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
+# title(main = "n = 1000", xpd = TRUE)
+```
+
+### 箱线图 {#boxplot}
+
+```{r boxplot,echo=TRUE}
+A <- c(79.98, 80.04, 80.02, 80.04, 80.03, 80.03, 80.04, 79.97,
+       80.05, 80.03, 80.02, 80, 80.02)
+B <- c(80.02, 79.94, 79.98, 79.97, 79.97, 80.03, 79.95, 79.97)
+boxplot(A, B)
+```
+
+```{r iris,fig.cap="安德森的鸢尾花数据",fig.asp=1,echo=TRUE}
+with(data = iris, {
+  op <- par(mfrow = c(2, 2), mar = c(4, 4, 2, .5))
+  plot(Sepal.Length ~ Species)
+  plot(Sepal.Width ~ Species)
+  plot(Petal.Length ~ Species)
+  plot(Petal.Width ~ Species)
+  par(op)
+  mtext("Edgar Anderson's Iris Data", side = 3, line = 4)
+})
+```
+
+箱线图的花样也很多
+
+```{r}
+boxplot(longley$Unemployed)
+# 水平放置
+boxplot(longley$Unemployed,
+  horizontal = TRUE,
+  col = "pink",
+  main = "Box-and-whiskers plot (boxplot)"
+)
+```
+
+```{r}
+data(InsectSprays)
+boxplot(count ~ spray,
+  data = InsectSprays,
+  col = "pink",
+  xlab = "Spray",
+  ylab = "Count",
+  main = "Insect sprays"
+)
+```
+
+水平放置
+
+```{r}
+boxplot(count ~ spray,
+  data = InsectSprays,
+  col = "pink",
+  horizontal = TRUE,
+  las = 1, # Horizontal labels
+  xlab = "Count",
+  ylab = "Spray",
+  main = "Insect sprays"
+)
+```
+
 
 ### 提琴图 {#violin-plot}
 
@@ -152,11 +425,34 @@ sunspots               Monthly Sunspot Numbers, 1749-1983
 
 ### 马赛克图 {#mosaic-plot}
 
-### 矩阵树图 {#treemap}
+### 矩阵图 {#treemap}
+
+在对角线上添加平滑曲线、密度曲线
+
+```{r}
+pairs(longley,
+  gap = 0,
+  diag.panel = function(x, ...) {
+    par(new = TRUE)
+    hist(x,
+      col = "light blue",
+      probability = TRUE,
+      axes = FALSE,
+      main = ""
+    )
+    lines(density(x),
+      col = "red",
+      lwd = 3
+    )
+    rug(x)
+  }
+)
+```
 
 ### 雷达图 {#radar-plot}
 
 ### 玫瑰图 {#rose-plot}
+
 
 
 ## TikZ {#tikz}
@@ -311,9 +607,9 @@ apropos("dev.")
 
 ## 魔法 {#magic}
 
-旋转坐标轴标签
+### 旋转坐标轴标签 {#rotated-axis-labels}
 
-```{r,eval=FALSE}
+```{r,echo=TRUE}
 # Rotated axis labels in R plots
 # https://menugget.blogspot.com/2014/08/rotated-axis-labels-in-r-plots.html
 # Example data
@@ -339,3 +635,271 @@ par(op)
 # dev.off()
 ```
 
+旋转坐标抽标签的例子来自手册《R FAQ》的第7章第27个问题 [@R-FAQ]，在基础图形中，旋转坐标轴标签需要 `text()` 而不是 `mtext()`，因为后者不支持`par("srt")` 
+
+```{r rotate-axis-labels,fig.cap="旋转坐标轴标签"}
+## Increase bottom margin to make room for rotated labels
+par(mar = c(5, 4, .5, 2) + 0.1)
+## Create plot with no x axis and no x axis label
+plot(1 : 8, xaxt = "n",  xlab = "")
+## Set up x axis with tick marks alone
+axis(1, labels = FALSE)
+## Create some text labels
+labels <- paste("Label", 1:8, sep = " ")
+## Plot x axis labels at default tick marks
+text(1:8, par("usr")[3] - 0.5, srt = 45, adj = 1,
+     labels = labels, xpd = TRUE)
+## Plot x axis label at line 6 (of 7)
+mtext(side = 1, text = "X Axis Label", line = 4)
+```
+
+`srt = 45` 表示文本旋转角度， `xpd = TRUE` 允许文本越出绘图区域，`adj = 1` to place the right end of text at the tick marks；You can adjust the value of the 0.5 offset as required to move the axis labels up or down relative to the x axis. 详细地参考 [@Paul_2003_Integrating]
+
+
+
+### 添加数学注释 {#math-annotation}
+
+数学符号注释，图\@ref(fig:math-annotation) 自定义坐标轴 [@Paul_2000_Approach]。
+
+```{r math-annotation, fig.cap="Creating Customized Axes With Suitable Annotation"}
+# 自定义坐标轴
+plot(c(1, 1e6), c(-pi, pi), type = "n", 
+     axes = FALSE, ann = FALSE, log = "x")
+axis(1, at = c(1, 1e2, 1e4, 1e6), 
+     labels = expression(1, 10^2, 10^4, 10^6))
+axis(2, at = c(-pi, -pi / 2, 0, pi / 2, pi), 
+     labels = expression(-pi, -pi / 2, 0, pi / 2, pi))
+text(1e3, 0, expression(italic("Customized Axes")))
+box()
+```
+
+在标题中添加数学公式
+
+```{r}
+x <- seq(-5, 5, length = 200)
+y <- sqrt(1 + x^2)
+plot(y ~ x,
+  type = "l",
+  ylab = expression(sqrt(1 + x^2))
+)
+title(main = expression(
+  "graph of the function f"(x) == sqrt(1 + x^2)
+))
+```
+
+修改参数使用 `substitute` 函数批量生成
+
+```{r}
+# substitute  神奇的函数哦
+
+x <- seq(-5, 5, length = 200)
+op <- par(mfrow = c(2, 2))
+for (i in 1:4) { # 画四个图
+  y <- sqrt(i + x^2)
+  plot(y ~ x,
+    type = "l",
+    ylim = c(0, 6),
+    ylab = substitute(
+      expression(sqrt(i + x^2)),
+      list(i = i)
+    )
+  )
+  title(main = substitute(
+    "graph of the function f"(x) == sqrt(i + x^2),
+    list(i = i)
+  ))
+}
+par(op)
+```
+
+### 外边空添加文字
+
+```{r}
+# 在图的边缘添加文字
+N <- 200
+x <- runif(N, -4, 4)
+y <- sin(x) + .5 * rnorm(N)
+plot(x, y,
+  xlab = "", ylab = "",
+  main = paste(
+    "The \"mtext\" function",
+    paste(rep(" ", 60), collapse = "")
+  )
+)
+mtext("Line 0", 3, line = 0)
+mtext("Line 1", 3, line = 1)
+mtext("Line 2", 3, line = 2)
+mtext("Line 3", 3, line = 3)
+```
+
+### 多个标题
+
+```{r}
+# 图标题/子标题 x轴标题/子标题
+N <- 200
+x <- runif(N, -4, 4)
+y <- sin(x) + .5 * rnorm(N)
+plot(x, y, xlab = "", ylab = "", main = "")
+mtext("Subtitle", 3, line = .8)
+mtext("Title", 3, line = 2, cex = 1.5)
+mtext("X axis", 1, line = 2.5, cex = 1.5)
+mtext("X axis subtitle", 1, line = 3.7)
+```
+
+### 双 Y 轴
+
+```{r}
+# 双Y轴
+N <- 200
+x <- seq(-4, 4, length = N)
+y1 <- sin(x)
+y2 <- cos(x)
+op <- par(mar = c(5, 4, 4, 4)) # Add some space in the right margin
+# The default is c(5,4,4,2) + .1
+xlim <- range(x)
+ylim <- c(-1.1, 1.1)
+plot(x, y1,
+  col = "blue", type = "l",
+  xlim = xlim, ylim = ylim,
+  axes = F, xlab = "", ylab = "", main = "Title"
+)
+axis(1)
+axis(2, col = "blue")
+par(new = TRUE)
+plot(x, y2,
+  col = "red", type = "l",
+  xlim = xlim, ylim = ylim,
+  axes = F, xlab = "", ylab = "", main = ""
+)
+axis(4, col = "red")
+mtext("First Y axis", 2, line = 2, col = "blue", cex = 1.2)
+mtext("Second Y axis", 4, line = 2, col = "red", cex = 1.2)
+# 1,2,3,4 分别代表下左上右四个位置
+```
+
+### 多图排列
+
+```{r}
+# 多图排列/分屏 page 47
+# 最常用的是 par mfrow mfcol分别按行/列放置图形
+
+op <- par(mfrow = c(2, 2))
+for (i in 1:4)
+  plot(runif(20), runif(20),
+    main = paste("random plot (", i, ")", sep = "")
+  )
+par(op)
+mtext("Four plots, without enough room for this title",
+  side = 3, font = 2, cex = 2, col = "red"
+) # 总/大标题放不下
+
+# 设置外边空放置大标题
+op <- par(
+  mfrow = c(2, 2),
+  oma = c(0, 0, 3, 0) # Outer margins
+)
+for (i in 1:4)
+  plot(runif(20), runif(20),
+    main = paste("random plot (", i, ")", sep = "")
+  )
+par(op)
+mtext("Four plots, with some room for this title",
+  side = 3, line = 1.5, font = 2, cex = 2, col = "red"
+)
+```
+
+```{r}
+# 设置每个子图的边空 mar
+op <- par(
+  mfrow = c(2, 2),
+  oma = c(0, 0, 3, 0),
+  mar = c(3, 3, 4, 1) + .1 # Margins
+)
+for (i in 1:4)
+  plot(runif(20), runif(20),
+    xlab = "", ylab = "",
+    main = paste("random plot (", i, ")", sep = "")
+  )
+par(op)
+mtext("Title",
+  side = 3, line = 1.5, font = 2, cex = 2, col = "red"
+)
+par(op)
+```
+
+
+```{r}
+# par 之 fig 参数 很神奇
+
+n <- 20
+x <- rnorm(n)
+y <- x^2 - 1 + .3 * rnorm(n)
+plot(y ~ x,
+  main = "The \"fig\" graphic parameter"
+)
+op <- par()
+for (i in 2:10) {
+  done <- FALSE
+  while (!done) {
+    a <- c(
+      sort(runif(2, 0, 1)),
+      sort(runif(2, 0, 1))
+    )
+    par(fig = a, new = T)
+    r <- try(plot(runif(5), type = "l", col = i))
+    done <- !inherits(r, "try-error")
+  }
+}
+par(op)
+```
+
+
+```{r}
+# fig 参数控制图形的位置 属于组合图形
+
+n <- 1000
+x <- rt(n, df = 10)
+hist(x,
+  col = "light blue",
+  probability = "TRUE",
+  ylim = c(0, 1.2 * max(density(x)$y))
+)
+lines(density(x),
+  col = "red",
+  lwd = 3
+)
+op <- par(
+  fig = c(.02, .4, .5, .98),
+  new = TRUE
+)
+qqnorm(x,
+  xlab = "", ylab = "", main = "",
+  axes = FALSE
+)
+qqline(x, col = "red", lwd = 2)
+box(lwd = 2)
+par(op)
+```
+
+
+```{r}
+# layout 布局 用于复杂组合图形
+
+op <- par(oma = c(0, 0, 3, 0))
+layout(matrix(c(
+  1, 1, 1,
+  2, 3, 4,
+  2, 3, 4
+), nr = 3, byrow = TRUE))
+hist(rnorm(n), col = "light blue")
+hist(rnorm(n), col = "light blue")
+hist(rnorm(n), col = "light blue")
+hist(rnorm(n), col = "light blue")
+mtext("The \"layout\" function",
+  side = 3, outer = TRUE,
+  font = 2, cex = 1.2
+)
+par(op)
+```
+
+[目前进度](https://github.com/XiangyunHuang/ISCGwR/blob/396d8deefb0a4238e05194f9e139177b15e61967/code/01A-Base-R-Graphics.R#L365)
