@@ -59,7 +59,7 @@ add_accuml(list(1, 2, 3))
 
 [Gord Sissons](http://www.teraproc.com/r-blog/) 发布了系列关于如何在 R 环境下并行的文章
 
-[CUDA 加速](https://devblogs.nvidia.com/accelerate-r-applications-cuda/)
+赵鹏 Patric Zhao 的博客 [ParallelR](http://www.parallelr.com/) 关注 GPU 加速 [CUDA 加速](https://devblogs.nvidia.com/accelerate-r-applications-cuda/)
 
 
 [^modeling-funcprog]: https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
