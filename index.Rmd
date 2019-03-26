@@ -146,6 +146,14 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 
     维基主页 https://en.wikipedia.org/wiki/Robert_Gentleman_(statistician)
 
+- 2016: Forty years of S
+   
+<https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Forty-years-of-S>
+
+- 2017: 20 years of CRAN
+
+<https://channel9.msdn.com/Events/useR-international-R-User-conferences/useR-International-R-User-2017-Conference/KEYNOTE-20-years-of-CRAN>
+
 
 ## 关于作者 {#about-author}
 
