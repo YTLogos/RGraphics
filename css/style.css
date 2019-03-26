@@ -15,11 +15,13 @@ pre code {
 }
 
 /* markdown 插入图片居中 */
+/*
 img {
     margin-left: auto; 
     margin-right: auto; 
     display: block;
 }
+*/
 
 /* Sidebar formating --------------------------------------------*/
 
