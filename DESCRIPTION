@@ -17,7 +17,8 @@ Imports:
   RClickhouse,
   sf (>= 0.7.2),
   tidyverse,
-  tikzDevice
+  tikzDevice,
+  visNetwork
 URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
 Suggests:
