@@ -269,7 +269,7 @@ port: 1111
 
 RClickHouse 提供部分 dplyr 式的数据操作
 
-```{r,eval=identical(.Platform$OS.type,'unix'),echo=TRUE}
+```{r,eval=identical(.Platform$OS.type,'unix') & !is_on_travis,echo=TRUE}
 library(RClickhouse)
 # 建立数据库连接
 con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")

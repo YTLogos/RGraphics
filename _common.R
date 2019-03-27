@@ -88,3 +88,6 @@ palette(c(
   "#FBBC05", # GoogleYellow
   "#EA4335"  # GoogleRed
 ))
+
+is_on_travis <- identical(Sys.getenv("TRAVIS"), "true")
+is_online <- curl::has_internet()
