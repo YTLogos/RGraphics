@@ -227,30 +227,37 @@ port: 1111
 
 RClickHouse 提供部分 dplyr 式的数据操作
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=identical(.Platform$OS.type,'unix'),echo=TRUE}
+library(RClickhouse)
 # 建立数据库连接
-con <- DBI::dbConnect(RClickhouse::clickhouse(), host="example-db.com")
+con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")
 
 # 往 ClickHouse 中写入数据
-DBI::dbWriteTable(con, "mtcars", mtcars)
+DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
 
 # 列出 ClickHouse 中存放的表
 dbListTables(con)
 dbListFields(con, "mtcars")
 
 # 查询数据
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 
 # 按变量 cyl 分组对 mpg 求和
 tbl(con, "mtcars") %>% 
   group_by(cyl) %>% 
   summarise(smpg=sum(mpg))
 
+# 等价于
+aggregate(mpg ~ cyl, data = mtcars, sum)
+
 # 先筛选出 cyl = 8 并且 vs = 0 的数据，然后按 am 分组，最后对 qsec 求平均值
 tbl(con, "mtcars") %>% 
   filter(cyl == 8, vs == 0) %>% 
   group_by(am) %>% 
   summarise(mean(qsec))
+
+# 等价于
+aggregate(qsec ~ am, data = mtcars, mean, subset = cyl == 8 & vs == 0)
 
 # 不使用数据库的时候一定记得关闭数据库的连接
 dbDisconnect(con)
