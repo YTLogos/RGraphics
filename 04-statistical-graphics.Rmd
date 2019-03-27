@@ -354,7 +354,7 @@ with(data = iris, {
 
 箱线图的花样也很多
 
-```{r}
+```{r,echo=TRUE}
 boxplot(longley$Unemployed)
 # 水平放置
 boxplot(longley$Unemployed,
@@ -364,7 +364,7 @@ boxplot(longley$Unemployed,
 )
 ```
 
-```{r}
+```{r,echo=TRUE}
 data(InsectSprays)
 boxplot(count ~ spray,
   data = InsectSprays,
@@ -377,7 +377,7 @@ boxplot(count ~ spray,
 
 水平放置
 
-```{r}
+```{r,echo=TRUE}
 boxplot(count ~ spray,
   data = InsectSprays,
   col = "pink",
@@ -392,8 +392,7 @@ boxplot(count ~ spray,
 
 ### 提琴图 {#violin-plot}
 
-Tom Kelly 维护的 vioplot 包
-https://github.com/TomKellyGenetics/vioplot
+Tom Kelly 维护的 vioplot 包 <https://github.com/TomKellyGenetics/vioplot>
 
 ### 热力图 {#heatmap-plot}
 
@@ -407,10 +406,6 @@ geom\_density()
 ggridges
 
 
-### 气泡图 {#bubble-plot}
-
-topo 是地形数据
-
 ### 轮廓图 {#contour-plot}
 
 topo 是地形数据
@@ -419,15 +414,7 @@ topo 是地形数据
 
 ### 折线图 {#line-plot}
 
-函数曲线，样条曲线，核密度曲线，平行坐标图，时序图
-
-
-
-股价走势曲线
-
-EuStockMarkets         Daily Closing Prices of Major European Stock
-                       Indices, 1991-1998
-其拓展案例
+函数曲线，样条曲线，核密度曲线，平行坐标图
 
 太阳黑子活动数据
 
@@ -441,7 +428,7 @@ sunspots               Monthly Sunspot Numbers, 1749-1983
 
 在对角线上添加平滑曲线、密度曲线
 
-```{r}
+```{r,echo=TRUE,fig.asp=1,fig.cap="变量关系"}
 pairs(longley,
   gap = 0,
   diag.panel = function(x, ...) {
