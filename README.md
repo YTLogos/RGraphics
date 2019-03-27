@@ -116,8 +116,6 @@
         - [深入 Python 3](https://woodpecker.org.cn/diveintopython3/) dive into python3 中文版
         - [高效的 Python：编写高质量Python代码的59个有效方法](https://guoruibiao.gitbooks.io/effective-python/content/) Effective Python: 59 Specific Ways to Write Better Python 中文版
         - [Python 官方中文文档](https://docs.python.org/zh-cn/3/)
-        
-        1. 英文材料
         - [Python 小抄](https://www.pythonsheets.com/) Python 英文版
         - [Python 3 标准库](https://pymotw.com/3/)  Python 3 Standard Library 英文版
         - [Think Python 2nd Edition](https://greenteapress.com/wp/think-python-2e/) 英文版        
@@ -166,7 +164,6 @@
   - [孟晓犁](https://statistics.fas.harvard.edu/people/xiao-li-meng)
   - [Erich Leo Lehmann](https://en.wikipedia.org/wiki/Erich_Leo_Lehmann) 1917-2019 https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-985X.2010.00645_1.x
   - [Peter Hall](https://en.wikipedia.org/wiki/Peter_Gavin_Hall) 1951-2016 https://royalsocietypublishing.org/doi/pdf/10.1098/rsbm.2017.0035
-
   - [Sebastian Sauer](https://data-se.netlify.com)
   - [Peter J. Diggle](https://www.lancaster.ac.uk/staff/diggle/)
   - [Rob J Hyndman](https://robjhyndman.com/)
