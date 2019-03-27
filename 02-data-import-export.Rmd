@@ -17,6 +17,29 @@ apropos("^write.")
 
 ### `read.table` 与 `write.table` {#read-write-table}
 
+变量名是不允许以下划线开头的，同样在数据框里，列名也不推荐使用下划线开头。默认情况下，`read.table` 都会通过参数 `check.names` 检查列名的有效性，该参数实际调用了函数 `make.names` 去检查。如果想尽量保持数据集原来的样子可以设置参数 `check.names = FALSE, stringsAsFactors = FALSE`。 默认情形下，`read.table` 还会将字符串转化为因子变量，这是 R 的历史原因，作为一门统计学家的必备语言，在统计模型中，字符常用来描述类别，而类别变量在 R 环境中常用因子类型来表示，而且大量内置的统计模型也是将它们视为因子变量，如 lm 、glm 等
+
+```{r,echo=TRUE}
+dat1 = read.table(header = TRUE, check.names = TRUE, text = "
+_a _b _c
+1 2 a1
+3 4 a2
+")
+dat1
+dat2 = read.table(header = TRUE, check.names = FALSE, text = "
+_a _b _c
+1 2 a1
+3 4 a2
+")
+dat2
+dat3 = read.table(header = TRUE, check.names = FALSE, stringsAsFactors = FALSE, text = "
+_a _b _c
+1 2 a1
+3 4 a2
+")
+dat3
+```
+
 ### `readLines` 与 `writeLines` {#read-write-lines}
 
 让我们折腾一波，读进来又写出去
@@ -29,6 +52,25 @@ writeLines(readLines("latex/TeXLive.pkgs"),"latex/TeXLive.pkgs")
 
 ### `readRDS` 与 `saveRDS` {#read-save-rds}
 
+序列化数据操作，Mark Klik 开发的 [fst](https://github.com/fstpackage/fst) 和 [Travers Ching](https://travers.im/) 开发的 [qs](https://github.com/traversc/qs)
+
+Table: (\#tab:fst-vs-others) fst 序列化数据框对象性能比较 BaseR、 data.table 和 feather [^fst-performance]
+
+| Method         | Format  | Time (ms) | Size (MB) | Speed (MB/s) | N       |
+| :------------- | :------ | :-------- | :-------- | :----------- | :------ |
+| readRDS        | bin     | 1577      | 1000      | 633          | 112     |
+| saveRDS        | bin     | 2042      | 1000      | 489          | 112     |
+| fread          | csv     | 2925      | 1038      | 410          | 232     |
+| fwrite         | csv     | 2790      | 1038      | 358          | 241     |
+| read\_feather  | bin     | 3950      | 813       | 253          | 112     |
+| write\_feather | bin     | 1820      | 813       | 549          | 112     |
+| **read\_fst**  | **bin** | **457**   | **303**   | **2184**     | **282** |
+| **write\_fst** | **bin** | **314**   | **303**   | **3180**     | **291** |
+
+目前比较好的是 qs 和 fst 包 
+
+
+[^fst-performance]: https://www.fstpackage.org/ 
 
 ### `read.ftable` 与 `write.ftable` {#read-write-ftable}
 
