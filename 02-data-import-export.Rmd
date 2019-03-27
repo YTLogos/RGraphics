@@ -174,3 +174,114 @@ dbListTables(con)
 
 参考 <https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql/>
 
+### ClickHouse
+
+对系统的要求是 System requirements: Linux, x86_64 with SSE 4.2.
+
+```{bash,eval=F}
+sudo apt-get install dirmngr    # optional
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4    # optional
+
+echo "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/" | sudo tee /etc/apt/sources.list.d/clickhouse.list
+sudo apt-get update
+
+sudo apt-get install -y clickhouse-server clickhouse-client
+
+sudo service clickhouse-server start
+clickhouse-client
+```
+
+[ClickHouse 中文用户手册](https://clickhouse.yandex/docs/zh/)
+
+开源社区对 ClickHouse 提供了很多语言的支持，比如 R 语言接口有 [RClickhouse](https://github.com/IMSMWU/RClickhouse) 和 [clickhouse-r](https://github.com/hannesmuehleisen/clickhouse-r)，其它接口请看 [官方文档链接](https://clickhouse.yandex/docs/zh/interfaces/third-party/client_libraries/)
+
+由于 clickhouse-r 还在开发中，从未提交到 CRAN，提供的功能也相对有限，这里我们推荐使用 RClickhouse，首先安装 RClickhouse
+
+```{r,eval=FALSE,echo=TRUE}
+# 安装 CRAN 版本
+install.packages("RClickhouse")
+# 安装Github上的开发版
+devtools::install_github("IMSMWU/RClickhouse")
+```
+
+建立数据库的连接，离不开 `dbConnect` 函数，它提供的 `config_paths` 参数用来指定配置文件 `RClickhouse.yaml` 的路径，在该文件中指定一系列的参数值 `host, port, db, user, password, compression`
+
+```yaml
+host: example-db.com
+port: 1111
+```
+
+如果没有手动配置，会使用默认的参数配置 `host="localhost", port = 9000, db = "default", user = "default", password = "", compression = "lz4"`
+
+RClickHouse 提供部分 dplyr 式的数据操作
+
+```{r,eval=FALSE,echo=TRUE}
+# 建立数据库连接
+con <- DBI::dbConnect(RClickhouse::clickhouse(), host="example-db.com")
+
+# 往 ClickHouse 中写入数据
+DBI::dbWriteTable(con, "mtcars", mtcars)
+
+# 列出 ClickHouse 中存放的表
+dbListTables(con)
+dbListFields(con, "mtcars")
+
+# 查询数据
+library(dplyr)
+
+# 按变量 cyl 分组对 mpg 求和
+tbl(con, "mtcars") %>% 
+  group_by(cyl) %>% 
+  summarise(smpg=sum(mpg))
+
+# 先筛选出 cyl = 8 并且 vs = 0 的数据，然后按 am 分组，最后对 qsec 求平均值
+tbl(con, "mtcars") %>% 
+  filter(cyl == 8, vs == 0) %>% 
+  group_by(am) %>% 
+  summarise(mean(qsec))
+
+# 不使用数据库的时候一定记得关闭数据库的连接
+dbDisconnect(con)
+```
+
+你当然可以继续使用 SQL 语句做查询，而不使用 dplyr 提供的现代化的管道操作语法
+
+```{r,eval=FALSE,echo=TRUE}
+# 传递查询语句
+DBI::dbGetQuery(con, "SELECT
+                             vs
+                            ,COUNT(*) AS 'number of cases'
+                            ,AVG(qsec) AS 'average qsec'
+                      FROM mtcars
+                      GROUP BY vs")
+
+# 保存查询结果
+res <- DBI::dbGetQuery(con, "SELECT (*)
+                             FROM mtcars
+                             WHERE am = 1")
+
+# 如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器可以获得更好的性能
+mtcars <- dbReadTable(con, mtcars)
+
+# 不使用数据库的时候一定记得关闭数据库的连接
+dbDisconnect(con)
+```
+
+还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数
+
+```{r,eval=FALSE,echo=TRUE}
+# 查看 ClickHouse 中所有的数据库名称
+DBI::dbGetQuery(con, "SHOW DATABASES")
+
+# 获取 ClickHouse 中表 mtcars 的变量名和类型
+DBI::dbGetQuery(con, "DESCRIBE TABLE mtcars")
+
+# Compact CASE - WHEN - THEN conditionals
+DBI::dbGetQuery(con, "SELECT multiIf(am='1', 'automatic', 'manual') AS 'transmission'
+                            ,multiIf(vs='1', 'straight', 'V-shaped') AS 'engine' 
+                      FROM mtcars")
+
+# 不使用数据库的时候一定记得关闭数据库的连接
+dbDisconnect(con)
+```
+
