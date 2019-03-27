@@ -271,5 +271,4 @@
 ## 与 R 语言相关的工作
 
 - 美团喻灿 yucan@meituan.com https://tech.meituan.com/2018/08/02/mt-r-practice.html
-
-
+- 比较成熟的有京东、豆瓣、ebay、阿里
