@@ -24,17 +24,13 @@ library(ggplot2)
 颜色 col 连续型和离散型
 面/多边形 rect 颜色填充
 
-各种符号
+各种符号 \@ref(fig:cex-symbol) 
 
-```{r}
-# 符号
-
-op <- par(mar = c(1, 1, 4, 1) + .1)
+```{r cex-symbol,fig.cap="cex 支持的符号",echo=TRUE,fig.asp=.9}
 plot(0, 0,
   xlim = c(1, 5), ylim = c(-.5, 4),
   axes = F,
-  xlab = "", ylab = "",
-  main = "Available symbols"
+  xlab = "", ylab = ""
 )
 for (i in 0:4) {
   for (j in 1:5) {
@@ -46,9 +42,7 @@ for (i in 0:4) {
     text(j, i - .25, as.character(n))
   }
 }
-par(op)
 ```
-
 
 点、线、多边形和圆聚集在图 \@ref(fig:symbols) 中
 
@@ -56,24 +50,24 @@ par(op)
 # https://jeroen.github.io/uros2018/#23
 plot.new()
 plot.window(xlim = c(0, 100), ylim = c(0, 100))
-polygon(c(10, 40, 80), c(10, 80, 40), col = 'hotpink')
-text(40, 90, labels = 'My drawing', col = 'navyblue', cex = 3)
-symbols(c(70, 80, 90), c(20, 50, 80), circles = c(10, 20, 10),
-        bg = c('yellow', 'orange', 'red'), add = TRUE, lty = 'dashed')
+polygon(c(10, 40, 80), c(10, 80, 40), col = "hotpink")
+text(40, 90, labels = "My drawing", col = "navyblue", cex = 3)
+symbols(c(70, 80, 90), c(20, 50, 80),
+  circles = c(10, 20, 10),
+  bg = c("yellow", "orange", "red"), add = TRUE, lty = "dashed"
+)
 ```
 
+在介绍各种统计图形之前，先介绍几个绘图函数 `plot` 和 `text` 还有 `par` 参数设置， 作为最简单的开始，尽量依次介绍其中的每个参数的含义并附上图形对比。
 
-在介绍各种统计图形之前，先介绍几个绘图函数 `plot` 和 `text` 还有 `par` 参数设置， 作为最简单的开始， 尽量依次介绍其中的每个参数的含义并附上图形对比。
-
-```{r pos,fig.height=4.5,fig.asp=.8}
-x <- 1:4
-y <- x
+```{r pos,fig.cap="pos 位置参数",echo=TRUE,fig.asp=.9}
+y <- x <- 1:4
 plot(x, y, ann = F, col = "blue", pch = 16)
 text(x, y,
   labels = c("1st", "2nd", "3rd", "4th"),
   col = "red", pos = c(3, 4, 4, 1), offset = 0.6
 )
-ahat = "sigma"
+ahat <- "sigma"
 # title(substitute(hat(a) == ahat, list(ahat = ahat)))
 title(bquote(hat(a) == .(ahat)))
 ```
@@ -87,107 +81,119 @@ title(bquote(hat(a) == .(ahat)))
 ```{r plot,echo=FALSE,fig.width=7,fig.height=9,fig.cap='plot函数对象',fig.asp=1}
 # pdf(file = 'plot.pdf',width=10,height=6)
 # layout(matrix(seq(6), 2, 3, byrow = TRUE))
-# 矩阵图 自带 layout 
+# 矩阵图 自带 layout
 # plot(iris[,-5],col = iris$Species)
-par(mfrow = c(3,2),mar=c( 2.5, 2.5, .5, .5))
+par(mfrow = c(3, 2), mar = c(2.5, 2.5, .5, .5))
 # 分类散点图
-plot(Sepal.Length~Sepal.Width,data=iris,col = Species,pch=16 )
-legend('topright',legend = unique(iris$Species),box.col = "gray",
-		pch=16,col = unique(iris$Species) )
-box(col="gray")
+plot(Sepal.Length ~ Sepal.Width, data = iris, col = Species, pch = 16)
+legend("topright",
+  legend = unique(iris$Species), box.col = "gray",
+  pch = 16, col = unique(iris$Species)
+)
+box(col = "gray")
 # 气泡图
-plot(Volume~Height,data = trees,pch =16,cex = Girth/8,
-	 col = rev(terrain.colors(nrow(trees), alpha = .5)))
-box(col="gray")
+plot(Volume ~ Height,
+  data = trees, pch = 16, cex = Girth / 8,
+  col = rev(terrain.colors(nrow(trees), alpha = .5))
+)
+box(col = "gray")
 # 折线图
 plot(AirPassengers)
-box(col="gray")
+box(col = "gray")
 # 柱形图
 set.seed(123456)
 barPois <- table(stats::rpois(1000, lambda = 5))
-plot(barPois,col = "lightblue",type = 'h',lwd=10,main = "")
-box(col="gray")
+plot(barPois, col = "lightblue", type = "h", lwd = 10, main = "")
+box(col = "gray")
 # 马赛克图
 # par(mar=c(2,2,.5,.5))
-plot(HairEyeColor,col = "lightblue",border = 'white',main = '')
+plot(HairEyeColor, col = "lightblue", border = "white", main = "")
 # box(col="gray")
 ## 直方图
 set.seed(1234)
 n <- 2^24
-x <- runif(n,0,1)
+x <- runif(n, 0, 1)
 delta <- 0.01
-len <- diff(c(0,which(x < delta),n+1))-1
-ylim <- seq( 0, 1800, by = 300)
-xlim <- seq( 0, 100, by = 20)
-p <- hist(len[len < 101], breaks = -1:100+0.5,plot = FALSE)
-plot(p,ann = FALSE,axes = FALSE,col="lightblue",border = "white",main = "")	 
-axis( 1, labels = xlim, at = xlim, las = 1) # x 轴
-axis( 2, labels = ylim, at = ylim, las = 0) # y 轴
-box(col="gray")
+len <- diff(c(0, which(x < delta), n + 1)) - 1
+ylim <- seq(0, 1800, by = 300)
+xlim <- seq(0, 100, by = 20)
+p <- hist(len[len < 101], breaks = -1:100 + 0.5, plot = FALSE)
+plot(p, ann = FALSE, axes = FALSE, col = "lightblue", border = "white", main = "")
+axis(1, labels = xlim, at = xlim, las = 1) # x 轴
+axis(2, labels = ylim, at = ylim, las = 0) # y 轴
+box(col = "gray")
 ```
 
 
 
 ### 条形图 {#bar-plot}
 
-```{r ISLR,fig.width=5,fig.height=4,fig.cap='条形图'}
-data(NCI60, package ="ISLR") # 加载数据		
-myData <- sort(table(NCI60$labs), decreasing = TRUE)		
-par(mar=c(2,7,1,1))
-barCenters <- barplot(myData,col = "lightblue",axes = FALSE,
-			axisnames=FALSE,horiz=TRUE,border ="white")				
-text(y = barCenters, x = par("usr")[3],
-     adj = 1, labels = names(myData), xpd = TRUE)
-axis(1, labels = seq(0,9,by=1), at = seq(0,9,by=1),  las = 1 , col = "gray")
+```{r ISLR,fig.width=5,fig.height=4,fig.cap='条形图',echo=TRUE}
+data(NCI60, package = "ISLR") # 加载数据
+myData <- sort(table(NCI60$labs), decreasing = TRUE)
+par(mar = c(2, 7, 1, 1))
+barCenters <- barplot(myData,
+  col = "lightblue", axes = FALSE,
+  axisnames = FALSE, horiz = TRUE, border = "white"
+)
+text(
+  y = barCenters, x = par("usr")[3],
+  adj = 1, labels = names(myData), xpd = TRUE
+)
+axis(1, labels = seq(0, 9, by = 1), at = seq(0, 9, by = 1), 
+     las = 1, col = "gray")
 ```
 
 
 ### 直方图 {#histograms}
 
-```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布"}
+```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布",echo=TRUE}
 with(data = faithful, {
-  hist(eruptions, seq(1.6, 5.2, 0.2), prob = TRUE)
+  hist(eruptions, seq(1.6, 5.2, 0.2), prob = TRUE, main = "")
   lines(density(eruptions, bw = 0.1))
-  rug(eruptions) # show the actual data points
+  rug(eruptions) # 添加数据点
 })
 ```
 
-```{r}
+```{r,fig.cap="概率密度分布",echo=TRUE}
 hist(longley$Unemployed,
-  probability = TRUE, # Change the vertical units,
-  # to overlay a density estimation
-  col = "light blue"
+  probability = TRUE, 
+  col = "light blue", main = ""
 )
+# 添加密度估计
 lines(density(longley$Unemployed),
   col = "red",
   lwd = 3
 )
 ```
 
-直方图有很多花样的
+直方图有很多花样的，添加阴影线，angle 控制倾斜的角度
 
-```{r}
-hist(longley$Unemployed, density = 3, angle = 45)
+```{r,fig.cap="density 数值越大阴影线越密",echo=TRUE}
+# hist(longley$Unemployed, density = 1, angle = 45)
+# hist(longley$Unemployed, density = 3, angle = 15)
+# hist(longley$Unemployed, density = 1, angle = 15)
+hist(longley$Unemployed, density = 3, angle = 45, main = "")
 ```
 
-### 经验累积分布图 {#ecdf}
+### 经验图 {#ecdf}
 
-```{r faithful}
+```{r faithful,echo=TRUE,fig.cap="累积经验分布图"}
 with(data = faithful, {
   long <- eruptions[eruptions > 3]
-  plot(ecdf(long), do.points = FALSE, verticals = TRUE)
+  plot(ecdf(long), do.points = FALSE, verticals = TRUE, main = "")
   x <- seq(3, 5.4, 0.01)
   lines(x, pnorm(x, mean = mean(long), sd = sqrt(var(long))), lty = 3)
 })
 ```
 
-### QQ 正态分布图 {#qqnorm}
+### QQ 图 {#qqnorm}
 
 ```{r faithful-eruptions}
 with(data = faithful, {
   long <- eruptions[eruptions > 3]
   par(pty = "s") # arrange for a square figure region
-  qqnorm(long)
+  qqnorm(long, main = "")
   qqline(long)
 })
 ```
@@ -197,40 +203,50 @@ with(data = faithful, {
 
 时序图最适合用来描述股价走势
 
-```{r}
+```{r,echo=TRUE,fig.cap="1991–1998年间主要欧洲股票市场日闭市价格指数图 \n 德国 DAX (Ibis), Switzerland SMI, 法国 CAC 和 英国 FTSE"}
 matplot(time(EuStockMarkets), EuStockMarkets,
-  main = "Daily Closing Prices of Major European Stock Indices, 1991–1998\nGermany DAX (Ibis), Switzerland SMI, France CAC, and UK FTSE",
+  main = "",
   xlab = "Date", ylab = "closing prices",
   pch = 17, type = "l", col = 1:4
 )
 legend("topleft", colnames(EuStockMarkets), pch = 17, lty = 1, col = 1:4)
 ```
 
-### 饼图 {#pie-plot}
+### 饼图 {#pie}
+
+clockwise 参数
+
+```{r,echo=TRUE}
+pie.sales <- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
+names(pie.sales) <- c("Blueberry", "Cherry",
+    "Apple", "Boston Cream", "Other", "Vanilla Cream")
+pie(pie.sales, clockwise = TRUE, main = "")
+segments(0, 0, 0, 1, col = "red", lwd = 2)
+text(0, 1, "init.angle = 90", col = "red")
+```
 
 
+### 茎叶图 {#stem-leaf}
 
-### 茎叶图 {#stem-leaf-plot}
+```{r,echo=TRUE}
+stem(longley$Unemployed)
+```
 
-### 抖动图 {#jitter-plot}
 
-在 base R 中实现的图形，附上 ggplot2 的实现，而 ggplot2 的章节图形提供 base R 实现的图形
+### 散点图 {#scatter}
 
-强调图对应的数据类型
+这种点图 抖动图
 
-### 散点图 {#scatter-plot}
-
-这种点图
-
-```{r}
-# 一维云图/点图
-stripchart(longley$Unemployed)
+```{r,echo=TRUE,fig.cap="一维点图",fig.asp=0.3}
+# stripchart(longley$Unemployed, method = "jitter", jitter = 0.1, pch = 16, col = "lightblue")
+# 默认
+stripchart(longley$Unemployed, method = "overplot", pch = 16, col = "lightblue")
 ```
 
 
 ```{r,echo=TRUE}
 # 加载数据集
-data(topo, package="MASS")
+data(topo, package = "MASS")
 # 查看数据集
 str(topo)
 ```
@@ -238,8 +254,10 @@ str(topo)
 topo 是空间地形数据集，包含有52行3列，数据点是310平方英尺范围内的海拔高度数据，x 坐标每单位50英尺，y 坐标单位同 x 坐标，海拔高度 z 单位是英尺
 
 ```{r,echo=TRUE,fig.cap=""}
-plot(y~x, cex = (960-z)/(960-690), data = topo, 
-     xlab = "X Coordinates", ylab = "Y coordinates")
+plot(y ~ x,
+  cex = (960 - z) / (960 - 690) * 3, data = topo,
+  xlab = "X Coordinates", ylab = "Y coordinates"
+)
 ```
 
 散点图也适合分类数据的展示，在图中用不同颜色或符号标记数据点所属类别，即在普通散点图的基础上添加一分类变量的描述
@@ -322,8 +340,10 @@ graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
 ### 箱线图 {#boxplot}
 
 ```{r boxplot,echo=TRUE}
-A <- c(79.98, 80.04, 80.02, 80.04, 80.03, 80.03, 80.04, 79.97,
-       80.05, 80.03, 80.02, 80, 80.02)
+A <- c(
+  79.98, 80.04, 80.02, 80.04, 80.03, 80.03, 80.04, 79.97,
+  80.05, 80.03, 80.02, 80, 80.02
+)
 B <- c(80.02, 79.94, 79.98, 79.97, 79.97, 80.03, 79.95, 79.97)
 boxplot(A, B)
 ```
@@ -348,7 +368,7 @@ boxplot(longley$Unemployed)
 boxplot(longley$Unemployed,
   horizontal = TRUE,
   col = "pink",
-  main = "Box-and-whiskers plot (boxplot)"
+  main = ""
 )
 ```
 
@@ -359,7 +379,7 @@ boxplot(count ~ spray,
   col = "pink",
   xlab = "Spray",
   ylab = "Count",
-  main = "Insect sprays"
+  main = ""
 )
 ```
 
@@ -373,7 +393,7 @@ boxplot(count ~ spray,
   las = 1, # Horizontal labels
   xlab = "Count",
   ylab = "Spray",
-  main = "Insect sprays"
+  main = ""
 )
 ```
 
@@ -423,7 +443,7 @@ sunspot.month          Monthly Sunspot Data, from 1749 to "Present"
 sunspot.year           Yearly Sunspot Data, 1700-1988
 sunspots               Monthly Sunspot Numbers, 1749-1983
 
-### 马赛克图 {#mosaic-plot}
+### 马赛克图 {#mosaic}
 
 ### 矩阵图 {#treemap}
 
@@ -521,48 +541,53 @@ nus <- c(0:5, 10, 20)
 x <- seq(0, 4, length.out = 501)
 
 plot(x0, x0^-8,
-  frame.plot = TRUE,                     # 添加绘图框
-  log = "xy",                            # x 和 y 轴都取对数尺度
-  axes = FALSE,                          # 去掉坐标轴
-  xlab = "$u$", 
-  ylab = "$\\mathcal{K}_{\\kappa}(u)$",  # 设置坐标轴标签
-  type = "n",                            # 清除绘图区域的内容
-  ann = TRUE,                            # 添加标题 x和y轴标签
-  panel.first = grid()                   # 添加背景参考线
+  frame.plot = TRUE, # 添加绘图框
+  log = "xy", # x 和 y 轴都取对数尺度
+  axes = FALSE, # 去掉坐标轴
+  xlab = "$u$",
+  ylab = "$\\mathcal{K}_{\\kappa}(u)$", # 设置坐标轴标签
+  type = "n", # 清除绘图区域的内容
+  ann = TRUE, # 添加标题 x和y轴标签
+  panel.first = grid() # 添加背景参考线
 )
 
 axis(1,
-     at = c(1e-08, 1e-06, 1e-04, 1e-02, 1, 1e+02),
-     labels = expression(10^-8, 10^-6, 10^-4, 10^-2, 1, 10^2)
+  at = c(1e-08, 1e-06, 1e-04, 1e-02, 1, 1e+02),
+  labels = expression(10^-8, 10^-6, 10^-4, 10^-2, 1, 10^2)
 )
 axis(2,
-     at = c(1e-16, 1, 1e+16, 1e+32, 1e+48),
-     labels = expression(10^-16, 1, 10^16, 10^32, 10^48), las = 1
+  at = c(1e-16, 1, 1e+16, 1e+32, 1e+48),
+  labels = expression(10^-16, 1, 10^16, 10^32, 10^48), las = 1
 )
 # 设置线条颜色
-cols <- RColorBrewer::brewer.pal(9,name = "Spectral")
+cols <- RColorBrewer::brewer.pal(9, name = "Spectral")
 # gray.colors(9) terrain.colors(9)  RColorBrewer::brewer.pal(9,name = "Spectral")
 for (i in seq(length(nus)))
   lines(x0, besselK(x0, nu = nus[i]), col = cols[i], lwd = 2)
-legend("topright",legend = paste0("$\\kappa=", rev(nus),"$"),
-       col = rev(cols), lwd = 2, cex = 0.5)
+legend("topright",
+  legend = paste0("$\\kappa=", rev(nus), "$"),
+  col = rev(cols), lwd = 2, cex = 0.5
+)
 
 # 数据变化范围太大，因此横纵坐标轴都取了以10为底的对数，数据可以紧凑的在一张图内展示
 x <- seq(0, 40, length.out = 801)
 x <- x[x > 0]
-plot(x, x,frame.plot=TRUE,
-     ylim = c(1e-18, 1e11), log = "y", xlab = "$u$", type = "n",  yaxt = "n",
-     ylab = "$\\mathcal{K}_{\\kappa}(u)$", ann = TRUE, panel.first = grid()
+plot(x, x,
+  frame.plot = TRUE,
+  ylim = c(1e-18, 1e11), log = "y", xlab = "$u$", type = "n", yaxt = "n",
+  ylab = "$\\mathcal{K}_{\\kappa}(u)$", ann = TRUE, panel.first = grid()
 )
 axis(2,
-     at = c(1e-19, 1e-12, 1e-05, 1e+02, 1e+09),
-     labels = expression(10^-19, 10^-12, 10^-5, 10^2, 10^9), las = 1
+  at = c(1e-19, 1e-12, 1e-05, 1e+02, 1e+09),
+  labels = expression(10^-19, 10^-12, 10^-5, 10^2, 10^9), las = 1
 )
 
 for (i in seq(length(nus)))
   lines(x, besselK(x, nu = nus[i]), col = cols[i], lwd = 2)
-legend("topright", legend = paste0("$\\kappa=", rev(nus),"$"), 
-       col = rev(cols), lwd = 2, cex = 0.5)
+legend("topright",
+  legend = paste0("$\\kappa=", rev(nus), "$"),
+  col = rev(cols), lwd = 2, cex = 0.5
+)
 ```
 
 ## 保存 {#save}
@@ -622,7 +647,7 @@ x <- seq(tmin, tmax, length.out = 100)
 y <- cumsum(rnorm(100))
 
 # Plot
-# png("plot_w_rotated_axis_labels.png", height = 3, 
+# png("plot_w_rotated_axis_labels.png", height = 3,
 #     width = 6, units = "in", res = 300)
 op <- par(mar = c(6, 4, 1, 1))
 plot(x, y, t = "l", xaxt = "n", xlab = "")
@@ -641,14 +666,16 @@ par(op)
 ## Increase bottom margin to make room for rotated labels
 par(mar = c(5, 4, .5, 2) + 0.1)
 ## Create plot with no x axis and no x axis label
-plot(1 : 8, xaxt = "n",  xlab = "")
+plot(1:8, xaxt = "n", xlab = "")
 ## Set up x axis with tick marks alone
 axis(1, labels = FALSE)
 ## Create some text labels
 labels <- paste("Label", 1:8, sep = " ")
 ## Plot x axis labels at default tick marks
-text(1:8, par("usr")[3] - 0.5, srt = 45, adj = 1,
-     labels = labels, xpd = TRUE)
+text(1:8, par("usr")[3] - 0.5,
+  srt = 45, adj = 1,
+  labels = labels, xpd = TRUE
+)
 ## Plot x axis label at line 6 (of 7)
 mtext(side = 1, text = "X Axis Label", line = 4)
 ```
@@ -663,12 +690,18 @@ mtext(side = 1, text = "X Axis Label", line = 4)
 
 ```{r math-annotation, fig.cap="Creating Customized Axes With Suitable Annotation"}
 # 自定义坐标轴
-plot(c(1, 1e6), c(-pi, pi), type = "n", 
-     axes = FALSE, ann = FALSE, log = "x")
-axis(1, at = c(1, 1e2, 1e4, 1e6), 
-     labels = expression(1, 10^2, 10^4, 10^6))
-axis(2, at = c(-pi, -pi / 2, 0, pi / 2, pi), 
-     labels = expression(-pi, -pi / 2, 0, pi / 2, pi))
+plot(c(1, 1e6), c(-pi, pi),
+  type = "n",
+  axes = FALSE, ann = FALSE, log = "x"
+)
+axis(1,
+  at = c(1, 1e2, 1e4, 1e6),
+  labels = expression(1, 10^2, 10^4, 10^6)
+)
+axis(2,
+  at = c(-pi, -pi / 2, 0, pi / 2, pi),
+  labels = expression(-pi, -pi / 2, 0, pi / 2, pi)
+)
 text(1e3, 0, expression(italic("Customized Axes")))
 box()
 ```
