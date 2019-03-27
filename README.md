@@ -174,7 +174,6 @@
   - [John Fox](https://socialsciences.mcmaster.ca/jfox/)
   - [Charlie Geyer](http://users.stat.umn.edu/~geyer/)
   - [Michael L. Stein](http://www.stat.uchicago.edu/faculty/stein.shtml)
-
   - [李航](http://hangli-hl.com)
 
 * 主页
