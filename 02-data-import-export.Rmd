@@ -97,10 +97,21 @@ iris <- dget(file = 'iris.dat')
 
 ### jsonlite 与 yaml
 
-json
+jsonlite 包读取 `*.json` 格式的文件，`jsonlite::write_json` 函数将 R对象保存为 JSON 文件，`jsonlite::fromJSON` 将 json 字符串或文件转化为 R 对象，`jsonlite::toJSON` 函数正好与之相反
 
-yaml
+```{r,echo=TRUE,eval=FALSE}
+library(jsonlite)
+jsonlite::read_json(path = "path/to/filename.json")
+```
 
+yaml 包读取 `*.yml` 格式文件，返回一个列表，`yaml::write_yaml` 函数将 R 对象写入 yaml 格式 
+
+```{r,echo=TRUE}
+library(yaml)
+yaml::read_yaml(file = '_bookdown.yml')
+```
+
+yaml 和 json 格式互转
 
 ## 读写数据库 {#read-write-database}
 
@@ -186,8 +197,9 @@ echo "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/" | sudo tee /etc/ap
 sudo apt-get update
 
 sudo apt-get install -y clickhouse-server clickhouse-client
-
+# 启动服务
 sudo service clickhouse-server start
+# 进入客户端
 clickhouse-client
 ```
 
