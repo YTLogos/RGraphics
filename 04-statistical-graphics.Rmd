@@ -4,7 +4,7 @@
 作为知识介绍，本章所有数据都来源于基础 R 包，即安装 R 软件后自带的数据集，图库在以 base R 中的数据集介绍完后，以相应真实数据扩展为案列，结合统计意义和探索性数据分析介绍各种常见统计图形
 :::
 
-数据可视化是一种重要的数据分析手段，Claus O. Wilke 目前正在写《Fundamentals of Data Visualization》，并且给出了在线网络版^[<https://serialmentor.com/dataviz/>]。 
+数据可视化是一种重要的数据分析手段，Claus O. Wilke 目前正在写《Fundamentals of Data Visualization》，并且给出了在线网络版 <https://serialmentor.com/dataviz/>。 
 
 准备好以下绘制统计图形的 R 包
 
