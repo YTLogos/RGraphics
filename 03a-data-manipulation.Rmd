@@ -1,7 +1,7 @@
 # 数据操作手 {#data-manipulator}
 
 ```{r,include=FALSE}
-library(magrittr) # %>%
+library(magrittr) # 提供管道操作 %>%
 ```
 
 数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的，而且如果没有特别说明，文中出现的数据集都是 Base R 内置的，第三方 R 包或者来源于网上的数据集都会加以说明。
@@ -57,10 +57,6 @@ gsub(" <([^<>]*)>", "", lapply(.packages(TRUE), maintainer) %>%
   sort() %>%
   tail(10)
 ```
-
-我安装 Hadley Wickham 维护的 R 包有 33 个
-
-stringr/stringi
 
 ## 重塑 {#reshape}
 
@@ -428,13 +424,63 @@ i[sample(n, n/4)] = TRUE
 microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 ```
 
-with 和 within
-
 ## 其它 {#others}
 
 成对的数据操作
 
-list unlist 
-stack unstack 
-class unclass
-attach detach
+- `list` 与 `unlist` 创建列表 
+
+```{r,echo=TRUE}
+tmp = list(A = c(1,2,3), B = c("a", "b"))
+tmp
+tmp2 = unlist(tmp)
+tmp2
+```
+
+- `stack` 与 `unstack` 将多个向量堆在一起组成一个向量
+
+```{r,echo=TRUE}
+head(PlantGrowth)
+formula(PlantGrowth)         # check the default formula
+pg <- unstack(PlantGrowth)   # unstack according to this formula
+pg
+stack(pg)                    # now put it back together
+stack(pg, select = -ctrl)    # omitting one vector
+```
+
+- `class` 和 `unclass` 查看类属性
+
+```{r,out.lines=6}
+iris$Species
+
+class(iris$Species)
+
+unclass(iris$Species)
+```
+
+
+- `attach` 和 `detach` 是否绑定数据框的列名，不推荐操作，推荐使用 `with`
+
+```{r,echo=TRUE}
+attach(iris)
+head(Species)
+detach(iris)
+```
+
+- `with` 和 `within` 都是进入数据环境，后者会修改数据
+
+```{r,echo=TRUE}
+with(iris,{
+  head(Species)
+})
+
+aq <- within(airquality, {     # Notice that multiple vars can be changed
+    lOzone <- log(Ozone)
+    Month <- factor(month.abb[Month])
+    cTemp <- round((Temp - 32) * 5/9, 1) # From Fahrenheit to Celsius
+    S.cT <- Solar.R / cTemp  # using the newly created variable
+    rm(Day, Temp)
+})
+head(aq)
+```
+
