@@ -192,6 +192,7 @@
   - [高涛](https://joegaotao.github.io)
   - [黄俊文](https://www.fyears.org) Python 和 R
   - [黄晨成](https://liam.page/) TeX 专家
+  - [王奕如](https://earo.me/) 时空序列数据分析 博士
   - [边蓓蕾](http://statsjoke.me) 上届 COS 副主编
   - [郎大为](http://langdawei.com/) 词云 recharts
   - [寇强](http://qkou.info/) Rcpp/mxnet 核心开发者
