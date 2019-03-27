@@ -1,0 +1,9 @@
+# 动态图形 {#interactive-graphics}
+
+这里的动态图形覆盖的范围是各种 JS 库
+
+## 网络图 {#network}
+
+[visNetwork](https://github.com/datastorm-open/visNetwork) 基于 vis.js 库
+
+
