@@ -191,7 +191,7 @@ sudo service clickhouse-server start
 clickhouse-client
 ```
 
-[ClickHouse 中文用户手册](https://clickhouse.yandex/docs/zh/) 和新浪高鹏在北京ClickHouse社区分享会上给的报告 [MySQL DBA解锁数据分析的新姿势-ClickHouse](https://yandex.github.io/clickhouse-presentations/meetup12/power_your_data.pdf) 
+[ClickHouse 中文用户手册](https://clickhouse.yandex/docs/zh/) 和新浪高鹏在北京 [ClickHouse社区分享会](https://clickhouse.yandex/blog/en/clickhouse-community-meetup-in-beijing-on-january-27-2018) 上给的报告 [MySQL DBA解锁数据分析的新姿势-ClickHouse](https://yandex.github.io/clickhouse-presentations/meetup12/power_your_data.pdf) 
 
 开源社区对 ClickHouse 提供了很多语言的支持，比如 R 语言接口有 [RClickhouse](https://github.com/IMSMWU/RClickhouse) 和 [clickhouse-r](https://github.com/hannesmuehleisen/clickhouse-r)，其它接口请看 [官方文档链接](https://clickhouse.yandex/docs/zh/interfaces/third-party/client_libraries/)
 
