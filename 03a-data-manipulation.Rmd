@@ -198,6 +198,48 @@ unsplit(l, g) %>% head(5) # 合并
 
 merge 合并两个数据框
 
+```{r,echo=TRUE}
+authors <- data.frame(
+    ## I(*) : use character columns of names to get sensible sort order
+    surname = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
+    nationality = c("US", "Australia", "US", "UK", "Australia"),
+    deceased = c("yes", rep("no", 4)))
+authorN <- within(authors, { name <- surname; rm(surname) })
+books <- data.frame(
+    name = I(c("Tukey", "Venables", "Tierney",
+             "Ripley", "Ripley", "McNeil", "R Core")),
+    title = c("Exploratory Data Analysis",
+              "Modern Applied Statistics ...",
+              "LISP-STAT",
+              "Spatial Statistics", "Stochastic Simulation",
+              "Interactive Data Analysis",
+              "An Introduction to R"),
+    other.author = c(NA, "Ripley", NA, NA, NA, NA,
+                     "Venables & Smith"))
+
+authors
+authorN
+books
+```
+
+默认找到同名的列，然后是同名的行合并，多余的没有匹配到的就丢掉
+
+```{r,echo=TRUE}
+merge(authorN, books)
+```
+
+还可以指定合并的列，先按照 surname 合并，留下 surname
+
+```{r,echo=TRUE}
+merge(authors, books, by.x = "surname", by.y = "name")
+```
+
+留下的是 name
+
+```{r,echo=TRUE}
+merge(books, authors, by.x = "name", by.y = "surname")
+```
+
 cbind
 rbind
 
@@ -450,7 +492,7 @@ stack(pg, select = -ctrl)    # omitting one vector
 
 - `class` 和 `unclass` 查看类属性
 
-```{r,out.lines=6}
+```{r,out.lines=6,echo=TRUE}
 iris$Species
 
 class(iris$Species)
