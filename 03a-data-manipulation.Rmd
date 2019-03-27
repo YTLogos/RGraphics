@@ -13,8 +13,8 @@ str(iris)
 ```
 
 ```{r,echo=TRUE}
-head(iris,5)
-tail(iris,5)
+head(iris, 5)
+tail(iris, 5)
 ```
 
 查看文件前（后）5行
@@ -71,18 +71,20 @@ str(Indometh)
 summary(Indometh)
 ```
 ```{r,echo=TRUE}
-wide <- reshape(Indometh, v.names = "conc", idvar = "Subject",
-                timevar = "time", direction = "wide")
-wide[,1:6]
+wide <- reshape(Indometh,
+  v.names = "conc", idvar = "Subject",
+  timevar = "time", direction = "wide"
+)
+wide[, 1:6]
 ```
 
 长 long 变 wide 宽格式
 
 ```{r,echo=TRUE,eval=FALSE}
-data(gambia,package = 'geoR')
+data(gambia, package = "geoR")
 # Building a "village-level" data frame
-ind <- paste("x",gambia[,1], "y", gambia[,2], sep="")
-village <- gambia[!duplicated(ind),c(1:2,7:8)]
+ind <- paste("x", gambia[, 1], "y", gambia[, 2], sep = "")
+village <- gambia[!duplicated(ind), c(1:2, 7:8)]
 village$prev <- as.vector(tapply(gambia$pos, ind, mean))
 head(village)
 ```
@@ -92,7 +94,7 @@ head(village)
 transform 对数据框中的某些列做计算，取对数，将计算的结果单存一列加到数据框中
 
 ```{r,echo=TRUE}
-transform(iris, scale.sl = (max(Sepal.Length) - Sepal.Length)/(max(Sepal.Length) - min(Sepal.Length))) %>% head(5)
+transform(iris, scale.sl = (max(Sepal.Length) - Sepal.Length) / (max(Sepal.Length) - min(Sepal.Length))) %>% head(5)
 ```
 
 ::: sidebar
@@ -110,17 +112,15 @@ subset(iris, Species == "virginica") %>% head(5)
 # summary(iris$Sepal.Length)  mean(iris$Sepal.Length)
 # 且的逻辑
 # subset(iris, Species == "virginica" & Sepal.Length > 5.84333) %>% head(5)
-subset(iris, Species == "virginica" & 
-         Sepal.Length > mean(Sepal.Length)
-       ) %>% head(5)
+subset(iris, Species == "virginica" &
+  Sepal.Length > mean(Sepal.Length)) %>% head(5)
 # 在行的子集范围内
-subset(iris, Species %in% c("virginica","versicolor") & 
-         Sepal.Length > mean(Sepal.Length)
-       ) %>% head(5)
+subset(iris, Species %in% c("virginica", "versicolor") &
+  Sepal.Length > mean(Sepal.Length)) %>% head(5)
 # 在列的子集内 先选中列
-subset(iris, Sepal.Length > mean(Sepal.Length), 
-       select = c("Sepal.Length","Species")
-       ) %>% head(5)
+subset(iris, Sepal.Length > mean(Sepal.Length),
+  select = c("Sepal.Length", "Species")
+) %>% head(5)
 ```
 
 高级操作：加入正则表达式筛选
@@ -144,13 +144,14 @@ subset(state.x77, grepl("^M", rownames(state.x77)), Illiteracy:Murder)
 
 ```{r,echo=TRUE}
 iris[iris$Species == "virginica", ] %>% head(5)
-iris[iris$Species == "virginica" &  
-       iris$Sepal.Length > mean(iris$Sepal.Length), 
-     ] %>% head(5)
+iris[iris$Species == "virginica" &
+  iris$Sepal.Length > mean(iris$Sepal.Length), ] %>% head(5)
 
-iris[iris$Species == "virginica" &  
-       iris$Sepal.Length > mean(iris$Sepal.Length), 
-     c("Sepal.Length","Species")] %>% head(5)
+iris[
+  iris$Species == "virginica" &
+    iris$Sepal.Length > mean(iris$Sepal.Length),
+  c("Sepal.Length", "Species")
+] %>% head(5)
 ```
 
 [^non-standard-eval]: Thomas Lumley (2003) Standard nonstandard evaluation rules. https://developer.r-project.org/nonstandard-eval.pdf
@@ -161,11 +162,11 @@ iris[iris$Species == "virginica" &
 
 ```{r,echo=TRUE}
 # 对萼片的长度排序
-iris[order(iris$Species,iris$Sepal.Length),] %>% head(5)
+iris[order(iris$Species, iris$Sepal.Length), ] %>% head(5)
 # 对花瓣的长度排序
-iris[order(iris$Species,iris$Petal.Length),] %>% head(5)
+iris[order(iris$Species, iris$Petal.Length), ] %>% head(5)
 # 先对花瓣的宽度排序，再对花瓣的长度排序
-iris[order(iris$Petal.Width,iris$Petal.Length),] %>% head(5)
+iris[order(iris$Petal.Width, iris$Petal.Length), ] %>% head(5)
 ```
 
 sort 排序
@@ -182,7 +183,7 @@ head(aq2)
 ```
 
 ```{r,echo=TRUE}
-with(aq2, tapply(Oz.Z,  Month, sd, na.rm = TRUE))
+with(aq2, tapply(Oz.Z, Month, sd, na.rm = TRUE))
 ```
 
 以 iris 数据集为例
@@ -200,22 +201,33 @@ merge 合并两个数据框
 
 ```{r,echo=TRUE}
 authors <- data.frame(
-    ## I(*) : use character columns of names to get sensible sort order
-    surname = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
-    nationality = c("US", "Australia", "US", "UK", "Australia"),
-    deceased = c("yes", rep("no", 4)))
-authorN <- within(authors, { name <- surname; rm(surname) })
+  ## I(*) : use character columns of names to get sensible sort order
+  surname = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
+  nationality = c("US", "Australia", "US", "UK", "Australia"),
+  deceased = c("yes", rep("no", 4))
+)
+authorN <- within(authors, {
+  name <- surname
+  rm(surname)
+})
 books <- data.frame(
-    name = I(c("Tukey", "Venables", "Tierney",
-             "Ripley", "Ripley", "McNeil", "R Core")),
-    title = c("Exploratory Data Analysis",
-              "Modern Applied Statistics ...",
-              "LISP-STAT",
-              "Spatial Statistics", "Stochastic Simulation",
-              "Interactive Data Analysis",
-              "An Introduction to R"),
-    other.author = c(NA, "Ripley", NA, NA, NA, NA,
-                     "Venables & Smith"))
+  name = I(c(
+    "Tukey", "Venables", "Tierney",
+    "Ripley", "Ripley", "McNeil", "R Core"
+  )),
+  title = c(
+    "Exploratory Data Analysis",
+    "Modern Applied Statistics ...",
+    "LISP-STAT",
+    "Spatial Statistics", "Stochastic Simulation",
+    "Interactive Data Analysis",
+    "An Introduction to R"
+  ),
+  other.author = c(
+    NA, "Ripley", NA, NA, NA, NA,
+    "Venables & Smith"
+  )
+)
 
 authors
 authorN
@@ -346,8 +358,8 @@ aggregate(uptake ~ Treatment, data = CO2, mean)
 
 ```{r,echo=TRUE}
 aggregate(uptake ~ Type + Treatment, data = CO2, mean)
-tapply(CO2$uptake, list(CO2$Type,CO2$Treatment), mean)
-by(CO2$uptake,list(CO2$Type,CO2$Treatment), mean)
+tapply(CO2$uptake, list(CO2$Type, CO2$Treatment), mean)
+by(CO2$uptake, list(CO2$Type, CO2$Treatment), mean)
 ```
 
 在这个例子中 tapply 和 by 的输出结果的表示形式不一样，aggregate 返回一个 data.frame 数据框，tapply 返回一个表格 table，by 返回特殊的数据类型 by。
@@ -374,7 +386,7 @@ with(warpbreaks, ave(breaks, tension, FUN = function(x) mean(x, trim = 0.1)))
 # 分组求和
 with(warpbreaks, ave(breaks, tension, FUN = function(x) sum(x)))
 # 分组求和
-with(iris,ave(Sepal.Length,Species, FUN = function(x) sum(x)))
+with(iris, ave(Sepal.Length, Species, FUN = function(x) sum(x)))
 ```
 
 
@@ -459,10 +471,10 @@ prop.table(margin.table(UCBA2DF.tab, c(1, 3)), 1)
 which 与引用 `[` 性能比较，在区间 $[0,1]$ 上生成 10 万个服从均匀分布的随机数，随机抽取其中$\frac{1}{4}$。
 
 ```{r,echo=TRUE}
-n = 100000
-x = runif(n)
-i = logical(n)
-i[sample(n, n/4)] = TRUE
+n <- 100000
+x <- runif(n)
+i <- logical(n)
+i[sample(n, n / 4)] <- TRUE
 microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 ```
 
@@ -473,9 +485,9 @@ microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 - `list` 与 `unlist` 创建列表 
 
 ```{r,echo=TRUE}
-tmp = list(A = c(1,2,3), B = c("a", "b"))
+tmp <- list(A = c(1, 2, 3), B = c("a", "b"))
 tmp
-tmp2 = unlist(tmp)
+tmp2 <- unlist(tmp)
 tmp2
 ```
 
@@ -483,11 +495,11 @@ tmp2
 
 ```{r,echo=TRUE}
 head(PlantGrowth)
-formula(PlantGrowth)         # check the default formula
-pg <- unstack(PlantGrowth)   # unstack according to this formula
+formula(PlantGrowth) # check the default formula
+pg <- unstack(PlantGrowth) # unstack according to this formula
 pg
-stack(pg)                    # now put it back together
-stack(pg, select = -ctrl)    # omitting one vector
+stack(pg) # now put it back together
+stack(pg, select = -ctrl) # omitting one vector
 ```
 
 - `class` 和 `unclass` 查看类属性
@@ -512,16 +524,16 @@ detach(iris)
 - `with` 和 `within` 都是进入数据环境，后者会修改数据
 
 ```{r,echo=TRUE}
-with(iris,{
+with(iris, {
   head(Species)
 })
 
-aq <- within(airquality, {     # Notice that multiple vars can be changed
-    lOzone <- log(Ozone)
-    Month <- factor(month.abb[Month])
-    cTemp <- round((Temp - 32) * 5/9, 1) # From Fahrenheit to Celsius
-    S.cT <- Solar.R / cTemp  # using the newly created variable
-    rm(Day, Temp)
+aq <- within(airquality, { # Notice that multiple vars can be changed
+  lOzone <- log(Ozone)
+  Month <- factor(month.abb[Month])
+  cTemp <- round((Temp - 32) * 5 / 9, 1) # From Fahrenheit to Celsius
+  S.cT <- Solar.R / cTemp # using the newly created variable
+  rm(Day, Temp)
 })
 head(aq)
 ```
