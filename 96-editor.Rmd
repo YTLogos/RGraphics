@@ -1,6 +1,6 @@
 # 编辑器 {#editor}
 
-1. Atom 编辑器^[<https://atom.io/>]
+1. Atom 编辑器 <https://atom.io/>
 
   ```bash
   sudo add-apt-repository ppa:webupd8team/atom
@@ -8,9 +8,9 @@
   sudo apt-get install atom
   ```
 
-1. Code 编辑器微软出品 https://code.visualstudio.com/
+1. Code 编辑器微软出品 <https://code.visualstudio.com/>
 
-1. Notepad++ 开源的 Windows 平台上的编辑器 https://notepad-plus-plus.org/
+1. Notepad++ 开源的 Windows 平台上的编辑器 <https://notepad-plus-plus.org/>
 
 1. VI & VIM 开源的跨平台编辑器
 
@@ -20,7 +20,7 @@
 
 1. Markdown 编辑器 + blogdown 记笔记
 
-1. Typora Markdown 编辑器，支持 CSS 样式
+1. Typora Markdown 编辑器，支持自定义 CSS 样式
 
 ```{bash,eval=F}
 # or run:
