@@ -165,7 +165,7 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 
 ## 关于作者 {#about-author}
 
-热心开源事业，目前在统计之都理事、副主编 Associated Editor of Captial of Statistics 
+热心开源事业，统计之都现任理事、副主编 Associated Editor of Captial of Statistics，经常混迹于统计之都论坛、Github 和爆栈网。个人主页 <https://www.xiangyunhuang.com.cn/>
 
 ## 软件信息 {#softwares-rsession-info}
 
