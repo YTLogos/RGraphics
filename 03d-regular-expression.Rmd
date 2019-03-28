@@ -220,7 +220,7 @@ Atomic grouping 原子分组, possessive qualifiers 占有限定 and conditional
 
 ![(\#fig:regex-xkcd) 正则表达式漫画](https://imgs.xkcd.com/comics/regular_expressions.png)
 
-
+正则表达式的直观解释 <https://github.com/gadenbuie/regexplain>
 
 [regex-xkcd]: https://xkcd.com/208/
 
