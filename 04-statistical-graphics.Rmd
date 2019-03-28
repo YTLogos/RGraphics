@@ -140,8 +140,10 @@ text(
   y = barCenters, x = par("usr")[3],
   adj = 1, labels = names(myData), xpd = TRUE
 )
-axis(1, labels = seq(0, 9, by = 1), at = seq(0, 9, by = 1), 
-     las = 1, col = "gray")
+axis(1,
+  labels = seq(0, 9, by = 1), at = seq(0, 9, by = 1),
+  las = 1, col = "gray"
+)
 ```
 
 
@@ -157,7 +159,7 @@ with(data = faithful, {
 
 ```{r,fig.cap="概率密度分布",echo=TRUE}
 hist(longley$Unemployed,
-  probability = TRUE, 
+  probability = TRUE,
   col = "light blue", main = ""
 )
 # 添加密度估计
@@ -218,8 +220,10 @@ clockwise 参数
 
 ```{r,echo=TRUE}
 pie.sales <- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
-names(pie.sales) <- c("Blueberry", "Cherry",
-    "Apple", "Boston Cream", "Other", "Vanilla Cream")
+names(pie.sales) <- c(
+  "Blueberry", "Cherry",
+  "Apple", "Boston Cream", "Other", "Vanilla Cream"
+)
 pie(pie.sales, clockwise = TRUE, main = "")
 segments(0, 0, 0, 1, col = "red", lwd = 2)
 text(0, 1, "init.angle = 90", col = "red")
@@ -667,7 +671,7 @@ mtext(side = 1, text = "X Axis Label", line = 4)
 
 数学符号注释，图\@ref(fig:math-annotation) 自定义坐标轴 [@Paul_2000_Approach]。
 
-```{r math-annotation, fig.cap="Creating Customized Axes With Suitable Annotation"}
+```{r math-annotation, fig.cap="创建自定义的坐标轴和刻度标签",echo=TRUE}
 # 自定义坐标轴
 plot(c(1, 1e6), c(-pi, pi),
   type = "n",
@@ -687,7 +691,7 @@ box()
 
 在标题中添加数学公式
 
-```{r}
+```{r,fig.cap="标题含有数学公式",title.mar=TRUE,echo=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
 x <- seq(-5, 5, length = 200)
 y <- sqrt(1 + x^2)
 plot(y ~ x,
@@ -701,11 +705,8 @@ title(main = expression(
 
 修改参数使用 `substitute` 函数批量生成
 
-```{r}
-# substitute  神奇的函数哦
-
+```{r,fig.cap="批量生成函数图形",title.mar=TRUE,echo=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
 x <- seq(-5, 5, length = 200)
-op <- par(mfrow = c(2, 2))
 for (i in 1:4) { # 画四个图
   y <- sqrt(i + x^2)
   plot(y ~ x,
@@ -721,13 +722,11 @@ for (i in 1:4) { # 画四个图
     list(i = i)
   ))
 }
-par(op)
 ```
 
 ### 外边空添加文字
 
-```{r}
-# 在图的边缘添加文字
+```{r,fig.cap="外边空在图的边缘添加文字",title.mar=TRUE,echo=TRUE}
 N <- 200
 x <- runif(N, -4, 4)
 y <- sin(x) + .5 * rnorm(N)
@@ -746,8 +745,7 @@ mtext("Line 3", 3, line = 3)
 
 ### 多个标题
 
-```{r}
-# 图标题/子标题 x轴标题/子标题
+```{r,fig.cap="图标题/子标题 x轴标题/子标题",sub.mar=TRUE,echo=TRUE}
 N <- 200
 x <- runif(N, -4, 4)
 y <- sin(x) + .5 * rnorm(N)
@@ -760,7 +758,7 @@ mtext("X axis subtitle", 1, line = 3.7)
 
 ### 双 Y 轴
 
-```{r}
+```{r,title.mar=TRUE,echo=TRUE,fig.cap="两个 Y 轴",fig.asp=1}
 # 双Y轴
 N <- 200
 x <- seq(-4, 4, length = N)
@@ -791,21 +789,26 @@ mtext("Second Y axis", 4, line = 2, col = "red", cex = 1.2)
 
 ### 多图排列
 
-```{r}
+```{r,sub.mar=TRUE,echo=TRUE,fig.asp=1,fig.cap="多图排列共享一个大标题"}
 # 多图排列/分屏 page 47
 # 最常用的是 par mfrow mfcol分别按行/列放置图形
-
-op <- par(mfrow = c(2, 2))
+op <- par(
+  mfrow = c(2, 2),
+  oma = c(0, 0, 4, 0) # Outer margins
+)
 for (i in 1:4)
   plot(runif(20), runif(20),
     main = paste("random plot (", i, ")", sep = "")
   )
 par(op)
 mtext("Four plots, without enough room for this title",
-  side = 3, font = 2, cex = 2, col = "red"
+  side = 3, font = 2, cex = 1.5, col = "red"
 ) # 总/大标题放不下
+```
 
-# 设置外边空放置大标题
+`par` 的 oma 用来设置外边空的大小
+
+```{r,fig.cap="设置外边空放置大标题",fig.asp=1,title.mar=TRUE,echo=TRUE}
 op <- par(
   mfrow = c(2, 2),
   oma = c(0, 0, 3, 0) # Outer margins
@@ -816,12 +819,12 @@ for (i in 1:4)
   )
 par(op)
 mtext("Four plots, with some room for this title",
-  side = 3, line = 1.5, font = 2, cex = 2, col = "red"
+  side = 3, line = 1.5, font = 1, cex = 1.5, col = "red"
 )
 ```
 
-```{r}
-# 设置每个子图的边空 mar
+
+```{r,fig.cap="设置每个子图的边空 mar",fig.asp=1,title.mar=TRUE,echo=TRUE}
 op <- par(
   mfrow = c(2, 2),
   oma = c(0, 0, 3, 0),
@@ -836,44 +839,26 @@ par(op)
 mtext("Title",
   side = 3, line = 1.5, font = 2, cex = 2, col = "red"
 )
-par(op)
 ```
 
-
-```{r}
-# par 之 fig 参数 很神奇
-
-n <- 20
-x <- rnorm(n)
-y <- x^2 - 1 + .3 * rnorm(n)
-plot(y ~ x,
-  main = "The \"fig\" graphic parameter"
-)
-op <- par()
-for (i in 2:10) {
-  done <- FALSE
-  while (!done) {
-    a <- c(
-      sort(runif(2, 0, 1)),
-      sort(runif(2, 0, 1))
-    )
-    par(fig = a, new = T)
-    r <- try(plot(runif(5), type = "l", col = i))
-    done <- !inherits(r, "try-error")
-  }
-}
-par(op)
+`par` 之 `fig` 参数很神奇，使得多个图可以叠加在一起，它接受一个数值向量`c(x1, x2, y1, y2)` ，是图形设备显示区域中的绘图区域的(NDC, normalized device coordinates)坐标。
+ 
+```{r,fig.cap="多图叠加",fig.asp=1,title.mar=TRUE,echo=TRUE}
+plot(1:12, type = "b", main = "'fg' : axes, ticks and box in gray",
+     fg = gray(0.7), bty = "7" , sub = R.version.string)
+par(fig = c(1,6,5,10)/10, new = T)
+plot(6:10, type = "b", main = "",
+     fg = gray(0.7), bty = "7" , xlab = R.version.string)
 ```
 
+`fig` 参数控制图形的位置，用来绘制组合图形
 
-```{r}
-# fig 参数控制图形的位置 属于组合图形
-
+```{r,echo=TRUE,fig.cap="组合图形"}
 n <- 1000
 x <- rt(n, df = 10)
 hist(x,
   col = "light blue",
-  probability = "TRUE",
+  probability = "TRUE", main = "",
   ylim = c(0, 1.2 * max(density(x)$y))
 )
 lines(density(x),
@@ -893,10 +878,9 @@ box(lwd = 2)
 par(op)
 ```
 
-
-```{r}
-# layout 布局 用于复杂组合图形
-
+`layout` 函数布局， 绘制复杂组合图形
+ 
+```{r,fig.cap="更加复杂的组合图形",echo=TRUE,fig.asp=1}
 op <- par(oma = c(0, 0, 3, 0))
 layout(matrix(c(
   1, 1, 1,
@@ -911,7 +895,6 @@ mtext("The \"layout\" function",
   side = 3, outer = TRUE,
   font = 2, cex = 1.2
 )
-par(op)
 ```
 
 [目前进度](https://github.com/XiangyunHuang/ISCGwR/blob/396d8deefb0a4238e05194f9e139177b15e61967/code/01A-Base-R-Graphics.R#L365)

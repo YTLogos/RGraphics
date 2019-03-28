@@ -6,7 +6,13 @@ knitr::knit_hooks$set(
   pdfcrop = knitr::hook_pdfcrop,
   small.mar = function(before, options, envir) {
     if (before) par(mar = c(4.1, 4.1, 0.5, 0.5))  # smaller margin on top and right
-  }
+  },
+  title.mar = function(before, options, envir) {
+    if (before) par(mar = c(4.1, 4.1, 4.5, 0.5))  # plot with title 
+  },
+  sub.mar = function(before, options, envir) {
+    if (before) par(mar = c(4.5, 4.1, 4.5, 0.5))  # sub.title sub.axes
+  }  
 )
 
 knitr::knit_hooks$set(output = local({
