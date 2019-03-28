@@ -8,9 +8,13 @@ library(magrittr) # 提供管道操作 %>%
 
 ## 查看 {#show}
 
+查看属性
+
 ```{r,echo=TRUE}
 str(iris)
 ```
+
+查看部分数据集
 
 ```{r,echo=TRUE}
 head(iris, 5)
@@ -24,38 +28,21 @@ head -n 5 clientip.csv
 tail -n 5 clientip.csv
 ```
 
+对象的类型，存储方式
+
 ```{r,echo=TRUE}
-object.size(iris)
+class(iris)
 mode(iris)
 typeof(iris)
 ```
 
+查看对象在R环境中所占空间的大小
 
 ```{r,echo=TRUE}
+object.size(iris)
 object.size(letters)
 object.size(ls)
 format(object.size(library), units = "auto")
-```
-
-
-## 清洗 {#clean}
-
-清晰目标是提取字段，整理成数据框的数据存储形式 grep sub gsub
-
-R 基础包提供了丰富的字符串处理函数
-
-```{r,eval=FALSE,echo=TRUE}
-help.search(keyword = "character", package = "base")
-```
-
-R 包维护者
-
-```{r,echo=TRUE}
-gsub(" <([^<>]*)>", "", lapply(.packages(TRUE), maintainer) %>%
-  unlist()) %>%
-  table() %>%
-  sort() %>%
-  tail(10)
 ```
 
 ## 重塑 {#reshape}

@@ -1,9 +1,25 @@
 # 数据清洁工 {#data-cleaner}
 
-
-Concatenate Strings 连接字符串，`paste/c/bfile/bracket` 函数性能比较
+连接字符串，`paste/c/bfile/bracket` 函数性能比较
 <https://wch.github.io/string_builder/index.html>
 
+清晰目标是提取字段，整理成数据框的数据存储形式 grep sub gsub
+
+R 基础包提供了丰富的字符串处理函数
+
+```{r,eval=FALSE,echo=TRUE}
+help.search(keyword = "character", package = "base")
+```
+
+R 包维护者
+
+```{r,echo=TRUE}
+gsub(" <([^<>]*)>", "", lapply(.packages(TRUE), maintainer) %>%
+  unlist()) %>%
+  table() %>%
+  sort() %>%
+  tail(10)
+```
 
 ## `grep` 和 `grepl` {#grep-grepl}
 
