@@ -42,9 +42,9 @@ dat3
 
 ### `readLines` 与 `writeLines` {#read-write-lines}
 
-让我们折腾一波，读进来又写出去
+让我们折腾一波，读进来又写出去，只有 R 3.5.3 以上才能保持原样的正确输入输出
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,eval=FALSE}
 writeLines(readLines("latex/TeXLive.pkgs"),"latex/TeXLive.pkgs")
 ```
 
