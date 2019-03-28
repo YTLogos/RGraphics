@@ -54,6 +54,8 @@ writeLines(readLines("latex/TeXLive.pkgs"),"latex/TeXLive.pkgs")
 
 序列化数据操作，Mark Klik 开发的 [fst](https://github.com/fstpackage/fst) 和 [Travers Ching](https://travers.im/) 开发的 [qs](https://github.com/traversc/qs)
 
+[feather](https://github.com/wesm/feather/tree/master/R) 跨语言环境快速的读写数据
+
 Table: (\#tab:fst-vs-others) fst 序列化数据框对象性能比较 BaseR、 data.table 和 feather [^fst-performance]
 
 | Method         | Format  | Time (ms) | Size (MB) | Speed (MB/s) | N       |

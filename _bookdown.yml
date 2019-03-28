@@ -29,7 +29,7 @@ rmd_files:
   - "03a-data-manipulation.Rmd"
   - "03b-data-wrangeling.Rmd"
   
-  - "03c-data-cleaner.Rmd"
+  - "03c-data-cleaning.Rmd"
   - "03d-regular-expression.Rmd"  
   # 统计图形
   - "04-statistical-graphics.Rmd"
