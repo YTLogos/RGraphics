@@ -239,6 +239,8 @@ merge(authors, books, by.x = "surname", by.y = "name")
 merge(books, authors, by.x = "name", by.y = "surname")
 ```
 
+为了比较清楚地观察几种合并的区别，这里提供对应的动画展示 <https://github.com/gadenbuie/tidyexplain>
+
 cbind
 rbind
 
