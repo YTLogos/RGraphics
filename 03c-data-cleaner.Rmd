@@ -1,5 +1,9 @@
 # 数据清洁工 {#data-cleaner}
 
+```{r,include=FALSE}
+library(magrittr) # 提供管道操作 %>%
+```
+
 连接字符串，`paste/c/bfile/bracket` 函数性能比较
 <https://wch.github.io/string_builder/index.html>
 
