@@ -456,6 +456,13 @@ pairs(longley,
 
 ### 玫瑰图 {#rose-plot}
 
+### 地形图 {#raster}
+
+raster 包定义了获取和操作空间 raster 类型数据集的类和方法，rasterVis 补充加强了 raster 包在数据可视化和交互方面的功能。可视化是基于 lattice 的
+
+[rastervis-gh]: https://github.com/oscarperpinan/rastervis
+[rastervis-web]: https://oscarperpinan.github.io/rastervis/
+[rastervis-faq]: https://oscarperpinan.github.io/rastervis/FAQ.html
 
 
 ## TikZ {#tikz}
