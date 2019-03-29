@@ -4,6 +4,7 @@ Title: R Graphics.
 Version: 0.0.0.9000
 Imports: 
   bookdown,
+  colormap,
   fs,
   gganimate,
   ggridges,
@@ -12,6 +13,7 @@ Imports:
   mapproj,
   maptools,
   microbenchmark,
+  MSG,
   sessioninfo,
   desc,
   RClickhouse,

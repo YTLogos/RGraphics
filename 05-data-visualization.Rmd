@@ -407,11 +407,103 @@ ggplot(crimesm, aes(map_id = state)) +
   facet_wrap(~variable)
 ```
 
+比较 viridis 和 Spectral 两块调色板，如图 \@ref(fig:pickcolor) 所示，可见 Spectral 的可识别性高些
+
+```{r pickcolor,fig.cap="viridis 和 Spectral对比"}
+dat <- as.data.frame(cbind(rep(1948 + seq(12), each = 12), rep(seq(12), 12), AirPassengers))
+colnames(dat) <- c("year", "month", "passengers")
+library(colormap)
+ggplot(data = dat, aes(as.factor(year), as.factor(month))) +
+  geom_point(aes(colour = passengers), pch = 15, size = 8) +
+  scale_colour_distiller(palette = "Spectral") +
+  labs(x = "Year", y = "Month") +
+  theme_minimal()
+```
+
+再举栗子，图\@ref(fig:faithfuld)是正负例对比，其中好在哪里呢？这张图要表达美国黄石国家公园的老忠实泉间歇喷发的时间规律，那么好的标准就是层次分明，以突出不同颜色之间的时间差异。这个差异，还要看起来不那么费眼睛，越一目了然越好。
+
+```{r faithfuld,fig.cap="美国黄石国家公园的老忠实泉"}
+library(gridExtra)
+erupt <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_raster() +
+  scale_x_continuous(NULL, expand = c(0,0)) +
+  scale_y_continuous(NULL, expand = c(0,0)) +
+  theme(legend.position = "none")
+erupt1 <- erupt + scale_fill_gradientn(colours = gray.colors(7))
+erupt2 <- erupt + scale_fill_distiller(palette = "Spectral")
+erupt3 <- erupt + scale_fill_gradientn(colours = terrain.colors(7))
+erupt4 <- erupt + scale_fill_colormap(colormap = colormaps$RdBu)
+grid.arrange(erupt1, erupt2, erupt3, erupt4, ncol = 2)
+```
+
+
+此处调用 RColorBrewer 中 Spectral 调色板，它本来只有11中颜色，通过 `scale_colour_distiller` 却可以把它映射到连续型数值变量 `mag` 上，发散型调色板本身的对比性也可以起到很好的区分度，如图 \@ref(fig:fiji-map) 所示
+
+```{r fiji-map,fig.cap="斐济地震带",echo=TRUE}
+library(mapdata)
+FijiMap <- map_data("worldHires", region = "Fiji")
+ggplot(FijiMap, aes(x = long, y = lat)) +
+  geom_map(map = FijiMap, aes(map_id = region), size = .2) +
+  geom_point(data = quakes, aes(x = long, y = lat, colour = mag), pch = 16) +
+  xlim(160, 195) +
+  scale_colour_distiller(palette = "Spectral") +
+  scale_y_continuous(breaks = (-18:18) * 5) +
+  coord_map("ortho", orientation = c(-10, 180, 0)) +
+  labs(colour = "Magnitude", x = "Longitude", y = "Latitude") +
+  theme_bw()
+```
+
+此外， colormap 包提供更加丰富的调色板，通过 `scale_color_colormap` 支持 ggplot2 绘图风格
+
+```{r,fig.cap="1973年至2010年世界各地6级及以上地震统计表",echo=TRUE}
+data(quake6, package = "MSG")
+ggplot(quake6, aes(x = year, y = as.factor(month))) +
+  stat_sum(aes(size = ..n..), colour = "lightblue") +
+  scale_size(range = c(1, 10), breaks = c(10, 15, 20, 25, 30, 35)) +
+  labs(size = "magnitude", x = "Year", y = "Month") +
+  theme_bw()
+```
+
+```{r unemploymentGG,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
+# 数据来源 http://datasets.flowingdata.com/unemployment09.csv
+unemp <- read.csv(file = "http://datasets.flowingdata.com/unemployment09.csv", 
+                  header = FALSE, stringsAsFactors = FALSE)
+names(unemp) <- c("id", "state_fips", "county_fips", "name", "year", 
+  "?", "?", "?", "rate")
+unemp$county <- tolower(gsub(" County, [A-Z]{2}", "", unemp$name))
+unemp$state <- gsub("^.*([A-Z]{2}).*$", "\\1", unemp$name)
+
+county_df <- map_data("county")
+names(county_df) <- c("long", "lat", "group", "order", "state_name", "county")
+county_df$state <- state.abb[match(county_df$state_name, tolower(state.name))]
+county_df$state_name <- NULL
+
+state_df <- map_data("state")
+# Combine together 
+choropleth <- merge(county_df, unemp, by = c("state", "county"))
+choropleth <- choropleth[order(choropleth$order), ]
+choropleth$rate_d <- cut(choropleth$rate, breaks = c(seq(0, 10, by = 2), 35))
+
+library(ggthemes)
+ggplot(choropleth, aes(long, lat, group = group)) +
+  geom_polygon(aes(fill = rate_d), colour = alpha("white", 1/4), size = 0.2) +
+  geom_polygon(data = state_df, colour = "white",fill = NA) +
+  scale_fill_brewer(palette = "PuRd") +
+  labs(fill = "ratio of unemployment",title = "unemployment by county, 2009",
+       caption = "data source: http://datasets.flowingdata.com/unemployment09.csv") +
+  coord_map("polyconic")  +
+  theme_map()
+```
 
 [sp-gallery]: https://edzer.github.io/sp/
 
+### 地形图 {#raster}
 
-### raster
+raster 包定义了获取和操作空间 raster 类型数据集的类和方法，rasterVis 补充加强了 raster 包在数据可视化和交互方面的功能。可视化是基于 lattice 的
+
+[rastervis-gh]: https://github.com/oscarperpinan/rastervis
+[rastervis-web]: https://oscarperpinan.github.io/rastervis/
+[rastervis-faq]: https://oscarperpinan.github.io/rastervis/FAQ.html
 
 [raster](https://github.com/rspatial/raster) 包的开发已经被作者 [Robert J. Hijmans](https://desp.ucdavis.edu/people/robert-j-hijmans) 迁移到 Github 上啦，官方文档 <https://www.rspatial.org/>
 

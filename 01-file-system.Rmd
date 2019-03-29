@@ -1,4 +1,4 @@
-# 文件管理员 {#files-administrator}
+# 文件管理员 {#file-administrator}
 
 ```{r,include=FALSE}
 library(magrittr) # 提供管道命令 %>%

@@ -456,14 +456,35 @@ pairs(longley,
 
 ### 玫瑰图 {#rose-plot}
 
-### 地形图 {#raster}
+### 地图 {#map}
 
-raster 包定义了获取和操作空间 raster 类型数据集的类和方法，rasterVis 补充加强了 raster 包在数据可视化和交互方面的功能。可视化是基于 lattice 的
-
-[rastervis-gh]: https://github.com/oscarperpinan/rastervis
-[rastervis-web]: https://oscarperpinan.github.io/rastervis/
-[rastervis-faq]: https://oscarperpinan.github.io/rastervis/FAQ.html
-
+```{r unemployment,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
+# 代码来自 ?map
+par(mar = c(0, 0, 2, 0))
+library(mapproj)
+data(unemp)
+data(county.fips)
+colors <- c("#F1EEF6", "#D4B9DA", "#C994C7", "#DF65B0", "#DD1C77", "#980043")
+unemp$colorBuckets <- as.numeric(cut(unemp$unemp, c(0, 2, 4, 6, 8, 10, 100)))
+leg.txt <- c("<2%", "2-4%", "4-6%", "6-8%", "8-10%", ">10%")
+cnty.fips <- county.fips$fips[match(
+  map("county", plot = FALSE)$names,
+  county.fips$polyname
+)]
+colorsmatched <- unemp$colorBuckets [match(cnty.fips, unemp$fips)]
+# draw map
+map("county",
+  col = colors[colorsmatched], fill = TRUE, resolution = 0,
+  lty = 0, projection = "polyconic"
+)
+map("state",
+  col = "white", fill = FALSE, add = TRUE, lty = 1, lwd = 0.2,
+  projection = "polyconic"
+)
+title("unemployment by county, 2009")
+legend("bottomleft", leg.txt, horiz = FALSE, fill = colors, 
+       border = "gray")
+```
 
 ## TikZ {#tikz}
 
