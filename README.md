@@ -105,6 +105,9 @@
       - 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
       - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
       - 学习统计与 R 语言 [Learning Statistics with R](https://github.com/djnavarro/rbook)
+      - [An Introduction to Bayesian Thinking: A Companion to the Statistics with R Course](https://statswithr.github.io/book/)
+      - [R语言教程](http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html)
+      - [统计计算](http://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/index.html)
 
    1. 学习 Python
         - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
