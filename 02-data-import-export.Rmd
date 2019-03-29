@@ -233,7 +233,7 @@ dbListTables(con)
 
 对系统的要求是 System requirements: Linux, x86_64 with SSE 4.2.
 
-```{bash,eval=F}
+```{bash,eval=FALSE,echo=TRUE}
 sudo apt-get install dirmngr    # optional
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4    # optional
 
@@ -311,10 +311,9 @@ dbDisconnect(con)
 
 ```{r,eval=FALSE,echo=TRUE}
 # 传递查询语句
-DBI::dbGetQuery(con, "SELECT
-                             vs
-                            ,COUNT(*) AS 'number of cases'
-                            ,AVG(qsec) AS 'average qsec'
+DBI::dbGetQuery(con, "SELECT vs,
+                      COUNT(*) AS 'number of cases',
+					  AVG(qsec) AS 'average qsec'
                       FROM mtcars
                       GROUP BY vs")
 
@@ -340,8 +339,8 @@ DBI::dbGetQuery(con, "SHOW DATABASES")
 DBI::dbGetQuery(con, "DESCRIBE TABLE mtcars")
 
 # Compact CASE - WHEN - THEN conditionals
-DBI::dbGetQuery(con, "SELECT multiIf(am='1', 'automatic', 'manual') AS 'transmission'
-                            ,multiIf(vs='1', 'straight', 'V-shaped') AS 'engine' 
+DBI::dbGetQuery(con, "SELECT multiIf(am='1', 'automatic', 'manual') AS 'transmission',
+                             multiIf(vs='1', 'straight', 'V-shaped') AS 'engine' 
                       FROM mtcars")
 
 # 不使用数据库的时候一定记得关闭数据库的连接
