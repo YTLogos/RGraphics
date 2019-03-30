@@ -1,4 +1,4 @@
-# 动态图形 {#interactive-graphics}
+# 交互式图形 {#interactive-graphics}
 
 这里的动态图形覆盖的范围是各种 JS 库，不包含 tcltk、 rgl 和 svg 里面的动图，当然也不包括由静态图形转化过来的图形如 animation 或者 magick 和 gganimate 制作的图形 
 
