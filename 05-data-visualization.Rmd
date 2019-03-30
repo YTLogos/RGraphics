@@ -275,6 +275,43 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 with(diamonds, table(color, clarity, cut))
 ```
 
+## 点图
+
+
+```{r,echo=TRUE}
+str(mpg)
+head(mpg)
+
+# 按 manufacturer 分组求平均值
+cty_mpg <- aggregate(mpg$cty, by = list(mpg$manufacturer), FUN = mean)
+colnames(cty_mpg) <- c("make", "mileage") # 设置新的列名
+cty_mpg <- cty_mpg[order(cty_mpg$mileage), ] # 按 mileage 排序
+cty_mpg$make <- factor(cty_mpg$make, levels = cty_mpg$make) # 保持因子水平的顺序
+
+str(cty_mpg)
+head(cty_mpg, 6)
+```
+
+```{r,echo=TRUE,fig.cap="点图"}
+ggplot(cty_mpg, aes(x = make, y = mileage)) +
+  geom_point(size = 3) +
+  geom_segment(aes(
+    x = make,
+    xend = make,
+    y = 0,
+    yend = mileage
+  )) +
+  labs(
+    title = "Lollipop Chart",
+    subtitle = "Make Vs Avg. Mileage",
+    caption = "source: mpg"
+  ) +
+  theme(axis.text.x = element_text(angle = 65, vjust = 0.6))
+```
+
+
+
+
 ## 折线图 {#ggplot2-line}
 
 时间序列数据的展示，时序图
@@ -307,6 +344,20 @@ ggplot(diamonds, aes(x = cut, y = price)) + geom_boxplot()
 ggplot(diamonds, aes(x = cut, y = price)) + geom_violin()
 ```
 
+
+```{r violin-mpg,fig.cap="城市里程与车辆类别"}
+ggplot(mpg, aes(class, cty)) +
+  geom_violin() +
+  labs(
+    title = "Violin plot",
+    subtitle = "City Mileage vs Class of vehicle",
+    caption = "Source: mpg",
+    x = "Class of Vehicle",
+    y = "City Mileage"
+  ) +
+  theme_minimal()
+```
+
 ## 抖动图 {#jitter}
 
 ```{r,fig.cap="抖动图",echo=TRUE}
@@ -333,6 +384,19 @@ ggplot(diamonds, aes(x = color, y = price)) +
 ```
 
 ## 密度图 {#ridge}
+
+
+```{r,fig.cap="按汽缸数分组的城市里程"}
+ggplot(mpg, aes(cty)) +
+  geom_density(aes(fill = factor(cyl)), alpha = 0.8) +
+  labs(
+    title = "Density plot",
+    subtitle = "City Mileage Grouped by Number of cylinders",
+    caption = "Source: mpg",
+    x = "City Mileage",
+    fill = "# Cylinders"
+  )
+```
 
 添加透明度，解决遮挡
 
