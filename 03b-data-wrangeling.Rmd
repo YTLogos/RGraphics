@@ -1,5 +1,9 @@
 # 数据变形者 {#data-transformer}
 
+:::
+更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse
+:::
+
 函数式编程 Functional Programming Languages 用于数据处理，向量化运算、并行运算和分布式运算
 
 - [future.apply](https://github.com/HenrikBengtsson/future.apply) 可以替代 base R 提供的 apply 族函数

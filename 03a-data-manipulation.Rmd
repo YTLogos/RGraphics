@@ -1,6 +1,12 @@
 # 数据操作手 {#data-manipulator}
 
-```{r,include=FALSE}
+:::
+主要介绍 Base R 提供的数据操作
+:::
+
+为方便后续的操作，添加支持管道操作的 magrittr 包
+
+```{r,echo=TRUE}
 library(magrittr) # 提供管道操作 %>%
 ```
 

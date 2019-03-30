@@ -31,8 +31,11 @@ rmd_files:
   
   - "03c-data-cleaning.Rmd"
   - "03d-regular-expression.Rmd"  
+  
   # 统计图形
-  - "04-statistical-graphics.Rmd"
+  - "04-graph-gallery.Rmd"
+  
+  
   - "05-data-visualization.Rmd"
   - "06-colors-fonts.Rmd"
   # 动态文档
