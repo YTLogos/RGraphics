@@ -100,7 +100,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   
 1. 自定义编译选项
 
-  ```
+  ```bash
   ./configure --help
   ```  
 
@@ -149,7 +149,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   ./configure --enable-R-shlib --enable-byte-compiled-packages \
     --enable-BLAS-shlib --enable-memory-profiling
   ```
-  ```
+  ```markdown
   R is now configured for x86_64-pc-linux-gnu
   
     Source directory:          .
@@ -195,7 +195,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
     --enable-BLAS-shlib --enable-memory-profiling \
     --with-blas="-lopenblas"
   ```
-  ```
+  ```markdown
   R is now configured for x86_64-pc-linux-gnu
 
   Source directory:          .
@@ -213,7 +213,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   Obj-C compiler:            gcc -g -O2 -fobjc-exceptions
 
   Interfaces supported:      X11, tcltk
-  External libraries:        readline, BLAS(OpenBLAS), curl
+  External libraries:        readline, **BLAS(OpenBLAS)**, curl
   Additional capabilities:   PNG, JPEG, TIFF, NLS, cairo, ICU
   Options enabled:           shared R library, shared BLAS, R profiling, memory profiling
 
@@ -233,13 +233,13 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 
   ATLAS 加持
 
-  ```  
+  ```bash
   sudo yum install -y atlas
   ./configure --enable-R-shlib --enable-byte-compiled-packages \
     --enable-BLAS-shlib --enable-memory-profiling \
     --with-blas="-L/usr/lib64/atlas -lsatlas"
   ```
-  ```
+  ```markdown
   R is now configured for x86_64-pc-linux-gnu
 
   Source directory:          .
@@ -257,7 +257,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   Obj-C compiler:            gcc -g -O2 -fobjc-exceptions
 
   Interfaces supported:      X11, tcltk
-  External libraries:        readline, BLAS(generic), curl
+  External libraries:        readline, **BLAS(generic)**, curl
   Additional capabilities:   PNG, JPEG, TIFF, NLS, cairo, ICU
   Options enabled:           shared R library, shared BLAS, R profiling, memory profiling
 
