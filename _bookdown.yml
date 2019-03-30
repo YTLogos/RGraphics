@@ -20,24 +20,33 @@ new_session: yes
 before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"
+  # 安装指导
   - "00-installation.Rmd"
+  
   # 文件系统
   - "01-file-system.Rmd"
+  
   # 数据接口
   - "02-data-import-export.Rmd"
   
+  # 数据操作
   - "03a-data-manipulation.Rmd"
   - "03b-data-wrangeling.Rmd"
   
+  # 数据清理
   - "03c-data-cleaning.Rmd"
   - "03d-regular-expression.Rmd"  
   
   # 统计图形
   - "04-graph-gallery.Rmd"
-  
-  
+
+  # 数据可视化
   - "05-data-visualization.Rmd"
   - "06-colors-fonts.Rmd"
+  
+  # 动态图形 
+  - "07-dynamic-graphics.Rmd"
+  
   # 动态文档
   - "10-dynamic-documents.Rmd"
   
