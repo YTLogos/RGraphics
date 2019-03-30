@@ -1,4 +1,4 @@
-# 字体和颜色 {#colors-fonts}
+# 字体配色 {#colors-fonts}
 
 ## 配色 {#colors}
 
