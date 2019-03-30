@@ -273,23 +273,24 @@ RClickHouse 提供部分 dplyr 式的数据操作
 
 ```{r,eval=identical(.Platform$OS.type,'unix') & !is_on_travis,echo=TRUE}
 library(RClickhouse)
-# 建立数据库连接
-con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")
-
-# 往 ClickHouse 中写入数据
-DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
-
-# 列出 ClickHouse 中存放的表
-dbListTables(con)
-dbListFields(con, "mtcars")
-
 # 查询数据
 library(dplyr, warn.conflicts = FALSE)
 
+# 建立数据库连接
+# con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")
+con <- DBI::dbConnect(RClickhouse::clickhouse())
+
+# 往 ClickHouse 中写入数据
+# DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
+
+# 列出 ClickHouse 中存放的表
+dbListTables(con)
+# 列出表 mtcars 中的所有字段
+dbListFields(con, "mtcars")
 # 按变量 cyl 分组对 mpg 求和
 tbl(con, "mtcars") %>% 
   group_by(cyl) %>% 
-  summarise(smpg=sum(mpg))
+  summarise(smpg=sum(mpg, na.rm = TRUE)) # SQL 总是要移除缺失值
 
 # 等价于
 aggregate(mpg ~ cyl, data = mtcars, sum)
@@ -298,7 +299,7 @@ aggregate(mpg ~ cyl, data = mtcars, sum)
 tbl(con, "mtcars") %>% 
   filter(cyl == 8, vs == 0) %>% 
   group_by(am) %>% 
-  summarise(mean(qsec))
+  summarise(mean(qsec, na.rm = TRUE))
 
 # 等价于
 aggregate(qsec ~ am, data = mtcars, mean, subset = cyl == 8 & vs == 0)
@@ -307,41 +308,53 @@ aggregate(qsec ~ am, data = mtcars, mean, subset = cyl == 8 & vs == 0)
 dbDisconnect(con)
 ```
 
+::: sidebar
+aggregate 聚合函数默认对缺失值的处理是忽略， sum 和 mean 函数的参数 `na.rm=TRUE` 实际由聚合函数 aggregate 的参数 `na.action` 传递，它的默认值是 `na.omit` ，就是将缺失值移除后返回。值得注意的是 `na.omit` 是一个缺失值处理的函数，所以如果对缺失值有特殊要求，比如插补，可以自己写函数传递给 `na.action` 参数
+:::
+
 你当然可以继续使用 SQL 语句做查询，而不使用 dplyr 提供的现代化的管道操作语法
 
-```{r,eval=FALSE,echo=TRUE}
-# 传递查询语句
-DBI::dbGetQuery(con, "SELECT vs,
-                      COUNT(*) AS 'number of cases',
-					  AVG(qsec) AS 'average qsec'
-                      FROM mtcars
-                      GROUP BY vs")
-
-# 保存查询结果
-res <- DBI::dbGetQuery(con, "SELECT (*)
-                             FROM mtcars
-                             WHERE am = 1")
-
-# 如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器可以获得更好的性能
-mtcars <- dbReadTable(con, mtcars)
-
+```{r,eval=identical(.Platform$OS.type,'unix') & !is_on_travis,echo=TRUE}
+# 建立数据库连接
+con <- DBI::dbConnect(RClickhouse::clickhouse())
+# 传递 SQL 查询语句
+DBI::dbGetQuery(con, 
+"SELECT
+    vs,
+    COUNT(*) AS n_vc,
+    AVG(qsec) AS avg_qsec
+FROM mtcars
+GROUP BY vs")
 # 不使用数据库的时候一定记得关闭数据库的连接
 dbDisconnect(con)
 ```
 
-还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数
+::: sidebar
+如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器才可以获得更好的性能
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,echo=TRUE,eval=FALSE}
+# 读取数据库中的整张表
+mtcars <- dbReadTable(con, mtcars)
+```
+:::
+
+还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数，如 `multiIf`
+
+```{r,eval=identical(.Platform$OS.type,'unix') & !is_on_travis,echo=TRUE}
+# 建立数据库连接
+con <- DBI::dbConnect(RClickhouse::clickhouse())
 # 查看 ClickHouse 中所有的数据库名称
 DBI::dbGetQuery(con, "SHOW DATABASES")
-
-# 获取 ClickHouse 中表 mtcars 的变量名和类型
+# 查看所有存储的表
+DBI::dbGetQuery(con, "SHOW TABLES")
+# 获取 ClickHouse 中 mtcars 表的变量名和类型描述
 DBI::dbGetQuery(con, "DESCRIBE TABLE mtcars")
-
 # Compact CASE - WHEN - THEN conditionals
-DBI::dbGetQuery(con, "SELECT multiIf(am='1', 'automatic', 'manual') AS 'transmission',
-                             multiIf(vs='1', 'straight', 'V-shaped') AS 'engine' 
-                      FROM mtcars")
+DBI::dbGetQuery(con, "
+SELECT multiIf(am=1, 'automatic', 'manual') AS transmission,
+       multiIf(vs=1, 'straight', 'V-shaped') AS engine
+FROM mtcars
+")
 
 # 不使用数据库的时候一定记得关闭数据库的连接
 dbDisconnect(con)
