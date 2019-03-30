@@ -17,6 +17,33 @@ p2 <- plot_ly(y = values, type = "histogram", name = "flipped")
 subplot(p1, p2)
 ```
 
+## highcharter 
+
+美国失业率数据
+
+```r
+data(unemployment,package = "highcharter")
+temp <-  unlist(strsplit(unemployment[,2],",")) # 拆成两列
+unique(temp[seq(from=2,to = length(temp),by=2)]) # 51 个州
+# US Counties unemployment rate
+# code: The county code.
+# 
+# name: The county name.
+# 
+# value: The unemployment.
+# A data.frame with 3 variables and 3216 observations.
+```
+
+```{r,echo=TRUE}
+library(highcharter)
+data(unemployment)
+hcmap("countries/us/us-all-all", data = unemployment,
+      name = "Unemployment", value = "value", joinBy = c("hc-key", "code"),
+      borderColor = "transparent") %>%
+  hc_colorAxis(dataClasses = color_classes(c(seq(0, 10, by = 2), 50))) %>% 
+  hc_legend(layout = "vertical", align = "right",
+            floating = TRUE, valueDecimals = 0, valueSuffix = "%")
+```
 
 
 ## 网络图 {#network}

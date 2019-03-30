@@ -10,6 +10,7 @@ Imports:
   gganimate,
   ggridges,
   gridExtra,
+  highcharter,
   mapdata,
   mapproj,
   maptools,
