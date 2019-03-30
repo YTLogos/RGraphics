@@ -2,6 +2,23 @@
 
 这里的动态图形覆盖的范围是各种 JS 库，不包含 tcltk、 rgl 和 svg 里面的动图，当然也不包括由静态图形转化过来的图形如 animation 或者 magick 和 gganimate 制作的图形 
 
+## plotly
+
+各种动态图形
+
+```{r,echo=TRUE}
+library(ggplot2)
+library(plotly, warn.conflicts = FALSE)
+packageVersion("plotly")
+set.seed(2)
+values <- rnorm(50)
+p1 <- plot_ly(x = values, type = "histogram", name = "default")
+p2 <- plot_ly(y = values, type = "histogram", name = "flipped")
+subplot(p1, p2)
+```
+
+
+
 ## 网络图 {#network}
 
 [visNetwork](https://github.com/datastorm-open/visNetwork) 基于 vis.js 库

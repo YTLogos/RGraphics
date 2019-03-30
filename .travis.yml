@@ -2,7 +2,6 @@ language: r
 dist: xenial
 r: devel
 
-
 sudo: true
 cache:
   packages: true
@@ -60,17 +59,6 @@ addons:
       - libleptonica-dev 
       - tesseract-ocr-eng
 
-  
-#brew_packages: 
-#  - ghostscript
-#  - imagemagick
-#  - optipng
-#  - graphviz
-
-#  - gdal
-#  - unixodbc
-#  - psqlodbc
-
 before_install:
 #  - mkdir ~/.R
 #  - cp Makevars ~/.R
@@ -87,34 +75,15 @@ before_install:
   - chmod +x ./_deploy.sh
   
 before_script:
- # - Rscript -e 'tinytex::install_tinytex()' 
- # - Rscript -e 'tinytex::tlmgr_install(readLines("latex/TeXLive.pkgs"))'
   - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
 
 script:
   - Rscript -e 'bookdown::render_book("index.Rmd")'
 
-# deploy 
-after_success:
-#  - make pdf
-
-after_script:
-  - ./_deploy.sh
-
 deploy:
-  - provider: script
-    script: netlify deploy --dir _book --prod --message "$DEPLOY_MSG"
-    skip_cleanup: true
-    on:
-      branch: master
-  - provider: script
-    script: netlify deploy --dir _book --message "$DEPLOY_MSG"
-    skip_cleanup: true
-    on:
-      all_branches: true
-      condition: $TRAVIS_BRANCH != "master"
+  provider: script
+  script: netlify deploy --dir _book --prod --message "$DEPLOY_MSG"
+  skip_cleanup: true
+  on:
+    branch: master
 
-notifications:
-  email:
-    on_success: change
-    on_failure: change
