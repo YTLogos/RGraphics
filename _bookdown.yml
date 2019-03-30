@@ -45,7 +45,7 @@ rmd_files:
   - "06-colors-fonts.Rmd"
   
   # 动态图形 
-  - "07-dynamic-graphics.Rmd"
+  - "07-interactive-graphics.Rmd"
   
   # 动态文档
   - "10-dynamic-documents.Rmd"
