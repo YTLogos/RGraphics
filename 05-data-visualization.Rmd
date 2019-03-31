@@ -561,7 +561,7 @@ ggplot(choropleth, aes(long, lat, group = group)) +
 
 [sp-gallery]: https://edzer.github.io/sp/
 
-### 地形图 {#raster}
+### raster {#raster}
 
 raster 包定义了获取和操作空间 raster 类型数据集的类和方法，rasterVis 补充加强了 raster 包在数据可视化和交互方面的功能。可视化是基于 lattice 的
 

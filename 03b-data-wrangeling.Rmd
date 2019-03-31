@@ -1,6 +1,6 @@
 # 数据变形者 {#data-transformer}
 
-:::
+::: sidebar
 更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse
 :::
 

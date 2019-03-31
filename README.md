@@ -21,7 +21,7 @@
 
 
 * 书籍
-   1. 道家的小无相功 穷毕生之力修习小无相功，这是一门内家功夫
+   1. 道家的小无相功
       - 高级R语言编程 [Advanced R](https://adv-r.hadley.nz)
       
    1. 编程指南
@@ -84,6 +84,7 @@
       - [A gentle INLA tutorial](https://www.precision-analytics.ca/blog-1/inla)
       - [Reproducible road safety research: an exploration of the shifting spatial and temporal distribution of car-pedestrian crashes](https://github.com/Robinlovelace/stats19-gisruk)
       - [出租车地理信息可视化](https://data-se.netlify.com/2017/11/20/great-dataviz-examples-in-rstats/)
+	  - [Spatial Data Science with R](https://www.rspatial.org/) raster 包 Geographic Data Analysis and Modeling 地理数据分析和建模
    1. 文本挖掘
       - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
       - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
