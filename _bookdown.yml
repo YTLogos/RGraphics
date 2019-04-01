@@ -49,18 +49,6 @@ rmd_files:
   
   # 动态文档
   - "10-dynamic-documents.Rmd"
-  
 
-#  - "20-OO.Rmd"
-
-# 附录
-  - "95-r-packages.Rmd"
-  - "96-editor.Rmd"
-  - "97-rstudio.Rmd"  
-  - "98-git-github-gitlab.Rmd"
-  - "99-container.Rmd"
-  
-  - "99-other-tools.Rmd"
-  
 # 参考文献  
   - "99-references.Rmd"
