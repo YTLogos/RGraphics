@@ -31,6 +31,7 @@ addons:
       - sourceline: ppa:opencpu/imagemagick
       - sourceline: ppa:opencpu/poppler
       - sourceline: ppa:opencpu/libgit2
+      - sourceline: ppa:jonathonf/ffmpeg-3
     packages:
       - ghostscript
       - imagemagick
@@ -41,6 +42,10 @@ addons:
       - qpdf
       # git2r
       - libgit2-dev
+      # av
+      - libavfilter-dev
+      # gifski
+      - cargo
       # for sf rgdal
       - libudunits2-dev
       - libproj-dev
