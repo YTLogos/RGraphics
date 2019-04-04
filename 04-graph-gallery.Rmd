@@ -180,131 +180,147 @@ hist(longley$Unemployed, density = 3, angle = 45, main = "")
 
 ### 密度图 {#density}
 
-```{r,echo=TRUE,fig.asp=1,out.width="60%",fig.width=5.14}
-days <- abs(rnorm(1000,80,125))
+```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
+days <- abs(rnorm(1000, 80, 125))
 plot(density(days, from = 0),
-             main = "Density plot",
-             xlab =  "Number of days since trial started")
+  main = "Density plot",
+  xlab = "Number of days since trial started"
+)
 plot(density(days, from = 0, to = 180, adjust = 0.2),
-             main = "Density plot - Up to 180 days (86% of data)",
-             xlab =  "Number of days since trial started")
+  main = "Density plot - Up to 180 days (86% of data)",
+  xlab = "Number of days since trial started"
+)
 ```
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="7.5%",fig.width=7.5}
 library(survival)
-surv.days = Surv(days)
-surv.fit = survfit(surv.days~1)
-plot(surv.fit, main = "Kaplan-Meier estimate with 95% confidence bounds (86% of data)",
-     xlab = "Days since trial started",
-     xlim = c(0, 180),
-     ylab = "Survival function")
-grid(20, 10, lwd = 2) 
+surv.days <- Surv(days)
+surv.fit <- survfit(surv.days ~ 1)
+plot(surv.fit,
+  main = "Kaplan-Meier estimate with 95% confidence bounds (86% of data)",
+  xlab = "Days since trial started",
+  xlim = c(0, 180),
+  ylab = "Survival function"
+)
+grid(20, 10, lwd = 2)
 ```
 
 ```{r,include=FALSE}
 HeatedDensityPlot <- function(x,
                               title = "",
                               x.title = "x",
-                              colors = c('#d7191c','#fdae61','#ffffbf','#abdda4','#2b83ba'),
-                              show.legend = TRUE, 
-                              legend.title = "Cumulative %", 
+                              colors = c("#d7191c", "#fdae61", "#ffffbf", "#abdda4", "#2b83ba"),
+                              show.legend = TRUE,
+                              legend.title = "Cumulative %",
                               n = 512, # Number of unique values of x in the heatmap/density estimation
                               n.breaks = 5, # Number of values of x to show on the x-axis. Final number may differ.
-                              ...)
-{
-    # Checking inputs.
+                              ...) {
+  # Checking inputs.
+  n.obs <- length(x)
+  if (any(nas <- is.na(x))) {
+    warning(sum(nas), " observations with missing values have been removed.")
+    x <- x[!nas]
     n.obs <- length(x)
-    if (any(nas <- is.na(x))) {
-        warning(sum(nas), " observations with missing values have been removed.")
-        x <- x[!nas]
-        n.obs <- length(x)
-    }
-    if (n.obs < 4)
-        stop(n.obs, " is too few observations for a valid density plot. See Silverman (1986) Density Estimation for Statistics and Data Analysis.")
-    # Computing densities
-    dens <- density(x, ...)
-    y.max <- max(dens$y) * 1.1 # To ensure top of plot isn't too close to title
-    x.to.plot.true <- x.to.plot <- dens$x
-    y.seq <- c(0, y.max/2, y.max)
-    y.to.plot <- dens$y
-    range.x = range(x)
-    cum.dens <- ecdf(x)(x.to.plot)# * 100
-    #Due to plotly blug that misaligns heatmap with ensuing white line,
-    #putting blanks at beginnig of data.
-    n.blanks <- 10
-    cum.dens <- c(rep(NA, n.blanks), cum.dens)
-    diff <- x.to.plot[1] - x.to.plot[2]
-    blanks <- diff * (n.blanks:1) + x.to.plot[1]
-    x.to.plot <- c(blanks, x.to.plot)
-    y.to.plot <- c(rep(0, n.blanks), y.to.plot)
-    # Creating the matrix of heatmap values
-    cum.perc <- cum.dens * 100
-    z.mat <- matrix(cum.perc, byrow = TRUE, nrow = 3, ncol = n + n.blanks,
-                    dimnames = list(y = y.seq, x = x.to.plot))
-    # Specifying the colors
-    col.fun <- scales::col_numeric(colors, domain = 0:1, na.color = "white")#range.x)
-    x.as.colors <- col.fun(cum.dens)
-    z.to.plot.scaled <- scales::rescale(cum.perc)
-    color.lookup <- setNames(data.frame(z.to.plot.scaled, x.as.colors), NULL)
-    # Creating the base heatmap.
-    require(plotly)
-    p <- plot_ly(z = z.mat,
-                 xsrc = x.to.plot,
-                 ysrc = y.seq,
-                 type = "heatmap",
-                 colorscale = color.lookup,
-                 cauto = FALSE,
-                 hoverinfo = "none",
-                  colorbar = list(title = legend.title),
-                 showscale = show.legend)
-    # Placing white on top of the bits of the heatmap to hide
-    p <- add_trace(p,
-                   x = c(1:(n + n.blanks), (n + n.blanks):1),
-                   y = c(y.to.plot, rep(y.max * 1.10, n + n.blanks)),
-                   fill = "tonexty",
-                   hoverinfo = "none",
-                   showlegend = FALSE,
-                   type = "scatter",
-                   mode = "line",
-                   showscale = FALSE, 
-                   line = list(color = "white", width = 0),
-                   fillcolor = "white")
-    # Adding the tooltips
-    p <- add_trace(p,
-                   x = 1:(n + n.blanks),
-                   y = y.to.plot,
-                   name = "",
-                   hoverinfo = "text",
-                   text = sprintf(paste0(x.title,": %.0f %% < %.1f"), cum.perc, x.to.plot),
-                   type = "scatter",
-                   mode = "lines",
-                   line = list(color = "white", width = 0),
-                   showlegend=FALSE, 
-                   showscale=FALSE)
-    p <- plotly::config(p, displayModeBar = FALSE)
-    # Formatting the x axis
-    x.text <- pretty(x.to.plot, n = n.breaks)
-    x.tick <- 1 + (x.text - x.to.plot[1]) / (x.to.plot[n + n.blanks] - x.to.plot[1]) * (n + n.blanks - 1)
-    p <- layout(p, title = title,
-                xaxis = list(title = x.title, tickmode = "array", tickvals = x.tick, ticktext = x.text),
-                yaxis = list(title = "", showline = FALSE, ticks = "", showticklabels = FALSE, range= c(0, y.max)),
-                margin = list(t = 30, l = 5, b = 50, r = 5))
-    p
+  }
+  if (n.obs < 4) {
+    stop(n.obs, " is too few observations for a valid density plot. See Silverman (1986) Density Estimation for Statistics and Data Analysis.")
+  }
+  # Computing densities
+  dens <- density(x, ...)
+  y.max <- max(dens$y) * 1.1 # To ensure top of plot isn't too close to title
+  x.to.plot.true <- x.to.plot <- dens$x
+  y.seq <- c(0, y.max / 2, y.max)
+  y.to.plot <- dens$y
+  range.x <- range(x)
+  cum.dens <- ecdf(x)(x.to.plot) # * 100
+  # Due to plotly blug that misaligns heatmap with ensuing white line,
+  # putting blanks at beginnig of data.
+  n.blanks <- 10
+  cum.dens <- c(rep(NA, n.blanks), cum.dens)
+  diff <- x.to.plot[1] - x.to.plot[2]
+  blanks <- diff * (n.blanks:1) + x.to.plot[1]
+  x.to.plot <- c(blanks, x.to.plot)
+  y.to.plot <- c(rep(0, n.blanks), y.to.plot)
+  # Creating the matrix of heatmap values
+  cum.perc <- cum.dens * 100
+  z.mat <- matrix(cum.perc,
+    byrow = TRUE, nrow = 3, ncol = n + n.blanks,
+    dimnames = list(y = y.seq, x = x.to.plot)
+  )
+  # Specifying the colors
+  col.fun <- scales::col_numeric(colors, domain = 0:1, na.color = "white") # range.x)
+  x.as.colors <- col.fun(cum.dens)
+  z.to.plot.scaled <- scales::rescale(cum.perc)
+  color.lookup <- setNames(data.frame(z.to.plot.scaled, x.as.colors), NULL)
+  # Creating the base heatmap.
+  require(plotly)
+  p <- plot_ly(
+    z = z.mat,
+    xsrc = x.to.plot,
+    ysrc = y.seq,
+    type = "heatmap",
+    colorscale = color.lookup,
+    cauto = FALSE,
+    hoverinfo = "none",
+    colorbar = list(title = legend.title),
+    showscale = show.legend
+  )
+  # Placing white on top of the bits of the heatmap to hide
+  p <- add_trace(p,
+    x = c(1:(n + n.blanks), (n + n.blanks):1),
+    y = c(y.to.plot, rep(y.max * 1.10, n + n.blanks)),
+    fill = "tonexty",
+    hoverinfo = "none",
+    showlegend = FALSE,
+    type = "scatter",
+    mode = "line",
+    showscale = FALSE,
+    line = list(color = "white", width = 0),
+    fillcolor = "white"
+  )
+  # Adding the tooltips
+  p <- add_trace(p,
+    x = 1:(n + n.blanks),
+    y = y.to.plot,
+    name = "",
+    hoverinfo = "text",
+    text = sprintf(paste0(x.title, ": %.0f %% < %.1f"), cum.perc, x.to.plot),
+    type = "scatter",
+    mode = "lines",
+    line = list(color = "white", width = 0),
+    showlegend = FALSE,
+    showscale = FALSE
+  )
+  p <- plotly::config(p, displayModeBar = FALSE)
+  # Formatting the x axis
+  x.text <- pretty(x.to.plot, n = n.breaks)
+  x.tick <- 1 + (x.text - x.to.plot[1]) / (x.to.plot[n + n.blanks] - x.to.plot[1]) * (n + n.blanks - 1)
+  p <- layout(p,
+    title = title,
+    xaxis = list(title = x.title, tickmode = "array", tickvals = x.tick, ticktext = x.text),
+    yaxis = list(title = "", showline = FALSE, ticks = "", showticklabels = FALSE, range = c(0, y.max)),
+    margin = list(t = 30, l = 5, b = 50, r = 5)
+  )
+  p
 }
 ```
 
 ```{r,echo=TRUE}
-HeatedDensityPlot(days, from = 0,
-                  title = "Heated density plot", 
-                  x.title = "Number of days since trial started",
-                  legend.title = "% of buyers")
+HeatedDensityPlot(days,
+  from = 0,
+  title = "Heated density plot",
+  x.title = "Number of days since trial started",
+  legend.title = "% of buyers"
+)
 ```
 
 ```{r,echo=TRUE}
-HeatedDensityPlot(days, from = 0, to = 180, adjust = 0.2,
-                  title = "Heated density plot - Up to 180 days (86% of data)", 
-                  x.title = "Number of days since trial started",
-                  legend.title = "% of buyers")
+HeatedDensityPlot(days,
+  from = 0, to = 180, adjust = 0.2,
+  title = "Heated density plot - Up to 180 days (86% of data)",
+  x.title = "Number of days since trial started",
+  legend.title = "% of buyers"
+)
 ```
 
 [visualize-distributions]: https://www.displayr.com/using-heatmap-coloring-density-plot-using-r-visualize-distributions/
@@ -613,8 +629,10 @@ map("state",
   projection = "polyconic"
 )
 title("unemployment by county, 2009")
-legend("bottomleft", leg.txt, horiz = FALSE, fill = colors, 
-       border = "gray")
+legend("bottomleft", leg.txt,
+  horiz = FALSE, fill = colors,
+  border = "gray"
+)
 ```
 
 ## TikZ {#tikz}
@@ -1003,11 +1021,15 @@ mtext("Title",
 `par` 之 `fig` 参数很神奇，使得多个图可以叠加在一起，它接受一个数值向量`c(x1, x2, y1, y2)` ，是图形设备显示区域中的绘图区域的(NDC, normalized device coordinates)坐标。
  
 ```{r,fig.cap="多图叠加",fig.asp=1,title.mar=TRUE,echo=TRUE}
-plot(1:12, type = "b", main = "'fg' : axes, ticks and box in gray",
-     fg = gray(0.7), bty = "7" , sub = R.version.string)
-par(fig = c(1,6,5,10)/10, new = T)
-plot(6:10, type = "b", main = "",
-     fg = gray(0.7), bty = "7" , xlab = R.version.string)
+plot(1:12,
+  type = "b", main = "'fg' : axes, ticks and box in gray",
+  fg = gray(0.7), bty = "7", sub = R.version.string
+)
+par(fig = c(1, 6, 5, 10) / 10, new = T)
+plot(6:10,
+  type = "b", main = "",
+  fg = gray(0.7), bty = "7", xlab = R.version.string
+)
 ```
 
 `fig` 参数控制图形的位置，用来绘制组合图形
