@@ -1,4 +1,4 @@
-# 数据可视化 {#data-visualization}
+# Ggplot2可视化 {#ggplot2-visualization}
 
 50 个 ggplot2 数据可视化例子[^fifty-ggplot2] 
 

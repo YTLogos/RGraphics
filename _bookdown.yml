@@ -41,7 +41,7 @@ rmd_files:
   - "04-graph-gallery.Rmd"
 
   # 数据可视化
-  - "05-data-visualization.Rmd"
+  - "05-ggplot2-visualization.Rmd"
   - "06-colors-fonts.Rmd"
   
   # 动态图形 
