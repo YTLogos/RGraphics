@@ -1,5 +1,11 @@
 # 字体配色 {#colors-fonts}
 
+首先我们加载 R 包 ggplot2 
+
+```{r,echo=TRUE}
+library(ggplot2)
+```
+
 ## 配色 {#colors}
 
 调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板
@@ -7,7 +13,7 @@
 R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
 
 ```{r,echo=TRUE}
-sample(colors(TRUE),20)
+sample(colors(TRUE), 20)
 ```
 
 
@@ -23,12 +29,46 @@ scales::show_col(colours = more_colors)
 
 ```{r fish-hsv-pal, fig.cap="Hue-Saturation-Value (HSV) color model"}
 # colors in colortools from http://www.gastonsanchez.com/
-fish_pal <- c("#69D2E7", "#6993E7", "#7E69E7", "#BD69E7", 
-              "#E769D2", "#E76993", "#E77E69", "#E7BD69", 
-              "#D2E769", "#93E769", "#69E77E", "#69E7BD")
+fish_pal <- c(
+  "#69D2E7", "#6993E7", "#7E69E7", "#BD69E7",
+  "#E769D2", "#E76993", "#E77E69", "#E7BD69",
+  "#D2E769", "#93E769", "#69E77E", "#69E7BD"
+)
 more_colors <- (grDevices::colorRampPalette(fish_pal))(n)
 scales::show_col(colours = more_colors)
 ```
+
+```{r,echo=TRUE}
+rgb(red = 86, green = 180, blue = 233, maxColorValue = 255) # "#56B4E9"
+rgb(red = 0, green = 158, blue = 115, maxColorValue = 255) # "#009E73"
+rgb(red = 240, green = 228, blue = 66, maxColorValue = 255) # "#F0E442"
+rgb(red = 0, green = 114, blue = 178, maxColorValue = 255) # "#0072B2"
+```
+
+给直方图配色
+
+```{r,fig.cap="直方图",echo=TRUE}
+# library(pander)
+# evalsOptions('graph.unify', TRUE)
+# panderOptions('graph.colors') 获取调色板
+# https://www.fontke.com/tool/rgbschemes/ 在线配色
+cols <- c(
+  "#56B4E9", "#009E73", "#F0E442", "#0072B2",
+  "#D55E00", "#CC79A7", "#999999", "#E69F00"
+)
+hist(mtcars$hp, col = "#56B4E9", border = "white", grid = grid())
+```
+
+```{r,fig.cap="直方图",echo=TRUE,eval=FALSE}
+ggplot(mtcars) +
+  geom_histogram(aes(x = hp, fill = as.factor(..count..)),
+    color = "white", bins = 6
+  ) +
+  scale_fill_manual(values = rep("#56B4E9", 10)) +
+  ggtitle("Histogram with ggplot2") +
+  theme(legend.position = "none")
+```
+
 
 ## 字体 {#fonts}
 
@@ -56,7 +96,7 @@ if (!dir.exists("~/msfonts")) {
 
 for (i in seq(length(fonts)))
   download.file(
-    url = fonts_url[i], 
+    url = fonts_url[i],
     destfile = paste("~/msfonts", fonts_exe[i], sep = "/"),
     method = "auto"
   )
@@ -84,7 +124,7 @@ sudo apt install fonts-inconsolata
 以常用的新罗马字体为例，在 R 绘图代码中全局设置字体 `par(family="Times")` 或者 `par(family="serif")`，数据集 ais 的含义，散点图 \@ref(fig:times-font) 表达的统计意义
  
 ```{r times-font,out.width="45%",fig.width=27/7,fig.asp=1,dev.args=list(family = "serif"),fig.cap="数学字体"}
-data(ais, package = 'DAAG')
+data(ais, package = "DAAG")
 plot(hg ~ rcc,
   data = ais,
   xlab = expression("Red cell count (" * 10^12 * italic(l)^{
@@ -99,7 +139,7 @@ plot(hg ~ rcc,
 pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体，添加代码块设置 `dev.args=list(family = "sans")` 图\@ref(fig:sans-font)
 
 ```{r sans-font,echo=TRUE,out.width = "45%",fig.width=27/7,fig.cap="默认 sans 字体",fig.asp=1}
-par(mar=c(4,4,2,1))
+par(mar = c(4, 4, 2, 1))
 x <- seq(-4, 4, len = 101)
 y <- cbind(sin(x), cos(x))
 matplot(x, y,
@@ -137,7 +177,7 @@ family 指定字体，默认字体 Helvetica
 
 ```{r,eval=FALSE,echo=TRUE}
 pdf("cm.pdf", family = "CM", width = 4, height = 4)
-par(mar = c(4.1, 4.1, 0.5, 0.5)) 
+par(mar = c(4.1, 4.1, 0.5, 0.5))
 x <- seq(-4, 4, len = 101)
 y <- cbind(sin(x), cos(x))
 matplot(x, y,
@@ -167,7 +207,7 @@ Sys.setenv(R_GSCMD = "C:/Program Files/gs/gs9.26/bin/gswin64c.exe")
 # embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") # GS 默认搜索路径不对
 embedFonts(
   file = "cm.pdf", outfile = "cm-embed.pdf",
-  fontpaths = system.file("fonts", package = "fontcm")  # 指定字体搜索路径
+  fontpaths = system.file("fonts", package = "fontcm") # 指定字体搜索路径
 )
 ```
 
@@ -178,16 +218,16 @@ embedFonts(
 调用系统字体，安装使用网络字体
 
 ```{r,eval=FALSE,echo=TRUE}
-library(showtext,quietly = TRUE)
+library(showtext, quietly = TRUE)
 showtext_auto()
 pdf("google-fonts.pdf")
 font_add_google("Alegreya Sans", "aleg")
 par(family = "serif")
-plot(0:5,0:5, type="n")
-text(1:4, 1:4, "Serif", font=1:4, cex = 2)
+plot(0:5, 0:5, type = "n")
+text(1:4, 1:4, "Serif", font = 1:4, cex = 2)
 par(family = "fira-sans")
-plot(0:5,0:5, type="n")
-text(1:4, 1:4, "Sans", font=1:4, cex = 2)
+plot(0:5, 0:5, type = "n")
+text(1:4, 1:4, "Sans", font = 1:4, cex = 2)
 dev.off()
 ```
 
@@ -201,7 +241,7 @@ names(knitr::knit_engines$get())
 导入系统TTF类型字体到 R 环境中，这样绘图可以使用更多的字体
 
 ```{r,echo=TRUE,eval=FALSE}
-install.packages('extrafont')
+install.packages("extrafont")
 library(extrafont)
 font_import()
 # 查看可用的字体
@@ -220,12 +260,13 @@ loadfonts()
 测试字体是否被正确调用
 
 ```{r,echo=TRUE,eval=FALSE}
-pdf("font_Impact.pdf", family="Impact", width=4, height=4)
-par(mar = c(4.1, 4.1, 2.1, 0.5)) 
-plot(mtcars$mpg, mtcars$wt, 
-     main = "Fuel Efficiency of 32 Cars",
-     xlab = "Weight (x1000 lb)",
-     ylab = "Miles per Gallon")
+pdf("font_Impact.pdf", family = "Impact", width = 4, height = 4)
+par(mar = c(4.1, 4.1, 2.1, 0.5))
+plot(mtcars$mpg, mtcars$wt,
+  main = "Fuel Efficiency of 32 Cars",
+  xlab = "Weight (x1000 lb)",
+  ylab = "Miles per Gallon"
+)
 dev.off()
 ```
 

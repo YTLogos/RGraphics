@@ -335,6 +335,7 @@ ggplot(diamonds, aes(price)) + geom_histogram(bins = 30)
 ggplot(diamonds, aes(x = price, fill = cut)) + geom_histogram(bins = 30)
 ```
 
+
 ## 提琴图 {#violin}
 
 提琴图
@@ -481,7 +482,7 @@ head(states_map)
 ```{r,echo=TRUE,fig.cap="1973年美国各州的犯罪率数据",echo=TRUE}
 ggplot(crimes, aes(map_id = state)) +
   geom_map(aes(fill = Murder), map = states_map) +
-  expand_limits(x = states_map$long, y = states_map$lat) + 
+  expand_limits(x = states_map$long, y = states_map$lat) +
   coord_map()
 ```
 
@@ -512,8 +513,8 @@ ggplot(data = dat, aes(as.factor(year), as.factor(month))) +
 library(gridExtra)
 erupt <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_raster() +
-  scale_x_continuous(NULL, expand = c(0,0)) +
-  scale_y_continuous(NULL, expand = c(0,0)) +
+  scale_x_continuous(NULL, expand = c(0, 0)) +
+  scale_y_continuous(NULL, expand = c(0, 0)) +
   theme(legend.position = "none")
 erupt1 <- erupt + scale_fill_gradientn(colours = gray.colors(7))
 erupt2 <- erupt + scale_fill_distiller(palette = "Spectral")
@@ -552,10 +553,14 @@ ggplot(quake6, aes(x = year, y = as.factor(month))) +
 
 ```{r unemploymentGG,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
 # 数据来源 http://datasets.flowingdata.com/unemployment09.csv
-unemp <- read.csv(file = "http://datasets.flowingdata.com/unemployment09.csv", 
-                  header = FALSE, stringsAsFactors = FALSE)
-names(unemp) <- c("id", "state_fips", "county_fips", "name", "year", 
-  "?", "?", "?", "rate")
+unemp <- read.csv(
+  file = "http://datasets.flowingdata.com/unemployment09.csv",
+  header = FALSE, stringsAsFactors = FALSE
+)
+names(unemp) <- c(
+  "id", "state_fips", "county_fips", "name", "year",
+  "?", "?", "?", "rate"
+)
 unemp$county <- tolower(gsub(" County, [A-Z]{2}", "", unemp$name))
 unemp$state <- gsub("^.*([A-Z]{2}).*$", "\\1", unemp$name)
 
@@ -565,19 +570,21 @@ county_df$state <- state.abb[match(county_df$state_name, tolower(state.name))]
 county_df$state_name <- NULL
 
 state_df <- map_data("state")
-# Combine together 
+# Combine together
 choropleth <- merge(county_df, unemp, by = c("state", "county"))
 choropleth <- choropleth[order(choropleth$order), ]
 choropleth$rate_d <- cut(choropleth$rate, breaks = c(seq(0, 10, by = 2), 35))
 
 library(ggthemes)
 ggplot(choropleth, aes(long, lat, group = group)) +
-  geom_polygon(aes(fill = rate_d), colour = alpha("white", 1/4), size = 0.2) +
-  geom_polygon(data = state_df, colour = "white",fill = NA) +
+  geom_polygon(aes(fill = rate_d), colour = alpha("white", 1 / 4), size = 0.2) +
+  geom_polygon(data = state_df, colour = "white", fill = NA) +
   scale_fill_brewer(palette = "PuRd") +
-  labs(fill = "ratio of unemployment",title = "unemployment by county, 2009",
-       caption = "data source: http://datasets.flowingdata.com/unemployment09.csv") +
-  coord_map("polyconic")  +
+  labs(
+    fill = "ratio of unemployment", title = "unemployment by county, 2009",
+    caption = "data source: http://datasets.flowingdata.com/unemployment09.csv"
+  ) +
+  coord_map("polyconic") +
   theme_map()
 ```
 
@@ -620,7 +627,8 @@ image <- as.raster(matrix(0:1, ncol = 5, nrow = 3))
 rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
 rasterImage(image, 100, 400, 150, 450)
 rasterImage(image, 200, 300, 200 + xinch(.5), 300 + yinch(.3),
-            interpolate = FALSE)
+  interpolate = FALSE
+)
 rasterImage(image, 200, 400, 250, 450, angle = 15, interpolate = FALSE)
 ```
 
