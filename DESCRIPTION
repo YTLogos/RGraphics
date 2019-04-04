@@ -10,6 +10,7 @@ Imports:
   gapminder,
   gganimate,
   ggridges,
+  ggthemes,
   gridExtra,
   highcharter,
   magick,
