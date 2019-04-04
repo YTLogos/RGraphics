@@ -30,7 +30,7 @@ addons:
     sources:
       - sourceline: ppa:opencpu/imagemagick
       - sourceline: ppa:opencpu/poppler
-      - sourceline: ppa:git-core/ppa
+      - sourceline: ppa:opencpu/libgit2
     packages:
       - ghostscript
       - imagemagick
