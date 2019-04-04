@@ -42,6 +42,8 @@ addons:
       - qpdf
       # git2r
       - libgit2-dev
+      # v8
+      - libv8-dev
       # av
       - libavfilter-dev
       # gifski
