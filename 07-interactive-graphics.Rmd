@@ -24,6 +24,38 @@ image_write(gapminder, "gapminder.gif")
 
 ![gapminder 汉斯罗琳的 TED 演讲](figures/gapminder.gif)
 
+tweenr 用于中间过渡，插值
+
+```{r,echo=TRUE,out.width="45%",fig.width=3.85,fig.asp=1.5}
+library(ggplot2)
+
+f <- function(a, b) {
+  function(y) {
+    a * y * log(y, base = 10) - 1 / b * exp(-(b * y - b / exp(1))^4)
+  }
+}
+
+y <- seq(0, 1, length.out = 100)
+cols <- colorspace::rainbow_hcl(5)
+d5 <- data.frame(x = f(3, 30)(y), y = y, color = cols[1])
+d4 <- data.frame(x = f(2.8, 33)(y), y = y, color = cols[2])
+d3 <- data.frame(x = f(2.5, 36)(y), y = y, color = cols[3])
+d2 <- data.frame(x = f(2.2, 40)(y), y = y, color = cols[4])
+d1 <- data.frame(x = f(2, 50)(y), y = y, color = cols[5])
+
+df <- list(d5, d4, d3, d2, d1)
+
+library(tweenr)
+df2 <- tween_states(df,
+  tweenlength = 2, statelength = 1,
+  ease = rep("cubic-in-out", 4), nframes = 100
+)
+
+ggplot(data = df2, aes(x, y, color = I(color), frame = .frame)) +
+  geom_path() +
+  xlab(NULL) + ylab(NULL) + 
+  theme_minimal()
+```
 
 ## plotly
 
@@ -60,12 +92,16 @@ unique(temp[seq(from=2,to = length(temp),by=2)]) # 51 个州
 ```{r,echo=TRUE}
 library(highcharter)
 data(unemployment)
-hcmap("countries/us/us-all-all", data = unemployment,
-      name = "Unemployment", value = "value", joinBy = c("hc-key", "code"),
-      borderColor = "transparent") %>%
-  hc_colorAxis(dataClasses = color_classes(c(seq(0, 10, by = 2), 50))) %>% 
-  hc_legend(layout = "vertical", align = "right",
-            floating = TRUE, valueDecimals = 0, valueSuffix = "%")
+hcmap("countries/us/us-all-all",
+  data = unemployment,
+  name = "Unemployment", value = "value", joinBy = c("hc-key", "code"),
+  borderColor = "transparent"
+) %>%
+  hc_colorAxis(dataClasses = color_classes(c(seq(0, 10, by = 2), 50))) %>%
+  hc_legend(
+    layout = "vertical", align = "right",
+    floating = TRUE, valueDecimals = 0, valueSuffix = "%"
+  )
 ```
 
 

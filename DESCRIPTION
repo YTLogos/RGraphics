@@ -24,6 +24,7 @@ Imports:
   sf (>= 0.7.2),
   tidyverse,
   tikzDevice,
+  tweenr,
   visNetwork
 URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
