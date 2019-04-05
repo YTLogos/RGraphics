@@ -1,4 +1,4 @@
-# 安装 {#install-r-packages}
+# 安装与配置 {#installation-settings}
 
 主要参考 R-admin
 

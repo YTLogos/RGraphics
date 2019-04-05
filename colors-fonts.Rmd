@@ -1,4 +1,4 @@
-# 字体配色 {#colors-fonts}
+# 色彩与字体 {#colors-fonts}
 
 首先我们加载 R 包 ggplot2 
 
