@@ -20,6 +20,7 @@ Imports:
   microbenchmark,
   MSG,
   plotly,
+  quantmod,
   RClickhouse,
   sessioninfo,
   sf (>= 0.7.2),
