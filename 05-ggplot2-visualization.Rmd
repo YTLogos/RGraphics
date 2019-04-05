@@ -275,7 +275,7 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 with(diamonds, table(color, clarity, cut))
 ```
 
-## 点图
+## 点图 {#ggplot2-dotplot}
 
 
 ```{r,echo=TRUE}
@@ -336,7 +336,7 @@ ggplot(diamonds, aes(x = price, fill = cut)) + geom_histogram(bins = 30)
 ```
 
 
-## 提琴图 {#violin}
+## 提琴图 {#ggplot2-violin}
 
 提琴图
 
@@ -359,7 +359,7 @@ ggplot(mpg, aes(class, cty)) +
   theme_minimal()
 ```
 
-## 抖动图 {#jitter}
+## 抖动图 {#ggplot2-jitter}
 
 ```{r,fig.cap="抖动图",echo=TRUE}
 ggplot(diamonds, aes(x = cut, y = price)) + geom_jitter()
@@ -384,7 +384,7 @@ ggplot(diamonds, aes(x = color, y = price)) +
   facet_grid(cut ~ clarity)
 ```
 
-## 密度图 {#ridge}
+## 密度图 {#ggplot2-ridge}
 
 
 ```{r,fig.cap="按汽缸数分组的城市里程"}
@@ -420,7 +420,7 @@ ggplot(diamonds, aes(carat, stat(count), fill = cut)) +
   geom_density(position = "fill")
 ```
 
-## 玫瑰图 {#nightingale-rose}
+## 玫瑰图 {#ggplot2-rose}
 
 南丁格尔风玫瑰图[^nightingale-rose] 可以作为堆积条形图，分组条形图
 
@@ -457,7 +457,7 @@ p + geom_bar(colour = "white") +
 
 [^nightingale-rose]: https://mbostock.github.io/protovis/ex/crimea-rose-full.html
 
-## 空间数据 {#sp-vis}
+## 空间数据 {#ggplot2-spatial}
 
 美国各州的犯罪率数据 USArrests
 
@@ -590,7 +590,7 @@ ggplot(choropleth, aes(long, lat, group = group)) +
 
 [sp-gallery]: https://edzer.github.io/sp/
 
-### raster {#raster}
+### raster {#ggplot2-raster}
 
 raster 包定义了获取和操作空间 raster 类型数据集的类和方法，rasterVis 补充加强了 raster 包在数据可视化和交互方面的功能。可视化是基于 lattice 的
 
@@ -632,7 +632,7 @@ rasterImage(image, 200, 300, 200 + xinch(.5), 300 + yinch(.3),
 rasterImage(image, 200, 400, 250, 450, angle = 15, interpolate = FALSE)
 ```
 
-### sp
+### sp {#ggplot2-sp}
 
 空间数据对象，以类 sp 方式存储 [@Pebesma_2005_sp]
 
@@ -668,7 +668,7 @@ spplot(nc, c("SID74", "SID79"),
 maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过时，推荐使用 `rgdal::readOGR` 或者 `sf::st_read` 方式读取
 :::
 
-### sf {#simple-features}
+### sf {#ggplot2-sf}
 
 - maps
 - mapdata
@@ -682,9 +682,11 @@ maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过�
 - ggmap
 - sf
 
-## 网络数据 {#net-vis}
+## 网络数据 {#ggplot2-network}
 
 [igraph](https://igraph.org/) 提供了 R 和 Python 接口 <https://github.com/igraph>。 [qgraph](https://github.com/SachaEpskamp/qgraph) 开发者 [Sacha Epskamp](http://sachaepskamp.com) 在个人主页上提供了很多网络数据分析的学习资料， [Rgraphviz](https://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html) 基于 [Graphviz](https://www.graphviz.org/)
+
+geomnet
 
 ```r
 BiocManager::install("Rgraphviz", version = "3.8")
