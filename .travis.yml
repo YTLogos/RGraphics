@@ -1,8 +1,21 @@
 language: r
 dist: xenial
-r: devel
 
-sudo: true
+matrix:
+  include:
+  - r: release
+    env: rlang='CRAN'
+    after_success:
+    - nvm install stable
+    - npm install netlify-cli -g
+    deploy:
+      provider: script
+      script: netlify deploy --prod --dir _book
+      skip_cleanup: true
+  - r: devel
+    env: rlang='github'
+    before_script: Rscript -e "remotes::install_github('tidyverse/ggplot2')"
+
 cache:
   packages: true
   directories:
@@ -67,10 +80,6 @@ addons:
       - tesseract-ocr-eng
 
 before_install:
-#  - mkdir ~/.R
-#  - cp Makevars ~/.R
-  - nvm install stable
-  - npm install netlify-cli -g
   - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
   - tar -xzf /tmp/tinytex.tar.gz -C $HOME
   - export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
@@ -86,11 +95,3 @@ before_script:
 
 script:
   - Rscript -e 'bookdown::render_book("index.Rmd")'
-
-deploy:
-  provider: script
-  script: netlify deploy --dir _book --prod --message "$DEPLOY_MSG"
-  skip_cleanup: true
-  on:
-    branch: master
-
