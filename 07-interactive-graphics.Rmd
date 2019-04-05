@@ -26,7 +26,7 @@ image_write(gapminder, "gapminder.gif")
 
 tweenr 用于中间过渡，插值
 
-```{r,echo=TRUE,out.width="45%",fig.width=3.85,fig.asp=1.5}
+```{r,echo=TRUE,fig.cap="tweenr 添加过渡效果"}
 library(ggplot2)
 
 f <- function(a, b) {
@@ -54,12 +54,15 @@ df2 <- tween_states(df,
 ggplot(data = df2, aes(x, y, color = I(color), frame = .frame)) +
   geom_path() +
   xlab(NULL) + ylab(NULL) + 
+  coord_flip() +
   theme_minimal()
 ```
 
 ## plotly
 
 各种动态图形
+
+### 直方图 {#plotly-histogram}
 
 ```{r,echo=TRUE}
 library(ggplot2)
@@ -72,7 +75,32 @@ p2 <- plot_ly(y = values, type = "histogram", name = "flipped")
 subplot(p1, p2)
 ```
 
-## highcharter 
+### 地图 {#plotly-map}
+
+```{r,echo=TRUE}
+library(maps)
+map_data("world", "canada") %>%
+  group_by(group) %>%
+  plot_geo(x = ~long, y = ~lat) %>%
+  add_markers(size = I(1))
+```
+
+
+## highcharter
+
+### 时序图 {#highcharter-ts}
+
+```{r,echo=TRUE}
+library(highcharter)
+library(quantmod)
+
+x <- getSymbols("GOOG", auto.assign = FALSE)
+
+hchart(x)
+```
+
+
+### 地图 {#highcharter-map}
 
 美国失业率数据
 
@@ -90,7 +118,6 @@ unique(temp[seq(from=2,to = length(temp),by=2)]) # 51 个州
 ```
 
 ```{r,echo=TRUE}
-library(highcharter)
 data(unemployment)
 hcmap("countries/us/us-all-all",
   data = unemployment,
@@ -104,6 +131,8 @@ hcmap("countries/us/us-all-all",
   )
 ```
 
+
+<https://github.com/bhaskarvk/colormap> 静态图
 
 ## 网络图 {#network}
 
