@@ -126,7 +126,7 @@ box(col = "gray")
 
 
 
-### 条形图 {#bar-plot}
+### 条形图 {#plot-bar}
 
 ```{r ISLR,fig.width=5,fig.height=4,fig.cap='条形图',echo=TRUE}
 data(NCI60, package = "ISLR") # 加载数据
@@ -147,7 +147,7 @@ axis(1,
 ```
 
 
-### 直方图 {#histograms}
+### 直方图 {#plot-hist}
 
 ```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布",echo=TRUE}
 with(data = faithful, {
@@ -178,7 +178,7 @@ lines(density(longley$Unemployed),
 hist(longley$Unemployed, density = 3, angle = 45, main = "")
 ```
 
-### 密度图 {#density}
+### 密度图 {#plot-density}
 
 ```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
 days <- abs(rnorm(1000, 80, 125))
@@ -325,7 +325,7 @@ HeatedDensityPlot(days,
 
 [visualize-distributions]: https://www.displayr.com/using-heatmap-coloring-density-plot-using-r-visualize-distributions/
 
-### 经验图 {#ecdf}
+### 经验图 {#plot-ecdf}
 
 ```{r faithful,echo=TRUE,fig.cap="累积经验分布图"}
 with(data = faithful, {
@@ -336,7 +336,7 @@ with(data = faithful, {
 })
 ```
 
-### QQ 图 {#qqnorm}
+### QQ 图 {#plot-qqnorm}
 
 ```{r faithful-eruptions}
 with(data = faithful, {
@@ -348,7 +348,7 @@ with(data = faithful, {
 ```
 
 
-### 时序图 {#time-series-plot}
+### 时序图 {#plot-ts}
 
 时序图最适合用来描述股价走势
 
@@ -361,7 +361,7 @@ matplot(time(EuStockMarkets), EuStockMarkets,
 legend("topleft", colnames(EuStockMarkets), pch = 17, lty = 1, col = 1:4)
 ```
 
-### 饼图 {#pie}
+### 饼图 {#plot-pie}
 
 clockwise 参数
 
@@ -377,14 +377,14 @@ text(0, 1, "init.angle = 90", col = "red")
 ```
 
 
-### 茎叶图 {#stem-leaf}
+### 茎叶图 {#plot-stem-leaf}
 
 ```{r,echo=TRUE}
 stem(longley$Unemployed)
 ```
 
 
-### 散点图 {#scatter}
+### 散点图 {#plot-scatter}
 
 在一维空间上，绘制散点图，其实是在看散点的疏密程度随坐标轴的变化
 
@@ -480,7 +480,7 @@ graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
 
 
 
-### 箱线图 {#boxplot}
+### 箱线图 {#plot-box}
 
 ```{r boxplot,echo=TRUE}
 A <- c(
@@ -541,29 +541,29 @@ boxplot(count ~ spray,
 ```
 
 
-### 提琴图 {#violin-plot}
+### 提琴图 {#plot-violin}
 
 Tom Kelly 维护的 vioplot 包 <https://github.com/TomKellyGenetics/vioplot>
 
-### 热力图 {#heatmap-plot}
+### 热力图 {#plot-heatmap}
 
 ggplot2
 
 geom\_density()
 
 
-### 岭线图 {#ridge-lines}
+### 岭线图 {#plot-ridges}
 
 ggridges
 
 
-### 轮廓图 {#contour-plot}
+### 轮廓图 {#plot-contour}
 
 topo 是地形数据
 
 等高线图
 
-### 折线图 {#line-plot}
+### 折线图 {#plot-line}
 
 函数曲线，样条曲线，核密度曲线，平行坐标图
 
@@ -573,9 +573,9 @@ sunspot.month          Monthly Sunspot Data, from 1749 to "Present"
 sunspot.year           Yearly Sunspot Data, 1700-1988
 sunspots               Monthly Sunspot Numbers, 1749-1983
 
-### 马赛克图 {#mosaic}
+### 马赛克图 {#plot-mosaic}
 
-### 矩阵图 {#treemap}
+### 矩阵图 {#plot-matrix}
 
 在对角线上添加平滑曲线、密度曲线
 
@@ -599,11 +599,11 @@ pairs(longley,
 )
 ```
 
-### 雷达图 {#radar-plot}
+### 雷达图 {#plot-radar}
 
-### 玫瑰图 {#rose-plot}
+### 玫瑰图 {#plot-rose}
 
-### 地图 {#map}
+### 地图 {#plot-map}
 
 ```{r unemployment,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
 # 代码来自 ?map
