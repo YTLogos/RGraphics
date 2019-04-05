@@ -22,6 +22,7 @@ Imports:
   plotly,
   quantmod,
   RClickhouse,
+  RSQLite,
   sessioninfo,
   sf (>= 0.7.2),
   tidyverse,

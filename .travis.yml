@@ -4,7 +4,7 @@ dist: xenial
 matrix:
   include:
   - r: release
-    env: rlang='CRAN'
+    env: ggplot='CRAN'
     after_success:
     - nvm install stable
     - npm install netlify-cli -g
@@ -13,7 +13,7 @@ matrix:
       script: netlify deploy --prod --dir _book
       skip_cleanup: true
   - r: devel
-    env: rlang='github'
+    env: ggplot='github'
     before_script: Rscript -e "remotes::install_github('tidyverse/ggplot2')"
 
 cache:
