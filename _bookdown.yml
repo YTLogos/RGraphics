@@ -21,34 +21,37 @@ before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"
   # 安装指导
-  - "00-installation.Rmd"
+  - "installation.Rmd"
   
   # 文件系统
-  - "01-file-system.Rmd"
+  - "file-system.Rmd"
   
   # 数据接口
-  - "02-data-import-export.Rmd"
+  - "import-export.Rmd"
   
   # 数据操作
-  - "03a-data-manipulation.Rmd"
-  - "03b-data-wrangeling.Rmd"
+  - "data-manipulation.Rmd"
+  - "data-wrangeling.Rmd"
   
   # 数据清理
-  - "03c-data-cleaning.Rmd"
-  - "03d-regular-expression.Rmd"  
+  - "data-cleaning.Rmd"
+  - "regular-expression.Rmd"  
   
   # 统计图形
-  - "04-graph-gallery.Rmd"
+  - "plot-gallery.Rmd"
+  - "custom-plot.Rmd"
 
   # 数据可视化
-  - "05-ggplot2-visualization.Rmd"
-  - "06-colors-fonts.Rmd"
+  - "ggplot2-gallery.Rmd"
   
-  # 动态图形 
-  - "07-interactive-graphics.Rmd"
+  # 配色和选择字体
+  - "colors-fonts.Rmd"
+  
+  # 交互式图形 
+  - "interactive-graphics.Rmd"
   
   # 动态文档
-  - "10-dynamic-documents.Rmd"
+  - "dynamic-documents.Rmd"
 
-# 参考文献  
+  # 参考文献  
   - "99-references.Rmd"
