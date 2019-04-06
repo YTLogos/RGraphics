@@ -203,6 +203,9 @@ tbl <- "mtcars"
 ```{sql connection="con"}
 SELECT * FROM `mtcars` where gear IN (3, 4)
 ```
+```{r,include=FALSE}
+dbDisconnect(con)
+```
 
 
 ### PostgreSQL
