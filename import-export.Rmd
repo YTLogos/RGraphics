@@ -195,18 +195,28 @@ knitr::kable(db2r, col.names = c("数据库","官网","R接口","开发仓"), ca
 ```{r,echo=TRUE}
 library(DBI)
 con <- dbConnect(RSQLite::SQLite(), ":memory:")
-dbWriteTable(con, "mtcars", mtcars)
-library(glue)
-tbl <- "mtcars"
+dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
+subjects = 6
 ```
 
-```{sql connection="con"}
-SELECT * FROM `mtcars` where gear IN (3, 4)
+`max.print=10` 控制显示的行数
+
+```{sql connection="con",tab.cap = "My Caption",max.print=10}
+SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
+```
+
+`output.var="mtcars34"` 将查询的结果保存到变量 `mtcars34`，此外，还支持 SQL 语句中包含变量 subjects
+
+```{sql connection="con",tab.cap = "My Caption", output.var="mtcars34"}
+SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
+```
+
+```{r,echo=TRUE}
+head(mtcars34)
 ```
 ```{r,include=FALSE}
-dbDisconnect(con)
+dbDisconnect(conn = con)
 ```
-
 
 ### PostgreSQL
 

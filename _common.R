@@ -36,6 +36,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   small.mar = TRUE,
   echo = FALSE,
+  sql.max.print = 20,
   cache = TRUE,
   size = "scriptsize",
   out.width = "70%",
