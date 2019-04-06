@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/XiangyunHuang/RGraphics.svg?token=JzZLZhzXpgpzucseAyh4&branch=master)](https://travis-ci.com/XiangyunHuang/RGraphics)[![Netlify Status](https://api.netlify.com/api/v1/badges/6c069b09-a414-40f9-a0cf-3921fa547f28/deploy-status)](https://app.netlify.com/sites/r4charts/deploys)
+[![Build Status](https://travis-ci.com/XiangyunHuang/RGraphics.svg?token=JzZLZhzXpgpzucseAyh4&branch=master)](https://travis-ci.com/XiangyunHuang/RGraphics)[![Netlify Status](https://api.netlify.com/api/v1/badges/6c069b09-a414-40f9-a0cf-3921fa547f28/deploy-status)](https://app.netlify.com/sites/r4charts/deploys) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![GitHub All Releases](https://img.shields.io/github/downloads/XiangyunHuang/RGraphics/total.svg)](https://github.com/XiangyunHuang/RGraphics)
 ---
 
 本书采用 [知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/) 许可，请君自重，别没事儿拿去传个什么新浪爱问、百度文库以及 XX 经济论坛，项目中代码使用 [MIT 协议](https://github.com/XiangyunHuang/RGraphics/blob/master/LICENSE) 开源
@@ -9,11 +9,11 @@
 
 ## 参考材料
 
-- 作者 [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf)  后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得
-
-- 获取帮助 [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336)
+- [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf)  后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得
+- [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 
 - [R语言调色版合集](https://github.com/EmilHvitfeldt/r-color-palettes)
 - [条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
+- 太多了，这里放不下
 
 ## 相关资源
 
@@ -64,7 +64,7 @@
    1. 空间数据分析
       - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
       - 空间点模式：理论与应用 [Spatial Point Patterns: Methodology and Applications with R](https://spatstat.org)
-      - 空间微观模拟与R语言 [Spatial Microsimulation with R](https://spatial-microsim-book.robinlovelace.net/)       
+      - 空间微观模拟与R语言 [Spatial Microsimulation with R](https://spatial-microsim-book.robinlovelace.net/) 
       - 地质统计计算与 R 语言 [Geocomputation with R](https://geocompr.robinlovelace.net/)
       - 空间统计概念入门 [Introduction to Geospatial Concepts](https://datacarpentry.org/organization-geospatial/)
       - 用于生态学家的数据分析与可视化 [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/)
@@ -84,7 +84,8 @@
       - [A gentle INLA tutorial](https://www.precision-analytics.ca/blog-1/inla)
       - [Reproducible road safety research: an exploration of the shifting spatial and temporal distribution of car-pedestrian crashes](https://github.com/Robinlovelace/stats19-gisruk)
       - [出租车地理信息可视化](https://data-se.netlify.com/2017/11/20/great-dataviz-examples-in-rstats/)
-	  - [Spatial Data Science with R](https://www.rspatial.org/) raster 包 Geographic Data Analysis and Modeling 地理数据分析和建模
+	    - [Spatial Data Science with R](https://www.rspatial.org/) raster 包 Geographic Data Analysis and Modeling 地理数据分析和建模
+
    1. 文本挖掘
       - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
       - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
@@ -131,7 +132,7 @@
         - [Sklearn 与 TensorFlow 机器学习实用指南](https://hand2st.apachecn.org/#/) 
         - [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/) Python Data Science Handbook
 
-   更多在线书籍合集 <https://bookdown.org> 还有一个 [传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可参考 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
+   更多在线书籍合集 <https://bookdown.org> 还有一个 [传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可看看 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
 * 课程
    1. Tony Cai
@@ -159,6 +160,7 @@
   - [Flowing Data](https://flowingdata.com/)
   - [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
   - [Mick Crawley](http://www.bio.ic.ac.uk/research/mjcraw/crawley.htm) [The R Book](http://www.imperial.ac.uk/bio/research/crawley/therbook) 的作者
+
 * 学者
   - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
   - [姚琦伟](http://stats.lse.ac.uk/q.yao/)
@@ -169,31 +171,31 @@
   - [Erich Leo Lehmann](https://en.wikipedia.org/wiki/Erich_Leo_Lehmann) 1917-2019 https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-985X.2010.00645_1.x
   - [Peter Hall](https://en.wikipedia.org/wiki/Peter_Gavin_Hall) 1951-2016 https://royalsocietypublishing.org/doi/pdf/10.1098/rsbm.2017.0035
   - [Sebastian Sauer](https://data-se.netlify.com)
-  - [Peter J. Diggle](https://www.lancaster.ac.uk/staff/diggle/)
-  - [Rob J Hyndman](https://robjhyndman.com/)
+  - [Peter J. Diggle](https://www.lancaster.ac.uk/staff/diggle/) Geostatistics
+  - [Rob J Hyndman](https://robjhyndman.com/) 时间序列
   - [Julian Faraway](https://farawaystatistics.wordpress.com/)
-  - [Andrew Gelman](https://andrewgelman.com/)
-  - [Norm Matloff](https://matloff.wordpress.com/)
-  - [Brian Ripley](http://www.stats.ox.ac.uk/~ripley/)
-  - [John Fox](https://socialsciences.mcmaster.ca/jfox/)
+  - [Andrew Gelman](https://andrewgelman.com/) Stan
+  - [Norm Matloff](https://matloff.wordpress.com/) R语言编程艺术
+  - [Brian Ripley](http://www.stats.ox.ac.uk/~ripley/) MASS
+  - [John Fox](https://socialsciences.mcmaster.ca/jfox/) Rcmdr car 
   - [Charlie Geyer](http://users.stat.umn.edu/~geyer/)
   - [Michael L. Stein](http://www.stat.uchicago.edu/faculty/stein.shtml)
-  - [李航](http://hangli-hl.com)
+  - [李航](http://hangli-hl.com) NLP
 
 * 主页
   - [王江浩](https://jianghao.github.io) 地理信息
-  - [陈新鹏](https://chenxinpeng.github.io/) 腾讯 AI lab 实习生
+  - [陈新鹏](https://chenxinpeng.github.io/) 腾讯 AI lab 
   - [于淼](https://yufree.cn/)  加拿大，COS 执行主编
-  - [朱雪宁](https://xueningzhu.github.io/) COS主编，李润泽高足
+  - [朱雪宁](https://xueningzhu.github.io/) COS 主编，李润泽高足
   - [余光创](https://guangchuangyu.github.io/) 生物统计 ggtree 开发者
-  - [肖楠](https://nanx.me/)
+  - [肖楠](https://nanx.me/) 
   - [高策](https://gaocegege.com) 交大，可视化
-  - [赵鹏](http://www.pzhao.org/zh/) 德国
+  - [赵鹏](http://www.pzhao.org/zh/) 德国《学R》
   - [高涛](https://joegaotao.github.io)
   - [黄俊文](https://www.fyears.org) Python 和 R
   - [黄晨成](https://liam.page/) TeX 专家
   - [王奕如](https://earo.me/) 时空序列数据分析 博士
-  - [边蓓蕾](http://statsjoke.me) 上届 COS 副主编
+  - [边蓓蕾](http://statsjoke.me) COS 副主编
   - [郎大为](http://langdawei.com/) 词云 recharts
   - [寇强](http://qkou.info/) Rcpp/mxnet 核心开发者
   - [邱怡轩](https://yixuan.cos.name/cn/) or [Yixuan Qiu-en](https://statr.me/) 普渡大学博后，人称小轩哥
@@ -206,7 +208,7 @@
   - [WenSui Liu](https://statcompute.wordpress.com/)
   - [Yuling Yao](https://www.yulingyao.com/)
   - [handong1587](https://handong1587.github.io/)
-  - [杜雨](http://raindu.com/) ggplot2 数据可视化 左手R右手Python
+  - [杜雨](http://raindu.com/) ggplot2 数据可视化 左手 R右手 Python
   - [Paula Moraga](https://paula-moraga.github.io) Peter J. Diggle 的学生，研究 Geostatistics 
   - [John MacFarlane](https://johnmacfarlane.net/) Pandoc 开发者
   - [Paul Bürkner](https://paul-buerkner.github.io/) Stan/brms 开发者  
@@ -217,7 +219,7 @@
   - [书籍传送门](http://gen.lib.rus.ec/) 需要科学上网 http://gen.lib.rus.ec/
   - [Stack Overflow](https://stackoverflow.com/)
 
-* RStudio
+* RStudio 出品 
   - https://gt.rstudio.com/
   - https://shiny.rstudio.com/
   - https://db.rstudio.com
@@ -226,8 +228,6 @@
   - https://keras.rstudio.com
   - https://rmarkdown.rstudio.com/
   - https://rmarkdown.rstudio.com/flexdashboard/
-
-* RStudio 成员出品  
   - https://bookdown.org/yihui/blogdown
   - https://bookdown.org/yihui/bookdown
   - https://rstudio.github.io/reticulate/
@@ -270,6 +270,6 @@
 
 ## 与 R 语言相关的工作
 
-- 美团喻灿 yucan@meituan.com https://tech.meituan.com/2018/08/02/mt-r-practice.html
+- 美团 https://tech.meituan.com/2018/08/02/mt-r-practice.html
 - 比较成熟的有京东、豆瓣、ebay、阿里
 - 国外使用 R 环境的公司 https://github.com/ThinkR-open/companies-using-r

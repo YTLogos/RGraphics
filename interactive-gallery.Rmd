@@ -99,6 +99,13 @@ x <- getSymbols("GOOG", auto.assign = FALSE)
 hchart(x)
 ```
 
+### 散点图 {#highcharter-scatter}
+
+```{r}
+library("highcharter")
+data(diamonds, mpg, package = "ggplot2")
+hchart(mpg, "scatter", hcaes(x = displ, y = hwy, group = class))
+```
 
 ### 地图 {#highcharter-map}
 

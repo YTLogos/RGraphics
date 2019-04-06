@@ -1,6 +1,6 @@
 # 数据操作手 {#data-manipulator}
 
-:::
+::: sidebar
 主要介绍 Base R 提供的数据操作
 :::
 
