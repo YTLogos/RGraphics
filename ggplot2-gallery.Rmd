@@ -335,6 +335,44 @@ ggplot(diamonds, aes(price)) + geom_histogram(bins = 30)
 ggplot(diamonds, aes(x = price, fill = cut)) + geom_histogram(bins = 30)
 ```
 
+基础 R 包与 Ggplot2 包绘制的直方图的对比，Base R 绘图速度快，代码更加稳定，Ggplot2 代码简洁，更美观
+
+```{r,fig.cap="直方图",fig.subcap=c("Base R 直方图","Ggplot2 直方图")}
+par(mar = c(2.1, 2.1, 1.5, 0.5))
+plot(c(50, 350), c(0, 10),
+  type = "n", font.main = 1,
+  xlab = "", ylab = "", frame.plot = FALSE, axes = FALSE,
+  # xlab = "hp", ylab = "Frequency",
+  main = paste("Histogram with Base R", paste(rep(" ", 56), collapse = ""))
+)
+axis(
+  side = 1, at = seq(50, 350, 50), labels = seq(50, 350, 50),
+  col = "white", tick = FALSE, las = 1, padj = -1.5
+)
+axis(
+  side = 2, at = seq(0, 10, 2), labels = seq(0, 10, 2),
+  col = "white", tick = FALSE, padj = 1.5 # , las = 1, hadj = -0.5
+)
+abline(h = seq(0, 10, 2), v = seq(50, 350, 50), col = "gray90", lty = "solid")
+abline(h = seq(1, 9, 2), v = seq(75, 325, 50), col = "gray95", lty = "solid")
+hist(mtcars$hp,
+  col = "#56B4E9", border = "white",
+  freq = TRUE, add = TRUE
+  # labels = TRUE, axes = TRUE, ylim = c(0, 10.5),
+  # xlab = "hp",main = "Histogram with Base R"
+)
+mtext("hp", 1, line = 1.0)
+mtext("Frequency", 2, line = 1.2)
+
+ggplot(mtcars) +
+  geom_histogram(aes(x = hp), fill = "#56B4E9", color = "white", breaks = seq(50, 350, 50)) +
+  scale_x_continuous(breaks = seq(50, 350, 50)) +
+  scale_y_continuous(breaks = seq(0, 12, 2)) +
+  labs(x = "hp", y = "Frequency", title = "Histogram with Ggplot2") +
+  theme_minimal(base_size = 12)
+```
+
+
 
 ## 提琴图 {#ggplot2-violin}
 

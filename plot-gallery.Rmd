@@ -192,7 +192,7 @@ plot(density(days, from = 0, to = 180, adjust = 0.2),
 )
 ```
 
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="7.5%",fig.width=7.5}
+```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="75%",fig.width=7.5}
 library(survival)
 surv.days <- Surv(days)
 surv.fit <- survfit(surv.days ~ 1)
