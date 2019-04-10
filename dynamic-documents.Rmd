@@ -6,6 +6,98 @@
 
 Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 [Pandoc's Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown)，其实是 Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍一下被 Pandoc 加强后的 Markdown 表格、图片和公式的使用
 
+> RStudio 插件 [remedy](https://github.com/ThinkR-open/remedy) 简化 Markdown 写作
+
+### 语法 {#syntax}
+
+Markdown 基础语法见 RStudio IDE自带的手册 Markdown Quick Reference， 这里主要介绍一下 Markdown 高级语法， 特别是 Pandoc's Markdown，Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍列表、表格、图片和公式的使用
+
+- 有序的列表
+
+  1. 第一条
+  1. 第二条
+
+- 无序的列表
+
+  - 第一条
+  - 第二条
+
+  * here is my first
+    list item.
+  * and my second.
+
+- 嵌套的列表
+
+  1. 有序
+  2. Item 2
+  3. Item 3
+      + Item 3a
+      + Item 3b
+
+  * 无序
+  * Item 2
+      + Item 2a
+      + Item 2b
+
+轻微强调 
+:   这是倾斜的文字 _下划线表示强调_, and this is *星花表示强调*.
+
+特别强调 
+:   这是加粗的文字 **strong emphasis** and __with underscores__.
+
+强烈强调
+:   这是斜体加粗的文字 ***三个星花***
+
+删除线 
+:   This ~~is deleted text.~~
+
+上下标 
+:   H~2~O is a liquid.  2^10^ is 1024. C^137^ 是一种放射性元素
+
+
+### 引用 {#quote}
+
+注意在引用末尾空两格，出处另起一行，引用名人名言:
+
+> It's always better to give 
+> than to receive.  
+
+或者
+
+> A Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.  
+> --- John Gruber
+
+> Trellis graphics are a bit like hash functions: 
+> you can be close to the target, but get a far-off result.[^lattice-panel]   
+> --- Dieter Menne
+
+[^lattice-panel]: (about problems with creating a suitable lattice panel function) R-help (August 2008)
+
+> If you imagine that this pen is Trellis, then Lattice is not this pen.[^lattice-pen]  
+> --- Paul Murrell
+
+[^lattice-pen]: (on the difference of Lattice (which eventually was called grid) and Trellis) DSC 2001, Wien (March 2001)
+
+> You're overlooking something like line 800 of the documentation for xyplot. [...] 
+> It's probably in the R-FAQ as well, 
+> since my original feeling was that this behaviour was chosen 
+> in order to confuse people and see how many people read the FAQ... :) [^xyplot]  
+> --- Barry Rowlingson 
+
+[^xyplot]: (about the fact that lattice objects have to be print()ed) R-help (May 2005)
+
+```{r knitr-graphics, fig.cap="(ref:text-references)",out.width="45%",echo=FALSE}
+knitr::include_graphics(path = "figures/fig11.png")
+```
+
+(ref:fig-cap) 测试文本引用
+(ref:text-references) 图表标题很长可使用文本引用方式 <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references>
+
+```{r fig.cap='(ref:fig-cap)', fig.height=2, out.height='4in'}
+par(mar = c(4.1, 4.1, 0.5, 0.5))
+plot(rnorm(10), xlab = "", ylab = "")
+```
+
 ### 表格 {#table}
 
 插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦，复杂的表格制作可以借助 R 包 knitr 提供的 kable 函数以及 kableExtra 包^[<https://xiangyunhuang.github.io/bookdown-kableExtra/>]，此外谢益辉的书籍 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/) 中也有一节专门介绍表格 <https://bookdown.org/yihui/bookdown/tables.html>
@@ -44,6 +136,8 @@ knitr::kable(
   booktabs = TRUE
 )
 ```
+
+[kableExtra](https://github.com/haozhu233/kableExtra) 、broom 和 [pixiedust](https://github.com/nutterb/pixiedust) 包实现表格样式的精细调整，如黄湘云制作的[样例](https://xiangyunhuang.github.io/bookdown-kableExtra/) 
 
 
 ### 图片 {#image}
@@ -169,17 +263,49 @@ L(\beta,\boldsymbol{\theta})
 
 注意，`\mathbf` 只对字母 $a,b,c,A,B,C$ 加粗，mathjax 不支持公式中使用 `\bm` 对 $\theta,\alpha,\beta,\ldots,\gamma$ 加粗，应该使用 `\boldsymbol`
 
-## bookdown
+## R Markdown
 
-The **bookdown** package can be installed from CRAN or Github:
+R Markdown 站在巨人的肩膀上，这些巨人有 [Markdown](https://daringfireball.net/projects/markdown/)、 [LaTeX](https://www.latex-project.org/)、 [Pandoc](http://pandoc.org)。 
 
-`par()` 图形版面设置，如图\@ref(fig:par) 所示
+生态系统
 
-```{r par,fig.cap="图形参数设置",fig.subcap=c("单图环境","多图环境"),out.width="33%",echo=FALSE, fig.link='https://github.com/rstudio/rmarkdown'}
-knitr::include_graphics(path = c("figures/mai.png","figures/mai.png"))
+1. 报告
+   - learnr: Interactive Tutorials with R Markdown <https://rstudio.github.com/learnr/>
+   - r2d3: R Interface to D3 Visualizations <https://rstudio.github.io/r2d3/>
+   - radix: Radix combines the technical authoring features of Distill with R Markdown, enabling a fully reproducible workflow based on literate programming <https://github.com/radixpub/radix-r>
+2. 网络服务
+   - RestRserve: RestRserve is a R web API framework for building high-performance microservices and app backends <https://github.com/dselivanov/RestRserve> 基于 [Rserve](https://github.com/s-u/Rserve) 在笔记本上处理请求的吞吐量是每秒10000次，比 plumber 快大约20倍
+   - plumber: Turn your R code into a web API. <https://www.rplumber.io>
+3. 展示
+   - revealjs: R Markdown Format for reveal.js Presentations <https://github.com/rstudio/revealjs>
+   - xaringan: Presentation Ninja 幻灯忍者写轮眼 <https://slides.yihui.name/xaringan/>
+
+
+在指定目录创建 Book 项目，
+
+```r
+bookdown:::bookdown_skeleton("~/bookdown-demo")
 ```
 
-通过 <https://bookdown.org/> 发布书籍
+项目根目录的文件列表
+
+```markdown
+directory/
+├──  index.Rmd
+├── 01-intro.Rmd
+├── 02-literature.Rmd
+├── 03-method.Rmd
+├── 04-application.Rmd
+├── 05-summary.Rmd
+├── 06-references.Rmd
+├── _bookdown.yml
+├── _output.yml
+├──  book.bib
+├──  preamble.tex
+├──  README.md
+└──  style.css
+```
+
 
 ## TinyTeX {#tinytex}
 

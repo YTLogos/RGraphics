@@ -16,15 +16,23 @@
 library(tidyverse)
 ```
 
+```{r,eval=FALSE}
+install.packages(c("reshape", "reshape2", "plyr"))
+```
+
 数据操作的语法
 
 第一代
 
-1. reshape 使用函数 `melt` 和 `cast` 聚合数据（退休） `install.packages("reshape")`
-1. reshape2 是 reshape 的继任者，提供两个函数 `melt` 和 `cast` 聚合数据（退休）`install.packages("reshape2")`
-1. plyr 统一拆分(split)，计算(apply)，合并(combine)的数据处理流（退休）`install.packages("tidyr")`
+1. Base R 数据操作
 
 第二代
+
+1. reshape （退休）使用函数 `melt` 和 `cast` 重构(restructure)和聚合(aggregate)数据 
+1. reshape2 （退休）是 reshape 的继任者，功能和 reshape 类似，提供两个函数 `melt` 和 `cast` 聚合数据 
+1. plyr （退休）统一拆分(split)，计算(apply)，合并(combine)的数据处理流，由 dplyr（用于data.frame） 和 purrr （用于 list）继任
+
+第三代
 
 1. dplyr 操作数据的语法
 1. sparklyr 给 dplyr 提供 Spark 接口支持
