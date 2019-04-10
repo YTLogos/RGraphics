@@ -72,6 +72,9 @@ ggplot(mtcars) +
 
 ## 字体 {#fonts}
 
+
+[firatheme](https://github.com/vankesteren/firatheme) a ggplot2 theme with fira font 
+
 在 Ubuntu 系统上安装微软字体，如果因为网络原因，下载出现问题，也有可能是长期没有维护更新，默认字体下载链接失效了
 
 ```bash
