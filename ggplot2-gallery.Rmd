@@ -343,15 +343,20 @@ plot(c(50, 350), c(0, 10),
   type = "n", font.main = 1,
   xlab = "", ylab = "", frame.plot = FALSE, axes = FALSE,
   # xlab = "hp", ylab = "Frequency",
-  main = paste("Histogram with Base R", paste(rep(" ", 56), collapse = ""))
+  main = paste("Histogram with Base R", paste(rep(" ", 60), collapse = ""))
 )
 axis(
   side = 1, at = seq(50, 350, 50), labels = seq(50, 350, 50),
-  col = "white", tick = FALSE, las = 1, padj = -1.5
+  tick = FALSE, las = 1, padj = 0, mgp = c(3, 0.1, 0) 
 )
 axis(
   side = 2, at = seq(0, 10, 2), labels = seq(0, 10, 2),
-  col = "white", tick = FALSE, padj = 1.5 # , las = 1, hadj = -0.5
+  # col = "white", 坐标轴的颜色
+  # col.ticks 刻度线的颜色
+  tick = FALSE, # 取消刻度线
+  las = 1, # 水平方向
+  hadj = 1, # 右侧对齐
+  mgp = c(3, 0.1, 0) # 纵轴边距线设置为 0.1
 )
 abline(h = seq(0, 10, 2), v = seq(50, 350, 50), col = "gray90", lty = "solid")
 abline(h = seq(1, 9, 2), v = seq(75, 325, 50), col = "gray95", lty = "solid")
@@ -362,7 +367,7 @@ hist(mtcars$hp,
   # xlab = "hp",main = "Histogram with Base R"
 )
 mtext("hp", 1, line = 1.0)
-mtext("Frequency", 2, line = 1.2)
+mtext("Frequency", 2, line = 1.0)
 
 ggplot(mtcars) +
   geom_histogram(aes(x = hp), fill = "#56B4E9", color = "white", breaks = seq(50, 350, 50)) +
