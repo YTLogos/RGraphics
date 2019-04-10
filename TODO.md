@@ -1,5 +1,107 @@
 ## TO DO
 
+- Plot
+  - 条形图
+  - 直方图
+  - 箱线图
+  - 散点图
+  - 饼图
+  - 扩展 
+    - **plotrix** 包含231页手册 pie3D 
+    - **scatterplot3d** 三维图形
+    - **plot3D** 三维图形
+
+  ```R
+  library(plotrix)
+  ls("package:plotrix")
+    [1] "ablineclip"         "add.ps"             "addtable2plot"     
+    [4] "arctext"            "axis.break"         "axis.mult"         
+    [7] "barlabels"          "barNest"            "barp"              
+   [10] "battleship.plot"    "bin.wind.records"   "binciW"            
+   [13] "binciWl"            "binciWu"            "box.heresy"        
+   [16] "boxed.labels"       "brkdn.plot"         "brkdnNest"         
+   [19] "bumpchart"          "categoryReshape"    "centipede.plot"    
+   [22] "clean.args"         "clock24.plot"       "clplot"            
+   [25] "cluster.overplot"   "clustered.dotplots" "color.axis"        
+   [28] "color.gradient"     "color.id"           "color.legend"      
+   [31] "color.scale"        "color.scale.lines"  "color2D.matplot"   
+   [34] "corner.label"       "count.overplot"     "cylindrect"        
+   [37] "dendroPlot"         "diamondplot"        "dispersion"        
+   [40] "dotplot.mtb"        "draw.arc"           "draw.circle"       
+   [43] "draw.ellipse"       "draw.radial.line"   "draw.tilted.sector"
+   [46] "drawNestedBars"     "drawSectorAnnulus"  "ehplot"            
+   [49] "election"           "emptyspace"         "fan.plot"          
+   [52] "feather.plot"       "fill.corner"        "floating.pie"      
+   [55] "fullaxis"           "furc"               "gantt.chart"       
+   [58] "gap.barplot"        "gap.boxplot"        "gap.plot"          
+   [61] "get.breaks"         "get.gantt.info"     "get.segs"          
+   [64] "get.soil.texture"   "get.tablepos"       "get.triprop"       
+   [67] "getFigCtr"          "getIntersectList"   "getMarginWidth"    
+   [70] "getYmult"           "gradient.rect"      "hexagon"           
+   [73] "histStack"          "intersectDiagram"   "jiggle"            
+   [76] "joyPlot"            "kiteChart"          "labbePlot"         
+   [79] "ladderplot"         "ladderplot.default" "legendg"           
+   [82] "lengthKey"          "listDepth"          "makeDendrite"      
+   [85] "makeIntersectList"  "maxEmptyRect"       "mtext3d"           
+   [88] "multhist"           "multivari"          "multsymbolbox"     
+   [91] "oz.windrose"        "oz.windrose.legend" "p2p_arrows"        
+   [94] "panes"              "pasteCols"          "paxis3d"           
+   [97] "perspx"             "pie.labels"         "pie3D"             
+  [100] "pie3D.labels"       "placeLabels"        "plot.dendrite"     
+  [103] "plot_bg"            "plotCI"             "plotH"             
+  [106] "polar.plot"         "polygon.shadow"     "propbrk"           
+  [109] "psegments3d"        "ptext3d"            "pyramid.plot"      
+  [112] "radial.grid"        "radial.pie"         "radial.plot"       
+  [115] "radial.plot.labels" "radialtext"         "raw.means.plot"    
+  [118] "raw.means.plot2"    "rectFill"           "remove.args"       
+  [121] "rescale"            "revaxis"            "ruginv"            
+  [124] "seats"              "size_n_color"       "sizeplot"          
+  [127] "sizetree"           "sliceArray"         "smoothColors"      
+  [130] "soil.texture"       "soil.texture.uk"    "spread.labels"     
+  [133] "spreadout"          "stackpoly"          "staircase.plot"    
+  [136] "staircasePlot"      "starPie"            "staxlab"           
+  [139] "std.error"          "sumbrk"             "sumDendrite"       
+  [142] "symbolbarplot"      "symbolbox"          "tab.title"         
+  [145] "taylor.diagram"     "textbox"            "thigmophobe"       
+  [148] "thigmophobe.labels" "triax.abline"       "triax.fill"        
+  [151] "triax.frame"        "triax.plot"         "triax.points"      
+  [154] "tsxpos"             "twoord.plot"        "twoord.stackplot"  
+  [157] "valid.n"            "vectorField"        "violin_plot"       
+  [160] "weighted.hist"      "zoomInPlot"        
+  
+  library(scatterplot3d)
+  ls("package:scatterplot3d")
+  [1] "scatterplot3d"
+  
+  library(plot3D)
+  ls("package:plot3D")
+   [1] "alpha.col"     "arrows2D"      "arrows3D"      "border3D"     
+   [5] "box3D"         "colkey"        "contour2D"     "contour3D"    
+   [9] "createisosurf" "createvoxel"   "getplist"      "gg.col"       
+  [13] "gg2.col"       "hist3D"        "Hypsometry"    "image2D"      
+  [17] "image3D"       "ImageOcean"    "isosurf3D"     "jet.col"      
+  [21] "jet2.col"      "lines2D"       "lines3D"       "mesh"         
+  [25] "Oxsat"         "persp3D"       "perspbox"      "plotdev"      
+  [29] "points2D"      "points3D"      "polygon2D"     "polygon3D"    
+  [33] "ramp.col"      "rect2D"        "rect3D"        "ribbon3D"     
+  [37] "scatter2D"     "scatter3D"     "segments2D"    "segments3D"   
+  [41] "selectplist"   "setplist"      "slice3D"       "slicecont3D"  
+  [45] "spheresurf3D"  "surf3D"        "text2D"        "text3D"       
+  [49] "trans3D"       "triangle3D"    "voxel3D"      
+  ```
+
+- Ggplot2
+  - 主题 [ggthemes](https://github.com/jrnold/ggthemes) [ggthemr](https://github.com/cttobin/ggthemr)
+  - 组合 **gridExtra**
+- shiny 
+  - [Mastering Shiny](https://jcheng5.github.io/shiny-book/)
+  - [Shiny Server Professional Administrator's Guide](https://docs.rstudio.com/shiny-server/)
+  - [Learn Shiny](https://shiny.rstudio.com/tutorial/)
+  - [rstudio::conf 2018](https://github.com/simecek/RStudioConf2018Slides)
+
+- [Comprehensive list of color palettes available in r](https://github.com/EmilHvitfeldt/r-color-palettes)
+  
+
 ### 部署网站
 
 ```bash
@@ -55,8 +157,8 @@ git checkout master
 - 星图 stars 多元数据
 
 - 折线图
-   点线图 plot(type="b") 函数曲线图 curve matplot  X 样条曲线 xspline
-   时序图 
+  - 点线图 plot(type="b") 函数曲线图 curve matplot  X 样条曲线 xspline
+  - 时序图 
 - 条形图 barplot 
   堆积条形图 spineplot
 - 饼图 pie
@@ -94,9 +196,6 @@ do.call("clip", as.list(usr)) # reset to plot region
 
 
 barsurf 包
-plotrix
-plot3D
-scatterplot3d
 
 orthographic projection
 
