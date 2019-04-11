@@ -1,6 +1,64 @@
 ## TO DO
 
+> 不要拘泥于一种解决方案，比如清理数据中正则表达式有 Base R 提供的一套，stringr 又一套，提高效率的工具 RStudio 插件 [regexplain](https://github.com/gadenbuie/regexplain) 和辅助创建正则表达式 [RVerbalExpressions](https://github.com/VerbalExpressions/RVerbalExpressions) 包
+>
+> 再比如数据处理或者叫特征工程 Base R data.table dplyr 它们各有优点，所以都加以介绍
+
+
+
+- 数据处理
+
+  - 获取数据：从本地、数据库、网页导入数据
+  - 清理数据：正则 Base R 和 stringr 包
+  - 整理数据：
+    - 筛选 subset、排序 order、聚合 aggregate、合并 merge 、重塑 reshape 和变换 transform
+    - Base R vs dplyr 
+    - 扩展：数据库 MySQL 和集群 Spark  DBI sparklyr
+
+- 数据可视化
+
+  - Base R
+  - Ggplot2
+  - 动画
+  - 交互式
+
+- 动态文档
+
+  - Pandoc 对 Markdown 语法的扩充
+  - R Markdown 加持
+
+  - 可重复数据分析 Rmd
+  - dashboard 面板
+  - Shiny 文档
+  - 写书
+  - 写博客
+  - 写幻灯片
+
+- 统计建模  功能比较全面的 R 包或者框架的介绍，如 rstan 最有效的 R 包（计算结果最好） 最快实现的 R 包（计算速度最快、开发效率高）
+  - 线性模型
+    - 多元线性回归：参数估计，参数显著性检验，模型显著性检验和模型预测，共线性问题
+    - 多重多元线性回归
+    - 逐步回归、岭回归/最小角回归/Lasso、主成分回归、支持向量机回归等
+    - 高维线性模型 SIS 变量选择 
+  - 广义线性模型
+- 机器学习
+  - 支持向量机
+  - 最近邻
+  - 随机森林
+  - 神经网络
+
+
+
+### 统计软件
+
+1. [**JASP**](https://jasp-stats.org/)
+
+
+
+[学习正则表达式](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)
+
 - Plot
+
   - 条形图
   - 直方图
   - 箱线图
@@ -93,6 +151,7 @@
 - Ggplot2
   - 主题 [ggthemes](https://github.com/jrnold/ggthemes) [ggthemr](https://github.com/cttobin/ggthemr)
   - 组合 **gridExtra**
+
 - shiny 
   - [Mastering Shiny](https://jcheng5.github.io/shiny-book/)
   - [Shiny Server Professional Administrator's Guide](https://docs.rstudio.com/shiny-server/)
@@ -100,7 +159,7 @@
   - [rstudio::conf 2018](https://github.com/simecek/RStudioConf2018Slides)
 
 - [Comprehensive list of color palettes available in r](https://github.com/EmilHvitfeldt/r-color-palettes)
-  
+
 
 ### 部署网站
 
@@ -148,7 +207,7 @@ git checkout master
    散点密度图 smoothScatter （数据量大） 
    一维散点图或点图 stripchart 数据量小
    地图上的气泡图
-   
+  
 - 抖动图 jitter
 - 散点矩阵图 pairs 
 
