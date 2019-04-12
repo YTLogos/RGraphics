@@ -42,6 +42,103 @@ Garrett Grolemund 在 RStudio 主要从事教育教学，参考 [Materials for t
 
 Dirk Eddelbuettel 的 [Getting Started in R -- Tinyverse Edition](https://github.com/eddelbuettel/gsir-te)
 
+
+## 常用操作 {#common-operations}
+
+参考资料[^dataframe-ops]
+
+### 创建空的 data.frame {#create-empty-data-frame}
+
+创建空的数据框，就是不包含任何行、记录[^create-an-empty-data-frame] 
+
+```{r,echo=TRUE}
+empty_df <- data.frame(
+  Doubles = double(),
+  Ints = integer(),
+  Factors = factor(),
+  Logicals = logical(),
+  Characters = character(),
+  stringsAsFactors = FALSE
+)
+str(empty_df)
+```
+
+如果数据框 df 包含数据，现在要依据它创建一个空的数据框
+
+```{r,eval=FALSE}
+empty_df = df[FALSE,]
+```
+
+还可以使用 structure 构造一个数据框，并且我们发现它的效率更高
+
+```{r,echo=TRUE}
+s <- function() structure(list(
+    Date = as.Date(character()),
+    File = character(),
+    User = character()
+  ),
+  class = "data.frame"
+  )
+d <- function() data.frame(
+    Date = as.Date(character()),
+    File = character(),
+    User = character(),
+    stringsAsFactors = FALSE
+  )
+microbenchmark::microbenchmark(s(), d())
+```
+
+[^create-an-empty-data-frame]: https://stackoverflow.com/questions/10689055
+
+### 按列对 data.frame 排序 {#sort-by-columns}
+
+创建数据框时，如果参数
+order 默认是升序
+
+```{r}
+dd <- data.frame(
+  b = factor(c("Hi", "Med", "Hi", "Low"),
+    levels = c("Low", "Med", "Hi"), ordered = TRUE
+  ),
+  x = c("A", "D", "A", "C"), y = c(8, 3, 9, 9),
+  z = c(1, 1, 1, 2)
+)
+str(dd)
+dd[order(-dd[,4], dd[,1]), ]
+```
+
+根据变量 z 
+
+```{r,echo=TRUE}
+dd[order(dd$z, dd$b), ]
+```
+
+### 合并 data.frame
+
+merge
+
+
+### 移除含有缺失值的行
+
+
+### 快速读取大数据框
+
+
+### 列表转化为数据框
+
+
+### 因子型变量转化为字符型
+
+
+### 抽取特定的列
+
+
+[^dataframe-ops]: https://github.com/ujjwalkarn/DataScienceR#common-dataframe-operations
+
+
+
+
+
 ## 高阶函数 {#Higher-Order-Functions}
 
 参数为函数，返回值也是函数
