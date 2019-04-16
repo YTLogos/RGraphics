@@ -192,7 +192,7 @@ knitr::kable(db2r, col.names = c("数据库","官网","R接口","开发仓"), ca
 
 参考 [bookdown-SQL](https://bookdown.org/yihui/rmarkdown/language-engines.html#sql)
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,cache=FALSE}
 library(DBI)
 con <- dbConnect(RSQLite::SQLite(), ":memory:")
 dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
@@ -201,13 +201,13 @@ subjects = 6
 
 `max.print=10` 控制显示的行数
 
-```{sql connection="con",tab.cap = "My Caption",max.print=10}
+```{sql connection="con",tab.cap = "My Caption",max.print=10,cache=FALSE}
 SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 ```
 
 `output.var="mtcars34"` 将查询的结果保存到变量 `mtcars34`，此外，还支持 SQL 语句中包含变量 subjects
 
-```{sql connection="con",tab.cap = "My Caption", output.var="mtcars34"}
+```{sql connection="con",tab.cap = "My Another Caption", output.var="mtcars34"}
 SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 ```
 
