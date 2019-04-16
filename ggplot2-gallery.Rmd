@@ -175,6 +175,20 @@ ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
   facet_grid(~cut)
 ```
 
+四块土地，所施肥料不同，肥力大小顺序 4 < 2 < 3 < 1 小麦产量随肥力的变化
+
+```{r,fig.cap="多个图例",echo=TRUE}
+library(nlme)
+data(Wheat2) # Wheat Yield Trials
+library(colorspace)
+ggplot(Wheat2, aes(longitude, latitude)) +
+  geom_point(aes(size=yield, colour = Block)) + 
+  scale_color_discrete_sequential(palette = "Viridis") +
+  scale_x_continuous(breaks = seq(0, 30, 5)) + 
+  scale_y_continuous(breaks = seq(0, 50, 10))
+```
+  
+
 图层、分组、分面和散点图介绍完了，接下来就是其它统计图形，如箱线图，小提琴图和条形图
 
 ## 箱线图 {#ggplot2-boxplot}
