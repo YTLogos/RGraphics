@@ -68,8 +68,12 @@
     - **plotrix** 包含231页手册 pie3D 
     - **scatterplot3d** 三维图形
     - **plot3D** 三维图形
+    - **barsurf** 三维条形图
 
   ```R
+  barsurf: Bar, Surface and Other Plots
+  Produces heat maps, contour plots, bar plots (in 3D) and surface plots (also, in 3D). Is designed for plotting functions of two variables, however, can plot relatively arbitrary matrices. Uses HCL color space, extensively. Also, supports triangular plots and nested matrices.
+  
   library(plotrix)
   ls("package:plotrix")
     [1] "ablineclip"         "add.ps"             "addtable2plot"     
