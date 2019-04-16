@@ -16,8 +16,9 @@ R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地�
 sample(colors(TRUE), 20)
 ```
 
+R 包 grDevices 提供 hcl 调色板[^hcl-palettes] 调制两个色板
 
-调制两个色板
+[^hcl-palettes]: https://developer.r-project.org/Blog/public/2019/04/01/hcl-based-color-palettes-in-grdevices/index.html
 
 ```{r color-pal, fig.cap = "桃色至梨色的渐变"}
 # Colors from https://github.com/johannesbjork/LaCroixColoR
