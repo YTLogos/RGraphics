@@ -292,3 +292,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 查看帮助 `?.Rprofile`
 
 `commandArgs` 命令行参数传递
+
+- [rdoc](https://github.com/mdequeljoe/rdoc) 高亮 R 帮助文档中的 R 函数、关键字 `NULL`
+- [radian](https://github.com/randy3k/radian) 代码自动补全和语法高亮
+- [docopt](https://github.com/docopt/docopt.R) 提供R命令行工具，如 [littler](https://github.com/eddelbuettel/littler) 包

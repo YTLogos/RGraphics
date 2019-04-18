@@ -23,18 +23,15 @@
 
 1. 道家的小无相功
    - 高级R语言编程 [Advanced R](https://adv-r.hadley.nz)
-   
 1. 编程指南
    - R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
    - 高效R语言编程 [Efficient R programming](https://csgillespie.github.io/efficientR)
-
 1. 开发 R 包
    - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  第二版 https://r-pkgs.org/
    - R 扩展 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
    - Git [Pro Git 中文第二版](https://git-scm.com/book/zh/v2)
    - R 用户愉快地使用 Git/Github [Happy Git and GitHub for the useR](https://happygitwithr.com/)
    - [The drake R Package User Manual](https://ropenscilabs.github.io/drake-manual/)
-   
 1. 数据科学 
    - 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)
    - 可解释的机器学习 [Interpretable Machine Learning: A Guide for Making Black Box Models Explainable](https://christophm.github.io/interpretable-ml-book/)
@@ -60,7 +57,6 @@
    - 数据分析与图形艺术 [ggplot2: Elegant Graphics for Data Analysis](https://link.springer.com/book/10.1007%2F978-3-319-24277-4) [PDF](http://moderngraphics11.pbworks.com/f/ggplot2-Book09hWickham.pdf)
    - 数据可视化：实践指南 [Data Visualization: A practical introduction](https://socviz.co/) [Github](https://github.com/kjhealy/socviz)
    - 可视化数据分析与R语言 [Graphical Data Analysis with R](http://www.gradaanwr.net/)
-
 1. 空间数据分析
    - 时空统计与 R 语言 [Spatio-Temporal Statistics with R](https://spacetimewithr.org/)
    - 空间点模式：理论与应用 [Spatial Point Patterns: Methodology and Applications with R](https://spatstat.org)
@@ -85,22 +81,18 @@
    - [Reproducible road safety research: an exploration of the shifting spatial and temporal distribution of car-pedestrian crashes](https://github.com/Robinlovelace/stats19-gisruk)
    - [出租车地理信息可视化](https://data-se.netlify.com/2017/11/20/great-dataviz-examples-in-rstats/)
     - [Spatial Data Science with R](https://www.rspatial.org/) raster 包 Geographic Data Analysis and Modeling 地理数据分析和建模
-
 1. 文本挖掘
    - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
    - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
    - 字符串处理 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/)
    - 文本挖掘 [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
-
 1. 动态文档
    - 动态文档 [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
    - 写作 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown)
    - 网站 [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
-
 1. 模型部署
    - Docker 入门 [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
    - Docker 从入门到实践 [docker practice](https://www.gitbook.com/book/yeasy/docker_practice)
-
 1. 学习 R
    - R 安装与管理 [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
    - R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
@@ -110,24 +102,22 @@
    - [An Introduction to Bayesian Thinking: A Companion to the Statistics with R Course](https://statswithr.github.io/book/)
    - [R语言教程](http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html)
    - [统计计算](http://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/index.html)
-
 1. 学习 Python
-     - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
-     - [廖雪峰的 Python3.x 教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
-     - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python 中文版
-     - [Python 食谱第三版](https://python3-cookbook.readthedocs.io/zh_CN/latest/) Python Cookbook 3rd Edition 中文版
-     - [笨办法学 Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) Learn Python 3 The Hard Way 中文版
-     - [Python 最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/) Python Best Practices Guidebook 中文版
-     - [深入 Python 3](https://woodpecker.org.cn/diveintopython3/) dive into python3 中文版
-     - [高效的 Python：编写高质量Python代码的59个有效方法](https://guoruibiao.gitbooks.io/effective-python/content/) Effective Python: 59 Specific Ways to Write Better Python 中文版
-     - [Python 官方中文文档](https://docs.python.org/zh-cn/3/)
-     - [Python 小抄](https://www.pythonsheets.com/) Python 英文版
-     - [Python 3 标准库](https://pymotw.com/3/)  Python 3 Standard Library 英文版
-     - [Think Python 2nd Edition](https://greenteapress.com/wp/think-python-2e/) 英文版        
-     - [Python 代码风格 PEP8](https://www.python.org/dev/peps/pep-0008/) PEP 8 -- Style Guide for Python Code 官方英文文档
-     - [初识 Python](https://docs.python.org/3/tutorial/index.html) Python 官方入门材料
-     - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) 自动化无聊的工作
-     
+      - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
+      - [廖雪峰的 Python3.x 教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
+      - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python 中文版
+      - [Python 食谱第三版](https://python3-cookbook.readthedocs.io/zh_CN/latest/) Python Cookbook 3rd Edition 中文版
+      - [笨办法学 Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) Learn Python 3 The Hard Way 中文版
+      - [Python 最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/) Python Best Practices Guidebook 中文版
+      - [深入 Python 3](https://woodpecker.org.cn/diveintopython3/) dive into python3 中文版
+      - [高效的 Python：编写高质量Python代码的59个有效方法](https://guoruibiao.gitbooks.io/effective-python/content/) Effective Python: 59 Specific Ways to Write Better Python 中文版
+      - [Python 官方中文文档](https://docs.python.org/zh-cn/3/)
+      - [Python 小抄](https://www.pythonsheets.com/) Python 英文版
+      - [Python 3 标准库](https://pymotw.com/3/)  Python 3 Standard Library 英文版
+      - [Think Python 2nd Edition](https://greenteapress.com/wp/think-python-2e/) 英文版        
+      - [Python 代码风格 PEP8](https://www.python.org/dev/peps/pep-0008/) PEP 8 -- Style Guide for Python Code 官方英文文档
+      - [初识 Python](https://docs.python.org/3/tutorial/index.html) Python 官方入门材料
+      - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) 自动化无聊的工作
  1. 机器学习与数据科学    
      - [Sklearn 与 TensorFlow 机器学习实用指南](https://hand2st.apachecn.org/#/) 
      - [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/) Python Data Science Handbook
@@ -141,6 +131,8 @@
 1. Ben Bolker
    - fall 2018: STAT 4/6c03 [Generalized Linear Models](https://bbolker.github.io/stat4c03/) 
    - Morelia 2018 workshop [Generalized Linear/Mixed models](https://bbolker.github.io/morelia_2018)
+1. 统计机器学习
+   - [Elements of Statistical Learning](https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/)
 
 ### 博客
 
@@ -244,21 +236,20 @@
 - https://rstudio.github.io/learnr/
 - https://rstudio.github.io/profvis/
 
+- https://dbplyr.tidyverse.org/
+- https://dplyr.tidyverse.org
+- https://purrr.tidyverse.org/
+- https://lubridate.tidyverse.org
+- https://ggplot2.tidyverse.org
+- https://tidyr.tidyverse.org
+- https://readr.tidyverse.org
+- https://magrittr.tidyverse.org
+- https://stringr.tidyverse.org
+- https://forcats.tidyverse.org
+- https://style.tidyverse.org
+- https://glue.tidyverse.org
+- https://haven.tidyverse.org
 
-* tidyverse
-  - https://dbplyr.tidyverse.org/
-  - https://dplyr.tidyverse.org
-  - https://purrr.tidyverse.org/
-  - https://lubridate.tidyverse.org
-  - https://ggplot2.tidyverse.org
-  - https://tidyr.tidyverse.org
-  - https://readr.tidyverse.org
-  - https://magrittr.tidyverse.org
-  - https://stringr.tidyverse.org
-  - https://forcats.tidyverse.org
-  - https://style.tidyverse.org
-  - https://glue.tidyverse.org
-  - https://haven.tidyverse.org
 
 * 博客聚合
   - https://rweekly.org/

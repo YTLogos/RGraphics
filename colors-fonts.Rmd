@@ -2,6 +2,8 @@
 
 首先我们加载 R 包 ggplot2 
 
+[wesanderson](https://github.com/karthik/wesanderson) 调色板
+
 ```{r,echo=TRUE}
 library(ggplot2)
 ```
