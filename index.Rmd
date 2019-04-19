@@ -39,6 +39,7 @@ packages = desc::desc_get_deps()$package
 lapply(packages, function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
+if(!require(firatheme)) remotes::install_github('vankesteren/firatheme')
 ```
 
 # 准备 {#prerequisites}
