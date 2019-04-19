@@ -739,6 +739,15 @@ maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过�
 - ggmap
 - sf
 
+```{r,eval=FALSE}
+library(GADMTools)
+data("Corsica")
+# basefile 文件存放路径
+# FRA Corse 的国家代码
+map <- gadm_sf_loadCountries("FRA", basefile = "./")
+gadm_plot(map) + theme_minimal()
+```
+
 ## 网络数据 {#ggplot2-network}
 
 [igraph](https://igraph.org/) 提供了 R 和 Python 接口 <https://github.com/igraph>。 [qgraph](https://github.com/SachaEpskamp/qgraph) 开发者 [Sacha Epskamp](http://sachaepskamp.com) 在个人主页上提供了很多网络数据分析的学习资料， [Rgraphviz](https://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html) 基于 [Graphviz](https://www.graphviz.org/)
