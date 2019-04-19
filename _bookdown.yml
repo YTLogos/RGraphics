@@ -38,11 +38,11 @@ rmd_files:
   - "regular-expression.Rmd"  
   
   # 统计图形
-  - "plot-gallery.Rmd"
+  - "data-visualization-with-plot.Rmd"
   - "custom-plot.Rmd"
 
   # 数据可视化
-  - "ggplot2-gallery.Rmd"
+  - "data-visualization-with-ggplot2.Rmd"
   
   # 配色和选择字体
   - "colors-fonts.Rmd"

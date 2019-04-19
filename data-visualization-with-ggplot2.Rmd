@@ -1,4 +1,4 @@
-# Ggplot2可视化 {#ggplot2-visualization}
+# 数据可视化 {#ggplot2-visualization}
 
 50 个 ggplot2 数据可视化例子[^fifty-ggplot2] 
 
@@ -644,6 +644,8 @@ ggplot(choropleth, aes(long, lat, group = group)) +
   coord_map("polyconic") +
   theme_map()
 ```
+
+美国各地区失业率地图，配不同颜色， [colormap](https://github.com/bhaskarvk/colormap) 适合给静态图配色
 
 [sp-gallery]: https://edzer.github.io/sp/
 

@@ -2,11 +2,18 @@
 
 这里的动态图形覆盖的范围是各种 JS 库，不包含 tcltk、 rgl 和 svg 里面的动图，包括由静态图形转化过来的图形如 animation 或者 magick 和 gganimate 制作的图形 
 
+## gganimate
+
+```{r,echo=TRUE}
+library(ggplot2)
+library(gganimate)
+```
+
+
 ## magick
 
 ```{r,echo=TRUE,eval=FALSE}
 library(gapminder)
-library(ggplot2)
 library(magick)
 img <- image_graph(res = 96)
 datalist <- split(gapminder, gapminder$year)
@@ -27,8 +34,6 @@ image_write(gapminder, "gapminder.gif")
 tweenr 用于中间过渡，插值
 
 ```{r,echo=TRUE,fig.cap="tweenr 添加过渡效果"}
-library(ggplot2)
-
 f <- function(a, b) {
   function(y) {
     a * y * log(y, base = 10) - 1 / b * exp(-(b * y - b / exp(1))^4)
@@ -53,26 +58,40 @@ df2 <- tween_states(df,
 
 ggplot(data = df2, aes(x, y, color = I(color), frame = .frame)) +
   geom_path() +
-  xlab(NULL) + ylab(NULL) + 
   coord_flip() +
-  theme_minimal()
+  theme_minimal() +
+  labs(x = NULL, y = NULL)
 ```
 
 ## plotly
 
-各种动态图形
+[plotly](https://plotly-r.com) 类似 GGplot2 提供了各种交互图形的绘制函数，其中 `plot_ly` 函数提供了两种风格的绘图方式，一种是 Base R 另一种是 GGplot2，我们主要考虑使用 GGplot2 这种风格的 
 
 ### 直方图 {#plotly-histogram}
 
 ```{r,echo=TRUE}
-library(ggplot2)
 library(plotly, warn.conflicts = FALSE)
 packageVersion("plotly")
-set.seed(2)
-values <- rnorm(50)
-p1 <- plot_ly(x = values, type = "histogram", name = "default")
-p2 <- plot_ly(y = values, type = "histogram", name = "flipped")
-subplot(p1, p2)
+# 生成一些随机数
+days <- abs(rnorm(1000, 80, 125))
+
+# 直方图
+plot_ly(as.data.frame(days)) %>%
+  add_lines() %>%
+  layout(yaxis = list(title = ""))
+
+p1 <- plot_ly(as.data.frame(days), x = ~days) %>% add_histogram(name = "plotly.js")
+
+# hist 的默认方法是 Sturges
+price_hist <- function(method = "FD") {
+  h <- hist(diamonds$price, breaks = method, plot = FALSE)
+  plot_ly(x = h$mids, y = h$counts) %>% add_bars(name = method)
+}
+
+subplot(
+  p1, price_hist(), price_hist("Sturges"),  price_hist("Scott"),
+  nrows = 4, shareX = TRUE
+)
 ```
 
 ### 地图 {#plotly-map}
@@ -83,6 +102,21 @@ map_data("world", "canada") %>%
   group_by(group) %>%
   plot_geo(x = ~long, y = ~lat) %>%
   add_markers(size = I(1))
+```
+
+### 热力图 {#plotly-heatmap}
+
+```{r,echo=TRUE}
+data(geyser, package = "MASS")
+den <- MASS::kde2d(geyser$waiting, geyser$duration)
+
+# 热力图
+plot_ly(x = den$x, y = den$y, z = den$z) %>%
+  add_heatmap()
+
+# 等高线图
+plot_ly(x = den$x, y = den$y, z = den$z) %>%
+  add_contour()
 ```
 
 
@@ -101,8 +135,7 @@ hchart(x)
 
 ### 散点图 {#highcharter-scatter}
 
-```{r}
-library("highcharter")
+```{r,echo=TRUE}
 data(diamonds, mpg, package = "ggplot2")
 hchart(mpg, "scatter", hcaes(x = displ, y = hwy, group = class))
 ```
@@ -111,15 +144,15 @@ hchart(mpg, "scatter", hcaes(x = displ, y = hwy, group = class))
 
 美国失业率数据
 
-```r
-data(unemployment,package = "highcharter")
-temp <-  unlist(strsplit(unemployment[,2],",")) # 拆成两列
-unique(temp[seq(from=2,to = length(temp),by=2)]) # 51 个州
+```{r,eval=FALSE,echo=TRUE}
+data(unemployment, package = "highcharter")
+temp <- unlist(strsplit(unemployment[, 2], ",")) # 拆成两列
+unique(temp[seq(from = 2, to = length(temp), by = 2)]) # 51 个州
 # US Counties unemployment rate
 # code: The county code.
-# 
+#
 # name: The county name.
-# 
+#
 # value: The unemployment.
 # A data.frame with 3 variables and 3216 observations.
 ```
@@ -137,9 +170,6 @@ hcmap("countries/us/us-all-all",
     floating = TRUE, valueDecimals = 0, valueSuffix = "%"
   )
 ```
-
-
-<https://github.com/bhaskarvk/colormap> 静态图
 
 ## 网络图 {#network}
 
