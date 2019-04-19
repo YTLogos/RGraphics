@@ -180,6 +180,44 @@ hist(longley$Unemployed, density = 3, angle = 45, main = "")
 
 ### 密度图 {#plot-density}
 
+
+```{r,echo=TRUE}
+library(MASS)
+data(galaxies)
+galaxies <- galaxies/1000
+# Bandwidth Selection by Pilot Estimation of Derivatives
+c(width.SJ(galaxies, method = "dpi"), width.SJ(galaxies))
+plot(x = c(5, 40), y = c(0, 0.2), type = "n", bty = "l",
+         xlab = "velocity of galaxy (km/s)", ylab = "density")
+rug(galaxies)
+lines(density(galaxies, width = 3.25, n = 200),col = 'blue', lty = 1)
+lines(density(galaxies, width = 2.56, n = 200),col = 'red', lty = 3)
+```
+
+```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
+x <- seq(from = 110, to = 174, by = 0.5)
+y1 <- dnorm(x, mean = 145, sd = 9)
+y2 <- dnorm(x, mean = 138, sd = 8)
+plot(x, y1, type="l", lwd=2, col="red",
+     main="Systolic Blood Pressure Before and After Treatment",
+     xlab = "Systolic Blood Pressure (mmHg)",
+     ylab = "Frequency", yaxt="n",
+     xlim = c(110, 175), ylim = c(0, 0.05))
+lines(x, y2)
+polygon(c(110,x,175),c(0,y2,0), col="firebrick3",
+     border = "white")
+polygon(c(117,x,175),c(0,y1,0), col="dodgerblue4",
+     border = "white")
+ylab = c(seq(from=0, to=175, by=25))
+y = c(seq(from=0, to=0.05, length.out = 8))
+axis(2,at=y,labels=ylab, las=1)
+text(x = 120, y = 0.045, "- Pre-Treatment BP", col = "dodgerblue4", cex = 0.9)
+text(x = 120, y = 0.04, " - Post-Treatment BP", col = "firebrick3", cex = 0.9)
+points(109, 0.0445, pch = 15, col = "dodgerblue4")
+points(109, 0.0395, pch = 15, col = "firebrick3")
+```
+
+
 ```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
 days <- abs(rnorm(1000, 80, 125))
 plot(density(days, from = 0),
@@ -572,6 +610,30 @@ topo 是地形数据
 sunspot.month          Monthly Sunspot Data, from 1749 to "Present"
 sunspot.year           Yearly Sunspot Data, 1700-1988
 sunspots               Monthly Sunspot Numbers, 1749-1983
+
+### 函数图 {#function}
+
+```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
+library(pracma)
+##  First zero on the critical line s = 0.5 + i t
+x <- seq(0, 20, len=1001)
+z <- 0.5 + x*1i
+fr <- Re(zeta(z))
+fi <- Im(zeta(z))
+fa <- abs(zeta(z))
+plot(x, fa, type="n", xlim = c(0, 20), ylim = c(-1.5, 2.5),
+     xlab = "Imaginary part (on critical line)", ylab = "Function value",
+     main = "Riemann's Zeta Function along the critical line")
+grid()	 
+lines(x, fr, col="blue")
+lines(x, fi, col="darkgreen")
+lines(x, fa, col = "red", lwd = 2)
+points(14.1347, 0, col = "darkred")
+legend(0, 2.4, c("real part", "imaginary part", "absolute value"),
+       lty = 1, lwd = c(1, 1, 2), col = c("blue", "darkgreen", "red"))
+```
+
+还有 eta 函数和 gammaz 函数
 
 ### 马赛克图 {#plot-mosaic}
 
