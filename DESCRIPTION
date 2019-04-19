@@ -1,7 +1,7 @@
 Package: placeholder
 Type: Book
 Title: R Graphics.
-Version: 0.0.0.9000
+Version: 0.0.0.9999
 Imports: 
   bookdown,
   colormap,

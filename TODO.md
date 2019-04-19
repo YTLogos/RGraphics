@@ -1,11 +1,5 @@
 ## TO DO
 
-> 不要拘泥于一种解决方案，比如清理数据中正则表达式有 Base R 提供的一套，stringr 又一套，提高效率的工具 RStudio 插件 [regexplain](https://github.com/gadenbuie/regexplain) 和辅助创建正则表达式 [RVerbalExpressions](https://github.com/VerbalExpressions/RVerbalExpressions) 包
->
-> 再比如数据处理或者叫特征工程 Base R data.table dplyr 它们各有优点，所以都加以介绍
-
-
-
 - 数据处理
 
   - 获取数据：从本地、数据库、网页导入数据
@@ -16,17 +10,14 @@
     - 扩展：数据库 MySQL 和集群 Spark  DBI sparklyr
 
 - 数据可视化
-
   - Base R
   - Ggplot2
   - 动画
   - 交互式
 
 - 动态文档
-
   - Pandoc 对 Markdown 语法的扩充
   - R Markdown 加持
-
   - 可重复数据分析 Rmd
   - dashboard 面板
   - Shiny 文档
@@ -35,9 +26,11 @@
   - 写幻灯片
 
 
-### 统计软件
+## 统计软件
 
 1. [**JASP**](https://jasp-stats.org/)
+
+## 统计图形
 
 - Plot
 
@@ -145,7 +138,7 @@
   - [rstudio::conf 2018](https://github.com/simecek/RStudioConf2018Slides)
 
 
-### 部署网站
+## 部署网站
 
 ```bash
 # 切到 gh-pages 分支
@@ -340,7 +333,7 @@ plot(pressure)
 
 画图 graphics 使用基础 R 包和基于基础包的扩展包绘图 **plotrix** [@Lemon_2006_Plotrix]
 
-## 插图
+## R Markdown 插图
 
 根据代码动态生成图片，并插入文档中；外部图片插入文档中
 

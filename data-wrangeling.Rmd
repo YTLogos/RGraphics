@@ -1,7 +1,7 @@
 # 数据变形者 {#data-transformer}
 
 ::: sidebar
-更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse
+更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse，数据处理或者叫特征工程 Base R data.table dplyr 它们各有优点，所以都加以介绍
 :::
 
 函数式编程 Functional Programming Languages 用于数据处理，向量化运算、并行运算和分布式运算

@@ -8,6 +8,7 @@ R 内置的三种匹配模式
 1. `perl = TRUE`: 使用 Perl 正则表达式.
 1. `fixed = FALSE, perl = FALSE`: 使用 POSIX 1003.2 extended 正则表达式 (默认设置).
 
+不要拘泥于一种解决方案，比如清理数据中正则表达式有 Base R 提供的一套，stringr 又一套，提高效率的工具 RStudio 插件 [regexplain](https://github.com/gadenbuie/regexplain) 和辅助创建正则表达式 [RVerbalExpressions](https://github.com/VerbalExpressions/RVerbalExpressions) 包
 
 ::: sidebar
 有几个名词需要单独拎出来解释的
