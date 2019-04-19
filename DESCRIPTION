@@ -47,3 +47,4 @@ Suggests:
   svglite,
   tm,
   XML
+Remotes: vankesteren/firatheme

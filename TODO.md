@@ -34,28 +34,10 @@
   - 写博客
   - 写幻灯片
 
-- 统计建模  功能比较全面的 R 包或者框架的介绍，如 rstan 最有效的 R 包（计算结果最好） 最快实现的 R 包（计算速度最快、开发效率高）
-  - 线性模型
-    - 多元线性回归：参数估计，参数显著性检验，模型显著性检验和模型预测，共线性问题
-    - 多重多元线性回归
-    - 逐步回归、岭回归/最小角回归/Lasso、主成分回归、支持向量机回归等
-    - 高维线性模型 SIS 变量选择 
-  - 广义线性模型
-- 机器学习
-  - 支持向量机
-  - 最近邻
-  - 随机森林
-  - 神经网络
-
-
 
 ### 统计软件
 
 1. [**JASP**](https://jasp-stats.org/)
-
-
-
-[学习正则表达式](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)
 
 - Plot
 
@@ -161,8 +143,6 @@
   - [Shiny Server Professional Administrator's Guide](https://docs.rstudio.com/shiny-server/)
   - [Learn Shiny](https://shiny.rstudio.com/tutorial/)
   - [rstudio::conf 2018](https://github.com/simecek/RStudioConf2018Slides)
-
-- [Comprehensive list of color palettes available in r](https://github.com/EmilHvitfeldt/r-color-palettes)
 
 
 ### 部署网站
@@ -391,21 +371,7 @@ plot(pressure)
 plot(AirPassengers)
 ```
 
-## 字体
-
-fontquiver: Set of Installed Fonts
-
-Provides a set of fonts with permissive licences. This is useful when you want to avoid system fonts to make sure your outputs are reproducible.
-
-fontBitstreamVera: Fonts with 'Bitstream Vera Fonts' License
-
-Provides fonts licensed under the 'Bitstream Vera Fonts' license for the 'fontquiver' package.
-
-fontLiberation: Liberation Fonts
-
-A placeholder for the Liberation fontset intended for the 'fontquiver' package. This fontset covers the 12 combinations of families (sans, serif, mono) and faces (plain, bold, italic, bold italic) supported in R graphics devices.
-
-## 参考 {#ref}
+## 参考
 
 1. 现代统计图形（未出版） --- 谢益辉
 1. Fundamentals of Data Visualization --- Claus O. Wilke [网站](https://serialmentor.com/dataviz/)
