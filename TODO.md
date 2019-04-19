@@ -254,9 +254,9 @@ plot3d.surf(, , volcano)
 
 ```{r gap-axis,fig.asp=1,fig.width=4.5,fig.cap="gap.axis用法",eval=getRversion() >= 3.6}
 ## Changing default gap between labels:
-plot(0:100, type="n", axes=FALSE, ann=FALSE)
+plot(c(0,100),c(0,50), type="n", axes=FALSE, ann=FALSE)
 title(quote("axis(1, .., gap.axis = f)," ~~ f >= 0))
-axis(2, at = 5*(0:20), las = 1, gap.axis = 1/4)
+axis(2, at = 5*(0:10), las = 1, gap.axis = 1/4)
 gaps <- c(4, 2, 1, 1/2, 1/4, 0.1, 0)
 chG <- paste0(ifelse(gaps == 1, "default:  ", ""),
               "gap.axis=", formatC(gaps))

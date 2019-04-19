@@ -16,10 +16,79 @@ library(ggplot2)
 
 ## 要素 {#elements} 
 
-点线面
+点和线是最常见的画图元素，在 `plot` 函数中，分别用参数 `pch` 和 `lty` 来设定类型，点的大小、线的宽度分别用参数 `cex` 和 `lwd` 来指定，颜色由参数 `col` 设置。参数 `type` 不同的值设置如下，`p` 显示点，`l` 绘制线，`b` 同时绘制空心点，并用线连接，`c` 只有线，`o` 在线上绘制点，`s` 和 `S` 点线连接绘制阶梯图，`h` 绘制类似直方图一样的垂线，最后 `n` 表示什么也不画。
 
-点 pch cex 点的类型和大小  col 
-线 lty lwd 线的类型和宽度  col 
+```{r,echo=TRUE,fig.cap="不同的 pch 参数值"}
+##-------- Showing all the extra & some char graphics symbols ---------
+pchShow <-
+  function(extras = c("*",".", "o","O","0","+","-","|","%","#"),
+           cex = 2, ## good for both .Device=="postscript" and "x11"
+           col = "red3", bg = "gold", coltext = "brown", cextext = 1.2,
+           main = paste("plot symbols :  points (...  pch = *, cex =",
+                        cex,")"))
+  {
+    nex <- length(extras)
+    np  <- 26 + nex
+    ipch <- 0:(np-1)
+    k <- floor(sqrt(np))
+    dd <- c(-1,1)/2
+    rx <- dd + range(ix <- ipch %/% k)
+    ry <- dd + range(iy <- 3 + (k-1)- ipch %% k)
+    pch <- as.list(ipch) # list with integers & strings
+    if(nex > 0) pch[26+ 1:nex] <- as.list(extras)
+    plot(rx, ry, type = "n", axes  =  FALSE, xlab = "", ylab = "", main = main)
+    abline(v = ix, h = iy, col = "lightgray", lty = "dotted")
+    for(i in 1:np) {
+      pc <- pch[[i]]
+      ## 'col' symbols with a 'bg'-colored interior (where available) :
+      points(ix[i], iy[i], pch = pc, col = col, bg = bg, cex = cex)
+      if(cextext > 0)
+          text(ix[i] - 0.3, iy[i], pc, col = coltext, cex = cextext)
+    }
+  }
+
+pchShow()
+```
+
+
+```{r,echo=TRUE,fig.cap="pch 支持的字符",out.width="80%"}
+## ------------ test code for various pch specifications -------------
+# Try this in various font families (including Hershey)
+# and locales.  Use sign = -1 asserts we want Latin-1.
+# Standard cases in a MBCS locale will not plot the top half.
+TestChars <- function(sign = 1, font = 1, ...)
+{
+   MB <- l10n_info()$MBCS
+   r <- if(font == 5) { sign <- 1; c(32:126, 160:254)
+       } else if(MB) 32:126 else 32:255
+   if (sign == -1) r <- c(32:126, 160:255)
+   par(pty = "s")
+   plot(c(-1,16), c(-1,16), type = "n", xlab = "", ylab = "",
+        xaxs = "i", yaxs = "i",
+        main = sprintf("sign = %d, font = %d", sign, font))
+   grid(17, 17, lty = 1) ; mtext(paste("MBCS:", MB))
+   for(i in r) try(points(i%%16, i%/%16, pch = sign*i, font = font,...))
+}
+par(mfrow=c(2,2), mar = .1+ c(2,2,3,1))
+TestChars()
+try(TestChars(sign = -1))
+TestChars(font = 5)  # Euro might be at 160 (0+10*16).
+                     # macOS has apple at 240 (0+15*16).
+try(TestChars(-1, font = 2))  # bold
+```
+
+```{r,echo=TRUE,fig.cap="不同的 type 参数值",fig.width=9,fig.asp=1}
+x <- 0:12
+y <- sin(pi/5 * x)
+par(mfrow = c(3,3), mar = .1+ c(2,2,3,1))
+for (tp in c("p","l","b",  "c","o","h",  "s","S","n")) {
+   plot(y ~ x, type = tp, main = paste0("plot(*, type = \"", tp, "\")"))
+   if(tp == "S") {
+      lines(x, y, type = "s", col = "red", lty = 2)
+      mtext("lines(*, type = \"s\", ...)", col = "red", cex = 0.8)
+   }
+}
+```
 
 颜色 col 连续型和离散型
 面/多边形 rect 颜色填充
@@ -78,7 +147,7 @@ title(bquote(hat(a) == .(ahat)))
 
 
 
-```{r plot,echo=FALSE,fig.width=7,fig.height=9,fig.cap='plot函数对象',fig.asp=1}
+```{r plot,echo=TRUE,fig.width=7,fig.height=9,fig.cap='plot函数对象',fig.asp=1}
 # pdf(file = 'plot.pdf',width=10,height=6)
 # layout(matrix(seq(6), 2, 3, byrow = TRUE))
 # 矩阵图 自带 layout
@@ -579,7 +648,7 @@ legend("bottomleft", leg.txt,
 )
 ```
 
-## TikZ {#tikz}
+## TikZ 绘图 {#tikz}
 
 > 用 Base R 绘制带有复杂数学公式的图形，tikzDevice 包结合 R Markdown 的使用，引入 LaTeX 绘图引擎 TikZ 主要是借助 LaTeX 对数学符号的强大支持，让R 语言绘制的图形上出现优美的复杂的数学符号表达式 
 
@@ -694,7 +763,7 @@ legend("topright",
 )
 ```
 
-## 保存 {#save}
+## 保存图形 {#save}
 
 保存绘制的图形，R 使用的图形渲染库的版本
 
@@ -734,7 +803,7 @@ apropos("dev.")
 [22] "devAskNewPage"       "deviance"            "deviceIsInteractive"
 ```
 
-## Unicode 字母表 {#letter-numbers}
+## Unicode 字母 {#letter-numbers}
 
 基础绘图函数，如 plot 标签 `xlab` 支持 Unicode 代码表示的希腊字母，常用字母表备查，公式环境下，也可以用在绘图中
 
