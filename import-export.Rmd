@@ -157,6 +157,42 @@ yaml::read_yaml(file = '_bookdown.yml')
 
 yaml 和 json 格式互转
 
+## 批量读取文件 {#batch-import}
+
+```{r,echo=TRUE,eval=FALSE}
+read_list <- function(list_of_datasets, read_func) {
+  read_and_assign <- function(dataset, read_func) {
+    dataset_name <- as.name(dataset)
+    dataset_name <- read_func(dataset)
+  }
+
+  # invisible is used to suppress the unneeded output
+  output <- invisible(
+    sapply(list_of_datasets,
+      read_and_assign,
+      read_func = read_func, simplify = FALSE, USE.NAMES = TRUE
+    )
+  )
+
+  # Remove the extension at the end of the data set names
+  names_of_datasets <- c(unlist(strsplit(list_of_datasets, "[.]"))[c(T, F)])
+  names(output) <- names_of_datasets
+  return(output)
+}
+
+data_files <- list.files(pattern = ".csv") # 提取文件名.csv格式文件
+# 文件列表
+print(data_files)
+
+library("readr")
+library("tibble")
+# 读取文件
+list_of_data_sets <- read_list(data_files, read_csv)
+# 查看数据
+glimpse(list_of_data_sets)
+```
+
+
 ## 读写数据库 {#read-write-database}
 
 [Hands-On Programming with R](https://rstudio-education.github.io/hopr) 数据读写章节[^dataio]
