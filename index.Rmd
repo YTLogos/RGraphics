@@ -60,7 +60,7 @@ lapply(packages, function(pkg) {
 
 
 
-## Why R? {#why-r}
+## Why R {#why-r}
 
 不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
 
@@ -124,6 +124,15 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 ## 关于本书 {#what-talk-about}
 
 这里写每章的主要内容介绍
+
+1. R包数量增长如此之快  R包如此之多
+2. R包之间依赖关系如此之复杂
+3. 每个base R包内的函数如此之多，函数参数之多，`ls("package:base") %>% length`
+4. 数据处理和可视化常用基本包  ggplot2  dplyr 
+5. 程序设计风格如此之多，面向对象s3 s4 RC R5 R6、过程（函数调用）、响应式 shiny 动态图形、函数式编程（数据操作）
+6. 数据结构如此之多  列表list sp sf 
+7. 统计学家的程序设计思维如此难懂
+8. 数据交换接口如此之多，数据库、网页、编程语言 python 等 
 
 ## 记号约定 {#conventions}
 
