@@ -13,6 +13,7 @@ Imports:
   ggthemes,
   gridExtra,
   highcharter,
+  leaflet,
   magick,
   mapdata,
   mapproj,

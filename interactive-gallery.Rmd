@@ -171,6 +171,17 @@ hcmap("countries/us/us-all-all",
   )
 ```
 
+## 地图 {#leaflet}
+
+```{r,echo=TRUE}
+library(leaflet)
+# a map with the default OSM tile layer
+leaflet() %>% 
+  addTiles() %>% 
+  setView(-93.65, 42.0285, zoom = 17) %>% 
+  addPopups(-93.65, 42.0285, 'Here is the <b>Department of Statistics</b>, ISU')
+```
+
 ## 网络图 {#network}
 
 [visNetwork](https://github.com/datastorm-open/visNetwork) 基于 vis.js 库
