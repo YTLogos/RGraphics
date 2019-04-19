@@ -291,8 +291,30 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 
 查看帮助 `?.Rprofile`
 
-`commandArgs` 命令行参数传递
+`commandArgs` 从终端命令行中传递参数
 
-- [rdoc](https://github.com/mdequeljoe/rdoc) 高亮 R 帮助文档中的 R 函数、关键字 `NULL`
-- [radian](https://github.com/randy3k/radian) 代码自动补全和语法高亮
-- [docopt](https://github.com/docopt/docopt.R) 提供R命令行工具，如 [littler](https://github.com/eddelbuettel/littler) 包
+- [rdoc](https://github.com/mdequeljoe/rdoc) 高亮 R 帮助文档中的 R 函数、关键字 `NULL`。启用需要在R控制台中执行 `rdoc::use_rdoc()`
+- [radian](https://github.com/randy3k/radian) 代码自动补全和语法高亮，进入 R 控制台，终端中输入`radian`
+- [docopt](https://github.com/docopt/docopt.R) 提供R命令行工具，如 [littler](https://github.com/eddelbuettel/littler) 包，[getopt](https://github.com/trevorld/r-getopt) 从终端命令行接受参数
+- [optparse](https://github.com/trevorld/r-optparse) 命令行选项参数的解析器
+
+安装完 R-littler R-littler-examples (centos) 或 littler r-cran-littler (ubuntu) 后，执行
+
+```bash
+# centos
+sudo ln -s /usr/lib64/R/library/littler/examples/install.r /usr/bin/install.r 
+sudo ln -s /usr/lib64/R/library/littler/examples/install2.r /usr/bin/install2.r
+sudo ln -s /usr/lib64/R/library/littler/examples/installGithub.r /usr/bin/installGithub.r 
+sudo ln -s /usr/lib64/R/library/littler/examples/testInstalled.r /usr/bin/testInstalled.r
+# ubuntu
+sudo ln -s /usr/lib/R/site-library/littler/examples/install.r /usr/bin/install.r 
+sudo ln -s /usr/lib/R/site-library/littler/examples/install2.r /usr/bin/install2.r
+sudo ln -s /usr/lib/R/site-library/littler/examples/installGithub.r /usr/bin/installGithub.r 
+sudo ln -s /usr/lib/R/site-library/littler/examples/testInstalled.r /usr/bin/testInstalled.r
+```
+
+这样可以载终端中安装 R 包了
+
+```r
+install.r docopt
+```
