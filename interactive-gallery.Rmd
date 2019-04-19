@@ -75,11 +75,6 @@ packageVersion("plotly")
 # 生成一些随机数
 days <- abs(rnorm(1000, 80, 125))
 
-# 直方图
-plot_ly(as.data.frame(days)) %>%
-  add_lines() %>%
-  layout(yaxis = list(title = ""))
-
 p1 <- plot_ly(as.data.frame(days), x = ~days) %>% add_histogram(name = "plotly.js")
 
 # hist 的默认方法是 Sturges
