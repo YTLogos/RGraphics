@@ -13,6 +13,7 @@
 - [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 
 - [R语言调色版合集](https://github.com/EmilHvitfeldt/r-color-palettes)
 - [条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
+- [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)
 - 太多了，这里放不下
 
 ## 相关资源
