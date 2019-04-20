@@ -34,7 +34,7 @@ rmd_files:
   - "data-wrangeling.Rmd"
   
   # 数据清理
-  - "data-cleaning.Rmd"
+  - "string-manipulation.Rmd"
   - "regular-expression.Rmd"  
   
   # 统计图形

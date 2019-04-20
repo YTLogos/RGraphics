@@ -126,27 +126,6 @@ Sys.setlocale("LC_ALL", locale = foo)
 
 脱字符 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
-## 字符串转换 {#character-translations}
-
-`tolower` 将字符串或字符串向量中含有的大写字母全都转化为小写， `toupper` 函数正好与之相反，`chartr` 是对应字符的替换操作.
-
-```{r,echo=TRUE}
-tolower(c("HELLO", "Hello, R", "hello"))
-toupper(c("HELLO", "Hello, R", "hello"))
-```
-
-`chartr` 支持正则表达式的替换
-
-```{r,echo=TRUE}
-x <- "MiXeD cAsE 123"
-# 将字符 iXs 替换为 why
-chartr("iXs", "why", x)
-# 将字符串 a-cX 中的字符挨个对应地替换为 D-Fw
-chartr("a-cX", "D-Fw", x)
-```
-
-
-
 ## 匹配 {#match}
 
 近似匹配 `agrep` for approximate matching.
