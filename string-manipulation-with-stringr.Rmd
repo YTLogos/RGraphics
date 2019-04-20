@@ -1,4 +1,4 @@
-# 字符串处理 {#string-manipulation-with-stringr}
+# 字符串操作 II {#string-manipulation-with-stringr}
 
 相比于第\@ref(string-manipulation)章，本章主要介绍字符串处理 stringr 包以及一些高级应用。
 
