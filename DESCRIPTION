@@ -45,7 +45,6 @@ Suggests:
   rsvg,
   showtext,
   svglite,
-  tm,
   XML
 Remotes: 
   vankesteren/firatheme,
