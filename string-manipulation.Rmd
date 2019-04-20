@@ -14,7 +14,28 @@ help.search(keyword = "character", package = "base")
 
 ## 字符数统计 {#base-count}
 
-nchar
+`nchar` 函数统计字符串向量中每个元素的字符个数，注意与函数`length` 的差别，它统计向量中元素的个数，即向量的长度。
+
+```{r,echo=TRUE}
+nchar(c("Hello", "world", "!"))
+R.version.string
+nchar(R.version.string)
+deparse(base::mean)
+nchar(deparse(base::mean))
+```
+
+一些特殊的情况
+
+```{r,echo=TRUE}
+nchar("")
+nchar(NULL)
+nchar(0)
+pi
+nchar(pi)
+exp(1)
+nchar(exp(1))
+nchar(NA)
+```
 
 ## 字符串翻译 {#base-translations}
 
@@ -36,6 +57,16 @@ toupper(c("HELLO", "Hello, R", "hello"))
 ## 字符串拆分 {#base-split}
 
 strsplit
+
+## 字符串匹配 {#base-match}
+
+近似匹配 `agrep` for approximate matching.
+
+部分匹配 `charmatch`  `pmatch` for partial matching,
+
+`match` for matching to whole strings, 
+
+`startsWith` for matching of initial parts of strings.
 
 ## 字符串查询 {#base-search}
 
