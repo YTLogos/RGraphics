@@ -47,20 +47,6 @@ if(!require(firatheme)) remotes::install_github('vankesteren/firatheme')
 \index{knitr}
 \index{pandoc}
 
-::: warning
-
-1. 数据变形者
-1. 统计图形
-1. 数据导入导出
-1. R 语言数据处理和正则表达式
-
-[容器技术与 Docker]{.todo}
-[数据结构与算法基础C++]{.todo}
-[常用机器学习算法与kaggle项目实战]{.todo}
-:::
-
-
-
 ## Why R {#why-r}
 
 不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
