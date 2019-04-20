@@ -128,14 +128,6 @@ Sys.setlocale("LC_ALL", locale = foo)
 
 ## 匹配 {#match}
 
-近似匹配 `agrep` for approximate matching.
-
-部分匹配 `charmatch`  `pmatch` for partial matching,
-
-`match` for matching to whole strings, 
-
-`startsWith` for matching of initial parts of strings.
-
 默认的匹配方式是贪婪的，会使用尽可能多的匹配次数，这个可以变为最小的匹配次数，通过在其之后添加 `?`，一个正则表达式可能跟着重复量词，下面的限定符都是限定在它前面的正则表达式
 
 Table: (\#tab:repetition-quantifiers) 贪婪匹配限定符
