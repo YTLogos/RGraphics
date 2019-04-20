@@ -1,12 +1,16 @@
 # 字符串操作 {#string-manipulation}
 
-[janitor](https://github.com/sfirke/janitor)
-
 ```{r,include=FALSE}
 library(magrittr) # 提供管道操作 %>%
 ```
 
-参考 [字符串处理](https://blog.csdn.net/duqi_yc/article/details/9817243)
+字符和字符串类型的数据值得单独拿出来讲，不仅因为内容多，而且比较难，应用范围最广，特别是面对文本类型的数据时，几乎是避不开的！R 的前身是 S，S 的前身是一些 Fortran 和 C 子程序，最早在贝尔实验室是用于文本分析领域，因此在 R 基础包中提供了丰富的字符串处理函数，你可以在R控制台中执行如下一行命令查看
+
+```{r,eval=FALSE,echo=TRUE}
+help.search(keyword = "character", package = "base")
+```
+
+本章主要介绍 R 内置的字符串操作函数，参考 [字符串处理](https://blog.csdn.net/duqi_yc/article/details/9817243)
 
 ## 字符数统计 {#base-count}
 
@@ -14,35 +18,20 @@ nchar
 
 ## 字符串翻译 {#base-translations}
 
-`tolower` 将字符串或字符串向量中含有的大写字母全都转化为小写， `toupper` 函数正好与之相反，`chartr` 是对应字符的替换操作.
+`tolower` 将字符串或字符串向量中含有的大写字母全都转化为小写， `toupper` 函数正好与之相反.
 
 ```{r,echo=TRUE}
 tolower(c("HELLO", "Hello, R", "hello"))
 toupper(c("HELLO", "Hello, R", "hello"))
 ```
 
-`chartr` 支持正则表达式的替换
 
-```{r,echo=TRUE}
-x <- "MiXeD cAsE 123"
-# 将字符 iXs 替换为 why
-chartr("iXs", "why", x)
-# 将字符串 a-cX 中的字符挨个对应地替换为 D-Fw
-chartr("a-cX", "D-Fw", x)
-```
 
 ## 字符串连接 {#base-concatenate}
 
-连接字符串，`paste/c/bfile/bracket` 函数性能比较
-<https://wch.github.io/string_builder/index.html>
 
 清晰目标是提取字段，整理成数据框的数据存储形式 grep sub gsub
 
-R 基础包提供了丰富的字符串处理函数
-
-```{r,eval=FALSE,echo=TRUE}
-help.search(keyword = "character", package = "base")
-```
 
 ## 字符串拆分 {#base-split}
 
@@ -116,19 +105,6 @@ grepl(x = "a\\\\b", pattern = "\\\\", fixed = TRUE)
 ```
 
 此外，还有一个函数 `grepRaw` 用于匹配 Raw Vectors 
-
-## 字符串替换 {#base-replacement}
-
-两个 `*sub` 函数的区别：sub 替换第一次匹配到的结果，gsub 替换所有匹配的结果
-
-```{r,echo=TRUE}
-sub(" .*", "", extSoftVersion()["PCRE"])
-```
-
-
-```{r,echo=TRUE}
-gsub(pattern =  "([ab])", replacement = "\\1_\\1_", x = "abc and ABC")
-```
 
 `regexpr`  `gregexpr`  `regexec` 和 `regmatches` 
 
@@ -238,80 +214,29 @@ txt <- c(
 regexpr("en", txt)
 ```
 
+## 字符串替换 {#base-replacement}
+
+`chartr` 支持正则表达式的替换，`chartr` 是对应字符的替换操作
+
+```{r,echo=TRUE}
+x <- "MiXeD cAsE 123"
+# 将字符 iXs 替换为 why
+chartr("iXs", "why", x)
+# 将字符串 a-cX 中的字符挨个对应地替换为 D-Fw
+chartr("a-cX", "D-Fw", x)
+```
+
+两个 `*sub` 函数的区别：sub 替换第一次匹配到的结果，gsub 替换所有匹配的结果
+
+```{r,echo=TRUE}
+sub(" .*", "", extSoftVersion()["PCRE"])
+```
+
+```{r,echo=TRUE}
+gsub(pattern =  "([ab])", replacement = "\\1_\\1_", x = "abc and ABC")
+```
+
 ## 字符串提取 {#base-extract}
 
 `substr` 和 `substring`
 
-## 字符操作性能 {#performance}
-
-当你对一个很长的字符串进行大量的正则表达式匹配的时候，你需要考虑性能问题了，这时候该考虑启用合适的选项，一般来讲， PCRE 比默认的正则表达式引擎快，`fixed=TRUE` 可以继续加快匹配速度，特别是当每个模式只匹配少量次数时。
-
-基于 PCRE 的匹配
-
-`options` 默认控制PCRE的三个选项 `PCRE_limit_recursion=NA` 、`PCRE_study=10` 和 `PCRE_use_JIT=TRUE`
-
-看看本系统环境下 PCRE 的支持情况
-
-```{r,echo=TRUE}
-pcre_config()
-```
-
-查看系统的PCRE配置
-
-```{r,echo=TRUE}
-sapply(c("PCRE_limit_recursion", "PCRE_study", "PCRE_use_JIT"), getOption)
-```
-
-## stringi 和 stringr {#stringi-stringr}
-
-[Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
-
-[stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包，[re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份，[正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
-
-Pattern Matching and Replacement 模式匹配和替换
-
-正则表达式 is ervrywhere，is 高级/hacker's skill 技能
-
-- [正则表达式速查表 -- Python3](https://www.dataquest.io/blog/large_files/python-regular-expressions-cheat-sheet.pdf)
-- [Online regex tester and debugger](https://regex101.com/)
-- [Regular expression operations](https://docs.python.org/3/library/re.html)
-- [Handling Strings with R](http://www.gastonsanchez.com/r4strings/) 字符串处理
-
-## RCurl 和 XML {#rcurl-xml}
-
-用 R 语言写爬虫 解析网页
-
-web 服务都会用到正则吧
-
-curl 和 xml2 以及 rvest
-
-libcurl 库的版本
-
-```{r,echo=TRUE}
-libcurlVersion()
-```
-
-## 扩展阅读 {#more-readings}
-
-[How did Axios rectangle Trump's PDF schedule? A try with R](https://masalmon.eu/2019/02/11/trump-schedule/) 使用 pdftools 和 magick 处理表格，这两个R包分别依赖 Poppler C++ 和 ImageMagick++
-
-如何在 Ubuntu 18.04 上安装 `poppler >= 0.73` [^install-poppler]
-
-[^install-poppler]: https://askubuntu.com/questions/1112856
-
-[Manipulating strings with the {stringr} package](https://www.brodrigues.co/blog/2019-02-10-stringr_package/)
-
-PDF 表格抽取工具 [tabulizer](https://github.com/ropensci/tabulizer)
-
-在 Ubuntu 上安装 pdftools 和 magick
-
-```bash
-sudo apt-get install libpoppler-cpp-dev libmagick++-dev
-```
-
-```{r,echo=TRUE,eval=FALSE}
-install.packages(c("pdftools", "magick"))
-```
-
-OCR 扫描 PDF 文字识别 tesseract
-  
