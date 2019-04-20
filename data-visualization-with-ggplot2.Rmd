@@ -750,12 +750,133 @@ map <- gadm_sf_loadCountries("FRA", basefile = "./")
 gadm_plot(map) + theme_minimal()
 ```
 
+```{r,echo=TRUE}
+library(maps) # For map data
+library(mapdata)
+library(ggplot2)
+east_asia <- map_data("worldHires", region = c("Japan", "China", "North Korea", "South Korea"))
+
+# Map region to fill color
+ggplot(east_asia, aes(x = long, y = lat, group = group, fill = region)) +
+  geom_polygon(colour = "black") +
+  scale_fill_brewer(palette = "Set2")
+```
+
 ## 网络数据 {#ggplot2-network}
 
 [igraph](https://igraph.org/) 提供了 R 和 Python 接口 <https://github.com/igraph>。 [qgraph](https://github.com/SachaEpskamp/qgraph) 开发者 [Sacha Epskamp](http://sachaepskamp.com) 在个人主页上提供了很多网络数据分析的学习资料， [Rgraphviz](https://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html) 基于 [Graphviz](https://www.graphviz.org/)
 
-geomnet
-
-```r
+```{r,eval=FALSE}
 BiocManager::install("Rgraphviz", version = "3.8")
 ```
+
+## CRAN 分析 {#analysis-cran}
+
+首先我们从 CRAN 官网下载 R 包描述信息
+
+```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
+library(tidyverse)
+# CRAN R包 metadata 信息
+pdb = readRDS(file = file(sprintf("%s/web/packages/packages.rds", getOption("repos")["CRAN"])))
+```
+
+接着，我们可以看看CRAN 上发布的 R 包数量
+
+```{r,echo=TRUE}
+pdb[, "Package"] %>% length()
+```
+
+经过与官网发布的数据来对比，我们发现这里计算的结果与实际不符，多出来了几十个R包，所以我们再观察一下是否有重复的 R 包描述信息
+
+```{r,echo=TRUE}
+pdb[, "Package"][duplicated(pdb[, "Package"])]
+```
+
+不难发现，果然有！所以去掉重复的 R 包信息，就是 CRAN 上实际发布的 R 包列表
+
+```{r,echo=TRUE}
+subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package")) %>% length()
+```
+
+接下来，我们再来查看一些比较高产的 R 包开发者谢益辉都维护了哪些R包，如表 \@ref(tab:rmarkdown-eco) 所示
+
+```{r rmarkdown-eco,echo=TRUE}
+subset(pdb,
+  subset = grepl("Yihui Xie", pdb[, "Maintainer"]),
+  select = c("Package", "Maintainer", "Title")
+) %>%
+  knitr::kable(caption = "谢益辉维护的 R Markdown 生态", booktabs = TRUE)
+```
+
+接下来，我们想看看R包维护者数量有多少
+
+```{r,echo=TRUE}
+subset(pdb,
+        subset = !duplicated(pdb[, "Package"]),
+       select = "Maintainer"
+) %>% unique() %>% length()
+```
+
+可实际上没有这么多的开发者，因为存在这样的情况，以R包维护者 Hadley Wickham 为例，由于他曾使用过不同的邮箱，所以在维护者字段出现了不一致的情况，实际却是同一个人。
+
+```{r,echo=TRUE}
+subset(pdb,
+  subset = grepl("Hadley Wickham", pdb[, "Maintainer"]),
+  select = c("Package", "Maintainer")
+)
+```
+
+因此，有必要先把 Maintainer 字段中的邮箱部分去掉
+
+```{r,echo=TRUE}
+clean_maintainer <- function(x) {
+  # 去掉邮箱
+  x <- gsub("<([^<>]*)>", "", x)
+  # 去掉 \n \t \' \" 和 '
+  x <- gsub("(\\\n)|(\\\t)|(\\\")|(\\\')|(')", "", x)
+  # 去掉末尾空格
+  x <- gsub(" +$", "", x)
+}
+```
+
+这样我们可以得到比较靠谱的R包维护者数量了！
+
+```{r,echo=TRUE}
+# 去重之后
+cran_maintainers <- subset(pdb,
+  subset = !duplicated(pdb[, "Package"]),
+  select = "Maintainer"
+) %>%
+  lapply(clean_maintainer) %>% # 清理 Maintainer 字段
+  unlist() # 列表转成字符串向量
+cran_maintainers %>%
+  unique() %>% # 去重
+  length()
+```
+
+接下来，我们还想把 R 包维护者，按照其维护的R包数量排个序，用条形图\@ref(fig:top-maintainers) 表示
+
+```{r top-maintainers,fig.cap="(ref:top-maintainers)",echo=TRUE}
+myData <- cran_maintainers %>%
+  table() %>% # 按照维护者分组计数
+  sort(decreasing = T) %>% # 降序排列
+  head(20) # 取 Top 20
+par(mar = c(2, 7, 1, 1))
+barCenters <- barplot(myData,
+  col = "lightblue", axes = FALSE,
+  axisnames = FALSE, horiz = TRUE, border = "white"
+)
+text(
+  y = barCenters, x = par("usr")[3],
+  adj = 1, labels = names(myData), xpd = TRUE
+)
+axis(1,
+  labels = seq(0, 90, by = 10), at = seq(0, 90, by = 10),
+  las = 1, col = "gray"
+)
+grid()
+```
+
+(ref:top-maintainers) 维护R包数量最多的20个人[^orphaned]
+
+[^orphaned]: 其中 Orphaned 表示之前的R包维护者不愿意继续维护了，后来有人接手维护，Orphaned 表示这一类接盘侠
