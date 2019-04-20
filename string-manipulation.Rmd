@@ -66,7 +66,54 @@ paste0(c("A", "B", "C"), 1:3, collapse = ";")
 
 ## 字符串拆分 {#base-split}
 
-strsplit
+```{r,eval=FALSE,echo=TRUE}
+strsplit(x, split, fixed = FALSE, perl = FALSE, useBytes = FALSE)
+```
+
+`strsplit` 函数用于字符串拆分，参数 x 是被拆分的字符串向量，其每个元素都会被拆分，而参数 split 表示拆分的位置，可以用正则表达式来描述位置，拆分的结果是一个列表。
+
+参数 fixed 默认设置 `fixed = FALSE` 表示正则表达式匹配，而 `fixed = TRUE` 表示正则表达式的精确匹配或者按文本字符的字面意思匹配，即按普通文本匹配。我们知道按普通文本匹配速度快。
+
+当启用 `perl = TRUE` 时，由 `PCRE_use_JIT` 控制细节。`perl` 参数的设置与 Perl 软件版本有关，如果正则表达式很长，除了正确设置正则表达式，使用 `perl = TRUE` 可以提高运算速度
+
+参数 useBytes 设置是否按照逐个字节地进行匹配，默认设置为 FALSE，即按照字符而不是字节进行匹配
+
+```{r,echo=TRUE}
+x <- c(as = "asfef", qu = "qwerty", "yuiop[", "b", "stuff.blah.yech")
+# 按字母 e 拆分字符串向量 x
+strsplit(x, "e")
+```
+
+参数 split 支持通过正则表达式的方式指明拆分位置
+
+```{r,echo=TRUE}
+# 默认将点号 . 看作一个正则表达式，它是一个元字符，匹配任意字符
+strsplit("a.b.c", ".")
+# 这才是按点号拆分
+strsplit("a.b.c", ".", fixed = TRUE)
+# 或者
+strsplit("a.b.c", "[.]")
+# 或者转义点号，去掉元字符的特殊意义
+strsplit("a.b.c", "\\.")
+```
+
+这里介绍一个将字符串逆序的函数 `str_rev`
+
+```{r,echo=TRUE}
+str_rev <- function(x)
+        sapply(lapply(strsplit(x, NULL), rev), paste, collapse = "")
+str_rev(c("abc", "Statistics"))
+```
+
+为了加深理解，再举几个例子
+
+```{r,echo=TRUE}
+# 最后一个空字符没有产生
+strsplit(paste(c("", "a", ""), collapse="#"), split="#")
+# 空字符只有有定义的时候才会产生
+strsplit("", " ")
+strsplit(" ", " ")
+```
 
 ## 字符串匹配 {#base-match}
 
