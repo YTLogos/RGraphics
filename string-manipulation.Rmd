@@ -329,6 +329,39 @@ gsub(pattern =  "([ab])", replacement = "\\1_\\1_", x = "abc and ABC")
 
 ## 字符串提取 {#base-extract}
 
-`substr` 和 `substring`
+```{r,eval=FALSE,echo=TRUE}
+substr(x, start, stop)
+substring(text, first, last = 1000000L)
+```
+
+`substr` 和 `substring` 函数通过位置进行字符串的拆分和提取，它们本身不使用正则表达式，结合其他正则表达式函数`regexpr`, `gregexpr` 和 `regexec`，可以很方便地从大量文本中提取所需的信息。作用类似之前提到的 `regmatches` 函数
+
+参数设置基本相同
+
+- x/text 是要拆分的字符串向量
+- start/first 截取的起始位置向量
+- stop/last 截取的终止位置向量
+
+返回值有差别
+
+- `substr` 返回的字串个数等于第一个参数 x 的长度
+- `substring` 返回字串个数等于三个参数中最长向量长度，短向量循环使用。
+
+```{r,echo=TRUE}
+x <- "123456789"
+substr(x, c(2, 4), c(4, 5, 8))
+substring(x, c(2, 4), c(4, 5, 8))
+
+substr("abcdef", 2, 4)
+substring("abcdef", 1:6, 1:6)
+```
+因为 x 的向量长度为1，所以 `substr` 获得的结果只有1个字串，即第2和第3个参数向量只用了第一个组合：起始位置2，终止位置4。而 `substring` 的语句三个参数中最长的向量为 `c(4,5,8)`，执行时按短向量循环使用的规则第一个参数事实上就是`c(x,x,x)`，第二个参数就成了`c(2,4,2)`，最终截取的字串起始位置组合为：2-4, 4-5和2-8。
+
+```{r,echo=TRUE}
+x <- c("123456789", "abcdefghijklmnopq")
+substr(x, c(2, 4), c(4, 5, 8))
+substring(x, c(2, 4), c(4, 5, 8))
+```
+
 
 [^regexp]: https://homepage.divms.uiowa.edu/~luke/R/regexp.html
