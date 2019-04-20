@@ -72,9 +72,9 @@ addons:
       # pdftools
       - libpoppler-cpp-dev
       # tesseract
-      - libtesseract-dev 
-      - libleptonica-dev 
-      - tesseract-ocr-eng
+      #- libtesseract-dev 
+      #- libleptonica-dev 
+      #- tesseract-ocr-eng
 
 before_install:
   - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
