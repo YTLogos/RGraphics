@@ -15,7 +15,7 @@ library(fs)
 ```
 
 
-## 查看 {#list}
+## 查看文件 {#list}
 
 文件夹只包含文件，目录既包含文件又包含文件夹，`list.dirs` 列出目录或文件夹，`list.files` 列出文件或文件夹 
 
@@ -106,7 +106,7 @@ library(fs)
 查看当前目录下的文件和文件夹 `tree -L 2 .` 或者 `ls -l .` 
 
 
-## 操作 {#manipulation}
+## 操作文件 {#manipulation}
 
 实现文件增删改查的函数如下
 
@@ -184,7 +184,7 @@ files <- c("demo.txt", "tmp.txt") # 指向文件路径
 if (any(file.exists(files))) file.remove(files[file.exists(files)])
 ```
 
-## 压缩 {#compression}
+## 压缩文件 {#compression}
 
 tar 和 zip 是两种常见的压缩文件工具，具有免费和跨平台的特点，因此应用范围广^[<https://github.com/libarchive/libarchive/wiki/FormatTar>]。 R 内对应的压缩与解压缩命令是 `tar/untar` 
 
@@ -228,7 +228,7 @@ untar(tarfile, files = NULL, list = FALSE, exdir = ".",
 [^rtools40]: 继 Rtools35 之后， [RTools40](https://cloud.r-project.org/bin/windows/testing/rtools40.html) 主要为 R 3.6.0 准备的，包含有 GCC 8 及其它编译R包需要的[工具包](https://github.com/r-windows/rtools-packages)，详情请看的[幻灯片](https://jeroen.github.io/uros2018)
 
 
-## 路径 {#paths}
+## 路径操作 {#paths}
 
 环境变量算是路径操作
 
@@ -281,7 +281,7 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
     Sys.glob(file.path(R.home(), "library", "*", "R", "*.rdx")) 
     ```
 
-## 查找 {#find}
+## 查找文件 {#find}
 
 查找文件、可执行文件的完整路径、R 包
 
@@ -330,21 +330,26 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 1. `apropos` 和 `find` 查找对象
 
-```r
+```{r,echo=TRUE,eval=FALSE}
 apropos(what, where = FALSE, ignore.case = TRUE, mode = "any")
+find(what, mode = "any", numeric = FALSE, simple.words = TRUE)
 ```
+
+匹配含有 find 的函数
 
 ```{r,echo=TRUE}
 apropos("find")
 ```
 
+问号 `?` 加函数名搜索R软件内置函数的帮助文档，如 `?regrex`。如果不知道具体的函数名，可采用关键词搜索，如
 
-```r
-find(what, mode = "any", numeric = FALSE, simple.words = TRUE)
+```{r,eval=FALSE,echo=TRUE}
+help.search(keyword = "character", package = "base")
 ```
 
+`browseEnv` 函数用来在浏览器中查看当前环境下，对象的列表，默认环境是 `sys.frame()`
 
-## 权限 {#permissions}
+## 文件权限 {#permissions}
 
 操作目录和文件的权限 Manipulation of Directories and File Permissions
 
@@ -373,7 +378,7 @@ find(what, mode = "any", numeric = FALSE, simple.words = TRUE)
     ```
 
 
-## 区域 {#locale}
+## 区域设置 {#locale}
 
 1. `Sys.getlocale(category = "LC_ALL")` 查看当前区域设置
 
@@ -411,7 +416,7 @@ find(what, mode = "any", numeric = FALSE, simple.words = TRUE)
     ```
 
 
-## 进程 {#process}
+## 进程管理 {#process}
 
 - `Sys.getpid` 获取当前运行中的 R 控制台（会话）的进程 ID
 
@@ -441,8 +446,6 @@ find(what, mode = "any", numeric = FALSE, simple.words = TRUE)
     gc.time()
     ```
 
-## 调用 {#system}
-
 `system` 和 `system2` 调用系统命令，推荐使用后者，它更灵活更便携。此外，Jeroen Ooms 开发的 [sys 包](https://github.com/jeroen/sys) 可看作 `base::system2` 的替代品
 
 ```{r}
@@ -457,7 +460,7 @@ system2(command = 'g++', args = '--version')
 对于文件操作，Jim Hester 开发了 [fs 包](https://github.com/r-lib/fs) 目的是统一文件操作的命令，由于时间和历史原因，R内置的文件操作函数的命名很不统一，如 `path.expand()` 和 `normalizePath()`，`Sys.chmod()` 和 `file.access()` 等
 
 
-## 时间 {#time}
+## 时间管理 {#time}
 
 1. `Sys.timezone` 获取时区信息
 
@@ -547,14 +550,8 @@ system2(command = 'g++', args = '--version')
     
     全局修改，在文件 `r paste(R.home('etc'),'Rprofile.site',sep = '/')` 内添加`Sys.setenv(TZ="Asia/Shanghai")`。 局部修改，就是在本地R项目下，创建 `.Rprofile`，然后同样添加 `Sys.setenv(TZ="Asia/Shanghai")`。
 
-## 搜索 {#search}
 
-`help.search`
-`?regrex`
-
-`apropos`,`browseEnv`, `help.search` 
-
-## R 包 {#package}
+## R 包管理 {#package}
 
 ```{r,echo=TRUE}
 apropos('package')

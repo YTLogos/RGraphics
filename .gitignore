@@ -17,4 +17,7 @@ temp.Rmd
 book/
 data/
 slide
+
+stringi.md
+
 .DS_Store
