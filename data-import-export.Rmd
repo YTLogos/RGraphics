@@ -197,6 +197,8 @@ glimpse(list_of_data_sets)
 
 ## 读写数据库 {#read-write-database}
 
+将大量的 txt 文本存进 MySQL 数据库中，通过操作数据库来聚合文本，极大降低内存消耗 [^txt-to-mysql]
+
 [Hands-On Programming with R](https://rstudio-education.github.io/hopr) 数据读写章节[^dataio]
 
 [^dataio]: https://rstudio-education.github.io/hopr/dataio.html
@@ -457,7 +459,7 @@ knitr::include_graphics(path = "figures/clickhouse.png")
 
 ### MySQL
 
-数据分析的常见环境是在一个R Notebook 里，我们可以在正文之前先设定数据库连接信息
+MySQL 是一个很常见，应用也很广泛的数据库，数据分析的常见环境是在一个R Notebook 里，我们可以在正文之前先设定数据库连接信息
 
 ````markdown
 `r ''````{r setup}
@@ -489,7 +491,7 @@ SELECT * FROM user_table where date_format(created_date,'%Y-%m-%d')>=?idate
 
 以上代码会将 SQL 的运行结果存在 `data_output` 这是数据库中，idate 取之前设置的日期`2019-05-03`，`user_table` 是 MySQL 数据库中的表名，`created_date` 是创建`user_table`时，指定的日期名。
 
-如果 SQL 比较长，为了代码美观，把带有变量的 SQL 保存为`demo.sql`脚本，只需要在 SQL 的 chunk 中直接读取 SQL 文件。
+如果 SQL 比较长，为了代码美观，把带有变量的 SQL 保存为`demo.sql`脚本，只需要在 SQL 的 chunk 中直接读取 SQL 文件[^sql-chunck]。
 
 ````markdown
 `r ''````{sql, code=readLines("demo.sql"), output.var="data_output"}
@@ -521,7 +523,7 @@ rmarkdown::render("MyDocument.Rmd", params = list(
 
 ## Spark
 
-
+当数据分析报告遇上 Spark 时，就需要 SparkR、 sparklyr 或 rsparking 接口了[^the-r-spark]
 
 
 [^the-r-spark]: https://therinspark.com/
