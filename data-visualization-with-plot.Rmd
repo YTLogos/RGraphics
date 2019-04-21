@@ -12,7 +12,7 @@
 
 点和线是最常见的画图元素，在 `plot` 函数中，分别用参数 `pch` 和 `lty` 来设定类型，点的大小、线的宽度分别用参数 `cex` 和 `lwd` 来指定，颜色由参数 `col` 设置。参数 `type` 不同的值设置如下，`p` 显示点，`l` 绘制线，`b` 同时绘制空心点，并用线连接，`c` 只有线，`o` 在线上绘制点，`s` 和 `S` 点线连接绘制阶梯图，`h` 绘制类似直方图一样的垂线，最后 `n` 表示什么也不画。
 
-点 points 、线 abline lines rug（线段segments、箭头arrows）、
+点 points 、线 grid 背景线 abline lines rug 刻度线（线段segments、箭头arrows）、
 
 ```{r,echo=TRUE,fig.cap="不同的 pch 参数值"}
 ##-------- Showing all the extra & some char graphics symbols ---------

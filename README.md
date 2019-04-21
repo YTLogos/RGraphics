@@ -21,6 +21,10 @@
 - https://blog.rsquaredacademy.com/getting-help-in-r-updated/
 - 现代统计图形（未出版） 谢益辉
 - R Graphics, Third ---  [出版商页面](https://www.crcpress.com/p/book/9781498789059) [书籍补充材料](https://www.stat.auckland.ac.nz/~paul/RG3e/)
+- [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf) 后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得
+- [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 
+- [条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
+- [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)
 
 ## 相关资源
 
