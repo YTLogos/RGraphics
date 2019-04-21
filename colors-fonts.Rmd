@@ -1,17 +1,50 @@
 # 色彩与字体 {#colors-fonts}
 
-首先我们加载 R 包 ggplot2 
-
-[wesanderson](https://github.com/karthik/wesanderson) 调色板
-
-```{r,echo=TRUE}
-library(ggplot2)
-```
-
 ## 配色 {#colors}
 
-调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，还有 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes)
+调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，还有 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和调色板 [wesanderson](https://github.com/karthik/wesanderson) 
 
+```{r,fig.cap="HCL调色",echo=TRUE}
+# https://github.com/hadley/ggplot2-book
+library(scales)
+library(dplyr)
+library(colorspace)
+
+hcl <- expand.grid(x = seq(-1, 1, length = 100), y = seq(-1, 1, length=100)) %>%
+  tbl_df() %>%
+  filter(x^2 + y^2 < 1) %>%
+  mutate(
+    r = sqrt(x^2 + y^2),
+    c = 100 * r,
+    h = 180 / pi * atan2(y, x),
+    l = 65,
+    colour = hcl(h, c, l)
+  )
+
+# sin(h) = y / (c / 100)
+# y = sin(h) * c / 100
+
+cols <- hue_pal()(5)
+selected <- RGB(t(col2rgb(cols)) / 255) %>%
+  as("polarLUV") %>%
+  coords() %>%
+  as.data.frame() %>%
+  mutate(
+    x = cos(H / 180 * pi) * C / 100,
+    y = sin(H / 180 * pi) * C / 100,
+    colour = cols
+  )
+
+ggplot(hcl, aes(x, y)) +
+  geom_raster(aes(fill = colour)) +
+  scale_fill_identity() +
+  scale_colour_identity() +
+  coord_equal() +
+  scale_x_continuous("", breaks = NULL) +
+  scale_y_continuous("", breaks = NULL) +
+  geom_point(data = selected, size = 10, color = "white") +
+  geom_point(data = selected, size = 5, aes(colour = colour))
+```
 
 R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
 
