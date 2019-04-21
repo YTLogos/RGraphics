@@ -6,7 +6,8 @@ Imports:
   bookdown,
   colormap,
   desc,
-  fs,
+  firatheme,
+  fs (>= 1.2.7),
   gapminder,
   gganimate,
   ggridges,
@@ -21,6 +22,7 @@ Imports:
   microbenchmark,
   MSG,
   odbc,
+  patchwork,
   plotly,
   pracma,
   quantmod,
@@ -28,6 +30,7 @@ Imports:
   RSQLite,
   sessioninfo,
   sf (>= 0.7.2),
+  showtext,
   tidyverse,
   tikzDevice,
   tweenr,
@@ -35,12 +38,10 @@ Imports:
 URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
 Suggests:
-  DAAG,
   extrafont,
   fontcm,
   ISLR,
   rsvg,
-  showtext,
   svglite
 Remotes: 
   vankesteren/firatheme,

@@ -4,7 +4,7 @@
 
 [^fifty-ggplot2]: https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
-## Why ggplot2? {#why-ggplot2}
+## Why ggplot2 {#why-ggplot2}
 
 为何使用 ggplot2 [^why-ggplot2]
 
@@ -12,7 +12,7 @@
 
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 
-## ggplot2 简介 {#intro-ggplot2}
+## 语法 {#intro-ggplot2}
 
 首先我们加载 R 包 ggplot2 
 
@@ -22,31 +22,31 @@ library(ggplot2)
 
 ggplot2 提供了很多函数
 
-图层系统
+图层
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^geom_")
 ```
 
-主题系统
+主题
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^theme_")
 ```
 
-配色系统
+配色
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^scale_(color|fill)_")
 ```
 
-坐标系统
+坐标
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^coord_")
 ```
 
-坐标轴刻度变换
+尺度
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^scale_(x|y)_")
