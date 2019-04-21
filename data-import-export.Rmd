@@ -139,7 +139,9 @@ iris <- dget(file = 'iris.dat')
 
 戏称 [rio](https://github.com/leeper/rio) 包是数据导入导出 Input/Output  的瑞士军刀
 
-### jsonlite 与 yaml
+### 其它数据格式 {#other-data-source}
+
+jsonlite 与 yaml
 
 jsonlite 包读取 `*.json` 格式的文件，`jsonlite::write_json` 函数将 R对象保存为 JSON 文件，`jsonlite::fromJSON` 将 json 字符串或文件转化为 R 对象，`jsonlite::toJSON` 函数正好与之相反
 
@@ -157,7 +159,7 @@ yaml::read_yaml(file = '_bookdown.yml')
 
 yaml 和 json 格式互转
 
-## 批量读取文件 {#batch-import}
+## 批量读写 {#batch-import-export}
 
 ```{r,echo=TRUE,eval=FALSE}
 read_list <- function(list_of_datasets, read_func) {
@@ -199,7 +201,7 @@ glimpse(list_of_data_sets)
 
 [^dataio]: https://rstudio-education.github.io/hopr/dataio.html
 
-### ODBC 与 DBI
+ODBC 与 DBI 是其它数据库接口的基础
 
 制作一个表格，左边数据库右边 R 接口，都包含链接，如表 \@ref(tab:dbi) 所示
 
@@ -293,8 +295,6 @@ con <- dbConnect(odbc::odbc(),
 dbListTables(con)
 ```
 
-参考 <https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql/>
-
 ### ClickHouse
 
 对系统的要求是 System requirements: Linux, x86_64 with SSE 4.2.
@@ -316,8 +316,6 @@ clickhouse-client
 [ClickHouse 中文用户手册](https://clickhouse.yandex/docs/zh/) 和新浪高鹏在北京 [ClickHouse社区分享会](https://clickhouse.yandex/blog/en/clickhouse-community-meetup-in-beijing-on-january-27-2018) 上给的报告 [MySQL DBA解锁数据分析的新姿势-ClickHouse](https://yandex.github.io/clickhouse-presentations/meetup12/power_your_data.pdf) 
 
 开源社区对 ClickHouse 提供了很多语言的支持，比如 R 语言接口有 [RClickhouse](https://github.com/IMSMWU/RClickhouse) 和 [clickhouse-r](https://github.com/hannesmuehleisen/clickhouse-r)，其它接口请看 [官方文档链接](https://clickhouse.yandex/docs/zh/interfaces/third-party/client_libraries/)
-
-#### RClickhouse 
 
 由于 clickhouse-r 还在开发中，从未提交到 CRAN，提供的功能也相对有限，这里我们推荐使用 RClickhouse，首先安装 RClickhouse
 
@@ -428,8 +426,6 @@ FROM mtcars
 dbDisconnect(con)
 ```
 
-#### clickhouse2r
-
 这是一个存放在 Github 上的包，随着 ClikHouse 在大厂的流行，此包也受到越来越多的关注
 与数据仓库如何连接，如何查询数据，背后的接口 DBI 如何使用，实例化一个新的接口，如 clickhouse2r
 
@@ -461,14 +457,13 @@ knitr::include_graphics(path = "figures/clickhouse.png")
 
 ### MySQL
 
-参考 <https://d.cosx.org/d/419974>
+数据分析的常见环境是在一个R Notebook 里，我们可以在正文之前先设定数据库连接信息
 
 ````markdown
 `r ''````{r setup}
 library(DBI)
-library(RMySQL)
-# 这里的数据库链接信息我改了
-db <- dbConnect(MySQL(),
+# 指定数据库连接信息
+db <- dbConnect(RMySQL::MySQL(),
   dbname = "dbtest",
   username = "user_test",
   password = "password",
@@ -477,14 +472,14 @@ db <- dbConnect(MySQL(),
 )
 # 创建默认连接
 knitr::opts_chunk$set(connection = "db")
-# 设置字符，以免中文查询乱码
-dbSendQuery(db, "SET NAMES utf8")
+# 设置字符编码，以免中文查询乱码
+DBI::dbSendQuery(db, "SET NAMES utf8")
 # 设置日期变量，以运用在SQL中
-idate <- "2018-05-03"
+idate <- "2019-05-03"
 ```
 ````
 
-SQL 中使用R的变量并将结果输出为数据框
+SQL 代码块中使用 R 环境中的变量，并将查询结果输出为R环境中的数据框
 
 ````markdown
 `r ''````{sql, output.var="data_output"}
@@ -492,10 +487,44 @@ SELECT * FROM user_table where date_format(created_date,'%Y-%m-%d')>=?idate
 ```
 ````
 
-以上代码会将 SQL 的运行结果存在 `data_output` 这是数据库中。如果 SQL 比较长，为了代码美观，把带有变量的 SQL 保存为`.sql`脚本，那怎么在 SQL 的 chunk 中直接导入 SQL 文件
+以上代码会将 SQL 的运行结果存在 `data_output` 这是数据库中，idate 取之前设置的日期`2019-05-03`，`user_table` 是 MySQL 数据库中的表名，`created_date` 是创建`user_table`时，指定的日期名。
+
+如果 SQL 比较长，为了代码美观，把带有变量的 SQL 保存为`demo.sql`脚本，只需要在 SQL 的 chunk 中直接读取 SQL 文件。
 
 ````markdown
-`r ''````{sql, code=readLines("你的脚本.sql")}
+`r ''````{sql, code=readLines("demo.sql"), output.var="data_output"}
 ```
 ````
 
+如果我们需要每天或者按照指定的日期重复地运行这个 R Markdown 文件，可以在 YAML 部分引入参数[^params-knit]
+
+````markdown
+---
+params:
+  date: "2019-05-03"  # 参数化日期
+---
+
+`r ''````{r, setup, include=FALSE}
+idate = params$date # 将参数化日期传递给 idate 变量
+```
+````
+
+我们将这个 Rmd 文件命名为 `MyDocument.Rmd`，运行这个文件可以从 R 控制台执行或在 RStudio 点击 knit。
+
+```{r,echo=TRUE,eval=FALSE}
+rmarkdown::render("MyDocument.Rmd", params = list(
+  date = "2019-05-03"
+))
+```
+
+如果在文档的 YAML 位置已经指定日期，这里可以不指定。注意在这里设置日期会覆盖 YAML 处指定的参数值，这样做的好处是可以批量化操作。
+
+## Spark
+
+
+
+
+[^the-r-spark]: https://therinspark.com/
+[^sql-chunck]: https://d.cosx.org/d/419974
+[^txt-to-mysql]: https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql
+[^params-knit]: https://bookdown.org/yihui/rmarkdown/params-knit.html
