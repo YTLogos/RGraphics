@@ -197,15 +197,9 @@ glimpse(list_of_data_sets)
 
 ## 读写数据库 {#read-write-database}
 
-将大量的 txt 文本存进 MySQL 数据库中，通过操作数据库来聚合文本，极大降低内存消耗 [^txt-to-mysql]
-
 [Hands-On Programming with R](https://rstudio-education.github.io/hopr) 数据读写章节[^dataio]
 
-[^dataio]: https://rstudio-education.github.io/hopr/dataio.html
-
-ODBC 与 DBI 是其它数据库接口的基础
-
-制作一个表格，左边数据库右边 R 接口，都包含链接，如表 \@ref(tab:dbi) 所示
+将大量的 txt 文本存进 MySQL 数据库中，通过操作数据库来聚合文本，极大降低内存消耗 [^txt-to-mysql]，而 ODBC 与 DBI 包是其它数据库接口的基础，knitr 提供了一个支持 SQL 代码的引擎，它便是基于 DBI，因此可以在 R Markdown 文档中直接使用 SQL 代码块 [^sql-engine]。这里制作一个归纳表格，左边数据库右边对应其 R 接口，两边都包含链接，如表 \@ref(tab:dbi) 所示
 
 ```{r dbi}
 db2r <- data.frame(
@@ -229,8 +223,6 @@ knitr::kable(db2r, col.names = c("数据库","官网","R接口","开发仓"), ca
 ```
 
 ### RSQLite
-
-参考 [bookdown-SQL](https://bookdown.org/yihui/rmarkdown/language-engines.html#sql)
 
 ```{r,echo=TRUE,cache=FALSE}
 library(DBI)
@@ -521,7 +513,7 @@ rmarkdown::render("MyDocument.Rmd", params = list(
 
 如果在文档的 YAML 位置已经指定日期，这里可以不指定。注意在这里设置日期会覆盖 YAML 处指定的参数值，这样做的好处是可以批量化操作。
 
-## Spark
+### Spark
 
 当数据分析报告遇上 Spark 时，就需要 SparkR、 sparklyr 或 rsparking 接口了[^the-r-spark]
 
@@ -530,3 +522,5 @@ rmarkdown::render("MyDocument.Rmd", params = list(
 [^sql-chunck]: https://d.cosx.org/d/419974
 [^txt-to-mysql]: https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql
 [^params-knit]: https://bookdown.org/yihui/rmarkdown/params-knit.html
+[^dataio]: https://rstudio-education.github.io/hopr/dataio.html
+[^sql-engine]: https://bookdown.org/yihui/rmarkdown/language-engines.html#sql
