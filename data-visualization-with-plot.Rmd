@@ -4,9 +4,7 @@
 作为知识介绍，本章所有数据都来源于基础 R 包，即安装 R 软件后自带的数据集，图库在以 base R 中的数据集介绍完后，以相应真实数据扩展为案列，结合统计意义和探索性数据分析介绍各种常见统计图形
 :::
 
-数据可视化是一种重要的数据分析手段，Claus O. Wilke 目前正在写《Fundamentals of Data Visualization》，并且给出了在线网络版 <https://serialmentor.com/dataviz/>。 R 提供了两套图形系统，分别是 graphics 包提供的基础绘图系统和 grid 包提供的栅格绘图系统，后者主要以两个 R 包为大家所熟知，一个是 lattice 包，另一个是 ggplot2 包。
-
-准备好以下绘制统计图形的 R 包
+数据可视化是一种重要的数据分析手段， R 提供了两套图形系统，分别是 graphics 包提供的基础绘图系统和 grid 包提供的栅格绘图系统，后者主要以两个 R 包为大家所熟知，一个是 lattice 包，另一个是 ggplot2 包。
 
 ```{r load-pkgs,echo=TRUE}
 library(grid)
@@ -359,7 +357,44 @@ for (i in 1:4) { # 画四个图
 }
 ```
 
+基础绘图函数，如 plot 标签 `xlab` 支持 Unicode 代码表示的希腊字母，常用字母表备查，公式环境下，也可以用在绘图中
 
+Table: (\#tab:letters) 希腊字母表
+
+ 希腊字母      | LaTeX 代码     | Unicode 代码 |  希腊字母   |  LaTeX 代码   |  Unicode 代码
+:------------- | :------------- | :----------- | :---------- | :------------ | :-------------
+ $\alpha$      | `\alpha`       | `\u03B1`     |  $\mu$      | `\mu`         |   `\u03BC`
+ $\beta$       | `\beta`        | `\u03B2`     |  $\nu$      | `\nu`         |   `\u03BD`
+ $\gamma$      | `\gamma`       | `\u03B3`     |  $\xi$      | `\xi`         |   `\u03BE`
+ $\delta$      | `\delta`       | `\u03B4`     |  $\varphi$  | `\varphi`     |   `\u03C6`
+ $\epsilon$    | `\epsilon`     | `\u03B5`     |  $\pi$      | `\pi`         |   `\u03C0`
+ $\zeta$       | `\zeta`        | `\u03B6`     |  $\rho$     | `\rho`        |   `\u03C1`
+ $\eta$        | `\eta`         | `\u03B7`     |  $\upsilon$ | `\upsilon`    |   `\u03C5`
+ $\theta$      | `\theta`       | `\u03B8`     |  $\phi$     | `\phi`        |   `\u03C6`
+ $\iota$       | `\iota`        | `\u03B9`     |  $\chi$     | `\chi`        |   `\u03C7`
+ $\kappa$      | `\kappa`       | `\u03BA`     |  $\psi$     | `\psi`        |   `\u03C8`
+ $\lambda$     | `\lambda`      | `\u03BB`     |  $\omega$   | `\omega`      |   `\u03C9`
+ $\sigma$      | `\sigma`       | `\u03C3`     |  $\tau$     | `\tau`        |   `\u03C4`  
+ 
+Table: (\#tab:super-sub-script) 数字上下标
+
+  上标数字 | LaTeX 代码| Unicode 代码 | 下标数字   | LaTeX 代码 |  Unicode 代码
+:--------- |:--------- | :---------   | :--------- | :--------- | :---------
+ ${}^0$    | `{}^0`    |   `\u2070`   |   ${}_0$   |   `{}_0`   |  `\u2080`
+ ${}^1$    | `{}^1`    |   `\u00B9`   |   ${}_1$   |   `{}_1`   |  `\u2081`
+ ${}^2$    | `{}^2`    |   `\u00B2`   |   ${}_2$   |   `{}_2`   |  `\u2082`
+ ${}^3$    | `{}^3`    |   `\u00B2`   |   ${}_3$   |   `{}_3`   |  `\u2083`
+ ${}^4$    | `{}^4`    |   `\u2074`   |   ${}_4$   |   `{}_4`   |  `\u2084`
+ ${}^5$    | `{}^5`    |   `\u2075`   |   ${}_5$   |   `{}_5`   |  `\u2085`
+ ${}^6$    | `{}^6`    |   `\u2076`   |   ${}_6$   |   `{}_6`   |  `\u2086`
+ ${}^7$    | `{}^7`    |   `\u2077`   |   ${}_7$   |   `{}_7`   |  `\u2087`
+ ${}^8$    | `{}^8`    |   `\u2078`   |   ${}_8$   |   `{}_8`   |  `\u2088`
+ ${}^9$    | `{}^9`    |   `\u2079`   |   ${}_9$   |   `{}_9`   |  `\u2089`
+ ${}^n$    | `{}^n`    |   `\u207F`   |   ${}_n$   |   `{}_n`   |  -
+
+其它字母，请查看 [Unicode 字母表][unicode-tab]
+
+[unicode-tab]: https://www.ssec.wisc.edu/~tomw/java/unicode.html
 
 
 ### 图例 {#base-legend}
@@ -1288,7 +1323,7 @@ legend("topright",
 )
 ```
 
-## 保存图形 {#save}
+## 图形导出 {#export-save}
 
 保存绘制的图形，R 使用的图形渲染库的版本
 
@@ -1327,44 +1362,3 @@ apropos("dev.")
 [19] "dev.set"             "dev.size"            "dev2bitmap"         
 [22] "devAskNewPage"       "deviance"            "deviceIsInteractive"
 ```
-
-## Unicode 字母 {#letter-numbers}
-
-基础绘图函数，如 plot 标签 `xlab` 支持 Unicode 代码表示的希腊字母，常用字母表备查，公式环境下，也可以用在绘图中
-
-Table: (\#tab:letters) 希腊字母表
-
- 希腊字母      | LaTeX 代码     | Unicode 代码 |  希腊字母   |  LaTeX 代码   |  Unicode 代码
-:------------- | :------------- | :----------- | :---------- | :------------ | :-------------
- $\alpha$      | `\alpha`       | `\u03B1`     |  $\mu$      | `\mu`         |   `\u03BC`
- $\beta$       | `\beta`        | `\u03B2`     |  $\nu$      | `\nu`         |   `\u03BD`
- $\gamma$      | `\gamma`       | `\u03B3`     |  $\xi$      | `\xi`         |   `\u03BE`
- $\delta$      | `\delta`       | `\u03B4`     |  $\varphi$  | `\varphi`     |   `\u03C6`
- $\epsilon$    | `\epsilon`     | `\u03B5`     |  $\pi$      | `\pi`         |   `\u03C0`
- $\zeta$       | `\zeta`        | `\u03B6`     |  $\rho$     | `\rho`        |   `\u03C1`
- $\eta$        | `\eta`         | `\u03B7`     |  $\upsilon$ | `\upsilon`    |   `\u03C5`
- $\theta$      | `\theta`       | `\u03B8`     |  $\phi$     | `\phi`        |   `\u03C6`
- $\iota$       | `\iota`        | `\u03B9`     |  $\chi$     | `\chi`        |   `\u03C7`
- $\kappa$      | `\kappa`       | `\u03BA`     |  $\psi$     | `\psi`        |   `\u03C8`
- $\lambda$     | `\lambda`      | `\u03BB`     |  $\omega$   | `\omega`      |   `\u03C9`
- $\sigma$      | `\sigma`       | `\u03C3`     |  $\tau$     | `\tau`        |   `\u03C4`  
- 
-Table: (\#tab:super-sub-script) 数字上下标
-
-  上标数字 | LaTeX 代码| Unicode 代码 | 下标数字   | LaTeX 代码 |  Unicode 代码
-:--------- |:--------- | :---------   | :--------- | :--------- | :---------
- ${}^0$    | `{}^0`    |   `\u2070`   |   ${}_0$   |   `{}_0`   |  `\u2080`
- ${}^1$    | `{}^1`    |   `\u00B9`   |   ${}_1$   |   `{}_1`   |  `\u2081`
- ${}^2$    | `{}^2`    |   `\u00B2`   |   ${}_2$   |   `{}_2`   |  `\u2082`
- ${}^3$    | `{}^3`    |   `\u00B2`   |   ${}_3$   |   `{}_3`   |  `\u2083`
- ${}^4$    | `{}^4`    |   `\u2074`   |   ${}_4$   |   `{}_4`   |  `\u2084`
- ${}^5$    | `{}^5`    |   `\u2075`   |   ${}_5$   |   `{}_5`   |  `\u2085`
- ${}^6$    | `{}^6`    |   `\u2076`   |   ${}_6$   |   `{}_6`   |  `\u2086`
- ${}^7$    | `{}^7`    |   `\u2077`   |   ${}_7$   |   `{}_7`   |  `\u2087`
- ${}^8$    | `{}^8`    |   `\u2078`   |   ${}_8$   |   `{}_8`   |  `\u2088`
- ${}^9$    | `{}^9`    |   `\u2079`   |   ${}_9$   |   `{}_9`   |  `\u2089`
- ${}^n$    | `{}^n`    |   `\u207F`   |   ${}_n$   |   `{}_n`   |  -
-
-其它字母，请查看 [Unicode 字母表][unicode-tab]
-
-[unicode-tab]: https://www.ssec.wisc.edu/~tomw/java/unicode.html

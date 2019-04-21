@@ -9,11 +9,11 @@
 
 ## 参考材料
 
-- [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf)  后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得
-- [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 
-- [R语言调色版合集](https://github.com/EmilHvitfeldt/r-color-palettes)
-- [条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
-- [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)
+- Winston Chang [R Graphics Cookbook](https://r-graphics.org/)
+- Claus O. Wilke [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
+- Garrett Grolemund and Hadley Wickham [R for data science](https://r4ds.had.co.nz/)
+- Kieran Healy [Data Visualization: A practical introduction](https://socviz.co/)
+- Carson Sievert [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
 - 太多了，这里放不下
 
 ## 相关资源
@@ -101,8 +101,10 @@
    - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
    - 学习统计与 R 语言 [Learning Statistics with R](https://github.com/djnavarro/rbook)
    - [An Introduction to Bayesian Thinking: A Companion to the Statistics with R Course](https://statswithr.github.io/book/)
-   - [R语言教程](http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html)
-   - [统计计算](http://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/index.html)
+   - 北大 李东风 [R语言教程](http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html)
+   - 北大 李东风 [统计计算](http://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/index.html)
+   - 北大 李东风 [金融时间序列分析讲义](http://www.math.pku.edu.cn/teachers/lidf/course/fts/ftsnotes/html/_ftsnotes/index.html)
+   - 北大 李东风 [应用时间序列分析备课笔记](http://www.math.pku.edu.cn/teachers/lidf/course/atsa/atsanotes/html/_atsanotes/index.html)
 1. 学习 Python
       - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
       - [廖雪峰的 Python3.x 教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
