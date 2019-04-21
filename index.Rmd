@@ -165,7 +165,7 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 重现本书内容需要的 R 包
 
 ```{r sessioninfo,echo=TRUE}
-sessioninfo::session_info(pkgs = desc::desc_get_deps()$package)
+xfun::session_info(desc::desc_get_deps()$package)
 ```
 
 > 为了重复实现，我准备了一个虚拟机，存放在百度云盘上，链接: <https://pan.baidu.com/s/1K7R55QfFHGu6_QsyUlpCJA> 密码: 2ixt
