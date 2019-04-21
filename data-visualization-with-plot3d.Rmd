@@ -1,0 +1,49 @@
+# 三维图形 {#plot-3d}
+
+## 饼图 {#pie-3d}
+
+## 柱形图 {#bar-3d}
+
+## 散点图 {#scatter-3d}
+
+## 函数图 {#curve-3d}
+
+## 透视图 {#persp-3d}
+
+
+- **plotrix** 包含231页手册 pie3D 
+- **scatterplot3d** 三维图形
+- **plot3D** 三维图形
+- **barsurf** 三维条形图
+
+```R
+barsurf: Bar, Surface and Other Plots
+ls("package:barsurf")
+
+library(plotrix)
+ls("package:plotrix") 161 个函数
+
+library(scatterplot3d)
+ls("package:scatterplot3d")
+[1] "scatterplot3d"
+
+library(plot3D)
+ls("package:plot3D") 51个函数
+
+library(rgl)
+```
+
+```{r,eval=FALSE}
+library(barsurf)
+library(colorspace)
+
+plot3d.empty()
+
+x <- y <- 1:4
+f <- function(x, y) x^2 + y^2
+z <- outer(x, y, f)
+plot3d.bar(, , z)
+
+plot3d.bar(, , volcano)
+plot3d.surf(, , volcano)
+```
