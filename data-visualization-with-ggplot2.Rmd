@@ -34,6 +34,8 @@ ls("package:ggplot2", pattern = "^geom_")
 ls("package:ggplot2", pattern = "^theme_")
 ```
 
+[ggthemes](https://github.com/jrnold/ggthemes) [ggthemr](https://github.com/cttobin/ggthemr)
+
 配色
 
 ```{r,echo=TRUE}
@@ -52,14 +54,15 @@ ls("package:ggplot2", pattern = "^coord_")
 ls("package:ggplot2", pattern = "^scale_(x|y)_")
 ```
 
-
 注释
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^annotate_")
 ```
 
+组合
 
+gridExtra 和 patchwork
 
 ## 散点图 {#ggplot2-scatter}
 
