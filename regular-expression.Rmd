@@ -126,14 +126,14 @@ Sys.setlocale("LC_ALL", locale = foo)
 
 脱字符 caret `^` 和美元符号 `$` 是元字符，分别匹配一行的开头和结尾。符号 `\<` 和 `\>` 分别匹配一个词的开头和结尾的空字符串。`\b` 匹配词边缘的空字符串，`\B` 匹配不在词边缘的空字符串。 词 word 的解释依赖于区域和实现。
 
-## 匹配 {#match}
+## 字符串匹配 {#match}
 
 默认的匹配方式是贪婪的，会使用尽可能多的匹配次数，这个可以变为最小的匹配次数，通过在其之后添加 `?`，一个正则表达式可能跟着重复量词，下面的限定符都是限定在它前面的正则表达式
 
 Table: (\#tab:repetition-quantifiers) 贪婪匹配限定符
 
 |    符号      |     描述                |
-|:-----------  | :----------------------:|
+|:-----------  | :---------------------- |
 |    `?`       | 匹配至多 1 次           |
 |    `*`       | 匹配 0 次或多次         |
 |    `+`       | 匹配至少 1 次           |
@@ -141,7 +141,7 @@ Table: (\#tab:repetition-quantifiers) 贪婪匹配限定符
 |    `{n,}`    | 匹配至少 n 次           |
 |    `{n,m}`   | 匹配至少 n 次，至多 m 次|
 
-## 级联 {#concatenation}
+## 级联表达式 {#concatenation}
 
 > Regular expressions may be concatenated; the resulting regular expression matches any string formed by concatenating the substrings that match the concatenated subexpressions.
 
@@ -155,7 +155,7 @@ Table: (\#tab:repetition-quantifiers) 贪婪匹配限定符
 
 反向引用 `\N` 这里 N 可取 1,2,...,9 匹配被之前第 N 个括起来的子表达式匹配的子字符串，例子见 COS 论坛 <https://d.cosx.org/d/420570/5>
 
-## 命名分组 {#name-groups}
+## 命名捕捉 {#named-capture}
 
 模式 `(?:...)` 包住的字符就是括号分组，但是不做反向查找。模式 `(?<=...)` 和 `(?<!...)` 都是反向查找，它们不允许跟限制符，在 `...` 也不允许出现 `\C`。表 \@ref(tab:group-lookaround) 展示四个反向引用
 
@@ -202,7 +202,7 @@ Atomic grouping 原子分组, possessive qualifiers 占有限定 and conditional
 
 [regex-xkcd]: https://xkcd.com/208/
 
-## 注释 {#comment}
+## 表达式注释 {#comment}
 
 The sequence `(?#` marks the start of a comment which continues up to the next closing parenthesis. Nested parentheses are not permitted. The characters that make up a comment play no part at all in the pattern matching.
 
