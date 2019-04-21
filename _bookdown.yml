@@ -38,11 +38,8 @@ rmd_files:
   - "string-manipulation-with-stringr.Rmd"
   - "regular-expression.Rmd"  
   
-  # 统计图形
-  - "data-visualization-with-plot.Rmd"
-  - "custom-plot.Rmd"
-
   # 数据可视化
+  - "data-visualization-with-plot.Rmd"
   - "data-visualization-with-ggplot2.Rmd"
   
   # 配色和选择字体

@@ -16,6 +16,8 @@ library(ggplot2)
 
 ## 要素 {#elements} 
 
+### 点线 {#base-points}
+
 点和线是最常见的画图元素，在 `plot` 函数中，分别用参数 `pch` 和 `lty` 来设定类型，点的大小、线的宽度分别用参数 `cex` 和 `lwd` 来指定，颜色由参数 `col` 设置。参数 `type` 不同的值设置如下，`p` 显示点，`l` 绘制线，`b` 同时绘制空心点，并用线连接，`c` 只有线，`o` 在线上绘制点，`s` 和 `S` 点线连接绘制阶梯图，`h` 绘制类似直方图一样的垂线，最后 `n` 表示什么也不画。
 
 ```{r,echo=TRUE,fig.cap="不同的 pch 参数值"}
@@ -91,7 +93,69 @@ for (tp in c("p","l","b",  "c","o","h",  "s","S","n")) {
 ```
 
 颜色 col 连续型和离散型
+
+### 区域 {#base-rect}
+
+矩形，多边形，曲线交汇出来的区域
+
 面/多边形 rect 颜色填充
+
+```{r,fig.cap="rect 函数画长方形"}
+# From the manual
+ch.col <- c(
+  "rainbow(n, start=.7, end=.1)",
+  "heat.colors(n)",
+  "terrain.colors(n)",
+  "topo.colors(n)",
+  "cm.colors(n)"
+) # 选择颜色
+n <- 16
+nt <- length(ch.col)
+i <- 1:n
+j <- n / nt
+d <- j / 6
+dy <- 2 * d
+plot(i, i + d,
+  type = "n",
+  yaxt = "n",
+  ylab = "",
+  main = paste("color palettes; n=", n)
+)
+for (k in 1:nt) {
+  rect(i - .5, (k - 1) * j + dy, i + .4, k * j,
+    col = eval(parse(text = ch.col[k]))
+  ) # 咬人的函数/字符串解析为/转函数
+  text(2 * j, k * j + dy / 4, ch.col[k])
+}
+```
+
+
+```{r,fig.cap="区域重叠 polygon 函数"}
+my.col <- function(f, g, xmin, xmax, col, N = 200,
+                   xlab = "", ylab = "", main = "") {
+  x <- seq(xmin, xmax, length = N)
+  fx <- f(x)
+  gx <- g(x)
+  plot(0, 0,
+    type = "n",
+    xlim = c(xmin, xmax),
+    ylim = c(min(fx, gx), max(fx, gx)),
+    xlab = xlab, ylab = ylab, main = main
+  )
+  polygon(c(x, rev(x)), c(fx, rev(gx)),
+    col = "red", border = 0
+  )
+  lines(x, fx, lwd = 3, col = "green")
+  lines(x, gx, lwd = 3, col = "blue")
+}
+op <- par(mar = c(3, 3, 4, 1) + .1)
+my.col(function(x) x^2, function(x) x^2 + 10 * sin(x),
+  -6, 6,
+  main = "The \"polygon\" function"
+)
+par(op)
+```
+
 
 各种符号 \@ref(fig:cex-symbol) 
 
@@ -143,9 +207,439 @@ title(bquote(hat(a) == .(ahat)))
 
 其中 labels， pos 都是向量化的参数
 
+### 坐标轴 {#base-axis}
+
+```{r,title.mar=TRUE,echo=TRUE,fig.cap="两个 Y 轴",fig.asp=1}
+# 双Y轴
+N <- 200
+x <- seq(-4, 4, length = N)
+y1 <- sin(x)
+y2 <- cos(x)
+op <- par(mar = c(5, 4, 4, 4)) # Add some space in the right margin
+# The default is c(5,4,4,2) + .1
+xlim <- range(x)
+ylim <- c(-1.1, 1.1)
+plot(x, y1,
+  col = "blue", type = "l",
+  xlim = xlim, ylim = ylim,
+  axes = F, xlab = "", ylab = "", main = "Title"
+)
+axis(1)
+axis(2, col = "blue")
+par(new = TRUE)
+plot(x, y2,
+  col = "red", type = "l",
+  xlim = xlim, ylim = ylim,
+  axes = F, xlab = "", ylab = "", main = ""
+)
+axis(4, col = "red")
+mtext("First Y axis", 2, line = 2, col = "blue", cex = 1.2)
+mtext("Second Y axis", 4, line = 2, col = "red", cex = 1.2)
+# 1,2,3,4 分别代表下左上右四个位置
+```
+旋转坐标轴标签
+
+```{r,echo=TRUE}
+# Rotated axis labels in R plots
+# https://menugget.blogspot.com/2014/08/rotated-axis-labels-in-r-plots.html
+# Example data
+tmin <- as.Date("2000-01-01")
+tmax <- as.Date("2001-01-01")
+tlab <- seq(tmin, tmax, by = "month")
+lab <- format(tlab, format = "%Y-%b")
+set.seed(111)
+x <- seq(tmin, tmax, length.out = 100)
+y <- cumsum(rnorm(100))
+
+# Plot
+# png("plot_w_rotated_axis_labels.png", height = 3,
+#     width = 6, units = "in", res = 300)
+op <- par(mar = c(6, 4, 1, 1))
+plot(x, y, t = "l", xaxt = "n", xlab = "")
+axis(1, at = tlab, labels = FALSE)
+text(
+  x = tlab, y = par()$usr[3] - 0.1 * (par()$usr[4] - par()$usr[3]),
+  labels = lab, srt = 45, adj = 1, xpd = TRUE
+)
+par(op)
+# dev.off()
+```
+
+旋转坐标抽标签的例子来自手册《R FAQ》的第7章第27个问题 [@R-FAQ]，在基础图形中，旋转坐标轴标签需要 `text()` 而不是 `mtext()`，因为后者不支持`par("srt")` 
+
+```{r rotate-axis-labels,fig.cap="旋转坐标轴标签"}
+## Increase bottom margin to make room for rotated labels
+par(mar = c(5, 4, .5, 2) + 0.1)
+## Create plot with no x axis and no x axis label
+plot(1:8, xaxt = "n", xlab = "")
+## Set up x axis with tick marks alone
+axis(1, labels = FALSE)
+## Create some text labels
+labels <- paste("Label", 1:8, sep = " ")
+## Plot x axis labels at default tick marks
+text(1:8, par("usr")[3] - 0.5,
+  srt = 45, adj = 1,
+  labels = labels, xpd = TRUE
+)
+## Plot x axis label at line 6 (of 7)
+mtext(side = 1, text = "X Axis Label", line = 4)
+```
+
+`srt = 45` 表示文本旋转角度， `xpd = TRUE` 允许文本越出绘图区域，`adj = 1` to place the right end of text at the tick marks；You can adjust the value of the 0.5 offset as required to move the axis labels up or down relative to the x axis. 详细地参考 [@Paul_2003_Integrating]
+
+### 标题 {#base-title}
+
+添加多个标题
+
+```{r,fig.cap="图标题/子标题 x轴标题/子标题",sub.mar=TRUE,echo=TRUE}
+N <- 200
+x <- runif(N, -4, 4)
+y <- sin(x) + .5 * rnorm(N)
+plot(x, y, xlab = "", ylab = "", main = "")
+mtext("Subtitle", 3, line = .8)
+mtext("Title", 3, line = 2, cex = 1.5)
+mtext("X axis", 1, line = 2.5, cex = 1.5)
+mtext("X axis subtitle", 1, line = 3.7)
+```
+
+### 注释 {#base-annotation}
+
+数学符号注释，图\@ref(fig:math-annotation) 自定义坐标轴 [@Paul_2000_Approach]。
+
+```{r math-annotation, fig.cap="创建自定义的坐标轴和刻度标签",echo=TRUE}
+# 自定义坐标轴
+plot(c(1, 1e6), c(-pi, pi),
+  type = "n",
+  axes = FALSE, ann = FALSE, log = "x"
+)
+axis(1,
+  at = c(1, 1e2, 1e4, 1e6),
+  labels = expression(1, 10^2, 10^4, 10^6)
+)
+axis(2,
+  at = c(-pi, -pi / 2, 0, pi / 2, pi),
+  labels = expression(-pi, -pi / 2, 0, pi / 2, pi)
+)
+text(1e3, 0, expression(italic("Customized Axes")))
+box()
+```
+
+在标题中添加数学公式
+
+```{r,fig.cap="标题含有数学公式",title.mar=TRUE,echo=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
+x <- seq(-5, 5, length = 200)
+y <- sqrt(1 + x^2)
+plot(y ~ x,
+  type = "l",
+  ylab = expression(sqrt(1 + x^2))
+)
+title(main = expression(
+  "graph of the function f"(x) == sqrt(1 + x^2)
+))
+```
+
+修改参数使用 `substitute` 函数批量生成
+
+```{r,fig.cap="批量生成函数图形",title.mar=TRUE,echo=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
+x <- seq(-5, 5, length = 200)
+for (i in 1:4) { # 画四个图
+  y <- sqrt(i + x^2)
+  plot(y ~ x,
+    type = "l",
+    ylim = c(0, 6),
+    ylab = substitute(
+      expression(sqrt(i + x^2)),
+      list(i = i)
+    )
+  )
+  title(main = substitute(
+    "graph of the function f"(x) == sqrt(i + x^2),
+    list(i = i)
+  ))
+}
+```
+
+
+
+
+### 图例 {#base-legend}
+
+```{r,fig.cap="三角函数添加图例",echo=TRUE}
+x <- seq(-6, 6, length = 200)
+y <- sin(x)
+z <- cos(x)
+plot(y ~ x,
+  type = "l", lwd = 3,
+  ylab = "", xlab = "angle", main = "Trigonometric functions"
+)
+abline(h = 0, lty = 3)
+abline(v = 0, lty = 3)
+lines(z ~ x, type = "l", lwd = 3, col = "red")
+legend(-6, -1,
+  yjust = 0,
+  c("Sine", "Cosine"),
+  lwd = 3, lty = 1, col = c(par("fg"), "red")
+)
+```
+
+```{r,fig.cap="设置图例的位置",echo=TRUE}
+xmin <- par("usr")[1]
+xmax <- par("usr")[2]
+ymin <- par("usr")[3]
+ymax <- par("usr")[4]
+
+plot(y ~ x,
+  type = "l", lwd = 3,
+  ylab = "", xlab = "angle", main = "Trigonometric functions"
+)
+abline(h = 0, lty = 3)
+abline(v = 0, lty = 3)
+lines(z ~ x, type = "l", lwd = 3, col = "red")
+legend("bottomleft",
+  c("Sine", "Cosine"),
+  lwd = 3, lty = 1, col = c(par("fg"), "red")
+)
+```
+
+```{r,fig.cap="insert 函数微调图例位置",echo=TRUE}
+plot(y ~ x,
+  type = "l", lwd = 3,
+  ylab = "", xlab = "angle", main = "Trigonometric functions"
+)
+abline(h = 0, lty = 3)
+abline(v = 0, lty = 3)
+lines(z ~ x, type = "l", lwd = 3, col = "red")
+legend("bottomleft",
+  c("Sine", "Cosine"),
+  inset = c(.03, .03),
+  lwd = 3, lty = 1, col = c(par("fg"), "red")
+)
+```
+
+
+```{r,fig.cap="将图例放在绘图区域外面"}
+op <- par(no.readonly = TRUE)
+plot(y ~ x,
+  type = "l", lwd = 3,
+  ylab = "", xlab = "angle", main = "Trigonometric functions"
+)
+abline(h = 0, lty = 3)
+abline(v = 0, lty = 3)
+lines(z ~ x, type = "l", lwd = 3, col = "red")
+par(xpd = TRUE) # Do not clip to the drawing area 关键一行/允许出界
+lambda <- .025
+legend(par("usr")[1],
+  (1 + lambda) * par("usr")[4] - lambda * par("usr")[3],
+  c("Sine", "Cosine"),
+  xjust = 0, yjust = 0,
+  lwd = 3, lty = 1, col = c(par("fg"), "red")
+)
+par(op)
+```
+
+Hmisc 包的 labcurve 函数可以在曲线上放置名称，而不是遥远的图例上
+
+### 边空 {#base-par}
+
+```{r,fig.cap="外边空在图的边缘添加文字",title.mar=TRUE,echo=TRUE}
+N <- 200
+x <- runif(N, -4, 4)
+y <- sin(x) + .5 * rnorm(N)
+plot(x, y,
+  xlab = "", ylab = "",
+  main = paste(
+    "The \"mtext\" function",
+    paste(rep(" ", 60), collapse = "")
+  )
+)
+mtext("Line 0", 3, line = 0)
+mtext("Line 1", 3, line = 1)
+mtext("Line 2", 3, line = 2)
+mtext("Line 3", 3, line = 3)
+```
+
+
+`par`
+
+```{r,sub.mar=TRUE,echo=TRUE,fig.asp=1,fig.cap="多图排列共享一个大标题"}
+# 多图排列/分屏 page 47
+# 最常用的是 par mfrow mfcol分别按行/列放置图形
+op <- par(
+  mfrow = c(2, 2),
+  oma = c(0, 0, 4, 0) # Outer margins
+)
+for (i in 1:4)
+  plot(runif(20), runif(20),
+    main = paste("random plot (", i, ")", sep = "")
+  )
+par(op)
+mtext("Four plots, without enough room for this title",
+  side = 3, font = 2, cex = 1.5, col = "red"
+) # 总/大标题放不下
+```
+
+`par` 的 oma 用来设置外边空的大小
+
+```{r,fig.cap="设置外边空放置大标题",fig.asp=1,title.mar=TRUE,echo=TRUE}
+op <- par(
+  mfrow = c(2, 2),
+  oma = c(0, 0, 3, 0) # Outer margins
+)
+for (i in 1:4)
+  plot(runif(20), runif(20),
+    main = paste("random plot (", i, ")", sep = "")
+  )
+par(op)
+mtext("Four plots, with some room for this title",
+  side = 3, line = 1.5, font = 1, cex = 1.5, col = "red"
+)
+```
+
+
+```{r,fig.cap="设置每个子图的边空 mar",fig.asp=1,title.mar=TRUE,echo=TRUE}
+op <- par(
+  mfrow = c(2, 2),
+  oma = c(0, 0, 3, 0),
+  mar = c(3, 3, 4, 1) + .1 # Margins
+)
+for (i in 1:4)
+  plot(runif(20), runif(20),
+    xlab = "", ylab = "",
+    main = paste("random plot (", i, ")", sep = "")
+  )
+par(op)
+mtext("Title",
+  side = 3, line = 1.5, font = 2, cex = 2, col = "red"
+)
+```
+
+
+
+### 图层 {#base-layer}
+
+覆盖图形 `add = T` or `par(new=TRUE)`
+
+```{r,fig.cap="添加图层"}
+plot(runif(5), runif(5),
+  xlim = c(0, 1), ylim = c(0, 1)
+)
+points(runif(5), runif(5),
+  col = "orange", pch = 16, cex = 3
+)
+lines(runif(5), runif(5), col = "red")
+segments(runif(5), runif(5), runif(5), runif(5),
+  col = "blue"
+)
+title(main = "Overlaying points, segments, lines...")
+```
+
+
+### 布局 {#base-layout}
+
+`layout` 函数布局， 绘制复杂组合图形
+ 
+```{r,fig.cap="更加复杂的组合图形",echo=TRUE,fig.asp=1}
+op <- par(oma = c(0, 0, 3, 0))
+layout(matrix(c(
+  1, 1, 1,
+  2, 3, 4,
+  2, 3, 4
+), nr = 3, byrow = TRUE))
+hist(rnorm(n), col = "light blue")
+hist(rnorm(n), col = "light blue")
+hist(rnorm(n), col = "light blue")
+hist(rnorm(n), col = "light blue")
+mtext("The \"layout\" function",
+  side = 3, outer = TRUE,
+  font = 2, cex = 1.2
+)
+```
+
+### 组合 {#base-combine}
+
+`par` 之 `fig` 参数很神奇，使得多个图可以叠加在一起，它接受一个数值向量`c(x1, x2, y1, y2)` ，是图形设备显示区域中的绘图区域的(NDC, normalized device coordinates)坐标。
+ 
+```{r,fig.cap="多图叠加",fig.asp=1,title.mar=TRUE,echo=TRUE}
+plot(1:12,
+  type = "b", main = "'fg' : axes, ticks and box in gray",
+  fg = gray(0.7), bty = "7", sub = R.version.string
+)
+par(fig = c(1, 6, 5, 10) / 10, new = T)
+plot(6:10,
+  type = "b", main = "",
+  fg = gray(0.7), bty = "7", xlab = R.version.string
+)
+```
+
+`fig` 参数控制图形的位置，用来绘制组合图形
+
+```{r,echo=TRUE,fig.cap="组合图形"}
+n <- 1000
+x <- rt(n, df = 10)
+hist(x,
+  col = "light blue",
+  probability = "TRUE", main = "",
+  ylim = c(0, 1.2 * max(density(x)$y))
+)
+lines(density(x),
+  col = "red",
+  lwd = 3
+)
+op <- par(
+  fig = c(.02, .4, .5, .98),
+  new = TRUE
+)
+qqnorm(x,
+  xlab = "", ylab = "", main = "",
+  axes = FALSE
+)
+qqline(x, col = "red", lwd = 2)
+box(lwd = 2)
+par(op)
+```
+
+
+### 分屏 {#base-screen}
+
+
+`split.screen` 分屏组合
+
+```{r,echo=TRUE,fig.cap="分屏"}
+random.plot <- function() {
+  N <- 200
+  f <- sample(
+    list(
+      rnorm,
+      function(x) {
+        rt(x, df = 2)
+      },
+      rlnorm,
+      runif
+    ),
+    1
+  ) [[1]]
+  x <- f(N)
+  hist(x, col = "lightblue", main = "", xlab = "", ylab = "", axes = F)
+  axis(1)
+}
+op <- par(bg = "white", mar = c(2.5, 2, 1, 2))
+split.screen(c(2, 1))
+split.screen(c(1, 3), screen = 2)
+screen(1)
+random.plot()
+# screen(2); random.plot() # Screen 2 was split into three screens: 3, 4, 5
+screen(3)
+random.plot()
+screen(4)
+random.plot()
+screen(5)
+random.plot()
+close.screen(all = TRUE)
+par(op)
+```
+
+
 ## 图库 {#gallary}
-
-
 
 ```{r plot,echo=TRUE,fig.width=7,fig.height=9,fig.cap='plot函数对象',fig.asp=1}
 # pdf(file = 'plot.pdf',width=10,height=6)
@@ -613,6 +1107,9 @@ legend(0, 2.4, c("real part", "imaginary part", "absolute value"),
 ```
 
 还有 eta 函数和 gammaz 函数
+
+
+
 
 ### 马赛克图 {#plot-mosaic}
 
