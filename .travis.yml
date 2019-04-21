@@ -70,7 +70,7 @@ addons:
       # magick
       - libmagick++-dev
       # pdftools
-      - libpoppler-cpp-dev
+      #- libpoppler-cpp-dev
       # tesseract
       #- libtesseract-dev 
       #- libleptonica-dev 

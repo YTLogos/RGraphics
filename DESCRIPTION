@@ -20,6 +20,7 @@ Imports:
   maptools,
   microbenchmark,
   MSG,
+  odbc,
   plotly,
   pracma,
   quantmod,
@@ -35,17 +36,12 @@ URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
 Suggests:
   DAAG,
-  DBI,
   extrafont,
   fontcm,
   ISLR,
-  odbc,
-  pdftools,
-  RCurl,
   rsvg,
   showtext,
-  svglite,
-  XML
+  svglite
 Remotes: 
   vankesteren/firatheme,
   thomasp85/patchwork
