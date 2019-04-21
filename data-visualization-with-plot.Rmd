@@ -6,13 +6,7 @@
 
 数据可视化是一种重要的数据分析手段， R 提供了两套图形系统，分别是 graphics 包提供的基础绘图系统和 grid 包提供的栅格绘图系统，后者主要以两个 R 包为大家所熟知，一个是 lattice 包，另一个是 ggplot2 包。
 
-```{r load-pkgs,echo=TRUE}
-library(grid)
-library(lattice)
-library(ggplot2)
-```
-
-## 要素 {#elements} 
+## 基本要素 {#elements} 
 
 ### 点线 {#base-points}
 
@@ -674,7 +668,7 @@ par(op)
 ```
 
 
-## 图库 {#gallary}
+## 统计图形 {#gallary}
 
 ```{r plot,echo=TRUE,fig.width=7,fig.height=9,fig.cap='plot函数对象',fig.asp=1}
 # pdf(file = 'plot.pdf',width=10,height=6)
@@ -949,6 +943,7 @@ legend(300, 35,
 ```
 
 ```{r category-ggplot,fig.cap="分类散点图",echo=TRUE}
+library(ggplot2)
 ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
   geom_point() +
   theme_bw()
@@ -1090,18 +1085,6 @@ legend(2, 9, c("Ascorbic acid", "Orange juice"),
 ### 提琴图 {#plot-violin}
 
 Tom Kelly 维护的 vioplot 包 <https://github.com/TomKellyGenetics/vioplot>
-
-### 热力图 {#plot-heatmap}
-
-ggplot2
-
-geom\_density()
-
-
-### 岭线图 {#plot-ridges}
-
-ggridges
-
 
 ### 轮廓图 {#plot-contour}
 

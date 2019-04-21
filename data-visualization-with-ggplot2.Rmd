@@ -514,6 +514,17 @@ p + geom_bar(colour = "white") +
 
 [^nightingale-rose]: https://mbostock.github.io/protovis/ex/crimea-rose-full.html
 
+## 热力图 {#ggplot2-heatmap}
+
+ggplot2
+
+geom\_density()
+
+
+## 岭线图 {#ggplot2-ridges}
+
+ggridges
+
 ## 空间数据 {#ggplot2-spatial}
 
 美国各州的犯罪率数据 USArrests
