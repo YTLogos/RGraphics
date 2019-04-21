@@ -323,6 +323,8 @@ chartr("a-cX", "D-Fw", x)
 sub(" .*", "", extSoftVersion()["PCRE"])
 ```
 
+参数 replacement 的值是正则表达式，其包含反向引用的用法， `\\1` 即引用表达式 `([ab])` 
+
 ```{r,echo=TRUE}
 gsub(pattern =  "([ab])", replacement = "\\1_\\1_", x = "abc and ABC")
 ```
