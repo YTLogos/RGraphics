@@ -15,6 +15,7 @@
 - Kieran Healy [Data Visualization: A practical introduction](https://socviz.co/)
 - Carson Sievert [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
 
+- [Online regex tester and debugger](https://regex101.com/)
 - Martin Mächler [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) https://github.com/mmaechler
 - R 炼狱 https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
 - R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
@@ -131,6 +132,8 @@
     - [Python 代码风格 PEP8](https://www.python.org/dev/peps/pep-0008/) PEP 8 -- Style Guide for Python Code 官方英文文档
     - [初识 Python](https://docs.python.org/3/tutorial/index.html) Python 官方入门材料
     - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) 自动化无聊的工作
+    - [Python Regular expression operations](https://docs.python.org/3/library/re.html)
+    - [正则表达式速查表 Python3](https://www.dataquest.io/blog/large_files/python-regular-expressions-cheat-sheet.pdf)
 1. 机器学习与数据科学    
    - [Sklearn 与 TensorFlow 机器学习实用指南](https://hand2st.apachecn.org/#/) 
    - [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/) Python Data Science Handbook
@@ -170,71 +173,20 @@
 - [RStudio 公司](https://www.rstudio.com/)
 - [极乐净土 Tidyverse](https://www.tidyverse.org/)
 
-### 主页
+### 搜索
 
-- [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
-- [姚琦伟](http://stats.lse.ac.uk/q.yao/)
-- [范剑青](https://orfe.princeton.edu/~jqfan/index.html) [Jianqing Fan-Fudan](http://www.sds.fudan.edu.cn/wp/?p=1695)
-- [蔡天文](http://www-stat.wharton.upenn.edu/~tcai/)
-- [李润泽](http://personal.psu.edu/ril4/)
-- [孟晓犁](https://statistics.fas.harvard.edu/people/xiao-li-meng)
-- [Erich Leo Lehmann](https://en.wikipedia.org/wiki/Erich_Leo_Lehmann) 1917-2019 https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-985X.2010.00645_1.x
-- [Peter Hall](https://en.wikipedia.org/wiki/Peter_Gavin_Hall) 1951-2016 https://royalsocietypublishing.org/doi/pdf/10.1098/rsbm.2017.0035
-- [Sebastian Sauer](https://data-se.netlify.com)
-- [Peter J. Diggle](https://www.lancaster.ac.uk/staff/diggle/) Geostatistics
-- [Rob J Hyndman](https://robjhyndman.com/) 时间序列
-- [Julian Faraway](https://farawaystatistics.wordpress.com/)
-- [Andrew Gelman](https://andrewgelman.com/) Stan
-- [Norm Matloff](https://matloff.wordpress.com/) R语言编程艺术
-- [Brian Ripley](http://www.stats.ox.ac.uk/~ripley/) MASS
-- [John Fox](https://socialsciences.mcmaster.ca/jfox/) Rcmdr car 
-- [Charlie Geyer](http://users.stat.umn.edu/~geyer/)
-- [Michael L. Stein](http://www.stat.uchicago.edu/faculty/stein.shtml)
-- [李航](http://hangli-hl.com) NLP
-
-- [王江浩](https://jianghao.github.io) 地理信息
-- [陈新鹏](https://chenxinpeng.github.io/) 腾讯 AI lab 
-- [于淼](https://yufree.cn/)  加拿大，COS 执行主编
-- [朱雪宁](https://xueningzhu.github.io/) COS 主编，李润泽高足
-- [余光创](https://guangchuangyu.github.io/) 生物统计 ggtree 开发者
-- [肖楠](https://nanx.me/) 
-- [高策](https://gaocegege.com) 交大，可视化
-- [赵鹏](http://www.pzhao.org/zh/) 德国《学R》
-- [高涛](https://joegaotao.github.io)
-- [黄俊文](https://www.fyears.org) Python 和 R
-- [黄晨成](https://liam.page/) TeX 专家
-- [王奕如](https://earo.me/) 时空序列数据分析 博士
-- [边蓓蕾](http://statsjoke.me) COS 副主编
-- [郎大为](http://langdawei.com/) 词云 recharts
-- [寇强](http://qkou.info/) Rcpp/mxnet 核心开发者
-- [邱怡轩](https://yixuan.cos.name/cn/) or [Yixuan Qiu-en](https://statr.me/) 普渡大学博后，人称小轩哥
-- [杨洵默](https://tcya.xyz/) 化学码农，谷歌工程师
-- [杜亚蕾](http://yalei.name/) 51talk
-- [冯俊晨](http://www.fengjunchen.com/)
-- [刘思喆](http://www.bjt.name/) 51talk
-- [陈丽云](http://www.loyhome.com/) 落园博主
-- [唐源](https://terrytangyuan.github.io) tensorflow/xgboost/mxnet 活跃贡献者 
-- [WenSui Liu](https://statcompute.wordpress.com/)
-- [Yuling Yao](https://www.yulingyao.com/)
-- [handong1587](https://handong1587.github.io/)
-- [杜雨](http://raindu.com/) ggplot2 数据可视化 左手 R右手 Python
-- [Paula Moraga](https://paula-moraga.github.io) Peter J. Diggle 的学生，研究 Geostatistics 
-- [John MacFarlane](https://johnmacfarlane.net/) Pandoc 开发者
-- [Paul Bürkner](https://paul-buerkner.github.io/) Stan/brms 开发者  
-- [Francesco Bailo](http://www.francescobailo.net/) 空间数据分析
-
-* 搜索
 - [Sci-Hub: removing barriers in the way of science](https://sci-hub.tw/)
 - [书籍传送门](http://gen.lib.rus.ec/) 需要科学上网 http://gen.lib.rus.ec/
 - [Stack Overflow](https://stackoverflow.com/)
 
-* 博客聚合
-  - https://rweekly.org/
-  - https://www.r-bloggers.com/
-  - https://dailyr.netlify.com/
-  - https://datascienceplus.com/
+### 博客聚合
 
-## R 语言落地场景
+- https://rweekly.org/
+- https://www.r-bloggers.com/
+- https://dailyr.netlify.com/
+- https://datascienceplus.com/
+
+### R 语言落地场景
 
 - 美团 https://tech.meituan.com/2018/08/02/mt-r-practice.html
 - 比较成熟的有京东、豆瓣、ebay、阿里
