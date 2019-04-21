@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/XiangyunHuang/RGraphics.svg?token=JzZLZhzXpgpzucseAyh4&branch=master)](https://travis-ci.com/XiangyunHuang/RGraphics)[![Netlify Status](https://api.netlify.com/api/v1/badges/6c069b09-a414-40f9-a0cf-3921fa547f28/deploy-status)](https://app.netlify.com/sites/r4charts/deploys) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![GitHub All Releases](https://img.shields.io/github/downloads/XiangyunHuang/RGraphics/total.svg)](https://github.com/XiangyunHuang/RGraphics)
+[![Build Status](https://travis-ci.com/XiangyunHuang/RGraphics.svg?token=JzZLZhzXpgpzucseAyh4&branch=master)](https://travis-ci.com/XiangyunHuang/RGraphics) [![Netlify Status](https://api.netlify.com/api/v1/badges/6c069b09-a414-40f9-a0cf-3921fa547f28/deploy-status)](https://app.netlify.com/sites/r4charts/deploys) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![GitHub All Releases](https://img.shields.io/github/downloads/XiangyunHuang/RGraphics/total.svg)](https://github.com/XiangyunHuang/RGraphics)
 ---
 
 本书采用 [知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/) 许可，请君自重，别没事儿拿去传个什么新浪爱问、百度文库以及 XX 经济论坛，项目中代码使用 [MIT 协议](https://github.com/XiangyunHuang/RGraphics/blob/master/LICENSE) 开源
@@ -14,7 +14,11 @@
 - Garrett Grolemund and Hadley Wickham [R for data science](https://r4ds.had.co.nz/)
 - Kieran Healy [Data Visualization: A practical introduction](https://socviz.co/)
 - Carson Sievert [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
-- 太多了，这里放不下
+
+- Martin Mächler [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) https://github.com/mmaechler
+- A book about trouble spots, oddities, traps, glitches in R.  Many of the same problems are in S+. If you are using R and you think you’re in hell, this is a map for you. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
+- R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
+- https://blog.rsquaredacademy.com/getting-help-in-r-updated/
 
 ## 相关资源
 
@@ -106,26 +110,26 @@
    - 北大 李东风 [金融时间序列分析讲义](http://www.math.pku.edu.cn/teachers/lidf/course/fts/ftsnotes/html/_ftsnotes/index.html)
    - 北大 李东风 [应用时间序列分析备课笔记](http://www.math.pku.edu.cn/teachers/lidf/course/atsa/atsanotes/html/_atsanotes/index.html)
 1. 学习 Python
-      - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
-      - [廖雪峰的 Python3.x 教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
-      - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python 中文版
-      - [Python 食谱第三版](https://python3-cookbook.readthedocs.io/zh_CN/latest/) Python Cookbook 3rd Edition 中文版
-      - [笨办法学 Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) Learn Python 3 The Hard Way 中文版
-      - [Python 最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/) Python Best Practices Guidebook 中文版
-      - [深入 Python 3](https://woodpecker.org.cn/diveintopython3/) dive into python3 中文版
-      - [高效的 Python：编写高质量Python代码的59个有效方法](https://guoruibiao.gitbooks.io/effective-python/content/) Effective Python: 59 Specific Ways to Write Better Python 中文版
-      - [Python 官方中文文档](https://docs.python.org/zh-cn/3/)
-      - [Python 小抄](https://www.pythonsheets.com/) Python 英文版
-      - [Python 3 标准库](https://pymotw.com/3/)  Python 3 Standard Library 英文版
-      - [Think Python 2nd Edition](https://greenteapress.com/wp/think-python-2e/) 英文版        
-      - [Python 代码风格 PEP8](https://www.python.org/dev/peps/pep-0008/) PEP 8 -- Style Guide for Python Code 官方英文文档
-      - [初识 Python](https://docs.python.org/3/tutorial/index.html) Python 官方入门材料
-      - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) 自动化无聊的工作
- 1. 机器学习与数据科学    
-     - [Sklearn 与 TensorFlow 机器学习实用指南](https://hand2st.apachecn.org/#/) 
-     - [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/) Python Data Science Handbook
+    - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
+    - [廖雪峰的 Python3.x 教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
+    - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python 中文版
+    - [Python 食谱第三版](https://python3-cookbook.readthedocs.io/zh_CN/latest/) Python Cookbook 3rd Edition 中文版
+    - [笨办法学 Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) Learn Python 3 The Hard Way 中文版
+    - [Python 最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/) Python Best Practices Guidebook 中文版
+    - [深入 Python 3](https://woodpecker.org.cn/diveintopython3/) dive into python3 中文版
+    - [高效的 Python：编写高质量Python代码的59个有效方法](https://guoruibiao.gitbooks.io/effective-python/content/) Effective Python: 59 Specific Ways to Write Better Python 中文版
+    - [Python 官方中文文档](https://docs.python.org/zh-cn/3/)
+    - [Python 小抄](https://www.pythonsheets.com/) Python 英文版
+    - [Python 3 标准库](https://pymotw.com/3/)  Python 3 Standard Library 英文版
+    - [Think Python 2nd Edition](https://greenteapress.com/wp/think-python-2e/) 英文版        
+    - [Python 代码风格 PEP8](https://www.python.org/dev/peps/pep-0008/) PEP 8 -- Style Guide for Python Code 官方英文文档
+    - [初识 Python](https://docs.python.org/3/tutorial/index.html) Python 官方入门材料
+    - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) 自动化无聊的工作
+1. 机器学习与数据科学    
+   - [Sklearn 与 TensorFlow 机器学习实用指南](https://hand2st.apachecn.org/#/) 
+   - [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/) Python Data Science Handbook
 
-更多在线书籍合集 <https://bookdown.org> 还有一个 [传送门](http://gen.lib.rus.ec/)，要记住学习 R 语言的天花板不在编程而在统计。可看看 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
+更多在线书籍合集 <https://bookdown.org> ，要记住学习 R 语言的天花板不在编程而在统计。可看看 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
 ### 课程
 
@@ -157,8 +161,10 @@
 - [Flowing Data](https://flowingdata.com/)
 - [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
 - [Mick Crawley](http://www.bio.ic.ac.uk/research/mjcraw/crawley.htm) [The R Book](http://www.imperial.ac.uk/bio/research/crawley/therbook) 的作者
+- [RStudio 公司](https://www.rstudio.com/)
+- [极乐净土 Tidyverse](https://www.tidyverse.org/)
 
-### 学者
+### 主页
 
 - [朱力行](http://www.math.hkbu.edu.hk/~lzhu/)
 - [姚琦伟](http://stats.lse.ac.uk/q.yao/)
@@ -179,8 +185,6 @@
 - [Charlie Geyer](http://users.stat.umn.edu/~geyer/)
 - [Michael L. Stein](http://www.stat.uchicago.edu/faculty/stein.shtml)
 - [李航](http://hangli-hl.com) NLP
-
-### 主页
 
 - [王江浩](https://jianghao.github.io) 地理信息
 - [陈新鹏](https://chenxinpeng.github.io/) 腾讯 AI lab 
@@ -213,60 +217,16 @@
 - [Paul Bürkner](https://paul-buerkner.github.io/) Stan/brms 开发者  
 - [Francesco Bailo](http://www.francescobailo.net/) 空间数据分析
 
-搜索
+* 搜索
 - [Sci-Hub: removing barriers in the way of science](https://sci-hub.tw/)
 - [书籍传送门](http://gen.lib.rus.ec/) 需要科学上网 http://gen.lib.rus.ec/
 - [Stack Overflow](https://stackoverflow.com/)
-
-### RStudio 产品
-
-- https://gt.rstudio.com/
-- https://shiny.rstudio.com/
-- https://db.rstudio.com
-- https://spark.rstudio.com/
-- https://tensorflow.rstudio.com/
-- https://keras.rstudio.com
-- https://rmarkdown.rstudio.com/
-- https://rmarkdown.rstudio.com/flexdashboard/
-- https://bookdown.org/yihui/blogdown
-- https://bookdown.org/yihui/bookdown
-- https://rstudio.github.io/reticulate/
-- https://rstudio.github.io/leaflet
-- https://rstudio.github.io/dygraphs/
-- https://rstudio.github.io/DT
-- https://rstudio.github.io/r2d3/
-- https://rstudio.github.io/radix/
-- https://rstudio.github.io/learnr/
-- https://rstudio.github.io/profvis/
-
-- https://dbplyr.tidyverse.org/
-- https://dplyr.tidyverse.org
-- https://purrr.tidyverse.org/
-- https://lubridate.tidyverse.org
-- https://ggplot2.tidyverse.org
-- https://tidyr.tidyverse.org
-- https://readr.tidyverse.org
-- https://magrittr.tidyverse.org
-- https://stringr.tidyverse.org
-- https://forcats.tidyverse.org
-- https://style.tidyverse.org
-- https://glue.tidyverse.org
-- https://haven.tidyverse.org
-
 
 * 博客聚合
   - https://rweekly.org/
   - https://www.r-bloggers.com/
   - https://dailyr.netlify.com/
   - https://datascienceplus.com/
-
-
-## 学习 R 语言
-
-- Martin Mächler [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) https://github.com/mmaechler
-- A book about trouble spots, oddities, traps, glitches in R.  Many of the same problems are in S+. If you are using R and you think you’re in hell, this is a map for you. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
-- R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
-- https://blog.rsquaredacademy.com/getting-help-in-r-updated/
 
 ## R 语言落地场景
 
