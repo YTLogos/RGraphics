@@ -40,6 +40,7 @@ lapply(packages, function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 if(!require(firatheme)) remotes::install_github('vankesteren/firatheme')
+if(!require(patchwork)) remotes::install_github('thomasp85/patchwork')
 ```
 
 # 准备 {#prerequisites}
