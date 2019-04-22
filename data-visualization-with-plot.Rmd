@@ -670,7 +670,7 @@ par(op)
 ```
 
 
-## 统计图形 {#gallary}
+## 统计图形 {#plot-gallary}
 
 
 ### 条形图 {#plot-bar}

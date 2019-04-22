@@ -6,7 +6,7 @@
 
 [RStudio GGplot2 作图插件 esquisse](https://github.com/dreamRs/esquisse)
 
-## Why ggplot2 {#why-ggplot2}
+## Why GGplot2 {#why-ggplot2}
 
 为何使用 ggplot2 [^why-ggplot2]
 
@@ -14,7 +14,7 @@
 
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 
-## 语法 {#intro-ggplot2}
+## 基础语法 {#intro-ggplot2}
 
 首先我们加载 R 包 ggplot2 
 
@@ -24,13 +24,13 @@ library(ggplot2)
 
 ggplot2 提供了很多函数
 
-图层
+### 图层 {#ggplot2-layer}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^geom_")
 ```
 
-主题
+### 主题 {#ggplot2-theme}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^theme_")
@@ -38,35 +38,37 @@ ls("package:ggplot2", pattern = "^theme_")
 
 [ggthemes](https://github.com/jrnold/ggthemes) [ggthemr](https://github.com/cttobin/ggthemr)
 
-配色
+### 配色 {#ggplot2-color}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^scale_(color|fill)_")
 ```
 
-坐标
+### 坐标 {#ggplot2-coord}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^coord_")
 ```
 
-尺度
+### 尺度 {#ggplot2-scale}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^scale_(x|y)_")
 ```
 
-注释
+### 注释 {#ggplot2-annotate}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^annotate_")
 ```
 
-组合
+### 组合 {#ggplot2-combine}
 
 gridExtra 和 patchwork
 
-## 散点图 {#ggplot2-scatter}
+## 统计图形 {#ggplot2-gallary}
+
+### 散点图 {#ggplot2-scatter}
 
 下面以 diamonds 数据集为例展示 ggplot2 的绘图过程，首先加载 diamonds 数据集，查看数据集的内容
 
@@ -212,7 +214,7 @@ ggplot(data = dat, aes(x = as.factor(year), y = as.factor(month))) +
   theme_minimal()
 ```
 
-## 箱线图 {#ggplot2-boxplot}
+### 箱线图 {#ggplot2-boxplot}
 
 以钻石切割质量 cut 为分面依据，以钻石颜色类别 color 为 x 轴，钻石价格为 y 轴，绘制箱线图\@ref(fig:boxplot-facet-color)
 
@@ -239,7 +241,7 @@ ggplot(diamonds, aes(x = cut, y = price, color = color)) +
   facet_grid(clarity ~ color)
 ```
 
-## 条形图 {#ggplot2-barplot}
+### 条形图 {#ggplot2-barplot}
 
 条形图特别适合分类变量的展示，我们这里展示钻石切割质量 cut 不同等级的数量，当然我们可以直接展示各类的数目，在图层 `geom_bar` 中指定 `stat="identity"`
 
@@ -310,7 +312,7 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 with(diamonds, table(color, clarity, cut))
 ```
 
-## 点图 {#ggplot2-dotplot}
+### 点图 {#ggplot2-dotplot}
 
 
 ```{r,echo=TRUE}
@@ -347,7 +349,7 @@ ggplot(cty_mpg, aes(x = make, y = mileage)) +
 
 
 
-## 折线图 {#ggplot2-line}
+### 折线图 {#ggplot2-line}
 
 时间序列数据的展示，时序图
 
@@ -356,7 +358,7 @@ ggplot(economics, aes(date, unemploy)) + geom_line()
 ```
 
 
-## 直方图 {#ggplot2-histogram}
+### 直方图 {#ggplot2-histogram}
 
 直方图用来查看连续变量的分布
 
@@ -414,7 +416,7 @@ ggplot(mtcars) +
 
 
 
-## 提琴图 {#ggplot2-violin}
+### 提琴图 {#ggplot2-violin}
 
 提琴图
 
@@ -437,7 +439,7 @@ ggplot(mpg, aes(class, cty)) +
   theme_minimal()
 ```
 
-## 抖动图 {#ggplot2-jitter}
+### 抖动图 {#ggplot2-jitter}
 
 ```{r,fig.cap="抖动图",echo=TRUE}
 ggplot(diamonds, aes(x = cut, y = price)) + geom_jitter()
@@ -462,7 +464,7 @@ ggplot(diamonds, aes(x = color, y = price)) +
   facet_grid(cut ~ clarity)
 ```
 
-## 密度图 {#ggplot2-ridge}
+### 密度图 {#ggplot2-ridge}
 
 
 ```{r,fig.cap="按汽缸数分组的城市里程"}
@@ -498,7 +500,7 @@ ggplot(diamonds, aes(carat, stat(count), fill = cut)) +
   geom_density(position = "fill")
 ```
 
-## 玫瑰图 {#ggplot2-rose}
+### 玫瑰图 {#ggplot2-rose}
 
 南丁格尔风玫瑰图[^nightingale-rose] 可以作为堆积条形图，分组条形图
 
@@ -535,14 +537,14 @@ p + geom_bar(colour = "white") +
 
 [^nightingale-rose]: https://mbostock.github.io/protovis/ex/crimea-rose-full.html
 
-## 热力图 {#ggplot2-heatmap}
+### 热力图 {#ggplot2-heatmap}
 
 ggplot2
 
 geom\_density()
 
 
-## 岭线图 {#ggplot2-ridges}
+### 岭线图 {#ggplot2-ridges}
 
 ggridges
 

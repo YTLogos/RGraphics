@@ -16,7 +16,7 @@
 - Carson Sievert [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
 
 - [Online regex tester and debugger](https://regex101.com/)
-- Martin Mächler [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) https://github.com/mmaechler
+- [Martin Mächler](https://github.com/mmaechler) [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) 
 - R 炼狱 https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
 - R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
 - https://blog.rsquaredacademy.com/getting-help-in-r-updated/
