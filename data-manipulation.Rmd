@@ -51,7 +51,7 @@ object.size(ls)
 format(object.size(library), units = "auto")
 ```
 
-## 数据变形 {#reshape}
+## 数据变形 {#base-reshape}
 
 重复测量数据的变形 Reshape Grouped Data
 
@@ -82,7 +82,7 @@ village$prev <- as.vector(tapply(gambia$pos, ind, mean))
 head(village)
 ```
 
-## 数据转换 {#transform}
+## 数据转换 {#base-transform}
 
 transform 对数据框中的某些列做计算，取对数，将计算的结果单存一列加到数据框中
 
@@ -94,7 +94,7 @@ transform(iris, scale.sl = (max(Sepal.Length) - Sepal.Length) / (max(Sepal.Lengt
 Warning: This is a convenience function intended for use interactively. For programming it is better to use the standard subsetting arithmetic functions, and in particular the non-standard evaluation of argument `transform` can have unanticipated consequences.
 :::
 
-## 提取子集 {#subset}
+## 提取子集 {#base-subset}
 
 `subset(x, subset, select, drop = FALSE, ...)` 参数 subset 代表行操作，select 代表列操作
 
@@ -149,7 +149,7 @@ iris[
 
 [^non-standard-eval]: Thomas Lumley (2003) Standard nonstandard evaluation rules. https://developer.r-project.org/nonstandard-eval.pdf
 
-## 按列排序 {#order}
+## 按列排序 {#base-order}
 
 在数据框内，根据(order)某一列或几列对行进行排序(sort)，根据鸢尾花(iris)的类别(Species)对萼片(sepal)的长度进行排序，其余的列随之变化
 
@@ -164,7 +164,7 @@ iris[order(iris$Petal.Width, iris$Petal.Length), ] %>% head(5)
 
 sort 排序
 
-## 数据拆分 {#split}
+## 数据拆分 {#base-split}
 
 ```{r,echo=TRUE}
 ## Notice that assignment form is not used since a variable is being added
@@ -188,7 +188,7 @@ l <- lapply(l, transform, scale.sl = scale(Sepal.Length)) # 计算
 unsplit(l, g) %>% head(5) # 合并
 ```
 
-## 数据合并 {#merge}
+## 数据合并 {#base-merge}
 
 merge 合并两个数据框
 
@@ -253,7 +253,7 @@ rbind
 left join
 right join
 
-## 数据聚合 {#aggregate}
+## 数据聚合 {#base-aggregate}
 
 主要是分组统计
 
@@ -385,7 +385,7 @@ with(iris, ave(Sepal.Length, Species, FUN = function(x) sum(x)))
 ```
 
 
-## 表格统计 {#cross-table}
+## 表格统计 {#base-table}
 
 > 介绍操作表格的 table, addmargins, prop.table, xtabs, margin.table, ftabe 等函数
 
@@ -461,7 +461,7 @@ prop.table(margin.table(UCBA2DF.tab, c(1, 3)), 1)
 
 男生倾向于申请院系 A 和 B，女生倾向于申请院系 C 到 F，院系 A 和 B 是最容易录取的。
 
-## 索引访问 {#index}
+## 索引访问 {#base-index}
 
 which 与引用 `[` 性能比较，在区间 $[0,1]$ 上生成 10 万个服从均匀分布的随机数，随机抽取其中$\frac{1}{4}$。
 
@@ -473,7 +473,7 @@ i[sample(n, n / 4)] <- TRUE
 microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 ```
 
-## 其它操作 {#others}
+## 其它操作 {#base-others}
 
 成对的数据操作
 

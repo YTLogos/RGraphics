@@ -11,31 +11,32 @@
 - [disk.frame](https://github.com/xiaodaigh/disk.frame) 是基于磁盘的超出内存容量的快速并行数据操作框架
 - [future](https://github.com/HenrikBengtsson/future) 在 R 语言中提供统一的并行和分布式处理框架
 
+- [rpivotTable](https://github.com/smartinsightsfromdata/rpivotTable) 动态数据透视表
+- [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) Join tables together on inexact matching
+- [dtplyr](https://github.com/hadley/dtplyr) dtplyr is the data.table backend for dplyr. It provides S3 methods for data.table objects so that dplyr works the way you expect.
 
 ```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 library(tidyverse)
-```
-
-```{r,eval=FALSE}
-install.packages(c("reshape", "reshape2", "plyr"))
 ```
 
 数据操作的语法
 
 第一代
 
-1. Base R 数据操作
+1. Base R 数据操作已在第 \@ref(data-manipulator) 章详细介绍
 
 第二代
 
 1. reshape （退休）使用函数 `melt` 和 `cast` 重构(restructure)和聚合(aggregate)数据 
-1. reshape2 （退休）是 reshape 的继任者，功能和 reshape 类似，提供两个函数 `melt` 和 `cast` 聚合数据 
+1. reshape2 （退休）是 reshape 的继任者，功能和 reshape 类似，提供两个函数 `melt` 和 `cast` 聚合数据，因此不再介绍 reshape，而鉴于 reshape2 还在活跃使用中，故而以它为例介绍  `melt` 和 `cast` 函数
 1. plyr （退休）统一拆分(split)，计算(apply)，合并(combine)的数据处理流，由 dplyr（用于data.frame） 和 purrr （用于 list）继任
 
 第三代
 
-1. dplyr 操作数据的语法
+1. dplyr 操作数据的语法及其扩展
 1. sparklyr 给 dplyr 提供 Spark 接口支持
+1. dbplyr 给 dplyr 提供 DBI 数据库接口支持
+1. dtplyr 给 dplyr 提供 data.table 支持
 1. tidyr 提供 `spread` 和 `gather` 两个函数清洗数据
 
 Garrett Grolemund 在 RStudio 主要从事教育教学，参考 [Materials for the Tidyverse Train-the-trainer workshop](https://github.com/rstudio-education/teach-tidy) 和 [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/)
@@ -45,7 +46,58 @@ Dirk Eddelbuettel 的 [Getting Started in R -- Tinyverse Edition](https://github
 
 ## 常用操作 {#common-operations}
 
-参考资料[^dataframe-ops]
+以 GGplot2 自带的钻石数据集diamonds为例介绍
+
+### 查看 {#tibble-show}
+
+除了直接打印数据集的前几行，tibble 包还提供 glimpse 函数查看数据集，而 Base R 默认查看方式是调用 str 函数
+
+```{r,echo=TRUE}
+diamonds
+glimpse(diamonds)
+```
+
+Table: (\#tab:dplyr-object-type) dplyr 定义的数据对象类型
+
+| 类型 | 含义                   |
+| :--- | :--------------------- |
+| int  | 整型 integer           |
+| dbl  | （单）双精度浮点类型   |
+| chr  | 字符（串）类型         |
+| dttm | data-time 类型         |
+| lgl  | 布尔类型               |
+| fctr | 因子类型 factor        |
+| date | 日期类型               |
+
+表 \@ref(tab:dplyr-object-type) 中 dttm 和 date 类型代指 lubridate 包指定的日期对象 POSIXct、 POSIXlt、 Date、 chron、 yearmon、 yearqtr、 zoo、 zooreg、 timeDate、 xts、 its、 ti、 jul、 timeSeries 和 fts。
+
+### 筛选 {#dplyr-subset}
+
+
+
+
+### 排序 {#dplyr-order}
+
+### 聚合 {#dplyr-aggregate}
+
+### 合并 {#dplyr-merge}
+
+### 重塑 {#dplyr-reshape}
+
+### 变换 {#dplyr-transform}
+    
+### 去重 {#dplyr-duplicated} 
+
+
+
+
+
+## 高频问题 {#faq-dataframe}
+
+参考资料[^dataframe-ops] 
+
+
+
 
 ### 创建空的 data.frame {#create-empty-data-frame}
 
@@ -88,14 +140,12 @@ d <- function() data.frame(
 microbenchmark::microbenchmark(s(), d())
 ```
 
-[^create-an-empty-data-frame]: https://stackoverflow.com/questions/10689055
-
 ### 按列对 data.frame 排序 {#sort-by-columns}
 
 创建数据框时，如果参数
 order 默认是升序
 
-```{r}
+```{r,echo=TRUE}
 dd <- data.frame(
   b = factor(c("Hi", "Med", "Hi", "Low"),
     levels = c("Low", "Med", "Hi"), ordered = TRUE
@@ -133,8 +183,6 @@ merge
 ### 抽取特定的列
 
 
-[^dataframe-ops]: https://github.com/ujjwalkarn/DataScienceR#common-dataframe-operations
-
 
 
 
@@ -146,7 +194,7 @@ merge
 
 
 
-## `Map` 与 `Reduce` {#high-order-function}
+### Map 与 Reduce I {#base-mapreduce}
 
 在 R 语言里玩转`apply`， `Map()` 和 `Reduce()`[^apply-family]，下面分别以提取合并多张 XLSX 表格[^openxl-map]，分组计算[^by-group-calculation] 和子集操作 [^subsetting] 为例，从函数式编程到 MapReduce [^funcprog-map-reduce]，制作数据透视表[^pivot-tables]，用于数据处理的函数式编程和单元测试 Functional programming and unit testing for data munging with R 特别是第三章 <https://b-rodrigues.github.io/fput/>，然后是函数式编程与数据建模 Modeling data with functional programming in R[^modeling-funcprog]
 
@@ -159,15 +207,35 @@ add_accuml <- function(x) Reduce("+", x, accumulate = TRUE)
 add_accuml(list(1, 2, 3))
 ```
 
-## 并行计算 {#parallel-computing}
+### Map 与 Reduce II {#purrr-mapreduce}
 
+### 并行计算 {#parallel-computing}
 
+介绍函数式编程中使用到的基于共享内存的并行 parallel
 
 [Gord Sissons](http://www.teraproc.com/r-blog/) 发布了系列关于如何在 R 环境下并行的文章
 
 赵鹏 Patric Zhao 的博客 [ParallelR](http://www.parallelr.com/) 关注 GPU 加速 [CUDA 加速](https://devblogs.nvidia.com/accelerate-r-applications-cuda/)
 
+## 表格样式 {#table-style}
 
+在数据分析报告中，根据报告的文本格式，我们有不同的数据呈现形式，基于 HTML 和 LaTeX 甚至 DOCX 
+
+表格样式工具 [gt](https://github.com/rstudio/gt) [kableExtra](https://github.com/haozhu233/kableExtra) [flextable](https://github.com/davidgohel/flextable) 和 [DT](https://github.com/rstudio/DT)
+
+[remedy](https://github.com/ThinkR-open/remedy) 格式化 Markdown 语法
+[beautifyR](https://github.com/mwip/beautifyR)
+[RStudio 插件列表](https://github.com/daattali/addinslist)
+
+### HTML 样式 {#table-html}
+
+### LaTeX 样式 {#table-latex}
+
+
+
+
+[^create-an-empty-data-frame]: https://stackoverflow.com/questions/10689055
+[^dataframe-ops]: https://github.com/ujjwalkarn/DataScienceR#common-dataframe-operations
 [^modeling-funcprog]: https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
 [^funcprog-map-reduce]: https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
 [^pivot-tables]: https://digitheadslabnotebook.blogspot.com/2010/01/pivot-tables-in-r.html
