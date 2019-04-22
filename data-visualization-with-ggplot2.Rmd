@@ -193,8 +193,24 @@ ggplot(Wheat2, aes(longitude, latitude)) +
   scale_y_continuous(breaks = seq(0, 50, 10))
 ```
   
+```{r category-ggplot,fig.cap="分类散点图",echo=TRUE}
+ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
+  geom_point() +
+  theme_bw()
+```
 
 图层、分组、分面和散点图介绍完了，接下来就是其它统计图形，如箱线图，小提琴图和条形图
+
+```{r,fig.cap="1948年至1960年航班乘客人数变化",echo=TRUE}
+dat <- as.data.frame( cbind(rep( 1948 + seq(12), each = 12), rep(seq(12),12), AirPassengers) )  
+colnames(dat) <- c("year","month","passengers")
+
+ggplot(data = dat, aes(x = as.factor(year), y = as.factor(month))) +
+  stat_sum(aes(size = passengers), colour = "lightblue") +
+  scale_size(range = c(1, 10), breaks = seq(100,650,50)) +
+  labs(x = "Year",y = "Month",colour = "Passengers") +
+  theme_minimal()
+```
 
 ## 箱线图 {#ggplot2-boxplot}
 
@@ -614,15 +630,6 @@ ggplot(FijiMap, aes(x = long, y = lat)) +
 ```
 
 此外， colormap 包提供更加丰富的调色板，通过 `scale_color_colormap` 支持 ggplot2 绘图风格
-
-```{r,fig.cap="1973年至2010年世界各地6级及以上地震统计表",echo=TRUE}
-data(quake6, package = "MSG")
-ggplot(quake6, aes(x = year, y = as.factor(month))) +
-  stat_sum(aes(size = ..n..), colour = "lightblue") +
-  scale_size(range = c(1, 10), breaks = c(10, 15, 20, 25, 30, 35)) +
-  labs(size = "magnitude", x = "Year", y = "Month") +
-  theme_bw()
-```
 
 ```{r unemploymentGG,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
 # 数据来源 http://datasets.flowingdata.com/unemployment09.csv

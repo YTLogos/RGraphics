@@ -672,38 +672,37 @@ par(op)
 
 ## 统计图形 {#gallary}
 
-```{r plot,echo=TRUE,fig.width=7,fig.height=9,fig.cap='plot函数对象',fig.asp=1}
-# pdf(file = 'plot.pdf',width=10,height=6)
-# layout(matrix(seq(6), 2, 3, byrow = TRUE))
-# 矩阵图 自带 layout
-# plot(iris[,-5],col = iris$Species)
-par(mfrow = c(3, 2), mar = c(2.5, 2.5, .5, .5))
-# 分类散点图
-plot(Sepal.Length ~ Sepal.Width, data = iris, col = Species, pch = 16)
-legend("topright",
-  legend = unique(iris$Species), box.col = "gray",
-  pch = 16, col = unique(iris$Species)
+
+### 条形图 {#plot-bar}
+
+```{r diamonds-base-barplot,fig.cap='条形图',echo=TRUE}
+data(diamonds, package = "ggplot2") # 加载数据
+par(mar = c(2, 5, 1, 1))
+barCenters <- barplot(table(diamonds$cut),
+  col = "lightblue", axes = FALSE,
+  axisnames = FALSE, horiz = TRUE, border = "white"
 )
-box(col = "gray")
-# 气泡图
-plot(Volume ~ Height,
-  data = trees, pch = 16, cex = Girth / 8,
-  col = rev(terrain.colors(nrow(trees), alpha = .5))
+text(
+  y = barCenters, x = par("usr")[3],
+  adj = 1, labels = names(table(diamonds$cut)), xpd = TRUE
 )
-box(col = "gray")
-# 折线图
-plot(AirPassengers)
-box(col = "gray")
-# 柱形图
+axis(1,
+  labels = seq(0, 25000, by = 5000), at = seq(0, 25000, by = 5000),
+  las = 1, col = "gray"
+)
+grid()
+```
+
+```{r,fig.cap="柱形图"}
 set.seed(123456)
 barPois <- table(stats::rpois(1000, lambda = 5))
 plot(barPois, col = "lightblue", type = "h", lwd = 10, main = "")
 box(col = "gray")
-# 马赛克图
-# par(mar=c(2,2,.5,.5))
-plot(HairEyeColor, col = "lightblue", border = "white", main = "")
-# box(col="gray")
-## 直方图
+```
+
+### 直方图 {#plot-hist}
+
+```{r,fig.cap="直方图"}
 set.seed(1234)
 n <- 2^24
 x <- runif(n, 0, 1)
@@ -717,31 +716,6 @@ axis(1, labels = xlim, at = xlim, las = 1) # x 轴
 axis(2, labels = ylim, at = ylim, las = 0) # y 轴
 box(col = "gray")
 ```
-
-
-
-### 条形图 {#plot-bar}
-
-```{r ISLR,fig.width=5,fig.height=4,fig.cap='条形图',echo=TRUE}
-data(NCI60, package = "ISLR") # 加载数据
-myData <- sort(table(NCI60$labs), decreasing = TRUE)
-par(mar = c(2, 7, 1, 1))
-barCenters <- barplot(myData,
-  col = "lightblue", axes = FALSE,
-  axisnames = FALSE, horiz = TRUE, border = "white"
-)
-text(
-  y = barCenters, x = par("usr")[3],
-  adj = 1, labels = names(myData), xpd = TRUE
-)
-axis(1,
-  labels = seq(0, 9, by = 1), at = seq(0, 9, by = 1),
-  las = 1, col = "gray"
-)
-```
-
-
-### 直方图 {#plot-hist}
 
 ```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布",echo=TRUE}
 with(data = faithful, {
@@ -944,11 +918,13 @@ legend(300, 35,
 )
 ```
 
-```{r category-ggplot,fig.cap="分类散点图",echo=TRUE}
-library(ggplot2)
-ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
-  geom_point() +
-  theme_bw()
+```{r,fig.cap="分类散点图"}
+plot(Sepal.Length ~ Sepal.Width, data = iris, col = Species, pch = 16)
+legend("topright",
+  legend = unique(iris$Species), box.col = "gray",
+  pch = 16, col = unique(iris$Species)
+)
+box(col = "gray")
 ```
 
 有时为了实现特定的目的，需要高亮其中某些点，按类别或者因子变量分组绘制散点图，这里继续采用 `stripchart` 函数绘制二维散点图\@ref(fig:scatter-iris)， 由左图可知，函数 `stripchart` 提供的参数 `pch` 不接受向量，实际只是取了前三个值 16 16 17 对应于 Species 的三类，关键是高亮的分界点是有区分意义的
@@ -993,6 +969,13 @@ graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
 # title(main = "n = 1000", xpd = TRUE)
 ```
 
+```{r,fig.cap="气泡图"}
+plot(Volume ~ Height,
+  data = trees, pch = 16, cex = Girth / 8,
+  col = rev(terrain.colors(nrow(trees), alpha = .5))
+)
+box(col = "gray")
+```
 
 
 ### 箱线图 {#plot-box}
@@ -1114,6 +1097,11 @@ sunspot.month          Monthly Sunspot Data, from 1749 to "Present"
 sunspot.year           Yearly Sunspot Data, 1700-1988
 sunspots               Monthly Sunspot Numbers, 1749-1983
 
+```{r,fig.cap="折线图"}
+plot(AirPassengers)
+box(col = "gray")
+```
+
 ### 函数图 {#function}
 
 ```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
@@ -1143,6 +1131,10 @@ legend(0, 2.4, c("real part", "imaginary part", "absolute value"),
 
 ### 马赛克图 {#plot-mosaic}
 
+```{r,fig.cap="马赛克图"}
+plot(HairEyeColor, col = "lightblue", border = "white", main = "")
+```
+
 ### 矩阵图 {#plot-matrix}
 
 在对角线上添加平滑曲线、密度曲线
@@ -1166,6 +1158,12 @@ pairs(longley,
   }
 )
 ```
+
+```{r,fig.cap="矩阵图"}
+# 自带 layout
+plot(iris[,-5],col = iris$Species)
+```
+
 
 ### 雷达图 {#plot-radar}
 

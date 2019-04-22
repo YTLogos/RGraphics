@@ -20,7 +20,6 @@ Imports:
   mapproj,
   maptools,
   microbenchmark,
-  MSG,
   odbc,
   patchwork,
   plotly,
@@ -40,7 +39,6 @@ BugReports: https://github.com/XiangyunHuang/RGraphics/issues
 Suggests:
   extrafont,
   fontcm,
-  ISLR,
   rsvg,
   svglite
 Remotes: 
