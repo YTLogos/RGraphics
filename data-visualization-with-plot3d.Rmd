@@ -1,5 +1,7 @@
 # 三维图形 {#plot-3d}
 
+画图 graphics 使用基础 R 包和基于基础包的扩展包绘图 **plotrix** [@Lemon_2006_Plotrix]
+
 ## 饼图 {#pie-3d}
 
 ## 柱形图 {#bar-3d}

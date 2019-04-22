@@ -1320,13 +1320,15 @@ legend("topright",
 
 ## 图形导出 {#export-save}
 
+图形导出的格式主要看面向的呈现方式，如 插入 HTML 网页中，可选 png， svg， rgl 和 gif 格式，插入 LaTeX 文档中，可选 eps，ps，pdf和png等格式 
+
 保存绘制的图形，R 使用的图形渲染库的版本
 
 ```{r,echo=TRUE}
 grSoftVersion()
 ```
 
-当前R环境中支持的图形设备
+当前 R 环境中支持的图形设备
 
 ```{r,echo=TRUE}
 capabilities()
@@ -1334,26 +1336,18 @@ capabilities()
 
 Table: (\#tab:graphics-devices) 图形设备列表
 
-available     | functional
-------------- | -------------
-windows       | cairo\_pdf, cairo\_ps
-pdf           | svg
-postscript    | png
-xfig          | jpeg
-bitmap        | bmp
-pictex        | tiff
+| 设备       | 函数                  |
+| :--------- | :-------------------- |
+| windows    | cairo\_pdf, cairo\_ps |
+| pdf        | svg                   |
+| postscript | png                   |
+| xfig       | jpeg                  |
+| bitmap     | bmp                   |
+| pictex     | tiff                  |
 
+图形设备控制函数
 
-```r
+```{r,echo=TRUE}
 apropos("dev.")
 ```
-```
- [1] ".Device"             ".Devices"            "dev.capabilities"   
- [4] "dev.capture"         "dev.control"         "dev.copy"           
- [7] "dev.copy2eps"        "dev.copy2pdf"        "dev.cur"            
-[10] "dev.flush"           "dev.hold"            "dev.interactive"    
-[13] "dev.list"            "dev.new"             "dev.next"           
-[16] "dev.off"             "dev.prev"            "dev.print"          
-[19] "dev.set"             "dev.size"            "dev2bitmap"         
-[22] "devAskNewPage"       "deviance"            "deviceIsInteractive"
-```
+

@@ -4,6 +4,8 @@
 
 [^fifty-ggplot2]: https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
+[RStudio GGplot2 作图插件 esquisse](https://github.com/dreamRs/esquisse)
+
 ## Why ggplot2 {#why-ggplot2}
 
 为何使用 ggplot2 [^why-ggplot2]

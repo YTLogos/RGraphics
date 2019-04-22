@@ -1,11 +1,8 @@
 ## TO DO
 
 - 数据处理
-
-  - 获取数据：从本地、数据库、网页导入数据
   - 清理数据：正则 Base R 和 stringr 包
   - 整理数据：
-    - 筛选 subset、排序 order、聚合 aggregate、合并 merge 、重塑 reshape 和变换 transform
     - Base R vs dplyr 
     - 扩展：数据库 MySQL 和集群 Spark  DBI sparklyr
 
@@ -20,7 +17,6 @@
   - 写幻灯片
   
 - shiny 
-
   - [Mastering Shiny](https://jcheng5.github.io/shiny-book/)
   - [Shiny Server Professional Administrator's Guide](https://docs.rstudio.com/shiny-server/)
   - [Learn Shiny](https://shiny.rstudio.com/tutorial/)
@@ -180,5 +176,3 @@ graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
 ```{r pressure,fig.cap="压力与温度的关系"}
 plot(pressure)
 ```
-
-画图 graphics 使用基础 R 包和基于基础包的扩展包绘图 **plotrix** [@Lemon_2006_Plotrix]

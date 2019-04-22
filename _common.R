@@ -49,6 +49,8 @@ knitr::opts_chunk$set(
 
 options(
   digits = 3,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
   citation.bibtex.max = 999,
   bitmapType = "cairo",
   stringsAsFactors = FALSE,
@@ -98,3 +100,6 @@ palette(c(
 
 is_on_travis <- identical(Sys.getenv("TRAVIS"), "true")
 is_online <- curl::has_internet()
+is_latex <- function() {
+  identical(knitr::opts_knit$get("rmarkdown.pandoc.to"), "latex")
+}
