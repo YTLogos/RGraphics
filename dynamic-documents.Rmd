@@ -137,7 +137,7 @@ knitr::kable(
 )
 ```
 
-[kableExtra](https://github.com/haozhu233/kableExtra) 、broom 和 [pixiedust](https://github.com/nutterb/pixiedust) 包实现表格样式的精细调整，如黄湘云制作的[样例](https://xiangyunhuang.github.io/bookdown-kableExtra/) 
+[kableExtra](https://github.com/haozhu233/kableExtra) 、broom 和 [pixiedust](https://github.com/nutterb/pixiedust) 包实现表格样式的精细调整，如黄湘云制作的 [样例](https://xiangyunhuang.github.io/bookdown-kableExtra/) 
 
 
 ### 图片 {#image}

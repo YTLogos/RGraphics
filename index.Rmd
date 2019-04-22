@@ -126,6 +126,34 @@ Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，�
 
 写作风格，R 包名称都加粗表示，如 **bookdown**， **rmarkdown** 等，软件、编程语言名称保持原样，如 TinyTeX，LyX，TeXLive，R，Python，Stan，C++，SQL等，在代码块中，我们不使用`R>`或`+`，代码输出结果用`#>`注释。**knitr** [@xie_2015_knitr] **bookdown** [@xie_2016_bookdown] 和 Pandoc \index{Pandoc} TinyTeX \index{TinyTeX}，请使用 XeLaTeX 编译这本书，等宽字体为 [inconsolata](https://ctan.org/pkg/inconsolata) 默认的文本字体为 [Times](https://ctan.org/pkg/mathptmx)
 
+在这本书中，使用如下印刷约定：
+
+Italic
+
+:   Indicates new terms, URLs, email addresses, filenames, and file extensions.
+
+Constant width
+
+:   Used for program listings, as well as within paragraphs to refer to program elements such as variable or function names, databases, data types, environment variables, statements, and keywords.
+:   Constant width text that is prefaced with `#>` represents output from R.
+
+**`Constant width bold`**
+
+:   Shows commands or other text that should be typed literally by the user.
+
+*Constant width italic*
+
+:   Shows text that should be replaced with user-supplied values or by values determined by context.
+
+> **Tip**
+>
+> This icon signifies a tip, suggestion, or general note.
+
+> **Caution**
+>
+> This icon indicates a warning or caution.
+
+
 ## 本书结构 {#structure-of-book}
 
 
