@@ -9,6 +9,8 @@
 
 ## 参考材料
 
+- [John W. Tukey](https://www.ams.org/notices/200202/fea-tukey.pdf) 生平介绍
+
 - Winston Chang [R Graphics Cookbook](https://r-graphics.org/)
 - Claus O. Wilke [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
 - Garrett Grolemund and Hadley Wickham [R for data science](https://r4ds.had.co.nz/)
