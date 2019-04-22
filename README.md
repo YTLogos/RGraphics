@@ -16,18 +16,11 @@
 - Garrett Grolemund and Hadley Wickham [R for data science](https://r4ds.had.co.nz/)
 - Kieran Healy [Data Visualization: A practical introduction](https://socviz.co/)
 - Carson Sievert [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
+- R Graphics, Third ---  [出版商页面](https://www.crcpress.com/p/book/9781498789059) [书籍补充材料](https://www.stat.auckland.ac.nz/~paul/RG3e/)
 
 - [Online regex tester and debugger](https://regex101.com/)
 - [Martin Mächler](https://github.com/mmaechler) [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) 
-- R 炼狱 https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
-- R 社区大佬视频合集 <https://blog.revolutionanalytics.com/profiles/>
-- https://blog.rsquaredacademy.com/getting-help-in-r-updated/
-- 现代统计图形（未出版） 谢益辉
-- R Graphics, Third ---  [出版商页面](https://www.crcpress.com/p/book/9781498789059) [书籍补充材料](https://www.stat.auckland.ac.nz/~paul/RG3e/)
-- [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf) 后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得
-- [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 
-- [条形图](https://rpubs.com/chidungkt/392980) 来自书籍 Data Visualisation with R: 100 Examples
-- [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)
+
 
 ## 相关资源
 
@@ -40,6 +33,8 @@
 1. 编程指南
    - R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
    - 高效R语言编程 [Efficient R programming](https://csgillespie.github.io/efficientR)
+   - [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)   
+   - [R 炼狱](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) 
 1. 开发 R 包
    - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  第二版 https://r-pkgs.org/
    - R 扩展 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
@@ -64,6 +59,7 @@
    - 应用预测建模 [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
    - 应用回归分析与广义线性模型 [Applied Regression Analysis and Generalized Linear Models](https://socialsciences.mcmaster.ca/jfox/)
    - 数据融合，理论、方法和应用 [Data Fusion Theory, Methods, and Applications](http://www.gagolewski.com/publications/datafusion/)
+   - [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf) 后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得   
 1. 数据可视化   
    - 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
    - 数据可视化与R语言 [Data Visualisation with R --- 100 Examples](http://www.datavisualisation-r.com/)

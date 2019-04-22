@@ -675,6 +675,8 @@ par(op)
 
 ### 条形图 {#plot-bar}
 
+[条形图](https://rpubs.com/chidungkt/392980) 
+
 ```{r diamonds-base-barplot,fig.cap='条形图',echo=TRUE}
 data(diamonds, package = "ggplot2") # 加载数据
 par(mar = c(2, 5, 1, 1))

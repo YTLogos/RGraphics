@@ -156,6 +156,9 @@ Constant width
 
 ## 本书结构 {#structure-of-book}
 
+## 获取帮助 {#Getting-Help-with-R}
+
+[Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 https://blog.rsquaredacademy.com/getting-help-in-r-updated/
 
 ## 发展历史 {#history-of-r}
 
