@@ -187,18 +187,17 @@ merge
 
 
 
-## 高阶函数 {#Higher-Order-Functions}
+## 函数式编程 {#functional-programming}
 
-参数为函数，返回值也是函数
+什么是函数式编程，R 语言环境下的函数式编程是如何操作的
 
+### 高阶函数 {#higher-order-functions}
 
+高阶函数，简单来说，就是参数为函数，返回值也是函数。Base R 提供了 `Reduce` 、`Filter` 、`Find` 、`Map` 、`Negate` 和 `Position` 等常用函数，此外还有 `*apply` 族，我们把它放在第\@ref(vector-computing)小节向量化计算中介绍。
 
-
-### Map 与 Reduce I {#base-mapreduce}
 
 在 R 语言里玩转`apply`， `Map()` 和 `Reduce()`[^apply-family]，下面分别以提取合并多张 XLSX 表格[^openxl-map]，分组计算[^by-group-calculation] 和子集操作 [^subsetting] 为例，从函数式编程到 MapReduce [^funcprog-map-reduce]，制作数据透视表[^pivot-tables]，用于数据处理的函数式编程和单元测试 Functional programming and unit testing for data munging with R 特别是第三章 <https://b-rodrigues.github.io/fput/>，然后是函数式编程与数据建模 Modeling data with functional programming in R[^modeling-funcprog]
 
-并行计算小抄 [Parallel_Computing](https://github.com/ardeeshany/Parallel_Computing)
 
 ```{r,echo=TRUE}
 add <- function(x) Reduce("+", x)
@@ -207,11 +206,15 @@ add_accuml <- function(x) Reduce("+", x, accumulate = TRUE)
 add_accuml(list(1, 2, 3))
 ```
 
-### Map 与 Reduce II {#purrr-mapreduce}
 
-### 并行计算 {#parallel-computing}
+
+
+
+### 向量化计算 {#vector-computing}
 
 介绍函数式编程中使用到的基于共享内存的并行 parallel
+
+并行计算小抄 [Parallel_Computing](https://github.com/ardeeshany/Parallel_Computing)
 
 [Gord Sissons](http://www.teraproc.com/r-blog/) 发布了系列关于如何在 R 环境下并行的文章
 
@@ -239,7 +242,7 @@ add_accuml(list(1, 2, 3))
 [^modeling-funcprog]: https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
 [^funcprog-map-reduce]: https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
 [^pivot-tables]: https://digitheadslabnotebook.blogspot.com/2010/01/pivot-tables-in-r.html
-[^openxl-map]: https://trinkerrstuff.wordpress.com/2018/02/14/easily-make-multi-tabbed-xlsx-files-with-openxlsx/)
+[^openxl-map]: https://trinkerrstuff.wordpress.com/2018/02/14/easily-make-multi-tabbed-xlsx-files-with-openxlsx/
 [^by-group-calculation]: https://statcompute.wordpress.com/2018/09/03/playing-map-and-reduce-in-r-by-group-calculation/
 [^subsetting]: https://statcompute.wordpress.com/2018/09/08/playing-map-and-reduce-in-r-subsetting/
 [^apply-family]: https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family
