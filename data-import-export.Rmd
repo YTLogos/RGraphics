@@ -515,12 +515,12 @@ rmarkdown::render("MyDocument.Rmd", params = list(
 
 ### Spark
 
-当数据分析报告遇上 Spark 时，就需要 SparkR、 sparklyr 或 rsparking 接口了[^the-r-spark]
+当数据分析报告遇上 Spark 时，就需要 [SparkR](https://github.com/apache/spark/tree/master/R)、 [sparklyr](https://github.com/rstudio/sparklyr)、 [arrow](https://github.com/apache/arrow/tree/master/r) 或 [rsparking](https://github.com/h2oai/sparkling-water/tree/master/r) 接口了， Javier Luraschi 写了一本书 [The R in Spark: Learning Apache Spark with R](https://therinspark.com/) 详细介绍了相关扩展和应用
 
 
-[^the-r-spark]: https://therinspark.com/
 [^sql-chunck]: https://d.cosx.org/d/419974
 [^txt-to-mysql]: https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql
 [^params-knit]: https://bookdown.org/yihui/rmarkdown/params-knit.html
 [^dataio]: https://rstudio-education.github.io/hopr/dataio.html
 [^sql-engine]: https://bookdown.org/yihui/rmarkdown/language-engines.html#sql
+[rstudio-spark]: https://spark.rstudio.com/
