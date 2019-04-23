@@ -426,7 +426,7 @@ dbDisconnect(con)
 [ClickHouse](https://clickhouse.yandex/) 独辟蹊径，基于 C++ 的实现，数据查询速度超级快，官网介绍碾压大量传统数据库。还有不少接口，其中还有 R 的 [clickhouse-r](https://github.com/hannesmuehleisen/clickhouse-r)
 
 ```{r,eval=FALSE,echo=TRUE}
-# 安装
+# 安装clickhouse接口
 devtools::install_github("hannesmuehleisen/clickhouse-r")
 # 调用接口
 library(DBI)
@@ -453,41 +453,41 @@ knitr::include_graphics(path = "figures/clickhouse.png")
 
 MySQL 是一个很常见，应用也很广泛的数据库，数据分析的常见环境是在一个R Notebook 里，我们可以在正文之前先设定数据库连接信息
 
-````markdown
-`r ''````{r setup}
+````{r echo = FALSE, comment = NA}
+cat("```{r setup}
 library(DBI)
 # 指定数据库连接信息
 db <- dbConnect(RMySQL::MySQL(),
-  dbname = "dbtest",
-  username = "user_test",
-  password = "password",
-  host = "10.10.101.10",
+  dbname = 'dbtest',
+  username = 'user_test',
+  password = 'password',
+  host = '10.10.101.10',
   port = 3306
 )
 # 创建默认连接
-knitr::opts_chunk$set(connection = "db")
+knitr::opts_chunk$set(connection = 'db')
 # 设置字符编码，以免中文查询乱码
-DBI::dbSendQuery(db, "SET NAMES utf8")
+DBI::dbSendQuery(db, 'SET NAMES utf8')
 # 设置日期变量，以运用在SQL中
-idate <- "2019-05-03"
-```
+idate <- '2019-05-03'
+```")
 ````
 
 SQL 代码块中使用 R 环境中的变量，并将查询结果输出为R环境中的数据框
 
-````markdown
-`r ''````{sql, output.var="data_output"}
-SELECT * FROM user_table where date_format(created_date,'%Y-%m-%d')>=?idate  
-```
+````{r echo = FALSE, comment = NA}
+cat("```{sql, output.var='data_output'}
+SELECT * FROM user_table where date_format(created_date,'%Y-%m-%d')>=?idate
+```")
 ````
 
 以上代码会将 SQL 的运行结果存在 `data_output` 这是数据库中，idate 取之前设置的日期`2019-05-03`，`user_table` 是 MySQL 数据库中的表名，`created_date` 是创建`user_table`时，指定的日期名。
 
 如果 SQL 比较长，为了代码美观，把带有变量的 SQL 保存为`demo.sql`脚本，只需要在 SQL 的 chunk 中直接读取 SQL 文件[^sql-chunck]。
 
-````markdown
-`r ''````{sql, code=readLines("demo.sql"), output.var="data_output"}
-```
+````{r echo = FALSE, comment = NA}
+cat("```{sql, code=readLines('demo.sql'), output.var='data_output'}
+```")
 ````
 
 如果我们需要每天或者按照指定的日期重复地运行这个 R Markdown 文件，可以在 YAML 部分引入参数[^params-knit]
@@ -497,10 +497,11 @@ SELECT * FROM user_table where date_format(created_date,'%Y-%m-%d')>=?idate
 params:
   date: "2019-05-03"  # 参数化日期
 ---
-
-`r ''````{r, setup, include=FALSE}
-idate = params$date # 将参数化日期传递给 idate 变量
 ```
+````{r echo = FALSE, comment = NA}
+cat("```{r setup, include=FALSE}
+idate = params$date # 将参数化日期传递给 idate 变量
+```")
 ````
 
 我们将这个 Rmd 文件命名为 `MyDocument.Rmd`，运行这个文件可以从 R 控制台执行或在 RStudio 点击 knit。
