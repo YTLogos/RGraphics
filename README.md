@@ -147,6 +147,9 @@
    - Morelia 2018 workshop [Generalized Linear/Mixed models](https://bbolker.github.io/morelia_2018)
 1. 统计机器学习
    - [Elements of Statistical Learning](https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/)
+1. Dennis Sun 
+   - 2015 summer Stats 253 [Analysis of Spatial and Temporal Data](https://web.stanford.edu/class/stats253/lectures.html)
+   - 课程列表 https://web.calpoly.edu/~dsun09/teaching.html
 
 ### 博客
 
