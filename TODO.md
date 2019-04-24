@@ -176,3 +176,11 @@ graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
 ```{r pressure,fig.cap="压力与温度的关系"}
 plot(pressure)
 ```
+
+
+
+par 函数给个参数的含义
+
+These are my rationalisations for the various par() graphical parameter names. These are not necessarily definitive (some of them are quite a stretch!), but hopefully they are still useful.
+
+https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html

@@ -33,7 +33,8 @@ Imports:
   tidyverse,
   tikzDevice,
   tweenr,
-  visNetwork
+  visNetwork,
+  vegawidget
 URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
 Suggests:

@@ -209,6 +209,28 @@ hcmap("countries/us/us-all-all",
   )
 ```
 
+## vegawidget
+
+```{r,echo=TRUE}
+library("vegawidget")
+spec_mtcars <-
+  list(
+    `$schema` = vega_schema(), # specifies Vega-Lite
+    description = "An mtcars example.",
+    data = list(values = mtcars),
+    mark = "point",
+    encoding = list(
+      x = list(field = "wt", type = "quantitative"),
+      y = list(field = "mpg", type = "quantitative"),
+      color = list(field = "cyl", type = "nominal")
+    )
+  ) %>% 
+  as_vegaspec()
+spec_mtcars
+```
+
+
+
 
 ## 网络图 {#network}
 
