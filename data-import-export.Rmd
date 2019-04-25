@@ -518,6 +518,37 @@ rmarkdown::render("MyDocument.Rmd", params = list(
 
 当数据分析报告遇上 Spark 时，就需要 [SparkR](https://github.com/apache/spark/tree/master/R)、 [sparklyr](https://github.com/rstudio/sparklyr)、 [arrow](https://github.com/apache/arrow/tree/master/r) 或 [rsparking](https://github.com/h2oai/sparkling-water/tree/master/r) 接口了， Javier Luraschi 写了一本书 [The R in Spark: Learning Apache Spark with R](https://therinspark.com/) 详细介绍了相关扩展和应用
 
+首先安装 sparklyr 包，RStudio 公司 Javier Lurasch 开发了 sparklyr 包，作为 Spark 与 R 语言之间的接口，安装完 sparklyr 包，还是需要 Spark 和 Hadoop 环境
+
+```{r,echo=TRUE,eval=FALSE}
+install.packages('sparklyr')
+library(sparklyr)
+spark_install()
+# Installing Spark 2.4.0 for Hadoop 2.7 or later.
+# Downloading from:
+# - 'https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz'
+# Installing to:
+# - '~/spark/spark-2.4.0-bin-hadoop2.7'
+# trying URL 'https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz'
+# Content type 'application/x-gzip' length 227893062 bytes (217.3 MB)
+# ==================================================
+# downloaded 217.3 MB
+# 
+# Installation complete.
+```
+
+既然 sparklyr 已经安装了 Spark 和 Hadoop 环境，安装 SparkR 后，只需配置好路径，就可以加载 SparkR 包
+
+```{r,echo=TRUE,eval=FALSE}
+install.packages('SparkR')
+if (nchar(Sys.getenv("SPARK_HOME")) < 1) {
+  Sys.setenv(SPARK_HOME = "~/spark/spark-2.4.0-bin-hadoop2.7")
+}
+library(SparkR, lib.loc = c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib")))
+sparkR.session(master = "local[*]", sparkConfig = list(spark.driver.memory = "2g"))
+```
+
+
 
 [^sql-chunck]: https://d.cosx.org/d/419974
 [^txt-to-mysql]: https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql

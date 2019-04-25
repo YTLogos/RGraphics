@@ -211,6 +211,8 @@ hcmap("countries/us/us-all-all",
 
 ## vegawidget
 
+动态交互图形包 vegawidget 基于 vega 支持导出 SVG 格式图片
+
 ```{r,echo=TRUE}
 library("vegawidget")
 spec_mtcars <-
