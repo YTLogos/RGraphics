@@ -14,15 +14,6 @@ pre code {
   white-space: inherit;
 }
 
-/* markdown 插入图片居中 */
-/*
-img {
-    margin-left: auto; 
-    margin-right: auto; 
-    display: block;
-}
-*/
-
 /* Sidebar formating --------------------------------------------*/
 
 .sidebar, .base, .warning {
@@ -76,11 +67,4 @@ div.warning::before {
   content: "TO DO: ";
   font-weight: bold;
   color: blue;
-}
-
-blockquote > p:last-child {
-  text-align: right;
-}
-blockquote > p:first-child {
-  text-align: inherit;
 }
