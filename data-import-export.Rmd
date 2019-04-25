@@ -492,7 +492,7 @@ cat("```{sql, code=readLines('demo.sql'), output.var='data_output'}
 
 如果我们需要每天或者按照指定的日期重复地运行这个 R Markdown 文件，可以在 YAML 部分引入参数[^params-knit]
 
-````markdown
+```markdown
 ---
 params:
   date: "2019-05-03"  # 参数化日期
