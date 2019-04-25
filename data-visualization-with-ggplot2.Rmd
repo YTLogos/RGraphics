@@ -22,12 +22,18 @@
 library(ggplot2)
 ```
 
-ggplot2 提供了很多函数
+以数据集 airquality 为例介绍GGplot2 图层、主题、配色、坐标、尺度、注释和组合等
 
 ### 图层 {#ggplot2-layer}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^geom_")
+```
+
+生成一个散点图
+
+```{r,echo=TRUE}
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point()
 ```
 
 ### 主题 {#ggplot2-theme}
@@ -36,7 +42,14 @@ ls("package:ggplot2", pattern = "^geom_")
 ls("package:ggplot2", pattern = "^theme_")
 ```
 
-[ggthemes](https://github.com/jrnold/ggthemes) [ggthemr](https://github.com/cttobin/ggthemr)
+这里只展示 `theme_bw()` `theme_void()` `theme_minimal() ` 和 `theme_void()` 等四个常见主题，更多主题参考 [ggthemes](https://github.com/jrnold/ggthemes) 和 [ggthemr](https://github.com/cttobin/ggthemr) 包
+
+```{r,echo=TRUE}
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_bw()
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_void()
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_minimal()
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_void()
+```
 
 ### 配色 {#ggplot2-color}
 
@@ -44,7 +57,16 @@ ls("package:ggplot2", pattern = "^theme_")
 ls("package:ggplot2", pattern = "^scale_(color|fill)_")
 ```
 
+```{r,echo=TRUE}
+ggplot(airquality, aes(x = Temp, y = Ozone, color = as.factor(Month))) +
+  geom_point()
+ggplot(airquality, aes(x = Temp, y = Ozone, color = as.ordered(Month))) +
+  geom_point()
+```
+
 ### 坐标 {#ggplot2-coord}
+
+极坐标，直角坐标
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^coord_")
@@ -56,13 +78,31 @@ ls("package:ggplot2", pattern = "^coord_")
 ls("package:ggplot2", pattern = "^scale_(x|y)_")
 ```
 
+```{r,echo=TRUE}
+range(airquality$Temp, na.rm = TRUE)
+range(airquality$Ozone, na.rm = TRUE)
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() +
+  scale_x_continuous(breaks = seq(50, 100, 5)) +
+  scale_y_continuous(breaks = seq(0, 200, 20))
+```
+
 ### 注释 {#ggplot2-annotate}
 
 ```{r,echo=TRUE}
-ls("package:ggplot2", pattern = "^annotate_")
+ls("package:ggplot2", pattern = "^annotation_")
 ```
 
+```{r}
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point()
+```
+
+
 ### 组合 {#ggplot2-combine}
+
+```{r,echo=TRUE}
+ggplot(airquality) + geom_point(aes(x = Temp, y = Ozone)) + facet_wrap(~ as.ordered(Month))
+ggplot(airquality) + geom_point(aes(x = Temp, y = Ozone)) + facet_wrap(~ as.ordered(Month), nrow = 1)
+```
 
 gridExtra 和 patchwork
 
@@ -189,9 +229,9 @@ library(nlme)
 data(Wheat2) # Wheat Yield Trials
 library(colorspace)
 ggplot(Wheat2, aes(longitude, latitude)) +
-  geom_point(aes(size=yield, colour = Block)) + 
+  geom_point(aes(size = yield, colour = Block)) +
   scale_color_discrete_sequential(palette = "Viridis") +
-  scale_x_continuous(breaks = seq(0, 30, 5)) + 
+  scale_x_continuous(breaks = seq(0, 30, 5)) +
   scale_y_continuous(breaks = seq(0, 50, 10))
 ```
   
@@ -204,13 +244,13 @@ ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
 图层、分组、分面和散点图介绍完了，接下来就是其它统计图形，如箱线图，小提琴图和条形图
 
 ```{r,fig.cap="1948年至1960年航班乘客人数变化",echo=TRUE}
-dat <- as.data.frame( cbind(rep( 1948 + seq(12), each = 12), rep(seq(12),12), AirPassengers) )  
-colnames(dat) <- c("year","month","passengers")
+dat <- as.data.frame(cbind(rep(1948 + seq(12), each = 12), rep(seq(12), 12), AirPassengers))
+colnames(dat) <- c("year", "month", "passengers")
 
 ggplot(data = dat, aes(x = as.factor(year), y = as.factor(month))) +
   stat_sum(aes(size = passengers), colour = "lightblue") +
-  scale_size(range = c(1, 10), breaks = seq(100,650,50)) +
-  labs(x = "Year",y = "Month",colour = "Passengers") +
+  scale_size(range = c(1, 10), breaks = seq(100, 650, 50)) +
+  labs(x = "Year", y = "Month", colour = "Passengers") +
   theme_minimal()
 ```
 
@@ -384,7 +424,7 @@ plot(c(50, 350), c(0, 10),
 )
 axis(
   side = 1, at = seq(50, 350, 50), labels = seq(50, 350, 50),
-  tick = FALSE, las = 1, padj = 0, mgp = c(3, 0.1, 0) 
+  tick = FALSE, las = 1, padj = 0, mgp = c(3, 0.1, 0)
 )
 axis(
   side = 2, at = seq(0, 10, 2), labels = seq(0, 10, 2),
@@ -802,7 +842,7 @@ BiocManager::install("Rgraphviz", version = "3.8")
 ```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 library(tidyverse)
 # CRAN R包 metadata 信息
-pdb = readRDS(file = file(sprintf("%s/web/packages/packages.rds", getOption("repos")["CRAN"])))
+pdb <- readRDS(file = file(sprintf("%s/web/packages/packages.rds", getOption("repos")["CRAN"])))
 ```
 
 接着，我们可以看看CRAN 上发布的 R 包数量
@@ -837,8 +877,8 @@ subset(pdb,
 
 ```{r,echo=TRUE}
 subset(pdb,
-        subset = !duplicated(pdb[, "Package"]),
-       select = "Maintainer"
+  subset = !duplicated(pdb[, "Package"]),
+  select = "Maintainer"
 ) %>% unique() %>% length()
 ```
 
