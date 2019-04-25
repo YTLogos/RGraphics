@@ -14,32 +14,34 @@
 
 点 points 、线 grid 背景线 abline lines rug 刻度线（线段segments、箭头arrows）、
 
-```{r,echo=TRUE,fig.cap="不同的 pch 参数值"}
-##-------- Showing all the extra & some char graphics symbols ---------
+```{r,echo=TRUE,fig.cap="不同的 pch 参数值",title.mar=TRUE}
+## -------- Showing all the extra & some char graphics symbols ---------
 pchShow <-
-  function(extras = c("*",".", "o","O","0","+","-","|","%","#"),
-           cex = 2, ## good for both .Device=="postscript" and "x11"
-           col = "red3", bg = "gold", coltext = "brown", cextext = 1.2,
-           main = paste("plot symbols :  points (...  pch = *, cex =",
-                        cex,")"))
-  {
+  function(extras = c("*", ".", "o", "O", "0", "+", "-", "|", "%", "#"),
+             cex = 2, ## good for both .Device=="postscript" and "x11"
+             col = "red3", bg = "gold", coltext = "brown", cextext = 1.2,
+             main = paste(
+               "plot symbols :  points (...  pch = *, cex =",
+               cex, ")"
+             )) {
     nex <- length(extras)
-    np  <- 26 + nex
-    ipch <- 0:(np-1)
+    np <- 26 + nex
+    ipch <- 0:(np - 1)
     k <- floor(sqrt(np))
-    dd <- c(-1,1)/2
+    dd <- c(-1, 1) / 2
     rx <- dd + range(ix <- ipch %/% k)
-    ry <- dd + range(iy <- 3 + (k-1)- ipch %% k)
+    ry <- dd + range(iy <- 3 + (k - 1) - ipch %% k)
     pch <- as.list(ipch) # list with integers & strings
-    if(nex > 0) pch[26+ 1:nex] <- as.list(extras)
-    plot(rx, ry, type = "n", axes  =  FALSE, xlab = "", ylab = "", main = main)
+    if (nex > 0) pch[26 + 1:nex] <- as.list(extras)
+    plot(rx, ry, type = "n", axes = FALSE, xlab = "", ylab = "", main = main)
     abline(v = ix, h = iy, col = "lightgray", lty = "dotted")
-    for(i in 1:np) {
+    for (i in 1:np) {
       pc <- pch[[i]]
       ## 'col' symbols with a 'bg'-colored interior (where available) :
       points(ix[i], iy[i], pch = pc, col = col, bg = bg, cex = cex)
-      if(cextext > 0)
-          text(ix[i] - 0.3, iy[i], pc, col = coltext, cex = cextext)
+      if (cextext > 0) {
+        text(ix[i] - 0.3, iy[i], pc, col = coltext, cex = cextext)
+      }
     }
   }
 
@@ -47,42 +49,45 @@ pchShow()
 ```
 
 
-```{r,echo=TRUE,fig.cap="pch 支持的字符",out.width="80%"}
+```{r,echo=TRUE,fig.cap="pch 支持的字符",out.width="35%",title.mar=TRUE}
 ## ------------ test code for various pch specifications -------------
 # Try this in various font families (including Hershey)
 # and locales.  Use sign = -1 asserts we want Latin-1.
 # Standard cases in a MBCS locale will not plot the top half.
-TestChars <- function(sign = 1, font = 1, ...)
-{
-   MB <- l10n_info()$MBCS
-   r <- if(font == 5) { sign <- 1; c(32:126, 160:254)
-       } else if(MB) 32:126 else 32:255
-   if (sign == -1) r <- c(32:126, 160:255)
-   par(pty = "s")
-   plot(c(-1,16), c(-1,16), type = "n", xlab = "", ylab = "",
-        xaxs = "i", yaxs = "i",
-        main = sprintf("sign = %d, font = %d", sign, font))
-   grid(17, 17, lty = 1) ; mtext(paste("MBCS:", MB))
-   for(i in r) try(points(i%%16, i%/%16, pch = sign*i, font = font,...))
+TestChars <- function(sign = 1, font = 1, ...) {
+  MB <- l10n_info()$MBCS
+  r <- if (font == 5) {
+    sign <- 1
+    c(32:126, 160:254)
+  } else if (MB) 32:126 else 32:255
+  if (sign == -1) r <- c(32:126, 160:255)
+  par(pty = "s")
+  plot(c(-1, 16), c(-1, 16),
+    type = "n", xlab = "", ylab = "",
+    xaxs = "i", yaxs = "i",
+    main = sprintf("sign = %d, font = %d", sign, font)
+  )
+  grid(17, 17, lty = 1)
+  mtext(paste("MBCS:", MB))
+  for (i in r) try(points(i %% 16, i %/% 16, pch = sign * i, font = font, ...))
 }
-par(mfrow=c(2,2), mar = .1+ c(2,2,3,1))
 TestChars()
 try(TestChars(sign = -1))
-TestChars(font = 5)  # Euro might be at 160 (0+10*16).
-                     # macOS has apple at 240 (0+15*16).
-try(TestChars(-1, font = 2))  # bold
+TestChars(font = 5) # Euro might be at 160 (0+10*16).
+# macOS has apple at 240 (0+15*16).
+try(TestChars(-1, font = 2)) # bold
 ```
 
-```{r,echo=TRUE,fig.cap="不同的 type 参数值",fig.width=9,fig.asp=1}
+```{r,echo=TRUE,fig.cap="不同的 type 参数值",fig.asp=1}
 x <- 0:12
-y <- sin(pi/5 * x)
-par(mfrow = c(3,3), mar = .1+ c(2,2,3,1))
-for (tp in c("p","l","b",  "c","o","h",  "s","S","n")) {
-   plot(y ~ x, type = tp, main = paste0("plot(*, type = \"", tp, "\")"))
-   if(tp == "S") {
-      lines(x, y, type = "s", col = "red", lty = 2)
-      mtext("lines(*, type = \"s\", ...)", col = "red", cex = 0.8)
-   }
+y <- sin(pi / 5 * x)
+par(mfrow = c(3, 3), mar = .1 + c(2, 2, 3, 1))
+for (tp in c("p", "l", "b", "c", "o", "h", "s", "S", "n")) {
+  plot(y ~ x, type = tp, main = paste0("plot(*, type = \"", tp, "\")"))
+  if (tp == "S") {
+    lines(x, y, type = "s", col = "red", lty = 2)
+    mtext("lines(*, type = \"s\", ...)", col = "red", cex = 0.8)
+  }
 }
 ```
 
@@ -94,7 +99,7 @@ for (tp in c("p","l","b",  "c","o","h",  "s","S","n")) {
 面（矩形rect，多边形polygon）、路径 polypath
 面/多边形 rect 颜色填充
 
-```{r,fig.cap="rect 函数画长方形"}
+```{r,fig.cap="rect 函数画长方形",title.mar=TRUE}
 # From the manual
 ch.col <- c(
   "rainbow(n, start=.7, end=.1)",
@@ -124,7 +129,7 @@ for (k in 1:nt) {
 ```
 
 
-```{r,fig.cap="区域重叠 polygon 函数"}
+```{r,fig.cap="区域重叠 polygon 函数",echo=TRUE}
 my.col <- function(f, g, xmin, xmax, col, N = 200,
                    xlab = "", ylab = "", main = "") {
   x <- seq(xmin, xmax, length = N)
@@ -187,7 +192,7 @@ symbols(c(70, 80, 90), c(20, 50, 80),
 
 在介绍各种统计图形之前，先介绍几个绘图函数 `plot` 和 `text` 还有 `par` 参数设置， 作为最简单的开始，尽量依次介绍其中的每个参数的含义并附上图形对比。
 
-```{r pos,fig.cap="pos 位置参数",echo=TRUE,fig.asp=.9}
+```{r pos,fig.cap="pos 位置参数",echo=TRUE,out.width="35%",fig.asp=1,title.mar=TRUE}
 y <- x <- 1:4
 plot(x, y, ann = F, col = "blue", pch = 16)
 text(x, y,
@@ -754,33 +759,41 @@ hist(longley$Unemployed, density = 3, angle = 45, main = "")
 ```{r,echo=TRUE}
 library(MASS)
 data(galaxies)
-galaxies <- galaxies/1000
+galaxies <- galaxies / 1000
 # Bandwidth Selection by Pilot Estimation of Derivatives
 c(width.SJ(galaxies, method = "dpi"), width.SJ(galaxies))
-plot(x = c(5, 40), y = c(0, 0.2), type = "n", bty = "l",
-         xlab = "velocity of galaxy (km/s)", ylab = "density")
+plot(
+  x = c(5, 40), y = c(0, 0.2), type = "n", bty = "l",
+  xlab = "velocity of galaxy (km/s)", ylab = "density"
+)
 rug(galaxies)
-lines(density(galaxies, width = 3.25, n = 200),col = 'blue', lty = 1)
-lines(density(galaxies, width = 2.56, n = 200),col = 'red', lty = 3)
+lines(density(galaxies, width = 3.25, n = 200), col = "blue", lty = 1)
+lines(density(galaxies, width = 2.56, n = 200), col = "red", lty = 3)
 ```
 
 ```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
 x <- seq(from = 110, to = 174, by = 0.5)
 y1 <- dnorm(x, mean = 145, sd = 9)
 y2 <- dnorm(x, mean = 138, sd = 8)
-plot(x, y1, type="l", lwd=2, col="red",
-     main="Systolic Blood Pressure Before and After Treatment",
-     xlab = "Systolic Blood Pressure (mmHg)",
-     ylab = "Frequency", yaxt="n",
-     xlim = c(110, 175), ylim = c(0, 0.05))
+plot(x, y1,
+  type = "l", lwd = 2, col = "red",
+  main = "Systolic Blood Pressure Before and After Treatment",
+  xlab = "Systolic Blood Pressure (mmHg)",
+  ylab = "Frequency", yaxt = "n",
+  xlim = c(110, 175), ylim = c(0, 0.05)
+)
 lines(x, y2)
-polygon(c(110,x,175),c(0,y2,0), col="firebrick3",
-     border = "white")
-polygon(c(117,x,175),c(0,y1,0), col="dodgerblue4",
-     border = "white")
-ylab = c(seq(from=0, to=175, by=25))
-y = c(seq(from=0, to=0.05, length.out = 8))
-axis(2,at=y,labels=ylab, las=1)
+polygon(c(110, x, 175), c(0, y2, 0),
+  col = "firebrick3",
+  border = "white"
+)
+polygon(c(117, x, 175), c(0, y1, 0),
+  col = "dodgerblue4",
+  border = "white"
+)
+ylab <- c(seq(from = 0, to = 175, by = 25))
+y <- c(seq(from = 0, to = 0.05, length.out = 8))
+axis(2, at = y, labels = ylab, las = 1)
 text(x = 120, y = 0.045, "- Pre-Treatment BP", col = "dodgerblue4", cex = 0.9)
 text(x = 120, y = 0.04, " - Post-Treatment BP", col = "firebrick3", cex = 0.9)
 points(109, 0.0445, pch = 15, col = "dodgerblue4")
@@ -1053,30 +1066,44 @@ boxplot(count ~ spray,
 ```{r,echo=TRUE}
 # example from boxplot:
 with(ToothGrowth, {
-    boxplot(len ~ dose, boxwex = 0.25, at = 1:3 - 0.2,
-            subset = (supp == "VC"), col = "yellow",
-            main = "Guinea Pigs' Tooth Growth",
-            xlab = "Vitamin C dose mg",
-            ylab = "tooth length", ylim = c(0, 35))
-    boxplot(len ~ dose, add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
-            subset = supp == "OJ", col = "orange")
-    legend(2, 9, c("Ascorbic acid", "Orange juice"),
-           fill = c("yellow", "orange"))
+  boxplot(len ~ dose,
+    boxwex = 0.25, at = 1:3 - 0.2,
+    subset = (supp == "VC"), col = "yellow",
+    main = "Guinea Pigs' Tooth Growth",
+    xlab = "Vitamin C dose mg",
+    ylab = "tooth length", ylim = c(0, 35)
+  )
+  boxplot(len ~ dose,
+    add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
+    subset = supp == "OJ", col = "orange"
+  )
+  legend(2, 9, c("Ascorbic acid", "Orange juice"),
+    fill = c("yellow", "orange")
+  )
 })
 ```
 
 ```{r,echo=TRUE}
 # alternate form that avoids subset argument:
-with(subset(ToothGrowth, supp == "VC"),
-     boxplot(len ~ dose, boxwex = 0.25, at = 1:3 - 0.2,
-             col = "yellow", main = "Guinea Pigs' Tooth Growth",
-             xlab = "Vitamin C dose mg",
-             ylab = "tooth length", ylim = c(0, 35)))
-with(subset(ToothGrowth,  supp == "OJ"),
-     boxplot(len ~ dose, add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
-             col = "orange"))
+with(
+  subset(ToothGrowth, supp == "VC"),
+  boxplot(len ~ dose,
+    boxwex = 0.25, at = 1:3 - 0.2,
+    col = "yellow", main = "Guinea Pigs' Tooth Growth",
+    xlab = "Vitamin C dose mg",
+    ylab = "tooth length", ylim = c(0, 35)
+  )
+)
+with(
+  subset(ToothGrowth, supp == "OJ"),
+  boxplot(len ~ dose,
+    add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
+    col = "orange"
+  )
+)
 legend(2, 9, c("Ascorbic acid", "Orange juice"),
-       fill = c("yellow", "orange"))
+  fill = c("yellow", "orange")
+)
 ```
 
 ### 提琴图 {#plot-violin}
@@ -1109,21 +1136,24 @@ box(col = "gray")
 ```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
 library(pracma)
 ##  First zero on the critical line s = 0.5 + i t
-x <- seq(0, 20, len=1001)
-z <- 0.5 + x*1i
+x <- seq(0, 20, len = 1001)
+z <- 0.5 + x * 1i
 fr <- Re(zeta(z))
 fi <- Im(zeta(z))
 fa <- abs(zeta(z))
-plot(x, fa, type="n", xlim = c(0, 20), ylim = c(-1.5, 2.5),
-     xlab = "Imaginary part (on critical line)", ylab = "Function value",
-     main = "Riemann's Zeta Function along the critical line")
-grid()	 
-lines(x, fr, col="blue")
-lines(x, fi, col="darkgreen")
+plot(x, fa,
+  type = "n", xlim = c(0, 20), ylim = c(-1.5, 2.5),
+  xlab = "Imaginary part (on critical line)", ylab = "Function value",
+  main = "Riemann's Zeta Function along the critical line"
+)
+grid()
+lines(x, fr, col = "blue")
+lines(x, fi, col = "darkgreen")
 lines(x, fa, col = "red", lwd = 2)
 points(14.1347, 0, col = "darkred")
 legend(0, 2.4, c("real part", "imaginary part", "absolute value"),
-       lty = 1, lwd = c(1, 1, 2), col = c("blue", "darkgreen", "red"))
+  lty = 1, lwd = c(1, 1, 2), col = c("blue", "darkgreen", "red")
+)
 ```
 
 还有 eta 函数和 gammaz 函数
@@ -1163,7 +1193,7 @@ pairs(longley,
 
 ```{r,fig.cap="矩阵图"}
 # 自带 layout
-plot(iris[,-5],col = iris$Species)
+plot(iris[, -5], col = iris$Species)
 ```
 
 
@@ -1320,7 +1350,7 @@ legend("topright",
 
 ## 图形导出 {#export-save}
 
-图形导出的格式主要看面向的呈现方式，如 插入 HTML 网页中，可选 png， svg， rgl 和 gif 格式，插入 LaTeX 文档中，可选 eps，ps，pdf和png等格式 
+图形导出的格式主要看面向的呈现方式，如插入 HTML 网页中，可选 png， svg， rgl 和 gif 格式，插入 LaTeX 文档中，可选 eps，ps，pdf 和 png 等格式 
 
 保存绘制的图形，R 使用的图形渲染库的版本
 
