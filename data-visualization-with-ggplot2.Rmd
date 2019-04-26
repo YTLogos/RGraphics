@@ -1,18 +1,23 @@
 # 数据可视化 {#ggplot2-visualization}
 
-50 个 ggplot2 数据可视化例子[^fifty-ggplot2] 
+David Robinson 给出为何使用 ggplot2 [^why-ggplot2] 当然也有 Jeff Leek 指出在某些重要场合不适合 ggplot2 [^why-not-ggplot2] 并且给出强有力的 [证据](http://motioninsocial.com/tufte/)，其实不管怎么样，适合自己的才是好的。也不枉费 Garrick Aden-Buie 花费 160 页幻灯片逐步分解介绍 [优雅的ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2)，还有 Selva Prabhakaran 精心总结给出了 50 个 ggplot2 数据可视化的 [例子](https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) 以及 Victor Perrier 为小白用 ggplot2 操碎了心地开发 RStudio 插件 [esquisse](https://github.com/dreamRs/esquisse) 包。
 
-[^fifty-ggplot2]: https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
+GGplot2 是十分方便的统计作图工具，相比 Base R，为了一张出版级的图形，不需要去调整每个参数，实现快速出图。集成了很多其它统计计算的 R 包，支持丰富的统计分析和计算功能，如回归、平滑等，实现了作图和模型的无缝连接。比如图\@ref(fig:awesome-ggplot2)，使用 loess 局部多项式平滑得到数据的趋势，不仅仅是散点图，代码量也非常少。
 
-[RStudio GGplot2 作图插件 esquisse](https://github.com/dreamRs/esquisse)
-
-## Why GGplot2 {#why-ggplot2}
-
-为何使用 ggplot2 [^why-ggplot2]
-
-[优雅的ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2)
+```{r awesome-ggplot2,echo=TRUE,fig.cap="简洁美观"}
+library(ggplot2)
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = TRUE, method = "loess") +
+  labs(
+    title = "Fuel efficiency generally decreases with engine size",
+    subtitle = "Two seaters (sports cars) are an exception because of their light weight",
+    caption = "Data from fueleconomy.gov"
+  )
+```
 
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
+[^why-not-ggplot2]: https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 
 ## 基础语法 {#intro-ggplot2}
 
