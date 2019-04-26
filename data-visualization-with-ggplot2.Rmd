@@ -1,5 +1,9 @@
 # 数据可视化 {#ggplot2-visualization}
 
+```{r,R.options=list(tidyverse.quiet = TRUE),include=FALSE}
+library(tidyverse)
+```
+
 David Robinson 给出为何使用 ggplot2 [^why-ggplot2] 当然也有 Jeff Leek 指出在某些重要场合不适合 ggplot2 [^why-not-ggplot2] 并且给出强有力的 [证据](http://motioninsocial.com/tufte/)，其实不管怎么样，适合自己的才是好的。也不枉费 Garrick Aden-Buie 花费 160 页幻灯片逐步分解介绍 [优雅的ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2)，还有 Selva Prabhakaran 精心总结给出了 50 个 ggplot2 数据可视化的 [例子](https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) 以及 Victor Perrier 为小白用 ggplot2 操碎了心地开发 RStudio 插件 [esquisse](https://github.com/dreamRs/esquisse) 包。
 
 GGplot2 是十分方便的统计作图工具，相比 Base R，为了一张出版级的图形，不需要去调整每个参数，实现快速出图。集成了很多其它统计计算的 R 包，支持丰富的统计分析和计算功能，如回归、平滑等，实现了作图和模型的无缝连接。比如图\@ref(fig:awesome-ggplot2)，使用 loess 局部多项式平滑得到数据的趋势，不仅仅是散点图，代码量也非常少。
@@ -20,12 +24,6 @@ ggplot(mpg, aes(displ, hwy)) +
 [^why-not-ggplot2]: https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 
 ## 基础语法 {#intro-ggplot2}
-
-首先我们加载 R 包 ggplot2 
-
-```{r,echo=TRUE}
-library(ggplot2)
-```
 
 以数据集 airquality 为例介绍GGplot2 图层、主题、配色、坐标、尺度、注释和组合等
 
@@ -761,6 +759,25 @@ rasterImage(image, 200, 300, 200 + xinch(.5), 300 + yinch(.3),
 rasterImage(image, 200, 400, 250, 450, angle = 15, interpolate = FALSE)
 ```
 
+Edzer Pebesma 开发了 stars 包
+
+```{r,echo=TRUE}
+# https://resources.rstudio.com/rstudio-conf-2019/spatial-data-science-in-the-tidyverse
+library(abind)
+library(sf)
+library(stars)
+x <- system.file("tif/L7_ETMs.tif", package = "stars") %>% 
+  read_stars()
+ggplot() +
+  geom_stars(data = x) +
+  coord_equal() +
+  facet_wrap(~band) +
+  theme_void() +
+  scale_fill_viridis_c() +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))
+```
+
 ### sp {#ggplot2-sp}
 
 空间数据对象，以类 sp 方式存储 [@Pebesma_2005_sp]
@@ -810,6 +827,16 @@ maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过�
 
 - ggmap
 - sf
+
+```{r,echo=TRUE}
+nc <- system.file("gpkg/nc.gpkg", package = "sf") %>% read_sf() 
+nc2 <- nc %>% 
+  select(SID74, SID79) %>% 
+  gather(VAR, SID, -geom)
+ggplot() + 
+  geom_sf(data = nc2, aes(fill = SID)) + 
+  facet_wrap(~VAR, ncol = 1)
+```
 
 ```{r,eval=FALSE}
 library(GADMTools)

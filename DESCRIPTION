@@ -30,6 +30,7 @@ Imports:
   sessioninfo,
   sf (>= 0.7.2),
   showtext,
+  stars,
   tidyverse,
   tikzDevice,
   tweenr,
