@@ -159,6 +159,7 @@ Constant width
 ## 获取帮助 {#Getting-Help-with-R}
 
 [Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 https://blog.rsquaredacademy.com/getting-help-in-r-updated/
+https://www.r-project.org/help.html
 
 ## 发展历史 {#history-of-r}
 
@@ -214,7 +215,7 @@ docker run --name rstudio -d -p 8787:8787 -e ROOT=TRUE \
 ```{r include=FALSE,cache=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tikzDevice'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
 
