@@ -69,13 +69,34 @@ scan("data/ex.data", what = list("", "", ""), flush = TRUE)
 unlink("data/ex.data") # tidy up
 ```
 
-### `read.csv` 与 `write.csv` {#read-write-csv}
+### `read.table` {#read-write-table}
 
-`read.csv2` 与 `write.csv2` 
+```{r,echo=TRUE,eval=FALSE}
+read.table(file, header = FALSE, sep = "", quote = "\"'",
+           dec = ".", numerals = c("allow.loss", "warn.loss", "no.loss"),
+           row.names, col.names, as.is = !stringsAsFactors,
+           na.strings = "NA", colClasses = NA, nrows = -1,
+           skip = 0, check.names = TRUE, fill = !blank.lines.skip,
+           strip.white = FALSE, blank.lines.skip = TRUE,
+           comment.char = "#",
+           allowEscapes = FALSE, flush = FALSE,
+           stringsAsFactors = default.stringsAsFactors(),
+           fileEncoding = "", encoding = "unknown", text, skipNul = FALSE)
 
-### `read.table` 与 `write.table` {#read-write-table}
+read.csv(file, header = TRUE, sep = ",", quote = "\"",
+         dec = ".", fill = TRUE, comment.char = "", ...)
 
-变量名是不允许以下划线开头的，同样在数据框里，列名也不推荐使用下划线开头。默认情况下，`read.table` 都会通过参数 `check.names` 检查列名的有效性，该参数实际调用了函数 `make.names` 去检查。如果想尽量保持数据集原来的样子可以设置参数 `check.names = FALSE, stringsAsFactors = FALSE`。 默认情形下，`read.table` 还会将字符串转化为因子变量，这是 R 的历史原因，作为一门统计学家的必备语言，在统计模型中，字符常用来描述类别，而类别变量在 R 环境中常用因子类型来表示，而且大量内置的统计模型也是将它们视为因子变量，如 lm 、glm 等
+read.csv2(file, header = TRUE, sep = ";", quote = "\"",
+          dec = ",", fill = TRUE, comment.char = "", ...)
+
+read.delim(file, header = TRUE, sep = "\t", quote = "\"",
+           dec = ".", fill = TRUE, comment.char = "", ...)
+
+read.delim2(file, header = TRUE, sep = "\t", quote = "\"",
+            dec = ",", fill = TRUE, comment.char = "", ...)
+```
+
+变量名是不允许以下划线开头的，同样在数据框里，列名也不推荐使用下划线开头。默认情况下，`read.table` 都会通过参数 `check.names` 检查列名的有效性，该参数实际调用了函数 `make.names` 去检查。如果想尽量保持数据集原来的样子可以设置参数 `check.names = FALSE, stringsAsFactors = FALSE`。 默认情形下，`read.table` 还会将字符串转化为因子变量，这是 R 的历史原因，作为一门统计学家的必备语言，在统计模型中，字符常用来描述类别，而类别变量在 R 环境中常用因子类型来表示，而且大量内置的统计模型也是将它们视为因子变量，如 `lm` 、`glm` 等
 
 ```{r,echo=TRUE}
 dat1 = read.table(header = TRUE, check.names = TRUE, text = "
@@ -98,21 +119,72 @@ _a _b _c
 dat3
 ```
 
-### `readLines` 与 `writeLines` {#read-write-lines}
+### `readLines` {#read-write-lines}
+
+```{r,echo=TRUE,eval=FALSE}
+readLines(con = stdin(), n = -1L, ok = TRUE, warn = TRUE,
+          encoding = "unknown", skipNul = FALSE)
+```
 
 让我们折腾一波，读进来又写出去，只有 R 3.5.3 以上才能保持原样的正确输入输出
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,echo=TRUE}
 writeLines(readLines("latex/TeXLive.pkgs"),"latex/TeXLive.pkgs")
 ```
 
+这次我们创建一个真的临时文件，因为重新启动 R 这个文件和文件夹就没有了，回收掉了
+
+```{r,echo=TRUE}
+fil <- tempfile(fileext = ".data")
+cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = fil,
+    sep = "\n")
+fil
+```
+
+设置参数 `n = -1` 表示将文件 fil 的内容从头读到尾
+
+```{r,echo=TRUE}
+readLines(fil, n = -1)
+```
+
+作为拥有良好习惯的 R 用户，这种垃圾文件最好用后即焚
+
+```{r,echo=TRUE}
+unlink(fil) # tidy up
+```
+
+再举个例子，我们创建一个新的临时文件 `fil`，文件内容只有
+
+```{r,echo=TRUE}
+cat("123\nabc")
+```
+```{r,echo=TRUE}
+fil <- tempfile("test")
+cat("123\nabc", file = fil, append = TRUE)
+fil
+readLines(fil)
+```
+
+这次读取文件的过程给出了警告，原因是 fil 没有以空行结尾，`warn = TRUE` 表示这种情况要给出警告，如果设置参数 `warn = FALSE` 就没有警告。我们还是建议大家尽量遵循规范。
+
+再举一个例子，从一个连接读取数据，建立连接的方式有很多，参见 `?file`，下面设置参数 `blocking`
+
+```{r,echo=TRUE}
+con <- file(fil, "r", blocking = FALSE)
+readLines(con)
+
+cat(" def\n", file = fil, append = TRUE)
+readLines(con)
+# 关闭连接
+close(con)
+# 清理垃圾文件
+unlink(fil)
+```
 
 
-### `readRDS` 与 `saveRDS` {#read-save-rds}
+### `readRDS` {#read-save-rds}
 
-序列化数据操作，Mark Klik 开发的 [fst](https://github.com/fstpackage/fst) 和 [Travers Ching](https://travers.im/) 开发的 [qs](https://github.com/traversc/qs)
-
-[feather](https://github.com/wesm/feather/tree/master/R) 跨语言环境快速的读写数据
+序列化数据操作，Mark Klik 开发的 [fst](https://github.com/fstpackage/fst) 和 [Travers Ching](https://travers.im/) 开发的 [qs](https://github.com/traversc/qs)， Hadley Wickham 开发的 [feather](https://github.com/wesm/feather/tree/master/R) 包实现跨语言环境快速的读写数据
 
 Table: (\#tab:fst-vs-others) fst 序列化数据框对象性能比较 BaseR、 data.table 和 feather [^fst-performance]
 
@@ -129,77 +201,77 @@ Table: (\#tab:fst-vs-others) fst 序列化数据框对象性能比较 BaseR、 d
 
 目前比较好的是 qs 和 fst 包 
 
-
 [^fst-performance]: https://www.fstpackage.org/ 
 
-### `read.ftable` 与 `write.ftable` {#read-write-ftable}
+### `read.ftable` {#read-write-ftable}
 
 
-### `readBin` 与 `writeBin` {#read-write-bin}
+### `readBin` {#read-write-bin}
 
 
-### `readChar` 与 `writeChar` {#read-write-char}
+### `readChar` {#read-write-char}
 
 
-### `read.dcf` 与 `write.dcf` {#read-write-dcf}
+### `read.dcf` {#read-write-dcf}
 
 
-### `readClipboard` 与 `writeClipboard` {#read-write-clipboard}
+### `readClipboard` {#read-write-clipboard}
 
+从粘贴板读取数据
 
-### `read.socket` 与 `write.socket` {#read-write-socket}
+### `read.socket` {#read-write-socket}
 
-### `load` 与 `save` {#load-save}
+## 保存输出结果 {#load-save}
 
-
-
-导入数据，也叫读入数据，读取数据，读入到 R 环境中，从磁盘上的文件，变成存储在R环境中的数据对象
+load save 导入数据，也叫读入数据，读取数据，读入到 R 环境中，从磁盘上的文件，变成存储在R环境中的数据对象
 
 写入压缩格式文件
-
 
 `capture.output` 参数为表达式
 
 `with` 与 `attach`
-`sink`
 
+`sink` 函数将控制台输出结果保存到文件，只将 `outer` 函数运行的结果保存到 `ex-sink.txt` 文件
 
-```r
-sink("sink-examp.txt")
+```{r,echo=TRUE}
+sink("data/ex-sink.txt")
 i <- 1:10
-outer(i, i, "*")
+outer(i, i, "*") # 直积 seq(10) %*% t(seq(10)) 
 sink()
 ```
 
-只将 `outer` 的结果保存到 `sink-examp.txt` 文件
+## 保存数据对象 {#save-data-object}
 
+`dump` 保存数据对象 AirPassengers 到文件 `AirPassengers.txt`，文件内容是 R 命令，可把`AirPassengers.txt`看作代码文档执行，dput 保存数据对象内容到文件`AirPassengers.dat`，文件中不包含变量名 AirPassengers。注意到 `dump` 输入是一个字符串，而 `dput` 要求输入数据对象的名称，`source` 函数与 `dump` 对应，而 `dget` 与 `dput`对应。 
 
-
-### `source` 与 `dump` {#source-dump}
-
-`dump` 保存数据对象 iris 到文件 `iris.txt`，文件内容是 R 命令，可把`iris.txt`看作代码文档执行，dput 保存数据对象内容到文件`iris.dat`，文件中不包含变量名 iris。注意到 `dump` 输入是一个字符串，而 `dput` 要求输入数据对象的名称，`source` 函数与 `dump` 对应，而 `dget` 与 `dput`对应。 
-
-```{r,eval=FALSE,echo=TRUE}
-data(iris)
-dump('iris', file = 'iris.txt') 
-source(file = 'iris.txt')
+```{r,echo=TRUE}
+# 加载数据
+data(AirPassengers, package = "datasets")
+# 将数据以R代码块的形式保存到文件
+dump('AirPassengers', file = 'data/AirPassengers.txt') 
+# source(file = 'data/AirPassengers.txt')
 ```
 
-### `dget` 与 `dput` {#dget-dput}
+接下来，我们读取 `AirPassengers.txt` 的文件内容，可见它是一段完整的 R 代码，可以直接复制到 R 的控制台中运行，并且得到一个与原始 AirPassengers 变量一样的结果
 
-```{r,eval=FALSE,echo=TRUE}
-dput(iris, file = 'iris.dat')
-iris <- dget(file = 'iris.dat')
+```{r,echo=TRUE}
+cat(readLines('data/AirPassengers.txt'), sep = "\n")
 ```
 
+`dput` 函数类似 `dump` 函数，保存数据对象到磁盘文件
 
-读取 SPSS Matlab SAS 等软件生成的数据文件
+```{r,echo=TRUE}
+dput(AirPassengers, file = 'data/AirPassengers.dat')
+# AirPassengers <- dget(file = 'data/AirPassengers.dat')
+```
 
-戏称 [rio](https://github.com/leeper/rio) 包是数据导入导出 Input/Output  的瑞士军刀
+同样地，现在我们观察 `dput` 函数保存的文件 `AirPassengers.dat` 内容，和`dump` 函数保存的文件 `AirPassengers.txt`相比，就缺一个赋值变量
 
-### 其它数据格式 {#other-data-source}
+```{r,echo=TRUE}
+cat(readLines('data/AirPassengers.dat'), sep = "\n")
+```
 
-jsonlite 与 yaml
+## 其它数据格式 {#other-data-source}
 
 jsonlite 包读取 `*.json` 格式的文件，`jsonlite::write_json` 函数将 R对象保存为 JSON 文件，`jsonlite::fromJSON` 将 json 字符串或文件转化为 R 对象，`jsonlite::toJSON` 函数正好与之相反
 
@@ -216,6 +288,10 @@ yaml::read_yaml(file = '_bookdown.yml')
 ```
 
 yaml 和 json 格式互转
+
+读取 SPSS Matlab SAS 等软件生成的数据文件
+
+戏称 [rio](https://github.com/leeper/rio) 包是数据导入导出 Input/Output  的瑞士军刀
 
 ## 批量导入数据 {#batch-import-export}
 
