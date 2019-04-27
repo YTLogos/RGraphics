@@ -223,12 +223,12 @@ capture.output({
 })
 ```
 
-`sink` 函数将控制台输出结果保存到文件，只将 `outer` 函数运行的结果保存到 `ex-sink.txt` 文件
+`sink` 函数将控制台输出结果保存到文件，只将 `outer` 函数运行的结果保存到 `ex-sink.txt` 文件，outer 函数计算的是直积，在这里相当于 `seq(10) %*% t(seq(10))`，而在 R 语言中，更加有效的计算方式是 `tcrossprod(seq(10),seq(10))`
 
 ```{r,echo=TRUE}
 sink("data/ex-sink.txt")
 i <- 1:10
-outer(i, i, "*") # 直积 seq(10) %*% t(seq(10)) 
+outer(i, i, "*") 
 sink()
 ```
 
