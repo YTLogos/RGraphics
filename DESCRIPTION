@@ -24,7 +24,6 @@ Imports:
   patchwork,
   plotly,
   pracma,
-  quantmod,
   RClickhouse,
   RSQLite,
   sf (>= 0.7.2),
