@@ -84,18 +84,6 @@ Markdown 基础语法见 RStudio IDE 自带的 Markdown 手册：RStudio 顶部�
 
 [^xyplot]: (about the fact that lattice objects have to be print()ed) R-help (May 2005)
 
-```{r knitr-graphics, fig.cap="(ref:text-references)",out.width="45%",echo=FALSE}
-knitr::include_graphics(path = "figures/mai.png")
-```
-
-```{r fig.cap='(ref:fig-cap)', fig.height=2, out.height='4in'}
-par(mar = c(4.1, 4.1, 0.5, 0.5))
-plot(rnorm(10), xlab = "", ylab = "")
-```
-
-(ref:fig-cap) 测试文本引用
-(ref:text-references) 图表标题很长可使用文本引用方式 <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references>
-
 ### 表格 {#table}
 
 插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦，复杂的表格制作可以借助 R 包 knitr 提供的 kable 函数以及 kableExtra 包^[<https://xiangyunhuang.github.io/bookdown-kableExtra/>]，此外谢益辉的书籍 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/) 中也有一节专门介绍表格 <https://bookdown.org/yihui/bookdown/tables.html>
@@ -151,7 +139,12 @@ knitr::kable(
 利用 `knitr::include_graphics` 函数在代码块中插入图片是很简单的，如图\@ref(fig:knitr-footnote)所示，图、表的标题很长或者需要插入脚注，可以使用[文本引用][text-references]
 
 ```{r knitr-footnote, fig.cap='(ref:footnote)', out.width="45%", echo=TRUE}
-knitr::include_graphics(path = "figures/mai.png")
+knitr::include_graphics(path = system.file("help/figures", "mai.png", package = "graphics"))
+```
+
+```{r fig.cap='(ref:fig-cap)', fig.height=2, out.height='4in'}
+par(mar = c(4.1, 4.1, 0.5, 0.5))
+plot(rnorm(10), xlab = "", ylab = "")
 ```
 
 插入一幅普通图片，如图 \@ref(fig:left-fig) 和图 \@ref(fig:full-fig) 所示分别控制图片插入的宽度[^css-position]
@@ -201,13 +194,11 @@ plot(pressure)
 plot(AirPassengers)
 ```
 
-
+(ref:fig-cap) 测试文本引用
+(ref:text-references) 图表标题很长可使用[文本引用][text-references] 
 (ref:footnote) 表格标题里插入脚注，但是 ebooks 不支持这样插入脚注[^longnote]
-
 [^longnote]: Here's one with multiple blocks.
-
 [text-references]: https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references
-
 [^css-position]: 参考谢益辉的博客： CSS 的位置属性以及如何居中对齐超宽元素 https://yihui.name/cn/2018/05/css-position/
 
 ### 公式 {#formula}
@@ -314,3 +305,7 @@ directory/
 
 > RStudio 插件 [remedy](https://github.com/ThinkR-open/remedy) 简化 Markdown 写作
 > 源代码截图 [carbonate](https://github.com/yonicd/carbonate)
+> 整理 Markdown 表格 [beautifyR](https://github.com/mwip/beautifyR)
+> 引用参考文献 [citr](https://github.com/crsh/citr)
+> 格式化R代码块 [styler](https://github.com/r-lib/styler)
+> 准备可重复的例子，方便在论坛/Github上发问 [reprex](https://github.com/tidyverse/reprex)
