@@ -203,33 +203,25 @@ Table: (\#tab:fst-vs-others) fst 序列化数据框对象性能比较 BaseR、 d
 
 [^fst-performance]: https://www.fstpackage.org/ 
 
-### `read.ftable` {#read-write-ftable}
-
-
-### `readBin` {#read-write-bin}
-
-
-### `readChar` {#read-write-char}
-
-
-### `read.dcf` {#read-write-dcf}
-
-
-### `readClipboard` {#read-write-clipboard}
-
-从粘贴板读取数据
-
-### `read.socket` {#read-write-socket}
-
 ## 保存输出结果 {#load-save}
 
-load save 导入数据，也叫读入数据，读取数据，读入到 R 环境中，从磁盘上的文件，变成存储在R环境中的数据对象
+```{r,echo=TRUE,eval=FALSE}
+capture.output(..., file = NULL, append = FALSE,
+               type = c("output", "message"), split = FALSE)
+```
 
-写入压缩格式文件
+`capture.output` 将一段R代码执行结果，保存到文件，参数为表达式。`capture.output` 和 `sink` 的关系相当于 `with` 和 `attach` 的关系。
 
-`capture.output` 参数为表达式
-
-`with` 与 `attach`
+```{r,echo=TRUE}
+glmout <- capture.output(summary(glm(case ~ spontaneous + induced,
+  data = infert, family = binomial()
+)), file = "data/capture.txt")
+capture.output(1 + 1, 2 + 2)
+capture.output({
+  1 + 1
+  2 + 2
+})
+```
 
 `sink` 函数将控制台输出结果保存到文件，只将 `outer` 函数运行的结果保存到 `ex-sink.txt` 文件
 
@@ -241,6 +233,25 @@ sink()
 ```
 
 ## 保存数据对象 {#save-data-object}
+
+```{r,echo=TRUE,eval=FALSE}
+load(file, envir = parent.frame(), verbose = FALSE)
+
+save(..., list = character(),
+     file = stop("'file' must be specified"),
+     ascii = FALSE, version = NULL, envir = parent.frame(),
+     compress = isTRUE(!ascii), compression_level,
+     eval.promises = TRUE, precheck = TRUE)
+
+save.image(file = ".RData", version = NULL, ascii = FALSE,
+           compress = !ascii, safe = TRUE)
+```
+
+`load` 和`save` 函数加载或保存包含工作环境信息的数据对象，`save.image` 保存当前工作环境到磁盘，即保存工作空间中所有数据对象，数据格式为 `.RData`，即相当于
+
+```{r,echo=TRUE,eval=FALSE}
+save(list = ls(all.names = TRUE), file = ".RData", envir = .GlobalEnv)
+```
 
 `dump` 保存数据对象 AirPassengers 到文件 `AirPassengers.txt`，文件内容是 R 命令，可把`AirPassengers.txt`看作代码文档执行，dput 保存数据对象内容到文件`AirPassengers.dat`，文件中不包含变量名 AirPassengers。注意到 `dump` 输入是一个字符串，而 `dput` 要求输入数据对象的名称，`source` 函数与 `dump` 对应，而 `dget` 与 `dput`对应。 
 
@@ -287,11 +298,38 @@ library(yaml)
 yaml::read_yaml(file = '_bookdown.yml')
 ```
 
-yaml 和 json 格式互转
+Table: (\#tab:other-softwares) 导入来自其它数据分析软件产生的数据集
 
-读取 SPSS Matlab SAS 等软件生成的数据文件
+|    统计软件       |         R函数     |        R包
+|:------------------|:------------------|:------------------
+|ERSI ArcGIS        |  `read.shapefile` |   shapefiles
+|Matlab             |  `readMat`        |   R.matlab
+|minitab            |  `read.mtp`       |   foreign
+|SAS (permanent data)| `read.ssd`       |   foreign
+|SAS (XPORT format)|   `read.xport`     |   foreign
+|SPSS              |   `read.spss`      |   foreign
+|Stata             |   `read.dta`       |   foreign
+|Systat            |   `read.systat`    |   foreign
+|Octave            |   `read.octave`    |   foreign
 
-戏称 [rio](https://github.com/leeper/rio) 包是数据导入导出 Input/Output  的瑞士军刀
+Table: (\#tab:other-read-functions) 导入来自其它格式的数据集
+
+|    文件格式       |         R函数     |        R包
+|:------------------|:------------------|:------------------
+|    列联表数据     |  `read.ftable`    |   stats
+|    二进制数据     |  `readBin`        |   base
+|    字符串数据     |  `readChar`       |   base
+|    剪贴板数据     |  `readClipboard`  |   utils
+
+`read.dcf` 函数读取 Debian 控制格式文件，这种类型的文件以人眼可读的形式在存储数据，如 R 包的 DESCRIPTION 文件或者包含所有 CRAN 上 R 包描述的文件 <https://cran.r-project.org/src/contrib/PACKAGES>
+
+```{r,echo=TRUE}
+x <- read.dcf(file = system.file("DESCRIPTION", package = "splines"),
+              fields = c("Package", "Version", "Title"))
+x
+```
+
+最后要提及拥有瑞士军刀之称的 [rio](https://github.com/leeper/rio) 包，它集合了当前 R 可以读取的所有统计分析软件导出的数据。
 
 ## 批量导入数据 {#batch-import-export}
 
