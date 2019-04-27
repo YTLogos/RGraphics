@@ -2,9 +2,11 @@
 
 三剑客 Markdown & Pandoc's Markdown & R Markdown
 
+首先介绍 Markdown 在强调、标题、列表、断行、链接、图片、引用、代码块、LaTeX 公式等使用方式，然后在 Markdown 的基础上介绍 Pandoc's Markdown 功能有加强的地方，R Markdown 在 Pandoc's Markdown 的基础上介绍功能有加强的地方
+
 ## Markdown {#markdown}
 
-Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 [Pandoc's Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown)，其实是 Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍一下被 Pandoc 加强后的 Markdown 表格、图片和公式的使用
+Markdown 基础语法见 RStudio IDE 自带的 Markdown 手册：RStudio 顶部菜单栏 -> Help -> Markdown Quick Reference，这里主要介绍一下Markdown 高级语法，特别是 [Pandoc's Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown)，其实是 Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍一下被 Pandoc 加强后的 Markdown 表格、图片和公式的使用
 
 ### 列表 {#markdown-list}
 
@@ -83,16 +85,16 @@ Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，
 [^xyplot]: (about the fact that lattice objects have to be print()ed) R-help (May 2005)
 
 ```{r knitr-graphics, fig.cap="(ref:text-references)",out.width="45%",echo=FALSE}
-knitr::include_graphics(path = "figures/fig11.png")
+knitr::include_graphics(path = "figures/mai.png")
 ```
-
-(ref:fig-cap) 测试文本引用
-(ref:text-references) 图表标题很长可使用文本引用方式 <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references>
 
 ```{r fig.cap='(ref:fig-cap)', fig.height=2, out.height='4in'}
 par(mar = c(4.1, 4.1, 0.5, 0.5))
 plot(rnorm(10), xlab = "", ylab = "")
 ```
+
+(ref:fig-cap) 测试文本引用
+(ref:text-references) 图表标题很长可使用文本引用方式 <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references>
 
 ### 表格 {#table}
 
@@ -263,7 +265,7 @@ L(\beta,\boldsymbol{\theta})
 
 介绍在 Markdown 的基础上添加的功能
 
-## R Markdown {#rmarkdown}
+## R Markdown {#r-markdown}
 
 R Markdown 站在巨人的肩膀上，这些巨人有 [Markdown](https://daringfireball.net/projects/markdown/)、 [Pandoc](http://pandoc.org) 和 [LaTeX](https://www.latex-project.org/) 等。 
 
@@ -306,7 +308,7 @@ directory/
 └──  style.css
 ```
 
-## 写作插件 {#addins}
+## R Markdown 扩展 {#rmarkdown-addins}
 
 提高写作效率的10大R包或RStudio插件
 
