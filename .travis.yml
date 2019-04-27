@@ -48,8 +48,6 @@ addons:
       - optipng
       # Rgraphviz igraph
       - graphviz
-      # qpdf
-      - qpdf
       # git2r
       - libgit2-dev
       # v8
@@ -69,12 +67,6 @@ addons:
       - odbc-postgresql
       # magick
       - libmagick++-dev
-      # pdftools
-      #- libpoppler-cpp-dev
-      # tesseract
-      #- libtesseract-dev 
-      #- libleptonica-dev 
-      #- tesseract-ocr-eng
 
 before_install:
   - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz

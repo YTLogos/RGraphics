@@ -43,3 +43,12 @@ Suggests:
 Remotes: 
   vankesteren/firatheme,
   thomasp85/patchwork
+SystemRequirements: 
+  ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb);
+  libxml2: libxml2-dev (deb), libxml2-devel (rpm);
+  libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb);
+  librsvg2: librsvg2-dev (deb) or librsvg2-devel (rpm);
+  libgit2-dev; libavfilter-dev; cargo; 
+  unixodbc; unixodbc-dev; odbc-postgresql;
+  libudunits2-dev; libproj-dev; libgeos-dev; libgdal-dev
+  libv8: libv8-dev (deb) or v8-devel (rpm).
