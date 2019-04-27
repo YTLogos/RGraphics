@@ -31,7 +31,6 @@ Imports:
   stars,
   tidyverse,
   tikzDevice,
-  tweenr,
   visNetwork,
   vegawidget
 URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
