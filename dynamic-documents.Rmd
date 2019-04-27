@@ -2,23 +2,17 @@
 
 三剑客 Markdown & Pandoc's Markdown & R Markdown
 
-## Markdown
+## Markdown {#markdown}
 
 Markdown 基础语法见 RStudio IDE 自带的手册 Markdown Quick Reference，这里主要介绍一下Markdown高级语法，特别是 [Pandoc's Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown)，其实是 Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍一下被 Pandoc 加强后的 Markdown 表格、图片和公式的使用
 
-> RStudio 插件 [remedy](https://github.com/ThinkR-open/remedy) 简化 Markdown 写作
-
-### 语法 {#syntax}
-
-Markdown 基础语法见 RStudio IDE自带的手册 Markdown Quick Reference， 这里主要介绍一下 Markdown 高级语法， 特别是 Pandoc's Markdown，Pandoc 提供了很多对 Markdown 的扩展支持，下面介绍列表、表格、图片和公式的使用
+### 列表 {#markdown-list}
 
 - 有序的列表
-
   1. 第一条
   1. 第二条
 
 - 无序的列表
-
   - 第一条
   - 第二条
 
@@ -38,6 +32,8 @@ Markdown 基础语法见 RStudio IDE自带的手册 Markdown Quick Reference， 
   * Item 2
       + Item 2a
       + Item 2b
+
+### 强调 {#markdown-emphasis}
 
 轻微强调 
 :   这是倾斜的文字 _下划线表示强调_, and this is *星花表示强调*.
@@ -263,9 +259,13 @@ L(\beta,\boldsymbol{\theta})
 
 注意，`\mathbf` 只对字母 $a,b,c,A,B,C$ 加粗，mathjax 不支持公式中使用 `\bm` 对 $\theta,\alpha,\beta,\ldots,\gamma$ 加粗，应该使用 `\boldsymbol`
 
-## R Markdown
+## Pandoc's Markdown {#pandoc-markdown}
 
-R Markdown 站在巨人的肩膀上，这些巨人有 [Markdown](https://daringfireball.net/projects/markdown/)、 [LaTeX](https://www.latex-project.org/)、 [Pandoc](http://pandoc.org)。 
+介绍在 Markdown 的基础上添加的功能
+
+## R Markdown {#rmarkdown}
+
+R Markdown 站在巨人的肩膀上，这些巨人有 [Markdown](https://daringfireball.net/projects/markdown/)、 [Pandoc](http://pandoc.org) 和 [LaTeX](https://www.latex-project.org/) 等。 
 
 生态系统
 
@@ -283,7 +283,7 @@ R Markdown 站在巨人的肩膀上，这些巨人有 [Markdown](https://daringf
 
 在指定目录创建 Book 项目，
 
-```r
+```{r,echo=TRUE,eval=FALSE}
 bookdown:::bookdown_skeleton("~/bookdown-demo")
 ```
 
@@ -306,53 +306,9 @@ directory/
 └──  style.css
 ```
 
+## 写作插件 {#addins}
 
-## TinyTeX {#tinytex}
+提高写作效率的10大R包或RStudio插件
 
-[TinyTeX 发行版和LaTeX 包管理器 tlmgr]{.todo}
-
-MacOS 添加 GPG 支持
-
-```
-tlmgr --repository http://www.preining.info/tlgpg/ install tlgpg
-```
-
-如何编译获取电子版，拉取镜像，安装缺失的依赖
-
-```bash
-docker run --name book -d -p 8282:8787 -e ROOT=TRUE \
- -e USER=rstudio -e PASSWORD=cloud rocker/geospatial
-```
-
-主机端口 8282 分配给容器内 RStudio Server 服务，进入容器后，为方便下载LaTeX宏包和R包起见，建议选择就近的站点
-
-```bash
-tlmgr option repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet
-echo 'options(repos = c(CRAN = "https://mirrors.tuna.tsinghua.edu.cn/CRAN"))' > ~/.Rprofile.site
-```
-
-安装常用的软件包依赖
-
-```bash
-sudo apt-get install imagemagick optipng ghostscript graphviz \
-   libgit2-dev libssh2-1-dev libglu1-mesa-dev \
-   libfreetype6-dev libxpm-dev libx11-dev libxaw7-dev \
-   tk-dev tcl-dev graphviz-dev phantomjs \
-   libosmesa6 libosmesa6-dev freeglut3 freeglut3-dev 
-```
-
-imagemagick 用于图片格式转化，optipng 用于 png 格式的图片压缩优化，ghostscript 字体处理
-
-然后安装常用的 LaTeX 宏包
-
-```{r,eval=FALSE,echo=TRUE}
-tinytex::tlmgr_install(pkgs = c(
-  "ctex", "ms", "xecjk", "ulem", "environ", 
-  "trimspaces", "zhnumber", "fandol", "filehook", 
-  "xcolor", "colortbl", "jknapltx", "lm-math", 
-  "rsfs", "pdfcrop", "subfig"
-))
-```
-
-我用了两个 R 包编译这本书，分别是 **knitr**\index{knitr}  和 **bookdown**\index{bookdown}。
-
+> RStudio 插件 [remedy](https://github.com/ThinkR-open/remedy) 简化 Markdown 写作
+> 源代码截图 [carbonate](https://github.com/yonicd/carbonate)
