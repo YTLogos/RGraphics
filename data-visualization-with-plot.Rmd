@@ -160,8 +160,7 @@ for (k in 1:nt) {
 
 `clip(x1, x2, y1, y2)` 在用户坐标中设置剪切区域
 
-
-```{r,echo=TRUE}
+```{r,echo=TRUE,title.mar=TRUE}
 x <- rnorm(1000)
 hist(x, xlim = c(-4,4))
 usr <- par("usr")
@@ -173,7 +172,7 @@ do.call("clip", as.list(usr)) # reset to plot region
 ```
 
 
-```{r,fig.cap="区域重叠 polygon 函数",echo=TRUE}
+```{r,fig.cap="区域重叠 polygon 函数",echo=TRUE,fig.asp=1,fig.width=4.5,out.width="45%"}
 my.col <- function(f, g, xmin, xmax, col, N = 200,
                    xlab = "", ylab = "", main = "") {
   x <- seq(xmin, xmax, length = N)
@@ -186,23 +185,21 @@ my.col <- function(f, g, xmin, xmax, col, N = 200,
     xlab = xlab, ylab = ylab, main = main
   )
   polygon(c(x, rev(x)), c(fx, rev(gx)),
-    col = "red", border = 0
+    col = "#EA4335", border = 0
   )
-  lines(x, fx, lwd = 3, col = "green")
-  lines(x, gx, lwd = 3, col = "blue")
+  lines(x, fx, lwd = 3, col = "#34A853")
+  lines(x, gx, lwd = 3, col = "#4285f4")
 }
-op <- par(mar = c(3, 3, 4, 1) + .1)
 my.col(function(x) x^2, function(x) x^2 + 10 * sin(x),
   -6, 6,
   main = "The \"polygon\" function"
 )
-par(op)
 ```
 
 
 各种符号 \@ref(fig:cex-symbol) 
 
-```{r cex-symbol,fig.cap="cex 支持的符号",echo=TRUE,fig.asp=.9}
+```{r cex-symbol,fig.cap="cex 支持的符号",echo=TRUE,fig.asp=1,fig.width=5.5,out.width="55%"}
 plot(0, 0,
   xlim = c(1, 5), ylim = c(-.5, 4),
   axes = F,
@@ -215,7 +212,7 @@ for (i in 0:4) {
       pch = n,
       cex = 3
     )
-    text(j, i - .25, as.character(n))
+    text(j, i - .3, as.character(n))
   }
 }
 ```
@@ -236,7 +233,7 @@ symbols(c(70, 80, 90), c(20, 50, 80),
 
 在介绍各种统计图形之前，先介绍几个绘图函数 `plot` 和 `text` 还有 `par` 参数设置， 作为最简单的开始，尽量依次介绍其中的每个参数的含义并附上图形对比。
 
-```{r pos,fig.cap="pos 位置参数",echo=TRUE,out.width="45%",fig.asp=1,fig.width=4.5,title.mar=TRUE}
+```{r pos,fig.cap="pos 位置参数",echo=TRUE,out.width="55%",fig.asp=1,fig.width=5.5,title.mar=TRUE}
 y <- x <- 1:4
 plot(x, y, ann = F, col = "blue", pch = 16)
 text(x, y,
@@ -252,7 +249,7 @@ title(bquote(hat(a) == .(ahat)))
 
 ### 坐标轴 {#base-axis}
 
-```{r,title.mar=TRUE,echo=TRUE,fig.cap="两个 Y 轴",fig.asp=1}
+```{r,title.mar=TRUE,echo=TRUE,fig.cap="两个 Y 轴",fig.asp=1,fig.width=5.5,out.width="55%"}
 # 双Y轴
 N <- 200
 x <- seq(-4, 4, length = N)
@@ -283,7 +280,7 @@ mtext("Second Y axis", 4, line = 2, col = "red", cex = 1.2)
 
 调整坐标轴标签的距离
 
-```{r gap-axis,fig.asp=1,fig.cap="gap.axis用法",echo=TRUE,title.mar=TRUE}
+```{r gap-axis,fig.asp=1,fig.cap="gap.axis用法",echo=TRUE,title.mar=TRUE,fig.width=5.5,out.width="55%"}
 ## Changing default gap between labels:
 plot(c(0,100),c(0,50), type="n", axes=FALSE, ann=FALSE)
 title(quote("axis(1, .., gap.axis = f)," ~~ f >= 0))
@@ -372,7 +369,7 @@ mtext("X axis subtitle", 1, line = 3.7)
 
 数学符号注释，图\@ref(fig:math-annotation) 自定义坐标轴 [@Paul_2000_Approach]。
 
-```{r math-annotation, fig.cap="创建自定义的坐标轴和刻度标签",echo=TRUE}
+```{r math-annotation, fig.cap="创建自定义的坐标轴和刻度标签",echo=TRUE,fig.asp=1,fig.width=4.5,out.width="45%"}
 # 自定义坐标轴
 plot(c(1, 1e6), c(-pi, pi),
   type = "n",
@@ -778,7 +775,7 @@ box(col = "gray")
 
 ### 直方图 {#plot-hist}
 
-```{r,fig.cap="直方图"}
+```{r,fig.cap="直方图",echo=TRUE,fig.asp=1,fig.width=5.5,out.width="55%"}
 set.seed(1234)
 n <- 2^24
 x <- runif(n, 0, 1)
@@ -795,9 +792,10 @@ box(col = "gray")
 
 ```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布",echo=TRUE}
 with(data = faithful, {
-  hist(eruptions, seq(1.6, 5.2, 0.2), prob = TRUE, main = "")
-  lines(density(eruptions, bw = 0.1))
-  rug(eruptions) # 添加数据点
+  hist(eruptions, seq(1.6, 5.2, 0.2), prob = TRUE, 
+       main = "", col = "lightblue", border = "white")
+  lines(density(eruptions, bw = 0.1), col = "#EA4335")
+  rug(eruptions, col = "#EA4335") # 添加数据点
 })
 ```
 
@@ -870,7 +868,7 @@ points(109, 0.0395, pch = 15, col = "firebrick3")
 ```
 
 
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
+```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="55%",fig.width=5.5}
 days <- abs(rnorm(1000, 80, 125))
 plot(density(days, from = 0),
   main = "Density plot",
