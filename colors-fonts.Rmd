@@ -2,7 +2,7 @@
 
 ## 配色 {#colors}
 
-调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，还有 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和调色板 [wesanderson](https://github.com/karthik/wesanderson) 
+调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，还有 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和调色板 [wesanderson](https://github.com/karthik/wesanderson) 以及 [colourlovers](https://github.com/andrewheiss/colourlovers)
 
 ```{r,fig.cap="HCL调色",echo=TRUE}
 # https://github.com/hadley/ggplot2-book
