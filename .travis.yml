@@ -10,7 +10,7 @@ matrix:
     - npm install netlify-cli -g
     deploy:
       provider: script
-      script: netlify deploy --prod --dir _book
+      script: netlify deploy --prod --dir _book --message "$DEPLOY_MSG"
       skip_cleanup: true
 
 cache:
