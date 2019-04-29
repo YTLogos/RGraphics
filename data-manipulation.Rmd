@@ -4,6 +4,18 @@
 主要介绍 Base R 提供的数据操作
 :::
 
+什么是 Base R? Base R 指的是 R 语言/软件的核心组件，由 R Core Team 维护
+
+```{r,echo=TRUE}
+Pkgs <- sapply(list.files(R.home("library")), function(x)
+  packageDescription(pkg = x, fields = "Priority"))
+names(Pkgs[Pkgs == "base" & !is.na(Pkgs)])
+```
+
+```{r,echo=TRUE}
+names(Pkgs[Pkgs == "recommended" & !is.na(Pkgs)])
+```
+
 为方便后续的操作，添加支持管道操作的 magrittr 包
 
 ```{r,echo=TRUE}
