@@ -1,0 +1,5 @@
+# 数据调整 {#data-rectangling}
+
+> 来自其它格式的数据形式，如 JSON、XML、YAML 需要转化清理成 R 中数据框的形式 data.frame
+
+1. [Data Rectangling with jq](https://www.carlboettiger.info/2017/12/11/data-rectangling-with-jq/)

@@ -1,7 +1,7 @@
 # 数据变形者 {#data-transformer}
 
 ::: sidebar
-更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse，数据处理或者叫特征工程 Base R data.table dplyr 它们各有优点，所以都加以介绍
+更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse，数据处理或者叫特征工程 Base R vs data.table vs dplyr 它们各有优点，所以都加以介绍 参考 [Jozef Hajnala](https://jozef.io/categories/rcase4base/) 博文
 :::
 
 函数式编程 Functional Programming Languages 用于数据处理，向量化运算、并行运算和分布式运算
@@ -14,6 +14,7 @@
 - [rpivotTable](https://github.com/smartinsightsfromdata/rpivotTable) 动态数据透视表
 - [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) Join tables together on inexact matching
 - [dtplyr](https://github.com/hadley/dtplyr) dtplyr is the data.table backend for dplyr. It provides S3 methods for data.table objects so that dplyr works the way you expect.
+- [bplyr](https://github.com/yonicd/bplyr) basic dplyr and tidyr functionality without the tidyverse dependencies 
 
 ```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 library(tidyverse)
@@ -223,6 +224,13 @@ add_accuml(list(1, 2, 3))
 [Gord Sissons](http://www.teraproc.com/r-blog/) 发布了系列关于如何在 R 环境下并行的文章
 
 赵鹏 Patric Zhao 的博客 [ParallelR](http://www.parallelr.com/) 关注 GPU 加速 [CUDA 加速](https://devblogs.nvidia.com/accelerate-r-applications-cuda/)
+
+Rmpi 安装配置 <http://www.stats.uwo.ca/faculty/yu/Rmpi/>
+
+Rhpc <https://prs.ism.ac.jp/~nakama/Rhpc/>
+
+Function of apply style using 'MPI' provides better 'HPC' environment on R. And this package supports long vector, can deal with slightly big data.
+
 
 ## 表格样式 {#table-style}
 

@@ -1,6 +1,7 @@
 # 动态文档 {#dynamic-documents}
 
-三剑客 Markdown & Pandoc's Markdown & R Markdown
+> 三剑客 Markdown & Pandoc's Markdown & R Markdown
+> [Markdown for scientific writing](https://github.com/scholmd/scholmd/wiki)
 
 首先介绍 Markdown 在强调、标题、列表、断行、链接、图片、引用、代码块、LaTeX 公式等使用方式，然后在 Markdown 的基础上介绍 Pandoc's Markdown 功能有加强的地方，R Markdown 在 Pandoc's Markdown 的基础上介绍功能有加强的地方
 

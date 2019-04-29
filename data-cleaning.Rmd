@@ -1,6 +1,6 @@
-# 字符串操作 II {#string-manipulation-with-stringr}
+# 数据清洁工 {#data-cleaning}
 
-相比于第\@ref(string-manipulation)章，本章主要介绍字符串处理 stringr 包以及一些高级应用。
+相比于第\@ref(string-manipulation)章，本章主要介绍字符串处理 stringr 包以及一些数据清理的高级应用。
 
 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
 

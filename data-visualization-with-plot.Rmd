@@ -93,13 +93,42 @@ for (tp in c("p", "l", "b", "c", "o", "h", "s", "S", "n")) {
 
 颜色 col 连续型和离散型
 
+线帽/端和字体的样式 
+
+```{r,fig.asp=1,out.width="55%",fig.width=4.71,fig.cap="不同的线端样式",echo=TRUE}
+# 合并为一个图 三条粗横线 横线上三种字形
+plot(c(1, 20), c(1, 20), type = "n", ann = FALSE)
+lines(x = c(5, 15), y = c(5, 5), lwd = 15, lend = "round")
+text(10, 5, "Hello, Helvetica", cex = 1.5, family = "sans", pos = 1, offset = 1.5)
+text(5, 5, "sans", cex = 1.5, family = "sans", pos = 2, offset = .5)
+text(15, 5, "lend = round", pos = 4, offset = .5)
+
+lines(x = c(5, 15), y = c(10, 10), lwd = 15, lend = "butt")
+text(10, 10, "Hello, Helvetica", cex = 1.5, family = "mono", pos = 1, offset = 1.5)
+text(5, 10, "mono", cex = 1.5, family = "mono", pos = 2, offset = .5)
+text(15, 10, "lend = butt", pos = 4, offset = .5)
+
+lines(x = c(5, 15), y = c(15, 15), lwd = 15, lend = "square")
+text(10, 15, "Hello, Helvetica", cex = 1.5, family = "serif", pos = 1, offset = 1.5)
+text(5, 15, "serif", cex = 1.5, family = "serif", pos = 2, offset = .5)
+text(15, 15, "lend = square", pos = 4, offset = .5)
+```
+
+
+lend：线端的样式，可用一个整数或字符串指定：
+
+- 0 或 "round" 圆形（默认）
+- 1 或 "butt" 对接形
+- 2 或 "square" 方形
+
+
 ### 区域 {#base-rect}
 
 矩形，多边形，曲线交汇出来的区域
 面（矩形rect，多边形polygon）、路径 polypath
 面/多边形 rect 颜色填充
 
-```{r,fig.cap="rect 函数画长方形",title.mar=TRUE}
+```{r,fig.cap="rect 函数画长方形",title.mar=TRUE,echo=TRUE,fig.asp=1}
 # From the manual
 ch.col <- c(
   "rainbow(n, start=.7, end=.1)",
@@ -127,6 +156,20 @@ for (k in 1:nt) {
   ) # 咬人的函数/字符串解析为/转函数
   text(2 * j, k * j + dy / 4, ch.col[k])
 }
+```
+
+`clip(x1, x2, y1, y2)` 在用户坐标中设置剪切区域
+
+
+```{r,echo=TRUE}
+x <- rnorm(1000)
+hist(x, xlim = c(-4,4))
+usr <- par("usr")
+clip(usr[1], -2, usr[3], usr[4])
+hist(x, col = 'red', add = TRUE)
+clip(2, usr[2], usr[3], usr[4])
+hist(x, col = 'blue', add = TRUE)
+do.call("clip", as.list(usr)) # reset to plot region
 ```
 
 
@@ -237,6 +280,29 @@ mtext("First Y axis", 2, line = 2, col = "blue", cex = 1.2)
 mtext("Second Y axis", 4, line = 2, col = "red", cex = 1.2)
 # 1,2,3,4 分别代表下左上右四个位置
 ```
+
+调整坐标轴标签的距离
+
+```{r gap-axis,fig.asp=1,fig.cap="gap.axis用法",echo=TRUE,title.mar=TRUE}
+## Changing default gap between labels:
+plot(c(0,100),c(0,50), type="n", axes=FALSE, ann=FALSE)
+title(quote("axis(1, .., gap.axis = f)," ~~ f >= 0))
+axis(2, at = 5*(0:10), las = 1, gap.axis = 1/4)
+gaps <- c(4, 2, 1, 1/2, 1/4, 0.1, 0)
+chG <- paste0(ifelse(gaps == 1, "default:  ", ""),
+              "gap.axis=", formatC(gaps))
+jj <- seq_along(gaps)
+linG <- -2.5*(jj-1)
+for(j in jj) {
+    isD <- gaps[j] == 1 # is default
+    axis (1, at=5*(0:20), gap.axis = gaps[j], padj=-1, line = linG[j],
+          col.axis = if(isD) "forest green" else 1, font.axis= 1+isD)
+}
+mtext(chG, side=1, padj=-1, line = linG -1/2, cex=3/4,
+      col = ifelse(gaps == 1, "forest green", "blue3"))
+## now shrink the window (in x- and y-direction) and observe the axis labels drawn
+```
+
 旋转坐标轴标签
 
 ```{r,echo=TRUE}
@@ -401,7 +467,7 @@ Table: (\#tab:super-sub-script) 数字上下标
 
 ### 图例 {#base-legend}
 
-```{r,fig.cap="三角函数添加图例",echo=TRUE}
+```{r,fig.cap="三角函数添加图例",echo=TRUE,title.mar=TRUE}
 x <- seq(-6, 6, length = 200)
 y <- sin(x)
 z <- cos(x)
@@ -419,7 +485,7 @@ legend(-6, -1,
 )
 ```
 
-```{r,fig.cap="设置图例的位置",echo=TRUE}
+```{r,fig.cap="设置图例的位置",echo=TRUE,title.mar=TRUE}
 xmin <- par("usr")[1]
 xmax <- par("usr")[2]
 ymin <- par("usr")[3]
@@ -438,7 +504,7 @@ legend("bottomleft",
 )
 ```
 
-```{r,fig.cap="insert 函数微调图例位置",echo=TRUE}
+```{r,fig.cap="insert 函数微调图例位置",echo=TRUE,title.mar=TRUE}
 plot(y ~ x,
   type = "l", lwd = 3,
   ylab = "", xlab = "angle", main = "Trigonometric functions"
@@ -454,7 +520,7 @@ legend("bottomleft",
 ```
 
 
-```{r,fig.cap="将图例放在绘图区域外面"}
+```{r,fig.cap="将图例放在绘图区域外面",title.mar=TRUE,echo=TRUE}
 op <- par(no.readonly = TRUE)
 plot(y ~ x,
   type = "l", lwd = 3,
@@ -638,7 +704,6 @@ par(op)
 
 ### 分屏 {#base-screen}
 
-
 `split.screen` 分屏组合
 
 ```{r,echo=TRUE,fig.cap="分屏"}
@@ -675,6 +740,9 @@ close.screen(all = TRUE)
 par(op)
 ```
 
+Paul Murrell 给出 `par` 函数各个参数的助记符
+
+<https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html>
 
 ## 统计图形 {#plot-gallary}
 
@@ -943,6 +1011,16 @@ legend("topright",
 box(col = "gray")
 ```
 
+分组散点图和平滑
+
+```{r,eval=FALSE}
+library(car)
+scatterplot(Sepal.Length ~ Sepal.Width, col = c("black","red","blue"), pch=c(16,16,16),
+            smooth = TRUE, boxplots = "xy", groups = iris$Species, 
+            xlab = "Sepal.Width", ylab = "Sepal.Length", data = iris
+)
+```
+
 有时为了实现特定的目的，需要高亮其中某些点，按类别或者因子变量分组绘制散点图，这里继续采用 `stripchart` 函数绘制二维散点图\@ref(fig:scatter-iris)， 由左图可知，函数 `stripchart` 提供的参数 `pch` 不接受向量，实际只是取了前三个值 16 16 17 对应于 Species 的三类，关键是高亮的分界点是有区分意义的
 
 ```{r scatter-iris, fig.cap="高亮图中部分散点",out.width="35%",fig.asp=1,fig.width=3.5}
@@ -969,7 +1047,7 @@ stripchart(Petal.Length ~ Species,
 
 如果存在大量散点
 
-```r
+```{r,eval=FALSE}
 densCols(x, y = NULL, nbin = 128, bandwidth,
          colramp = colorRampPalette(blues9[-(1:3)]))
 ```

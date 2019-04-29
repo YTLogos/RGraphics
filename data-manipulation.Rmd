@@ -53,11 +53,9 @@ format(object.size(library), units = "auto")
 
 ## 数据变形 {#base-reshape}
 
-重复测量数据的变形 Reshape Grouped Data
+重复测量数据的变形 Reshape Grouped Data，数据框宽格式 wide 变长格式 long
 
-数据框宽格式 wide 变长格式 long
-
-reshape 支持正则表达式
+reshape 还支持正则表达式
 
 ```{r,echo=TRUE}
 str(Indometh)
@@ -162,7 +160,7 @@ iris[order(iris$Species, iris$Petal.Length), ] %>% head(5)
 iris[order(iris$Petal.Width, iris$Petal.Length), ] %>% head(5)
 ```
 
-sort 排序
+sort/ordered 排序
 
 ## 数据拆分 {#base-split}
 
