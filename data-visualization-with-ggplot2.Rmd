@@ -20,6 +20,12 @@ ggplot(mpg, aes(displ, hwy)) +
   )
 ```
 
+故事源于一幅图片，我不记得第一次见到这幅图是什么时候了，只因多次在多个场合中见过，所以留下了深刻的印象，后来才知道它出自于一篇博文 --- [Using R packages and education to scale Data Science at Airbnb](https://medium.com/airbnb-engineering/using-r-packages-and-education-to-scale-data-science-at-airbnb)，作者 Ricardo Bion 还在其 Github 上传了相关代码^[<https://github.com/ricardo-bion/medium_visualization>]。除此之外还有几篇重要的参考资料：
+
+1. Pablo Barberá 的 [Data Visualization with R and ggplot2](https://github.com/pablobarbera/Rdataviz)
+2. Kieran Healy 的新书 [Data Visualization: A Practical Introduction](https://kieranhealy.org/publications/dataviz/)
+3. Matt Leonawicz 的新作 [mapmate](https://github.com/leonawicz/mapmate), 可以去其主页欣赏系列作品^[<https://leonawicz.github.io/>]
+
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 [^why-not-ggplot2]: https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 
@@ -867,6 +873,93 @@ ggplot(east_asia, aes(x = long, y = lat, group = group, fill = region)) +
 BiocManager::install("Rgraphviz", version = "3.8")
 ```
 
+Gephi [@ICWSM_2009_Gephi] 和 igraph 能处理的最大网络，R 包和作者依赖关系图 14000+ 包和 7000+ 作者，CRAN 是全球R包开发者之网，自发布 R 1.0.0 (February, 2000) 距今19年
+
+```{r,eval=FALSE,echo=TRUE}
+library(DiagrammeR)
+library(DiagrammeRsvg)
+svg <- export_svg(
+grViz("
+digraph neato {
+
+graph [layout = neato]
+
+node [shape = circle,
+      style = filled,
+      color = grey,
+      label = '']
+
+node [fillcolor = red]
+yihui_pkgs$Package
+
+node [fillcolor = green]
+unique(unlist(ctb))
+
+node [fillcolor = orange]
+
+edge [color = grey]
+yihui_pkgs$Package[1] -> ctb[[1]]
+yihui_pkgs$Package[2] -> ctb[[2]]
+yihui_pkgs$Package[3] -> ctb[[3]]
+yihui_pkgs$Package[4] -> ctb[[4]]
+}")
+)
+# this can then be used with htmltools and can save significantly
+# on size of output using svg rather than unrendered grViz
+library(htmltools)
+HTML(svg) # 将输出结果保存在svg格式矢量文件 即可
+html_print(HTML(svg))
+```
+
+- [igraph 使用](https://smallstats.blogspot.com/search/label/igraph)
+
+```{r,eval=FALSE,echo=TRUE}
+# https://smallstats.blogspot.jp/2012/12/loading-huge-graphs-with-igraph-and-r.html
+# Loading huge graphs with igraph and R
+df <- data.frame(
+  src = sample(1:1000, 1000000, replace = TRUE),
+
+  dst = sample(1:1000, 1000000, replace = TRUE)
+)
+
+library(igraph)
+cat("--- Creating data.frame ---")
+start <- proc.time()
+df <- data.frame(
+  src = sample(1:1000, 10000000, replace = TRUE),
+  dst = sample(1:1000, 10000000, replace = TRUE)
+)
+
+cat(sprintf("— elapsed time: %fs ", (proc.time() - start)[1]))
+cat("— Creating graph… ")
+start <- proc.time()
+G <- graph.data.frame(df, directed = TRUE)
+cat(sprintf("---elapsed user-time: %fs ", (proc.time() - start)[1]))
+
+
+cat("...Creating graph...")
+
+start <- proc.time()
+
+vertex.attrs <- list(name = unique(c(df$src, df$dst)))
+edges <- rbind(
+  match(df$src, vertex.attrs$name),
+  match(df$dst, vertex.attrs$name)
+)
+
+G <- graph.empty(n = 0, directed = T)
+G <- add.vertices(G, length(vertex.attrs$name), attr = vertex.attrs)
+G <- add.edges(G, edges)
+
+remove(edges)
+remove(vertex.attrs)
+
+cat(sprintf("--- elapsed user-time: %fs ", (proc.time() - start)[1]))
+```
+
+- geomnet
+
+
 ## CRAN 分析 {#analysis-cran}
 
 首先我们从 CRAN 官网下载 R 包描述信息
@@ -953,7 +1046,7 @@ cran_maintainers %>%
 
 接下来，我们还想把 R 包维护者，按照其维护的R包数量排个序，用条形图\@ref(fig:top-maintainers) 表示
 
-```{r top-maintainers,fig.cap="(ref:top-maintainers)",echo=TRUE}
+```{r top-maintainers,fig.cap="(ref:top-maintainers)",echo=TRUE,fig.asp=1,fig.width=5.5,out.width="55%"}
 myData <- cran_maintainers %>%
   table() %>% # 按照维护者分组计数
   sort(decreasing = T) %>% # 降序排列
@@ -972,6 +1065,25 @@ axis(1,
   las = 1, col = "gray"
 )
 grid()
+```
+
+
+```{r,echo=TRUE}
+myData =  as.data.frame(myData)
+colnames(myData) = c("Maintainer", "Freq")
+ggplot( myData) + 
+  geom_bar(aes(x = Maintainer,y = Freq), stat="identity") +
+  coord_flip() +
+  xlab("Maintainer") +
+  ylab("Numbers of Package")
+```
+
+```{r,echo=TRUE}
+ggplot(myData, aes(x = Freq, y = Maintainer)) +
+  geom_segment(aes(x = 20, xend = Freq, yend = Maintainer), colour = "grey50") +
+  geom_point(size = 2, colour = "red") +
+  xlab(" # of Packages ") +
+  ylab(" Developer ")
 ```
 
 (ref:top-maintainers) 维护R包数量最多的20个人[^orphaned]

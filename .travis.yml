@@ -62,8 +62,6 @@ addons:
       - libgeos-dev
       - libgdal-dev
       # for odbc
-      - unixodbc 
-      - unixodbc-dev
       - odbc-postgresql
       # magick
       - libmagick++-dev
