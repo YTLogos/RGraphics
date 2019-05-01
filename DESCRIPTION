@@ -9,6 +9,7 @@ Imports:
   desc,
   firatheme,
   gapminder,
+  gifski,
   gganimate,
   ggridges,
   ggthemes,
