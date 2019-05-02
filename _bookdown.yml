@@ -26,11 +26,9 @@ rmd_files:
   # 文件系统
   - "file-system.Rmd"
   
-  # 数据接口
+  # 数据操作
   - "data-import-export.Rmd"
   - "data-rectangling.Rmd"
-  
-  # 数据操作
   - "data-manipulation.Rmd"
   - "data-wrangeling.Rmd"
   
