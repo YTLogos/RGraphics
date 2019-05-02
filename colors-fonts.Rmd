@@ -2,14 +2,11 @@
 
 ## 配色 {#colors}
 
-调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，还有 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和调色板 [wesanderson](https://github.com/karthik/wesanderson) 以及 [colourlovers](https://github.com/andrewheiss/colourlovers)
+调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，还有 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和调色板 [wesanderson](https://github.com/karthik/wesanderson) 
 
-```{r,fig.cap="HCL调色",echo=TRUE}
+```{r,fig.cap="HCL调色",echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 # https://github.com/hadley/ggplot2-book
-library(scales)
-library(dplyr)
-library(colorspace)
-library(ggplot2)
+library(tidyverse)
 hcl <- expand.grid(x = seq(-1, 1, length = 100), y = seq(-1, 1, length=100)) %>%
   tbl_df() %>%
   filter(x^2 + y^2 < 1) %>%
@@ -24,10 +21,10 @@ hcl <- expand.grid(x = seq(-1, 1, length = 100), y = seq(-1, 1, length=100)) %>%
 # sin(h) = y / (c / 100)
 # y = sin(h) * c / 100
 
-cols <- hue_pal()(5)
-selected <- RGB(t(col2rgb(cols)) / 255) %>%
+cols <- scales::hue_pal()(5)
+selected <- colorspace::RGB(t(col2rgb(cols)) / 255) %>%
   as("polarLUV") %>%
-  coords() %>%
+  colorspace::coords() %>%
   as.data.frame() %>%
   mutate(
     x = cos(H / 180 * pi) * C / 100,
@@ -104,6 +101,42 @@ ggplot(mtcars) +
   scale_fill_manual(values = rep("#56B4E9", 10)) +
   ggtitle("Histogram with ggplot2") +
   theme(legend.position = "none")
+```
+
+### colourlovers
+
+colourlovers 包借助 XML, jsonlite 和 httr 包可以在线获取网站 [COLOURlovers](https://www.colourlovers.com/) 的调色板
+
+```{r}
+library(colourlovers)
+palette1 <- clpalette('113451')
+palette2 <- clpalette('92095')
+palette3 <- clpalette('629637')
+palette4 <- clpalette('694737')
+```
+
+使用调色板
+
+```{r}
+layout(matrix(1:4, nrow = 2))
+par(mar = c(2, 2, 2, 2))
+
+barplot(VADeaths, col = swatch(palette1)[[1]], border = NA)
+barplot(VADeaths, col = swatch(palette2)[[1]], border = NA)
+barplot(VADeaths, col = swatch(palette3)[[1]], border = NA)
+barplot(VADeaths, col = swatch(palette4)[[1]], border = NA)
+```
+
+调色板的描述信息
+
+```{r}
+palette1
+```
+
+获取调色板中的颜色向量
+
+```{r}
+swatch(palette1)[[1]]
 ```
 
 

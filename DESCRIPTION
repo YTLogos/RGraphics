@@ -5,6 +5,7 @@ Version: 0.0.0.9999
 Imports: 
   bookdown,
   colormap,
+  colourlovers,
   desc,
   firatheme,
   fs (>= 1.2.7),
