@@ -478,11 +478,12 @@ dbListTables(con)
 
 ```{bash,eval=FALSE,echo=TRUE}
 sudo apt-get install dirmngr    # optional
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4    # optional
-
+# 导入 key
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4    # optional
+# 添加源
 echo "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/" | sudo tee /etc/apt/sources.list.d/clickhouse.list
 sudo apt-get update
-
+# 安装客户端
 sudo apt-get install -y clickhouse-server clickhouse-client
 # 启动服务
 sudo service clickhouse-server start

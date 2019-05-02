@@ -35,17 +35,15 @@ rmd_files:
   - "data-wrangeling.Rmd"
   
   # 数据清理
-  - "string-manipulation.Rmd"
-  - "data-cleaning.Rmd"
-  - "regular-expression.Rmd"  
+  - "data-cleaning-with-string.Rmd"
+  - "data-cleaning-with-stringr.Rmd"
+  - "data-cleaning-with-regexp.Rmd"  
   
   # 数据可视化
   - "data-visualization-with-plot.Rmd"
   - "data-visualization-with-plot3d.Rmd"
   - "data-visualization-with-ggplot2.Rmd"
-  
-  # 配色和选择字体
-  - "colors-fonts.Rmd"
+  - "data-visualization-with-colors-fonts.Rmd"
   
   # 交互式图形 
   - "interactive-graphics.Rmd"

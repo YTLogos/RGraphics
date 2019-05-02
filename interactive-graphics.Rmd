@@ -2,6 +2,8 @@
 
 这里的动态图形覆盖的范围是各种 JS 库，不包含 tcltk、 rgl 和 svg 里面的动图，包括由静态图形转化过来的图形如 animation 或者 magick 和 gganimate 制作的图形 
 
+[htmlwidgets](http://www.htmlwidgets.org/) 将基于 JavaScript 的图形渲染库引入 R  
+
 ## gganimate
 
 ```{r,echo=TRUE}
@@ -269,3 +271,13 @@ visNetwork(nodes, edges, width = "100%") %>%
   visHierarchicalLayout(direction = "LR", levelSeparation = 500)
 ```
 
+
+[DiagrammeR](https://github.com/rich-iannone/DiagrammeR) 优点是可以将网络图导出 SVG 格式
+
+
+## threejs 
+
+三维交互可视化库，比如交互式全球可视化 Building an Interactive Globe Visualization in R [threejs][r-threejs]
+
+
+[r-threejs]: https://www.displayr.com/interactive-globe-r/

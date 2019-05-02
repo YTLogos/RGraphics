@@ -79,9 +79,9 @@ rgb(red = 240, green = 228, blue = 66, maxColorValue = 255) # "#F0E442"
 rgb(red = 0, green = 114, blue = 178, maxColorValue = 255) # "#0072B2"
 ```
 
-给直方图配色
+举例子，直方图配色与不配色
 
-```{r,fig.cap="直方图",echo=TRUE}
+```{r,fig.cap="直方图",echo=TRUE,title.mar=TRUE}
 # library(pander)
 # evalsOptions('graph.unify', TRUE)
 # panderOptions('graph.colors') 获取调色板
@@ -93,14 +93,15 @@ cols <- c(
 hist(mtcars$hp, col = "#56B4E9", border = "white", grid = grid())
 ```
 
-```{r,fig.cap="直方图",echo=TRUE,eval=FALSE}
+```{r,fig.cap="直方图",echo=TRUE}
 ggplot(mtcars) +
   geom_histogram(aes(x = hp, fill = as.factor(..count..)),
     color = "white", bins = 6
   ) +
   scale_fill_manual(values = rep("#56B4E9", 10)) +
   ggtitle("Histogram with ggplot2") +
-  theme(legend.position = "none")
+  theme_minimal() +
+  theme(legend.position = "none") 
 ```
 
 ### colourlovers

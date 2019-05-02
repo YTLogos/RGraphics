@@ -300,7 +300,51 @@ directory/
 └──  style.css
 ```
 
-## R Markdown 扩展 {#rmarkdown-addins}
+
+### 语法高亮
+
+Pandoc 通过 LaTeX 环境 lstlisting 支持语法高亮，比如
+
+````markdown
+```TeX
+\begin{lstlisting}
+\documentclass[cn]{elegantbook} 
+\documentclass[lang=cn]{elegantbook}
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single]
+\nocite{EINAV2010,Havrylchyk2018} %or include some bibitems
+\nocite{*} %include all the bibitems
+\end{lstlisting}
+```
+````
+
+```{r}
+# knit 支持的编程语言及其语法高亮环境
+names(knitr::knit_engines$get())
+# knit 支持的语法高亮主题
+# Pandoc 支持的语法高亮环境
+c(
+  "ABAP", "IDL", "Plasm", "ACSL",
+  "inform", "POV", "Ada", "Java", "Prolog",
+  "Algol", "JVMIS", "Promela", "Ant", "ksh",
+  "Python", "Assembler", "Lisp", "R", "Awk",
+  "Logo", "Reduce", "bash", "make", "Rexx",
+  "Basic", "Mathematica", "RSL", "C", "Matlab",
+  "Ruby", "C++", "Mercury", "S", "Caml",
+  "MetaPost", "SAS", "Clean", "Miranda", "Scilab",
+  "Cobol", "Mizar", "sh", "Comal", "ML", "SHELXL",
+  "csh", "Modula-2", "Simula", "Delphi",
+  "MuPAD", "SQL", "Eiffel", "NASTRAN", "tcl",
+  "Elan", "Oberon-2", "TeX", "erlang",
+  "OCL", "VBScript", "Euphoria", "Octave",
+  "Verilog", "Fortran", "Oz", "VHDL", "GCL",
+  "Pascal", "VRML", "Gnuplot", "Perl", "XML",
+  "Haskell", "PHP", "XSLT", "HTML", "PL/I"
+)
+```
+
+## 插件  {#rmarkdown-addins}
 
 提高写作效率的10大R包或RStudio插件
 

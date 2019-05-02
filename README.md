@@ -55,6 +55,7 @@
    - 时间序列分析及其应用 [Time Series Analysis and Its Applications: With R Examples](https://www.stat.pitt.edu/stoffer/tsa4/)
    - 线性模型与R语言 [Extending the Linear Model with R](http://people.bath.ac.uk/jjf23/ELM/) [Julian Faraway](https://farawaystatistics.wordpress.com/)
    - 统计反思 [Statistical Rethinking](http://xcelab.net/rm/statistical-rethinking/)  [Statistical Rethinking Resources](https://rpruim.github.io/Statistical-Rethinking/)
+   - 统计做错了 [Statistics Done Wrong](https://www.statisticsdonewrong.com)
    - 回归模型策略 [Regression Modeling Strategies](http://biostat.mc.vanderbilt.edu/wiki/Main/RmS)
    - 应用预测建模 [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
    - 应用回归分析与广义线性模型 [Applied Regression Analysis and Generalized Linear Models](https://socialsciences.mcmaster.ca/jfox/)
