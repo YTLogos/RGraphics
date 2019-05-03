@@ -553,27 +553,40 @@ port: 1111
 
 RClickHouse 提供部分 dplyr 式的数据操作
 
-```{r,eval=identical(.Platform$OS.type,'unix') & !is_on_travis,echo=TRUE}
+```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+library(DBI)
 library(RClickhouse)
-# 查询数据
-library(dplyr, warn.conflicts = FALSE)
-
 # 建立数据库连接
 # con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")
-con <- DBI::dbConnect(RClickhouse::clickhouse())
+con <- DBI::dbConnect(RClickhouse::clickhouse(),
+  host = "localhost", port = 9000, db = "default",
+  user = "default", password = "cloud", compression = "lz4"
+)
+```
 
-# 往 ClickHouse 中写入数据
-# DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
+往 ClickHouse 中写入数据
 
+```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
+```
+
+查看数据库中的 mtcars 表 
+
+```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
 # 列出 ClickHouse 中存放的表
 dbListTables(con)
 # 列出表 mtcars 中的所有字段
 dbListFields(con, "mtcars")
+```
+
+聚合操作
+
+```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+library(tidyverse)
 # 按变量 cyl 分组对 mpg 求和
 tbl(con, "mtcars") %>% 
   group_by(cyl) %>% 
   summarise(smpg=sum(mpg, na.rm = TRUE)) # SQL 总是要移除缺失值
-
 # 等价于
 aggregate(mpg ~ cyl, data = mtcars, sum)
 
@@ -582,12 +595,8 @@ tbl(con, "mtcars") %>%
   filter(cyl == 8, vs == 0) %>% 
   group_by(am) %>% 
   summarise(mean(qsec, na.rm = TRUE))
-
 # 等价于
 aggregate(qsec ~ am, data = mtcars, mean, subset = cyl == 8 & vs == 0)
-
-# 不使用数据库的时候一定记得关闭数据库的连接
-dbDisconnect(con)
 ```
 
 ::: sidebar
@@ -596,9 +605,7 @@ aggregate 聚合函数默认对缺失值的处理是忽略， sum 和 mean 函�
 
 你当然可以继续使用 SQL 语句做查询，而不使用 dplyr 提供的现代化的管道操作语法
 
-```{r,eval=identical(.Platform$OS.type,'unix') & !is_on_travis,echo=TRUE}
-# 建立数据库连接
-con <- DBI::dbConnect(RClickhouse::clickhouse())
+```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
 # 传递 SQL 查询语句
 DBI::dbGetQuery(con, 
 "SELECT
@@ -607,24 +614,21 @@ DBI::dbGetQuery(con,
     AVG(qsec) AS avg_qsec
 FROM mtcars
 GROUP BY vs")
-# 不使用数据库的时候一定记得关闭数据库的连接
-dbDisconnect(con)
 ```
 
 ::: sidebar
 如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器才可以获得更好的性能
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
 # 读取数据库中的整张表
-mtcars <- dbReadTable(con, mtcars)
+copy_mtcars <- dbReadTable(con, "mtcars")
+tibble::glimpse(copy_mtcars)
 ```
 :::
 
 还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数，如 `multiIf`
 
-```{r,eval=identical(.Platform$OS.type,'unix') & !is_on_travis,echo=TRUE}
-# 建立数据库连接
-con <- DBI::dbConnect(RClickhouse::clickhouse())
+```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
 # 查看 ClickHouse 中所有的数据库名称
 DBI::dbGetQuery(con, "SHOW DATABASES")
 # 查看所有存储的表
@@ -637,9 +641,9 @@ SELECT multiIf(am=1, 'automatic', 'manual') AS transmission,
        multiIf(vs=1, 'straight', 'V-shaped') AS engine
 FROM mtcars
 ")
-
-# 不使用数据库的时候一定记得关闭数据库的连接
-dbDisconnect(con)
+```
+```{r,cache=FALSE}
+dbDisconnect(conn = con)
 ```
 
 这是一个存放在 Github 上的包，随着 ClikHouse 在大厂的流行，此包也受到越来越多的关注
