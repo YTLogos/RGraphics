@@ -271,7 +271,7 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 1. `shortPathName(path)`  只在 Windows 下可用，Express File Paths in Short Form
 
-    ```{r,echo=TRUE,eval=identical(.Platform$OS.type,'windows')}
+    ```{r,echo=TRUE,eval=is_windows}
     cat(shortPathName(c(R.home(), tempdir())), sep = "\n")
     ```
 

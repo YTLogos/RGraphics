@@ -467,7 +467,7 @@ SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 ```{r,echo=TRUE}
 head(mtcars34)
 ```
-```{r,include=FALSE}
+```{r,include=FALSE,cache=FALSE}
 dbDisconnect(conn = con)
 ```
 
