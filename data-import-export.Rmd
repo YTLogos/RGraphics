@@ -642,7 +642,7 @@ SELECT multiIf(am=1, 'automatic', 'manual') AS transmission,
 FROM mtcars
 ")
 ```
-```{r,cache=FALSE}
+```{r,cache=FALSE,eval=is_unix & !is_on_travis}
 dbDisconnect(conn = con)
 ```
 
