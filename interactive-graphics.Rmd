@@ -4,11 +4,28 @@
 
 [htmlwidgets](http://www.htmlwidgets.org/) 将基于 JavaScript 的图形渲染库引入 R， [svgViewR](https://github.com/aaronolsen/svgViewR) 包制作基于 SVG 和 WebGL 的 3D 动画， [mapmate](https://github.com/leonawicz/mapmate) 制作地图方面的三维可视化图形
 
+- https://github.com/ropenscilabs/learngganimate
+
 ## gganimate
 
 ```{r,echo=TRUE}
 library(ggplot2)
 library(gganimate)
+```
+
+
+```{r,echo=TRUE}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point(colour = "purple", size = 3) +
+  facet_wrap(~cyl)
+```
+
+```{r,echo=TRUE,animation.hook='gifski'}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point(colour = "purple", size = 3) +
+  facet_wrap(~cyl) +
+  transition_manual(cyl) +
+  labs(title = "{current_frame}")
 ```
 
 
