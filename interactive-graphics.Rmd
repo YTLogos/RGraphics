@@ -13,6 +13,7 @@ library(ggplot2)
 library(gganimate)
 ```
 
+生成静态图片
 
 ```{r,echo=TRUE}
 ggplot(mtcars, aes(disp, mpg)) +
@@ -20,16 +21,20 @@ ggplot(mtcars, aes(disp, mpg)) +
   facet_wrap(~cyl)
 ```
 
-```{r,echo=TRUE,animation.hook='gifski'}
-ggplot(mtcars, aes(disp, mpg)) +
+用来分面的变量 cyl 作为转场的帧
+
+```{r,echo=TRUE}
+base_pic <- ggplot(mtcars, aes(disp, mpg)) +
   geom_point(colour = "purple", size = 3) +
   facet_wrap(~cyl) +
   transition_manual(cyl) +
   labs(title = "{current_frame}")
+animate(base_pic, nframes = 100, fps = 50)
 ```
 
-
 ## magick
+
+由一帧帧静态图片合并转化为 GIF 图
 
 ```{r,echo=TRUE,eval=FALSE}
 library(gapminder)
@@ -45,7 +50,7 @@ out <- lapply(datalist, function(data) {
 })
 dev.off()
 gapminder <- image_animate(img, fps = 2)
-image_write(gapminder, "gapminder.gif")
+image_write(gapminder, "data/gapminder.gif")
 ```
 
 ![gapminder 汉斯罗琳的 TED 演讲](figures/gapminder.gif)
