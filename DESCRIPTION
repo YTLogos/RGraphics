@@ -22,6 +22,7 @@ Imports:
   maptools,
   microbenchmark,
   odbc,
+  openxlsx,
   patchwork,
   plotly,
   pracma,

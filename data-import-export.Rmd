@@ -331,7 +331,7 @@ x
 
 最后要提及拥有瑞士军刀之称的 [rio](https://github.com/leeper/rio) 包，它集合了当前 R 可以读取的所有统计分析软件导出的数据。
 
-## 批量导入数据 {#batch-import-export}
+## 批量导入数据 {#batch-import-data}
 
 ```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 library(tidyverse)
@@ -376,6 +376,44 @@ list_of_data_sets <- read_list(data_files, readr::read_csv)
 
 ```{r,echo=TRUE,eval=FALSE}
 tibble::glimpse(list_of_data_sets)
+```
+
+## 批量导出数据 {#batch-export-data}
+
+假定我们有一个列表，其每个元素都是一个数据框，现在要把每个数据框分别存入 xlsx 表的工作薄中，以 mtcars 数据集为例，将其按分类变量 cyl 分组拆分，获得一个列表 list 
+
+```{r,echo=TRUE}
+dat <- split(mtcars, mtcars$cyl)
+dat
+```
+
+将 xlsx 表格初始化，创建空白的工作薄
+
+```{r,echo=TRUE}
+## 加载 openxlsx 包
+library('openxlsx')
+## 创建空白的工作薄
+wb <- createWorkbook()
+```
+
+将列表里的每张表分别存入 xlsx 表格的每个 worksheet，worksheet 的名字就是分组变量的名字
+
+```{r,echo=TRUE}
+Map(function(data, name){
+    addWorksheet(wb, name)
+    writeData(wb, name, data)
+ 
+}, dat, names(dat))
+```
+
+最后保存数据到磁盘，见图 \@ref(fig:batch-export-xlsx)
+
+```{r,echo=TRUE}
+saveWorkbook(wb, file = "data/matcars.xlsx", overwrite = TRUE)
+```
+
+```{r batch-export-xlsx,fig.cap="批量导出数据"}
+knitr::include_graphics(path = 'figures/batch-export-xlsx.png')
 ```
 
 ## 从数据库导入 {#import-data-from-database}
