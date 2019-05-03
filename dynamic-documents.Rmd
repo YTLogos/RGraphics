@@ -36,6 +36,55 @@ Markdown 基础语法见 RStudio IDE 自带的 Markdown 手册：RStudio 顶部�
       + Item 2a
       + Item 2b
 
+定义型列表中包含代码
+
+Term 1
+
+:   Definition 1
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+定义类型的列表，紧凑形式
+
+Term 1
+  ~ Definition 1
+
+Term 2
+  ~ Definition 2a
+  ~ Definition 2b
+  
+
+example 类型的列表
+
+(@)  My first example will be numbered (1).
+(@)  My second example will be numbered (2).
+
+Explanation of examples.
+
+(@)  My third example will be numbered (3).
+
+引用列表中的条目
+
+(@good)  This is a good example.
+
+As (@good) illustrates, ...
+
+
+列表里包含代码块
+
+-   item one
+-   item two
+
+<!-- end of list -->
+
+    { my code block }
+
 ### 强调 {#markdown-emphasis}
 
 轻微强调 
@@ -354,3 +403,4 @@ c(
 > 引用参考文献 [citr](https://github.com/crsh/citr)
 > 格式化R代码块 [styler](https://github.com/r-lib/styler)
 > 准备可重复的例子，方便在论坛/Github上发问 [reprex](https://github.com/tidyverse/reprex)
+> 快速获取 Github 等社交网络活动记录 [butteRfly](https://github.com/jonocarroll/butteRfly)
