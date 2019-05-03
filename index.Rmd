@@ -192,6 +192,11 @@ https://www.r-project.org/help.html
 
 热心开源事业，统计之都现任理事、副主编 Associated Editor of Captial of Statistics，经常混迹于统计之都论坛、Github 和爆栈网。个人主页 <https://www.xiangyunhuang.com.cn/>
 
+```{r eval=if(!is_latex())}
+knitr::include_graphics(path = 'https://ghchart.rshah.org/XiangyunHuang.svg')
+```
+
+
 ## 软件信息 {#softwares-rsession-info}
 
 重现本书内容需要的 R 包
