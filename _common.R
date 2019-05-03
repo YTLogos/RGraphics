@@ -36,7 +36,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   small.mar = TRUE,
   echo = FALSE,
-  sql.max.print = 20,
   cache = TRUE,
   size = "scriptsize",
   out.width = "70%",
@@ -46,6 +45,8 @@ knitr::opts_chunk$set(
   fig.show='hold',
   fig.pos="!htb"
 )
+
+knitr::opts_knit$set(sql.max.print = 20)
 
 options(
   digits = 3,
@@ -101,6 +102,8 @@ palette(c(
 is_on_travis <- identical(Sys.getenv("TRAVIS"), "true")
 is_online <- curl::has_internet()
 is_latex <- identical(knitr::opts_knit$get("rmarkdown.pandoc.to"), "latex")
+is_windows <- identical(.Platform$OS.type, 'windows')
+is_unix <- identical(.Platform$OS.type, 'unix')
 
 # 创建临时的目录存放数据集
 if(!dir.exists(paths = "./data")) dir.create(path = "./data")
