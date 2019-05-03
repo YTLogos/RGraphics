@@ -1,8 +1,8 @@
 # 交互式图形 {#interactive-graphics}
 
-这里的动态图形覆盖的范围是各种 JS 库，不包含 tcltk、 rgl 和 svg 里面的动图，包括由静态图形转化过来的图形如 animation 或者 magick 和 gganimate 制作的图形 
+这里的动态图形覆盖的范围是各种 JS 库，还包含 tcltk、 rgl 和 svg 里面的动图，包括由静态图形转化过来的图形如 animation 或者 magick 和 gganimate 制作的图形 
 
-[htmlwidgets](http://www.htmlwidgets.org/) 将基于 JavaScript 的图形渲染库引入 R  
+[htmlwidgets](http://www.htmlwidgets.org/) 将基于 JavaScript 的图形渲染库引入 R， [svgViewR](https://github.com/aaronolsen/svgViewR) 包制作基于 SVG 和 WebGL 的 3D 动画， [mapmate](https://github.com/leonawicz/mapmate) 制作地图方面的三维可视化图形
 
 ## gganimate
 
