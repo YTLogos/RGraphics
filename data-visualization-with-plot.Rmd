@@ -773,6 +773,35 @@ plot(barPois, col = "lightblue", type = "h", lwd = 10, main = "")
 box(col = "gray")
 ```
 
+
+```{r barplot-VADeaths-1,fig.cap="复合条形图"}
+par(mar = c(4.1,2.1,0.5,4.5))
+barplot(VADeaths, border = "white", horiz = FALSE, col = hcl.colors(5),
+        legend.text = rownames(VADeaths), xpd = TRUE, beside = TRUE,
+        cex.names = 0.9,
+        args.legend = list(x = "right",border = "white", title = "Age",
+                           box.col = NA, horiz = FALSE, inset = c(-.2, 0),
+                           xpd = TRUE), 
+        panel.first = grid(nx = 0, ny=7)) 
+```
+
+```{r barplot-VADeaths-2,fig.cap="堆积条形图"}
+par(mar = c(4.1,2.1,0.5,4.5))
+barplot(VADeaths, border = "white", horiz = FALSE, col = hcl.colors(5),
+        legend.text = rownames(VADeaths), xpd = TRUE, beside = FALSE,
+        cex.names = 0.9,
+        args.legend = list(x = "right",border = "white", title = "Age",
+                           box.col = NA, horiz = FALSE, inset = c(-.2, 0),
+                           xpd = TRUE), 
+        panel.first = grid(nx = 0, ny=4))
+```
+
+```{r barplot-PlantGrowth, small.mar = TRUE}
+pg_mean = aggregate(weight ~ group, data = PlantGrowth, mean)
+barplot(data = pg_mean, weight ~ group,
+        border = "white", horiz = FALSE, col = hcl.colors(3))
+```
+
 ### 直方图 {#plot-hist}
 
 ```{r,fig.cap="直方图",echo=TRUE,fig.asp=1,fig.width=5.5,out.width="55%"}
