@@ -179,20 +179,15 @@ https://www.r-project.org/help.html
 
     维基主页 https://en.wikipedia.org/wiki/Robert_Gentleman_(statistician)
 
-- 2016: Forty years of S
-   
-<https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Forty-years-of-S>
-
-- 2017: 20 years of CRAN
-
-<https://channel9.msdn.com/Events/useR-international-R-User-conferences/useR-International-R-User-2017-Conference/KEYNOTE-20-years-of-CRAN>
+- UseR 2016: [Forty years of S](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Forty-years-of-S)
+- UseR 2017: [20 years of CRAN](https://channel9.msdn.com/Events/useR-international-R-User-conferences/useR-International-R-User-2017-Conference/KEYNOTE-20-years-of-CRAN)
 
 
 ## 关于作者 {#about-author}
 
 热心开源事业，统计之都现任理事、副主编 Associated Editor of Captial of Statistics，经常混迹于统计之都论坛、Github 和爆栈网。个人主页 <https://www.xiangyunhuang.com.cn/>
 
-```{r eval=!is_latex}
+```{r eval=!is_latex,out.width="90%"}
 knitr::include_graphics(path = 'https://ghchart.rshah.org/XiangyunHuang.svg')
 ```
 
@@ -202,7 +197,7 @@ knitr::include_graphics(path = 'https://ghchart.rshah.org/XiangyunHuang.svg')
 重现本书内容需要的 R 包
 
 ```{r sessioninfo,echo=TRUE}
-xfun::session_info(desc::desc_get_deps()$package)
+sessionInfo()
 ```
 
 > 为了重复实现，我准备了一个虚拟机，存放在百度云盘上，链接: <https://pan.baidu.com/s/1K7R55QfFHGu6_QsyUlpCJA> 密码: 2ixt
