@@ -100,8 +100,7 @@ palette(c(
 
 is_on_travis <- identical(Sys.getenv("TRAVIS"), "true")
 is_online <- curl::has_internet()
-is_latex <- function() {
-  identical(knitr::opts_knit$get("rmarkdown.pandoc.to"), "latex")
-}
+is_latex <- identical(knitr::opts_knit$get("rmarkdown.pandoc.to"), "latex")
+
 # 创建临时的目录存放数据集
 if(!dir.exists(paths = "./data")) dir.create(path = "./data")
