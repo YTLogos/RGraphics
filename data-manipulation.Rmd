@@ -16,12 +16,6 @@ names(Pkgs[Pkgs == "base" & !is.na(Pkgs)])
 names(Pkgs[Pkgs == "recommended" & !is.na(Pkgs)])
 ```
 
-为方便后续的操作，添加支持管道操作的 magrittr 包
-
-```{r,echo=TRUE}
-library(magrittr) # 提供管道操作 %>%
-```
-
 数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的，而且如果没有特别说明，文中出现的数据集都是 Base R 内置的，第三方 R 包或者来源于网上的数据集都会加以说明。
 
 ## 查看数据 {#show}
@@ -97,7 +91,13 @@ head(village)
 transform 对数据框中的某些列做计算，取对数，将计算的结果单存一列加到数据框中
 
 ```{r,echo=TRUE}
-transform(iris, scale.sl = (max(Sepal.Length) - Sepal.Length) / (max(Sepal.Length) - min(Sepal.Length))) %>% head(5)
+transform(iris, scale.sl = (max(Sepal.Length) - Sepal.Length) / (max(Sepal.Length) - min(Sepal.Length)))
+```
+
+验证一下 `scale.sl` 变量的第一个值
+
+```{r,echo=TRUE}
+(max(iris$Sepal.Length) - 5.1) / (max(iris$Sepal.Length) - min(iris$Sepal.Length))
 ```
 
 ::: sidebar
@@ -106,24 +106,26 @@ Warning: This is a convenience function intended for use interactively. For prog
 
 ## 提取子集 {#base-subset}
 
-`subset(x, subset, select, drop = FALSE, ...)` 参数 subset 代表行操作，select 代表列操作
+```{r,echo=TRUE,eval=FALSE}
+subset(x, subset, select, drop = FALSE, ...)
+``` 
 
-subset() 从数据框中提取部分数据
+参数 `subset`代表行操作，`select` 代表列操作，函数 `subset` 从数据框中提取部分数据
 
 ```{r,echo=TRUE}
-subset(iris, Species == "virginica") %>% head(5)
+subset(iris, Species == "virginica")
 # summary(iris$Sepal.Length)  mean(iris$Sepal.Length)
 # 且的逻辑
-# subset(iris, Species == "virginica" & Sepal.Length > 5.84333) %>% head(5)
+# subset(iris, Species == "virginica" & Sepal.Length > 5.84333)
 subset(iris, Species == "virginica" &
-  Sepal.Length > mean(Sepal.Length)) %>% head(5)
+  Sepal.Length > mean(Sepal.Length))
 # 在行的子集范围内
 subset(iris, Species %in% c("virginica", "versicolor") &
-  Sepal.Length > mean(Sepal.Length)) %>% head(5)
+  Sepal.Length > mean(Sepal.Length))
 # 在列的子集内 先选中列
 subset(iris, Sepal.Length > mean(Sepal.Length),
   select = c("Sepal.Length", "Species")
-) %>% head(5)
+)
 ```
 
 高级操作：加入正则表达式筛选
@@ -140,21 +142,21 @@ subset(state.x77, grepl("^M", rownames(state.x77)), Illiteracy:Murder)
 ```
 
 ::: sidebar
-警告：这是一个为了交互使用打造的便捷函数。对于编程，最好使用标准的子集函数，如 `[`，特别地，参数 `subset` 的非标准计算(non-standard evaluation)[^non-standard-eval]可能带来意想不到的后果。
+警告：这是一个为了交互使用打造的便捷函数。对于编程，最好使用标准的子集函数，如 `[`，特别地，参数 `subset` 的非标准计算(non-standard evaluation)[^non-standard-eval] 可能带来意想不到的后果。
 :::
 
 使用索引 `[` 
 
 ```{r,echo=TRUE}
-iris[iris$Species == "virginica", ] %>% head(5)
+iris[iris$Species == "virginica", ]
 iris[iris$Species == "virginica" &
-  iris$Sepal.Length > mean(iris$Sepal.Length), ] %>% head(5)
+  iris$Sepal.Length > mean(iris$Sepal.Length), ]
 
 iris[
   iris$Species == "virginica" &
     iris$Sepal.Length > mean(iris$Sepal.Length),
   c("Sepal.Length", "Species")
-] %>% head(5)
+]
 ```
 
 [^non-standard-eval]: Thomas Lumley (2003) Standard nonstandard evaluation rules. https://developer.r-project.org/nonstandard-eval.pdf
@@ -165,38 +167,48 @@ iris[
 
 ```{r,echo=TRUE}
 # 对萼片的长度排序
-iris[order(iris$Species, iris$Sepal.Length), ] %>% head(5)
+iris[order(iris$Species, iris$Sepal.Length), ]
 # 对花瓣的长度排序
-iris[order(iris$Species, iris$Petal.Length), ] %>% head(5)
+iris[order(iris$Species, iris$Petal.Length), ]
 # 先对花瓣的宽度排序，再对花瓣的长度排序
-iris[order(iris$Petal.Width, iris$Petal.Length), ] %>% head(5)
+iris[order(iris$Petal.Width, iris$Petal.Length), ]
 ```
 
 sort/ordered 排序
 
 ## 数据拆分 {#base-split}
 
+数据拆分通常是按找某一个分类变量分组，分完组就是计算，计算完就把结果按照原来的分组方式合并
+
 ```{r,echo=TRUE}
 ## Notice that assignment form is not used since a variable is being added
 g <- airquality$Month
 l <- split(airquality, g) # 分组
-l <- lapply(l, transform, Oz.Z = scale(Ozone)) # 计算
+l <- lapply(l, transform, Oz.Z = scale(Ozone)) # 计算：按月对 Ozone 标准化
 aq2 <- unsplit(l, g) # 合并
 head(aq2)
 ```
 
+tapply 自带分组的功能，按月份 Month 对 Ozone 中心标准化，其返回一个列表
+
+```{r,echo=TRUE}
+with(airquality, tapply(Ozone, Month, scale))
+```
+
+上面的过程等价于
+
+```{r,echo=TRUE}
+do.call("rbind", lapply(split(airquality, airquality$Month), transform, Oz.Z = scale(Ozone)))
+```
+
+由于上面对 Ozone 正态标准化，所以标准化后的 `Oz.z` 再按月分组计算方差自然每个月都是 1，而均值都是 0。
+
 ```{r,echo=TRUE}
 with(aq2, tapply(Oz.Z, Month, sd, na.rm = TRUE))
+with(aq2, tapply(Oz.Z, Month, mean, na.rm = TRUE))
 ```
 
-以 iris 数据集为例
-
-```{r,echo=TRUE}
-g <- iris$Species
-l <- split(iris, g) # 分组
-l <- lapply(l, transform, scale.sl = scale(Sepal.Length)) # 计算
-unsplit(l, g) %>% head(5) # 合并
-```
+> 循着这个思路，我们可以用 tapply 实现分组计算，上面函数 `sd` 和 `mean` 完全可以用自定义的更加复杂的函数替代 
 
 `cut` 函数可以将连续型变量划分为分类变量
 
@@ -349,7 +361,8 @@ aggregate(Sepal.Length ~ Species, data = iris, mean)
 与上述分组统计结果一样的命令，在大数据集上， 与 aggregate 相比，tapply 要快很多，by 是 tapply 的包裹，处理速度差不多。读者可以构造伪随机数据集验证。
 
 ```{r,echo=TRUE}
-tapply(iris$Sepal.Length, list(iris$Species), mean)
+# tapply(iris$Sepal.Length, list(iris$Species), mean)
+with(iris, tapply(Sepal.Length, Species, mean))
 by(iris$Sepal.Length, iris$Species, mean)
 ```
 

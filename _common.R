@@ -38,6 +38,7 @@ knitr::opts_chunk$set(
   echo = FALSE,
   cache = TRUE,
   size = "scriptsize",
+  output = 6,
   out.width = "70%",
   fig.align = "center",
   fig.width = 6,
