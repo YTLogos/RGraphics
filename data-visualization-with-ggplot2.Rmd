@@ -149,6 +149,14 @@ ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(color = "steelblue")
 ```
 
+
+```{r scatter-scale-1,fig.cap="格式化坐标轴刻度标签",echo=TRUE}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(color = "steelblue") +
+  scale_y_continuous(labels = scales::unit_format(unit = "k", scale = 1e-3), 
+                     breaks = seq(0,20000,4000))
+```
+
 让另一变量 cut 作为颜色分类指标
 
 ```{r scatter-color-2,fig.cap="分类散点图",echo=TRUE}
