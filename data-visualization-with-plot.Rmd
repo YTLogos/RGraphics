@@ -6,6 +6,8 @@
 
 数据可视化是一种重要的数据分析手段， R 提供了两套图形系统，分别是 graphics 包提供的基础绘图系统和 grid 包提供的栅格绘图系统，后者主要以两个 R 包为大家所熟知，一个是 lattice 包，另一个是 ggplot2 包。
 
+Base 图形系统的扩展包 [prettyB](https://github.com/jumpingrivers/prettyB)
+
 ## 基本要素 {#elements} 
 
 ### 点线 {#base-points}
@@ -247,6 +249,22 @@ title(bquote(hat(a) == .(ahat)))
 
 其中 labels， pos 都是向量化的参数
 
+### 参考线 {#base-lines}
+
+矩形网格线是用做背景参考线的，常常是淡灰色的细密虚线，`plot` 函数的 `panel.first` 参数和 `grid` 函数常用来画这种参考线
+
+```{r bg-grid-lines,fig.cap="添加背景参考线",fig.asp=.8,fig.width=5,echo=TRUE}
+# modified from https://yihui.name/cn/2018/02/cohen-s-d/
+n = 30  # 样本量（只是一个例子）
+x = seq(0, 12, 0.01)
+par(mar = c(4, 4, 0.2, 0.1))
+plot(x/sqrt(n), 2 * (1 - pt(x, n - 1)), 
+     xlab = expression(d = x/sqrt(n)),
+  type = "l", panel.first = grid())
+abline(v = c(0.01, 0.2, 0.5, 0.8, 1.2, 2), lty = 2)
+```
+
+
 ### 坐标轴 {#base-axis}
 
 ```{r,title.mar=TRUE,echo=TRUE,fig.cap="两个 Y 轴",fig.asp=1,fig.width=5.5,out.width="55%"}
@@ -440,7 +458,7 @@ Table: (\#tab:letters) 希腊字母表
  $\kappa$      | `\kappa`       | `\u03BA`     |  $\psi$     | `\psi`        |   `\u03C8`
  $\lambda$     | `\lambda`      | `\u03BB`     |  $\omega$   | `\omega`      |   `\u03C9`
  $\sigma$      | `\sigma`       | `\u03C3`     |  $\tau$     | `\tau`        |   `\u03C4`  
- 
+
 Table: (\#tab:super-sub-script) 数字上下标
 
   上标数字 | LaTeX 代码| Unicode 代码 | 下标数字   | LaTeX 代码 |  Unicode 代码
@@ -637,7 +655,7 @@ title(main = "Overlaying points, segments, lines...")
 ### 布局 {#base-layout}
 
 `layout` 函数布局， 绘制复杂组合图形
- 
+
 ```{r,fig.cap="更加复杂的组合图形",echo=TRUE,fig.asp=1}
 op <- par(oma = c(0, 0, 3, 0))
 layout(matrix(c(
@@ -658,7 +676,7 @@ mtext("The \"layout\" function",
 ### 组合 {#base-combine}
 
 `par` 之 `fig` 参数很神奇，使得多个图可以叠加在一起，它接受一个数值向量`c(x1, x2, y1, y2)` ，是图形设备显示区域中的绘图区域的(NDC, normalized device coordinates)坐标。
- 
+
 ```{r,fig.cap="多图叠加",fig.asp=1,title.mar=TRUE,echo=TRUE}
 plot(1:12,
   type = "b", main = "'fg' : axes, ticks and box in gray",
@@ -741,12 +759,25 @@ Paul Murrell 给出 `par` 函数各个参数的助记符
 
 <https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html>
 
+### 交互 {#identify-locator}
+
+辅助绘图 identify locator
+
 ## 统计图形 {#plot-gallary}
 
+按图的类型划分，最后在小结部分给出各图适用的数据类型
+
+根据数据类型划分： 对于一元数据，可用什么图来描述；多元数据呢，连续数据和离散数据（分类数据）
+
+先找一个不重不漏的划分，指导原则是根据数据类型选择图，根据探索到的数据中的规律，选择图
+
+其它 assocplot fourfoldplot sunflowerplot
 
 ### 条形图 {#plot-bar}
 
 [条形图](https://rpubs.com/chidungkt/392980) 
+
+简单条形图
 
 ```{r diamonds-base-barplot,fig.cap='条形图',echo=TRUE}
 data(diamonds, package = "ggplot2") # 加载数据
@@ -766,12 +797,22 @@ axis(1,
 grid()
 ```
 
+
+
+简单柱形图
+
+
+
 ```{r,fig.cap="柱形图"}
 set.seed(123456)
 barPois <- table(stats::rpois(1000, lambda = 5))
 plot(barPois, col = "lightblue", type = "h", lwd = 10, main = "")
 box(col = "gray")
 ```
+
+
+
+复合条形图
 
 
 ```{r barplot-VADeaths-1,fig.cap="复合条形图"}
@@ -785,6 +826,8 @@ barplot(VADeaths, border = "white", horiz = FALSE, col = hcl.colors(5),
         panel.first = grid(nx = 0, ny=7)) 
 ```
 
+堆积条形图
+
 ```{r barplot-VADeaths-2,fig.cap="堆积条形图"}
 par(mar = c(4.1,2.1,0.5,4.5))
 barplot(VADeaths, border = "white", horiz = FALSE, col = hcl.colors(5),
@@ -796,10 +839,51 @@ barplot(VADeaths, border = "white", horiz = FALSE, col = hcl.colors(5),
         panel.first = grid(nx = 0, ny=4))
 ```
 
+- 堆积条形图 spineplot
+
+简单条形图
+
+```{r barplot-BOD, small.mar = TRUE}
+barplot(data = BOD, demand ~ Time, ylim = c(0, 20),
+        border = "white", horiz = FALSE, col = hcl.colors(1))
+```
+
+
+
 ```{r barplot-PlantGrowth, small.mar = TRUE}
 pg_mean = aggregate(weight ~ group, data = PlantGrowth, mean)
 barplot(data = pg_mean, weight ~ group,
         border = "white", horiz = FALSE, col = hcl.colors(3))
+```
+
+Titanic 数据集是 table 数据类型
+
+简单条形图
+
+复合条形图
+
+```{r, small.mar = TRUE,fig.asp=.8}
+barplot(Freq ~ Class + Survived, data = Titanic,
+        subset = Age == "Adult" & Sex == "Male",
+        beside = TRUE,
+        border = "white", horiz = FALSE, col = hcl.colors(4),
+        args.legend = list(border = "white", title = "Class",
+                           box.col = NA, horiz = FALSE,
+                           xpd = TRUE),   
+        ylab = "# {passengers}", legend = TRUE)
+```
+
+
+堆积条形图
+
+```{r, small.mar = TRUE,fig.asp=.9}
+barplot(Freq ~ Class + Survived, data = Titanic,
+        subset = Age == "Adult" & Sex == "Male",
+        border = "white", horiz = FALSE, col = hcl.colors(4),
+        args.legend = list(border = "white", title = "Class",
+                           box.col = NA, horiz = FALSE,
+                           xpd = TRUE),         
+        ylab = "# {passengers}", legend = TRUE)
 ```
 
 ### 直方图 {#plot-hist}
@@ -1029,7 +1113,7 @@ legend(300, 35,
 )
 ```
 
-```{r,fig.cap="分类散点图"}
+```{r,fig.cap="分类散点图",echo=TRUE}
 plot(Sepal.Length ~ Sepal.Width, data = iris, col = Species, pch = 16)
 legend("topright",
   legend = unique(iris$Species), box.col = "gray",
@@ -1040,7 +1124,7 @@ box(col = "gray")
 
 分组散点图和平滑
 
-```{r,eval=FALSE}
+```{r,eval=FALSE,echo=TRUE}
 library(car)
 scatterplot(Sepal.Length ~ Sepal.Width, col = c("black","red","blue"), pch=c(16,16,16),
             smooth = TRUE, boxplots = "xy", groups = iris$Species, 
@@ -1081,7 +1165,7 @@ densCols(x, y = NULL, nbin = 128, bandwidth,
 
 `densCols` 函数根据点的局部密度生成颜色，密度估计采用核平滑法，由 **KernSmooth** 包的 `bkde2D` 函数实现。参数 `colramp` 传递一个函数，`colorRampPalette` 根据给定的几种颜色生成函数，参数 `bandwidth` 实际上是传给 `bkde2D` 函数
 
-```{r densCols,fig.cap="根据点的密度生成颜色",fig.asp=1,out.width="45%",fig.width=4.5}
+```{r densCols,echo=TRUE,fig.cap="根据点的密度生成颜色",fig.asp=1,out.width="45%",fig.width=4.5}
 x1 <- matrix(rnorm(1e3), ncol = 2)
 x2 <- matrix(rnorm(1e3, mean = 3, sd = 1.5), ncol = 2)
 x <- rbind(x1, x2)
@@ -1090,7 +1174,9 @@ graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
 # title(main = "n = 1000", xpd = TRUE)
 ```
 
-```{r,fig.cap="气泡图"}
+气泡图也是散点图的一种
+
+```{r,fig.cap="气泡图",echo=TRUE}
 plot(Volume ~ Height,
   data = trees, pch = 16, cex = Girth / 8,
   col = rev(terrain.colors(nrow(trees), alpha = .5))
@@ -1098,6 +1184,22 @@ plot(Volume ~ Height,
 box(col = "gray")
 ```
 
+### 抖动图 {#base-jitter}
+
+抖动散点图
+
+```{r jitter-scatter,fig.cap="抖动散点图",fig.asp=1,echo=TRUE}
+mat <- matrix(1:length(colors()), ncol = 9, byrow= TRUE)
+df <- data.frame(col = colors(), 
+	x = as.integer(cut(1:length(colors()), 9)),
+	y = rep(1:73, 9), stringsAsFactors=FALSE)
+par(mar = c(4, 4, 1, 0.1))
+plot(y ~ jitter(x), data = df, col = df$col,
+ 	pch=16, main = "Visualizing colors() split in 9 groups",
+ 	xlab = "Group", 
+	ylab = "Element of the group (min = 1, max = 73)",
+	sub = "x = 3, y = 1 means that it's the 2 * 73 + 1 = 147th color")
+```
 
 ### 箱线图 {#plot-box}
 
@@ -1212,6 +1314,28 @@ legend(2, 9, c("Ascorbic acid", "Orange juice"),
 )
 ```
 
+
+### 残差图 {error-bars}
+
+iris 四个测量指标
+
+```{r,echo=TRUE,fig.cap="带标准差的均值散点图",fig.asp=.8,fig.width=5}
+vec_mean <- colMeans(iris[,-5])
+vec_sd <- apply(iris[, -5], 2, sd)
+plot(seq(4), vec_mean,
+  ylim = range(c(vec_mean - vec_sd, vec_mean + vec_sd)),
+  xlab = "Species", ylab = "Mean +/- SD", lwd = 1, pch = 19,
+  axes = FALSE
+)
+axis(1, at = seq(4), labels = colnames(iris)[-5])
+axis(2, at = seq(7), labels = seq(7))
+arrows(seq(4), vec_mean - vec_sd, seq(4), vec_mean + vec_sd,
+  length = 0.05, angle = 90, code = 3
+)
+box()
+```
+
+
 ### 提琴图 {#plot-violin}
 
 Tom Kelly 维护的 vioplot 包 <https://github.com/TomKellyGenetics/vioplot>
@@ -1225,6 +1349,10 @@ topo 是地形数据
 ### 折线图 {#plot-line}
 
 函数曲线，样条曲线，核密度曲线，平行坐标图
+
+- 折线图
+  - 点线图 `plot(type="b")` 函数曲线图 `curve` `matplot`  X 样条曲线 `xspline`
+  - 时序图 
 
 太阳黑子活动数据
 
@@ -1269,9 +1397,18 @@ legend(0, 2.4, c("real part", "imaginary part", "absolute value"),
 
 ### 马赛克图 {#plot-mosaic}
 
-```{r,fig.cap="马赛克图"}
+马赛克图 mosaicplot
+
+```{r,fig.cap="马赛克图",echo=TRUE,fig.asp=1}
 plot(HairEyeColor, col = "lightblue", border = "white", main = "")
 ```
+
+### 克利夫兰点图 {#dotchart}
+
+
+dotchart
+
+条件图 coplot
 
 ### 矩阵图 {#plot-matrix}
 
@@ -1297,7 +1434,7 @@ pairs(longley,
 )
 ```
 
-```{r,fig.cap="矩阵图"}
+```{r,fig.cap="矩阵图",echo=TRUE,fig.asp=1}
 # 自带 layout
 plot(iris[, -5], col = iris$Species)
 ```
@@ -1305,9 +1442,14 @@ plot(iris[, -5], col = iris$Species)
 
 ### 雷达图 {#plot-radar}
 
+星图 stars 多元数据
+
 ### 玫瑰图 {#plot-rose}
 
-### 地图 {#plot-map}
+### 地形图 {#plot-map}
+
+- 轮廓图 contour 等高线图
+- 热图 image
 
 ```{r unemployment,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
 # 代码来自 ?map
@@ -1338,6 +1480,41 @@ legend("bottomleft", leg.txt,
   border = "gray"
 )
 ```
+
+
+```{r,echo=TRUE,eval=FALSE}
+if (!"spDataLarge" %in% .packages(TRUE)) {
+  install.packages("spDataLarge",
+    repos = "https://nowosad.github.io/drat/",
+    type = "source"
+  )
+}
+```
+
+raster 图形，Elevation raster data from SRTM of the Zion National Park area
+
+```{r,fig.cap="raster 图形",fig.asp=.8,fig.width=6,echo=TRUE,eval=require("spDataLarge")}
+library(sp)
+library(raster)
+library(spDataLarge)
+plot(elevation, asp = NA)
+```
+
+注意与 image 函数区别
+
+```{r, fig.cap="image 图形",fig.asp=1}
+# A prettier display of the volcano
+x <- 10*(1:nrow(volcano))
+y <- 10*(1:ncol(volcano))
+image(x, y, volcano, col = terrain.colors(100), axes = FALSE)
+contour(x, y, volcano, levels = seq(90, 200, by = 5),
+        add = TRUE, col = "peru")
+axis(1, at = seq(100, 800, by = 100))
+axis(2, at = seq(100, 600, by = 100))
+box()
+title(main = "Maunga Whau Volcano", font.main = 4)
+```
+
 
 ## TikZ 绘图 {#tikz}
 
@@ -1487,3 +1664,8 @@ Table: (\#tab:graphics-devices) 图形设备列表
 apropos("dev.")
 ```
 
+导入导出 SVG 格式矢量图形
+
+[The Butterfly Affectation: A case study in embedding an external image in an R plot](https://www.stat.auckland.ac.nz/~paul/Reports/grImport/butterfly/butterfly.html)
+
+[Improved Importing of Vector Graphics in R](https://sjp.co.nz/projects/grimport2/grImport2.html)
