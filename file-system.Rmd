@@ -6,6 +6,8 @@ library(magrittr) # 提供管道命令 %>%
 
 ::: sidebar
 [fs](https://github.com/r-lib/fs) 由 [Jim Hester](https://www.jimhester.com/) 开发，提供文件系统操作的统一接口，相比于 R 默认的文件系统的操作函数有显而易见的优点，详情请看 <https://fs.r-lib.org/>
+
+对于文件操作，Jim Hester 开发了 [fs 包](https://github.com/r-lib/fs) 目的是统一文件操作的命令，由于时间和历史原因，R内置的文件操作函数的命名很不统一，如 `path.expand()` 和 `normalizePath()`，`Sys.chmod()` 和 `file.access()` 等
 :::
 
 
@@ -283,7 +285,7 @@ if (Sys.which("pandoc") == "" && !is.na(pandoc_path)) {
 
 ## 查找文件 {#find}
 
-查找文件、可执行文件的完整路径、R 包
+[here](https://github.com/r-lib/here) 包用来查找你的文件，查找文件、可执行文件的完整路径、R 包
 
 1. `Sys.which` Find Full Paths to Executables
 
@@ -418,6 +420,8 @@ help.search(keyword = "character", package = "base")
 
 ## 进程管理 {#process}
 
+ [ps](https://github.com/r-lib/ps) 包用来查询进程信息
+ 
 - `Sys.getpid` 获取当前运行中的 R 控制台（会话）的进程 ID
 
     ```{r,echo=TRUE}
@@ -446,6 +450,8 @@ help.search(keyword = "character", package = "base")
     gc.time()
     ```
 
+## 系统命令 {#system-commands}
+
 `system` 和 `system2` 调用系统命令，推荐使用后者，它更灵活更便携。此外，Jeroen Ooms 开发的 [sys 包](https://github.com/jeroen/sys) 可看作 `base::system2` 的替代品
 
 ```{r}
@@ -466,9 +472,6 @@ if (.Platform$OS.type == "windows") { # use conda env
 system(command = "gcc --version")
 system2(command = 'g++', args = '--version')
 ```
-
-对于文件操作，Jim Hester 开发了 [fs 包](https://github.com/r-lib/fs) 目的是统一文件操作的命令，由于时间和历史原因，R内置的文件操作函数的命名很不统一，如 `path.expand()` 和 `normalizePath()`，`Sys.chmod()` 和 `file.access()` 等
-
 
 ## 时间管理 {#time}
 
