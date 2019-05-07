@@ -73,7 +73,7 @@ ggplot(airquality, aes(x = Temp, y = Ozone, color = as.ordered(Month))) +
   geom_point()
 ```
 
-### 坐标 {#ggplot2-coord}
+### 坐标系 {#ggplot2-coord}
 
 极坐标，直角坐标
 
@@ -81,7 +81,11 @@ ggplot(airquality, aes(x = Temp, y = Ozone, color = as.ordered(Month))) +
 ls("package:ggplot2", pattern = "^coord_")
 ```
 
-### 尺度 {#ggplot2-scale}
+### 坐标轴 {#ggplot2-axes}
+
+坐标轴标签位置、大小、字体
+
+### 刻度 {#ggplot2-scale}
 
 ```{r,echo=TRUE}
 ls("package:ggplot2", pattern = "^scale_(x|y)_")
@@ -105,8 +109,9 @@ ls("package:ggplot2", pattern = "^annotation_")
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point()
 ```
 
+### 图例 {#ggplot2-legend}
 
-### 组合 {#ggplot2-combine}
+### 组合 {#ggplot2-grid}
 
 ```{r,echo=TRUE}
 ggplot(airquality) + geom_point(aes(x = Temp, y = Ozone)) + facet_wrap(~ as.ordered(Month))
@@ -114,6 +119,8 @@ ggplot(airquality) + geom_point(aes(x = Temp, y = Ozone)) + facet_wrap(~ as.orde
 ```
 
 gridExtra 和 patchwork
+
+
 
 ## 统计图形 {#ggplot2-gallary}
 
