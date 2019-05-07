@@ -65,6 +65,8 @@ addons:
       - odbc-postgresql
       # magick
       - libmagick++-dev
+      # pdftools for tikz
+      - libpoppler-cpp-dev
 
 before_install:
   - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
