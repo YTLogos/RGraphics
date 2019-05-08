@@ -445,22 +445,21 @@ knitr::kable(db2r, col.names = c("数据库","官网","R接口","开发仓"), ca
 
 ### RSQLite
 
-```{r,echo=TRUE,cache=FALSE}
-library(DBI)
-con <- dbConnect(RSQLite::SQLite(), ":memory:")
-dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
+```{r, echo=TRUE, cache=FALSE}
+db <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+DBI::dbWriteTable(db, "mtcars", mtcars, overwrite=TRUE)
 subjects = 6
 ```
 
 `max.print=10` 控制显示的行数
 
-```{sql connection="con",tab.cap = "My Caption",max.print=10}
+```{sql, connection=db, tab.cap = "My Caption", max.print=10, echo=TRUE}
 SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 ```
 
 `output.var="mtcars34"` 将查询的结果保存到变量 `mtcars34`，此时不再输出打印到控制台，此外，还支持 SQL 语句中包含变量 subjects
 
-```{sql connection="con",tab.cap = "My Another Caption", output.var="mtcars34"}
+```{sql, connection=db, tab.cap = "My Another Caption", output.var="mtcars34", echo=TRUE}
 SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 ```
 
@@ -470,7 +469,7 @@ SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 head(mtcars34)
 ```
 ```{r,include=FALSE,cache=FALSE}
-dbDisconnect(conn = con)
+DBI::dbDisconnect(conn = db)
 ```
 
 ### PostgreSQL
@@ -551,24 +550,24 @@ host: example-db.com
 port: 1111
 ```
 
-如果没有手动配置，会使用默认的参数配置 `host="localhost", port = 9000, db = "default", user = "default", password = "", compression = "lz4"`。现在，我们考虑更加实用的场景，服务器上安装了 Docker，ClickHouse 部署在Docker集群上，如何从本机连接上集群。
+如果没有手动配置，会使用默认的参数配置 `host="localhost", port = 9000, db = "default", user = "default", password = "", compression = "lz4"`。现在，我们考虑更加实用的场景，服务器上安装了 Docker，ClickHouse 部署在Docker集群上，下面介绍如何从本机连接上集群。
 
 首先在某台机器上，拉取 ClickHouse 的 Docker 镜像
 
-```{bash,eval=FALSE}
+```{bash,eval=FALSE,echo=TRUE}
 docker pull yandex/clickhouse-server
 ```
 
 从 Yandex 官网打包的 [Dockerfile](https://hub.docker.com/r/yandex/clickhouse-server/dockerfile) 来看，其默认暴露了 9000、 8123 和 9009 三个端口，所以我在运行 ClickHouse 容器的时候，需要选择其中一个端口映射给主机端口，这里我选择 8282，值得注意的是，我主机的8787端口已经分配给了 RStudio，所以不要再把该主机端口映射给 9000
 
-```{bash,eval=FALSE}
+```{bash,eval=FALSE,echo=TRUE}
 docker run --name ck -d -p 8282:9000 -e ROOT=TRUE \
    -e USER=xiangyun -e PASSWORD=cloud yandex/clickhouse-server
 ```
 
 最后是建立连接，需要远端 Docker 容器内 Clickhouse 的 IP 地址，分配给它的主机端口，用来访问数据库，数据库的用户账户和具体的数据库名称，默认账户和密码以及数据库都是 default，下面展示连接远程 ClickHouse 数据库
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,echo=TRUE,cache=FALSE}
 library(DBI)
 library(RClickhouse)
 con <- DBI::dbConnect(RClickhouse::clickhouse(),
@@ -583,7 +582,7 @@ con <- DBI::dbConnect(RClickhouse::clickhouse(),
 
 下面是连接本地 ClickHouse 数据库，数据库和数据分析环境都在本地，我们使用默认的9000端口和默认default数据库，而默认的账户名在安装 ClickHouse 时指定为 cloud，因此连接参数设置如下 
 
-```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE,eval=FALSE}
 library(DBI)
 library(RClickhouse)
 # con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")
@@ -595,13 +594,13 @@ con <- DBI::dbConnect(RClickhouse::clickhouse(),
 
 RClickHouse 包提供部分 dplyr 式的数据操作，使用比较方便，这里便使用它了，往 ClickHouse 中写入数据
 
-```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE,cache=FALSE}
 DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
 ```
 
 查看数据库中的 mtcars 表 
 
-```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE,cache=FALSE}
 # 列出 ClickHouse 中存放的表
 dbListTables(con)
 # 列出表 mtcars 中的所有字段
@@ -610,7 +609,7 @@ dbListFields(con, "mtcars")
 
 RClickHouse 包支持的聚合操作（其实是 dplyr）和 Base R 提供的聚合操作对比，测试一下正确与否
 
-```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE,cache=FALSE}
 library(tidyverse)
 # 按变量 cyl 分组对 mpg 求和
 tbl(con, "mtcars") %>% 
@@ -634,7 +633,7 @@ aggregate 聚合函数默认对缺失值的处理是忽略， sum 和 mean 函�
 
 你当然可以继续使用 SQL 语句做查询，而不使用 dplyr 提供的现代化的管道操作语法
 
-```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE,cache=FALSE}
 # 传递 SQL 查询语句
 DBI::dbGetQuery(con, 
 "SELECT
@@ -648,7 +647,7 @@ GROUP BY vs")
 ::: sidebar
 如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器才可以获得更好的性能
 
-```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE,cache=FALSE}
 # 读取数据库中的整张表
 copy_mtcars <- dbReadTable(con, "mtcars")
 tibble::glimpse(copy_mtcars)
@@ -657,7 +656,7 @@ tibble::glimpse(copy_mtcars)
 
 还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数，如 `multiIf`
 
-```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE,cache=FALSE}
 # 查看 ClickHouse 中所有的数据库名称
 DBI::dbGetQuery(con, "SHOW DATABASES")
 # 查看所有存储的表
@@ -671,7 +670,7 @@ SELECT multiIf(am=1, 'automatic', 'manual') AS transmission,
 FROM mtcars
 ")
 ```
-```{r,cache=FALSE,eval=is_unix & !is_on_travis}
+```{r,cache=FALSE}
 dbDisconnect(conn = con)
 ```
 
