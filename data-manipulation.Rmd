@@ -1,5 +1,9 @@
 # 数据操作手 {#data-manipulator}
 
+```{r,R.options=list(tidyverse.quiet = TRUE),include=FALSE}
+library(tidyverse)
+```
+
 ::: sidebar
 主要介绍 Base R 提供的数据操作
 :::
@@ -317,6 +321,43 @@ rbind
 
 left join
 right join
+
+## 数据去重 {#base-duplicated}
+
+单个数值型向量去重，此时和 unique 函数作用一样
+
+```{r,echo=TRUE}
+(x <- c(9:20, 1:5, 3:7, 0:8))
+## extract unique elements
+x[!duplicated(x)]
+unique(x)
+```
+
+数据框类型数据中，去除重复的行，这个重复可以是多个变量对应的向量
+
+```{r,echo=TRUE}
+set.seed(123)
+df <- data.frame(
+  x = sample(0:1, 10, replace = T),
+  y = sample(0:1, 10, replace = T),
+  z = 1:10
+)
+df
+df[!duplicated(df[, 1:2]), ]
+```
+
+::: sidebar
+数据去重在 dplyr 中的实现[^dplyr-duplicated]。
+
+```{r,echo=TRUE}
+library(dplyr)
+df %>%
+  group_by(x, y) %>%
+  filter(row_number(z) == 1)
+```
+
+[^dplyr-duplicated]: https://stackoverflow.com/questions/22959635/
+:::
 
 ## 数据聚合 {#base-aggregate}
 
