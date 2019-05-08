@@ -1,4 +1,4 @@
-# 三维图形 {#plot-3d}
+# 三维可视化 {#plot-3d}
 
 画图 graphics 使用基础 R 包和基于基础包的扩展包绘图 **plotrix** [@Plotrix_2006_Lemon]
 

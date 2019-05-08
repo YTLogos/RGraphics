@@ -20,6 +20,9 @@ new_session: yes
 before_chapter_script: ["_common.R"]
 rmd_files: 
   - "index.Rmd"
+  - "preface.Rmd"
+  - "introduction.Rmd"
+  
   # 安装指导
   - "installation.Rmd"
   

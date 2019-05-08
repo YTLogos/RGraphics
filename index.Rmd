@@ -1,15 +1,10 @@
 ---
-title: "数据可视化"
+title: "数据可视化与R语言"
 subtitle: "Data Visualization with R: Base Lattice GGplot2 Grid"
 author: "黄湘云"
 date: "`r format(Sys.time(), tz = 'Asia/Taipei', usetz = TRUE)`"
 site: bookdown::bookdown_site
 documentclass: book
-papersize: a4
-linestretch: 1.25 # 1.25 倍行间距
-lof: yes
-lot: yes
-#indent: 40pt # 段首缩进两个汉字
 toccolor: magenta
 fontsize: 10pt
 secnumdepth: 3
@@ -19,8 +14,6 @@ bibliography: [latex/book.bib, latex/refer.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 subparagraph: true
-compact-title: true
-#geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
 description: "学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情"
 keywords: ["Base", "Lattice", "GGplot2", "Grid"]
 cover-image: "images/dragon.png"
@@ -29,8 +22,6 @@ url: 'https\://bookdown.org/xiangyun/RGraphics/'
 # layout: default
 # comments: true
 ---
-
-\mainmatter
 
 `r if (knitr::is_latex_output()) '<!--'` 
 
@@ -43,174 +34,10 @@ if(!require(firatheme)) remotes::install_github('vankesteren/firatheme')
 if(!require(patchwork)) remotes::install_github('thomasp85/patchwork')
 ```
 
-# 准备 {#prerequisites}
-\index{bookdown}
-\index{knitr}
-\index{pandoc}
+# 欢迎 {#welcome .unnumbered}
 
-## Why R {#why-r}
+写作动机，如何加入写作，版权声明
 
-不管是在本科生还是研究生水平的教学中，R 语言都是帮助学习数理统计的[理想平台][why-r]
-
-[why-r]: https://www.ejwagenmakers.com/misc/HortonEtAl2004.pdf
-
-在数据科学领域内，选择 R 的理由
-
-
-> 1. written by statisticians for statisticians  
-2. built-in matrix type and matrix manipulations  
-3. great graphics, both base and CRAN  
-4. excellent parallelization facilities, etc.  
-> 
-> --- Norm Matloff
-
-
--  Python over R
-   1. [How GPL makes me leave R for Python](https://r-posts.com/how-gpl-makes-me-leave-r-for-python/)
-   1. [Top 10 reasons R is bad for you](https://decisionstats.com/2009/01/10/top-ten-rrreasons-r-is-bad-for-you/)
--  R over Python
-   1. [R > Python: A Concrete Example](https://matloff.wordpress.com/)
-   1. [Choosing R or Python for Data Analysis? An Infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis) 
-
-
-Table: (\#tab:r-vs-python) 我们不打嘴仗，不下结论，只做对比，不完善之处还请大家指出并补充[^r-python-notes]
-
------------------------------------------------------------------------------------------------------------------------
-  比较内容      具体范围                    R 包                                   Python 模块
---------------- --------------------------- -------------------------------------- ------------------------------------
-  数据获取      本地、数据库、远程          内置，RCurl、XML、rvest、data.table、  scrapy
-                                            odbc
-
-  数据清理      正则表达式                  内置，stringi、stringr、tidyr          re
-
-  数据聚合      SQL支持的所有操作           内置，dplyr、purrr、dbplyr、sparklyr   Numpy、Scipy、Pandas
-
-  数据分析      统计推断的所有方法          内置，lme4、rstan、mxnet、xgoost、     xgboost、scikit-learn、tensorflow、mxnet  
-                                            tensorflow               
-
-  数据展示      数据可视化                  内置，ggplot2、plotly                  matplotlib、bokeh、plotly
-
-  数据报告      网页文档、幻灯片            rmarkdown、bookdown、blogdown 
-
-  数据落地      模型部署，调优，维护        plumber、opencpu、fiery
------------------------------------------------------------------------------------------------------------------------
-
-[^r-python-notes]: 所有的 R 包和 Python 模块必须处于活跃维护，拥有大批粉丝，维护者在社区内享有声誉，有厂子或科研经费支持
-
-* 我的 Python 学习路径，零基础学习 Python
-
-1. 找本100页左右的Python导论书籍，力求对 Python 有个大致的了解和印象，知道它是什么，善于干什么，不善于干什么。大约进行两周时间
-   1. [A Byte of Python](https://python.swaroopch.com/) 及其中文翻译版 [简明 Python 教程](https://bop.mol.uno/)
-   1. Python 入门视频一套
-1. 就目前工作内容，找本比较贴合的 Python 书籍下手，这个阶段主要是为了完成任务。大约进行两周时间
-1. 深入系统学习 Python，这个阶段主要看系统手册，博客，论坛
-
-## 目标读者 {#who-read-this-book}
-
-接触过 R 语言的读者，本书起源于自己的学习笔记，侧重统计图形，当然也包括在制作统计图形之前的数据导入和变换操作，后续的可视化和动态文档
-
-## 关于本书 {#what-talk-about}
-
-这里写每章的主要内容介绍
-
-1. R包数量增长如此之快  R包如此之多
-2. R包之间依赖关系如此之复杂
-3. 每个base R包内的函数如此之多，函数参数之多，`ls("package:base") %>% length`
-4. 数据处理和可视化常用基本包  ggplot2  dplyr 
-5. 程序设计风格如此之多，面向对象s3 s4 RC R5 R6、过程（函数调用）、响应式 shiny 动态图形、函数式编程（数据操作）
-6. 数据结构如此之多  列表list sp sf 
-7. 统计学家的程序设计思维如此难懂
-8. 数据交换接口如此之多，数据库、网页、编程语言 python 等 
-
-## 记号约定 {#conventions}
-
-写作风格，R 包名称都加粗表示，如 **bookdown**， **rmarkdown** 等，软件、编程语言名称保持原样，如 TinyTeX，LyX，TeXLive，R，Python，Stan，C++，SQL等，在代码块中，我们不使用`R>`或`+`，代码输出结果用`#>`注释。**knitr** [@xie_2015_knitr] **bookdown** [@xie_2016_bookdown] 和 Pandoc \index{Pandoc} TinyTeX \index{TinyTeX}，请使用 XeLaTeX 编译这本书，等宽字体为 [inconsolata](https://ctan.org/pkg/inconsolata) 默认的文本字体为 [Times](https://ctan.org/pkg/mathptmx)
-
-在这本书中，使用如下印刷约定：
-
-Italic
-
-:   Indicates new terms, URLs, email addresses, filenames, and file extensions.
-
-Constant width
-
-:   Used for program listings, as well as within paragraphs to refer to program elements such as variable or function names, databases, data types, environment variables, statements, and keywords.
-:   Constant width text that is prefaced with `#>` represents output from R.
-
-**`Constant width bold`**
-
-:   Shows commands or other text that should be typed literally by the user.
-
-*Constant width italic*
-
-:   Shows text that should be replaced with user-supplied values or by values determined by context.
-
-> **Tip**
->
-> This icon signifies a tip, suggestion, or general note.
-
-> **Caution**
->
-> This icon indicates a warning or caution.
-
-
-## 本书结构 {#structure-of-book}
-
-## 获取帮助 {#Getting-Help-with-R}
-
-[Getting Help with R](https://support.rstudio.com/hc/en-us/articles/200552336) 获取帮助 https://blog.rsquaredacademy.com/getting-help-in-r-updated/
-https://www.r-project.org/help.html
-
-## 发展历史 {#history-of-r}
-
-1. Ross Ihaka
-
-    维基主页 https://en.wikipedia.org/wiki/Ross_Ihaka
-    
-    Ross Ihaka 的学术族谱
-    https://www.stat.auckland.ac.nz/%7Eihaka/downloads/ihaka.pdf
-    
-    R: Lessons Learned, Directions for the Future.
-    https://www.stat.auckland.ac.nz/%7Eihaka/downloads/JSM-Talk.pdf
-    
-    R语言的前世今生 https://www.cnblogs.com/chenkai/archive/2013/05/16/3082889.html
-
-1. Robert Gentleman
-
-    维基主页 https://en.wikipedia.org/wiki/Robert_Gentleman_(statistician)
-
-- UseR 2016: [Forty years of S](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Forty-years-of-S)
-- UseR 2017: [20 years of CRAN](https://channel9.msdn.com/Events/useR-international-R-User-conferences/useR-International-R-User-2017-Conference/KEYNOTE-20-years-of-CRAN)
-
-
-## 关于作者 {#about-author}
-
-热心开源事业，统计之都现任理事、副主编 Associated Editor of Captial of Statistics，经常混迹于统计之都论坛、Github 和爆栈网。个人主页 <https://www.xiangyunhuang.com.cn/>
-
-```{r eval=!is_latex,out.width="90%"}
-knitr::include_graphics(path = 'https://ghchart.rshah.org/XiangyunHuang.svg')
-```
-
-
-## 软件信息 {#softwares-rsession-info}
-
-重现本书内容需要的 R 包
-
-```{r sessioninfo,echo=TRUE}
-sessionInfo()
-```
-
-> 为了重复实现，我准备了一个虚拟机，存放在百度云盘上，链接: <https://pan.baidu.com/s/1K7R55QfFHGu6_QsyUlpCJA> 密码: 2ixt
-登陆用户名：xyhuang 密码：cloud
-
-当然，你也可以选择来自 rocker 项目的 Docker 镜像，包含的数据分析环境是 `rocker/verse`
-
-```bash
-docker run --name rstudio -d -p 8787:8787 -e ROOT=TRUE \
- -e USER=cloud -e PASSWORD=cloud rocker/verse
-```
-
-在本地拉取了一个名叫 rstudio 的镜像，从虚拟机到宿主机的映射端口是，8787 端口是虚拟机中 RStudio IDE 默认占用的，这样就可以在宿主机的浏览器里打开链接 <http://localhost:8787>
 
 ```{r include=FALSE,cache=FALSE}
 # automatically create a bib database for R packages

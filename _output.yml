@@ -4,9 +4,9 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">R 语言绘图基础</a></li>
+        <li><a href="./">数据可视化与R语言</a></li>
       after: |
-        <li><a href="https://ggplot.netlify.com" target="blank">Published with netlify</a></li>
+        <li><a href="https://r4charts.netlify.com/" target="blank">Published with netlify</a></li>
     download: ["pdf", "epub"]
     edit:
       link: https://github.com/XiangyunHuang/RGraphics/edit/master/%s
@@ -19,17 +19,5 @@ bookdown::pdf_book:
   latex_engine: xelatex
   citation_package: natbib
   pandoc_args: ["--top-level-division=chapter", "--lua-filter=latex/sidebar.lua"]
-  keep_tex: yes
-  dev: "cairo_pdf"
   quote_footer: ["\\hspace*{\\fill} ", ""]
-  toc_unnumbered: false
-  number_sections: true
-  toc_appendix: no
-  toc_bib: no
   toc_depth: 3
-#  highlight_bw: yes
-#  highlight: default
-  df_print: "default"
-  extra_dependencies:
-    ctex: heading
-#bookdown::epub_book: default

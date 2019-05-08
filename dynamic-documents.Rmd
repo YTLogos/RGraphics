@@ -1,4 +1,4 @@
-# 动态文档 {#dynamic-documents}
+# 动态性文档 {#dynamic-documents}
 
 > 三剑客 Markdown & Pandoc's Markdown & R Markdown
 > [Markdown for scientific writing](https://github.com/scholmd/scholmd/wiki)

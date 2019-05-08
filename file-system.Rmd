@@ -457,20 +457,10 @@ help.search(keyword = "character", package = "base")
 ```{r}
 system <- function(...) cat(base::system(..., intern = TRUE), sep = '\n')
 system2 <- function(...) cat(base::system2(..., stdout = TRUE), sep = "\n")
-rtools_path <- paste("C:/Rtools/mingw_64/bin",
-  "C:/Rtools/mingw_32/bin",
-  sep = .Platform$path.sep
-)
-if (.Platform$OS.type == "windows") { # use conda env
-  Sys.setenv(PATH = paste(
-    rtools_path, Sys.getenv("PATH"),
-    sep = .Platform$path.sep
-  ))
-}
 ```
 ```{r,echo=TRUE}
-system(command = "gcc --version")
-system2(command = 'g++', args = '--version')
+system(command = "xelatex --version")
+system2(command = 'pdflatex', args = '--version')
 ```
 
 ## 时间管理 {#time}

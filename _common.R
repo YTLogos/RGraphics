@@ -36,7 +36,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   small.mar = TRUE,
   echo = FALSE,
-  cache = TRUE,
+  cache = FALSE,
   size = "scriptsize",
   output = 6,
   out.width = "70%",
