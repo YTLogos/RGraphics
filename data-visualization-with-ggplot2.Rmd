@@ -979,10 +979,14 @@ cat(sprintf("--- elapsed user-time: %fs ", (proc.time() - start)[1]))
 
 首先我们从 CRAN 官网下载 R 包描述信息
 
-```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
+```{r, echo=TRUE}
 library(tidyverse)
 # CRAN R包 metadata 信息
-pdb <- readRDS(file = file(sprintf("%s/web/packages/packages.rds", getOption("repos")["CRAN"])))
+if (file.exists("data/packages.rds")) {
+  pdb <- readRDS("data/packages.rds")
+} else {
+  pdb <- readRDS(file = file(sprintf("%s/web/packages/packages.rds", getOption("repos")["CRAN"])))
+}
 ```
 
 接着，我们可以看看CRAN 上发布的 R 包数量
