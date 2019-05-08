@@ -1482,7 +1482,7 @@ legend("bottomleft", leg.txt,
 ```
 
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,echo=TRUE,eval=!require("spDataLarge")}
 if (!"spDataLarge" %in% .packages(TRUE)) {
   install.packages("spDataLarge",
     repos = "https://nowosad.github.io/drat/",

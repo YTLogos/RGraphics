@@ -1,4 +1,4 @@
-# 数据调整 {#data-rectangling}
+# 数据异形者 {#data-rectangling}
 
 > 来自其它格式的数据形式，如 JSON、XML、YAML 需要转化清理成 R 中数据框的形式 data.frame
 
