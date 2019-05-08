@@ -551,14 +551,41 @@ host: example-db.com
 port: 1111
 ```
 
-如果没有手动配置，会使用默认的参数配置 `host="localhost", port = 9000, db = "default", user = "default", password = "", compression = "lz4"`
+如果没有手动配置，会使用默认的参数配置 `host="localhost", port = 9000, db = "default", user = "default", password = "", compression = "lz4"`。现在，我们考虑更加实用的场景，服务器上安装了 Docker，ClickHouse 部署在Docker集群上，如何从本机连接上集群。
 
-RClickHouse 提供部分 dplyr 式的数据操作
+首先在某台机器上，拉取 ClickHouse 的 Docker 镜像
+
+```{bash,eval=FALSE}
+docker pull yandex/clickhouse-server
+```
+
+从 Yandex 官网打包的 [Dockerfile](https://hub.docker.com/r/yandex/clickhouse-server/dockerfile) 来看，其默认暴露了 9000、 8123 和 9009 三个端口，所以我在运行 ClickHouse 容器的时候，需要选择其中一个端口映射给主机端口，这里我选择 8282，值得注意的是，我主机的8787端口已经分配给了 RStudio，所以不要再把该主机端口映射给 9000
+
+```{bash,eval=FALSE}
+docker run --name ck -d -p 8282:9000 -e ROOT=TRUE \
+   -e USER=xiangyun -e PASSWORD=cloud yandex/clickhouse-server
+```
+
+最后是建立连接，需要远端 Docker 容器内 Clickhouse 的 IP 地址，分配给它的主机端口，用来访问数据库，数据库的用户账户和具体的数据库名称，默认账户和密码以及数据库都是 default，下面展示连接远程 ClickHouse 数据库
+
+```{r,eval=FALSE,echo=TRUE}
+library(DBI)
+library(RClickhouse)
+con <- DBI::dbConnect(RClickhouse::clickhouse(),
+  host = "192.168.99.100", port = 8282, db = "default",
+  user = "default", password = "default", compression = "lz4"
+)
+```
+
+::: sidebar
+连接远程数据库的方式，实现本地数据分析环境和数据库环境分离，分别管理和使用
+:::
+
+下面是连接本地 ClickHouse 数据库，数据库和数据分析环境都在本地，我们使用默认的9000端口和默认default数据库，而默认的账户名在安装 ClickHouse 时指定为 cloud，因此连接参数设置如下 
 
 ```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
 library(DBI)
 library(RClickhouse)
-# 建立数据库连接
 # con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")
 con <- DBI::dbConnect(RClickhouse::clickhouse(),
   host = "localhost", port = 9000, db = "default",
@@ -566,7 +593,7 @@ con <- DBI::dbConnect(RClickhouse::clickhouse(),
 )
 ```
 
-往 ClickHouse 中写入数据
+RClickHouse 包提供部分 dplyr 式的数据操作，使用比较方便，这里便使用它了，往 ClickHouse 中写入数据
 
 ```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
 DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
@@ -581,7 +608,7 @@ dbListTables(con)
 dbListFields(con, "mtcars")
 ```
 
-聚合操作
+RClickHouse 包支持的聚合操作（其实是 dplyr）和 Base R 提供的聚合操作对比，测试一下正确与否
 
 ```{r,eval=is_unix & !is_on_travis,echo=TRUE,cache=FALSE}
 library(tidyverse)
