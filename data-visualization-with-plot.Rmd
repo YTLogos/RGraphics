@@ -1585,49 +1585,48 @@ plot(x0, x0^-8,
   frame.plot = TRUE, # 添加绘图框
   log = "xy", # x 和 y 轴都取对数尺度
   axes = FALSE, # 去掉坐标轴
-  xlab = "$u$",
-  ylab = "$\\mathcal{K}_{\\kappa}(u)$", # 设置坐标轴标签
+  xlab = "$u$", ylab = "$\\mathcal{K}_{\\kappa}(u)$", # 设置坐标轴标签
   type = "n", # 清除绘图区域的内容
   ann = TRUE, # 添加标题 x和y轴标签
   panel.first = grid() # 添加背景参考线
 )
 
 axis(1,
-  at = c(1e-08, 1e-06, 1e-04, 1e-02, 1, 1e+02),
-  labels = expression(10^-8, 10^-6, 10^-4, 10^-2, 1, 10^2)
+  at = 10^seq(from = -8, to = 2, by = 2),
+  labels = paste0("$\\mathsf{10^{", seq(from = -8, to = 2, by = 2), "}}$")
 )
 axis(2,
-  at = c(1e-16, 1, 1e+16, 1e+32, 1e+48),
-  labels = expression(10^-16, 1, 10^16, 10^32, 10^48), las = 1
-)
-# 设置线条颜色
-cols <- RColorBrewer::brewer.pal(9, name = "Spectral")
-# gray.colors(9) terrain.colors(9)  RColorBrewer::brewer.pal(9,name = "Spectral")
-for (i in seq(length(nus)))
-  lines(x0, besselK(x0, nu = nus[i]), col = cols[i], lwd = 2)
-legend("topright",
-  legend = paste0("$\\kappa=", rev(nus), "$"),
-  col = rev(cols), lwd = 2, cex = 0.5
+  at = 10^seq(from = -8, to = 56, by = 16),
+  labels = paste0("$\\mathsf{10^{", seq(from = -8, to = 56, by = 16), "}}$"), las = 1
 )
 
-# 数据变化范围太大，因此横纵坐标轴都取了以10为底的对数，数据可以紧凑的在一张图内展示
-x <- seq(0, 40, length.out = 801)
+for (i in seq(length(nus))) {
+  lines(x0, besselK(x0, nu = nus[i]), col = hcl.colors(9)[i], lwd = 2)
+}
+legend("topright",
+  legend = paste0("$\\kappa=", rev(nus), "$"),
+  col = hcl.colors(9, rev = T), lwd = 2, cex = 1
+)
+
+x <- seq(0, 4, length.out = 501)
 x <- x[x > 0]
 plot(x, x,
   frame.plot = TRUE,
-  ylim = c(1e-18, 1e11), log = "y", xlab = "$u$", type = "n", yaxt = "n",
+  ylim = c(1e+0, 1e+20), log = "y",
+  xlab = "$u$", type = "n", yaxt = "n",
   ylab = "$\\mathcal{K}_{\\kappa}(u)$", ann = TRUE, panel.first = grid()
 )
 axis(2,
-  at = c(1e-19, 1e-12, 1e-05, 1e+02, 1e+09),
-  labels = expression(10^-19, 10^-12, 10^-5, 10^2, 10^9), las = 1
+  at = c(1e+0, 1e+05, 1e+10, 1e+15, 1e+20),
+  labels = paste0("$\\mathsf{10^{", seq(from = 0, to = 20, by = 5), "}}$"), las = 1
 )
 
-for (i in seq(length(nus)))
-  lines(x, besselK(x, nu = nus[i]), col = cols[i], lwd = 2)
+for (i in seq(length(nus))) {
+  lines(x, besselK(x, nu = nus[i]), col = hcl.colors(9)[i], lwd = 2)
+}
 legend("topright",
   legend = paste0("$\\kappa=", rev(nus), "$"),
-  col = rev(cols), lwd = 2, cex = 0.5
+  col = hcl.colors(9, rev = T), lwd = 2, cex = 1
 )
 ```
 
