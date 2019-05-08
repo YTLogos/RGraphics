@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
   small.mar = TRUE,
-  echo = FALSE,
+  echo = TRUE,
   cache = FALSE,
   size = "scriptsize",
   output = 6,
