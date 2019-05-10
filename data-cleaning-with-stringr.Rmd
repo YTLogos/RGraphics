@@ -39,6 +39,8 @@ sapply(c("PCRE_limit_recursion", "PCRE_study", "PCRE_use_JIT"), getOption)
 libcurlVersion()
 ```
 
+于主编利用 [tidyRSS](https://github.com/RobertMyles/tidyRSS) 包 解析博客站点的订阅信息，并将此设置为定时任务，创建自动更新博客内容的聚合网站 [Daily R](https://dailyr.netlify.com/)
+
 ## 文本挖掘 {#text-mining}
 
 [How did Axios rectangle Trump's PDF schedule? A try with R](https://masalmon.eu/2019/02/11/trump-schedule/) 使用 pdftools 和 magick 处理表格，这两个 R 包分别依赖 Poppler C++ 和 ImageMagick++，在 Ubuntu 上安装 pdftools 和 magick 包
