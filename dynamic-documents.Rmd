@@ -60,7 +60,20 @@ Term 2
   ~ Definition 2b
   
 
-example 类型的列表
+无序列表
+
+* fruits
+  + apples
+    - macintosh
+    - red delicious
+  + pears
+  + peaches
+* vegetables
+  + broccoli
+  + chard
+
+
+对应  LaTeX 列表环境里的有序环境，通篇计数
 
 (@)  My first example will be numbered (1).
 (@)  My second example will be numbered (2).
@@ -69,11 +82,11 @@ Explanation of examples.
 
 (@)  My third example will be numbered (3).
 
-引用列表中的条目
+`(@)` 环境可以引用
 
-(@good)  This is a good example.
+(@good)  这是一个好例子
 
-As (@good) illustrates, ...
+正如 (@good) 所指出的那样，
 
 
 列表里包含代码块
@@ -84,6 +97,8 @@ As (@good) illustrates, ...
 <!-- end of list -->
 
     { my code block }
+
+显示反引号 `` ` ``
 
 ### 强调 {#markdown-emphasis}
 
@@ -404,3 +419,6 @@ c(
 > 格式化R代码块 [styler](https://github.com/r-lib/styler)
 > 准备可重复的例子，方便在论坛/Github上发问 [reprex](https://github.com/tidyverse/reprex)
 > 快速获取 Github 等社交网络活动记录 [butteRfly](https://github.com/jonocarroll/butteRfly)
+> 统计 R Markdown 文档中的单词 [wordcountaddin](https://github.com/benmarwick/wordcountaddin)
+> 写可重复性研究报告 [rrtools](https://github.com/benmarwick/rrtools)
+> RStudio 插件集合 [addinslist](https://github.com/daattali/addinslist)

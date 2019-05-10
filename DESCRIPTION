@@ -23,6 +23,7 @@ Imports:
   odbc,
   openxlsx,
   patchwork,
+  pdftools,
   plotly,
   pracma,
   RClickhouse,

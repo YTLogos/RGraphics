@@ -19,16 +19,4 @@
 
 ## 列表 {#list}
 
-`lapply` 批量出图， `do.call` 
-
-## 时间序列 {#ts}
-
-## 空间对象 {#spatial-object}
-
-### sp
-
-### sf
-
-### raster
-
-
+时间序列 ts，xts，zoo 等对象和空间数据 sp sf raster 等对象
