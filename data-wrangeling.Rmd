@@ -233,6 +233,9 @@ library(parallel)
 ```{bash,echo=TRUE,eval=FALSE}
 yum install -y openmpi-devel
 echo "export ORTED=/usr/lib64/openmpi/bin" >> ~/.bashrc
+# 或者
+echo "PATH=/usr/lib64/openmpi/bin:$PATH; export PATH" | tee -a ~/.bashrc
+source ~/.bashrc
 ```
 
 然后进入 R 安装 R 包 Rmpi
@@ -283,9 +286,7 @@ mpi.apply(c(10, 20), runif)
 mpi.close.Rslaves()
 ```
 
-### Rhpc
-
-> 超算 HPC
+pbdMPI 包处于活跃维护状态，是 [pbdR](https://github.com/snoweye/user2016.demo) 项目的核心组件，能够轻松处理 TB 级数据
 
 [Rhpc](https://prs.ism.ac.jp/~nakama/Rhpc/) 包同样基于 MPI 方式，但是集 Rmpi 和 snow 两个包的优点于一身，在保持 apply 编程风格的同时，能够提供更好的高性能计算环境，支持长向量(long vector)，能够处理一些大数据。
 
