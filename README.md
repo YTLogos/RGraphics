@@ -10,112 +10,19 @@
 ## 参考材料
 
 - [John W. Tukey](https://www.ams.org/notices/200202/fea-tukey.pdf) 生平介绍
-
 - Winston Chang [R Graphics Cookbook](https://r-graphics.org/)
 - Claus O. Wilke [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
 - Garrett Grolemund and Hadley Wickham [R for data science](https://r4ds.had.co.nz/)
 - Kieran Healy [Data Visualization: A practical introduction](https://socviz.co/)
 - Carson Sievert [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
 - R Graphics, Third ---  [出版商页面](https://www.crcpress.com/p/book/9781498789059) [书籍补充材料](https://www.stat.auckland.ac.nz/~paul/RG3e/)
-
 - [Online regex tester and debugger](https://regex101.com/)
 - [Martin Mächler](https://github.com/mmaechler) [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) 
 
 
-## 相关资源
+## 课程
 
-分为 Github、书籍、课程和博客等四个方面介绍学习 R 语言的资料
-
-### 书籍
-
-1. 道家的小无相功
-   - 高级R语言编程 [Advanced R](https://adv-r.hadley.nz)
-1. 编程指南
-   - R 语言编程风格指南  [R Style Guide](https://style.tidyverse.org/)
-   - 高效R语言编程 [Efficient R programming](https://csgillespie.github.io/efficientR)
-   - [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)   
-   - [R 炼狱](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) 
-1. 开发 R 包
-   - 开发 R 包 [R packages](http://r-pkgs.had.co.nz)  第二版 https://r-pkgs.org/
-   - R 扩展 [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
-   - Git [Pro Git 中文第二版](https://git-scm.com/book/zh/v2)
-   - R 用户愉快地使用 Git/Github [Happy Git and GitHub for the useR](https://happygitwithr.com/)
-   - [The drake R Package User Manual](https://ropenscilabs.github.io/drake-manual/)
-1. 数据科学 
-   - 数据科学与 R 语言 [R for data science](https://r4ds.had.co.nz/)
-   - 可解释的机器学习 [Interpretable Machine Learning: A Guide for Making Black Box Models Explainable](https://christophm.github.io/interpretable-ml-book/)
-   - 数据科学入门 [Introduction to Data Science](https://rafalab.github.io/dsbook/) Rafael A. Irizarry
-   - 特征工程与特征选择 [Feature Engineering and Selection: A Practical Approach for Predictive Models](http://www.feat.engineering) Max Kuhn and Kjell Johnson
-   - 分类与回归：caret 包 [The caret Package](https://topepo.github.io/caret/)
-   - 统计机器学习与应用 [An Introduction to Statistical Learning with Applications in R](https://www-bcf.usc.edu/~gareth/ISL/) [PDF](https://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf)
-   - 机器学习与R语言 [Machine Learning in R](https://mlr.mlr-org.com/)
-   - 贝叶斯数据分析 [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
-   - 应用时间序列分析与R语言 [Time Series Analysis with Applications in R](http://homepage.divms.uiowa.edu/~kchan/TSA.htm)
-   - 时间序列预测预测：原理与实践 [Forecasting: Principles and Practice](https://www.otexts.org/fpp2/) [Rob J Hyndman](https://robjhyndman.com/)
-   - 时间序列分析及其应用 [Time Series Analysis and Its Applications: With R Examples](https://www.stat.pitt.edu/stoffer/tsa4/)
-   - 线性模型与R语言 [Extending the Linear Model with R](http://people.bath.ac.uk/jjf23/ELM/) [Julian Faraway](https://farawaystatistics.wordpress.com/)
-   - 统计反思 [Statistical Rethinking](http://xcelab.net/rm/statistical-rethinking/)  [Statistical Rethinking Resources](https://rpruim.github.io/Statistical-Rethinking/)
-   - 统计做错了 [Statistics Done Wrong](https://www.statisticsdonewrong.com)
-   - 回归模型策略 [Regression Modeling Strategies](http://biostat.mc.vanderbilt.edu/wiki/Main/RmS)
-   - 应用预测建模 [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
-   - 应用回归分析与广义线性模型 [Applied Regression Analysis and Generalized Linear Models](https://socialsciences.mcmaster.ca/jfox/)
-   - 数据融合，理论、方法和应用 [Data Fusion Theory, Methods, and Applications](http://www.gagolewski.com/publications/datafusion/)
-   - [John H. Maindonald](https://maths-people.anu.edu.au/~johnm/) [Using R for Data Analysis and Graphics](https://maths-people.anu.edu.au/~johnm/r/usingR.pdf) 后来演变为 [Data Analysis and Graphics Using R-3rd-2010](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html) 数据集和函数存放在 DAAG 包里，第四版正在进行中，手稿可在作者主页上获得   
-1. 数据可视化   
-   - 数据可视化基础 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz)
-   - 数据可视化与R语言 [Data Visualisation with R --- 100 Examples](http://www.datavisualisation-r.com/)
-   - R语言绘图手册 [R Graphics Cookbook](https://github.com/wch/gcookbook) [PDF](https://raw.githubusercontent.com/irichgreen/GCookBook/master/R%20Graphics%20Cookbook.pdf)
-   - 数据分析与图形艺术 [ggplot2: Elegant Graphics for Data Analysis](https://link.springer.com/book/10.1007%2F978-3-319-24277-4) [PDF](http://moderngraphics11.pbworks.com/f/ggplot2-Book09hWickham.pdf)
-   - 数据可视化：实践指南 [Data Visualization: A practical introduction](https://socviz.co/) [Github](https://github.com/kjhealy/socviz)
-   - 可视化数据分析与R语言 [Graphical Data Analysis with R](http://www.gradaanwr.net/)
-1. 文本挖掘
-   - 初识命令行 [The Unix Workbench](https://seankross.com/the-unix-workbench/)
-   - 数据科学与命令行 [Data Science at the Command Line](https://www.datascienceatthecommandline.com/)
-   - 字符串处理 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/)
-   - 文本挖掘 [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
-1. 动态文档
-   - 动态文档 [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
-   - 写作 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown)
-   - 网站 [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
-1. 模型部署
-   - Docker 入门 [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
-   - Docker 从入门到实践 [docker practice](https://www.gitbook.com/book/yeasy/docker_practice)
-1. 学习 R
-   - R 安装与管理 [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
-   - R 导论 [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
-   - 数据导入导出 [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
-   - 高频问题合集 [R-FAQs](https://cran.r-project.org/faqs.html)
-   - 学习统计与 R 语言 [Learning Statistics with R](https://github.com/djnavarro/rbook)
-   - [An Introduction to Bayesian Thinking: A Companion to the Statistics with R Course](https://statswithr.github.io/book/)
-   - 北大 李东风 [R语言教程](http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html)
-   - 北大 李东风 [统计计算](http://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/index.html)
-   - 北大 李东风 [金融时间序列分析讲义](http://www.math.pku.edu.cn/teachers/lidf/course/fts/ftsnotes/html/_ftsnotes/index.html)
-   - 北大 李东风 [应用时间序列分析备课笔记](http://www.math.pku.edu.cn/teachers/lidf/course/atsa/atsanotes/html/_atsanotes/index.html)
-1. 学习 Python
-    - [简明 Python 教程](https://bop.mol.uno/) 即 [A Byte of Python](https://python.swaroopch.com/) 的中文版
-    - [廖雪峰的 Python3.x 教程](https://www.kancloud.cn/smilesb101/python3_x/295557)
-    - [Python 进阶](https://eastlakeside.gitbooks.io/interpy-zh/content/) Intermediate Python 中文版
-    - [Python 食谱第三版](https://python3-cookbook.readthedocs.io/zh_CN/latest/) Python Cookbook 3rd Edition 中文版
-    - [笨办法学 Python](https://flyouting.gitbooks.io/learn-python-the-hard-way-cn) Learn Python 3 The Hard Way 中文版
-    - [Python 最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/) Python Best Practices Guidebook 中文版
-    - [深入 Python 3](https://woodpecker.org.cn/diveintopython3/) dive into python3 中文版
-    - [高效的 Python：编写高质量Python代码的59个有效方法](https://guoruibiao.gitbooks.io/effective-python/content/) Effective Python: 59 Specific Ways to Write Better Python 中文版
-    - [Python 官方中文文档](https://docs.python.org/zh-cn/3/)
-    - [Python 小抄](https://www.pythonsheets.com/) Python 英文版
-    - [Python 3 标准库](https://pymotw.com/3/)  Python 3 Standard Library 英文版
-    - [Think Python 2nd Edition](https://greenteapress.com/wp/think-python-2e/) 英文版        
-    - [Python 代码风格 PEP8](https://www.python.org/dev/peps/pep-0008/) PEP 8 -- Style Guide for Python Code 官方英文文档
-    - [初识 Python](https://docs.python.org/3/tutorial/index.html) Python 官方入门材料
-    - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) 自动化无聊的工作
-    - [Python Regular expression operations](https://docs.python.org/3/library/re.html)
-    - [正则表达式速查表 Python3](https://www.dataquest.io/blog/large_files/python-regular-expressions-cheat-sheet.pdf)
-1. 机器学习与数据科学    
-   - [Sklearn 与 TensorFlow 机器学习实用指南](https://hand2st.apachecn.org/#/) 
-   - [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/) Python Data Science Handbook
-
-更多在线书籍合集 <https://bookdown.org> ，要记住学习 R 语言的天花板不在编程而在统计。可看看 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
-
-### 课程
+> 可看看 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
 
 1. Tony Cai
    - Fall 2018: STAT 972: [Advanced Topics in Mathematical Statistics](http://www-stat.wharton.upenn.edu/~tcai/Stat972-Syllabus-Fall18.pdf)
@@ -128,7 +35,7 @@
    - 2015 summer Stats 253 [Analysis of Spatial and Temporal Data](https://web.stanford.edu/class/stats253/lectures.html)
    - 课程列表 https://web.calpoly.edu/~dsun09/teaching.html
 
-### 博客
+## 博客
 
 - [Ilya Kashnitsky](https://ikashnitsky.github.io/)
 - [Max Woolf](https://minimaxir.com/)

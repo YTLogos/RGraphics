@@ -284,7 +284,7 @@ cat(readLines('data/AirPassengers.dat'), sep = "\n")
 
 ## 其它数据格式 {#other-data-source}
 
-jsonlite 包读取 `*.json` 格式的文件，`jsonlite::write_json` 函数将 R对象保存为 JSON 文件，`jsonlite::fromJSON` 将 json 字符串或文件转化为 R 对象，`jsonlite::toJSON` 函数正好与之相反
+[jsonlite](https://github.com/jeroen/jsonlite) 读取 `*.json` 格式的文件，`jsonlite::write_json` 函数将 R对象保存为 JSON 文件，`jsonlite::fromJSON` 将 json 字符串或文件转化为 R 对象，`jsonlite::toJSON` 函数正好与之相反
 
 ```{r,echo=TRUE,eval=FALSE}
 library(jsonlite)
@@ -802,7 +802,9 @@ library(SparkR, lib.loc = c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib")))
 sparkR.session(master = "local[*]", sparkConfig = list(spark.driver.memory = "2g"))
 ```
 
+[rscala](https://github.com/dbdahl/rscala) 架起了 R 和 Scala 两门语言之间交流的桥梁，使得彼此之间可以互相调用
 
+> 是否存在这样的可能， Spark 提供了大量的 MLib 库的调用接口，R 的功能支持是最少的，Java/Scala 是原生的，那么要么自己开发新的功能整合到 SparkR 中，要么借助 rscala 将 scala 接口代码封装进来 
 
 [^sql-chunck]: https://d.cosx.org/d/419974
 [^txt-to-mysql]: https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql

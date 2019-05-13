@@ -144,6 +144,9 @@ plot_ly(x = den$x, y = den$y, z = den$z) %>%
   add_contour()
 ```
 
+Tal Galili 开发的 heatmaply 包[@Galili_2017_heatmaply] 层次聚类可视化
+
+
 ## leaflet {#leaflet}
 
 leaflet 基于 leaflet.js 展示空间数据

@@ -8,17 +8,22 @@
 
 函数式编程 Functional Programming Languages 用于数据处理，向量化运算、并行运算和分布式运算
 
+- [future](https://github.com/HenrikBengtsson/future) 在 R 语言中提供统一的并行和分布式处理框架
 - [future.apply](https://github.com/HenrikBengtsson/future.apply) 可以替代 base R 提供的 apply 族函数
+- [future.batchtools](https://github.com/HenrikBengtsson/future.batchtools) 使用 batchtools 实现并行和分布式处理
+- [batchtools](https://github.com/mllg/batchtools) Map 函数的并行实现，用于高性能计算系统和分布式处理，可以单机多核并行也可以多机并行，还提供了一种抽象的机制去定义大规模计算机实验。
 - [multidplyr](https://github.com/hadley/multidplyr) 是 dplyr 的后端，多核环境下实现数据分块，提高并行处理性能
 - [disk.frame](https://github.com/xiaodaigh/disk.frame) 是基于磁盘的超出内存容量的快速并行数据操作框架
-- [future](https://github.com/HenrikBengtsson/future) 在 R 语言中提供统一的并行和分布式处理框架
 
 - [rpivotTable](https://github.com/smartinsightsfromdata/rpivotTable) 动态数据透视表
 - [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) Join tables together on inexact matching
 - [dtplyr](https://github.com/hadley/dtplyr) dtplyr is the data.table backend for dplyr. It provides S3 methods for data.table objects so that dplyr works the way you expect.
 - [bplyr](https://github.com/yonicd/bplyr) basic dplyr and tidyr functionality without the tidyverse dependencies 
 
-```{r, echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
+- [fastmap](https://github.com/wch/fastmap) 实现键值存储，提供新的数据结构
+- [Roaring bitmaps](https://github.com/RoaringBitmap/CRoaring) Bitsets, also called bitmaps, are commonly used as fast data structures.
+
+```{r, echo=TRUE}
 library(tidyverse)
 ```
 
@@ -286,9 +291,9 @@ mpi.apply(c(10, 20), runif)
 mpi.close.Rslaves()
 ```
 
-pbdMPI 包处于活跃维护状态，是 [pbdR](https://github.com/snoweye/user2016.demo) 项目的核心组件，能够轻松处理 TB 级数据
+pbdMPI 包处于活跃维护状态，是 [pbdR 项目](https://github.com/RBigData) 的核心组件，能够以分布式计算的方式轻松处理 TB 级数据^[2016年国际 R 语言大会上的介绍<https://github.com/snoweye/user2016.demo> 和2018年 JSM 会 上的介绍 <https://github.com/RBigData/R_JSM2018>]
 
-[Rhpc](https://prs.ism.ac.jp/~nakama/Rhpc/) 包同样基于 MPI 方式，但是集 Rmpi 和 snow 两个包的优点于一身，在保持 apply 编程风格的同时，能够提供更好的高性能计算环境，支持长向量(long vector)，能够处理一些大数据。
+[Rhpc](https://prs.ism.ac.jp/~nakama/Rhpc/) 包同样基于 MPI 方式，但是集 Rmpi 和 snow 两个包的优点于一身，在保持 apply 编程风格的同时，能够提供更好的高性能计算环境，支持长向量，能够处理一些大数据。
 
 ### gpuR
 
