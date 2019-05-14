@@ -1010,14 +1010,17 @@ subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package")) %>% l
 接下来，我们再来查看一些比较高产的 R 包开发者谢益辉都维护了哪些R包，如表 \@ref(tab:rmarkdown-eco) 所示
 
 ```{r rmarkdown-eco,echo=TRUE}
-subset(pdb,
+yihui_pkg <- subset(pdb,
   subset = grepl("Yihui Xie", pdb[, "Maintainer"]),
-  select = c("Package", "Maintainer", "Title")
-) %>%
+  select = c("Package", "Maintainer", "Title") 
+) 
+yihui_pkg[, "Title"] <- gsub('\n', ' ', yihui_pkg[, "Title"])
+
+yihui_pkg %>% 
   knitr::kable(caption = "谢益辉维护的 R Markdown 生态", booktabs = TRUE)
 ```
 
-接下来，我们想看看R包维护者数量有多少
+接下来，我们想看看 R 包维护者数量有多少
 
 ```{r,echo=TRUE}
 subset(pdb,
@@ -1026,7 +1029,7 @@ subset(pdb,
 ) %>% unique() %>% length()
 ```
 
-可实际上没有这么多的开发者，因为存在这样的情况，以R包维护者 Hadley Wickham 为例，由于他曾使用过不同的邮箱，所以在维护者字段出现了不一致的情况，实际却是同一个人。
+可实际上没有这么多的开发者，因为存在这样的情况，以 R 包维护者 Hadley Wickham 为例，由于他曾使用过不同的邮箱，所以在维护者字段出现了不一致的情况，实际却是同一个人。
 
 ```{r,echo=TRUE}
 subset(pdb,
