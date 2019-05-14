@@ -270,9 +270,6 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E084DAB9
 
 https://software.intel.com/en-us/articles/using-intel-mkl-with-r
 
-### Ubuntu
-
-### CentOS
 
 ## 配置 {#settings}
 
