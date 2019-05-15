@@ -8,6 +8,8 @@
 
 Base 图形系统的扩展包 [prettyB](https://github.com/jumpingrivers/prettyB)
 
+为了方便记忆函数 `par` 的各个参数，Paul Murrell 整理了一份 [助记符](https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html)
+
 ## 基本要素 {#elements} 
 
 ### 点线 {#base-points}
@@ -755,9 +757,7 @@ close.screen(all = TRUE)
 par(op)
 ```
 
-Paul Murrell 给出 `par` 函数各个参数的助记符
 
-<https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html>
 
 ### 交互 {#identify-locator}
 

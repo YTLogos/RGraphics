@@ -580,6 +580,30 @@ i[sample(n, n / 4)] <- TRUE
 microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 ```
 
+## 多维数组 {#base-array}
+
+多维数组的行列是怎么定义的 `?array` 轴的概念，画个图表示数组
+
+```{r,echo=TRUE}
+array(1:27, c(3, 3, 3))
+```
+
+垂直于Z轴的平面去截三维立方体，3 代表 z 轴，得到三个截面（二维矩阵）
+
+```{r,echo=TRUE}
+asplit(array(1:27,c(3,3,3)),3)
+```
+
+对每个二维矩阵按列求和
+
+```{r,echo=TRUE}
+lapply(asplit(array(1:27,c(3,3,3)),3), apply, 2, sum)
+```
+
+`asplit` 和 `lapply` 组合处理多维数组的计算问题，多维数组[^matrix-list]
+
+[^matrix-list]: https://www.brodieg.com/2018/11/23/is-your-matrix-running-slow-try-lists/
+
 ## 其它操作 {#base-others}
 
 成对的数据操作

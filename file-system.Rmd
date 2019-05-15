@@ -661,3 +661,7 @@ apropos('package')
     install.packages(pkgs)
     ```
 
+## 查找函数 {#lookup-function}
+
+[lookup](https://github.com/jimhester/lookup) R 函数完整定义，包括编译的代码，S3 和 S4 方法
+

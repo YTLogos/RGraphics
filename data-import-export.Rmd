@@ -418,7 +418,7 @@ knitr::include_graphics(path = 'figures/batch-export-xlsx.png')
 
 ## 从数据库导入 {#import-data-from-database}
 
-[Hands-On Programming with R](https://rstudio-education.github.io/hopr) 数据读写章节[^dataio]
+[Hands-On Programming with R](https://rstudio-education.github.io/hopr) 数据读写章节[^dataio] 以及 [R, Databases, and Docker](https://smithjd.github.io/sql-pet/)
 
 将大量的 txt 文本存进 MySQL 数据库中，通过操作数据库来聚合文本，极大降低内存消耗 [^txt-to-mysql]，而 ODBC 与 DBI 包是其它数据库接口的基础，knitr 提供了一个支持 SQL 代码的引擎，它便是基于 DBI，因此可以在 R Markdown 文档中直接使用 SQL 代码块 [^sql-engine]。这里制作一个归纳表格，左边数据库右边对应其 R 接口，两边都包含链接，如表 \@ref(tab:dbi) 所示
 

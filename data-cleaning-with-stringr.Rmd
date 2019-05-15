@@ -8,7 +8,8 @@
 
 - [janitor](https://github.com/sfirke/janitor)
 - [Manipulating strings with the stringr package](https://www.brodrigues.co/blog/2019-02-10-stringr_package/)
-
+- [filesstrings](https://github.com/rorynolan/filesstrings) 基于 stringr 操作字符串
+- [strex](https://github.com/rorynolan/strex) 一些没有包含在 stringr 或者 stringi 中的字符串操作函数
 
 ## 处理性能 {#performance}
 

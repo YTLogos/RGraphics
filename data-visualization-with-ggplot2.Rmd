@@ -1,6 +1,6 @@
 # 数据可视化 {#ggplot2-visualization}
 
-```{r,R.options=list(tidyverse.quiet = TRUE),include=FALSE}
+```{r,include=FALSE}
 library(tidyverse)
 ```
 
@@ -25,7 +25,8 @@ ggplot(mpg, aes(displ, hwy)) +
 1. Pablo Barberá 的 [Data Visualization with R and ggplot2](https://github.com/pablobarbera/Rdataviz)
 2. Kieran Healy 的新书 [Data Visualization: A Practical Introduction](https://kieranhealy.org/publications/dataviz/)
 3. Matt Leonawicz 的新作 [mapmate](https://github.com/leonawicz/mapmate), 可以去其主页欣赏系列作品^[<https://leonawicz.github.io/>]
-
+1. [bbplot](https://github.com/bbc/bbplot)
+1. [tidytuesday 可视化挑战官方项目](https://github.com/rfordatascience/tidytuesday) 还有 [tidytuesday](https://github.com/abichat/tidytuesday)
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 [^why-not-ggplot2]: https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 
