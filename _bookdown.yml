@@ -56,4 +56,4 @@ rmd_files:
   - "dynamic-documents.Rmd"
 
   # 参考文献  
-  - "99-references.Rmd"
+  - "references.Rmd"
