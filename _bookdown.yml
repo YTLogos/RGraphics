@@ -4,13 +4,6 @@ language:
   label:
     fig: "图 "
     tab: "表 "
-    thm: "定理 "
-    lem: "引理 "
-    cor: "推论 "
-    prp: "命题 "
-    def: "定义 "
-    exm: "例 "
-    exr: "练习 "
   ui:
     edit: "编辑"
     chapter_name: ["第 ", " 章"]
@@ -18,42 +11,3 @@ language:
 output_dir: _book
 new_session: yes   
 before_chapter_script: ["_common.R"]
-rmd_files: 
-  - "index.Rmd"
-  - "preface.Rmd"
-  - "introduction.Rmd"
-  
-  # 安装指导
-  - "installation.Rmd"
-  
-  # 文件系统
-  - "file-system.Rmd"
-  
-  # 数据对象
-  #- "data-object.Rmd"
-  
-  # 数据操作
-  - "data-import-export.Rmd"
-  - "data-rectangling.Rmd"
-  - "data-manipulation.Rmd"
-  - "data-wrangeling.Rmd"
-  
-  # 数据清理
-  - "data-cleaning-with-string.Rmd"
-  - "data-cleaning-with-stringr.Rmd"
-  - "data-cleaning-with-regexp.Rmd"  
-  
-  # 数据可视化
-  - "data-visualization-with-plot.Rmd"
-  - "data-visualization-with-plot3d.Rmd"
-  - "data-visualization-with-ggplot2.Rmd"
-  - "data-visualization-with-colors-fonts.Rmd"
-  
-  # 交互式图形 
-  - "interactive-graphics.Rmd"
-  
-  # 动态文档
-  - "dynamic-documents.Rmd"
-
-  # 参考文献  
-  - "references.Rmd"

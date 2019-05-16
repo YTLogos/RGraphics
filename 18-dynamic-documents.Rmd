@@ -118,7 +118,7 @@ Explanation of examples.
 :   H~2~O is a liquid.  2^10^ is 1024. C^137^ 是一种放射性元素
 
 
-### 引用 {#quote}
+### 引用 {#markdown-quote}
 
 注意在引用末尾空两格，出处另起一行，引用名人名言:
 
@@ -149,7 +149,7 @@ Explanation of examples.
 
 [^xyplot]: (about the fact that lattice objects have to be print()ed) R-help (May 2005)
 
-### 表格 {#table}
+### 表格 {#markdown-table}
 
 插入表格很简单的，如表 \@ref(tab:insert-tab) 所示，还带脚注哦，复杂的表格制作可以借助 R 包 knitr 提供的 kable 函数以及 kableExtra 包^[<https://xiangyunhuang.github.io/bookdown-kableExtra/>]，此外谢益辉的书籍 [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/) 中也有一节专门介绍表格 <https://bookdown.org/yihui/bookdown/tables.html>
 
@@ -266,7 +266,7 @@ plot(AirPassengers)
 [text-references]: https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references
 [^css-position]: 参考谢益辉的博客： CSS 的位置属性以及如何居中对齐超宽元素 https://yihui.name/cn/2018/05/css-position/
 
-### 公式 {#formula}
+### 公式 {#markdown-math}
 
 行内公式一对美元符号 $\alpha$ 或者 \(\alpha+\beta\)，行间公式 $$\alpha$$ 或者 \[\alpha + \beta\] 对公式编号，如公式 \@ref(eq:likelihood)
 
