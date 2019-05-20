@@ -21,3 +21,18 @@ for y, linestyle in enumerate(linestyles):
     format_axes(ax)
     ax.set_title(u'线的类型')
 plt.show()
+
+# 另一个例子
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+plt.switch_backend('agg') # Very Important in R Markdown with Rocker/VBox
+
+# np.random.seed(1234)
+x1 = np.arange(0,6.6,0.1)
+x2 = np.linspace(0,100,len(x1))
+y = 10 + x1*np.cos(np.pi* x1) - 0.1*x2
+
+plt.clf()
+sns.scatterplot(x1,y)
+plt.show()

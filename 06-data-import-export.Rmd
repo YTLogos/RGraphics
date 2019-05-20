@@ -445,7 +445,7 @@ knitr::kable(db2r, col.names = c("数据库","官网","R接口","开发仓"), ca
 
 ### RSQLite
 
-```{r, echo=TRUE, cache=FALSE}
+```{r, echo=TRUE,cache=FALSE}
 db <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 DBI::dbWriteTable(db, "mtcars", mtcars, overwrite=TRUE)
 subjects = 6
@@ -453,7 +453,7 @@ subjects = 6
 
 `max.print=10` 控制显示的行数
 
-```{sql, connection=db, tab.cap = "My Caption", max.print=10, echo=TRUE}
+```{sql, connection=db, tab.cap = "My Caption", max.print=10, echo=TRUE,cache=FALSE}
 SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 ```
 
@@ -468,7 +468,7 @@ SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 ```{r,echo=TRUE}
 head(mtcars34)
 ```
-```{r,include=FALSE,cache=FALSE}
+```{r,include=FALSE}
 DBI::dbDisconnect(conn = db)
 ```
 
@@ -567,7 +567,7 @@ docker run --name ck -d -p 8282:9000 -e ROOT=TRUE \
 
 最后是建立连接，需要远端 Docker 容器内 Clickhouse 的 IP 地址，分配给它的主机端口，用来访问数据库，数据库的用户账户和具体的数据库名称，默认账户和密码以及数据库都是 default，下面展示连接远程 ClickHouse 数据库
 
-```{r,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE}
 library(DBI)
 library(RClickhouse)
 con <- DBI::dbConnect(RClickhouse::clickhouse(),
@@ -594,13 +594,13 @@ con <- DBI::dbConnect(RClickhouse::clickhouse(),
 
 RClickHouse 包提供部分 dplyr 式的数据操作，使用比较方便，这里便使用它了，往 ClickHouse 中写入数据
 
-```{r,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE}
 DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
 ```
 
 查看数据库中的 mtcars 表 
 
-```{r,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE}
 # 列出 ClickHouse 中存放的表
 dbListTables(con)
 # 列出表 mtcars 中的所有字段
@@ -609,7 +609,7 @@ dbListFields(con, "mtcars")
 
 RClickHouse 包支持的聚合操作（其实是 dplyr）和 Base R 提供的聚合操作对比，测试一下正确与否
 
-```{r,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE}
 library(tidyverse)
 # 按变量 cyl 分组对 mpg 求和
 tbl(con, "mtcars") %>% 
@@ -633,7 +633,7 @@ aggregate 聚合函数默认对缺失值的处理是忽略， sum 和 mean 函�
 
 你当然可以继续使用 SQL 语句做查询，而不使用 dplyr 提供的现代化的管道操作语法
 
-```{r,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE}
 # 传递 SQL 查询语句
 DBI::dbGetQuery(con, 
 "SELECT
@@ -647,7 +647,7 @@ GROUP BY vs")
 ::: sidebar
 如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器才可以获得更好的性能
 
-```{r,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE}
 # 读取数据库中的整张表
 copy_mtcars <- dbReadTable(con, "mtcars")
 tibble::glimpse(copy_mtcars)
@@ -656,7 +656,7 @@ tibble::glimpse(copy_mtcars)
 
 还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数，如 `multiIf`
 
-```{r,echo=TRUE,cache=FALSE}
+```{r,echo=TRUE}
 # 查看 ClickHouse 中所有的数据库名称
 DBI::dbGetQuery(con, "SHOW DATABASES")
 # 查看所有存储的表
@@ -670,7 +670,7 @@ SELECT multiIf(am=1, 'automatic', 'manual') AS transmission,
 FROM mtcars
 ")
 ```
-```{r,cache=FALSE}
+```{r}
 dbDisconnect(conn = con)
 ```
 

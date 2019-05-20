@@ -37,7 +37,7 @@ knitr::opts_chunk$set(
   small.mar = TRUE,
   echo = TRUE,
   python.reticulate = TRUE,
-  cache = FALSE,
+  cache = TRUE,
   size = "scriptsize",
   output = 6,
   out.width = "70%",

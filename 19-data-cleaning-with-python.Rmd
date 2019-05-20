@@ -1,5 +1,10 @@
 # 正则表达式与 Python {#regex-python}
 
+```{r,include=FALSE,eval=is_windows}
+# reticulate::conda_create(envname = 'r-tensorflow')
+reticulate::use_condaenv(condaenv = 'r-tensorflow', required = TRUE)
+```
+
 ::: sidebar
 在 `knitr::opts_chunk` 中设置 `python.reticulate = TRUE` 意味着所有的 Python 代码块共享一个 Python Session，而 `python.reticulate = FALSE` 意味着使用 knitr 提供的 Python 引擎，所有的 Python 代码块独立运行。
 
@@ -8,6 +13,19 @@
 R 和 Python 之间的交互，Python 负责数据处理和建模， R 负责绘图，有些复杂的机器学习模型及其相关数据操作需要在 Python 中完成，数据集清理至数据框的形式后导入到 R 中，画各种静态或者动态图，这时候需要加载 reticulate 包，只是设置 `python.reticulate = TRUE` 还不够
 :::
 
+## 字符串操作 {#python-str}
+
+字符串基本操作
+
+```{python}
+dir(str)
+dir(str.split)
+```
+
+
+## re 模块 {#re} 
+
+字符串基本操作
 
 ```{python}
 import re
@@ -22,14 +40,17 @@ m.group(0)
 sys.path
 ```
 
+## R 调用 Python {#r-call-python}
+
+pandas 读取数据，整理后由 reticulate 包传递给 R 环境中的 data.frame 对象，加载 ggplot2 绘图
 
 ```{python}
+# write.csv(iris, file = 'data/iris.csv', row.names = F)
 import pandas as pd
-pd.__version__
 iris2 = pd.read_csv('data/iris.csv')
 ```
 
-如图 \@ref(fig:reti-plot) 
+如图 \@ref(fig:reti-plot) 所示
 
 ```{r reti-plot,fig.cap="散点图"}
 library(reticulate)
@@ -38,20 +59,3 @@ ggplot(py$iris2, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
   geom_point()
 ```
 
-matplotlib 绘图
-
-```{python math-demo}
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-plt.switch_backend('agg') # Very Important in R Markdown with Rocker/VBox
-
-# np.random.seed(1234)
-x1 = np.arange(0,6.6,0.1)
-x2 = np.linspace(0,100,len(x1))
-y = 10 + x1*np.cos(np.pi* x1) - 0.1*x2
-
-plt.clf()
-sns.scatterplot(x1,y)
-plt.show()
-```

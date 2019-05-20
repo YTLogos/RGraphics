@@ -1,4 +1,4 @@
-## 向量化操作 {#vector-manipulation}
+# 向量化操作 {#vector-manipulation}
 
 > 常用操作和高频问题需要合并进之前的 data-manipulation，本章只介绍向量化计算
 
@@ -202,13 +202,15 @@ merge
 
 什么是函数式编程，R 语言环境下的函数式编程是如何操作的
 
-## apply {#apply}
+## 并行计算 {#parallel-computing}
+
+### apply {#apply}
 
 apply 家族和 `do.call` 
 
-## MapReduce {#map-reduce}
+### MapReduce {#map-reduce}
 
-高阶函数，简单来说，就是参数为函数，返回值也是函数。Base R 提供了 `Reduce` 、`Filter` 、`Find` 、`Map` 、`Negate` 和 `Position` 等常用函数，此外还有 `*apply` 族，我们把它放在第\@ref(vector-computing)小节向量化计算中介绍。
+高阶函数，简单来说，就是参数为函数，返回值也是函数。Base R 提供了 `Reduce` 、`Filter` 、`Find` 、`Map` 、`Negate` 和 `Position` 等常用函数，此外还有 `*apply` 族，我们把它放在第\@ref(vector-manipulation)小节向量化计算中介绍。
 
 与 `purrr::map` 比较
 
@@ -223,7 +225,7 @@ add_accuml(list(1, 2, 3))
 ```
 
 
-## parallel 
+### parallel 
 
 [并行计算小抄](https://github.com/ardeeshany/Parallel_Computing) 将共享内存的 R 包整理在一起
 
@@ -232,7 +234,7 @@ library(parallel)
 ```
 
 
-## Rmpi 
+### Rmpi 
 
 [Rmpi](http://fisher.stats.uwo.ca/faculty/yu/Rmpi/) 由卡尔顿大学的 [Hao Yu](https://www.uwo.ca/stats/people/bios/hao-yu.html) 开发和维护
 
@@ -298,7 +300,7 @@ pbdMPI 包处于活跃维护状态，是 [pbdR 项目](https://github.com/RBigDa
 
 [Rhpc](https://prs.ism.ac.jp/~nakama/Rhpc/) 包同样基于 MPI 方式，但是集 Rmpi 和 snow 两个包的优点于一身，在保持 apply 编程风格的同时，能够提供更好的高性能计算环境，支持长向量，能够处理一些大数据。
 
-## gpuR
+### gpuR
 
 Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 OpenCL 加速，目前处于活跃维护状态。而 Charles Determan 开发的另一个 [gpuRcuda](https://github.com/gpuRcore/gpuRcuda) 包是基于 CUDA 加速
 
@@ -307,7 +309,7 @@ Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 Open
 此外还有 [gputools](https://github.com/nullsatz/gputools)
 
 
-## 管道 {#pipe-op}
+## 管道操作 {#pipe-manipulation}
 
 我要查看是否需要新添加一个 R 包依赖，假设该 R 包是 reticulate 没有出现在 DESCRIPTION 文件中，但是可能已经被其中某（个）些 R 包依赖了
 
