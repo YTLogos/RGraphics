@@ -38,6 +38,21 @@ if(!require(patchwork)) remotes::install_github('thomasp85/patchwork')
 
 写作动机，如何加入写作，版权声明
 
+强调图的作用，检验模型的重要性
+
+```{r}
+data(anscombe)
+op <- par(mfrow = c(2, 2), mar = 0.1 + c(4, 4, 1, 1), oma =  c(0, 0, 2, 0))
+plot(y1 ~ x1, data = anscombe, col = hcl.colors(11), 
+     pch = 19, cex = 1.2,
+     xlim = c(3, 19), ylim = c(3, 13), 
+	 xlab = expression(x[1]), ylab = expression(y[1]))
+abline(lm(y1 ~ x1, data = anscombe),col="red",lwd=2)
+# 向量化出图
+
+mtext("Anscombe's 4 Regression data sets", outer = TRUE, cex = 1.5)
+par(op)
+```
 
 注意
 : 本书要求复现环境是 R 3.6.0 因为书中涉及 `barplot` 新增的公式方法，新增多维数组操作函数 `asplit`， `axis` 函数的 `gap.axis` ，新增 `hcl.colors` 函数等，完整列表见官网 [What's New?](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)

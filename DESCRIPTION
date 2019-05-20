@@ -27,6 +27,7 @@ Imports:
   plotly,
   pracma,
   RClickhouse,
+  reticulate,
   RSQLite,
   showtext,
   stars,

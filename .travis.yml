@@ -67,8 +67,15 @@ addons:
       - libmagick++-dev
       # pdftools for tikz
       - libpoppler-cpp-dev
+      - python3-pip
+      - python3-virtualenv
+      - python3-tk      
 
 before_install:
+  - virtualenv -p /usr/bin/python3 /opt/pyenv/r-tensorflow
+  - source /opt/pyenv/r-tensorflow/bin/activate
+  - pip install --upgrade pip
+  - pip install numpy matplotlib
   - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
   - tar -xzf /tmp/tinytex.tar.gz -C $HOME
   - export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
