@@ -12,6 +12,11 @@ bookdown::gitbook:
     edit:
       link: https://github.com/XiangyunHuang/RGraphics/edit/master/%s
       text: "Edit"    
+    sharing:
+      github: yes
+      facebook: no
+      twitter: no
+      all: []
 bookdown::pdf_book:
   includes:
     in_header: latex/preamble.tex
