@@ -1,4 +1,6 @@
-# 数据变形者 {#data-transformer}
+## 向量化操作 {#vector-manipulation}
+
+> 常用操作和高频问题需要合并进之前的 data-manipulation，本章只介绍向量化计算
 
 ::: sidebar
 更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse，数据处理或者叫特征工程 Base R vs data.table vs dplyr 它们各有优点，所以都加以介绍 参考 [Jozef Hajnala](https://jozef.io/categories/rcase4base/) 博文。
@@ -14,6 +16,7 @@
 - [batchtools](https://github.com/mllg/batchtools) Map 函数的并行实现，用于高性能计算系统和分布式处理，可以单机多核并行也可以多机并行，还提供了一种抽象的机制去定义大规模计算机实验。
 - [multidplyr](https://github.com/hadley/multidplyr) 是 dplyr 的后端，多核环境下实现数据分块，提高并行处理性能
 - [disk.frame](https://github.com/xiaodaigh/disk.frame) 是基于磁盘的超出内存容量的快速并行数据操作框架
+- [parallelMap](https://github.com/berndbischl/parallelMap) R package to interface some popular parallelization back-ends with a unified interface
 
 - [rpivotTable](https://github.com/smartinsightsfromdata/rpivotTable) 动态数据透视表
 - [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) Join tables together on inexact matching
@@ -195,15 +198,15 @@ merge
 
 
 
-## 向量化计算 {#vector-computing}
+
 
 什么是函数式编程，R 语言环境下的函数式编程是如何操作的
 
-### apply {#apply}
+## apply {#apply}
 
 apply 家族和 `do.call` 
 
-### MapReduce {#map-reduce}
+## MapReduce {#map-reduce}
 
 高阶函数，简单来说，就是参数为函数，返回值也是函数。Base R 提供了 `Reduce` 、`Filter` 、`Find` 、`Map` 、`Negate` 和 `Position` 等常用函数，此外还有 `*apply` 族，我们把它放在第\@ref(vector-computing)小节向量化计算中介绍。
 
@@ -220,7 +223,7 @@ add_accuml(list(1, 2, 3))
 ```
 
 
-### parallel 
+## parallel 
 
 [并行计算小抄](https://github.com/ardeeshany/Parallel_Computing) 将共享内存的 R 包整理在一起
 
@@ -229,7 +232,7 @@ library(parallel)
 ```
 
 
-### Rmpi 
+## Rmpi 
 
 [Rmpi](http://fisher.stats.uwo.ca/faculty/yu/Rmpi/) 由卡尔顿大学的 [Hao Yu](https://www.uwo.ca/stats/people/bios/hao-yu.html) 开发和维护
 
@@ -295,7 +298,7 @@ pbdMPI 包处于活跃维护状态，是 [pbdR 项目](https://github.com/RBigDa
 
 [Rhpc](https://prs.ism.ac.jp/~nakama/Rhpc/) 包同样基于 MPI 方式，但是集 Rmpi 和 snow 两个包的优点于一身，在保持 apply 编程风格的同时，能够提供更好的高性能计算环境，支持长向量，能够处理一些大数据。
 
-### gpuR
+## gpuR
 
 Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 OpenCL 加速，目前处于活跃维护状态。而 Charles Determan 开发的另一个 [gpuRcuda](https://github.com/gpuRcore/gpuRcuda) 包是基于 CUDA 加速
 
@@ -303,20 +306,18 @@ Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 Open
 
 此外还有 [gputools](https://github.com/nullsatz/gputools)
 
-## 表格样式 {#table-style}
 
-在数据分析报告中，根据报告的文本格式，我们有不同的数据呈现形式，基于 HTML 和 LaTeX 甚至 DOCX 
+## 管道 {#pipe-op}
 
-表格样式工具 [gt](https://github.com/rstudio/gt) [kableExtra](https://github.com/haozhu233/kableExtra) [flextable](https://github.com/davidgohel/flextable) 和 [DT](https://github.com/rstudio/DT)
+我要查看是否需要新添加一个 R 包依赖，假设该 R 包是 reticulate 没有出现在 DESCRIPTION 文件中，但是可能已经被其中某（个）些 R 包依赖了
 
-[remedy](https://github.com/ThinkR-open/remedy) 格式化 Markdown 语法
-[beautifyR](https://github.com/mwip/beautifyR) 整理 Markdown 表格
-[RStudio 插件列表](https://github.com/daattali/addinslist)
+```{r,echo=TRUE}
+"reticulate" %in% sort(unique(unlist(tools::package_dependencies(desc::desc_get_deps()$package, recursive = TRUE))))
+```
 
-### HTML 样式 {#table-html}
+转化为管道操作，增加可读性
 
-### LaTeX 样式 {#table-latex}
-
+> 再举一个关于数据模拟的例子
 
 
 
