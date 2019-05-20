@@ -40,6 +40,7 @@ knitr::opts_chunk$set(
   cache = TRUE,
   size = "scriptsize",
   output = 6,
+  dpi = 300,
   out.width = "70%",
   fig.align = "center",
   fig.width = 6,
