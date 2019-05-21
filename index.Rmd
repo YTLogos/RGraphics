@@ -43,39 +43,21 @@ if(!require(patchwork)) remotes::install_github('thomasp85/patchwork')
 
 ```{r anscombe-regression,out.width="65%",fig.width=5.5,fig.asp=1,fig.cap="Anscombe's 4 Regression data sets",echo=FALSE}
 data(anscombe)
+form <- paste(paste0("y", seq(4)), paste0("x", seq(4)), sep = "~")
+fit <- lapply(form, lm, data = anscombe)
+
 op <- par(mfrow = c(2, 2), mar = 0.1 + c(4, 4, 1, 1), oma = c(0, 0, 2, 0))
-plot(y1 ~ x1,
-  data = anscombe, col = hcl.colors(11),
-  pch = 19, cex = 1.2,
-  xlim = c(3, 19), ylim = c(3, 13),
-  xlab = expression(x[1]), ylab = expression(y[1])
-)
-abline(lm(y1 ~ x1, data = anscombe), col = "red", lwd = 2)
-# 向量化出图
-plot(y2 ~ x2,
-  data = anscombe, col = hcl.colors(11),
-  pch = 19, cex = 1.2,
-  xlim = c(3, 19), ylim = c(3, 13),
-  xlab = expression(x[1]), ylab = expression(y[1])
-)
-abline(lm(y2 ~ x2, data = anscombe), col = "red", lwd = 2)
-
-plot(y3 ~ x3,
-  data = anscombe, col = hcl.colors(11),
-  pch = 19, cex = 1.2,
-  xlim = c(3, 19), ylim = c(3, 13),
-  xlab = expression(x[1]), ylab = expression(y[1])
-)
-abline(lm(y3 ~ x3, data = anscombe), col = "red", lwd = 2)
-
-plot(y4 ~ x4,
-  data = anscombe, col = hcl.colors(11),
-  pch = 19, cex = 1.2,
-  xlim = c(3, 19), ylim = c(3, 13),
-  xlab = expression(x[1]), ylab = expression(y[1])
-)
-abline(lm(y4 ~ x4, data = anscombe), col = "red", lwd = 2)
-# mtext("Anscombe's 4 Regression data sets", outer = TRUE, cex = 1.5)
+for (i in seq(4)) {
+  plot(as.formula(form[i]),
+    data = anscombe, col = hcl.colors(11),
+    pch = 19, cex = 1.2,
+    xlim = c(3, 19), ylim = c(3, 13),
+    xlab = substitute(x[i], list(i = i)),
+    ylab = substitute(expression(y[i]), list(i = i))
+  )
+  abline(fit[[i]], col = "red", lwd = 2)
+}
+mtext("Anscombe's 4 Regression data sets", outer = TRUE, cex = 1.5)
 par(op)
 ```
 

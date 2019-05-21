@@ -484,7 +484,7 @@ Table: (\#tab:super-sub-script) 数字上下标
 
 ### 图例 {#base-legend}
 
-```{r,fig.cap="三角函数添加图例",echo=TRUE,title.mar=TRUE}
+```{r,fig.cap="三角函数添加图例",echo=TRUE,title.mar=TRUE,fig.asp=0.8}
 x <- seq(-6, 6, length = 200)
 y <- sin(x)
 z <- cos(x)
@@ -502,7 +502,7 @@ legend(-6, -1,
 )
 ```
 
-```{r,fig.cap="设置图例的位置",echo=TRUE,title.mar=TRUE}
+```{r,fig.cap="设置图例的位置",echo=TRUE,title.mar=TRUE,fig.asp=0.8}
 xmin <- par("usr")[1]
 xmax <- par("usr")[2]
 ymin <- par("usr")[3]
@@ -521,7 +521,7 @@ legend("bottomleft",
 )
 ```
 
-```{r,fig.cap="insert 函数微调图例位置",echo=TRUE,title.mar=TRUE}
+```{r,fig.cap="insert 函数微调图例位置",echo=TRUE,title.mar=TRUE,fig.asp=0.8}
 plot(y ~ x,
   type = "l", lwd = 3,
   ylab = "", xlab = "angle", main = "Trigonometric functions"
@@ -537,7 +537,7 @@ legend("bottomleft",
 ```
 
 
-```{r,fig.cap="将图例放在绘图区域外面",title.mar=TRUE,echo=TRUE}
+```{r,fig.cap="将图例放在绘图区域外面",title.mar=TRUE,echo=TRUE,fig.asp=0.8}
 op <- par(no.readonly = TRUE)
 plot(y ~ x,
   type = "l", lwd = 3,
@@ -639,7 +639,7 @@ mtext("Title",
 
 覆盖图形 `add = T` or `par(new=TRUE)`
 
-```{r,fig.cap="添加图层"}
+```{r,fig.cap="添加图层",title.mar=TRUE,fig.asp=0.8}
 plot(runif(5), runif(5),
   xlim = c(0, 1), ylim = c(0, 1)
 )
@@ -1271,7 +1271,7 @@ boxplot(count ~ spray,
 )
 ```
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,title.mar=TRUE}
 # example from boxplot:
 with(ToothGrowth, {
   boxplot(len ~ dose,
@@ -1291,7 +1291,7 @@ with(ToothGrowth, {
 })
 ```
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,title.mar=TRUE}
 # alternate form that avoids subset argument:
 with(
   subset(ToothGrowth, supp == "VC"),
@@ -1315,7 +1315,7 @@ legend(2, 9, c("Ascorbic acid", "Orange juice"),
 ```
 
 
-### 残差图 {error-bars}
+### 残差图 {#error-bars}
 
 iris 四个测量指标
 
@@ -1553,7 +1553,6 @@ knitr::include_graphics(path = "figures/demo-tikzDevice.png")
 
 ```{r linear-model,dev='tikz',fig.cap="线性回归模型",out.width="35%",fig.asp=1,fig.width=3.5,tikz2png='-quality 100 -density 300',fig.process=to_png}
 # 带有图标题
-par(mar = c(4.1, 4.1, 4.5, 1.5), ps = 13, family = "Times")
 x <- rnorm(10)
 y <- x + rnorm(5, sd = 0.25)
 model <- lm(y ~ x)
