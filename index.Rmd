@@ -16,7 +16,7 @@ link-citations: yes
 subparagraph: true
 description: "学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情"
 keywords: ["Base", "Lattice", "GGplot2", "Grid"]
-cover-image: "images/dragon.png"
+# cover-image: "images/dragon.png"
 github-repo: XiangyunHuang/RGraphics
 favicon: "images/favicon.ico"
 url: 'https\://bookdown.org/xiangyun/RGraphics/'
@@ -41,21 +41,19 @@ if(!require(patchwork)) remotes::install_github('thomasp85/patchwork')
 
 强调图的作用，检验模型的重要性
 
-```{r anscombe-regression,out.width="65%",fig.width=5.5,fig.asp=1,fig.cap="Anscombe's 4 Regression data sets",echo=FALSE}
+```{r anscombe-regression,out.width="65%",fig.width=5.5,fig.asp=1,echo=FALSE}
 data(anscombe)
 form <- paste(paste0("y", seq(4)), paste0("x", seq(4)), sep = "~")
 fit <- lapply(form, lm, data = anscombe)
-
 op <- par(mfrow = c(2, 2), mar = 0.1 + c(4, 4, 1, 1), oma = c(0, 0, 2, 0))
 for (i in seq(4)) {
   plot(as.formula(form[i]),
     data = anscombe, col = hcl.colors(11),
     pch = 19, cex = 1.2,
     xlim = c(3, 19), ylim = c(3, 13),
-    xlab = "", ylab = ""
+    xlab = as.expression(substitute(x[i], list(i = i))),
+    ylab = as.expression(substitute(y[i], list(i = i)))
   )
-  mtext(substitute(x[i], list(i = i)), 1, line = 3)
-  mtext(substitute(y[i], list(i = i)), 2, line = 3)
   abline(fit[[i]], col = "red", lwd = 2)
 }
 mtext("Anscombe's 4 Regression data sets", outer = TRUE, cex = 1.5)
