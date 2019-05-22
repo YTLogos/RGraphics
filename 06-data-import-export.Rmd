@@ -416,6 +416,12 @@ saveWorkbook(wb, file = "data/matcars.xlsx", overwrite = TRUE)
 knitr::include_graphics(path = 'figures/batch-export-xlsx.png')
 ```
 
+## 导入大数据集 {#import-large-csv-files}
+
+在不使用数据库的情况下，从命令行导入大数据集，如几百 M 或几个 G 的 csv 文件
+
+<https://stackoverflow.com/questions/1727772/>
+
 ## 从数据库导入 {#import-data-from-database}
 
 [Hands-On Programming with R](https://rstudio-education.github.io/hopr) 数据读写章节[^dataio] 以及 [R, Databases, and Docker](https://smithjd.github.io/sql-pet/)

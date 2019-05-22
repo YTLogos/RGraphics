@@ -178,7 +178,25 @@ iris[order(iris$Species, iris$Petal.Length), ]
 iris[order(iris$Petal.Width, iris$Petal.Length), ]
 ```
 
-sort/ordered 排序
+sort/ordered 排序， 默认是升序
+
+```{r}
+dd <- data.frame(
+  b = factor(c("Hi", "Med", "Hi", "Low"),
+    levels = c("Low", "Med", "Hi"), ordered = TRUE
+  ),
+  x = c("A", "D", "A", "C"), y = c(8, 3, 9, 9),
+  z = c(1, 1, 1, 2)
+)
+str(dd)
+dd[order(-dd[,4], dd[,1]), ]
+```
+
+根据变量 z 
+
+```{r,echo=TRUE}
+dd[order(dd$z, dd$b), ]
+```
 
 ## 数据拆分 {#base-split}
 

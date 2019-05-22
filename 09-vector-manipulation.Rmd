@@ -88,9 +88,6 @@ Table: (\#tab:dplyr-object-type) dplyr 定义的数据对象类型
 
 ### 筛选 {#dplyr-subset}
 
-
-
-
 ### 排序 {#dplyr-order}
 
 ### 聚合 {#dplyr-aggregate}
@@ -103,14 +100,16 @@ Table: (\#tab:dplyr-object-type) dplyr 定义的数据对象类型
     
 
 
-## 高频问题 {#faq-dataframe}
+## 高频问题 {#common-dataframe-operations}
 
-参考资料[^dataframe-ops] 
+常用的数据操作包含
 
+1. 创建空的数据框或者说初始化一个数据框，
+1. 按指定的列对数据框排序，
+1. 选择特定的一些列，复杂情况是可能需要正则表达式从列名或者值中筛选
+1. 合并两个数据框，分为 (inner outer left right) 四种情况
 
-
-
-### 创建空的数据框 {#create-empty-data-frame}
+### 初始化数据框 {#create-empty-dataframe}
 
 创建空的数据框，就是不包含任何行、记录[^create-an-empty-data-frame] 
 
@@ -151,54 +150,41 @@ d <- function() data.frame(
 microbenchmark::microbenchmark(s(), d())
 ```
 
-### 按列对数据框排序 {#sort-by-columns}
+### 移除缺失记录 {#remove-missing-values}
 
-创建数据框时，如果参数
-order 默认是升序
+只要行中包含缺失值，我们就把这样的行移除出去
 
-```{r,echo=TRUE}
-dd <- data.frame(
-  b = factor(c("Hi", "Med", "Hi", "Low"),
-    levels = c("Low", "Med", "Hi"), ordered = TRUE
-  ),
-  x = c("A", "D", "A", "C"), y = c(8, 3, 9, 9),
-  z = c(1, 1, 1, 2)
-)
-str(dd)
-dd[order(-dd[,4], dd[,1]), ]
+```{r,output=10}
+airquality[complete.cases(airquality), ]
 ```
 
-根据变量 z 
+### 数据类型转化 {#coerce-data-type}
 
-```{r,echo=TRUE}
-dd[order(dd$z, dd$b), ]
+```{r}
+str(PlantGrowth)
+bob <- PlantGrowth
+i <- sapply(bob, is.factor)
+bob[i] <- lapply(bob[i], as.character)
+str(bob)
 ```
 
-### 合并 data.frame
+### 跨列分组求和 {#cross-group-by}
 
-merge
+输入是一个数据框 data.frame，按照其中某一变量分组，然后计算任意数量的变量的行和和列和。
 
+空气质量数据集 airquality 按月份 Month 分组，然后求取满足条件的列的和
 
-### 移除含有缺失值的行
-
-
-### 快速读取大数据框
-
-
-### 列表转化为数据框
-
-
-### 因子型变量转化为字符型
-
-
-### 抽取特定的列
-
-
-
-
-
-
-
+```{r}
+Reduce(rbind, lapply(unique(airquality$Month), function(gv) {
+  subdta <- subset(airquality, subset = Month == gv)
+  data.frame(
+    Colsum = as.numeric(
+      colSums(subdta[, grepl("[mM]", names(airquality))], na.rm = TRUE)
+    ),
+    Month = gv
+  )
+}))
+```
 
 什么是函数式编程，R 语言环境下的函数式编程是如何操作的
 
@@ -324,7 +310,6 @@ Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 Open
 
 
 [^create-an-empty-data-frame]: https://stackoverflow.com/questions/10689055
-[^dataframe-ops]: https://github.com/ujjwalkarn/DataScienceR#common-dataframe-operations
 [^modeling-funcprog]: https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
 [^funcprog-map-reduce]: https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
 [^pivot-tables]: https://digitheadslabnotebook.blogspot.com/2010/01/pivot-tables-in-r.html
