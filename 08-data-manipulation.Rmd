@@ -608,14 +608,17 @@ lapply(asplit(array(1:27,c(3,3,3)),3), apply, 2, sum)
 
 成对的数据操作
 
+### 列表属性 {#list-or-unlist}
+
 - `list` 与 `unlist` 创建列表 
 
 ```{r,echo=TRUE}
 tmp <- list(A = c(1, 2, 3), B = c("a", "b"))
 tmp
-tmp2 <- unlist(tmp)
-tmp2
+unlist(tmp)
 ```
+
+### 堆叠向量 {#stack-or-unstack}
 
 - `stack` 与 `unstack` 将多个向量堆在一起组成一个向量
 
@@ -628,7 +631,9 @@ stack(pg) # now put it back together
 stack(pg, select = -ctrl) # omitting one vector
 ```
 
-- `class` 和 `unclass` 查看类属性
+### 属性转化 {#class-or-unclass}
+
+ `class` 和 `unclass` 查看类属性
 
 ```{r,out.lines=6,echo=TRUE}
 iris$Species
@@ -638,8 +643,9 @@ class(iris$Species)
 unclass(iris$Species)
 ```
 
+### 绑定环境 {#attach-or-detach}
 
-- `attach` 和 `detach` 是否绑定数据框的列名，不推荐操作，推荐使用 `with`
+`attach` 和 `detach` 是否绑定数据框的列名，不推荐操作，推荐使用 `with`
 
 ```{r,echo=TRUE}
 attach(iris)
@@ -647,18 +653,46 @@ head(Species)
 detach(iris)
 ```
 
-- `with` 和 `within` 都是进入数据环境，后者会修改数据
+### 数据环境 {#with-or-within}
+
+```{r,eval=FALSE,echo=TRUE}
+with(data, expr, ...)
+within(data, expr, ...)
+## S3 method for class 'list'
+within(data, expr, keepAttrs = TRUE, ...)
+```
+
+`data`
+:  参数 `data` 用来构造表达式计算的环境。其默认值可以是一个环境，列表，数据框。在 `within` 函数中 `data` 参数只能是列表或数据框。
+
+`expr`
+:  参数 `expr` 包含要计算的表达式。在 `within` 中通常包含一个复合表达式，比如
+   
+    ```{r,eval=FALSE,echo=TRUE}
+    {
+       a <- somefun()
+       b <- otherfun()
+       ...
+       rm(unused1, temp)
+    }
+    ```
+
+`with` 和 `within` 计算一组表达式，计算的环境是由数据构造的，后者可以修改原始的数据
 
 ```{r,echo=TRUE}
-with(iris, {
-  head(Species)
-})
+with(mtcars, mpg[cyl == 8  &  disp > 350])
+# is the same as, but nicer than
+mtcars$mpg[mtcars$cyl == 8  &  mtcars$disp > 350]
+```
 
-aq <- within(airquality, { # Notice that multiple vars can be changed
-  lOzone <- log(Ozone)
-  Month <- factor(month.abb[Month])
-  cTemp <- round((Temp - 32) * 5 / 9, 1) # From Fahrenheit to Celsius
-  S.cT <- Solar.R / cTemp # using the newly created variable
+多个变量发生改变
+
+```{r,echo=TRUE}
+aq <- within(airquality, {
+  lOzone <- log(Ozone) # 取对数
+  Month <- factor(month.abb[Month]) # 字符串型转因子型
+  cTemp <- round((Temp - 32) * 5 / 9, 1) # 从华氏温度到摄氏温度转化
+  S.cT <- Solar.R / cTemp # 使用新创建的变量
   rm(Day, Temp)
 })
 head(aq)
