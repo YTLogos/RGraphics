@@ -1271,49 +1271,6 @@ boxplot(count ~ spray,
 )
 ```
 
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=0.8}
-# example from boxplot:
-with(ToothGrowth, {
-  boxplot(len ~ dose,
-    boxwex = 0.25, at = 1:3 - 0.2,
-    subset = (supp == "VC"), col = "#4285f4",
-    main = "Guinea Pigs' Tooth Growth",
-    xlab = "Vitamin C dose mg",
-    ylab = "tooth length", ylim = c(0, 35)
-  )
-  boxplot(len ~ dose,
-    add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
-    subset = supp == "OJ", col = "#EA4335"
-  )
-  legend(2, 9, c("Ascorbic acid", "Orange juice"),
-    fill = c("#4285f4", "#EA4335")
-  )
-})
-```
-
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=0.8}
-# alternate form that avoids subset argument:
-with(
-  subset(ToothGrowth, supp == "VC"),
-  boxplot(len ~ dose,
-    boxwex = 0.25, at = 1:3 - 0.2,
-    col = "#4285f4", main = "Guinea Pigs' Tooth Growth",
-    xlab = "Vitamin C dose mg",
-    ylab = "tooth length", ylim = c(0, 35)
-  )
-)
-with(
-  subset(ToothGrowth, supp == "OJ"),
-  boxplot(len ~ dose,
-    add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
-    col = "#EA4335"
-  )
-)
-legend(2, 9, c("Ascorbic acid", "Orange juice"),
-  fill = c("#4285f4", "#EA4335")
-)
-```
-
 
 ### 残差图 {#error-bars}
 

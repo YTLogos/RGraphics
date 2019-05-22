@@ -620,7 +620,21 @@ unlist(tmp)
 
 ### 堆叠向量 {#stack-or-unstack}
 
-- `stack` 与 `unstack` 将多个向量堆在一起组成一个向量
+```{r,echo=TRUE,eval=FALSE}
+stack(x, ...)
+## Default S3 method:
+stack(x, drop=FALSE, ...)
+## S3 method for class 'data.frame'
+stack(x, select, drop=FALSE, ...)
+
+unstack(x, ...)
+## Default S3 method:
+unstack(x, form, ...)
+## S3 method for class 'data.frame'
+unstack(x, form, ...)
+```
+
+`stack` 与 `unstack` 将多个向量堆在一起组成一个向量
 
 ```{r,echo=TRUE}
 head(PlantGrowth)
@@ -681,13 +695,19 @@ within(data, expr, keepAttrs = TRUE, ...)
 
 ```{r,echo=TRUE}
 with(mtcars, mpg[cyl == 8  &  disp > 350])
-# is the same as, but nicer than
+```
+
+和下面计算的结果一样，但是更加简洁漂亮
+
+```{r,echo=TRUE}
 mtcars$mpg[mtcars$cyl == 8  &  mtcars$disp > 350]
 ```
 
-多个变量发生改变
+`within` 函数可以修改原数据环境中的多个变量，比如删除、修改和添加等
 
 ```{r,echo=TRUE}
+# 原数据集 airquality
+head(airquality)
 aq <- within(airquality, {
   lOzone <- log(Ozone) # 取对数
   Month <- factor(month.abb[Month]) # 字符串型转因子型
@@ -695,6 +715,51 @@ aq <- within(airquality, {
   S.cT <- Solar.R / cTemp # 使用新创建的变量
   rm(Day, Temp)
 })
+# 修改后的数据集
 head(aq)
 ```
 
+下面再举一个复杂的绘图例子，这个例子来自 `boxplot` 函数
+
+```{r subset-in-boxplot,echo=TRUE,title.mar=TRUE,fig.asp=0.8}
+with(ToothGrowth, {
+  boxplot(len ~ dose,
+    boxwex = 0.25, at = 1:3 - 0.2,
+    subset = (supp == "VC"), col = "#4285f4",
+    main = "Guinea Pigs' Tooth Growth",
+    xlab = "Vitamin C dose mg",
+    ylab = "tooth length", ylim = c(0, 35)
+  )
+  boxplot(len ~ dose,
+    add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
+    subset = supp == "OJ", col = "#EA4335"
+  )
+  legend(2, 9, c("Ascorbic acid", "Orange juice"),
+    fill = c("#4285f4", "#EA4335")
+  )
+})
+```
+
+将 `boxplot` 函数的 `subset` 参数单独提出来，调用数据子集选择函数 `subset` ，这里 `with` 中只包含一个表达式，所以也可以不用大括号
+
+```{r subset-out-boxplot,echo=TRUE,title.mar=TRUE,fig.asp=0.8}
+with(
+  subset(ToothGrowth, supp == "VC"),
+  boxplot(len ~ dose,
+    boxwex = 0.25, at = 1:3 - 0.2,
+    col = "#4285f4", main = "Guinea Pigs' Tooth Growth",
+    xlab = "Vitamin C dose mg",
+    ylab = "tooth length", ylim = c(0, 35)
+  )
+)
+with(
+  subset(ToothGrowth, supp == "OJ"),
+  boxplot(len ~ dose,
+    add = TRUE, boxwex = 0.25, at = 1:3 + 0.2,
+    col = "#EA4335"
+  )
+)
+legend(2, 9, c("Ascorbic acid", "Orange juice"),
+  fill = c("#4285f4", "#EA4335")
+)
+```
