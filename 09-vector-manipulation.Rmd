@@ -110,7 +110,7 @@ Table: (\#tab:dplyr-object-type) dplyr 定义的数据对象类型
 
 
 
-### 创建空的 data.frame {#create-empty-data-frame}
+### 创建空的数据框 {#create-empty-data-frame}
 
 创建空的数据框，就是不包含任何行、记录[^create-an-empty-data-frame] 
 
@@ -151,7 +151,7 @@ d <- function() data.frame(
 microbenchmark::microbenchmark(s(), d())
 ```
 
-### 按列对 data.frame 排序 {#sort-by-columns}
+### 按列对数据框排序 {#sort-by-columns}
 
 创建数据框时，如果参数
 order 默认是升序
