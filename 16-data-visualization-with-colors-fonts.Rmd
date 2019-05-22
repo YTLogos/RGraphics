@@ -4,7 +4,7 @@
 
 调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，其中包括 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和 [wesanderson](https://github.com/karthik/wesanderson)，根据电影 Harry Potter 制作的调色板 [harrypotter](https://github.com/aljrico/harrypotter)，根据网站 [CARTO](https://carto.com/) 设计的 [rcartocolor](https://github.com/Nowosad/rcartocolor) 包
 
-```{r,fig.cap="HCL调色",echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
+```{r,fig.cap="HCL调色",R.options=list(tidyverse.quiet = TRUE)}
 # https://github.com/hadley/ggplot2-book
 library(tidyverse)
 hcl <- expand.grid(x = seq(-1, 1, length = 100), y = seq(-1, 1, length=100)) %>%
@@ -45,7 +45,7 @@ ggplot(hcl, aes(x, y)) +
 
 R 内置了 `r length(colors(TRUE))` 种不同颜色的名称，下面随机地选取 20 种颜色
 
-```{r,echo=TRUE}
+```{r}
 sample(colors(TRUE), 20)
 ```
 
@@ -72,7 +72,7 @@ more_colors <- (grDevices::colorRampPalette(fish_pal))(n)
 scales::show_col(colours = more_colors)
 ```
 
-```{r,echo=TRUE}
+```{r}
 rgb(red = 86, green = 180, blue = 233, maxColorValue = 255) # "#56B4E9"
 rgb(red = 0, green = 158, blue = 115, maxColorValue = 255) # "#009E73"
 rgb(red = 240, green = 228, blue = 66, maxColorValue = 255) # "#F0E442"
@@ -81,7 +81,7 @@ rgb(red = 0, green = 114, blue = 178, maxColorValue = 255) # "#0072B2"
 
 举例子，直方图配色与不配色
 
-```{r,fig.cap="直方图",echo=TRUE,title.mar=TRUE}
+```{r,fig.cap="直方图",title.mar=TRUE}
 # library(pander)
 # evalsOptions('graph.unify', TRUE)
 # panderOptions('graph.colors') 获取调色板
@@ -93,7 +93,7 @@ cols <- c(
 hist(mtcars$hp, col = "#56B4E9", border = "white", grid = grid())
 ```
 
-```{r,fig.cap="直方图",echo=TRUE}
+```{r,fig.cap="直方图"}
 ggplot(mtcars) +
   geom_histogram(aes(x = hp, fill = as.factor(..count..)),
     color = "white", bins = 6
@@ -145,7 +145,7 @@ swatch(palette1)[[1]]
 
 [firatheme](https://github.com/vankesteren/firatheme) 包提供基于 fira sans 字体的 GGplot2 主题，类似的字体主题包还有 [trekfont](https://github.com/leonawicz/trekfont) 、 [fontHind](https://github.com/bhaskarvk/fontHind)， [fontquiver](https://github.com/lionel-/fontquiver) 包与 fontBitstreamVera（Bitstream Vera 字体）、 fontLiberation（Liberation 字体）包和 [fontDejaVu](https://github.com/lionel-/fontDejaVu) （DejaVu 字体）包一道提供了一些可允许使用的字体文件，这样，我们可以不依赖系统制作可重复的图形。
 
-```{r,echo=TRUE}
+```{r}
 library(firatheme)
 ggplot(mtcars, aes(x = mpg * 0.43, y = wt * 0.4535924, colour = factor(cyl))) +
   geom_point(size = 2) +
@@ -168,7 +168,7 @@ sudo apt-get install ttf-mscorefonts-installer
 
 因此，需要手动下载字体到目录 `~/msfonts/`下
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 baseurl <- "https://nchc.dl.sourceforge.net/project/corefonts/the%20fonts/final"
 fonts <- c(
   "webdin32", "verdan32", "trebuc32", "times32",
@@ -229,7 +229,7 @@ plot(Ozone ~ Wind, data = airquality, pch = as.character(Month),
 
 pdf 设备使用 sans 字体 ArialMT + SymbolMT 字体显示，默认字体，添加代码块设置 `dev.args=list(family = "sans")` 图\@ref(fig:sans-font)
 
-```{r sans-font,echo=TRUE,out.width = "45%",fig.width=27/7,fig.cap="默认 sans 字体",fig.asp=1}
+```{r sans-font,out.width = "45%",fig.width=27/7,fig.cap="默认 sans 字体",fig.asp=1}
 par(mar = c(4, 4, 2, 1))
 x <- seq(-4, 4, len = 101)
 y <- cbind(sin(x), cos(x))
@@ -250,7 +250,7 @@ axis(1,
 ```
 
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 CM <- Type1Font(
   "CM",
   c(file.path(
@@ -266,7 +266,7 @@ pdfFonts(CM = CM)
 
 family 指定字体，默认字体 Helvetica
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 pdf("cm.pdf", family = "CM", width = 4, height = 4)
 par(mar = c(4.1, 4.1, 0.5, 0.5))
 x <- seq(-4, 4, len = 101)
@@ -293,7 +293,7 @@ knitr::include_graphics(path = "figures/missing-fonts.png")
 ```
 
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 Sys.setenv(R_GSCMD = "C:/Program Files/gs/gs9.26/bin/gswin64c.exe")
 # embedFonts(file = "cm.pdf", outfile = "cm-embed.pdf") # GS 默认搜索路径不对
 embedFonts(
@@ -308,7 +308,7 @@ embedFonts(
 
 调用系统字体，安装使用网络字体
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 library(showtext, quietly = TRUE)
 showtext_auto()
 pdf("google-fonts.pdf")
@@ -325,13 +325,13 @@ dev.off()
 
 **knitr** 支持的引擎有：
 
-```{r,echo=TRUE}
+```{r}
 names(knitr::knit_engines$get())
 ```
 
 导入系统TTF类型字体到 R 环境中，这样绘图可以使用更多的字体
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 install.packages("extrafont")
 library(extrafont)
 font_import()
@@ -350,7 +350,7 @@ loadfonts()
 
 测试字体是否被正确调用
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 pdf("font_Impact.pdf", family = "Impact", width = 4, height = 4)
 par(mar = c(4.1, 4.1, 2.1, 0.5))
 plot(mtcars$mpg, mtcars$wt,

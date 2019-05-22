@@ -14,7 +14,7 @@
 
 第一个例子来自 Eric Lecoutre 的图库^[<http://www.ejwagenmakers.com/misc/Plotting_3d_in_R.pdf>]，这是我见过的图形中含有巨量公式，并且用 R 实现的例子。在他的基础上我修改了颜色，设置图片尺寸，基于 persp 实现的透视图，唯一不足的是 persp 不支持表达式形式的坐标轴标签。
 
-```{r bivariate-normal-density-1,fig.cap="二元正态概率密度函数",echo=TRUE,fig.asp=1}
+```{r bivariate-normal-density-1,fig.cap="二元正态概率密度函数",fig.asp=1}
 # library(latex2exp)
 # 代码来自  http://www.ejwagenmakers.com/misc/Plotting_3d_in_R.pdf
 mu1 <- 0 # setting the expected value of x1
@@ -77,7 +77,7 @@ mtext(expression(italic(f) ~ group("(",list(x[1],x[2]),")") == frac(1, 2 ~ pi ~ 
 
 早在 2006 年的时候，Paul Murrell 就提出来一种解决方法^[<https://www.stat.auckland.ac.nz/~paul/Talks/fonts.pdf>]，可是比较复杂，后来谢大大接手了 tikzDevice 包 [@R-tikzDevice] 的开发，算是比较好的解决了这个问题。
 
-```{r bivariate-normal-density-2,dev='tikz',fig.cap="二元正态密度函数",fig.asp=1,tikz2png='-quality 100 -density 300',fig.process=to_png,echo=TRUE}
+```{r bivariate-normal-density-2,dev='tikz',fig.cap="二元正态密度函数",fig.asp=1,tikz2png='-quality 100 -density 300',fig.process=to_png}
 # 代码来自  http://www.ejwagenmakers.com/misc/Plotting_3d_in_R.pdf
 mu1 <- 0 # setting the expected value of x1
 mu2 <- 0 # setting the expected value of x2
@@ -120,7 +120,7 @@ mtext("$f(x_{1},x_{2}) = \\frac{1}{2\\pi\\sqrt{\\sigma_{11}\\sigma_{22}(1-\\rho^
 ```
 
 
-```{r,fig.cap="表达式二元密度函数",echo=TRUE}
+```{r,fig.cap="表达式二元密度函数"}
 library(lattice)
 wireframe(z ~ x1 + x2,
   data = data.frame(x1 = x1, x2 = rep(x2, each = length(x1)), z = z),
@@ -129,7 +129,7 @@ wireframe(z ~ x1 + x2,
   colorkey = TRUE, drape = TRUE)
 ```
 
-```{r,echo=TRUE}
+```{r}
 ## volcano  ## 87 x 61 matrix
 wireframe(volcano, shade = TRUE,
           aspect = c(61/87, 0.4),

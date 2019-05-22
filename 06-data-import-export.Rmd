@@ -6,7 +6,7 @@
 
 Base R 针对不同的数据格式文件，提供了大量的数据导入和导出函数，不愧是专注数据分析20余年的优秀统计软件。 除了函数 `write.ftable` 和 `read.ftable` 来自 stats 包，都来自 base 和 utils 包
 
-```{r,echo=TRUE}
+```{r}
 # 当前环境的搜索路径
 searchpaths()
 # 返回匹配结果及其所在路径的编号
@@ -15,7 +15,7 @@ apropos("^(read|write)", where = TRUE, mode = "function")
 
 ### `scan` {#scan-file}
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 scan(file = "", what = double(), nmax = -1, n = -1, sep = "",
      quote = if(identical(sep, "\n")) "" else "'\"", dec = ".",
      skip = 0, nlines = 0, na.strings = "NA",
@@ -27,51 +27,51 @@ scan(file = "", what = double(), nmax = -1, n = -1, sep = "",
 
 首先让我们用 `cat` 函数创建一个练习数据集 `ex.data`
 
-```{r,echo=TRUE}
+```{r}
 cat("TITLE extra line", "2 3 5 7", "11 13 17")
 cat("TITLE extra line", "2 3 5 7", "11 13 17", file = "data/ex.data", sep = "\n")
 ```
 
 以此练习数据集，介绍 `scan` 函数最常用的参数
 
-```{r,error=TRUE,echo=TRUE}
+```{r,error=TRUE}
 scan("data/ex.data")
 ```
 
 从上面的报错信息，我们发现 `scan` 函数只能读取同一类型的数据，如布尔型 logical， 整型 integer，数值型 numeric(double)， 复数型 complex，字符型 character，raw 和列表 list。所以我们设置参数 `skip = 1` 把第一行跳过，就成功读取了数据
 
-```{r,echo=TRUE}
+```{r}
 scan("data/ex.data", skip = 1)
 ```
 
 如果设置参数 `quiet = TRUE` 就不会报告读取的数据量
 
-```{r,echo=TRUE}
+```{r}
 scan("data/ex.data", skip = 1, quiet = TRUE)
 ```
 
 参数 `nlines = 1` 表示只读取一行数据
 
-```{r,echo=TRUE}
+```{r}
 scan("data/ex.data", skip = 1, nlines = 1) # only 1 line after the skipped one
 ```
 
 默认参数 `flush = TRUE` 表示读取最后一个请求的字段后，刷新到行尾，下面对比一下读取的结果
 
-```{r,echo=TRUE}
+```{r}
 scan("data/ex.data", what = list("", "", "")) # flush is F -> read "7"
 scan("data/ex.data", what = list("", "", ""), flush = TRUE)
 ```
 
 临时文件 ex.data 用完了，我们调用 `unlink` 函数将其删除，以免留下垃圾文件
 
-```{r,echo=TRUE}
+```{r}
 unlink("data/ex.data") # tidy up
 ```
 
 ### `read.table` {#read-write-table}
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 read.table(file, header = FALSE, sep = "", quote = "\"'",
            dec = ".", numerals = c("allow.loss", "warn.loss", "no.loss"),
            row.names, col.names, as.is = !stringsAsFactors,
@@ -98,7 +98,7 @@ read.delim2(file, header = TRUE, sep = "\t", quote = "\"",
 
 变量名是不允许以下划线开头的，同样在数据框里，列名也不推荐使用下划线开头。默认情况下，`read.table` 都会通过参数 `check.names` 检查列名的有效性，该参数实际调用了函数 `make.names` 去检查。如果想尽量保持数据集原来的样子可以设置参数 `check.names = FALSE, stringsAsFactors = FALSE`。 默认情形下，`read.table` 还会将字符串转化为因子变量，这是 R 的历史原因，作为一门统计学家的必备语言，在统计模型中，字符常用来描述类别，而类别变量在 R 环境中常用因子类型来表示，而且大量内置的统计模型也是将它们视为因子变量，如 `lm` 、`glm` 等
 
-```{r,echo=TRUE}
+```{r}
 dat1 = read.table(header = TRUE, check.names = TRUE, text = "
 _a _b _c
 1 2 a1
@@ -121,20 +121,20 @@ dat3
 
 ### `readLines` {#read-write-lines}
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 readLines(con = stdin(), n = -1L, ok = TRUE, warn = TRUE,
           encoding = "unknown", skipNul = FALSE)
 ```
 
 让我们折腾一波，读进来又写出去，只有 R 3.5.3 以上才能保持原样的正确输入输出
 
-```{r,echo=TRUE}
+```{r}
 writeLines(readLines("latex/TeXLive.pkgs"),"latex/TeXLive.pkgs")
 ```
 
 这次我们创建一个真的临时文件，因为重新启动 R 这个文件和文件夹就没有了，回收掉了
 
-```{r,echo=TRUE}
+```{r}
 fil <- tempfile(fileext = ".data")
 cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = fil,
     sep = "\n")
@@ -143,22 +143,22 @@ fil
 
 设置参数 `n = -1` 表示将文件 fil 的内容从头读到尾
 
-```{r,echo=TRUE}
+```{r}
 readLines(fil, n = -1)
 ```
 
 作为拥有良好习惯的 R 用户，这种垃圾文件最好用后即焚
 
-```{r,echo=TRUE}
+```{r}
 unlink(fil) # tidy up
 ```
 
 再举个例子，我们创建一个新的临时文件 `fil`，文件内容只有
 
-```{r,echo=TRUE}
+```{r}
 cat("123\nabc")
 ```
-```{r,echo=TRUE}
+```{r}
 fil <- tempfile("test")
 cat("123\nabc", file = fil, append = TRUE)
 fil
@@ -169,7 +169,7 @@ readLines(fil)
 
 再举一个例子，从一个连接读取数据，建立连接的方式有很多，参见 `?file`，下面设置参数 `blocking`
 
-```{r,echo=TRUE}
+```{r}
 con <- file(fil, "r", blocking = FALSE)
 readLines(con)
 
@@ -205,14 +205,14 @@ Table: (\#tab:fst-vs-others) fst 序列化数据框对象性能比较 BaseR、 d
 
 ## 保存输出结果 {#load-save}
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 capture.output(..., file = NULL, append = FALSE,
                type = c("output", "message"), split = FALSE)
 ```
 
 `capture.output` 将一段R代码执行结果，保存到文件，参数为表达式。`capture.output` 和 `sink` 的关系相当于 `with` 和 `attach` 的关系。
 
-```{r,echo=TRUE}
+```{r}
 glmout <- capture.output(summary(glm(case ~ spontaneous + induced,
   data = infert, family = binomial()
 )), file = "data/capture.txt")
@@ -225,7 +225,7 @@ capture.output({
 
 `sink` 函数将控制台输出结果保存到文件，只将 `outer` 函数运行的结果保存到 `ex-sink.txt` 文件，outer 函数计算的是直积，在这里相当于 `seq(10) %*% t(seq(10))`，而在 R 语言中，更加有效的计算方式是 `tcrossprod(seq(10),seq(10))`
 
-```{r,echo=TRUE}
+```{r}
 sink("data/ex-sink.txt")
 i <- 1:10
 outer(i, i, "*") 
@@ -234,7 +234,7 @@ sink()
 
 ## 保存数据对象 {#save-data-object}
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 load(file, envir = parent.frame(), verbose = FALSE)
 
 save(..., list = character(),
@@ -249,13 +249,13 @@ save.image(file = ".RData", version = NULL, ascii = FALSE,
 
 `load` 和`save` 函数加载或保存包含工作环境信息的数据对象，`save.image` 保存当前工作环境到磁盘，即保存工作空间中所有数据对象，数据格式为 `.RData`，即相当于
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 save(list = ls(all.names = TRUE), file = ".RData", envir = .GlobalEnv)
 ```
 
 `dump` 保存数据对象 AirPassengers 到文件 `AirPassengers.txt`，文件内容是 R 命令，可把`AirPassengers.txt`看作代码文档执行，dput 保存数据对象内容到文件`AirPassengers.dat`，文件中不包含变量名 AirPassengers。注意到 `dump` 输入是一个字符串，而 `dput` 要求输入数据对象的名称，`source` 函数与 `dump` 对应，而 `dget` 与 `dput`对应。 
 
-```{r,echo=TRUE}
+```{r}
 # 加载数据
 data(AirPassengers, package = "datasets")
 # 将数据以R代码块的形式保存到文件
@@ -265,20 +265,20 @@ dump('AirPassengers', file = 'data/AirPassengers.txt')
 
 接下来，我们读取 `AirPassengers.txt` 的文件内容，可见它是一段完整的 R 代码，可以直接复制到 R 的控制台中运行，并且得到一个与原始 AirPassengers 变量一样的结果
 
-```{r,echo=TRUE}
+```{r}
 cat(readLines('data/AirPassengers.txt'), sep = "\n")
 ```
 
 `dput` 函数类似 `dump` 函数，保存数据对象到磁盘文件
 
-```{r,echo=TRUE}
+```{r}
 dput(AirPassengers, file = 'data/AirPassengers.dat')
 # AirPassengers <- dget(file = 'data/AirPassengers.dat')
 ```
 
 同样地，现在我们观察 `dput` 函数保存的文件 `AirPassengers.dat` 内容，和`dump` 函数保存的文件 `AirPassengers.txt`相比，就缺一个赋值变量
 
-```{r,echo=TRUE}
+```{r}
 cat(readLines('data/AirPassengers.dat'), sep = "\n")
 ```
 
@@ -286,14 +286,14 @@ cat(readLines('data/AirPassengers.dat'), sep = "\n")
 
 [jsonlite](https://github.com/jeroen/jsonlite) 读取 `*.json` 格式的文件，`jsonlite::write_json` 函数将 R对象保存为 JSON 文件，`jsonlite::fromJSON` 将 json 字符串或文件转化为 R 对象，`jsonlite::toJSON` 函数正好与之相反
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 library(jsonlite)
 jsonlite::read_json(path = "path/to/filename.json")
 ```
 
 yaml 包读取 `*.yml` 格式文件，返回一个列表，`yaml::write_yaml` 函数将 R 对象写入 yaml 格式 
 
-```{r,echo=TRUE}
+```{r}
 library(yaml)
 yaml::read_yaml(file = '_bookdown.yml')
 ```
@@ -323,7 +323,7 @@ Table: (\#tab:other-read-functions) 导入来自其它格式的数据集
 
 `read.dcf` 函数读取 Debian 控制格式文件，这种类型的文件以人眼可读的形式在存储数据，如 R 包的 DESCRIPTION 文件或者包含所有 CRAN 上 R 包描述的文件 <https://cran.r-project.org/src/contrib/PACKAGES>
 
-```{r,echo=TRUE}
+```{r}
 x <- read.dcf(file = system.file("DESCRIPTION", package = "splines"),
               fields = c("Package", "Version", "Title"))
 x
@@ -337,7 +337,7 @@ x
 library(tidyverse)
 ```
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 read_list <- function(list_of_datasets, read_func) {
   read_and_assign <- function(dataset, read_func) {
     dataset_name <- as.name(dataset)
@@ -361,20 +361,20 @@ read_list <- function(list_of_datasets, read_func) {
 
 批量导入文件扩展名为 `.csv` 的数据文件，即逗号分割的文件
  
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 data_files <- list.files(path = "path/to/csv/dir",pattern = ".csv", full.names = TRUE)
 print(data_files)
 ```
 
 相比于 Base R 提供的 `read.csv` 函数，使用 readr 包的 `read_csv` 函数可以更快地读取csv格式文件，特别是在读取GB级数据文件时，效果特别明显。
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 list_of_data_sets <- read_list(data_files, readr::read_csv)
 ```
 
 使用 tibble 包的`glimpse`函数可以十分方便地对整个数据集有一个大致的了解，展示方式和信息量相当于 `str` 加 `head` 函数 
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 tibble::glimpse(list_of_data_sets)
 ```
 
@@ -382,14 +382,14 @@ tibble::glimpse(list_of_data_sets)
 
 假定我们有一个列表，其每个元素都是一个数据框，现在要把每个数据框分别存入 xlsx 表的工作薄中，以 mtcars 数据集为例，将其按分类变量 cyl 分组拆分，获得一个列表 list 
 
-```{r,echo=TRUE}
+```{r}
 dat <- split(mtcars, mtcars$cyl)
 dat
 ```
 
 将 xlsx 表格初始化，创建空白的工作薄
 
-```{r,echo=TRUE}
+```{r}
 ## 加载 openxlsx 包
 library('openxlsx')
 ## 创建空白的工作薄
@@ -398,7 +398,7 @@ wb <- createWorkbook()
 
 将列表里的每张表分别存入 xlsx 表格的每个 worksheet，worksheet 的名字就是分组变量的名字
 
-```{r,echo=TRUE}
+```{r}
 Map(function(data, name){
     addWorksheet(wb, name)
     writeData(wb, name, data)
@@ -408,7 +408,7 @@ Map(function(data, name){
 
 最后保存数据到磁盘，见图 \@ref(fig:batch-export-xlsx)
 
-```{r,echo=TRUE}
+```{r}
 saveWorkbook(wb, file = "data/matcars.xlsx", overwrite = TRUE)
 ```
 
@@ -471,7 +471,7 @@ SELECT * FROM mtcars where gear IN (3, 4) and cyl >= ?subjects
 
 我们再来查看 `mtcars34` 变量的内容
 
-```{r,echo=TRUE}
+```{r}
 head(mtcars34)
 ```
 ```{r,include=FALSE}
@@ -502,7 +502,7 @@ sudo apt-get install odbc-postgresql
 
 建立连接
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 library(DBI)
 con <- dbConnect(odbc::odbc(),
   driver = "PostgreSQL Driver",
@@ -521,7 +521,7 @@ dbListTables(con)
 
 对系统的要求是 System requirements: Linux, x86_64 with SSE 4.2.
 
-```{bash,eval=FALSE,echo=TRUE}
+```{bash,eval=FALSE}
 sudo apt-get install dirmngr    # optional
 # 导入 key
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4    # optional
@@ -542,7 +542,7 @@ clickhouse-client
 
 由于 clickhouse-r 还在开发中，从未提交到 CRAN，提供的功能也相对有限，这里我们推荐使用 RClickhouse，首先安装 RClickhouse
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 # 安装 CRAN 版本
 install.packages("RClickhouse")
 # 安装Github上的开发版
@@ -560,20 +560,20 @@ port: 1111
 
 首先在某台机器上，拉取 ClickHouse 的 Docker 镜像
 
-```{bash,eval=FALSE,echo=TRUE}
+```{bash,eval=FALSE}
 docker pull yandex/clickhouse-server
 ```
 
 从 Yandex 官网打包的 [Dockerfile](https://hub.docker.com/r/yandex/clickhouse-server/dockerfile) 来看，其默认暴露了 9000、 8123 和 9009 三个端口，所以我在运行 ClickHouse 容器的时候，需要选择其中一个端口映射给主机端口，这里我选择 8282，值得注意的是，我主机的8787端口已经分配给了 RStudio，所以不要再把该主机端口映射给 9000
 
-```{bash,eval=FALSE,echo=TRUE}
+```{bash,eval=FALSE}
 docker run --name ck -d -p 8282:9000 -e ROOT=TRUE \
    -e USER=xiangyun -e PASSWORD=cloud yandex/clickhouse-server
 ```
 
 最后是建立连接，需要远端 Docker 容器内 Clickhouse 的 IP 地址，分配给它的主机端口，用来访问数据库，数据库的用户账户和具体的数据库名称，默认账户和密码以及数据库都是 default，下面展示连接远程 ClickHouse 数据库
 
-```{r,echo=TRUE}
+```{r}
 library(DBI)
 library(RClickhouse)
 con <- DBI::dbConnect(RClickhouse::clickhouse(),
@@ -588,7 +588,7 @@ con <- DBI::dbConnect(RClickhouse::clickhouse(),
 
 下面是连接本地 ClickHouse 数据库，数据库和数据分析环境都在本地，我们使用默认的9000端口和默认default数据库，而默认的账户名在安装 ClickHouse 时指定为 cloud，因此连接参数设置如下 
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 library(DBI)
 library(RClickhouse)
 # con <- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = "~/.R/RClickhouse.yaml")
@@ -600,13 +600,13 @@ con <- DBI::dbConnect(RClickhouse::clickhouse(),
 
 RClickHouse 包提供部分 dplyr 式的数据操作，使用比较方便，这里便使用它了，往 ClickHouse 中写入数据
 
-```{r,echo=TRUE}
+```{r}
 DBI::dbWriteTable(con, "mtcars", mtcars, overwrite=TRUE)
 ```
 
 查看数据库中的 mtcars 表 
 
-```{r,echo=TRUE}
+```{r}
 # 列出 ClickHouse 中存放的表
 dbListTables(con)
 # 列出表 mtcars 中的所有字段
@@ -615,7 +615,7 @@ dbListFields(con, "mtcars")
 
 RClickHouse 包支持的聚合操作（其实是 dplyr）和 Base R 提供的聚合操作对比，测试一下正确与否
 
-```{r,echo=TRUE}
+```{r}
 library(tidyverse)
 # 按变量 cyl 分组对 mpg 求和
 tbl(con, "mtcars") %>% 
@@ -639,7 +639,7 @@ aggregate 聚合函数默认对缺失值的处理是忽略， sum 和 mean 函�
 
 你当然可以继续使用 SQL 语句做查询，而不使用 dplyr 提供的现代化的管道操作语法
 
-```{r,echo=TRUE}
+```{r}
 # 传递 SQL 查询语句
 DBI::dbGetQuery(con, 
 "SELECT
@@ -653,7 +653,7 @@ GROUP BY vs")
 ::: sidebar
 如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器才可以获得更好的性能
 
-```{r,echo=TRUE}
+```{r}
 # 读取数据库中的整张表
 copy_mtcars <- dbReadTable(con, "mtcars")
 tibble::glimpse(copy_mtcars)
@@ -662,7 +662,7 @@ tibble::glimpse(copy_mtcars)
 
 还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数，如 `multiIf`
 
-```{r,echo=TRUE}
+```{r}
 # 查看 ClickHouse 中所有的数据库名称
 DBI::dbGetQuery(con, "SHOW DATABASES")
 # 查看所有存储的表
@@ -685,7 +685,7 @@ dbDisconnect(conn = con)
 
 [ClickHouse](https://clickhouse.yandex/) 独辟蹊径，基于 C++ 的实现，数据查询速度超级快，官网介绍碾压大量传统数据库。还有不少接口，其中还有 R 的 [clickhouse-r](https://github.com/hannesmuehleisen/clickhouse-r)
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 # 安装clickhouse接口
 devtools::install_github("hannesmuehleisen/clickhouse-r")
 # 调用接口
@@ -766,7 +766,7 @@ idate = params$date # 将参数化日期传递给 idate 变量
 
 我们将这个 Rmd 文件命名为 `MyDocument.Rmd`，运行这个文件可以从 R 控制台执行或在 RStudio 点击 knit。
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 rmarkdown::render("MyDocument.Rmd", params = list(
   date = "2019-05-03"
 ))
@@ -780,7 +780,7 @@ rmarkdown::render("MyDocument.Rmd", params = list(
 
 首先安装 sparklyr 包，RStudio 公司 Javier Lurasch 开发了 sparklyr 包，作为 Spark 与 R 语言之间的接口，安装完 sparklyr 包，还是需要 Spark 和 Hadoop 环境
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 install.packages('sparklyr')
 library(sparklyr)
 spark_install()
@@ -799,7 +799,7 @@ spark_install()
 
 既然 sparklyr 已经安装了 Spark 和 Hadoop 环境，安装 SparkR 后，只需配置好路径，就可以加载 SparkR 包
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 install.packages('SparkR')
 if (nchar(Sys.getenv("SPARK_HOME")) < 1) {
   Sys.setenv(SPARK_HOME = "~/spark/spark-2.4.0-bin-hadoop2.7")

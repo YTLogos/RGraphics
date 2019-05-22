@@ -238,7 +238,7 @@ plot(rnorm(10), xlab = "", ylab = "")
 
 根据代码动态生成图片，并插入文档中；外部图片插入文档中
 
-```{r air-passengers,fig.cap="时间序列图",echo=TRUE}
+```{r air-passengers,fig.cap="时间序列图"}
 plot(AirPassengers)
 ```
 
@@ -341,7 +341,7 @@ R Markdown 站在巨人的肩膀上，这些巨人有 [Markdown](https://daringf
 
 在指定目录创建 Book 项目，
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 bookdown:::bookdown_skeleton("~/bookdown-demo")
 ```
 

@@ -67,7 +67,7 @@ dplyr 常用的函数是6个： `arrange` 排序 `filter` 过滤 `select` 选择
 
 除了直接打印数据集的前几行，tibble 包还提供 glimpse 函数查看数据集，而 Base R 默认查看方式是调用 str 函数
 
-```{r,echo=TRUE}
+```{r}
 diamonds
 glimpse(diamonds)
 ```
@@ -113,7 +113,7 @@ Table: (\#tab:dplyr-object-type) dplyr 定义的数据对象类型
 
 创建空的数据框，就是不包含任何行、记录[^create-an-empty-data-frame] 
 
-```{r,echo=TRUE}
+```{r}
 empty_df <- data.frame(
   Doubles = double(),
   Ints = integer(),
@@ -133,7 +133,7 @@ empty_df = df[FALSE,]
 
 还可以使用 structure 构造一个数据框，并且我们发现它的效率更高
 
-```{r,echo=TRUE}
+```{r}
 s <- function() structure(list(
     Date = as.Date(character()),
     File = character(),
@@ -154,7 +154,7 @@ microbenchmark::microbenchmark(s(), d())
 
 只要行中包含缺失值，我们就把这样的行移除出去
 
-```{r,output=10}
+```{r,out.lines=10}
 airquality[complete.cases(airquality), ]
 ```
 
@@ -203,7 +203,7 @@ apply 家族和 `do.call`
 在 R 语言里玩转`apply`， `Map()` 和 `Reduce()`[^apply-family]，下面分别以提取合并多张 XLSX 表格[^openxl-map]，分组计算[^by-group-calculation] 和子集操作 [^subsetting] 为例，从函数式编程到 MapReduce [^funcprog-map-reduce]，制作数据透视表[^pivot-tables]，用于数据处理的函数式编程和单元测试 Functional programming and unit testing for data munging with R 特别是第三章 <https://b-rodrigues.github.io/fput/>，然后是函数式编程与数据建模 Modeling data with functional programming in R[^modeling-funcprog]
 
 
-```{r,echo=TRUE}
+```{r}
 add <- function(x) Reduce("+", x)
 add(list(1, 2, 3))
 add_accuml <- function(x) Reduce("+", x, accumulate = TRUE)
@@ -226,7 +226,7 @@ library(parallel)
 
 首先安装 openmpi-devel 开发环境（以 Fedora 30 为例）
 
-```{bash,echo=TRUE,eval=FALSE}
+```{bash,eval=FALSE}
 yum install -y openmpi-devel
 echo "export ORTED=/usr/lib64/openmpi/bin" >> ~/.bashrc
 # 或者
@@ -236,13 +236,13 @@ source ~/.bashrc
 
 然后进入 R 安装 R 包 Rmpi
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 install.packages('Rmpi')
 ```
 
 使用 Rmpi 包生成两组服从均匀分布的随机数
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 # 加载 R 包
 library(Rmpi)
 # 检测可用的逻辑 CPU 核心数
@@ -260,7 +260,7 @@ mpi.spawn.Rslaves(nslaves=2)
 
 调用 `mpi.apply` 函数
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 set.seed(1234)
 mpi.apply(c(10, 20), runif)
 ```
@@ -278,7 +278,7 @@ mpi.apply(c(10, 20), runif)
 
 用完要关闭
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 mpi.close.Rslaves()
 ```
 
@@ -299,7 +299,7 @@ Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 Open
 
 我要查看是否需要新添加一个 R 包依赖，假设该 R 包是 reticulate 没有出现在 DESCRIPTION 文件中，但是可能已经被其中某（个）些 R 包依赖了
 
-```{r,echo=TRUE}
+```{r}
 "reticulate" %in% sort(unique(unlist(tools::package_dependencies(desc::desc_get_deps()$package, recursive = TRUE))))
 ```
 

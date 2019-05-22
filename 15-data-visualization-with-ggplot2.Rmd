@@ -8,7 +8,7 @@ David Robinson 给出为何使用 ggplot2 [^why-ggplot2] 当然也有 Jeff Leek 
 
 GGplot2 是十分方便的统计作图工具，相比 Base R，为了一张出版级的图形，不需要去调整每个参数，实现快速出图。集成了很多其它统计计算的 R 包，支持丰富的统计分析和计算功能，如回归、平滑等，实现了作图和模型的无缝连接。比如图\@ref(fig:awesome-ggplot2)，使用 loess 局部多项式平滑得到数据的趋势，不仅仅是散点图，代码量也非常少。
 
-```{r awesome-ggplot2,echo=TRUE,fig.cap="简洁美观"}
+```{r awesome-ggplot2,fig.cap="简洁美观"}
 library(ggplot2)
 ggplot(mpg, aes(displ, hwy)) +
   geom_point(aes(color = class)) +
@@ -27,6 +27,7 @@ ggplot(mpg, aes(displ, hwy)) +
 3. Matt Leonawicz 的新作 [mapmate](https://github.com/leonawicz/mapmate), 可以去其主页欣赏系列作品^[<https://leonawicz.github.io/>]
 1. [bbplot](https://github.com/bbc/bbplot)
 1. [tidytuesday 可视化挑战官方项目](https://github.com/rfordatascience/tidytuesday) 还有 [tidytuesday](https://github.com/abichat/tidytuesday)
+
 [^why-ggplot2]: http://varianceexplained.org/r/why-I-use-ggplot2/
 [^why-not-ggplot2]: https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 
@@ -36,25 +37,25 @@ ggplot(mpg, aes(displ, hwy)) +
 
 ### 图层 {#ggplot2-layer}
 
-```{r,echo=TRUE}
+```{r}
 ls("package:ggplot2", pattern = "^geom_")
 ```
 
 生成一个散点图
 
-```{r,echo=TRUE}
+```{r}
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point()
 ```
 
 ### 主题 {#ggplot2-theme}
 
-```{r,echo=TRUE}
+```{r}
 ls("package:ggplot2", pattern = "^theme_")
 ```
 
 这里只展示 `theme_bw()` `theme_void()` `theme_minimal() ` 和 `theme_void()` 等四个常见主题，更多主题参考 [ggthemes](https://github.com/jrnold/ggthemes) 、[hrbrthemes](https://github.com/hrbrmstr/hrbrthemes)和 [ggthemr](https://github.com/cttobin/ggthemr) 包
 
-```{r,echo=TRUE}
+```{r}
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_bw()
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_void()
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_minimal()
@@ -63,11 +64,11 @@ ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_void()
 
 ### 配色 {#ggplot2-color}
 
-```{r,echo=TRUE}
+```{r}
 ls("package:ggplot2", pattern = "^scale_(color|fill)_")
 ```
 
-```{r,echo=TRUE}
+```{r}
 ggplot(airquality, aes(x = Temp, y = Ozone, color = as.factor(Month))) +
   geom_point()
 ggplot(airquality, aes(x = Temp, y = Ozone, color = as.ordered(Month))) +
@@ -78,7 +79,7 @@ ggplot(airquality, aes(x = Temp, y = Ozone, color = as.ordered(Month))) +
 
 极坐标，直角坐标
 
-```{r,echo=TRUE}
+```{r}
 ls("package:ggplot2", pattern = "^coord_")
 ```
 
@@ -88,11 +89,11 @@ ls("package:ggplot2", pattern = "^coord_")
 
 ### 刻度 {#ggplot2-scale}
 
-```{r,echo=TRUE}
+```{r}
 ls("package:ggplot2", pattern = "^scale_(x|y)_")
 ```
 
-```{r,echo=TRUE}
+```{r}
 range(airquality$Temp, na.rm = TRUE)
 range(airquality$Ozone, na.rm = TRUE)
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() +
@@ -102,7 +103,7 @@ ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() +
 
 ### 注释 {#ggplot2-annotate}
 
-```{r,echo=TRUE}
+```{r}
 ls("package:ggplot2", pattern = "^annotation_")
 ```
 
@@ -122,7 +123,7 @@ ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() +
 
 ### 组合 {#ggplot2-grid}
 
-```{r,echo=TRUE}
+```{r}
 ggplot(airquality) + geom_point(aes(x = Temp, y = Ozone)) + facet_wrap(~ as.ordered(Month))
 ggplot(airquality) + geom_point(aes(x = Temp, y = Ozone)) + facet_wrap(~ as.ordered(Month), nrow = 1)
 ```
@@ -137,14 +138,14 @@ gridExtra 和 patchwork
 
 下面以 diamonds 数据集为例展示 ggplot2 的绘图过程，首先加载 diamonds 数据集，查看数据集的内容
 
-```{r load-data,echo=TRUE}
+```{r load-data}
 data(diamonds)
 str(diamonds)
 ```
 
 数值型变量 carat 作为 x 轴
 
-```{r diamonds-axis,fig.cap=c("指定 x 轴","数值变量 price 作为纵轴","有序分类变量 cut 指定颜色","指定统一颜色"),echo=TRUE,out.width="35%",fig.align='center',fig.ncol=2,fig.width=3}
+```{r diamonds-axis,fig.cap=c("指定 x 轴","数值变量 price 作为纵轴","有序分类变量 cut 指定颜色","指定统一颜色"),out.width="35%",fig.align='center',fig.ncol=2,fig.width=3}
 ggplot(diamonds, aes(x = carat))
 ggplot(diamonds, aes(x = carat, y = price))
 ggplot(diamonds, aes(x = carat, color = cut))
@@ -153,20 +154,20 @@ ggplot(diamonds, aes(x = carat), color = "steelblue")
 
 图 \@ref(fig:diamonds-axis) 的基础上添加数据图层
 
-```{r scatter,fig.cap="添加数据图层",echo=TRUE}
+```{r scatter,fig.cap="添加数据图层"}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point()
 ```
 
 给散点图\@ref(fig:scatter)上色
 
-```{r scatter-color-1,fig.cap="散点图配色",echo=TRUE}
+```{r scatter-color-1,fig.cap="散点图配色"}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(color = "steelblue")
 ```
 
 
-```{r scatter-scale-1,fig.cap="格式化坐标轴刻度标签",echo=TRUE}
+```{r scatter-scale-1,fig.cap="格式化坐标轴刻度标签"}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(color = "steelblue") +
   scale_y_continuous(labels = scales::unit_format(unit = "k", scale = 1e-3), 
@@ -175,21 +176,21 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 
 让另一变量 cut 作为颜色分类指标
 
-```{r scatter-color-2,fig.cap="分类散点图",echo=TRUE}
+```{r scatter-color-2,fig.cap="分类散点图"}
 ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
   geom_point()
 ```
 
 当然还有一种类似的表示就是分组，默认情况下，ggplot2将所有观测点视为一组，以分类变量 cut 来分组
 
-```{r scatter-group,echo=TRUE,fig.cap="分组",echo=TRUE}
+```{r scatter-group,fig.cap="分组"}
 ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
   geom_point()
 ```
 
 在图\@ref(fig:scatter-group) 上没有体现出来分组的意思，下面以 cut 分组线性回归为例
 
-```{r group-lm,fig.cap="分组线性回归",echo=TRUE,fig.ncol=1}
+```{r group-lm,fig.cap="分组线性回归",fig.ncol=1}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point() +
   geom_smooth(method = "lm")
@@ -200,12 +201,12 @@ ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
 
 我们当然可以选择更加合适的拟合方式，如局部多项式平滑 `loess` 但是该方法不太适用观测值比较多的情况，因为它会占用比较多的内存，建议使用广义可加模型作平滑拟合
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
   geom_point() +
   geom_smooth(method = "loess")
 ```
-```{r group-gam,fig.cap="数据分组应用广义可加平滑",echo=TRUE}
+```{r group-gam,fig.cap="数据分组应用广义可加平滑"}
 ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
   geom_point() +
   geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs"))
@@ -213,7 +214,7 @@ ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
 
 为了更好地区分开组别，我们在图\@ref(fig:group-gam)的基础上分面或者配色
 
-```{r group-facet,fig.cap=c("分组分面","分组配色"),echo=TRUE,fig.ncol=1}
+```{r group-facet,fig.cap=c("分组分面","分组配色"),fig.ncol=1}
 ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
   geom_point() +
   geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs")) +
@@ -225,7 +226,7 @@ ggplot(diamonds, aes(x = carat, y = price, group = cut, color = cut)) +
 
 在分类散点图的另一种表示方法就是分面图，以 cut 变量作为分面的依据
 
-```{r scatter-facet,fig.cap="分面散点图",echo=TRUE}
+```{r scatter-facet,fig.cap="分面散点图"}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point() +
   facet_grid(~cut)
@@ -233,7 +234,7 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 
 给图 \@ref(fig:scatter-facet) 上色
 
-```{r scatter-facet-color-1,fig.cap="给分面散点图上色",echo=TRUE}
+```{r scatter-facet-color-1,fig.cap="给分面散点图上色"}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(color = "steelblue") +
   facet_grid(~cut)
@@ -241,7 +242,7 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 
 在图\@ref(fig:scatter-facet-color-1)的基础上，给不同的类上不同的颜色
 
-```{r scatter-facet-color-2,fig.cap="给不同的类上不同的颜色",echo=TRUE}
+```{r scatter-facet-color-2,fig.cap="给不同的类上不同的颜色"}
 ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
   geom_point() +
   facet_grid(~cut)
@@ -249,7 +250,7 @@ ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
 
 去掉图例，此时图例属于冗余信息了
 
-```{r scatter-facet-color-3,fig.cap="去掉图例",echo=TRUE}
+```{r scatter-facet-color-3,fig.cap="去掉图例"}
 ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
   geom_point(show.legend = FALSE) +
   facet_grid(~cut)
@@ -257,7 +258,7 @@ ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
 
 四块土地，所施肥料不同，肥力大小顺序 4 < 2 < 3 < 1 小麦产量随肥力的变化
 
-```{r,fig.cap="多个图例",echo=TRUE}
+```{r,fig.cap="多个图例"}
 library(nlme)
 data(Wheat2) # Wheat Yield Trials
 library(colorspace)
@@ -268,7 +269,7 @@ ggplot(Wheat2, aes(longitude, latitude)) +
   scale_y_continuous(breaks = seq(0, 50, 10))
 ```
   
-```{r category-ggplot,fig.cap="分类散点图",echo=TRUE}
+```{r category-ggplot,fig.cap="分类散点图"}
 ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
   geom_point() +
   theme_bw()
@@ -276,7 +277,7 @@ ggplot(mtcars, aes(x = hp, y = mpg, color = factor(am))) +
 
 图层、分组、分面和散点图介绍完了，接下来就是其它统计图形，如箱线图，小提琴图和条形图
 
-```{r,fig.cap="1948年至1960年航班乘客人数变化",echo=TRUE}
+```{r,fig.cap="1948年至1960年航班乘客人数变化"}
 dat <- as.data.frame(cbind(rep(1948 + seq(12), each = 12), rep(seq(12), 12), AirPassengers))
 colnames(dat) <- c("year", "month", "passengers")
 
@@ -299,13 +300,13 @@ ggplot(diamonds, aes(x = color, y = price, color = cut)) +
 
 我们当然还可以添加钻石的纯净度 clarity 作为分面依据，那么箱线图可以为图 \@ref(fig:boxplot-facet-color-clarity-1)，但是经过观察，我们发现水平分类过多，考虑用切割质量 cut 替换钻石颜色 color 绘图，但是由于分类过细，图信息展示不简练，反而不好，如图 \@ref(fig:boxplot-facet-color-clarity-2)
 
-```{r boxplot-facet-color-clarity-1,fig.cap="复合分面箱线图",echo=TRUE}
+```{r boxplot-facet-color-clarity-1,fig.cap="复合分面箱线图"}
 ggplot(diamonds, aes(x = color, y = price, color = cut)) +
   geom_boxplot(show.legend = FALSE) +
   facet_grid(clarity ~ cut)
 ```
 
-```{r boxplot-facet-color-clarity-2,echo=TRUE,fig.cap=c("切割质量cut上色","钻石颜色配色"),fig.ncol=1}
+```{r boxplot-facet-color-clarity-2,fig.cap=c("切割质量cut上色","钻石颜色配色"),fig.ncol=1}
 ggplot(diamonds, aes(x = cut, y = price, color = cut)) +
   geom_boxplot(show.legend = FALSE) +
   facet_grid(clarity ~ color)
@@ -318,19 +319,19 @@ ggplot(diamonds, aes(x = cut, y = price, color = color)) +
 
 条形图特别适合分类变量的展示，我们这里展示钻石切割质量 cut 不同等级的数量，当然我们可以直接展示各类的数目，在图层 `geom_bar` 中指定 `stat="identity"`
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 # 需要映射数据框的两个变量，相当于自己先计算了每类的数量
 with(diamonds, table(cut))
 cut_df <- as.data.frame(table(diamonds$cut))
 ggplot(cut_df, aes(x = Var1, y = Freq)) + geom_bar(stat = "identity")
 ```
-```{r diamonds-barplot-1,fig.cap="频数条形图",echo=TRUE}
+```{r diamonds-barplot-1,fig.cap="频数条形图"}
 ggplot(diamonds, aes(x = cut)) + geom_bar()
 ```
 
 还有另外三种表示方法
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 ggplot(diamonds, aes(x = cut)) + geom_bar(stat = "count")
 ggplot(diamonds, aes(x = cut, y = ..count..)) + geom_bar()
 ggplot(diamonds, aes(x = cut, y = stat(count))) + geom_bar()
@@ -338,13 +339,13 @@ ggplot(diamonds, aes(x = cut, y = stat(count))) + geom_bar()
 
 我们还可以在图 \@ref(fig:diamonds-barplot-1) 的基础上再添加一个分类变量钻石的纯净度 clarity，形成堆积条形图
 
-```{r diamonds-barplot-2,echo=TRUE,fig.cap="堆积条形图"}
+```{r diamonds-barplot-2,fig.cap="堆积条形图"}
 ggplot(diamonds, aes(x = cut, fill = clarity)) + geom_bar()
 ```
 
 再添加一个分类变量钻石颜色 color 比较好的做法是分面
 
-```{r diamonds-barplot-3,fig.cap="分面堆积条形图",echo=TRUE}
+```{r diamonds-barplot-3,fig.cap="分面堆积条形图"}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar() +
   facet_grid(~cut)
@@ -352,13 +353,13 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 
 实际上，绘制图\@ref(fig:diamonds-barplot-3)包含了对分类变量的分组计数过程，如下
 
-```{r,echo=TRUE}
+```{r}
 with(diamonds, table(cut, color))
 ```
 
 还有一种堆积的方法是按比例，而不是按数量，如图\@ref(fig:diamonds-barplot-4)
 
-```{r diamonds-barplot-4,fig.cap="比例堆积条形图",echo=TRUE}
+```{r diamonds-barplot-4,fig.cap="比例堆积条形图"}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar(position = "fill") +
   facet_grid(~cut)
@@ -366,14 +367,14 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 
 接下来就是复合条形图
 
-```{r diamonds-barplot-5,fig.cap="复合条形图",echo=TRUE}
+```{r diamonds-barplot-5,fig.cap="复合条形图"}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar(position = "dodge")
 ```
 
 再添加一个分类变量，就是需要分面大法了，图 \@ref(fig:diamonds-barplot-5) 展示了三个分类变量，其实我们还可以再添加一个分类变量用作分面的列依据
 
-```{r diamonds-barplot-6,fig.cap="分面复合条形图",echo=TRUE}
+```{r diamonds-barplot-6,fig.cap="分面复合条形图"}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar(position = "dodge") +
   facet_grid(rows = vars(cut))
@@ -381,14 +382,14 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 
 图 \@ref(fig:diamonds-barplot-6) 展示的数据如下
 
-```{r,echo=TRUE}
+```{r}
 with(diamonds, table(color, clarity, cut))
 ```
 
 ### 点图 {#ggplot2-dotplot}
 
 
-```{r,echo=TRUE}
+```{r}
 str(mpg)
 head(mpg)
 
@@ -402,7 +403,7 @@ str(cty_mpg)
 head(cty_mpg, 6)
 ```
 
-```{r,echo=TRUE,fig.cap="点图"}
+```{r,fig.cap="点图"}
 ggplot(cty_mpg, aes(x = make, y = mileage)) +
   geom_point(size = 3) +
   geom_segment(aes(
@@ -426,7 +427,7 @@ ggplot(cty_mpg, aes(x = make, y = mileage)) +
 
 时间序列数据的展示，时序图
 
-```{r,fig.cap="时序图",echo=TRUE}
+```{r,fig.cap="时序图"}
 ggplot(economics, aes(date, unemploy)) + geom_line()
 ```
 
@@ -435,13 +436,13 @@ ggplot(economics, aes(date, unemploy)) + geom_line()
 
 直方图用来查看连续变量的分布
 
-```{r,fig.cap="钻石价格的分布",echo=TRUE}
+```{r,fig.cap="钻石价格的分布"}
 ggplot(diamonds, aes(price)) + geom_histogram(bins = 30)
 ```
 
 堆积直方图
 
-```{r,fig.cap="钻石价格随切割质量的分布",echo=TRUE}
+```{r,fig.cap="钻石价格随切割质量的分布"}
 ggplot(diamonds, aes(x = price, fill = cut)) + geom_histogram(bins = 30)
 ```
 
@@ -493,7 +494,7 @@ ggplot(mtcars) +
 
 提琴图
 
-```{r violin,fig.cap=c("箱线图","小提琴图"),echo=TRUE,fig.ncol=1}
+```{r violin,fig.cap=c("箱线图","小提琴图"),fig.ncol=1}
 ggplot(diamonds, aes(x = cut, y = price)) + geom_boxplot()
 ggplot(diamonds, aes(x = cut, y = price)) + geom_violin()
 ```
@@ -514,13 +515,13 @@ ggplot(mpg, aes(class, cty)) +
 
 ### 抖动图 {#ggplot2-jitter}
 
-```{r,fig.cap="抖动图",echo=TRUE}
+```{r,fig.cap="抖动图"}
 ggplot(diamonds, aes(x = cut, y = price)) + geom_jitter()
 ```
 
 分面抖动图
 
-```{r,fig.cap=c("抖动图","根据钻石颜色上色"),fig.ncol=1,echo=TRUE}
+```{r,fig.cap=c("抖动图","根据钻石颜色上色"),fig.ncol=1}
 ggplot(diamonds, aes(x = color, y = price)) +
   geom_jitter() +
   facet_grid(~cut)
@@ -531,7 +532,7 @@ ggplot(diamonds, aes(x = color, y = price, color = color)) +
 
 筛选钻石颜色为 D 纯净度为 SI2 的数据集，全数据集太大，不适合用抖动图表示
 
-```{r,fig.cap="抖动图的反例",echo=TRUE}
+```{r,fig.cap="抖动图的反例"}
 ggplot(diamonds, aes(x = color, y = price)) +
   geom_boxplot() + geom_jitter() +
   facet_grid(cut ~ clarity)
@@ -554,20 +555,20 @@ ggplot(mpg, aes(cty)) +
 
 添加透明度，解决遮挡
 
-```{r density,fig.cap=c("密度图","添加透明度的密度图"),echo=TRUE,fig.ncol=1}
+```{r density,fig.cap=c("密度图","添加透明度的密度图"),fig.ncol=1}
 ggplot(diamonds, aes(x = price, fill = cut)) + geom_density()
 ggplot(diamonds, aes(x = price, fill = cut)) + geom_density(alpha = 0.5)
 ```
 
 堆积密度图
 
-```{r stack-density,fig.cap="堆积密度图",echo=TRUE}
+```{r stack-density,fig.cap="堆积密度图"}
 ggplot(diamonds, aes(x = price, fill = cut)) + geom_density(position = "stack")
 ```
 
 条件密度估计
 
-```{r,fig.cap="条件密度估计图",echo=TRUE}
+```{r,fig.cap="条件密度估计图"}
 # You can use position="fill" to produce a conditional density estimate
 ggplot(diamonds, aes(carat, stat(count), fill = cut)) +
   geom_density(position = "fill")
@@ -577,7 +578,7 @@ ggplot(diamonds, aes(carat, stat(count), fill = cut)) +
 
 南丁格尔风玫瑰图[^nightingale-rose] 可以作为堆积条形图，分组条形图
 
-```{r stack-to-rose,fig.cap="堆积条形图转风玫瑰图",echo=TRUE}
+```{r stack-to-rose,fig.cap="堆积条形图转风玫瑰图"}
 ggplot(diamonds, aes(x = color, fill = clarity)) +
   geom_bar()
 ggplot(diamonds, aes(x = color, fill = clarity)) +
@@ -585,7 +586,7 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
   coord_polar()
 ```
 
-```{r wind-rose,fig.cap="风玫瑰图",echo=TRUE}
+```{r wind-rose,fig.cap="风玫瑰图"}
 # 风玫瑰图 http://blog.csdn.net/Bone_ACE/article/details/47624987
 library(ggplot2)
 set.seed(2018)
@@ -627,7 +628,7 @@ ggridges
 
 准备数据集
 
-```{r,echo=TRUE}
+```{r}
 crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
 crimesm <- reshape2::melt(crimes, id = 1)
 head(crimesm)
@@ -635,7 +636,7 @@ head(crimesm)
 
 添加地图数据
 
-```{r,echo=TRUE}
+```{r}
 library(maps)
 states_map <- map_data("state")
 head(states_map)
@@ -643,7 +644,7 @@ head(states_map)
 
 绘图
 
-```{r,echo=TRUE,fig.cap="1973年美国各州的犯罪率数据",echo=TRUE}
+```{r,fig.cap="1973年美国各州的犯罪率数据"}
 ggplot(crimes, aes(map_id = state)) +
   geom_map(aes(fill = Murder), map = states_map) +
   expand_limits(x = states_map$long, y = states_map$lat) +
@@ -651,7 +652,7 @@ ggplot(crimes, aes(map_id = state)) +
 ```
 
 
-```{r,fig.cap="四类犯罪在各州的分布",echo=TRUE}
+```{r,fig.cap="四类犯罪在各州的分布"}
 ggplot(crimesm, aes(map_id = state)) +
   geom_map(aes(fill = value), map = states_map) +
   expand_limits(x = states_map$long, y = states_map$lat) +
@@ -690,7 +691,7 @@ grid.arrange(erupt1, erupt2, erupt3, erupt4, ncol = 2)
 
 此处调用 RColorBrewer 中 Spectral 调色板，它本来只有11中颜色，通过 `scale_colour_distiller` 却可以把它映射到连续型数值变量 `mag` 上，发散型调色板本身的对比性也可以起到很好的区分度，如图 \@ref(fig:fiji-map) 所示
 
-```{r fiji-map,fig.cap="斐济地震带",echo=TRUE}
+```{r fiji-map,fig.cap="斐济地震带"}
 library(mapdata)
 FijiMap <- map_data("worldHires", region = "Fiji")
 ggplot(FijiMap, aes(x = long, y = lat)) +
@@ -706,7 +707,7 @@ ggplot(FijiMap, aes(x = long, y = lat)) +
 
 此外， colormap 包提供更加丰富的调色板，通过 `scale_color_colormap` 支持 ggplot2 绘图风格
 
-```{r unemploymentGG,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
+```{r unemploymentGG,fig.cap="2009年美国各城镇失业率"}
 # 数据来源 http://datasets.flowingdata.com/unemployment09.csv
 unemp <- read.csv(
   file = "http://datasets.flowingdata.com/unemployment09.csv",
@@ -759,26 +760,26 @@ raster 包定义了获取和操作空间 raster 类型数据集的类和方法�
 
 星号 * 标记的是 S3 方法
 
-```{r,echo=TRUE}
+```{r}
 methods(plot)
 ```
 
 查看函数的定义
 
-```{r,echo=TRUE}
+```{r}
 getAnywhere(plot.raster)
 ```
 
 rasterImage 函数来绘制图像，如果想知道 `rasterImage` 的内容可以继续看 `getAnywhere(rasterImage)`
 
-```{r,echo=TRUE}
+```{r}
 getAnywhere(rasterImage)
 ```
 
 通过查看函数的帮助 `?rasterImage` ，我们需要重点关注一下
 参数 *image* 传递的 raster 对象
 
-```{r,echo=TRUE,fig.cap="raster 图像",dev.args=list(bg = "thistle"),warning=FALSE,fig.asp=1,out.width="50%",fig.width=30/7}
+```{r,fig.cap="raster 图像",dev.args=list(bg = "thistle"),warning=FALSE,fig.asp=1,out.width="50%",fig.width=30/7}
 plot(c(100, 250), c(300, 450), type = "n", xlab = "", ylab = "")
 image <- as.raster(matrix(0:1, ncol = 5, nrow = 3))
 rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
@@ -791,7 +792,7 @@ rasterImage(image, 200, 400, 250, 450, angle = 15, interpolate = FALSE)
 
 Edzer Pebesma 开发了 stars 包
 
-```{r,echo=TRUE}
+```{r}
 # https://resources.rstudio.com/rstudio-conf-2019/spatial-data-science-in-the-tidyverse
 library(abind)
 library(sf)
@@ -812,7 +813,7 @@ ggplot() +
 
 空间数据对象，以类 sp 方式存储 [@Pebesma_2005_sp]
 
-```{r,fig.cap="气泡图",echo=TRUE}
+```{r,fig.cap="气泡图"}
 library(sp)
 data(meuse)
 coords <- SpatialPoints(meuse[c("x", "y")])
@@ -820,7 +821,7 @@ meuse <- SpatialPointsDataFrame(coords, meuse)
 plot(meuse, pch = 1, cex = .05 * sqrt(meuse$zinc))
 ```
 
-```{r,echo=TRUE}
+```{r}
 library(maptools)
 fname <- system.file("shapes/sids.shp", package = "maptools")
 p4s <- CRS("+proj=longlat +datum=NAD27")
@@ -828,7 +829,7 @@ nc <- readShapePoly(fname, proj4string = p4s)
 plot(nc, axes = TRUE, col = grey(1 - nc$SID79 / 57))
 ```
 
-```{r,echo=TRUE}
+```{r}
 # Trellis maps
 arrow <- list("SpatialPolygonsRescale",
   layout.north.arrow(2),
@@ -858,7 +859,7 @@ maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过�
 - ggmap
 - sf
 
-```{r,echo=TRUE}
+```{r}
 nc <- system.file("gpkg/nc.gpkg", package = "sf") %>% read_sf() 
 nc2 <- nc %>% 
   select(SID74, SID79) %>% 
@@ -877,7 +878,7 @@ map <- gadm_sf_loadCountries("FRA", basefile = "./")
 gadm_plot(map) + theme_minimal()
 ```
 
-```{r,echo=TRUE}
+```{r}
 library(maps) # For map data
 library(mapdata)
 library(ggplot2)
@@ -899,7 +900,7 @@ BiocManager::install("Rgraphviz", version = "3.8")
 
 Gephi [@ICWSM_2009_Gephi] 和 igraph 能处理的最大网络，R 包和作者依赖关系图 14000+ 包和 7000+ 作者，CRAN 是全球R包开发者之网，自发布 R 1.0.0 (February, 2000) 距今19年
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 library(DiagrammeR)
 library(DiagrammeRsvg)
 svg <- export_svg(
@@ -937,7 +938,7 @@ html_print(HTML(svg))
 
 - [igraph 使用](https://smallstats.blogspot.com/search/label/igraph)
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 # https://smallstats.blogspot.jp/2012/12/loading-huge-graphs-with-igraph-and-r.html
 # Loading huge graphs with igraph and R
 df <- data.frame(
@@ -999,25 +1000,25 @@ if (file.exists("data/packages.rds")) {
 
 接着，我们可以看看CRAN 上发布的 R 包数量
 
-```{r,echo=TRUE}
+```{r}
 pdb[, "Package"] %>% length()
 ```
 
 经过与官网发布的数据来对比，我们发现这里计算的结果与实际不符，多出来了几十个R包，所以我们再观察一下是否有重复的 R 包描述信息
 
-```{r,echo=TRUE}
+```{r}
 pdb[, "Package"][duplicated(pdb[, "Package"])]
 ```
 
 不难发现，果然有！所以去掉重复的 R 包信息，就是 CRAN 上实际发布的 R 包列表
 
-```{r,echo=TRUE}
+```{r}
 subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package")) %>% length()
 ```
 
 接下来，我们再来查看一些比较高产的 R 包开发者谢益辉都维护了哪些R包，如表 \@ref(tab:rmarkdown-eco) 所示
 
-```{r rmarkdown-eco,echo=TRUE}
+```{r rmarkdown-eco}
 yihui_pkg <- subset(pdb,
   subset = grepl("Yihui Xie", pdb[, "Maintainer"]),
   select = c("Package", "Maintainer", "Title") 
@@ -1030,7 +1031,7 @@ yihui_pkg %>%
 
 接下来，我们想看看 R 包维护者数量有多少
 
-```{r,echo=TRUE}
+```{r}
 subset(pdb,
   subset = !duplicated(pdb[, "Package"]),
   select = "Maintainer"
@@ -1039,7 +1040,7 @@ subset(pdb,
 
 可实际上没有这么多的开发者，因为存在这样的情况，以 R 包维护者 Hadley Wickham 为例，由于他曾使用过不同的邮箱，所以在维护者字段出现了不一致的情况，实际却是同一个人。
 
-```{r,echo=TRUE}
+```{r}
 subset(pdb,
   subset = grepl("Hadley Wickham", pdb[, "Maintainer"]),
   select = c("Package", "Maintainer")
@@ -1048,7 +1049,7 @@ subset(pdb,
 
 因此，有必要先把 Maintainer 字段中的邮箱部分去掉
 
-```{r,echo=TRUE}
+```{r}
 clean_maintainer <- function(x) {
   # 去掉邮箱
   x <- gsub("<([^<>]*)>", "", x)
@@ -1061,7 +1062,7 @@ clean_maintainer <- function(x) {
 
 这样我们可以得到比较靠谱的R包维护者数量了！
 
-```{r,echo=TRUE}
+```{r}
 # 去重之后
 cran_maintainers <- subset(pdb,
   subset = !duplicated(pdb[, "Package"]),
@@ -1076,7 +1077,7 @@ cran_maintainers %>%
 
 接下来，我们还想把 R 包维护者，按照其维护的R包数量排个序，用条形图\@ref(fig:top-maintainers) 表示
 
-```{r top-maintainers,fig.cap="(ref:top-maintainers)",echo=TRUE,fig.asp=1,fig.width=5.5,out.width="55%"}
+```{r top-maintainers,fig.cap="(ref:top-maintainers)",fig.asp=1,fig.width=5.5,out.width="55%"}
 myData <- cran_maintainers %>%
   table() %>% # 按照维护者分组计数
   sort(decreasing = T) %>% # 降序排列
@@ -1098,7 +1099,7 @@ grid()
 ```
 
 
-```{r,echo=TRUE}
+```{r}
 myData =  as.data.frame(myData)
 colnames(myData) = c("Maintainer", "Freq")
 ggplot( myData) + 
@@ -1108,7 +1109,7 @@ ggplot( myData) +
   ylab("Numbers of Package")
 ```
 
-```{r,echo=TRUE}
+```{r}
 ggplot(myData, aes(x = Freq, y = Maintainer)) +
   geom_segment(aes(x = 20, xend = Freq, yend = Maintainer), colour = "grey50") +
   geom_point(size = 2, colour = "red") +

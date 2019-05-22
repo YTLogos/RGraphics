@@ -20,13 +20,13 @@
 
 R 内置的默认正则表达式匹配方式是基于 PCRE 的匹配，`options` 控制 PCRE 默认的三个选项 `PCRE_limit_recursion=NA` 、`PCRE_study=10` 和 `PCRE_use_JIT=TRUE`，当前系统环境下 PCRE 的支持情况
 
-```{r,echo=TRUE}
+```{r}
 pcre_config()
 ```
 
 查看R环境的 PCRE 配置
 
-```{r,echo=TRUE}
+```{r}
 sapply(c("PCRE_limit_recursion", "PCRE_study", "PCRE_use_JIT"), getOption)
 ```
 
@@ -35,7 +35,7 @@ sapply(c("PCRE_limit_recursion", "PCRE_study", "PCRE_use_JIT"), getOption)
 
 用 R 语言写爬虫 curl、 xml2 、RCurl、 XML 和 rvest 解析网页
 
-```{r,echo=TRUE}
+```{r}
 # 查看 libcurl 库的版本
 libcurlVersion()
 ```
@@ -50,7 +50,7 @@ libcurlVersion()
 sudo apt-get install libpoppler-cpp-dev libmagick++-dev
 ```
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 install.packages(c("pdftools", "magick"))
 ```
 

@@ -18,7 +18,7 @@ Base 图形系统的扩展包 [prettyB](https://github.com/jumpingrivers/prettyB
 
 点 points 、线 grid 背景线 abline lines rug 刻度线（线段segments、箭头arrows）、
 
-```{r,echo=TRUE,fig.cap="不同的 pch 参数值",fig.asp=1,title.mar=TRUE}
+```{r,fig.cap="不同的 pch 参数值",fig.asp=1,title.mar=TRUE}
 ## -------- Showing all the extra & some char graphics symbols ---------
 pchShow <-
   function(extras = c("*", ".", "o", "O", "0", "+", "-", "|", "%", "#"),
@@ -53,7 +53,7 @@ pchShow()
 ```
 
 
-```{r,echo=TRUE,fig.cap="pch 支持的字符",out.width="45%",fig.width=4.5,fig.asp=1,title.mar=TRUE}
+```{r,fig.cap="pch 支持的字符",out.width="45%",fig.width=4.5,fig.asp=1,title.mar=TRUE}
 ## ------------ test code for various pch specifications -------------
 # Try this in various font families (including Hershey)
 # and locales.  Use sign = -1 asserts we want Latin-1.
@@ -82,7 +82,7 @@ TestChars(font = 5) # Euro might be at 160 (0+10*16).
 try(TestChars(-1, font = 2)) # bold
 ```
 
-```{r,echo=TRUE,fig.cap="不同的 type 参数值",fig.asp=1}
+```{r,fig.cap="不同的 type 参数值",fig.asp=1}
 x <- 0:12
 y <- sin(pi / 5 * x)
 par(mfrow = c(3, 3), mar = .1 + c(2, 2, 3, 1))
@@ -99,7 +99,7 @@ for (tp in c("p", "l", "b", "c", "o", "h", "s", "S", "n")) {
 
 线帽/端和字体的样式 
 
-```{r,fig.asp=1,out.width="55%",fig.width=4.71,fig.cap="不同的线端样式",echo=TRUE}
+```{r,fig.asp=1,out.width="55%",fig.width=4.71,fig.cap="不同的线端样式"}
 # 合并为一个图 三条粗横线 横线上三种字形
 plot(c(1, 20), c(1, 20), type = "n", ann = FALSE)
 lines(x = c(5, 15), y = c(5, 5), lwd = 15, lend = "round")
@@ -132,7 +132,7 @@ lend：线端的样式，可用一个整数或字符串指定：
 面（矩形rect，多边形polygon）、路径 polypath
 面/多边形 rect 颜色填充
 
-```{r,fig.cap="rect 函数画长方形",title.mar=TRUE,echo=TRUE,fig.asp=1}
+```{r,fig.cap="rect 函数画长方形",title.mar=TRUE,fig.asp=1}
 # From the manual
 ch.col <- c(
   "rainbow(n, start=.7, end=.1)",
@@ -164,7 +164,7 @@ for (k in 1:nt) {
 
 `clip(x1, x2, y1, y2)` 在用户坐标中设置剪切区域
 
-```{r,echo=TRUE,title.mar=TRUE}
+```{r,title.mar=TRUE}
 x <- rnorm(1000)
 hist(x, xlim = c(-4,4))
 usr <- par("usr")
@@ -176,7 +176,7 @@ do.call("clip", as.list(usr)) # reset to plot region
 ```
 
 
-```{r,fig.cap="区域重叠 polygon 函数",echo=TRUE,fig.asp=1,fig.width=4.5,out.width="45%"}
+```{r,fig.cap="区域重叠 polygon 函数",fig.asp=1,fig.width=4.5,out.width="45%"}
 my.col <- function(f, g, xmin, xmax, col, N = 200,
                    xlab = "", ylab = "", main = "") {
   x <- seq(xmin, xmax, length = N)
@@ -203,7 +203,7 @@ my.col(function(x) x^2, function(x) x^2 + 10 * sin(x),
 
 各种符号 \@ref(fig:cex-symbol) 
 
-```{r cex-symbol,fig.cap="cex 支持的符号",echo=TRUE,fig.asp=1,fig.width=5.5,out.width="55%"}
+```{r cex-symbol,fig.cap="cex 支持的符号",fig.asp=1,fig.width=5.5,out.width="55%"}
 plot(0, 0,
   xlim = c(1, 5), ylim = c(-.5, 4),
   axes = F,
@@ -223,7 +223,7 @@ for (i in 0:4) {
 
 点、线、多边形和圆聚集在图 \@ref(fig:symbols) 中
 
-```{r symbols,fig.cap="多边形和符号元素",echo=TRUE}
+```{r symbols,fig.cap="多边形和符号元素"}
 # https://jeroen.github.io/uros2018/#23
 plot.new()
 plot.window(xlim = c(0, 100), ylim = c(0, 100))
@@ -237,7 +237,7 @@ symbols(c(70, 80, 90), c(20, 50, 80),
 
 在介绍各种统计图形之前，先介绍几个绘图函数 `plot` 和 `text` 还有 `par` 参数设置， 作为最简单的开始，尽量依次介绍其中的每个参数的含义并附上图形对比。
 
-```{r pos,fig.cap="pos 位置参数",echo=TRUE,out.width="55%",fig.asp=1,fig.width=5.5,title.mar=TRUE}
+```{r pos,fig.cap="pos 位置参数",out.width="55%",fig.asp=1,fig.width=5.5,title.mar=TRUE}
 y <- x <- 1:4
 plot(x, y, ann = F, col = "blue", pch = 16)
 text(x, y,
@@ -255,7 +255,7 @@ title(bquote(hat(a) == .(ahat)))
 
 矩形网格线是用做背景参考线的，常常是淡灰色的细密虚线，`plot` 函数的 `panel.first` 参数和 `grid` 函数常用来画这种参考线
 
-```{r bg-grid-lines,fig.cap="添加背景参考线",fig.asp=.8,fig.width=5,echo=TRUE}
+```{r bg-grid-lines,fig.cap="添加背景参考线",fig.asp=.8,fig.width=5}
 # modified from https://yihui.name/cn/2018/02/cohen-s-d/
 n = 30  # 样本量（只是一个例子）
 x = seq(0, 12, 0.01)
@@ -269,7 +269,7 @@ abline(v = c(0.01, 0.2, 0.5, 0.8, 1.2, 2), lty = 2)
 
 ### 坐标轴 {#base-axis}
 
-```{r,title.mar=TRUE,echo=TRUE,fig.cap="两个 Y 轴",fig.asp=1,fig.width=5.5,out.width="55%"}
+```{r,title.mar=TRUE,fig.cap="两个 Y 轴",fig.asp=1,fig.width=5.5,out.width="55%"}
 # 双Y轴
 N <- 200
 x <- seq(-4, 4, length = N)
@@ -300,7 +300,7 @@ mtext("Second Y axis", 4, line = 2, col = "red", cex = 1.2)
 
 调整坐标轴标签的距离
 
-```{r gap-axis,fig.asp=1,fig.cap="gap.axis用法",echo=TRUE,title.mar=TRUE,fig.width=5.5,out.width="55%"}
+```{r gap-axis,fig.asp=1,fig.cap="gap.axis用法",title.mar=TRUE,fig.width=5.5,out.width="55%"}
 ## Changing default gap between labels:
 plot(c(0,100),c(0,50), type="n", axes=FALSE, ann=FALSE)
 title(quote("axis(1, .., gap.axis = f)," ~~ f >= 0))
@@ -322,7 +322,7 @@ mtext(chG, side=1, padj=-1, line = linG -1/2, cex=3/4,
 
 旋转坐标轴标签
 
-```{r,echo=TRUE}
+```{r}
 # Rotated axis labels in R plots
 # https://menugget.blogspot.com/2014/08/rotated-axis-labels-in-r-plots.html
 # Example data
@@ -374,7 +374,7 @@ mtext(side = 1, text = "X Axis Label", line = 4)
 
 添加多个标题
 
-```{r,fig.cap="图标题/子标题 x轴标题/子标题",sub.mar=TRUE,echo=TRUE}
+```{r,fig.cap="图标题/子标题 x轴标题/子标题",sub.mar=TRUE}
 N <- 200
 x <- runif(N, -4, 4)
 y <- sin(x) + .5 * rnorm(N)
@@ -389,7 +389,7 @@ mtext("X axis subtitle", 1, line = 3.7)
 
 数学符号注释，图\@ref(fig:math-annotation) 自定义坐标轴 [@Paul_2000_Approach]。
 
-```{r math-annotation, fig.cap="创建自定义的坐标轴和刻度标签",echo=TRUE,fig.asp=1,fig.width=4.5,out.width="45%"}
+```{r math-annotation, fig.cap="创建自定义的坐标轴和刻度标签",fig.asp=1,fig.width=4.5,out.width="45%"}
 # 自定义坐标轴
 plot(c(1, 1e6), c(-pi, pi),
   type = "n",
@@ -409,7 +409,7 @@ box()
 
 在标题中添加数学公式
 
-```{r,fig.cap="标题含有数学公式",title.mar=TRUE,echo=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
+```{r,fig.cap="标题含有数学公式",title.mar=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
 x <- seq(-5, 5, length = 200)
 y <- sqrt(1 + x^2)
 plot(y ~ x,
@@ -423,7 +423,7 @@ title(main = expression(
 
 修改参数使用 `substitute` 函数批量生成
 
-```{r,fig.cap="批量生成函数图形",title.mar=TRUE,echo=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
+```{r,fig.cap="批量生成函数图形",title.mar=TRUE,fig.asp=1,out.width="45%",fig.width=4.5}
 x <- seq(-5, 5, length = 200)
 for (i in 1:4) { # 画四个图
   y <- sqrt(i + x^2)
@@ -484,7 +484,7 @@ Table: (\#tab:super-sub-script) 数字上下标
 
 ### 图例 {#base-legend}
 
-```{r,fig.cap="三角函数添加图例",echo=TRUE,title.mar=TRUE,fig.asp=0.8}
+```{r,fig.cap="三角函数添加图例",title.mar=TRUE,fig.asp=0.8}
 x <- seq(-6, 6, length = 200)
 y <- sin(x)
 z <- cos(x)
@@ -502,7 +502,7 @@ legend(-6, -1,
 )
 ```
 
-```{r,fig.cap="设置图例的位置",echo=TRUE,title.mar=TRUE,fig.asp=0.8}
+```{r,fig.cap="设置图例的位置",title.mar=TRUE,fig.asp=0.8}
 xmin <- par("usr")[1]
 xmax <- par("usr")[2]
 ymin <- par("usr")[3]
@@ -521,7 +521,7 @@ legend("bottomleft",
 )
 ```
 
-```{r,fig.cap="insert 函数微调图例位置",echo=TRUE,title.mar=TRUE,fig.asp=0.8}
+```{r,fig.cap="insert 函数微调图例位置",title.mar=TRUE,fig.asp=0.8}
 plot(y ~ x,
   type = "l", lwd = 3,
   ylab = "", xlab = "angle", main = "Trigonometric functions"
@@ -537,7 +537,7 @@ legend("bottomleft",
 ```
 
 
-```{r,fig.cap="将图例放在绘图区域外面",title.mar=TRUE,echo=TRUE,fig.asp=0.8}
+```{r,fig.cap="将图例放在绘图区域外面",title.mar=TRUE,fig.asp=0.8}
 op <- par(no.readonly = TRUE)
 plot(y ~ x,
   type = "l", lwd = 3,
@@ -561,7 +561,7 @@ Hmisc 包的 labcurve 函数可以在曲线上放置名称，而不是遥远的�
 
 ### 边空 {#base-par}
 
-```{r,fig.cap="外边空在图的边缘添加文字",title.mar=TRUE,echo=TRUE}
+```{r,fig.cap="外边空在图的边缘添加文字",title.mar=TRUE}
 N <- 200
 x <- runif(N, -4, 4)
 y <- sin(x) + .5 * rnorm(N)
@@ -581,7 +581,7 @@ mtext("Line 3", 3, line = 3)
 
 `par`
 
-```{r,sub.mar=TRUE,echo=TRUE,fig.asp=1,fig.cap="多图排列共享一个大标题"}
+```{r,sub.mar=TRUE,fig.asp=1,fig.cap="多图排列共享一个大标题"}
 # 多图排列/分屏 page 47
 # 最常用的是 par mfrow mfcol分别按行/列放置图形
 op <- par(
@@ -600,7 +600,7 @@ mtext("Four plots, without enough room for this title",
 
 `par` 的 oma 用来设置外边空的大小
 
-```{r,fig.cap="设置外边空放置大标题",fig.asp=1,title.mar=TRUE,echo=TRUE}
+```{r,fig.cap="设置外边空放置大标题",fig.asp=1,title.mar=TRUE}
 op <- par(
   mfrow = c(2, 2),
   oma = c(0, 0, 3, 0) # Outer margins
@@ -616,7 +616,7 @@ mtext("Four plots, with some room for this title",
 ```
 
 
-```{r,fig.cap="设置每个子图的边空 mar",fig.asp=1,title.mar=TRUE,echo=TRUE}
+```{r,fig.cap="设置每个子图的边空 mar",fig.asp=1,title.mar=TRUE}
 op <- par(
   mfrow = c(2, 2),
   oma = c(0, 0, 3, 0),
@@ -658,7 +658,7 @@ title(main = "Overlaying points, segments, lines...")
 
 `layout` 函数布局， 绘制复杂组合图形
 
-```{r,fig.cap="更加复杂的组合图形",echo=TRUE,fig.asp=1}
+```{r,fig.cap="更加复杂的组合图形",fig.asp=1}
 op <- par(oma = c(0, 0, 3, 0))
 layout(matrix(c(
   1, 1, 1,
@@ -679,7 +679,7 @@ mtext("The \"layout\" function",
 
 `par` 之 `fig` 参数很神奇，使得多个图可以叠加在一起，它接受一个数值向量`c(x1, x2, y1, y2)` ，是图形设备显示区域中的绘图区域的(NDC, normalized device coordinates)坐标。
 
-```{r,fig.cap="多图叠加",fig.asp=1,title.mar=TRUE,echo=TRUE}
+```{r,fig.cap="多图叠加",fig.asp=1,title.mar=TRUE}
 plot(1:12,
   type = "b", main = "'fg' : axes, ticks and box in gray",
   fg = gray(0.7), bty = "7", sub = R.version.string
@@ -693,7 +693,7 @@ plot(6:10,
 
 `fig` 参数控制图形的位置，用来绘制组合图形
 
-```{r,echo=TRUE,fig.cap="组合图形"}
+```{r,fig.cap="组合图形"}
 n <- 1000
 x <- rt(n, df = 10)
 hist(x,
@@ -723,7 +723,7 @@ par(op)
 
 `split.screen` 分屏组合
 
-```{r,echo=TRUE,fig.cap="分屏"}
+```{r,fig.cap="分屏"}
 random.plot <- function() {
   N <- 200
   f <- sample(
@@ -779,7 +779,7 @@ par(op)
 
 简单条形图
 
-```{r diamonds-base-barplot,fig.cap='条形图',echo=TRUE}
+```{r diamonds-base-barplot,fig.cap='条形图'}
 data(diamonds, package = "ggplot2") # 加载数据
 par(mar = c(2, 5, 1, 1))
 barCenters <- barplot(table(diamonds$cut),
@@ -888,7 +888,7 @@ barplot(Freq ~ Class + Survived, data = Titanic,
 
 ### 直方图 {#plot-hist}
 
-```{r,fig.cap="直方图",echo=TRUE,fig.asp=1,fig.width=5.5,out.width="55%"}
+```{r,fig.cap="直方图",fig.asp=1,fig.width=5.5,out.width="55%"}
 set.seed(1234)
 n <- 2^24
 x <- runif(n, 0, 1)
@@ -903,7 +903,7 @@ axis(2, labels = ylim, at = ylim, las = 0) # y 轴
 box(col = "gray")
 ```
 
-```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布",echo=TRUE}
+```{r eruptions,fig.cap="老忠实泉间歇性喷水的时间间隔分布"}
 with(data = faithful, {
   hist(eruptions, seq(1.6, 5.2, 0.2), prob = TRUE, 
        main = "", col = "lightblue", border = "white")
@@ -912,7 +912,7 @@ with(data = faithful, {
 })
 ```
 
-```{r,fig.cap="概率密度分布",echo=TRUE}
+```{r,fig.cap="概率密度分布"}
 hist(longley$Unemployed,
   probability = TRUE,
   col = "light blue", main = ""
@@ -926,7 +926,7 @@ lines(density(longley$Unemployed),
 
 直方图有很多花样的，添加阴影线，angle 控制倾斜的角度
 
-```{r,fig.cap="density 数值越大阴影线越密",echo=TRUE}
+```{r,fig.cap="density 数值越大阴影线越密"}
 # hist(longley$Unemployed, density = 1, angle = 45)
 # hist(longley$Unemployed, density = 3, angle = 15)
 # hist(longley$Unemployed, density = 1, angle = 15)
@@ -936,7 +936,7 @@ hist(longley$Unemployed, density = 3, angle = 45, main = "")
 ### 密度图 {#plot-density}
 
 
-```{r,echo=TRUE}
+```{r}
 library(MASS)
 data(galaxies)
 galaxies <- galaxies / 1000
@@ -951,7 +951,7 @@ lines(density(galaxies, width = 3.25, n = 200), col = "blue", lty = 1)
 lines(density(galaxies, width = 2.56, n = 200), col = "red", lty = 3)
 ```
 
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
+```{r,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
 x <- seq(from = 110, to = 174, by = 0.5)
 y1 <- dnorm(x, mean = 145, sd = 9)
 y2 <- dnorm(x, mean = 138, sd = 8)
@@ -981,7 +981,7 @@ points(109, 0.0395, pch = 15, col = "firebrick3")
 ```
 
 
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="55%",fig.width=5.5}
+```{r,title.mar=TRUE,fig.asp=1,out.width="55%",fig.width=5.5}
 days <- abs(rnorm(1000, 80, 125))
 plot(density(days, from = 0),
   main = "Density plot",
@@ -993,7 +993,7 @@ plot(density(days, from = 0, to = 180, adjust = 0.2),
 )
 ```
 
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="75%",fig.width=7.5}
+```{r,title.mar=TRUE,fig.asp=1,out.width="75%",fig.width=7.5}
 library(survival)
 surv.days <- Surv(days)
 surv.fit <- survfit(surv.days ~ 1)
@@ -1010,7 +1010,7 @@ grid(20, 10, lwd = 2)
 
 ### 经验图 {#plot-ecdf}
 
-```{r faithful,echo=TRUE,fig.cap="累积经验分布图"}
+```{r faithful,fig.cap="累积经验分布图"}
 with(data = faithful, {
   long <- eruptions[eruptions > 3]
   plot(ecdf(long), do.points = FALSE, verticals = TRUE, main = "")
@@ -1035,7 +1035,7 @@ with(data = faithful, {
 
 时序图最适合用来描述股价走势
 
-```{r,echo=TRUE,fig.cap="1991–1998年间主要欧洲股票市场日闭市价格指数图 \n 德国 DAX (Ibis), Switzerland SMI, 法国 CAC 和 英国 FTSE"}
+```{r,fig.cap="1991–1998年间主要欧洲股票市场日闭市价格指数图 \n 德国 DAX (Ibis), Switzerland SMI, 法国 CAC 和 英国 FTSE"}
 matplot(time(EuStockMarkets), EuStockMarkets,
   main = "",
   xlab = "Date", ylab = "closing prices",
@@ -1048,7 +1048,7 @@ legend("topleft", colnames(EuStockMarkets), pch = 17, lty = 1, col = 1:4)
 
 clockwise 参数
 
-```{r,echo=TRUE}
+```{r}
 pie.sales <- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
 names(pie.sales) <- c(
   "Blueberry", "Cherry",
@@ -1062,7 +1062,7 @@ text(0, 1, "init.angle = 90", col = "red")
 
 ### 茎叶图 {#plot-stem-leaf}
 
-```{r,echo=TRUE}
+```{r}
 stem(longley$Unemployed)
 ```
 
@@ -1071,14 +1071,14 @@ stem(longley$Unemployed)
 
 在一维空间上，绘制散点图，其实是在看散点的疏密程度随坐标轴的变化
 
-```{r,echo=TRUE,fig.cap="一维散点图",fig.subcap=c("抖动图","疏密图"),fig.asp=0.3}
+```{r,fig.cap="一维散点图",fig.subcap=c("抖动图","疏密图"),fig.asp=0.3}
 stripchart(longley$Unemployed, method = "jitter", jitter = 0.1, pch = 16, col = "lightblue")
 stripchart(longley$Unemployed, method = "overplot", pch = 16, col = "lightblue")
 ```
 
 气泡图是二维散点图的一种变体，气泡的大小可以用来描述第三个变量，下面以数据集 topo 为例展示气泡图
 
-```{r,echo=TRUE}
+```{r}
 # 加载数据集
 data(topo, package = "MASS")
 # 查看数据集
@@ -1087,7 +1087,7 @@ str(topo)
 
 topo 是空间地形数据集，包含有52行3列，数据点是310平方英尺范围内的海拔高度数据，x 坐标每单位50英尺，y 坐标单位同 x 坐标，海拔高度 z 单位是英尺
 
-```{r,echo=TRUE,fig.cap="地形图之海拔高度",fig.asp=1}
+```{r,fig.cap="地形图之海拔高度",fig.asp=1}
 plot(y ~ x,
   cex = (960 - z) / (960 - 690) * 3, data = topo,
   xlab = "X Coordinates", ylab = "Y coordinates"
@@ -1096,7 +1096,7 @@ plot(y ~ x,
 
 散点图也适合分类数据的展示，在图中用不同颜色或符号标记数据点所属类别，即在普通散点图的基础上添加一分类变量的描述
 
-```{r category-base, fig.cap="分类散点图",fig.asp=0.8,echo=TRUE}
+```{r category-base, fig.cap="分类散点图",fig.asp=0.8}
 plot(mpg ~ hp,
   data = subset(mtcars, am == 1), pch = 16, col = "blue",
   xlim = c(50, 350), ylim = c(10, 35)
@@ -1113,7 +1113,7 @@ legend(300, 35,
 )
 ```
 
-```{r,fig.cap="分类散点图",echo=TRUE}
+```{r,fig.cap="分类散点图"}
 plot(Sepal.Length ~ Sepal.Width, data = iris, col = Species, pch = 16)
 legend("topright",
   legend = unique(iris$Species), box.col = "gray",
@@ -1124,7 +1124,7 @@ box(col = "gray")
 
 分组散点图和平滑
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 library(car)
 scatterplot(Sepal.Length ~ Sepal.Width, col = c("black","red","blue"), pch=c(16,16,16),
             smooth = TRUE, boxplots = "xy", groups = iris$Species, 
@@ -1165,7 +1165,7 @@ densCols(x, y = NULL, nbin = 128, bandwidth,
 
 `densCols` 函数根据点的局部密度生成颜色，密度估计采用核平滑法，由 **KernSmooth** 包的 `bkde2D` 函数实现。参数 `colramp` 传递一个函数，`colorRampPalette` 根据给定的几种颜色生成函数，参数 `bandwidth` 实际上是传给 `bkde2D` 函数
 
-```{r densCols,echo=TRUE,fig.cap="根据点的密度生成颜色",fig.asp=1,out.width="45%",fig.width=4.5}
+```{r densCols,fig.cap="根据点的密度生成颜色",fig.asp=1,out.width="45%",fig.width=4.5}
 x1 <- matrix(rnorm(1e3), ncol = 2)
 x2 <- matrix(rnorm(1e3, mean = 3, sd = 1.5), ncol = 2)
 x <- rbind(x1, x2)
@@ -1176,7 +1176,7 @@ graphics::plot(x, col = dcols, pch = 20, panel.first = grid())
 
 气泡图也是散点图的一种
 
-```{r,fig.cap="气泡图",echo=TRUE}
+```{r,fig.cap="气泡图"}
 plot(Volume ~ Height,
   data = trees, pch = 16, cex = Girth / 8,
   col = rev(terrain.colors(nrow(trees), alpha = .5))
@@ -1188,7 +1188,7 @@ box(col = "gray")
 
 抖动散点图
 
-```{r jitter-scatter,fig.cap="抖动散点图",fig.asp=1,echo=TRUE}
+```{r jitter-scatter,fig.cap="抖动散点图",fig.asp=1}
 mat <- matrix(1:length(colors()), ncol = 9, byrow= TRUE)
 df <- data.frame(col = colors(), 
 	x = as.integer(cut(1:length(colors()), 9)),
@@ -1213,7 +1213,7 @@ https://tomizonor.wordpress.com/2013/11/24/double-box-plot-1-2/
 https://tomizonor.wordpress.com/2013/03/15/double-box-plot/
 
 
-```{r boxplot,echo=TRUE}
+```{r boxplot}
 A <- c(
   79.98, 80.04, 80.02, 80.04, 80.03, 80.03, 80.04, 79.97,
   80.05, 80.03, 80.02, 80, 80.02
@@ -1222,7 +1222,7 @@ B <- c(80.02, 79.94, 79.98, 79.97, 79.97, 80.03, 79.95, 79.97)
 boxplot(A, B)
 ```
 
-```{r iris,fig.cap="安德森的鸢尾花数据",fig.asp=1,echo=TRUE}
+```{r iris,fig.cap="安德森的鸢尾花数据",fig.asp=1}
 with(data = iris, {
   op <- par(mfrow = c(2, 2), mar = c(4, 4, 2, .5))
   plot(Sepal.Length ~ Species)
@@ -1236,7 +1236,7 @@ with(data = iris, {
 
 箱线图的花样也很多
 
-```{r,echo=TRUE}
+```{r}
 boxplot(longley$Unemployed)
 # 水平放置
 boxplot(longley$Unemployed,
@@ -1246,7 +1246,7 @@ boxplot(longley$Unemployed,
 )
 ```
 
-```{r,echo=TRUE}
+```{r}
 data(InsectSprays)
 boxplot(count ~ spray,
   data = InsectSprays,
@@ -1259,7 +1259,7 @@ boxplot(count ~ spray,
 
 水平放置
 
-```{r,echo=TRUE}
+```{r}
 boxplot(count ~ spray,
   data = InsectSprays,
   col = "pink",
@@ -1276,7 +1276,7 @@ boxplot(count ~ spray,
 
 iris 四个测量指标
 
-```{r,echo=TRUE,fig.cap="带标准差的均值散点图",fig.asp=.8,fig.width=5}
+```{r,fig.cap="带标准差的均值散点图",fig.asp=.8,fig.width=5}
 vec_mean <- colMeans(iris[,-5])
 vec_sd <- apply(iris[, -5], 2, sd)
 plot(seq(4), vec_mean,
@@ -1324,7 +1324,7 @@ box(col = "gray")
 
 ### 函数图 {#function}
 
-```{r,echo=TRUE,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
+```{r,title.mar=TRUE,fig.asp=1,out.width="65%",fig.width=6.5}
 library(pracma)
 ##  First zero on the critical line s = 0.5 + i t
 x <- seq(0, 20, len = 1001)
@@ -1356,7 +1356,7 @@ legend(0, 2.4, c("real part", "imaginary part", "absolute value"),
 
 马赛克图 mosaicplot
 
-```{r,fig.cap="马赛克图",echo=TRUE,fig.asp=1}
+```{r,fig.cap="马赛克图",fig.asp=1}
 plot(HairEyeColor, col = "lightblue", border = "white", main = "")
 ```
 
@@ -1371,7 +1371,7 @@ dotchart
 
 在对角线上添加平滑曲线、密度曲线
 
-```{r,echo=TRUE,fig.asp=1,fig.cap="变量关系"}
+```{r,fig.asp=1,fig.cap="变量关系"}
 pairs(longley,
   gap = 0,
   diag.panel = function(x, ...) {
@@ -1391,7 +1391,7 @@ pairs(longley,
 )
 ```
 
-```{r,fig.cap="矩阵图",echo=TRUE,fig.asp=1}
+```{r,fig.cap="矩阵图",fig.asp=1}
 # 自带 layout
 plot(iris[, -5], col = iris$Species)
 ```
@@ -1408,7 +1408,7 @@ plot(iris[, -5], col = iris$Species)
 - 轮廓图 contour 等高线图
 - 热图 image
 
-```{r unemployment,echo=TRUE,fig.cap="2009年美国各城镇失业率"}
+```{r unemployment,fig.cap="2009年美国各城镇失业率"}
 # 代码来自 ?map
 par(mar = c(0, 0, 2, 0))
 library(mapproj)
@@ -1439,7 +1439,7 @@ legend("bottomleft", leg.txt,
 ```
 
 
-```{r,echo=TRUE,eval=!require("spDataLarge")}
+```{r,eval=!require("spDataLarge")}
 if (!"spDataLarge" %in% .packages(TRUE)) {
   install.packages("spDataLarge",
     repos = "https://nowosad.github.io/drat/",
@@ -1450,7 +1450,7 @@ if (!"spDataLarge" %in% .packages(TRUE)) {
 
 raster 图形，Elevation raster data from SRTM of the Zion National Park area
 
-```{r,fig.cap="raster 图形",fig.asp=.8,fig.width=6,echo=TRUE,eval=require("spDataLarge")}
+```{r,fig.cap="raster 图形",fig.asp=.8,fig.width=6,eval=require("spDataLarge")}
 library(sp)
 library(raster)
 library(spDataLarge)
@@ -1629,13 +1629,13 @@ legend("topright",
 
 保存绘制的图形，R 使用的图形渲染库的版本
 
-```{r,echo=TRUE}
+```{r}
 grSoftVersion()
 ```
 
 当前 R 环境中支持的图形设备
 
-```{r,echo=TRUE}
+```{r}
 capabilities()
 ```
 
@@ -1652,7 +1652,7 @@ Table: (\#tab:graphics-devices) 图形设备列表
 
 图形设备控制函数
 
-```{r,echo=TRUE}
+```{r}
 apropos("dev.")
 ```
 

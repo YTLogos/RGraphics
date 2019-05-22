@@ -31,7 +31,7 @@ grep(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
 
 匹配模式 pattern 的内容 可以用函数 `cat` 打印出来，注意反斜杠进入 R 字符串中时，需要用两个，反斜杠 `\` 本身是转义符，否则会报错。
 
-```{r,echo=TRUE}
+```{r}
 cat("\\") # \ 反斜杠是转义字符
 cat("\\.")
 cat("\\\n") # 注意 \n 表示换行
@@ -68,7 +68,7 @@ Table: (\#tab:character-constants) 字符常量表
 
 R 内置的正则表达式实现是基于 PCRE ICU TRE iconv 等第三方库，搞清楚自己使用的版本信息是重要的，一些字符集的解释与区域环境有关，如 `[:alnum:]` 和 `[:alpha:]`等，所以获取当前的区域设置也很重要
 
-```{r,echo=TRUE}
+```{r}
 # find a suitable coding for the current locale
 localeToCharset(locale = Sys.getlocale("LC_CTYPE"))
 # 软件版本信息
@@ -85,7 +85,7 @@ stringi::stri_info()
 
 需要临时改变区域环境设置，配合特殊的画图和文本输出要求。
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 # 获取当前默认的区域设置
 foo <- Sys.getlocale()
 # 恢复默认的区域设置
@@ -172,7 +172,7 @@ Table: (\#tab:group-lookaround) 环顾四周查找
 
 下面举个例子说明，从字符串向量 `notables` 中获得了三组匹配 `name.rex` 是一段正则表达式，描述的模式是人名
 
-```{r,echo=TRUE}
+```{r}
 ## named capture
 notables <- c("  Ben Franklin and Jefferson Davis",
               "\tMillard Fillmore")

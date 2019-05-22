@@ -194,7 +194,7 @@ dd[order(-dd[,4], dd[,1]), ]
 
 根据变量 z 
 
-```{r,echo=TRUE}
+```{r}
 dd[order(dd$z, dd$b), ]
 ```
 
