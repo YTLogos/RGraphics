@@ -169,7 +169,7 @@ iris[
 
 在数据框内，根据(order)某一列或几列对行进行排序(sort)，根据鸢尾花(iris)的类别(Species)对萼片(sepal)的长度进行排序，其余的列随之变化
 
-```{r}
+```{r,out.lines=10}
 # 对萼片的长度排序
 iris[order(iris$Species, iris$Sepal.Length), ]
 # 对花瓣的长度排序
@@ -202,7 +202,7 @@ dd[order(dd$z, dd$b), ]
 
 数据拆分通常是按找某一个分类变量分组，分完组就是计算，计算完就把结果按照原来的分组方式合并
 
-```{r}
+```{r,out.lines=10}
 ## Notice that assignment form is not used since a variable is being added
 g <- airquality$Month
 l <- split(airquality, g) # 分组
@@ -213,13 +213,13 @@ head(aq2)
 
 tapply 自带分组的功能，按月份 Month 对 Ozone 中心标准化，其返回一个列表
 
-```{r}
+```{r,out.lines=10}
 with(airquality, tapply(Ozone, Month, scale))
 ```
 
 上面的过程等价于
 
-```{r}
+```{r,out.lines=10}
 do.call("rbind", lapply(split(airquality, airquality$Month), transform, Oz.Z = scale(Ozone)))
 ```
 
