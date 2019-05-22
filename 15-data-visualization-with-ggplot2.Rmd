@@ -110,6 +110,14 @@ ls("package:ggplot2", pattern = "^annotation_")
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point()
 ```
 
+
+```{r math-expr-r}
+ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() +
+  labs(title = substitute(paste(d *
+    bolditalic(x)[italic(t)] == alpha * (theta - bolditalic(x)[italic(t)]) *
+    d * italic(t) + lambda * d * italic(B)[italic(t)]), list(lambda = 4)))
+```
+
 ### 图例 {#ggplot2-legend}
 
 ### 组合 {#ggplot2-grid}
@@ -981,7 +989,6 @@ cat(sprintf("--- elapsed user-time: %fs ", (proc.time() - start)[1]))
 首先我们从 CRAN 官网下载 R 包描述信息
 
 ```{r, echo=TRUE}
-library(tidyverse)
 # CRAN R包 metadata 信息
 if (file.exists("data/packages.rds")) {
   pdb <- readRDS("data/packages.rds")
@@ -1112,3 +1119,10 @@ ggplot(myData, aes(x = Freq, y = Maintainer)) +
 (ref:top-maintainers) 维护R包数量最多的20个人[^orphaned]
 
 [^orphaned]: 其中 Orphaned 表示之前的R包维护者不愿意继续维护了，后来有人接手维护，Orphaned 表示这一类接盘侠
+
+## 软件信息  {#ggplot2-session-info}
+
+```{r}
+sessionInfo()
+```
+
