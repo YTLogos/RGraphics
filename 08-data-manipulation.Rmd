@@ -10,13 +10,13 @@ library(tidyverse)
 
 什么是 Base R? Base R 指的是 R 语言/软件的核心组件，由 R Core Team 维护
 
-```{r,echo=TRUE}
+```{r}
 Pkgs <- sapply(list.files(R.home("library")), function(x)
   packageDescription(pkg = x, fields = "Priority"))
 names(Pkgs[Pkgs == "base" & !is.na(Pkgs)])
 ```
 
-```{r,echo=TRUE}
+```{r}
 names(Pkgs[Pkgs == "recommended" & !is.na(Pkgs)])
 ```
 
@@ -26,13 +26,13 @@ names(Pkgs[Pkgs == "recommended" & !is.na(Pkgs)])
 
 查看属性
 
-```{r,echo=TRUE}
+```{r}
 str(iris)
 ```
 
 查看部分数据集
 
-```{r,echo=TRUE}
+```{r}
 head(iris, 5)
 tail(iris, 5)
 ```
@@ -46,7 +46,7 @@ tail -n 5 clientip.csv
 
 对象的类型，存储方式
 
-```{r,echo=TRUE}
+```{r}
 class(iris)
 mode(iris)
 typeof(iris)
@@ -54,7 +54,7 @@ typeof(iris)
 
 查看对象在R环境中所占空间的大小
 
-```{r,echo=TRUE}
+```{r}
 object.size(iris)
 object.size(letters)
 object.size(ls)
@@ -67,11 +67,11 @@ format(object.size(library), units = "auto")
 
 reshape 还支持正则表达式
 
-```{r,echo=TRUE}
+```{r}
 str(Indometh)
 summary(Indometh)
 ```
-```{r,echo=TRUE}
+```{r}
 wide <- reshape(Indometh,
   v.names = "conc", idvar = "Subject",
   timevar = "time", direction = "wide"
@@ -81,7 +81,7 @@ wide[, 1:6]
 
 长 long 变 wide 宽格式
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 data(gambia, package = "geoR")
 # Building a "village-level" data frame
 ind <- paste("x", gambia[, 1], "y", gambia[, 2], sep = "")
@@ -94,13 +94,13 @@ head(village)
 
 transform 对数据框中的某些列做计算，取对数，将计算的结果单存一列加到数据框中
 
-```{r,echo=TRUE}
+```{r}
 transform(iris, scale.sl = (max(Sepal.Length) - Sepal.Length) / (max(Sepal.Length) - min(Sepal.Length)))
 ```
 
 验证一下 `scale.sl` 变量的第一个值
 
-```{r,echo=TRUE}
+```{r}
 (max(iris$Sepal.Length) - 5.1) / (max(iris$Sepal.Length) - min(iris$Sepal.Length))
 ```
 
@@ -110,13 +110,13 @@ Warning: This is a convenience function intended for use interactively. For prog
 
 ## 提取子集 {#base-subset}
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 subset(x, subset, select, drop = FALSE, ...)
 ``` 
 
 参数 `subset`代表行操作，`select` 代表列操作，函数 `subset` 从数据框中提取部分数据
 
-```{r,echo=TRUE}
+```{r}
 subset(iris, Species == "virginica")
 # summary(iris$Sepal.Length)  mean(iris$Sepal.Length)
 # 且的逻辑
@@ -134,7 +134,7 @@ subset(iris, Sepal.Length > mean(Sepal.Length),
 
 高级操作：加入正则表达式筛选
 
-```{r,echo=TRUE}
+```{r}
 ## sometimes requiring a logical 'subset' argument is a nuisance
 nm <- rownames(state.x77)
 start_with_M <- nm %in% grep("^M", nm, value = TRUE)
@@ -151,7 +151,7 @@ subset(state.x77, grepl("^M", rownames(state.x77)), Illiteracy:Murder)
 
 使用索引 `[` 
 
-```{r,echo=TRUE}
+```{r}
 iris[iris$Species == "virginica", ]
 iris[iris$Species == "virginica" &
   iris$Sepal.Length > mean(iris$Sepal.Length), ]
@@ -169,7 +169,7 @@ iris[
 
 在数据框内，根据(order)某一列或几列对行进行排序(sort)，根据鸢尾花(iris)的类别(Species)对萼片(sepal)的长度进行排序，其余的列随之变化
 
-```{r,echo=TRUE}
+```{r}
 # 对萼片的长度排序
 iris[order(iris$Species, iris$Sepal.Length), ]
 # 对花瓣的长度排序
@@ -184,7 +184,7 @@ sort/ordered 排序
 
 数据拆分通常是按找某一个分类变量分组，分完组就是计算，计算完就把结果按照原来的分组方式合并
 
-```{r,echo=TRUE}
+```{r}
 ## Notice that assignment form is not used since a variable is being added
 g <- airquality$Month
 l <- split(airquality, g) # 分组
@@ -195,19 +195,19 @@ head(aq2)
 
 tapply 自带分组的功能，按月份 Month 对 Ozone 中心标准化，其返回一个列表
 
-```{r,echo=TRUE}
+```{r}
 with(airquality, tapply(Ozone, Month, scale))
 ```
 
 上面的过程等价于
 
-```{r,echo=TRUE}
+```{r}
 do.call("rbind", lapply(split(airquality, airquality$Month), transform, Oz.Z = scale(Ozone)))
 ```
 
 由于上面对 Ozone 正态标准化，所以标准化后的 `Oz.z` 再按月分组计算方差自然每个月都是 1，而均值都是 0。
 
-```{r,echo=TRUE}
+```{r}
 with(aq2, tapply(Oz.Z, Month, sd, na.rm = TRUE))
 with(aq2, tapply(Oz.Z, Month, mean, na.rm = TRUE))
 ```
@@ -216,7 +216,7 @@ with(aq2, tapply(Oz.Z, Month, mean, na.rm = TRUE))
 
 `cut` 函数可以将连续型变量划分为分类变量
 
-```{r,echo=TRUE}
+```{r}
 set.seed(2019)
 Z <- stats::rnorm(10)
 cut(Z, breaks = -6:6)
@@ -226,13 +226,13 @@ cut(Z, breaks = -6:6, labels = FALSE)
 
 我们还可以指定参数 `dig.lab` 设置分组的精度，`ordered` 将分组变量看作是有序的，`breaks` 传递单个数时，表示分组数，而不是断点
 
-```{r,echo=TRUE}
+```{r}
 cut(Z, breaks = 3, dig.lab = 4, ordered = TRUE)
 ```
 
 此时，统计每组的频数，如图 \@ref(fig:cut)
 
-```{r cut,fig.cap="连续型变量分组统计",out.width="35%",echo=TRUE}
+```{r cut,fig.cap="连续型变量分组统计",out.width="35%"}
 # 条形图
 plot(cut(Z, breaks = -6:6))
 # 直方图
@@ -241,14 +241,14 @@ hist(Z, breaks = -6:6)
 
 在指定分组数的情况下，我们还想获取分组的断点
 
-```{r,echo=TRUE}
+```{r}
 labs <- levels(cut(Z, 3))
 labs
 ```
 
 用正则表达式抽取断点
 
-```{r,echo=TRUE}
+```{r}
 cbind(
   lower = as.numeric(sub("\\((.+),.*", "\\1", labs)),
   upper = as.numeric(sub("[^,]*,([^]]*)\\]", "\\1", labs))
@@ -261,7 +261,7 @@ cbind(
 
 merge 合并两个数据框
 
-```{r,echo=TRUE}
+```{r}
 authors <- data.frame(
   ## I(*) : use character columns of names to get sensible sort order
   surname = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
@@ -298,19 +298,19 @@ books
 
 默认找到同名的列，然后是同名的行合并，多余的没有匹配到的就丢掉
 
-```{r,echo=TRUE}
+```{r}
 merge(authorN, books)
 ```
 
 还可以指定合并的列，先按照 surname 合并，留下 surname
 
-```{r,echo=TRUE}
+```{r}
 merge(authors, books, by.x = "surname", by.y = "name")
 ```
 
 留下的是 name
 
-```{r,echo=TRUE}
+```{r}
 merge(books, authors, by.x = "name", by.y = "surname")
 ```
 
@@ -326,7 +326,7 @@ right join
 
 单个数值型向量去重，此时和 unique 函数作用一样
 
-```{r,echo=TRUE}
+```{r}
 (x <- c(9:20, 1:5, 3:7, 0:8))
 ## extract unique elements
 x[!duplicated(x)]
@@ -335,7 +335,7 @@ unique(x)
 
 数据框类型数据中，去除重复的行，这个重复可以是多个变量对应的向量
 
-```{r,echo=TRUE}
+```{r}
 set.seed(123)
 df <- data.frame(
   x = sample(0:1, 10, replace = T),
@@ -349,7 +349,7 @@ df[!duplicated(df[, 1:2]), ]
 ::: sidebar
 数据去重在 dplyr 中的实现[^dplyr-duplicated]。
 
-```{r,echo=TRUE}
+```{r}
 library(dplyr)
 df %>%
   group_by(x, y) %>%
@@ -363,11 +363,11 @@ df %>%
 
 主要是分组统计
 
-```{r,echo=TRUE}
+```{r}
 apropos("apply")
 ```
 
-```{r,echo=TRUE}
+```{r}
 # 分组求和 colSums colMeans max
 unique(iris$Species)
 # 分类求和
@@ -383,7 +383,7 @@ apply(iris[iris$Species == "setosa", -5], 2, quantile)
 
 aggregate: Compute Summary Statistics of Data Subsets
 
-```{r,echo=TRUE}
+```{r}
 # 按分类变量 Species 分组求和
 # aggregate(subset(iris, select = -Species), by = list(iris[, "Species"]), FUN = sum)
 aggregate(iris[, -5], list(iris[, 5]), sum)
@@ -395,13 +395,13 @@ aggregate(iris[, -ind], list(iris[, ind]), sum)
 
 按照 Species 划分的类别，分组计算，使用公式表示形式，右边一定是分类变量，否则会报错误或者警告，输出奇怪的结果，请读者尝试运行`aggregate(Species ~ Sepal.Length, data = iris, mean)`。公式法表示分组计算，`~` 左手边可以做加 `+` 减 `-` 乘 `*` 除 `/` 取余 `%%` 等数学运算。下面以数据集 iris 为例，只对 Sepal.Length 按 Species 分组计算
 
-```{r,echo=TRUE}
+```{r}
 aggregate(Sepal.Length ~ Species, data = iris, mean)
 ```
 
 与上述分组统计结果一样的命令，在大数据集上， 与 aggregate 相比，tapply 要快很多，by 是 tapply 的包裹，处理速度差不多。读者可以构造伪随机数据集验证。
 
-```{r,echo=TRUE}
+```{r}
 # tapply(iris$Sepal.Length, list(iris$Species), mean)
 with(iris, tapply(Sepal.Length, Species, mean))
 by(iris$Sepal.Length, iris$Species, mean)
@@ -409,19 +409,19 @@ by(iris$Sepal.Length, iris$Species, mean)
 
 对所有变量按 Species 分组计算 
 
-```{r,echo=TRUE}
+```{r}
 aggregate(. ~ Species, data = iris, mean)
 ```
 
 对变量 Sepal.Length 和 Sepal.Width 求和后，按 Species 分组计算
 
-```{r,echo=TRUE}
+```{r}
 aggregate(Sepal.Length + Sepal.Width ~ Species, data = iris, mean)
 ```
 
 对多个分类变量做分组计算，在数据集 ChickWeight 中 Chick和Diet都是数字编码的分类变量，其中 Chick 是有序的因子变量，Diet 是无序的因子变量，而 Time 是数值型的变量，表示小鸡出生的天数。
 
-```{r,echo=TRUE}
+```{r}
 # 查看数据
 str(ChickWeight)
 ```
@@ -435,14 +435,14 @@ ChickWeight
 
 对于数据集ChickWeight中的有序变量Chick，aggregate 会按照既定顺序返回分组计算的结果
 
-```{r,echo=TRUE, out.lines=6}
+```{r, out.lines=6}
 aggregate(weight ~ Chick, data = ChickWeight, mean)
 aggregate(weight ~ Diet, data = ChickWeight, mean)
 ```
 
 分类变量没有用数字编码，以 CO2 数据集为例，该数据集描述草植对二氧化碳的吸收情况，Plant 是具有12个水平的有序的因子变量，Type表示植物的源头分别是魁北克(Quebec)和密西西比(Mississippi)，Treatment表示冷却(chilled)和不冷却(nonchilled)两种处理方式，conc表示周围环境中二氧化碳的浓度，uptake表示植物吸收二氧化碳的速率。
 
-```{r,echo=TRUE}
+```{r}
 # 查看数据集
 head(CO2)
 str(CO2)
@@ -450,7 +450,7 @@ str(CO2)
 
 对单个变量分组统计
 
-```{r,echo=TRUE}
+```{r}
 aggregate(uptake ~ Plant, data = CO2, mean)
 aggregate(uptake ~ Type, data = CO2, mean)
 aggregate(uptake ~ Treatment, data = CO2, mean)
@@ -458,7 +458,7 @@ aggregate(uptake ~ Treatment, data = CO2, mean)
 
 对多个变量分组统计，查看二氧化碳吸收速率uptake随类型Type和处理方式Treatment
 
-```{r,echo=TRUE}
+```{r}
 aggregate(uptake ~ Type + Treatment, data = CO2, mean)
 tapply(CO2$uptake, list(CO2$Type, CO2$Treatment), mean)
 by(CO2$uptake, list(CO2$Type, CO2$Treatment), mean)
@@ -468,7 +468,7 @@ by(CO2$uptake, list(CO2$Type, CO2$Treatment), mean)
 
 Function `by` is an object-oriented wrapper for `tapply` applied to data frames. 
 
-```{r,echo=TRUE}
+```{r}
 # 分组求和
 # by(iris[, 1], INDICES = list(iris$Species), FUN = sum)
 # by(iris[, 2], INDICES = list(iris$Species), FUN = sum)
@@ -480,7 +480,7 @@ by(iris, INDICES = list(iris$Species), FUN = summary)
 
 Group Averages Over Level Combinations of Factors 分组平均
 
-```{r,echo=TRUE}
+```{r}
 str(warpbreaks)
 ave(warpbreaks$breaks, warpbreaks$wool)
 warpbreaks %>% head(5)
@@ -502,33 +502,33 @@ table 多个分类变量分组计数统计
 - UCBAdmissions 1973 年加州大学伯克利分校的院系录取数据集 3维的列联表
 - Titanic 4维的列联表数据 泰坦尼克号幸存者数据集
 
-```{r,echo=TRUE}
+```{r}
 with(warpbreaks, table(wool, tension))
 ```
 
 以 iris 数据集为例，table 的第一个参数是自己制造的第二个分类变量，原始分类变量是 Species
 
-```{r,echo=TRUE}
+```{r}
 with(iris, table(Sepal.check = Sepal.Length > 7, Species))
 with(iris, table(Sepal.check = Sepal.Length > mean(Sepal.Length), Species))
 ```
 
 以 airquality 数据集为例，看看月份中臭氧含量比较高的几天
 
-```{r,echo=TRUE}
+```{r}
 aiq.tab <- with(airquality, table(Oz.high = Ozone > 80, Month))
 aiq.tab
 ```
 
 对表格按行和列求和，即求表格的边际，查看总体情况
 
-```{r,echo=TRUE}
+```{r}
 addmargins(aiq.tab, 1:2)
 ```
 
 臭氧含量超 80 的天数在每个月的占比，`addmargins` 的第二个参数 1 表示对列求和
 
-```{r,echo=TRUE}
+```{r}
 aiq.prop <- prop.table(aiq.tab, 2)
 aiq.prop
 aiq.marprop <- addmargins(aiq.prop, 1)
@@ -537,7 +537,7 @@ aiq.marprop
 
 转换成百分比，将小数四舍五入转化为百分数，保留两位小数点
 
-```{r,echo=TRUE}
+```{r}
 round(100 * aiq.marprop, 2)
 ```
 
@@ -547,7 +547,7 @@ pairs(airquality, panel = panel.smooth, main = "airquality data")
 
 以 UCBAdmissions 数据集为例，使用 `xtabs` 函数把数据组织成列联表，先查看数据的内容
 
-```{r,out.lines=6,echo=TRUE}
+```{r,out.lines=6}
 UCBAdmissions
 UCBA2DF <- as.data.frame(UCBAdmissions)
 UCBA2DF
@@ -555,14 +555,14 @@ UCBA2DF
 
 接着将 `UCBA2DF` 数据集转化为表格的形式
 
-```{r,echo=TRUE}
+```{r}
 UCBA2DF.tab <- xtabs(Freq ~ Gender + Admit + Dept, data = UCBA2DF)
 ftable(UCBA2DF.tab)
 ```
 
 将录取性别和院系进行对比
 
-```{r,echo=TRUE}
+```{r}
 prop.table(margin.table(UCBA2DF.tab, c(1, 3)), 1)
 ```
 
@@ -572,7 +572,7 @@ prop.table(margin.table(UCBA2DF.tab, c(1, 3)), 1)
 
 which 与引用 `[` 性能比较，在区间 $[0,1]$ 上生成 10 万个服从均匀分布的随机数，随机抽取其中$\frac{1}{4}$。
 
-```{r,echo=TRUE}
+```{r}
 n <- 100000
 x <- runif(n)
 i <- logical(n)
@@ -584,20 +584,20 @@ microbenchmark::microbenchmark(x[i], x[which(i)], times = 1000)
 
 多维数组的行列是怎么定义的 `?array` 轴的概念，画个图表示数组
 
-```{r,echo=TRUE}
+```{r}
 array(1:27, c(3, 3, 3))
 ```
 
 垂直于Z轴的平面去截三维立方体，3 代表 z 轴，得到三个截面（二维矩阵）
 
-```{r,echo=TRUE}
-asplit(array(1:27,c(3,3,3)),3)
+```{r}
+asplit(array(1:27, c(3, 3, 3)), 3)
 ```
 
 对每个二维矩阵按列求和
 
-```{r,echo=TRUE}
-lapply(asplit(array(1:27,c(3,3,3)),3), apply, 2, sum)
+```{r}
+lapply(asplit(array(1:27, c(3, 3, 3)), 3), apply, 2, sum)
 ```
 
 `asplit` 和 `lapply` 组合处理多维数组的计算问题，多维数组[^matrix-list]
@@ -606,26 +606,51 @@ lapply(asplit(array(1:27,c(3,3,3)),3), apply, 2, sum)
 
 ## 其它操作 {#base-others}
 
-成对的数据操作
+成对的数据操作有 `list` 与 `unlist`、`stack` 与 `unstack`、`class` 与 `unclass`、`attach` 与 `detach` 以及 `with` 和 `within`，它们在数据操作过程中有时会起到一定的补充作用。
 
 ### 列表属性 {#list-or-unlist}
 
-- `list` 与 `unlist` 创建列表 
+```{r,eval=FALSE}
+# 创建列表
+list(...)
+pairlist(...)
+# 转化列表
+as.list(x, ...)
+## S3 method for class 'environment'
+as.list(x, all.names = FALSE, sorted = FALSE, ...)
+as.pairlist(x)
+# 检查列表
+is.list(x)
+is.pairlist(x)
 
-```{r,echo=TRUE}
-tmp <- list(A = c(1, 2, 3), B = c("a", "b"))
-tmp
+alist(...)
+```
+
+`list` 函数用来构造、转化和检查 R 列表对象。下面创建一个临时列表对象 tmp ，它包含两个元素 A 和 B，两个元素都是向量，前者是数值型，后者是字符型
+
+```{r}
+(tmp <- list(A = c(1, 2, 3), B = c("a", "b")))
+```
+
+```{r,eval=FALSE}
+unlist(x, recursive = TRUE, use.names = TRUE)
+```
+
+`unlist` 函数将给定的列表对象 `x` 简化为原子向量 (atomic vector)，我们发现简化之后变成一个字符型向量
+
+```{r}
 unlist(tmp)
+unlist(tmp, use.names = FALSE)
 ```
 
 ### 堆叠向量 {#stack-or-unstack}
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,eval=FALSE}
 stack(x, ...)
 ## Default S3 method:
-stack(x, drop=FALSE, ...)
+stack(x, drop = FALSE, ...)
 ## S3 method for class 'data.frame'
-stack(x, select, drop=FALSE, ...)
+stack(x, select, drop = FALSE, ...)
 
 unstack(x, ...)
 ## Default S3 method:
@@ -636,32 +661,64 @@ unstack(x, form, ...)
 
 `stack` 与 `unstack` 将多个向量堆在一起组成一个向量
 
-```{r,echo=TRUE}
+```{r}
+# 查看数据集 PlantGrowth
+class(PlantGrowth)
 head(PlantGrowth)
-formula(PlantGrowth) # check the default formula
-pg <- unstack(PlantGrowth) # unstack according to this formula
-pg
-stack(pg) # now put it back together
-stack(pg, select = -ctrl) # omitting one vector
+# 检查默认的公式
+formula(PlantGrowth) 
+# 根据公式解除堆叠
+# 下面等价于 unstack(PlantGrowth, form = weight ~ group)
+(pg <- unstack(PlantGrowth)) 
 ```
+
+现在再将变量 pg 堆叠起来，还可以指定要堆叠的列
+
+```{r}
+stack(pg)
+stack(pg, select = -ctrl)
+```
+
+::: sidebar
+形式上和 reshape 有一些相似之处，数据框可以由长变宽或由宽变长
+:::
 
 ### 属性转化 {#class-or-unclass}
 
- `class` 和 `unclass` 查看类属性
+```{r,eval=FALSE}
+class(x)
+class(x) <- value
+unclass(x)
+inherits(x, what, which = FALSE)
 
-```{r,out.lines=6,echo=TRUE}
-iris$Species
+oldClass(x)
+oldClass(x) <- value
+```
 
+`class` 和 `unclass` 函数用来查看、设置类属性和取消类属性，常用于面向对象的编程设计中
+
+```{r,out.lines=6}
+class(iris)
 class(iris$Species)
-
 unclass(iris$Species)
 ```
 
 ### 绑定环境 {#attach-or-detach}
 
+```{r,eval=FALSE}
+attach(what,
+  pos = 2L, name = deparse(substitute(what), backtick = FALSE),
+  warn.conflicts = TRUE
+)
+detach(name,
+  pos = 2L, unload = FALSE, character.only = FALSE,
+  force = FALSE
+)
+```
+
 `attach` 和 `detach` 是否绑定数据框的列名，不推荐操作，推荐使用 `with`
 
-```{r,echo=TRUE}
+```{r}
 attach(iris)
 head(Species)
 detach(iris)
@@ -669,7 +726,7 @@ detach(iris)
 
 ### 数据环境 {#with-or-within}
 
-```{r,eval=FALSE,echo=TRUE}
+```{r,eval=FALSE}
 with(data, expr, ...)
 within(data, expr, ...)
 ## S3 method for class 'list'
@@ -682,30 +739,30 @@ within(data, expr, keepAttrs = TRUE, ...)
 `expr`
 :  参数 `expr` 包含要计算的表达式。在 `within` 中通常包含一个复合表达式，比如
    
-    ```{r,eval=FALSE,echo=TRUE}
+    ```{r,eval=FALSE}
     {
-       a <- somefun()
-       b <- otherfun()
-       ...
-       rm(unused1, temp)
+      a <- somefun()
+      b <- otherfun()
+      ...
+      rm(unused1, temp)
     }
     ```
 
 `with` 和 `within` 计算一组表达式，计算的环境是由数据构造的，后者可以修改原始的数据
 
-```{r,echo=TRUE}
-with(mtcars, mpg[cyl == 8  &  disp > 350])
+```{r}
+with(mtcars, mpg[cyl == 8 & disp > 350])
 ```
 
 和下面计算的结果一样，但是更加简洁漂亮
 
-```{r,echo=TRUE}
-mtcars$mpg[mtcars$cyl == 8  &  mtcars$disp > 350]
+```{r}
+mtcars$mpg[mtcars$cyl == 8 & mtcars$disp > 350]
 ```
 
 `within` 函数可以修改原数据环境中的多个变量，比如删除、修改和添加等
 
-```{r,echo=TRUE}
+```{r}
 # 原数据集 airquality
 head(airquality)
 aq <- within(airquality, {
@@ -721,7 +778,7 @@ head(aq)
 
 下面再举一个复杂的绘图例子，这个例子来自 `boxplot` 函数
 
-```{r subset-in-boxplot,echo=TRUE,title.mar=TRUE,fig.asp=0.8}
+```{r subset-in-boxplot,title.mar=TRUE,fig.asp=0.8}
 with(ToothGrowth, {
   boxplot(len ~ dose,
     boxwex = 0.25, at = 1:3 - 0.2,
@@ -742,7 +799,7 @@ with(ToothGrowth, {
 
 将 `boxplot` 函数的 `subset` 参数单独提出来，调用数据子集选择函数 `subset` ，这里 `with` 中只包含一个表达式，所以也可以不用大括号
 
-```{r subset-out-boxplot,echo=TRUE,title.mar=TRUE,fig.asp=0.8}
+```{r subset-out-boxplot,title.mar=TRUE,fig.asp=0.8}
 with(
   subset(ToothGrowth, supp == "VC"),
   boxplot(len ~ dose,
