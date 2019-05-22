@@ -663,5 +663,48 @@ apropos('package')
 
 ## 查找函数 {#lookup-function}
 
-[lookup](https://github.com/jimhester/lookup) R 函数完整定义，包括编译的代码，S3 和 S4 方法
+[lookup](https://github.com/jimhester/lookup) R 函数完整定义，包括编译的代码，S3 和 S4 方法。目前 lookup 包处于开发版，我们可以用 `remotes::install_github` 函数来安装它
+
+```{r,eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("jimhester/lookup")
+```
+
+R-level 的源代码都可以直接看
+
+```{r}
+body
+```
+
+此外，`lookup` 可以定位到 C-level 的源代码，需要联网才能查看，lookup 基于 Winston Chang 在 Github 上维护的 [R 源码镜像](https://github.com/wch/r-source) 
+
+```{r,eval=FALSE}
+lookup(body)
+```
+```
+base::body [closure] 
+function (fun = sys.function(sys.parent())) 
+{
+    if (is.character(fun)) 
+        fun <- get(fun, mode = "function", envir = parent.frame())
+    .Internal(body(fun))
+}
+<bytecode: 0x00000000140d6158>
+<environment: namespace:base>
+// c source: src/main/builtin.c#L264-L277
+SEXP attribute_hidden do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    if (TYPEOF(CAR(args)) == CLOSXP) {
+        SEXP b = BODY_EXPR(CAR(args));
+        RAISE_NAMED(b, NAMED(CAR(args)));
+        return b;
+    } else {
+        if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
+             TYPEOF(CAR(args)) == SPECIALSXP))
+            warningcall(call, _("argument is not a function"));
+        return R_NilValue;
+    }
+}
+```
 
