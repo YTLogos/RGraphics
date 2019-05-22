@@ -2,7 +2,7 @@
 
 ## 配色 {#colors}
 
-调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，还有 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和 [wesanderson](https://github.com/karthik/wesanderson)，还有根据电影 Harry Potter 制作的调色板 [harrypotter](https://github.com/aljrico/harrypotter)，以及根据网站[CARTO](https://carto.com/)设计的 [rcartocolor](https://github.com/Nowosad/rcartocolor) 包
+调色板合集 [paletteer](https://github.com/EmilHvitfeldt/paletteer)，其收录了很多 R 包制作的调色板，其中包括 [r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes) 和 [wesanderson](https://github.com/karthik/wesanderson)，根据电影 Harry Potter 制作的调色板 [harrypotter](https://github.com/aljrico/harrypotter)，根据网站 [CARTO](https://carto.com/) 设计的 [rcartocolor](https://github.com/Nowosad/rcartocolor) 包
 
 ```{r,fig.cap="HCL调色",echo=TRUE,R.options=list(tidyverse.quiet = TRUE)}
 # https://github.com/hadley/ggplot2-book
