@@ -2,7 +2,7 @@
 
 相比于第\@ref(string-manipulation)章，本章主要介绍字符串处理 stringr 包以及一些数据清理的高级应用。
 
-[Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)
+[Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [Text Mining with R A Tidy Approach](https://www.tidytextmining.com/) 字符串入门介绍 [R for Data Science](https://r4ds.had.co.nz/strings.html)， 谢士晨整理了 stringr 包与 Base R 正则表达式函数的对应表 <http://shichen.name/post/2017/07/25/datamani/>
 
 [stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包， [re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份 [正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
 
@@ -10,6 +10,8 @@
 - [Manipulating strings with the stringr package](https://www.brodrigues.co/blog/2019-02-10-stringr_package/)
 - [filesstrings](https://github.com/rorynolan/filesstrings) 基于 stringr 操作字符串
 - [strex](https://github.com/rorynolan/strex) 一些没有包含在 stringr 或者 stringi 中的字符串操作函数
+
+
 
 ## 处理性能 {#performance}
 
@@ -33,14 +35,18 @@ sapply(c("PCRE_limit_recursion", "PCRE_study", "PCRE_use_JIT"), getOption)
 
 ## 网络爬虫 {#Web-crawler}
 
-用 R 语言写爬虫 curl、 xml2 、RCurl、 XML 和 rvest 解析网页
+用 R 语言写爬虫 curl、httr、 xml2、XML 和 rvest 解析网页[^RCurl]
 
 ```{r}
 # 查看 libcurl 库的版本
 libcurlVersion()
 ```
 
-于主编利用 [tidyRSS](https://github.com/RobertMyles/tidyRSS) 包 解析博客站点的订阅信息，并将此设置为定时任务，创建自动更新博客内容的聚合网站 [Daily R](https://dailyr.netlify.com/)
+于主编利用 [tidyRSS](https://github.com/RobertMyles/tidyRSS) 包 抓取解析博客站点的订阅信息，并将此设置为定时任务，创建自动更新内容的博客聚合网站 [Daily R](https://dailyr.netlify.com/)
+
+抓取地震台信息
+
+[^RCurl]: Jeroen Ooms 已经确认 RCurl 早已经不再维护，取代它的是 curl/httr，不要使用不再维护的 R 包 <https://frie.codes/curl-vs-rcurl/>
 
 ## 文本挖掘 {#text-mining}
 
