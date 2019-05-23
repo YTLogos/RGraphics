@@ -53,7 +53,7 @@ ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point()
 ls("package:ggplot2", pattern = "^theme_")
 ```
 
-这里只展示 `theme_bw()` `theme_void()` `theme_minimal() ` 和 `theme_void()` 等四个常见主题，更多主题参考 [ggthemes](https://github.com/jrnold/ggthemes) 、[hrbrthemes](https://github.com/hrbrmstr/hrbrthemes)和 [ggthemr](https://github.com/cttobin/ggthemr) 包
+这里只展示 `theme_bw()` `theme_void()` `theme_minimal() ` 和 `theme_void()` 等四个常见主题，更多主题参考 [ggthemes](https://github.com/jrnold/ggthemes) 、[hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) 和 [ggthemr](https://github.com/cttobin/ggthemr) 包
 
 ```{r}
 ggplot(airquality, aes(x = Temp, y = Ozone)) + geom_point() + theme_bw()
@@ -170,8 +170,10 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 ```{r scatter-scale-1,fig.cap="格式化坐标轴刻度标签"}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(color = "steelblue") +
-  scale_y_continuous(labels = scales::unit_format(unit = "k", scale = 1e-3), 
-                     breaks = seq(0,20000,4000))
+  scale_y_continuous(
+    labels = scales::unit_format(unit = "k", scale = 1e-3),
+    breaks = seq(0, 20000, 4000)
+  )
 ```
 
 让另一变量 cut 作为颜色分类指标
@@ -289,6 +291,34 @@ ggplot(data = dat, aes(x = as.factor(year), y = as.factor(month))) +
 ```
 
 ### 箱线图 {#ggplot2-boxplot}
+
+以 PlantGrowth 数据集为例展示箱线图，在两组不同实验条件下，植物生长的情况，纵坐标是干燥植物的量，横坐标表示不同的实验条件。这是非常典型的适合用箱线图来表达数据的场合，Y 轴对应数值型变量，X 轴对应分类变量，在 R 语言中，分类变量的类型是 factor
+
+```{r}
+data("PlantGrowth")
+str(PlantGrowth)
+```
+
+```{r PlantGrowth-boxplot}
+ggplot(data = PlantGrowth, aes(x = group, y = weight)) + geom_boxplot()
+```
+
+PlantGrowth 数据量比较小，此时比较适合采用抖动散点图，抖动是为了避免点之间相互重叠，为了增加不同类别之间的识别性，我们可以用不同的点的形状或者不同的颜色来表示类别
+
+```{r PlantGrowth-jitter}
+ggplot(data = PlantGrowth, aes(x = group, y = weight, shape = group)) + geom_jitter()
+ggplot(data = PlantGrowth, aes(x = group, y = weight, color = group)) + geom_jitter()
+```
+
+::: base
+```{r,fig.asp=0.8}
+boxplot(weight ~ group,
+  data = PlantGrowth,
+  ylab = "Dried weight of plants", col = "lightgray",
+  notch = FALSE, varwidth = TRUE
+)
+```
+:::
 
 以钻石切割质量 cut 为分面依据，以钻石颜色类别 color 为 x 轴，钻石价格为 y 轴，绘制箱线图\@ref(fig:boxplot-facet-color)
 
@@ -797,7 +827,7 @@ Edzer Pebesma 开发了 stars 包
 library(abind)
 library(sf)
 library(stars)
-x <- system.file("tif/L7_ETMs.tif", package = "stars") %>% 
+x <- system.file("tif/L7_ETMs.tif", package = "stars") %>%
   read_stars()
 ggplot() +
   geom_stars(data = x) +
@@ -860,12 +890,12 @@ maptools 提供的 `readShapePoly` 函数去读取 shp 文件的方式已经过�
 - sf
 
 ```{r}
-nc <- system.file("gpkg/nc.gpkg", package = "sf") %>% read_sf() 
-nc2 <- nc %>% 
-  select(SID74, SID79) %>% 
+nc <- system.file("gpkg/nc.gpkg", package = "sf") %>% read_sf()
+nc2 <- nc %>%
+  select(SID74, SID79) %>%
   gather(VAR, SID, -geom)
-ggplot() + 
-  geom_sf(data = nc2, aes(fill = SID)) + 
+ggplot() +
+  geom_sf(data = nc2, aes(fill = SID)) +
   facet_wrap(~VAR, ncol = 1)
 ```
 
@@ -904,7 +934,7 @@ Gephi [@ICWSM_2009_Gephi] 和 igraph 能处理的最大网络，R 包和作者�
 library(DiagrammeR)
 library(DiagrammeRsvg)
 svg <- export_svg(
-grViz("
+  grViz("
 digraph neato {
 
 graph [layout = neato]
@@ -1021,11 +1051,12 @@ subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package")) %>% l
 ```{r rmarkdown-eco}
 yihui_pkg <- subset(pdb,
   subset = grepl("Yihui Xie", pdb[, "Maintainer"]),
-  select = c("Package", "Maintainer", "Title") 
-) 
-yihui_pkg[, "Title"] <- gsub('\n', ' ', yihui_pkg[, "Title"])
+  select = c("Package", "Maintainer", "Title")
+)
+yihui_pkg[, "Title"] <- gsub("
+", " ", yihui_pkg[, "Title"])
 
-yihui_pkg %>% 
+yihui_pkg %>%
   knitr::kable(caption = "谢益辉维护的 R Markdown 生态", booktabs = TRUE)
 ```
 
@@ -1035,7 +1066,9 @@ yihui_pkg %>%
 subset(pdb,
   subset = !duplicated(pdb[, "Package"]),
   select = "Maintainer"
-) %>% unique() %>% length()
+) %>%
+  unique() %>%
+  length()
 ```
 
 可实际上没有这么多的开发者，因为存在这样的情况，以 R 包维护者 Hadley Wickham 为例，由于他曾使用过不同的邮箱，所以在维护者字段出现了不一致的情况，实际却是同一个人。
@@ -1100,10 +1133,10 @@ grid()
 
 
 ```{r}
-myData =  as.data.frame(myData)
-colnames(myData) = c("Maintainer", "Freq")
-ggplot( myData) + 
-  geom_bar(aes(x = Maintainer,y = Freq), stat="identity") +
+myData <- as.data.frame(myData)
+colnames(myData) <- c("Maintainer", "Freq")
+ggplot(myData) +
+  geom_bar(aes(x = Maintainer, y = Freq), stat = "identity") +
   coord_flip() +
   xlab("Maintainer") +
   ylab("Numbers of Package")
