@@ -365,6 +365,7 @@ df[!duplicated(df[, 1:2]), ]
 ```
 
 ::: sidebar
+
 数据去重在 dplyr 中的实现[^dplyr-duplicated]。
 
 ```{r}
@@ -373,9 +374,9 @@ df %>%
   group_by(x, y) %>%
   filter(row_number(z) == 1)
 ```
+:::
 
 [^dplyr-duplicated]: https://stackoverflow.com/questions/22959635/
-:::
 
 ## 数据聚合 {#base-aggregate}
 
