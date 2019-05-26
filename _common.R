@@ -80,20 +80,11 @@ options(
 )
 
 to_png <- function(fig_path) {
-  sub("\\.pdf$", ".png", fig_path)
+  png_path <- sub("\\.pdf$", ".png", fig_path)
+  # convert pdf to png
+  magick::image_write(magick::image_read_pdf(fig_path), format = "png", path = png_path)
+  return(png_path)
 }
-
-# copy https://github.com/yihui/knitr-examples/blob/master/085-pdfcrop.Rnw
-# convert-im6.q16: not authorized ubuntu 16.04.5/18.04.1 https://blog.csdn.net/lpwmm/article/details/83313459
-knitr::knit_hooks$set(tikz2png = function(before, options, envir) {
-  # use this hook only for dev='tikz' and externalized tikz graphics
-  if (before || options$dev != "tikz" || !options$external || options$fig.num == 0) return()
-  figs <- knitr:::all_figs(options, ext = "pdf") # all figure names
-  # note the tikz2png option is the extra parameters passed to 'convert'
-  for (fig in figs) {
-    system(sprintf("convert %s %s +profile 'icc' %s", options$tikz2png, fig, sub("\\.pdf$", ".png", fig)))
-  }
-})
 
 palette(c(
   "#4285f4", # GoogleBlue

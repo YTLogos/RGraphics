@@ -1508,7 +1508,7 @@ knitr::include_graphics(path = "figures/demo-tikzDevice.png")
 
 两个利用 tikzDevice 包的例子
 
-```{r linear-model,dev='tikz',fig.cap="线性回归模型",out.width="35%",fig.asp=1,fig.width=3.5,tikz2png='-quality 100 -density 300',fig.process=to_png}
+```{r linear-model,dev='tikz',fig.cap="线性回归模型",out.width="35%",fig.asp=1,fig.width=3.5,fig.process=to_png}
 # 带有图标题
 x <- rnorm(10)
 y <- x + rnorm(5, sd = 0.25)
@@ -1532,7 +1532,7 @@ legend("bottomright", legend = paste("$y = ", round(coef(model)[2], 3),
 ), bty = "n")
 ```
 
-```{r bessel,dev='tikz',fig.cap="贝塞尔函数",out.width="35%",fig.asp=1,fig.width=2.5,tikz2png='-quality 100 -density 300',fig.process=to_png}
+```{r bessel,dev='tikz',fig.cap="贝塞尔函数",out.width="35%",fig.asp=1,fig.width=2.5,fig.process=to_png}
 x0 <- 2^(-20:10)
 nus <- c(0:5, 10, 20)
 x <- seq(0, 4, length.out = 501)
