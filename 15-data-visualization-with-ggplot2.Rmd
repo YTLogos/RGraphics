@@ -214,6 +214,10 @@ ggplot(diamonds, aes(x = carat, y = price, group = cut)) +
   geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs"))
 ```
 
+::: sidebar
+[ggfortify](https://github.com/sinhrks/ggfortify) 包支持更多的统计分析结果的可视化
+:::
+
 为了更好地区分开组别，我们在图\@ref(fig:group-gam)的基础上分面或者配色
 
 ```{r group-facet,fig.cap=c("分组分面","分组配色"),fig.ncol=1}

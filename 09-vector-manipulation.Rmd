@@ -303,12 +303,26 @@ Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 Open
 "reticulate" %in% sort(unique(unlist(tools::package_dependencies(desc::desc_get_deps()$package, recursive = TRUE))))
 ```
 
-转化为管道操作，增加可读性
+转化为管道操作，增加可读性，[^pipe-r]
 
 > 再举一个关于数据模拟的例子
 
+模拟 0-1 序列，
 
+```{r}
+set.seed(2019)
+binom_sample <- function(n) {
+  sum(sample(x = c(0,1), size = n, prob = c(0.8, 0.2), replace = TRUE))/n
+}
+# 频率估计概率
+one_prob <- sapply(10^(seq(8)), binom_sample)
+# 估计的误差
+one_abs <- abs(one_prob - 0.2)
+```
 
+似然估计
+
+[^pipe-r]: https://www.datacamp.com/community/tutorials/pipe-r-tutorial
 [^create-an-empty-data-frame]: https://stackoverflow.com/questions/10689055
 [^modeling-funcprog]: https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf
 [^funcprog-map-reduce]: https://cartesianfaith.com/2015/09/17/from-functional-programming-to-mapreduce-in-r/
