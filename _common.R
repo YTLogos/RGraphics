@@ -36,10 +36,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   small.mar = TRUE,
   echo = TRUE,
-  python.reticulate = TRUE,
   cache = TRUE,
-  size = "scriptsize",
-  output = 6,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
   dpi = 300,
   out.width = "70%",
   fig.align = "center",
