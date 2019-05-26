@@ -416,6 +416,10 @@ saveWorkbook(wb, file = "data/matcars.xlsx", overwrite = TRUE)
 knitr::include_graphics(path = 'figures/batch-export-xlsx.png')
 ```
 
+::: sidebar
+处理 Excel 2003 (XLS) 和 Excel 2007 (XLSX) 文件还可以使用 [WriteXLS](https://github.com/marcschwartz/WriteXLS) 包，不过它依赖于 Perl，另一个 R 包 [xlsx](	https://github.com/dragua/rexcel) 与之功能类似，依赖 Java 环境。	Jennifer Bryan 和 Hadley Wickham 开发的 [readxl](https://github.com/tidyverse/readxl) 包和 Jeroen Ooms 开发的 [writexl](https://github.com/ropensci/writexl) 包专门处理 xlsx 格式并且无任何系统依赖
+:::
+
 ## 导入大数据集 {#import-large-csv-files}
 
 在不使用数据库的情况下，从命令行导入大数据集，如几百 M 或几个 G 的 csv 文件
@@ -428,7 +432,7 @@ knitr::include_graphics(path = 'figures/batch-export-xlsx.png')
 
 将大量的 txt 文本存进 MySQL 数据库中，通过操作数据库来聚合文本，极大降低内存消耗 [^txt-to-mysql]，而 ODBC 与 DBI 包是其它数据库接口的基础，knitr 提供了一个支持 SQL 代码的引擎，它便是基于 DBI，因此可以在 R Markdown 文档中直接使用 SQL 代码块 [^sql-engine]。这里制作一个归纳表格，左边数据库右边对应其 R 接口，两边都包含链接，如表 \@ref(tab:dbi) 所示
 
-```{r dbi}
+```{r dbi,echo=FALSE}
 db2r <- data.frame(
   db = c("MySQL", "SQLite", "PostgreSQL", "MariaDB"),
   db_urls = c(
