@@ -101,7 +101,6 @@ ggplot(data = df2, aes(x, y, color = I(color), frame = .frame)) +
 
 ```{r}
 library(plotly, warn.conflicts = FALSE)
-packageVersion("plotly")
 # 生成一些随机数
 days <- abs(rnorm(1000, 80, 125))
 
