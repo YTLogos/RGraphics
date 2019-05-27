@@ -279,6 +279,7 @@ https://software.intel.com/en-us/articles/using-intel-mkl-with-r
 
 查看帮助 `?.Rprofile`
 
+更多配置设置 [startup](https://github.com/HenrikBengtsson/startup)
 
 ### 环境变量 `.Renviron` {#environ-vars}
 

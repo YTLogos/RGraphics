@@ -86,33 +86,6 @@ https://www.r-project.org/help.html
 
 写作风格，R 包名称都加粗表示，如 **bookdown**， **rmarkdown** 等，软件、编程语言名称保持原样，如 TinyTeX，LyX，TeXLive，R，Python，Stan，C++，SQL等，在代码块中，我们不使用`R>`或`+`，代码输出结果用`#>`注释。**knitr** [@xie_2015_knitr] **bookdown** [@xie_2016_bookdown] 和 Pandoc \index{Pandoc} TinyTeX \index{TinyTeX}，请使用 XeLaTeX 编译这本书，等宽字体为 [inconsolata](https://ctan.org/pkg/inconsolata) 默认的文本字体为 [Times](https://ctan.org/pkg/mathptmx)
 
-在这本书中，使用如下印刷约定：
-
-Italic
-
-:   Indicates new terms, URLs, email addresses, filenames, and file extensions.
-
-Constant width
-
-:   Used for program listings, as well as within paragraphs to refer to program elements such as variable or function names, databases, data types, environment variables, statements, and keywords.
-:   Constant width text that is prefaced with `#>` represents output from R.
-
-**`Constant width bold`**
-
-:   Shows commands or other text that should be typed literally by the user.
-
-*Constant width italic*
-
-:   Shows text that should be replaced with user-supplied values or by values determined by context.
-
-> **Tip**
->
-> This icon signifies a tip, suggestion, or general note.
-
-> **Caution**
->
-> This icon indicates a warning or caution.
-
 ## 软件信息 {#softwares-rsession-info}
 
 重现本书内容需要的 R 包
@@ -121,14 +94,12 @@ Constant width
 sessionInfo()
 ```
 
-> 为了重复实现，我准备了一个虚拟机，存放在百度云盘上，链接: <https://pan.baidu.com/s/1K7R55QfFHGu6_QsyUlpCJA> 密码: 2ixt
-登陆用户名：xyhuang 密码：cloud
-
-当然，你也可以选择来自 rocker 项目的 Docker 镜像，包含的数据分析环境是 `rocker/verse`
+选择来自 rocker 项目的 Docker 镜像来构建书籍，使用的镜像是 `rocker/verse`
 
 ```bash
-docker run --name rstudio -d -p 8787:8787 -e ROOT=TRUE \
- -e USER=cloud -e PASSWORD=cloud rocker/verse
+docker run --name rstudio -d -p 8585:8787 -e ROOT=TRUE \
+ -e USER=cloud -e PASSWORD=cloud \
+ -v /c/Users/xy-huang/Documents:/home/rstudio/dockspace rocker/verse
 ```
 
-在本地拉取了一个名叫 rstudio 的镜像，从虚拟机到宿主机的映射端口是，8787 端口是虚拟机中 RStudio IDE 默认占用的，这样就可以在宿主机的浏览器里打开链接 <http://localhost:8787>
+在本地拉取了一个名叫 rstudio 的镜像，从虚拟机到宿主机的映射端口是，8787 端口是虚拟机中 RStudio IDE 默认占用的，这样就可以在宿主机的浏览器里打开链接 <http://localhost:8585>
