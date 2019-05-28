@@ -303,6 +303,30 @@ Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 Open
 "reticulate" %in% sort(unique(unlist(tools::package_dependencies(desc::desc_get_deps()$package, recursive = TRUE))))
 ```
 
+安装 pkg 的依赖
+
+```{r}
+pkg <- c(
+  "bookdown",
+  "e1071",
+  "formatR",
+  "lme4",
+  "mvtnorm",
+  "prettydoc", "psych",
+  "reticulate", "rstan", "rstanarm", "rticles",
+  "svglite",
+  "TMB", "glmmTMB"
+)
+# 获取 pkg 的所有依赖
+dep_pkg <- tools::package_dependencies(pkg, recursive = TRUE)
+# 将列表 list 合并为向量 vector
+merge_pkg <- Reduce("c", dep_pkg, accumulate = FALSE)
+# 所有未安装的 R 包
+miss_pkg <- setdiff(unique(merge_pkg), unique(.packages(TRUE)))
+# 除了 pkg 外，未安装的 R 包，安装 pkg 的依赖
+sort(setdiff(miss_pkg, pkg))
+```
+
 转化为管道操作，增加可读性，[^pipe-r]
 
 > 再举一个关于数据模拟的例子
