@@ -18,6 +18,7 @@
 - R Graphics, Third ---  [出版商页面](https://www.crcpress.com/p/book/9781498789059) [书籍补充材料](https://www.stat.auckland.ac.nz/~paul/RG3e/)
 - [Online regex tester and debugger](https://regex101.com/)
 - [Martin Mächler](https://github.com/mmaechler) [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) 
+- 数据科学速查表 <https://github.com/FavioVazquez/ds-cheatsheets>
 
 
 ## 课程

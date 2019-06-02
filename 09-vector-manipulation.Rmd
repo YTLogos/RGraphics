@@ -6,6 +6,12 @@
 更加高级的数据变形操作，特别是数据类型的一致性，方便后续的可视化和建模，引入 tidyverse，数据处理或者叫特征工程 Base R vs data.table vs dplyr 它们各有优点，所以都加以介绍 参考 [Jozef Hajnala](https://jozef.io/categories/rcase4base/) 博文。
 
 关于 tidyverse 提供的数据操作移动到 Base R 对应的章节，本章主要讲并行或分布式数据操作工具，如 SparkR sparklyr 针对大数据集上的操
+
+[Malcolm Barrett](https://malco.io/) 以幻灯片的形式呈现 [dplyr](https://malco.io/slides/hs_dplyr/) 和 [purrr](https://malco.io/slides/hs_purrr/) 的基础用法
+
+Charlotte Wickham 的课程 A introduction to purrr [purrr-tutorial](https://github.com/cwickham/purrr-tutorial)
+
+关于引用 [quotation](https://github.com/cwickham/quotation)
 :::
 
 函数式编程 Functional Programming Languages 用于数据处理，向量化运算、并行运算和分布式运算
@@ -288,7 +294,7 @@ pbdMPI 包处于活跃维护状态，是 [pbdR 项目](https://github.com/RBigDa
 
 ### gpuR
 
-Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) 基于 OpenCL 加速，目前处于活跃维护状态。而 Charles Determan 开发的另一个 [gpuRcuda](https://github.com/gpuRcore/gpuRcuda) 包是基于 CUDA 加速
+Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) [@R-gpuR] 基于 OpenCL 加速，目前处于活跃维护状态。而 Charles Determan 开发的另一个 [gpuRcuda](https://github.com/gpuRcore/gpuRcuda) 包是基于 CUDA 加速
 
 [赵鹏](https://github.com/PatricZhao) 的博客 [ParallelR](http://www.parallelr.com/) 关注基于 [CUDA 的 GPU 加速](https://devblogs.nvidia.com/accelerate-r-applications-cuda/)
 

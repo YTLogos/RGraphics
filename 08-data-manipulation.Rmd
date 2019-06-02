@@ -1,5 +1,7 @@
 # 数据操作手 {#data-manipulator}
 
+> 参考 Data Manipulation With R [@Spector_2008_Manipulation] 重新捋一遍本章
+
 ```{r,R.options=list(tidyverse.quiet = TRUE),include=FALSE}
 library(tidyverse)
 ```
@@ -273,7 +275,11 @@ cbind(
 )
 ```
 
-更多相关函数可以参考 `findInterval` 和 `embed`
+更多相关函数可以参考 `findInterval` 和 `embed` 
+
+```r
+t(combn(8, 4, tabulate, nbins = 8))
+```
 
 ## 数据合并 {#base-merge}
 

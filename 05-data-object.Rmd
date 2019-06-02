@@ -19,4 +19,42 @@
 
 ## 列表 {#oop-list}
 
-时间序列 ts，xts，zoo 等对象和空间数据 sp sf raster 等对象
+## 时间序列 {#oop-ts}
+
+[Jeffrey A. Ryan](https://blog.revolutionanalytics.com/2011/07/the-r-files-jeff-ryan.html) 开发的 [xts](https://github.com/joshuaulrich/xts) 和 [quantmod](https://github.com/joshuaulrich/quantmod) 包，Joshua M. Ulrich 开发的 [zoo](https://r-forge.r-project.org/projects/zoo/) 是处理时间序列数据的主要工具
+
+Jeffrey A. Ryan 在开设了一门免费课程教大家如何在 R 语言中使用 xts 和 zoo 包操作时间序列数据 [^course-xts-zoo]
+
+xts (eXtensible Time Series) 扩展的 zoo 对象
+
+```{r,eval=FALSE}
+xts(x = NULL,
+    order.by = index(x),
+    frequency = NULL,
+    unique = TRUE,
+    tzone = Sys.getenv("TZ"),
+    ...)
+```
+
+
+```{r,message=FALSE,warning=FALSE}
+library(zoo)
+```
+```{r}
+library(xts)
+x = matrix(1:4, ncol = 2,nrow = 2)
+idx <- as.Date(c("2018-01-01", "2019-12-12"))
+# xts = matrix + index
+xts(x, order.by = idx)
+```
+
+Date，POSIX times，timeDate，chron 等各种各样处理日期数据的对象
+
+
+[^course-xts-zoo]: https://www.datacamp.com/courses/manipulating-time-series-data-in-r-with-xts-zoo
+
+
+## 空间数据 {#oop-sf}
+
+sp sf raster 等对象
+

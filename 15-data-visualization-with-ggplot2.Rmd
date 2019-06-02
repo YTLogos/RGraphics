@@ -4,7 +4,7 @@
 library(tidyverse)
 ```
 
-David Robinson 给出为何使用 ggplot2 [^why-ggplot2] 当然也有 Jeff Leek 指出在某些重要场合不适合 ggplot2 [^why-not-ggplot2] 并且给出强有力的 [证据](http://motioninsocial.com/tufte/)，其实不管怎么样，适合自己的才是好的。也不枉费 Garrick Aden-Buie 花费 160 页幻灯片逐步分解介绍 [优雅的ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2)，还有 Selva Prabhakaran 精心总结给出了 50 个 ggplot2 数据可视化的 [例子](https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) 以及 Victor Perrier 为小白用 ggplot2 操碎了心地开发 RStudio 插件 [esquisse](https://github.com/dreamRs/esquisse) 包。
+David Robinson 给出为何使用 ggplot2 [^why-ggplot2] 当然也有 Jeff Leek 指出在某些重要场合不适合 ggplot2 [^why-not-ggplot2] 并且给出强有力的 [证据](http://motioninsocial.com/tufte/)，其实不管怎么样，适合自己的才是好的。也不枉费 Garrick Aden-Buie 花费 160 页幻灯片逐步分解介绍 [优雅的ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2)，[Malcolm Barrett](https://malco.io/) 也介绍了 [ggplot2 基础用法](https://malco.io/slides/hs_ggplot2)，还有 Selva Prabhakaran 精心总结给出了 50 个 ggplot2 数据可视化的 [例子](https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) 以及 Victor Perrier 为小白用 ggplot2 操碎了心地开发 RStudio 插件 [esquisse](https://github.com/dreamRs/esquisse) 包。
 
 GGplot2 是十分方便的统计作图工具，相比 Base R，为了一张出版级的图形，不需要去调整每个参数，实现快速出图。集成了很多其它统计计算的 R 包，支持丰富的统计分析和计算功能，如回归、平滑等，实现了作图和模型的无缝连接。比如图\@ref(fig:awesome-ggplot2)，使用 loess 局部多项式平滑得到数据的趋势，不仅仅是散点图，代码量也非常少。
 
@@ -647,14 +647,26 @@ p + geom_bar(colour = "white") +
 
 ### 热力图 {#ggplot2-heatmap}
 
-ggplot2
 
-geom\_density()
+```{r}
+ggplot(diamonds, aes(carat, price)) + geom_hex()
+```
 
+
+
+
+### 词云 {#ggplot2-wordcount}
+
+[ggwordcloud](https://github.com/lepennec/ggwordcloud)
 
 ### 岭线图 {#ggplot2-ridges}
 
-ggridges
+```{r}
+ggplot(diamonds) +
+  ggridges::geom_density_ridges(aes(x = price, y = color))
+```
+
+
 
 ## 空间数据 {#ggplot2-spatial}
 
@@ -1021,10 +1033,10 @@ cat(sprintf("--- elapsed user-time: %fs ", (proc.time() - start)[1]))
 
 ## CRAN 分析 {#analysis-cran}
 
-首先我们从 CRAN 官网下载 R 包描述信息
+首先我们从 CRAN 官网下载 R 包描述信息[^download-cran-metadata] 
 
 ```{r, echo=TRUE}
-# CRAN R包 metadata 信息
+# CRAN R 包 metadata 信息
 if (file.exists("data/packages.rds")) {
   pdb <- readRDS("data/packages.rds")
 } else {
@@ -1157,6 +1169,32 @@ ggplot(myData, aes(x = Freq, y = Maintainer)) +
 (ref:top-maintainers) 维护R包数量最多的20个人[^orphaned]
 
 [^orphaned]: 其中 Orphaned 表示之前的R包维护者不愿意继续维护了，后来有人接手维护，Orphaned 表示这一类接盘侠
+
+[^download-cran-metadata]: 现在有更加方便的方式获取 R 包元数据 `pdb <- tools::CRAN_package_db()` 返回一个 data.frame 
+
+
+
+```{r,eval=FALSE}
+# 为这张图寻求一个完美的解释
+# 每天更新的 R包数量随日期的分布，发布数量最多的日期，好好想想是不是这样
+largest_update_num <- sort(table(pdb$Published), decreasing = T)[1]
+smallest_update_num <- sort(table(pdb$Published), decreasing = F)[1]
+pdb_df <- as.data.frame(pdb)
+ggplot(pdb_df[, c("Package", "Published")], aes(as.Date(Published))) +
+  geom_bar(color = "firebrick") +
+  geom_line(
+    data = data.frame(
+      date = as.Date(c("2011-01-01", "2012-10-20")),
+      count = c(130, 155)
+    ), aes(x = date, y = count),
+    arrow = arrow(angle = 15, length = unit(0.15, "inches"))
+  ) +
+  annotate("text", x = as.Date("2010-11-01"), y = 128, label = "(2012-10-29,172)") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  labs(x = "Published Date", y = "Count") +
+  theme_minimal()
+```
+
 
 ## 软件信息  {#ggplot2-session-info}
 
