@@ -75,17 +75,6 @@ ggplot(airquality, aes(x = Temp, y = Ozone, color = as.ordered(Month))) +
   geom_point()
 ```
 
-### 坐标系 {#ggplot2-coord}
-
-极坐标，直角坐标
-
-```{r}
-ls("package:ggplot2", pattern = "^coord_")
-```
-
-### 坐标轴 {#ggplot2-axes}
-
-坐标轴标签位置、大小、字体
 
 ### 刻度 {#ggplot2-scale}
 
@@ -131,6 +120,17 @@ ggplot(airquality) + geom_point(aes(x = Temp, y = Ozone)) + facet_wrap(~ as.orde
 gridExtra 和 patchwork
 
 
+### 坐标系 {#ggplot2-coord}
+
+极坐标，直角坐标
+
+```{r}
+ls("package:ggplot2", pattern = "^coord_")
+```
+
+### 坐标轴 {#ggplot2-axes}
+
+坐标轴标签位置、大小、字体
 
 ## 统计图形 {#ggplot2-gallary}
 
@@ -420,42 +420,6 @@ ggplot(diamonds, aes(x = color, fill = clarity)) +
 with(diamonds, table(color, clarity, cut))
 ```
 
-### 点图 {#ggplot2-dotplot}
-
-
-```{r}
-str(mpg)
-head(mpg)
-
-# 按 manufacturer 分组求平均值
-cty_mpg <- aggregate(mpg$cty, by = list(mpg$manufacturer), FUN = mean)
-colnames(cty_mpg) <- c("make", "mileage") # 设置新的列名
-cty_mpg <- cty_mpg[order(cty_mpg$mileage), ] # 按 mileage 排序
-cty_mpg$make <- factor(cty_mpg$make, levels = cty_mpg$make) # 保持因子水平的顺序
-
-str(cty_mpg)
-head(cty_mpg, 6)
-```
-
-```{r,fig.cap="点图"}
-ggplot(cty_mpg, aes(x = make, y = mileage)) +
-  geom_point(size = 3) +
-  geom_segment(aes(
-    x = make,
-    xend = make,
-    y = 0,
-    yend = mileage
-  )) +
-  labs(
-    title = "Lollipop Chart",
-    subtitle = "Make Vs Avg. Mileage",
-    caption = "source: mpg"
-  ) +
-  theme(axis.text.x = element_text(angle = 65, vjust = 0.6))
-```
-
-
-
 
 ### 折线图 {#ggplot2-line}
 
@@ -547,29 +511,62 @@ ggplot(mpg, aes(class, cty)) +
   theme_minimal()
 ```
 
+蜂群图 [ggbeeswarm](https://github.com/eclarke/ggbeeswarm) 是分类散点图加箱线图的合体
+
+```{r}
+ggplot(mpg, aes(x = class, y = hwy, color = class)) + ggbeeswarm::geom_quasirandom()
+```
+
+
+
+
 ### 抖动图 {#ggplot2-jitter}
 
-```{r,fig.cap="抖动图"}
+
+抖动图适合数据量比较小的情况
+
+```{r}
+ggplot(mpg, aes(x = class, y = hwy, color = class)) + geom_jitter()
+```
+
+在数据量比较大的时候，可以用箱线图、密度图、提琴图
+
+```{r,fig.cap="抖动图的反例"}
 ggplot(diamonds, aes(x = cut, y = price)) + geom_jitter()
 ```
 
-分面抖动图
+上色和分面都不好使的抖动图，因为区分度变小
 
-```{r,fig.cap=c("抖动图","根据钻石颜色上色"),fig.ncol=1}
-ggplot(diamonds, aes(x = color, y = price)) +
-  geom_jitter() +
-  facet_grid(~cut)
+```{r,fig.cap="根据钻石颜色上色"}
 ggplot(diamonds, aes(x = color, y = price, color = color)) +
   geom_jitter() +
-  facet_grid(~cut)
+  facet_grid(clarity ~ cut)
 ```
 
-筛选钻石颜色为 D 纯净度为 SI2 的数据集，全数据集太大，不适合用抖动图表示
+箱线图此时不宜分的过细
 
-```{r,fig.cap="抖动图的反例"}
-ggplot(diamonds, aes(x = color, y = price)) +
-  geom_boxplot() + geom_jitter() +
+```{r,fig.cap="箱线图"}
+ggplot(diamonds, aes(x = color, y = price, color = color)) +
+  geom_boxplot() +
   facet_grid(cut ~ clarity)
+```
+
+```{r}
+ggplot(diamonds, aes(x = color, y = price, color = color)) +
+  geom_boxplot() +
+  facet_grid(~clarity)
+```
+
+最好只比较一个维度
+
+```{r}
+ggplot(diamonds, aes(x = color, y = price, color = color)) +
+  geom_boxplot()
+```
+
+```{r}
+ggplot(diamonds) +
+  ggridges::geom_density_ridges(aes(y = color, x = price, fill = color))
 ```
 
 ### 密度图 {#ggplot2-ridge}
@@ -606,6 +603,38 @@ ggplot(diamonds, aes(x = price, fill = cut)) + geom_density(position = "stack")
 # You can use position="fill" to produce a conditional density estimate
 ggplot(diamonds, aes(carat, stat(count), fill = cut)) +
   geom_density(position = "fill")
+```
+
+
+岭线图是密度图的一种变体，可以防止密度曲线重叠在一起
+
+```{r}
+ggplot(diamonds) +
+  ggridges::geom_density_ridges(aes(x = price, y = color, fill = color))
+```
+
+二维的密度图又是一种延伸
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_density_2d(aes(color = cut)) +
+  facet_grid(~cut) +
+  scale_fill_viridis_d()
+```
+
+`stat` 函数，特别是 nlevel 参数，在密度曲线之间填充我们又可以得到热力图
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  stat_density_2d(aes(fill = stat(nlevel)), geom = "polygon") +
+  facet_grid(. ~ cut) + scale_fill_viridis_c()
+```
+
+`gemo_hex` 也是二维密度图的一种变体，特别适合数据量比较大的情形
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) + geom_hex() +
+  scale_fill_viridis_c()
 ```
 
 ### 玫瑰图 {#ggplot2-rose}
@@ -645,26 +674,10 @@ p + geom_bar(colour = "white") +
 
 [^nightingale-rose]: https://mbostock.github.io/protovis/ex/crimea-rose-full.html
 
-### 热力图 {#ggplot2-heatmap}
+
+词云 [ggwordcloud](https://github.com/lepennec/ggwordcloud)
 
 
-```{r}
-ggplot(diamonds, aes(carat, price)) + geom_hex()
-```
-
-
-
-
-### 词云 {#ggplot2-wordcount}
-
-[ggwordcloud](https://github.com/lepennec/ggwordcloud)
-
-### 岭线图 {#ggplot2-ridges}
-
-```{r}
-ggplot(diamonds) +
-  ggridges::geom_density_ridges(aes(x = price, y = color))
-```
 
 
 
