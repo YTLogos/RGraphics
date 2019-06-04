@@ -1041,9 +1041,6 @@ remove(vertex.attrs)
 cat(sprintf("--- elapsed user-time: %fs ", (proc.time() - start)[1]))
 ```
 
-- geomnet
-
-
 ## CRAN 分析 {#analysis-cran}
 
 首先我们从 CRAN 官网下载 R 包描述信息[^download-cran-metadata] 
@@ -1069,7 +1066,7 @@ pdb[, "Package"] %>% length()
 pdb[, "Package"][duplicated(pdb[, "Package"])]
 ```
 
-不难发现，果然有！所以去掉重复的 R 包信息，就是 CRAN 上实际发布的 R 包列表
+不难发现，果然有！所以去掉重复的 R 包信息，就是 CRAN 上实际发布的 R 包数量
 
 ```{r}
 subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package")) %>% length()
@@ -1082,8 +1079,7 @@ yihui_pkg <- subset(pdb,
   subset = grepl("Yihui Xie", pdb[, "Maintainer"]),
   select = c("Package", "Maintainer", "Title")
 )
-yihui_pkg[, "Title"] <- gsub("
-", " ", yihui_pkg[, "Title"])
+yihui_pkg[, "Title"] <- gsub("(\\\n)", " ", yihui_pkg[, "Title"])
 
 yihui_pkg %>%
   knitr::kable(caption = "谢益辉维护的 R Markdown 生态", booktabs = TRUE)
@@ -1160,6 +1156,7 @@ axis(1,
 grid()
 ```
 
+调用 ggplot2 包绘图要求输入的数据类型是 data.frame，所以我们首先将 myData 转化为数据框类型
 
 ```{r}
 myData <- as.data.frame(myData)
@@ -1171,6 +1168,8 @@ ggplot(myData) +
   ylab("Numbers of Package")
 ```
 
+条形图在柱子很多的情况下，点线图是一种更加简洁的替代方式
+
 ```{r}
 ggplot(myData, aes(x = Freq, y = Maintainer)) +
   geom_segment(aes(x = 20, xend = Freq, yend = Maintainer), colour = "grey50") +
@@ -1178,7 +1177,7 @@ ggplot(myData, aes(x = Freq, y = Maintainer)) +
   labs(x = " # of Packages ", y = " Maintainer ")
 ```
 
-接下来，我们想看看开发者维护的 R 包数量的分布，仅从上图，我们知道有的人能维护 80 多个 R 包，总体的分布情况又是如何呢？
+接下来，我们想看看开发者维护的 R 包数量的分布，仅从上图，我们知道有的人能维护 80 多个 R 包，总体的分布情况又是如何呢？如图所示，我们将纵轴刻度设置为 log 模式，随着开发的R包数量的增加，开发者人数是指数级递减，可见开发R包依然是一个门槛很高的工作！
 
 ```{r}
 cran_maintainers %>%
@@ -1187,6 +1186,13 @@ cran_maintainers %>%
   barplot(col = "lightblue", log = "y", border = "white", 
           xlab = "# of Packages", ylab = "# of Maintainers (log)",
           panel.first = grid())
+```
+
+只开发一个 R 包的人数达到 5276 人，占开发者总数的 67.31\%，约为2/3。我们还想进一步了解这些人是不是就自己开发自己维护，没有其他人参与，而且他们也不参与其它 R 包的贡献？如果是，则他们对社区的贡献非常有限，仅限于为社区带来数量上的堆积！那么社区的主要推动者是余下的 1/3，他们相互之间的合作应该比较多，我们接下来想分析一下他们之间的贡献网络。
+
+
+```{r}
+pdb[]
 ```
 
 
