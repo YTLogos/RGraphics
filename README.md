@@ -20,60 +20,8 @@
 - [Martin Mächler](https://github.com/mmaechler) [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) 
 - 数据科学速查表 <https://github.com/FavioVazquez/ds-cheatsheets>
 
+---
 
-## 课程
-
-> 可看看 [COPSS大师开设的课程](https://en.wikipedia.org/wiki/COPSS_Presidents'_Award)
-
-1. Tony Cai
-   - Fall 2018: STAT 972: [Advanced Topics in Mathematical Statistics](http://www-stat.wharton.upenn.edu/~tcai/Stat972-Syllabus-Fall18.pdf)
-1. Ben Bolker
-   - fall 2018: STAT 4/6c03 [Generalized Linear Models](https://bbolker.github.io/stat4c03/) 
-   - Morelia 2018 workshop [Generalized Linear/Mixed models](https://bbolker.github.io/morelia_2018)
-1. 统计机器学习
-   - [Elements of Statistical Learning](https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/)
-1. Dennis Sun 
-   - 2015 summer Stats 253 [Analysis of Spatial and Temporal Data](https://web.stanford.edu/class/stats253/lectures.html)
-   - 课程列表 https://web.calpoly.edu/~dsun09/teaching.html
-
-## 博客
-
-- [Ilya Kashnitsky](https://ikashnitsky.github.io/)
-- [Max Woolf](https://minimaxir.com/)
-- [Eugene Joh](https://incidental-ideas.org/)
-- [Shirin Glander](https://shirinsplayground.netlify.com/)
-- [Paul Murrell](https://www.stat.auckland.ac.nz/~paul/)
-- [统计之都](https://cosx.org/)
-- [谢益辉](https://yihui.name/)
-- [Simply Statistics](https://simplystatistics.org/)
-- [Edzer Pebesma](https://www.r-spatial.org/)
-- [Data Science Plus](https://datascienceplus.com/)
-- [Stan Core Team](https://mc-stan.org) [case studies](https://mc-stan.org/users/documentation/case-studies.html)
-- [Håvard Rue](http://www.r-inla.org/) Bayesian computing with INLA
-- [R Graph Gallery](https://www.r-graph-gallery.com/)
-- [htmlwidgets Gallery](https://gallery.htmlwidgets.org/)
-- [ggplot2 Gallery](https://www.ggplot2-exts.org/gallery/)
-- [Flowing Data](https://flowingdata.com/)
-- [Jared P. Lander](https://www.jaredlander.com/) R for Everyone 的作者
-- [Mick Crawley](http://www.bio.ic.ac.uk/research/mjcraw/crawley.htm) [The R Book](http://www.imperial.ac.uk/bio/research/crawley/therbook) 的作者
-- [RStudio 公司](https://www.rstudio.com/)
-- [极乐净土 Tidyverse](https://www.tidyverse.org/)
-
-### 搜索
-
-- [Sci-Hub: removing barriers in the way of science](https://sci-hub.tw/)
-- [书籍传送门](http://gen.lib.rus.ec/) 需要科学上网 http://gen.lib.rus.ec/
-- [Stack Overflow](https://stackoverflow.com/)
-
-### 博客聚合
-
-- https://rweekly.org/
-- https://www.r-bloggers.com/
-- https://dailyr.netlify.com/
-- https://datascienceplus.com/
-
-### R 语言落地场景
-
-- 美团 https://tech.meituan.com/2018/08/02/mt-r-practice.html
-- 比较成熟的有京东、豆瓣、ebay、阿里
-- 国外使用 R 环境的公司 https://github.com/ThinkR-open/companies-using-r
+> **Warning**
+> 
+> Early drafts of the book.
