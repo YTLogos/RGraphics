@@ -26,7 +26,10 @@
 - [Getting to Know Grid Graphics](https://www.stat.auckland.ac.nz/~paul/useR2015-grid/)
 - [R Reference Card (Chinese version)](https://github.com/sunbjt/r_reference) by [Sizhe Liu](https://www.bjt.name/)
 - [Frequently asked questionsR](https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf) by [Sizhe Liu](https://www.bjt.name/)
-
+- [Graphical Parameters](https://tech.hohoweiya.xyz/R/r-graphical-parameters-cheatsheet.pdf) `par` Visual cheat sheet for some plot parameters in R
+- [parallel computation cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/parallel_computation.pdf)
+- [permits *apply() style dispatch for HPC](https://prs.ism.ac.jp/~nakama/Rhpc/Documents/Rhpc_0.15-177.pdf) High-Performance and Parallel Computing
+- [Data Visualization in R](http://datavis.ca/courses/RGraphics/)
 
 ---
 
