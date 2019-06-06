@@ -10,7 +10,7 @@ fontsize: 10pt
 secnumdepth: 3
 colorlinks: yes
 classoption: "UTF8,oneside"
-bibliography: [latex/book.bib, latex/refer.bib, packages.bib]
+bibliography: [latex/book.bib, latex/refer.bib, latex/packages.bib]
 biblio-style: apalike
 link-citations: yes
 subparagraph: true
@@ -67,7 +67,7 @@ par(op)
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tikzDevice'
-), 'packages.bib')
+), 'latex/packages.bib')
 ```
 
 `r if (knitr::is_latex_output()) '-->'`
