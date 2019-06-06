@@ -758,6 +758,8 @@ dbDisconnect(con)
 knitr::include_graphics(path = "figures/clickhouse.png")
 ```
 
+学习博文 [利用 JDBC 驱动连接 R 和 Hive](https://www.bjt.name/2016/11/19/jdbc-hive-r.html) 和 [clickhouse-jdbc](https://github.com/yandex/clickhouse-jdbc) 试试 [RJDBC] 包远程连接 ClickHouse 仓库
+
 ### MySQL
 
 MySQL 是一个很常见，应用也很广泛的数据库，数据分析的常见环境是在一个R Notebook 里，我们可以在正文之前先设定数据库连接信息

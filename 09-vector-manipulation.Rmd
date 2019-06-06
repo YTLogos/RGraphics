@@ -23,7 +23,7 @@ Charlotte Wickham 的课程 A introduction to purrr [purrr-tutorial](https://git
 - [multidplyr](https://github.com/hadley/multidplyr) 是 dplyr 的后端，多核环境下实现数据分块，提高并行处理性能
 - [disk.frame](https://github.com/xiaodaigh/disk.frame) 是基于磁盘的超出内存容量的快速并行数据操作框架
 - [parallelMap](https://github.com/berndbischl/parallelMap) R package to interface some popular parallelization back-ends with a unified interface
-
+- [big.data.table](https://github.com/jangorecki/big.data.table) 基于 data.table 的分布式并行计算
 - [rpivotTable](https://github.com/smartinsightsfromdata/rpivotTable) 动态数据透视表
 - [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) Join tables together on inexact matching
 - [dtplyr](https://github.com/hadley/dtplyr) dtplyr is the data.table backend for dplyr. It provides S3 methods for data.table objects so that dplyr works the way you expect.

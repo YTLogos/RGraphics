@@ -16,14 +16,15 @@
   - 写博客
   - 写幻灯片
   
-- shiny 
-  - [Mastering Shiny](https://jcheng5.github.io/shiny-book/)
-  - [Shiny Server Professional Administrator's Guide](https://docs.rstudio.com/shiny-server/)
-  - [Learn Shiny](https://shiny.rstudio.com/tutorial/)
-  - [rstudio::conf 2018](https://github.com/simecek/RStudioConf2018Slides)
+> shiny 
+
+- [Mastering Shiny](https://jcheng5.github.io/shiny-book/)
+- [Shiny Server Professional Administrator's Guide](https://docs.rstudio.com/shiny-server/)
+- [Learn Shiny](https://shiny.rstudio.com/tutorial/)
+- [rstudio::conf 2018](https://github.com/simecek/RStudioConf2018Slides)
 
 
-## 统计软件
+> 统计软件
 
 1. [JASP](https://jasp-stats.org/)
 1. [Rcmdr](https://socialsciences.mcmaster.ca/jfox/Misc/Rcmdr/)

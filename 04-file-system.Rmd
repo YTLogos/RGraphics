@@ -1,5 +1,7 @@
 # 文件管理员 {#file-administrator}
 
+> 考虑添加 Shell 下的命令实现，参考 [命令行的艺术](https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md)
+
 ```{r}
 library(magrittr) # 提供管道命令 %>%
 ```
@@ -8,8 +10,6 @@ library(magrittr) # 提供管道命令 %>%
 [fs](https://github.com/r-lib/fs) 由 [Jim Hester](https://www.jimhester.com/) 开发，提供文件系统操作的统一接口，相比于 R 默认的文件系统的操作函数有显而易见的优点，详情请看 <https://fs.r-lib.org/>
 
 对于文件操作，Jim Hester 开发了 [fs 包](https://github.com/r-lib/fs) 目的是统一文件操作的命令，由于时间和历史原因，R内置的文件操作函数的命名很不统一，如 `path.expand()` 和 `normalizePath()`，`Sys.chmod()` 和 `file.access()` 等
-
-考虑添加 Shell 下的命令实现，[命令行中的艺术](https://github.com/jlevy/the-art-of-command-line)
 :::
 
 

@@ -18,6 +18,8 @@ book/
 data/
 slide
 
-stringi.md
+parallel/
 
+stringi.md
+tmp.R
 .DS_Store

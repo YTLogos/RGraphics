@@ -19,7 +19,10 @@
 - [Online regex tester and debugger](https://regex101.com/)
 - [Martin Mächler](https://github.com/mmaechler) [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) 
 - 数据科学速查表 <https://github.com/FavioVazquez/ds-cheatsheets>
-
+- [Modeling data with functional programming](https://cartesianfaith.com/2016/05/19/modeling-data-with-functional-programming-state-based-systems/) [PDF 下载链接](https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf)
+- [Getting to Know Grid Graphics](https://www.stat.auckland.ac.nz/~paul/useR2015-grid/)
+- [R 参考卡片](https://github.com/sunbjt/r_reference)
+- [R 常见问题解答](https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf)
 ---
 
 > **Warning**
