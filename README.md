@@ -25,23 +25,6 @@
 - [Frequently asked questionsR](https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf) by [Sizhe Liu](https://www.bjt.name/)
 
 
-## 部署到 Github Pages
-
-```bash
-git checkout gh-pages
-git rm -rf .
-
-rm -rf _bookdown_files images RGraphics.rds packages.bib .Rhistory
-mv _book/* .
-
-echo ".Rproj.user/" >> .gitignore
-git add .
-git commit -m "update book"
-git push origin gh-pages
-
-git checkout master
-```
-
 ---
 
 > **Warning**
