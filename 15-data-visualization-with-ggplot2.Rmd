@@ -1401,27 +1401,37 @@ subset(sub_pdb, subset = grepl("Matt Dowle", sub_pdb[, "Maintainer"]), select = 
 [^orphaned]: 其中 Orphaned 表示之前的R包维护者不愿意继续维护了，后来有人接手维护，Orphaned 表示这一类接盘侠
 [^download-cran-metadata]: 现在有更加方便的方式获取 R 包元数据 `pdb <- tools::CRAN_package_db()` 返回一个 `data.frame`
 
+### 更新知多少 {#CRAN-Update-Packages}
 
-```{r,eval=FALSE}
-# 为这张图寻求一个完美的解释
-# 每天更新的 R包数量随日期的分布，发布数量最多的日期，好好想想是不是这样
-largest_update_num <- sort(table(pdb$Published), decreasing = T)[1]
-smallest_update_num <- sort(table(pdb$Published), decreasing = F)[1]
-pdb_df <- as.data.frame(pdb)
-ggplot(pdb_df[, c("Package", "Published")], aes(as.Date(Published))) +
-  geom_bar(color = "firebrick") +
+这节标题取其字面意思表达 CRAN 服务器的特殊日子 2012-10-29，那天 CRAN 更新了一大波 R 包，像一根擎天柱一样支撑这幅图！
+
+```{r}
+old_pdb <- as.data.frame(pdb[, c("Package", "Published")], stringsAsFactors = FALSE)
+# 这天要更新的R包最多
+sort(table(pdb[, "Published"]), decreasing = TRUE)[1]
+
+ggplot(old_pdb, aes(as.Date(Published))) +
+  geom_bar(color = "skyblue4") +
   geom_line(
     data = data.frame(
       date = as.Date(c("2011-01-01", "2012-10-20")),
-      count = c(130, 155)
+      count = c(80, 100)
     ), aes(x = date, y = count),
     arrow = arrow(angle = 15, length = unit(0.15, "inches"))
   ) +
-  annotate("text", x = as.Date("2010-11-01"), y = 128, label = "(2012-10-29,172)") +
+  annotate("text", x = as.Date("2010-11-01"), y = 75, label = "(2012-10-29,130)") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   labs(x = "Published Date", y = "Count") +
   theme_minimal()
 ```
+
+当日发布的R包，不论是新增还是更新之前发布的R包都视为最新版，当日之前的都是旧版本，它们可能存在已经修复的 BUG！这句子好奇怪是吧，因为很多 R 包要么托管在 Github 上，要么托管在 [R-Forge](https://r-forge.r-project.org/) 上开发，而 CRAN 上的版本除了发布日外，一般来讲都会落后。如图所示待更新的 R 包在日期上的分布，有的已经10来年没有更新了，最老的 R 包可以追溯到 `r min(pdb[, "Published"])`，它是 `r old_pdb[which.min(as.Date(old_pdb[, "Published"])), 1]`！！
+
+```{r,eval=FALSE,echo=FALSE}
+subset(old_pdb, subset = old_pdb[, "Published"] == min(old_pdb[, "Published"]))
+old_pdb[which.min(as.Date(old_pdb[, "Published"])), 1]
+```
+
 
 
 ## 软件信息  {#ggplot2-session-info}
