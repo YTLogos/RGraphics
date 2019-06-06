@@ -1306,24 +1306,52 @@ cran_maintainers %>%
 
 ### 金字塔底的人 {#first-commit}
 
-我们还想进一步了解这些人是不是就自己开发自己维护，基本没有其他人参与，答案是 Almost Sure. 
+我们还想进一步了解这些人是不是就自己开发自己维护，基本没有其他人参与，答案是 Almost Sure. 这些人其实占了大部分，相比于前面的 R 核心开发团队或者 R Markdown 生态的维护者，他们绝大部分属于金字塔底部的人，二八定律似乎在这里再次得到印证。
 
 ```{r}
-new_pdb <- subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package", "Maintainer", "Author"))
-new_pdb[,"Maintainer"] <- clean_maintainer(new_pdb[,"Maintainer"])
+sub_pdb <- subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package", "Maintainer", "Author"))
+```
 
-new_pdb[,"Author"] <- clean_author(new_pdb[,"Author"])
+接着先清理一下 Maintainer 和 Author 字段，Author 字段的内容比起 Maintainer 复杂一些
 
-# 维护多个 R 包的开发者 2559
-new_pdb[, "Maintainer"][duplicated(new_pdb[, "Maintainer"])] %>% unique() %>% length()
+```{r}
+clean_author <- function(x) {
+  # 去掉中括号及其内容 [aut] [aut, cre]
+  x <- gsub("(\\[.*?\\])", "", x)
+  # 去掉小括号及其内容 ()
+  x <- gsub("(\\(.*?\\))", "", x)
+  # 去掉尖括号及其内容 < >
+  x <- gsub("(<.*?>)", "", x)
+  # 去掉 \n
+  x <- gsub("(\\\n)", "", x)
+  # 去掉制表符、双引号、单引号和 \'，如 'Hadley Wickham' 中的单引号 ' 等
+  x <- gsub("(\\\t)|(\\\")|(\\\')|(')|(\\))", "", x)
+  # Christian P. Robert, Universite Paris Dauphine, and Jean-Michel\n        Marin, Universite Montpellier 2
+  x <- gsub("(and)", "", x)
+  # 两个以上的空格替换为一个空格
+  x <- gsub("( {2,})"," ",x)
+  x
+}
 
-# 总的开发者 7838
-new_pdb[, "Maintainer"][!duplicated(new_pdb[, "Maintainer"])] %>% length()
+sub_pdb[, "Maintainer"] <- clean_maintainer(sub_pdb[, "Maintainer"])
+sub_pdb[, "Author"] <- clean_author(sub_pdb[, "Author"])
+```
 
-# 只维护1个R包的开发者 5279
-# 第一次提交 R 包
-first_ctb <- setdiff(new_pdb[, "Maintainer"][!duplicated(new_pdb[, "Maintainer"])],
-        unique(new_pdb[, "Maintainer"][duplicated(new_pdb[, "Maintainer"])]))
+维护多个 R 包的开发者数量 2559
+
+```{r}
+sub_pdb[, "Maintainer"][duplicated(sub_pdb[, "Maintainer"])] %>%
+  unique() %>%
+  length()
+```
+
+总的开发者中去掉开发了多个R包的人，就剩下只维护1个R包的开发者，共有 
+
+```{r}
+first_ctb <- setdiff(
+  sub_pdb[, "Maintainer"][!duplicated(sub_pdb[, "Maintainer"])],
+  unique(sub_pdb[, "Maintainer"][duplicated(sub_pdb[, "Maintainer"])])
+)
 ```
 
 按照每个R包贡献者的数量分组，如图所示，有一个或者没有贡献者的占总数占 70.60\%，说明这些 R 包的开发者基本在单干，有 4 个及以下的贡献者占总数（这个总数是指只开发了一个R包的那些开发者）的 90.85\%。
@@ -1332,8 +1360,8 @@ first_ctb <- setdiff(new_pdb[, "Maintainer"][!duplicated(new_pdb[, "Maintainer"]
 ctb_num <- unlist(
   lapply(
     strsplit(
-      subset(new_pdb,
-             subset = new_pdb[, "Maintainer"] %in% first_ctb,
+      subset(sub_pdb,
+             subset = sub_pdb[, "Maintainer"] %in% first_ctb,
              select = "Author"
       ),
       split = ","
@@ -1355,9 +1383,9 @@ table(ctb_num)
 
 ```{r}
 # 找到开发者
-first_ctb[ctb_num == 37]
+first_ctb[which.max(ctb_num)]
 # 找到 R 包
-subset(new_pdb, subset = grepl("Matt Dowle", new_pdb[, "Maintainer"]), select = "Package")
+subset(sub_pdb, subset = grepl("Matt Dowle", sub_pdb[, "Maintainer"]), select = "Package")
 ```
 
 哇，大名鼎鼎的 [data.table](https://github.com/Rdatatable/data.table) 包！！ I JUST find it!! 这是个异数，我们知道 data.table 在R社区享有盛名，影响范围很广，从 Matt Dowle 的 [Github 主页](https://github.com/mattdowle) 来看，他确实只开发了这一个 R 包！黑天鹅在这里出现了！如果按照谁的贡献者多谁影响力大的规律来看，有 10 个以上贡献者的其它几个 R 包也必定是名器！这里留给读者把它找出来吧！
