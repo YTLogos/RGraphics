@@ -60,6 +60,8 @@ mtext("Anscombe's 4 Regression data sets", outer = TRUE, cex = 1.5)
 par(op)
 ```
 
+书籍同时使用 [bookdown.org](https://bookdown.org) 和 [netlify](https://www.netlify.com) 部署，网址分别是 <https://bookdown.org/xiangyun/RGraphics/> 和 <https://r-graphics.netlify.com/>
+
 注意
 : 本书要求复现环境是 R 3.6.0 因为书中涉及 `barplot` 新增的公式方法，新增多维数组操作函数 `asplit`， `axis` 函数的 `gap.axis` ，新增 `hcl.colors` 函数等，完整列表见官网 [What's New?](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)
 
