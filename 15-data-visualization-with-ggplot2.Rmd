@@ -1302,10 +1302,69 @@ cran_maintainers %>%
           panel.first = grid())
 ```
 
-只开发一个 R 包的人数达到 5276 人，占开发者总数的 67.31\%，约为2/3。我们还想进一步了解这些人是不是就自己开发自己维护，没有其他人参与，而且他们也不参与其它 R 包的贡献？如果是，则他们对社区的贡献非常有限，仅限于为社区带来数量上的堆积！那么社区的主要推动者是余下的 1/3，他们相互之间的合作应该比较多，我们接下来想分析一下他们之间的贡献网络。
+只开发一个 R 包的人数达到 5276 人，占开发者总数的 67.31\%，约为2/3。
 
+### 金字塔底的人 {#first-commit}
+
+我们还想进一步了解这些人是不是就自己开发自己维护，基本没有其他人参与，答案是 Almost Sure. 
+
+```{r}
+new_pdb <- subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Package", "Maintainer", "Author"))
+new_pdb[,"Maintainer"] <- clean_maintainer(new_pdb[,"Maintainer"])
+
+new_pdb[,"Author"] <- clean_author(new_pdb[,"Author"])
+
+# 维护多个 R 包的开发者 2559
+new_pdb[, "Maintainer"][duplicated(new_pdb[, "Maintainer"])] %>% unique() %>% length()
+
+# 总的开发者 7838
+new_pdb[, "Maintainer"][!duplicated(new_pdb[, "Maintainer"])] %>% length()
+
+# 只维护1个R包的开发者 5279
+# 第一次提交 R 包
+first_ctb <- setdiff(new_pdb[, "Maintainer"][!duplicated(new_pdb[, "Maintainer"])],
+        unique(new_pdb[, "Maintainer"][duplicated(new_pdb[, "Maintainer"])]))
+```
+
+按照每个R包贡献者的数量分组，如图所示，有一个或者没有贡献者的占总数占 70.60\%，说明这些 R 包的开发者基本在单干，有 4 个及以下的贡献者占总数（这个总数是指只开发了一个R包的那些开发者）的 90.85\%。
+
+```{r}
+ctb_num <- unlist(
+  lapply(
+    strsplit(
+      subset(new_pdb,
+             subset = new_pdb[, "Maintainer"] %in% first_ctb,
+             select = "Author"
+      ),
+      split = ","
+    ), length
+  )
+) 
+hist(ctb_num, col = "lightblue", border = "white", probability = TRUE, labels = TRUE,
+     xlab = "# of Contributors", ylab = "Proportion", main = "",
+     panel.first = grid(), xlim = c(0, 10))
+```
+
+这些基本单干的R包开发者是否参与其它 R 包的贡献？如果不参与，则他们对社区的贡献非常有限，仅限于为社区带来数量上的堆积！
+
+```{r}
+table(ctb_num)
+```
+
+有意思的是，有一个开发者虽然只开发了一个 R 包，但是却引来37位贡献者（包括开发者本人在内），下面把这个颇受欢迎的 R 包找出来
+
+```{r}
+# 找到开发者
+first_ctb[ctb_num == 37]
+# 找到 R 包
+subset(new_pdb, subset = grepl("Matt Dowle", new_pdb[, "Maintainer"]), select = "Package")
+```
+
+哇，大名鼎鼎的 [data.table](https://github.com/Rdatatable/data.table) 包！！ I JUST find it!! 这是个异数，我们知道 data.table 在R社区享有盛名，影响范围很广，从 Matt Dowle 的 [Github 主页](https://github.com/mattdowle) 来看，他确实只开发了这一个 R 包！黑天鹅在这里出现了！如果按照谁的贡献者多谁影响力大的规律来看，有 10 个以上贡献者的其它几个 R 包也必定是名器！这里留给读者把它找出来吧！
 
 ### 贡献关系网络 {#Contribution-Network}
+
+综合上面的分析，社区的主要推动者是余下的 1/3，他们相互之间的合作应该比较多，我们接下来想分析一下他们之间的贡献网络。
 
 
 
