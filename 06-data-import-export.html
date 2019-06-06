@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 5 章 数据搬运工 | 数据可视化与R语言</title>
+  <meta name="description" content="学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情。数据操作和数据清理部分以Base R为主，在sidebar中给出tidyverse的等价表示。数据可视化部分以ggplot2为主，在sidebar中给出Base R的等价表示" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 5 章 数据搬运工 | 数据可视化与R语言" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/xiangyun/RGraphics/" />
+  
+  <meta property="og:description" content="学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情。数据操作和数据清理部分以Base R为主，在sidebar中给出tidyverse的等价表示。数据可视化部分以ggplot2为主，在sidebar中给出Base R的等价表示" />
+  <meta name="github-repo" content="XiangyunHuang/RGraphics" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 5 章 数据搬运工 | 数据可视化与R语言" />
+  
+  <meta name="twitter:description" content="学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情。数据操作和数据清理部分以Base R为主，在sidebar中给出tidyverse的等价表示。数据可视化部分以ggplot2为主，在sidebar中给出Base R的等价表示" />
+  
+
+<meta name="author" content="黄湘云" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="05-data-object.html">
+<link rel="next" href="07-data-rectangling.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">数据可视化与R语言</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>欢迎</a></li>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html#what-talk-about"><i class="fa fa-check"></i>关于本书</a></li>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html#structure-of-book"><i class="fa fa-check"></i>本书结构</a></li>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html#about-author"><i class="fa fa-check"></i>关于作者</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="02-introduction.html"><a href="02-introduction.html"><i class="fa fa-check"></i><b>1</b> 介绍</a><ul>
+<li class="chapter" data-level="1.1" data-path="02-introduction.html"><a href="02-introduction.html#why-r"><i class="fa fa-check"></i><b>1.1</b> Why R</a></li>
+<li class="chapter" data-level="1.2" data-path="02-introduction.html"><a href="02-introduction.html#who-read-this-book"><i class="fa fa-check"></i><b>1.2</b> 目标读者</a></li>
+<li class="chapter" data-level="1.3" data-path="02-introduction.html"><a href="02-introduction.html#Getting-Help-with-R"><i class="fa fa-check"></i><b>1.3</b> 获取帮助</a></li>
+<li class="chapter" data-level="1.4" data-path="02-introduction.html"><a href="02-introduction.html#history-of-r"><i class="fa fa-check"></i><b>1.4</b> 发展历史</a></li>
+<li class="chapter" data-level="1.5" data-path="02-introduction.html"><a href="02-introduction.html#conventions"><i class="fa fa-check"></i><b>1.5</b> 记号约定</a></li>
+<li class="chapter" data-level="1.6" data-path="02-introduction.html"><a href="02-introduction.html#softwares-rsession-info"><i class="fa fa-check"></i><b>1.6</b> 软件信息</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="03-setup.html"><a href="03-setup.html"><i class="fa fa-check"></i><b>2</b> 安装与配置</a><ul>
+<li class="chapter" data-level="2.1" data-path="03-setup.html"><a href="03-setup.html#repo-install"><i class="fa fa-check"></i><b>2.1</b> 仓库安装</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="03-setup.html"><a href="03-setup.html#ubuntu"><i class="fa fa-check"></i><b>2.1.1</b> Ubuntu</a></li>
+<li class="chapter" data-level="2.1.2" data-path="03-setup.html"><a href="03-setup.html#centos"><i class="fa fa-check"></i><b>2.1.2</b> CentOS</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="03-setup.html"><a href="03-setup.html#source-install"><i class="fa fa-check"></i><b>2.2</b> 源码安装</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="03-setup.html"><a href="03-setup.html#ubuntu-1"><i class="fa fa-check"></i><b>2.2.1</b> Ubuntu</a></li>
+<li class="chapter" data-level="2.2.2" data-path="03-setup.html"><a href="03-setup.html#centos-1"><i class="fa fa-check"></i><b>2.2.2</b> CentOS</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="03-setup.html"><a href="03-setup.html#ninja-install"><i class="fa fa-check"></i><b>2.3</b> 忍者安装</a></li>
+<li class="chapter" data-level="2.4" data-path="03-setup.html"><a href="03-setup.html#settings"><i class="fa fa-check"></i><b>2.4</b> 配置</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="03-setup.html"><a href="03-setup.html#init-session"><i class="fa fa-check"></i><b>2.4.1</b> 初始会话 <code>.Rprofile</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="03-setup.html"><a href="03-setup.html#environ-vars"><i class="fa fa-check"></i><b>2.4.2</b> 环境变量 <code>.Renviron</code></a></li>
+<li class="chapter" data-level="2.4.3" data-path="03-setup.html"><a href="03-setup.html#make-vars"><i class="fa fa-check"></i><b>2.4.3</b> 编译选项 <code>Makevars</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="03-setup.html"><a href="03-setup.html#command-line-arguments"><i class="fa fa-check"></i><b>2.5</b> 命令行参数</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="04-file-system.html"><a href="04-file-system.html"><i class="fa fa-check"></i><b>3</b> 文件管理员</a><ul>
+<li class="chapter" data-level="3.1" data-path="04-file-system.html"><a href="04-file-system.html#list"><i class="fa fa-check"></i><b>3.1</b> 查看文件</a></li>
+<li class="chapter" data-level="3.2" data-path="04-file-system.html"><a href="04-file-system.html#manipulation"><i class="fa fa-check"></i><b>3.2</b> 操作文件</a></li>
+<li class="chapter" data-level="3.3" data-path="04-file-system.html"><a href="04-file-system.html#compression"><i class="fa fa-check"></i><b>3.3</b> 压缩文件</a></li>
+<li class="chapter" data-level="3.4" data-path="04-file-system.html"><a href="04-file-system.html#paths"><i class="fa fa-check"></i><b>3.4</b> 路径操作</a></li>
+<li class="chapter" data-level="3.5" data-path="04-file-system.html"><a href="04-file-system.html#find"><i class="fa fa-check"></i><b>3.5</b> 查找文件</a></li>
+<li class="chapter" data-level="3.6" data-path="04-file-system.html"><a href="04-file-system.html#permissions"><i class="fa fa-check"></i><b>3.6</b> 文件权限</a></li>
+<li class="chapter" data-level="3.7" data-path="04-file-system.html"><a href="04-file-system.html#locale"><i class="fa fa-check"></i><b>3.7</b> 区域设置</a></li>
+<li class="chapter" data-level="3.8" data-path="04-file-system.html"><a href="04-file-system.html#process"><i class="fa fa-check"></i><b>3.8</b> 进程管理</a></li>
+<li class="chapter" data-level="3.9" data-path="04-file-system.html"><a href="04-file-system.html#system-commands"><i class="fa fa-check"></i><b>3.9</b> 系统命令</a></li>
+<li class="chapter" data-level="3.10" data-path="04-file-system.html"><a href="04-file-system.html#time"><i class="fa fa-check"></i><b>3.10</b> 时间管理</a></li>
+<li class="chapter" data-level="3.11" data-path="04-file-system.html"><a href="04-file-system.html#package"><i class="fa fa-check"></i><b>3.11</b> R 包管理</a></li>
+<li class="chapter" data-level="3.12" data-path="04-file-system.html"><a href="04-file-system.html#lookup-function"><i class="fa fa-check"></i><b>3.12</b> 查找函数</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="05-data-object.html"><a href="05-data-object.html"><i class="fa fa-check"></i><b>4</b> 对象在哪里</a><ul>
+<li class="chapter" data-level="4.1" data-path="05-data-object.html"><a href="05-data-object.html#oop-vector"><i class="fa fa-check"></i><b>4.1</b> 向量</a></li>
+<li class="chapter" data-level="4.2" data-path="05-data-object.html"><a href="05-data-object.html#oop-matrix"><i class="fa fa-check"></i><b>4.2</b> 矩阵</a></li>
+<li class="chapter" data-level="4.3" data-path="05-data-object.html"><a href="05-data-object.html#oop-array"><i class="fa fa-check"></i><b>4.3</b> 数组</a></li>
+<li class="chapter" data-level="4.4" data-path="05-data-object.html"><a href="05-data-object.html#oop-data.frame"><i class="fa fa-check"></i><b>4.4</b> 数据框</a></li>
+<li class="chapter" data-level="4.5" data-path="05-data-object.html"><a href="05-data-object.html#oop-table"><i class="fa fa-check"></i><b>4.5</b> 表格</a></li>
+<li class="chapter" data-level="4.6" data-path="05-data-object.html"><a href="05-data-object.html#oop-list"><i class="fa fa-check"></i><b>4.6</b> 列表</a></li>
+<li class="chapter" data-level="4.7" data-path="05-data-object.html"><a href="05-data-object.html#oop-ts"><i class="fa fa-check"></i><b>4.7</b> 时间序列</a></li>
+<li class="chapter" data-level="4.8" data-path="05-data-object.html"><a href="05-data-object.html#oop-sf"><i class="fa fa-check"></i><b>4.8</b> 空间数据</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="06-data-import-export.html"><a href="06-data-import-export.html"><i class="fa fa-check"></i><b>5</b> 数据搬运工</a><ul>
+<li class="chapter" data-level="5.1" data-path="06-data-import-export.html"><a href="06-data-import-export.html#import-data-files"><i class="fa fa-check"></i><b>5.1</b> 导入数据文件</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="06-data-import-export.html"><a href="06-data-import-export.html#scan-file"><i class="fa fa-check"></i><b>5.1.1</b> <code>scan</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="06-data-import-export.html"><a href="06-data-import-export.html#read-write-table"><i class="fa fa-check"></i><b>5.1.2</b> <code>read.table</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="06-data-import-export.html"><a href="06-data-import-export.html#read-write-lines"><i class="fa fa-check"></i><b>5.1.3</b> <code>readLines</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="06-data-import-export.html"><a href="06-data-import-export.html#read-save-rds"><i class="fa fa-check"></i><b>5.1.4</b> <code>readRDS</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="06-data-import-export.html"><a href="06-data-import-export.html#load-save"><i class="fa fa-check"></i><b>5.2</b> 保存输出结果</a></li>
+<li class="chapter" data-level="5.3" data-path="06-data-import-export.html"><a href="06-data-import-export.html#save-data-object"><i class="fa fa-check"></i><b>5.3</b> 保存数据对象</a></li>
+<li class="chapter" data-level="5.4" data-path="06-data-import-export.html"><a href="06-data-import-export.html#other-data-source"><i class="fa fa-check"></i><b>5.4</b> 其它数据格式</a></li>
+<li class="chapter" data-level="5.5" data-path="06-data-import-export.html"><a href="06-data-import-export.html#batch-import-data"><i class="fa fa-check"></i><b>5.5</b> 批量导入数据</a></li>
+<li class="chapter" data-level="5.6" data-path="06-data-import-export.html"><a href="06-data-import-export.html#batch-export-data"><i class="fa fa-check"></i><b>5.6</b> 批量导出数据</a></li>
+<li class="chapter" data-level="5.7" data-path="06-data-import-export.html"><a href="06-data-import-export.html#import-large-csv-files"><i class="fa fa-check"></i><b>5.7</b> 导入大数据集</a></li>
+<li class="chapter" data-level="5.8" data-path="06-data-import-export.html"><a href="06-data-import-export.html#import-data-from-database"><i class="fa fa-check"></i><b>5.8</b> 从数据库导入</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="06-data-import-export.html"><a href="06-data-import-export.html#rsqlite"><i class="fa fa-check"></i><b>5.8.1</b> RSQLite</a></li>
+<li class="chapter" data-level="5.8.2" data-path="06-data-import-export.html"><a href="06-data-import-export.html#postgresql"><i class="fa fa-check"></i><b>5.8.2</b> PostgreSQL</a></li>
+<li class="chapter" data-level="5.8.3" data-path="06-data-import-export.html"><a href="06-data-import-export.html#clickhouse"><i class="fa fa-check"></i><b>5.8.3</b> ClickHouse</a></li>
+<li class="chapter" data-level="5.8.4" data-path="06-data-import-export.html"><a href="06-data-import-export.html#mysql"><i class="fa fa-check"></i><b>5.8.4</b> MySQL</a></li>
+<li class="chapter" data-level="5.8.5" data-path="06-data-import-export.html"><a href="06-data-import-export.html#spark"><i class="fa fa-check"></i><b>5.8.5</b> Spark</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="07-data-rectangling.html"><a href="07-data-rectangling.html"><i class="fa fa-check"></i><b>6</b> 数据异形者</a></li>
+<li class="chapter" data-level="7" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html"><i class="fa fa-check"></i><b>7</b> 数据操作手</a><ul>
+<li class="chapter" data-level="7.1" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#show"><i class="fa fa-check"></i><b>7.1</b> 查看数据</a></li>
+<li class="chapter" data-level="7.2" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-reshape"><i class="fa fa-check"></i><b>7.2</b> 数据变形</a></li>
+<li class="chapter" data-level="7.3" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-transform"><i class="fa fa-check"></i><b>7.3</b> 数据转换</a></li>
+<li class="chapter" data-level="7.4" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-subset"><i class="fa fa-check"></i><b>7.4</b> 提取子集</a></li>
+<li class="chapter" data-level="7.5" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-order"><i class="fa fa-check"></i><b>7.5</b> 按列排序</a></li>
+<li class="chapter" data-level="7.6" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-split"><i class="fa fa-check"></i><b>7.6</b> 数据拆分</a></li>
+<li class="chapter" data-level="7.7" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-merge"><i class="fa fa-check"></i><b>7.7</b> 数据合并</a></li>
+<li class="chapter" data-level="7.8" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-duplicated"><i class="fa fa-check"></i><b>7.8</b> 数据去重</a></li>
+<li class="chapter" data-level="7.9" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-aggregate"><i class="fa fa-check"></i><b>7.9</b> 数据聚合</a></li>
+<li class="chapter" data-level="7.10" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-table"><i class="fa fa-check"></i><b>7.10</b> 表格统计</a></li>
+<li class="chapter" data-level="7.11" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-index"><i class="fa fa-check"></i><b>7.11</b> 索引访问</a></li>
+<li class="chapter" data-level="7.12" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-array"><i class="fa fa-check"></i><b>7.12</b> 多维数组</a></li>
+<li class="chapter" data-level="7.13" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-others"><i class="fa fa-check"></i><b>7.13</b> 其它操作</a><ul>
+<li class="chapter" data-level="7.13.1" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#list-or-unlist"><i class="fa fa-check"></i><b>7.13.1</b> 列表属性</a></li>
+<li class="chapter" data-level="7.13.2" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#stack-or-unstack"><i class="fa fa-check"></i><b>7.13.2</b> 堆叠向量</a></li>
+<li class="chapter" data-level="7.13.3" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#class-or-unclass"><i class="fa fa-check"></i><b>7.13.3</b> 属性转化</a></li>
+<li class="chapter" data-level="7.13.4" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#attach-or-detach"><i class="fa fa-check"></i><b>7.13.4</b> 绑定环境</a></li>
+<li class="chapter" data-level="7.13.5" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#with-or-within"><i class="fa fa-check"></i><b>7.13.5</b> 数据环境</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html"><i class="fa fa-check"></i><b>8</b> 向量化操作</a><ul>
+<li class="chapter" data-level="8.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#common-operations"><i class="fa fa-check"></i><b>8.1</b> 常用操作</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#tibble-show"><i class="fa fa-check"></i><b>8.1.1</b> 查看</a></li>
+<li class="chapter" data-level="8.1.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-subset"><i class="fa fa-check"></i><b>8.1.2</b> 筛选</a></li>
+<li class="chapter" data-level="8.1.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-order"><i class="fa fa-check"></i><b>8.1.3</b> 排序</a></li>
+<li class="chapter" data-level="8.1.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-aggregate"><i class="fa fa-check"></i><b>8.1.4</b> 聚合</a></li>
+<li class="chapter" data-level="8.1.5" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-merge"><i class="fa fa-check"></i><b>8.1.5</b> 合并</a></li>
+<li class="chapter" data-level="8.1.6" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-reshape"><i class="fa fa-check"></i><b>8.1.6</b> 重塑</a></li>
+<li class="chapter" data-level="8.1.7" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-transform"><i class="fa fa-check"></i><b>8.1.7</b> 变换</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#common-dataframe-operations"><i class="fa fa-check"></i><b>8.2</b> 高频问题</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#create-empty-dataframe"><i class="fa fa-check"></i><b>8.2.1</b> 初始化数据框</a></li>
+<li class="chapter" data-level="8.2.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#remove-missing-values"><i class="fa fa-check"></i><b>8.2.2</b> 移除缺失记录</a></li>
+<li class="chapter" data-level="8.2.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#coerce-data-type"><i class="fa fa-check"></i><b>8.2.3</b> 数据类型转化</a></li>
+<li class="chapter" data-level="8.2.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#cross-group-by"><i class="fa fa-check"></i><b>8.2.4</b> 跨列分组求和</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#parallel-computing"><i class="fa fa-check"></i><b>8.3</b> 并行计算</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#apply"><i class="fa fa-check"></i><b>8.3.1</b> apply</a></li>
+<li class="chapter" data-level="8.3.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#map-reduce"><i class="fa fa-check"></i><b>8.3.2</b> MapReduce</a></li>
+<li class="chapter" data-level="8.3.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#parallel"><i class="fa fa-check"></i><b>8.3.3</b> parallel</a></li>
+<li class="chapter" data-level="8.3.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#rmpi"><i class="fa fa-check"></i><b>8.3.4</b> Rmpi</a></li>
+<li class="chapter" data-level="8.3.5" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#gpur"><i class="fa fa-check"></i><b>8.3.5</b> gpuR</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#pipe-manipulation"><i class="fa fa-check"></i><b>8.4</b> 管道操作</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html"><i class="fa fa-check"></i><b>9</b> 字符串操作</a><ul>
+<li class="chapter" data-level="9.1" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-count"><i class="fa fa-check"></i><b>9.1</b> 字符数统计</a></li>
+<li class="chapter" data-level="9.2" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-translations"><i class="fa fa-check"></i><b>9.2</b> 字符串翻译</a></li>
+<li class="chapter" data-level="9.3" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-concatenate"><i class="fa fa-check"></i><b>9.3</b> 字符串连接</a></li>
+<li class="chapter" data-level="9.4" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-strsplit"><i class="fa fa-check"></i><b>9.4</b> 字符串拆分</a></li>
+<li class="chapter" data-level="9.5" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-match"><i class="fa fa-check"></i><b>9.5</b> 字符串匹配</a></li>
+<li class="chapter" data-level="9.6" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-search"><i class="fa fa-check"></i><b>9.6</b> 字符串查询</a></li>
+<li class="chapter" data-level="9.7" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-replacement"><i class="fa fa-check"></i><b>9.7</b> 字符串替换</a></li>
+<li class="chapter" data-level="9.8" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-extract"><i class="fa fa-check"></i><b>9.8</b> 字符串提取</a></li>
+<li class="chapter" data-level="9.9" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#other-string-op"><i class="fa fa-check"></i><b>9.9</b> 其它字符串操作</a><ul>
+<li class="chapter" data-level="9.9.1" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#strwrap"><i class="fa fa-check"></i><b>9.9.1</b> strwrap</a></li>
+<li class="chapter" data-level="9.9.2" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#strtrim"><i class="fa fa-check"></i><b>9.9.2</b> strtrim</a></li>
+<li class="chapter" data-level="9.9.3" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#strrep"><i class="fa fa-check"></i><b>9.9.3</b> strrep</a></li>
+<li class="chapter" data-level="9.9.4" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#trimws"><i class="fa fa-check"></i><b>9.9.4</b> trimws</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html"><i class="fa fa-check"></i><b>10</b> 数据清洁工</a><ul>
+<li class="chapter" data-level="10.1" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html#performance"><i class="fa fa-check"></i><b>10.1</b> 处理性能</a></li>
+<li class="chapter" data-level="10.2" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html#Web-crawler"><i class="fa fa-check"></i><b>10.2</b> 网络爬虫</a></li>
+<li class="chapter" data-level="10.3" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html#text-mining"><i class="fa fa-check"></i><b>10.3</b> 文本挖掘</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html"><i class="fa fa-check"></i><b>11</b> 正则表达式</a><ul>
+<li class="chapter" data-level="11.1" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#character-constants"><i class="fa fa-check"></i><b>11.1</b> 字符常量</a></li>
+<li class="chapter" data-level="11.2" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#environments"><i class="fa fa-check"></i><b>11.2</b> 软件环境</a></li>
+<li class="chapter" data-level="11.3" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#foundations"><i class="fa fa-check"></i><b>11.3</b> 基本概念</a></li>
+<li class="chapter" data-level="11.4" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#match"><i class="fa fa-check"></i><b>11.4</b> 字符串匹配</a></li>
+<li class="chapter" data-level="11.5" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#concatenation"><i class="fa fa-check"></i><b>11.5</b> 级联表达式</a></li>
+<li class="chapter" data-level="11.6" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#backreference"><i class="fa fa-check"></i><b>11.6</b> 反向引用</a></li>
+<li class="chapter" data-level="11.7" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#named-capture"><i class="fa fa-check"></i><b>11.7</b> 命名捕捉</a></li>
+<li class="chapter" data-level="11.8" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#comment"><i class="fa fa-check"></i><b>11.8</b> 表达式注释</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html"><i class="fa fa-check"></i><b>12</b> 绘图素材库</a><ul>
+<li class="chapter" data-level="12.1" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#elements"><i class="fa fa-check"></i><b>12.1</b> 基本要素</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-points"><i class="fa fa-check"></i><b>12.1.1</b> 点线</a></li>
+<li class="chapter" data-level="12.1.2" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-rect"><i class="fa fa-check"></i><b>12.1.2</b> 区域</a></li>
+<li class="chapter" data-level="12.1.3" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-lines"><i class="fa fa-check"></i><b>12.1.3</b> 参考线</a></li>
+<li class="chapter" data-level="12.1.4" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-axis"><i class="fa fa-check"></i><b>12.1.4</b> 坐标轴</a></li>
+<li class="chapter" data-level="12.1.5" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-title"><i class="fa fa-check"></i><b>12.1.5</b> 标题</a></li>
+<li class="chapter" data-level="12.1.6" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-annotation"><i class="fa fa-check"></i><b>12.1.6</b> 注释</a></li>
+<li class="chapter" data-level="12.1.7" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-legend"><i class="fa fa-check"></i><b>12.1.7</b> 图例</a></li>
+<li class="chapter" data-level="12.1.8" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-par"><i class="fa fa-check"></i><b>12.1.8</b> 边空</a></li>
+<li class="chapter" data-level="12.1.9" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-layer"><i class="fa fa-check"></i><b>12.1.9</b> 图层</a></li>
+<li class="chapter" data-level="12.1.10" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-layout"><i class="fa fa-check"></i><b>12.1.10</b> 布局</a></li>
+<li class="chapter" data-level="12.1.11" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-combine"><i class="fa fa-check"></i><b>12.1.11</b> 组合</a></li>
+<li class="chapter" data-level="12.1.12" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-screen"><i class="fa fa-check"></i><b>12.1.12</b> 分屏</a></li>
+<li class="chapter" data-level="12.1.13" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#identify-locator"><i class="fa fa-check"></i><b>12.1.13</b> 交互</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-gallary"><i class="fa fa-check"></i><b>12.2</b> 统计图形</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-bar"><i class="fa fa-check"></i><b>12.2.1</b> 条形图</a></li>
+<li class="chapter" data-level="12.2.2" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-hist"><i class="fa fa-check"></i><b>12.2.2</b> 直方图</a></li>
+<li class="chapter" data-level="12.2.3" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-density"><i class="fa fa-check"></i><b>12.2.3</b> 密度图</a></li>
+<li class="chapter" data-level="12.2.4" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-ecdf"><i class="fa fa-check"></i><b>12.2.4</b> 经验图</a></li>
+<li class="chapter" data-level="12.2.5" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-qqnorm"><i class="fa fa-check"></i><b>12.2.5</b> QQ 图</a></li>
+<li class="chapter" data-level="12.2.6" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-ts"><i class="fa fa-check"></i><b>12.2.6</b> 时序图</a></li>
+<li class="chapter" data-level="12.2.7" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-pie"><i class="fa fa-check"></i><b>12.2.7</b> 饼图</a></li>
+<li class="chapter" data-level="12.2.8" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-stem-leaf"><i class="fa fa-check"></i><b>12.2.8</b> 茎叶图</a></li>
+<li class="chapter" data-level="12.2.9" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-scatter"><i class="fa fa-check"></i><b>12.2.9</b> 散点图</a></li>
+<li class="chapter" data-level="12.2.10" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-jitter"><i class="fa fa-check"></i><b>12.2.10</b> 抖动图</a></li>
+<li class="chapter" data-level="12.2.11" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-box"><i class="fa fa-check"></i><b>12.2.11</b> 箱线图</a></li>
+<li class="chapter" data-level="12.2.12" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#error-bars"><i class="fa fa-check"></i><b>12.2.12</b> 残差图</a></li>
+<li class="chapter" data-level="12.2.13" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-violin"><i class="fa fa-check"></i><b>12.2.13</b> 提琴图</a></li>
+<li class="chapter" data-level="12.2.14" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-contour"><i class="fa fa-check"></i><b>12.2.14</b> 轮廓图</a></li>
+<li class="chapter" data-level="12.2.15" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-line"><i class="fa fa-check"></i><b>12.2.15</b> 折线图</a></li>
+<li class="chapter" data-level="12.2.16" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#function"><i class="fa fa-check"></i><b>12.2.16</b> 函数图</a></li>
+<li class="chapter" data-level="12.2.17" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-mosaic"><i class="fa fa-check"></i><b>12.2.17</b> 马赛克图</a></li>
+<li class="chapter" data-level="12.2.18" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#dotchart"><i class="fa fa-check"></i><b>12.2.18</b> 克利夫兰点图</a></li>
+<li class="chapter" data-level="12.2.19" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-matrix"><i class="fa fa-check"></i><b>12.2.19</b> 矩阵图</a></li>
+<li class="chapter" data-level="12.2.20" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-radar"><i class="fa fa-check"></i><b>12.2.20</b> 雷达图</a></li>
+<li class="chapter" data-level="12.2.21" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-rose"><i class="fa fa-check"></i><b>12.2.21</b> 玫瑰图</a></li>
+<li class="chapter" data-level="12.2.22" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-map"><i class="fa fa-check"></i><b>12.2.22</b> 地形图</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#tikz"><i class="fa fa-check"></i><b>12.3</b> TikZ 绘图</a></li>
+<li class="chapter" data-level="12.4" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#export-save"><i class="fa fa-check"></i><b>12.4</b> 图形导出</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html"><i class="fa fa-check"></i><b>13</b> 三维可视化</a><ul>
+<li class="chapter" data-level="13.1" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#pie-3d"><i class="fa fa-check"></i><b>13.1</b> 饼图</a></li>
+<li class="chapter" data-level="13.2" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#bar-3d"><i class="fa fa-check"></i><b>13.2</b> 柱形图</a></li>
+<li class="chapter" data-level="13.3" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#scatter-3d"><i class="fa fa-check"></i><b>13.3</b> 散点图</a></li>
+<li class="chapter" data-level="13.4" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#curve-3d"><i class="fa fa-check"></i><b>13.4</b> 函数图</a></li>
+<li class="chapter" data-level="13.5" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#persp-3d"><i class="fa fa-check"></i><b>13.5</b> 透视图</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html"><i class="fa fa-check"></i><b>14</b> 数据可视化</a><ul>
+<li class="chapter" data-level="14.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#intro-ggplot2"><i class="fa fa-check"></i><b>14.1</b> 基础语法</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-layer"><i class="fa fa-check"></i><b>14.1.1</b> 图层</a></li>
+<li class="chapter" data-level="14.1.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-theme"><i class="fa fa-check"></i><b>14.1.2</b> 主题</a></li>
+<li class="chapter" data-level="14.1.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-color"><i class="fa fa-check"></i><b>14.1.3</b> 配色</a></li>
+<li class="chapter" data-level="14.1.4" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-scale"><i class="fa fa-check"></i><b>14.1.4</b> 刻度</a></li>
+<li class="chapter" data-level="14.1.5" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-annotate"><i class="fa fa-check"></i><b>14.1.5</b> 注释</a></li>
+<li class="chapter" data-level="14.1.6" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-legend"><i class="fa fa-check"></i><b>14.1.6</b> 图例</a></li>
+<li class="chapter" data-level="14.1.7" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-grid"><i class="fa fa-check"></i><b>14.1.7</b> 组合</a></li>
+<li class="chapter" data-level="14.1.8" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-coord"><i class="fa fa-check"></i><b>14.1.8</b> 坐标系</a></li>
+<li class="chapter" data-level="14.1.9" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-axes"><i class="fa fa-check"></i><b>14.1.9</b> 坐标轴</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-gallary"><i class="fa fa-check"></i><b>14.2</b> 统计图形</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-scatter"><i class="fa fa-check"></i><b>14.2.1</b> 散点图</a></li>
+<li class="chapter" data-level="14.2.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-boxplot"><i class="fa fa-check"></i><b>14.2.2</b> 箱线图</a></li>
+<li class="chapter" data-level="14.2.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-barplot"><i class="fa fa-check"></i><b>14.2.3</b> 条形图</a></li>
+<li class="chapter" data-level="14.2.4" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-line"><i class="fa fa-check"></i><b>14.2.4</b> 折线图</a></li>
+<li class="chapter" data-level="14.2.5" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-histogram"><i class="fa fa-check"></i><b>14.2.5</b> 直方图</a></li>
+<li class="chapter" data-level="14.2.6" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-violin"><i class="fa fa-check"></i><b>14.2.6</b> 提琴图</a></li>
+<li class="chapter" data-level="14.2.7" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-jitter"><i class="fa fa-check"></i><b>14.2.7</b> 抖动图</a></li>
+<li class="chapter" data-level="14.2.8" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-ridge"><i class="fa fa-check"></i><b>14.2.8</b> 密度图</a></li>
+<li class="chapter" data-level="14.2.9" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-rose"><i class="fa fa-check"></i><b>14.2.9</b> 玫瑰图</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-spatial"><i class="fa fa-check"></i><b>14.3</b> 空间数据</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-raster"><i class="fa fa-check"></i><b>14.3.1</b> raster</a></li>
+<li class="chapter" data-level="14.3.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-sp"><i class="fa fa-check"></i><b>14.3.2</b> sp</a></li>
+<li class="chapter" data-level="14.3.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-sf"><i class="fa fa-check"></i><b>14.3.3</b> sf</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-network"><i class="fa fa-check"></i><b>14.4</b> 网络数据</a></li>
+<li class="chapter" data-level="14.5" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#analysis-cran"><i class="fa fa-check"></i><b>14.5</b> CRAN 分析</a></li>
+<li class="chapter" data-level="14.6" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-session-info"><i class="fa fa-check"></i><b>14.6</b> 软件信息</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html"><i class="fa fa-check"></i><b>15</b> 色彩与字体</a><ul>
+<li class="chapter" data-level="15.1" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html#colors"><i class="fa fa-check"></i><b>15.1</b> 配色</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html#colourlovers"><i class="fa fa-check"></i><b>15.1.1</b> colourlovers</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html#fonts"><i class="fa fa-check"></i><b>15.2</b> 字体</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="99-references.html"><a href="99-references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://r4charts.netlify.com/" target="blank">Published with netlify</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">数据可视化与R语言</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-porter" class="section level1">
+<h1><span class="header-section-number">第 5 章</span> 数据搬运工</h1>
+<p>导入数据与导出数据，各种数据格式，数据库</p>
+<div id="import-data-files" class="section level2">
+<h2><span class="header-section-number">5.1</span> 导入数据文件</h2>
+<p>Base R 针对不同的数据格式文件，提供了大量的数据导入和导出函数，不愧是专注数据分析20余年的优秀统计软件。 除了函数 <code>write.ftable</code> 和 <code>read.ftable</code> 来自 stats 包，都来自 base 和 utils 包</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 当前环境的搜索路径</span>
+<span class="kw">searchpaths</span>()
+<span class="co">#&gt;  [1] &quot;.GlobalEnv&quot;                                  </span>
+<span class="co">#&gt;  [2] &quot;D:/library/RClickhouse&quot;                      </span>
+<span class="co">#&gt;  [3] &quot;D:/library/DBI&quot;                              </span>
+<span class="co">#&gt;  [4] &quot;D:/library/openxlsx&quot;                         </span>
+<span class="co">#&gt;  [5] &quot;D:/library/forcats&quot;                          </span>
+<span class="co">#&gt;  [6] &quot;D:/library/stringr&quot;                          </span>
+<span class="co">#&gt;  [7] &quot;D:/library/dplyr&quot;                            </span>
+<span class="co">#&gt;  [8] &quot;D:/library/purrr&quot;                            </span>
+<span class="co">#&gt;  [9] &quot;D:/library/readr&quot;                            </span>
+<span class="co">#&gt; [10] &quot;D:/library/tidyr&quot;                            </span>
+<span class="co">#&gt; [11] &quot;D:/library/tibble&quot;                           </span>
+<span class="co">#&gt; [12] &quot;D:/library/ggplot2&quot;                          </span>
+<span class="co">#&gt; [13] &quot;D:/library/tidyverse&quot;                        </span>
+<span class="co">#&gt; [14] &quot;D:/library/yaml&quot;                             </span>
+<span class="co">#&gt; [15] &quot;C:/Program Files/R/R-3.6.0/library/stats&quot;    </span>
+<span class="co">#&gt; [16] &quot;C:/Program Files/R/R-3.6.0/library/graphics&quot; </span>
+<span class="co">#&gt; [17] &quot;C:/Program Files/R/R-3.6.0/library/grDevices&quot;</span>
+<span class="co">#&gt; [18] &quot;C:/Program Files/R/R-3.6.0/library/utils&quot;    </span>
+<span class="co">#&gt; [19] &quot;C:/Program Files/R/R-3.6.0/library/datasets&quot; </span>
+<span class="co">#&gt; [20] &quot;C:/Program Files/R/R-3.6.0/library/methods&quot;  </span>
+<span class="co">#&gt; [21] &quot;Autoloads&quot;                                   </span>
+<span class="co">#&gt; [22] &quot;C:/PROGRA~1/R/R-36~1.0/library/base&quot;</span>
+<span class="co"># 返回匹配结果及其所在路径的编号</span>
+<span class="kw">apropos</span>(<span class="st">&quot;^(read|write)&quot;</span>, <span class="dt">where =</span> <span class="ot">TRUE</span>, <span class="dt">mode =</span> <span class="st">&quot;function&quot;</span>)
+<span class="co">#&gt;                       18                       18                       22 </span>
+<span class="co">#&gt;               &quot;read.csv&quot;              &quot;read.csv2&quot;               &quot;read.dcf&quot; </span>
+<span class="co">#&gt;                       18                       18                       18 </span>
+<span class="co">#&gt;             &quot;read.delim&quot;            &quot;read.delim2&quot;               &quot;read.DIF&quot; </span>
+<span class="co">#&gt;                       18                       15                       18 </span>
+<span class="co">#&gt;           &quot;read.fortran&quot;            &quot;read.ftable&quot;               &quot;read.fwf&quot; </span>
+<span class="co">#&gt;                       18                       18                        4 </span>
+<span class="co">#&gt;            &quot;read.socket&quot;             &quot;read.table&quot;              &quot;read.xlsx&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;               &quot;read_csv&quot;       &quot;read_csv_chunked&quot;              &quot;read_csv2&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;      &quot;read_csv2_chunked&quot;             &quot;read_delim&quot;     &quot;read_delim_chunked&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;              &quot;read_file&quot;          &quot;read_file_raw&quot;               &quot;read_fwf&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;             &quot;read_lines&quot;     &quot;read_lines_chunked&quot;         &quot;read_lines_raw&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt; &quot;read_lines_raw_chunked&quot;               &quot;read_log&quot;               &quot;read_rds&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;             &quot;read_table&quot;            &quot;read_table2&quot;               &quot;read_tsv&quot; </span>
+<span class="co">#&gt;                        9                       14                       22 </span>
+<span class="co">#&gt;       &quot;read_tsv_chunked&quot;              &quot;read_yaml&quot;                &quot;readBin&quot; </span>
+<span class="co">#&gt;                       22                       18                       18 </span>
+<span class="co">#&gt;               &quot;readChar&quot;       &quot;readCitationFile&quot;          &quot;readClipboard&quot; </span>
+<span class="co">#&gt;                       22                       22                        9 </span>
+<span class="co">#&gt;               &quot;readline&quot;              &quot;readLines&quot;          &quot;readr_example&quot; </span>
+<span class="co">#&gt;                       22                       18                       22 </span>
+<span class="co">#&gt;                &quot;readRDS&quot;           &quot;readRegistry&quot;           &quot;readRenviron&quot; </span>
+<span class="co">#&gt;                        4                       22                       18 </span>
+<span class="co">#&gt;           &quot;readWorkbook&quot;                  &quot;write&quot;              &quot;write.csv&quot; </span>
+<span class="co">#&gt;                       18                       22                       15 </span>
+<span class="co">#&gt;             &quot;write.csv2&quot;              &quot;write.dcf&quot;           &quot;write.ftable&quot; </span>
+<span class="co">#&gt;                       18                       18                        4 </span>
+<span class="co">#&gt;           &quot;write.socket&quot;            &quot;write.table&quot;             &quot;write.xlsx&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;              &quot;write_csv&quot;             &quot;write_csv2&quot;            &quot;write_delim&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;        &quot;write_excel_csv&quot;       &quot;write_excel_csv2&quot;             &quot;write_file&quot; </span>
+<span class="co">#&gt;                        9                        9                        9 </span>
+<span class="co">#&gt;            &quot;write_lines&quot;              &quot;write_rds&quot;              &quot;write_tsv&quot; </span>
+<span class="co">#&gt;                       14                       22                       22 </span>
+<span class="co">#&gt;             &quot;write_yaml&quot;               &quot;writeBin&quot;              &quot;writeChar&quot; </span>
+<span class="co">#&gt;                       18                        4                        4 </span>
+<span class="co">#&gt;         &quot;writeClipboard&quot;           &quot;writeComment&quot;              &quot;writeData&quot; </span>
+<span class="co">#&gt;                        4                        4                       22 </span>
+<span class="co">#&gt;         &quot;writeDataTable&quot;           &quot;writeFormula&quot;             &quot;writeLines&quot;</span></code></pre>
+<div id="scan-file" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> <code>scan</code></h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scan</span>(<span class="dt">file =</span> <span class="st">&quot;&quot;</span>, <span class="dt">what =</span> <span class="kw">double</span>(), <span class="dt">nmax =</span> <span class="dv">-1</span>, <span class="dt">n =</span> <span class="dv">-1</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">quote =</span> <span class="cf">if</span>(<span class="kw">identical</span>(sep, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)) <span class="st">&quot;&quot;</span> <span class="cf">else</span> <span class="st">&quot;&#39;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>,
+     <span class="dt">skip =</span> <span class="dv">0</span>, <span class="dt">nlines =</span> <span class="dv">0</span>, <span class="dt">na.strings =</span> <span class="st">&quot;NA&quot;</span>,
+     <span class="dt">flush =</span> <span class="ot">FALSE</span>, <span class="dt">fill =</span> <span class="ot">FALSE</span>, <span class="dt">strip.white =</span> <span class="ot">FALSE</span>,
+     <span class="dt">quiet =</span> <span class="ot">FALSE</span>, <span class="dt">blank.lines.skip =</span> <span class="ot">TRUE</span>, <span class="dt">multi.line =</span> <span class="ot">TRUE</span>,
+     <span class="dt">comment.char =</span> <span class="st">&quot;&quot;</span>, <span class="dt">allowEscapes =</span> <span class="ot">FALSE</span>,
+     <span class="dt">fileEncoding =</span> <span class="st">&quot;&quot;</span>, <span class="dt">encoding =</span> <span class="st">&quot;unknown&quot;</span>, text, <span class="dt">skipNul =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>首先让我们用 <code>cat</code> 函数创建一个练习数据集 <code>ex.data</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;TITLE extra line&quot;</span>, <span class="st">&quot;2 3 5 7&quot;</span>, <span class="st">&quot;11 13 17&quot;</span>)
+<span class="co">#&gt; TITLE extra line 2 3 5 7 11 13 17</span>
+<span class="kw">cat</span>(<span class="st">&quot;TITLE extra line&quot;</span>, <span class="st">&quot;2 3 5 7&quot;</span>, <span class="st">&quot;11 13 17&quot;</span>, <span class="dt">file =</span> <span class="st">&quot;data/ex.data&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<p>以此练习数据集，介绍 <code>scan</code> 函数最常用的参数</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scan</span>(<span class="st">&quot;data/ex.data&quot;</span>)
+<span class="co">#&gt; Error in scan(&quot;data/ex.data&quot;): scan() expected &#39;a real&#39;, got &#39;TITLE&#39;</span></code></pre>
+<p>从上面的报错信息，我们发现 <code>scan</code> 函数只能读取同一类型的数据，如布尔型 logical， 整型 integer，数值型 numeric(double)， 复数型 complex，字符型 character，raw 和列表 list。所以我们设置参数 <code>skip = 1</code> 把第一行跳过，就成功读取了数据</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scan</span>(<span class="st">&quot;data/ex.data&quot;</span>, <span class="dt">skip =</span> <span class="dv">1</span>)
+<span class="co">#&gt; [1]  2  3  5  7 11 13 17</span></code></pre>
+<p>如果设置参数 <code>quiet = TRUE</code> 就不会报告读取的数据量</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scan</span>(<span class="st">&quot;data/ex.data&quot;</span>, <span class="dt">skip =</span> <span class="dv">1</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; [1]  2  3  5  7 11 13 17</span></code></pre>
+<p>参数 <code>nlines = 1</code> 表示只读取一行数据</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scan</span>(<span class="st">&quot;data/ex.data&quot;</span>, <span class="dt">skip =</span> <span class="dv">1</span>, <span class="dt">nlines =</span> <span class="dv">1</span>) <span class="co"># only 1 line after the skipped one</span>
+<span class="co">#&gt; [1] 2 3 5 7</span></code></pre>
+<p>默认参数 <code>flush = TRUE</code> 表示读取最后一个请求的字段后，刷新到行尾，下面对比一下读取的结果</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scan</span>(<span class="st">&quot;data/ex.data&quot;</span>, <span class="dt">what =</span> <span class="kw">list</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="co"># flush is F -&gt; read &quot;7&quot;</span>
+<span class="co">#&gt; Warning in scan(&quot;data/ex.data&quot;, what = list(&quot;&quot;, &quot;&quot;, &quot;&quot;)): number of items read</span>
+<span class="co">#&gt; is not a multiple of the number of columns</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] &quot;TITLE&quot; &quot;2&quot;     &quot;7&quot;     &quot;17&quot;   </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] &quot;extra&quot; &quot;3&quot;     &quot;11&quot;    &quot;&quot;     </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] &quot;line&quot; &quot;5&quot;    &quot;13&quot;   &quot;&quot;</span>
+<span class="kw">scan</span>(<span class="st">&quot;data/ex.data&quot;</span>, <span class="dt">what =</span> <span class="kw">list</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>), <span class="dt">flush =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] &quot;TITLE&quot; &quot;2&quot;     &quot;11&quot;   </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] &quot;extra&quot; &quot;3&quot;     &quot;13&quot;   </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] &quot;line&quot; &quot;5&quot;    &quot;17&quot;</span></code></pre>
+<p>临时文件 ex.data 用完了，我们调用 <code>unlink</code> 函数将其删除，以免留下垃圾文件</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlink</span>(<span class="st">&quot;data/ex.data&quot;</span>) <span class="co"># tidy up</span></code></pre>
+</div>
+<div id="read-write-table" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> <code>read.table</code></h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&#39;&quot;</span>,
+           <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">numerals =</span> <span class="kw">c</span>(<span class="st">&quot;allow.loss&quot;</span>, <span class="st">&quot;warn.loss&quot;</span>, <span class="st">&quot;no.loss&quot;</span>),
+           row.names, col.names, <span class="dt">as.is =</span> <span class="op">!</span>stringsAsFactors,
+           <span class="dt">na.strings =</span> <span class="st">&quot;NA&quot;</span>, <span class="dt">colClasses =</span> <span class="ot">NA</span>, <span class="dt">nrows =</span> <span class="dv">-1</span>,
+           <span class="dt">skip =</span> <span class="dv">0</span>, <span class="dt">check.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="op">!</span>blank.lines.skip,
+           <span class="dt">strip.white =</span> <span class="ot">FALSE</span>, <span class="dt">blank.lines.skip =</span> <span class="ot">TRUE</span>,
+           <span class="dt">comment.char =</span> <span class="st">&quot;#&quot;</span>,
+           <span class="dt">allowEscapes =</span> <span class="ot">FALSE</span>, <span class="dt">flush =</span> <span class="ot">FALSE</span>,
+           <span class="dt">stringsAsFactors =</span> <span class="kw">default.stringsAsFactors</span>(),
+           <span class="dt">fileEncoding =</span> <span class="st">&quot;&quot;</span>, <span class="dt">encoding =</span> <span class="st">&quot;unknown&quot;</span>, text, <span class="dt">skipNul =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">read.csv</span>(file, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>,
+         <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">comment.char =</span> <span class="st">&quot;&quot;</span>, ...)
+
+<span class="kw">read.csv2</span>(file, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>,
+          <span class="dt">dec =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">comment.char =</span> <span class="st">&quot;&quot;</span>, ...)
+
+<span class="kw">read.delim</span>(file, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>,
+           <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">comment.char =</span> <span class="st">&quot;&quot;</span>, ...)
+
+<span class="kw">read.delim2</span>(file, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>,
+            <span class="dt">dec =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">comment.char =</span> <span class="st">&quot;&quot;</span>, ...)</code></pre>
+<p>变量名是不允许以下划线开头的，同样在数据框里，列名也不推荐使用下划线开头。默认情况下，<code>read.table</code> 都会通过参数 <code>check.names</code> 检查列名的有效性，该参数实际调用了函数 <code>make.names</code> 去检查。如果想尽量保持数据集原来的样子可以设置参数 <code>check.names = FALSE, stringsAsFactors = FALSE</code>。 默认情形下，<code>read.table</code> 还会将字符串转化为因子变量，这是 R 的历史原因，作为一门统计学家的必备语言，在统计模型中，字符常用来描述类别，而类别变量在 R 环境中常用因子类型来表示，而且大量内置的统计模型也是将它们视为因子变量，如 <code>lm</code> 、<code>glm</code> 等</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat1 =<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">check.names =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span>
+<span class="st">_a _b _c</span>
+<span class="st">1 2 a1</span>
+<span class="st">3 4 a2</span>
+<span class="st">&quot;</span>)
+dat1
+<span class="co">#&gt;   X_a X_b X_c</span>
+<span class="co">#&gt; 1   1   2  a1</span>
+<span class="co">#&gt; 2   3   4  a2</span>
+dat2 =<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">check.names =</span> <span class="ot">FALSE</span>, <span class="dt">text =</span> <span class="st">&quot;</span>
+<span class="st">_a _b _c</span>
+<span class="st">1 2 a1</span>
+<span class="st">3 4 a2</span>
+<span class="st">&quot;</span>)
+dat2
+<span class="co">#&gt;   _a _b _c</span>
+<span class="co">#&gt; 1  1  2 a1</span>
+<span class="co">#&gt; 2  3  4 a2</span>
+dat3 =<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">check.names =</span> <span class="ot">FALSE</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>, <span class="dt">text =</span> <span class="st">&quot;</span>
+<span class="st">_a _b _c</span>
+<span class="st">1 2 a1</span>
+<span class="st">3 4 a2</span>
+<span class="st">&quot;</span>)
+dat3
+<span class="co">#&gt;   _a _b _c</span>
+<span class="co">#&gt; 1  1  2 a1</span>
+<span class="co">#&gt; 2  3  4 a2</span></code></pre>
+</div>
+<div id="read-write-lines" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> <code>readLines</code></h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="dt">con =</span> <span class="kw">stdin</span>(), <span class="dt">n =</span> <span class="op">-</span>1L, <span class="dt">ok =</span> <span class="ot">TRUE</span>, <span class="dt">warn =</span> <span class="ot">TRUE</span>,
+          <span class="dt">encoding =</span> <span class="st">&quot;unknown&quot;</span>, <span class="dt">skipNul =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>让我们折腾一波，读进来又写出去，只有 R 3.5.3 以上才能保持原样的正确输入输出</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">writeLines</span>(<span class="kw">readLines</span>(<span class="st">&quot;latex/TeXLive.pkgs&quot;</span>),<span class="st">&quot;latex/TeXLive.pkgs&quot;</span>)</code></pre>
+<p>这次我们创建一个真的临时文件，因为重新启动 R 这个文件和文件夹就没有了，回收掉了</p>
+<pre class="sourceCode r"><code class="sourceCode r">fil &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.data&quot;</span>)
+<span class="kw">cat</span>(<span class="st">&quot;TITLE extra line&quot;</span>, <span class="st">&quot;2 3 5 7&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;11 13 17&quot;</span>, <span class="dt">file =</span> fil,
+    <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+fil
+<span class="co">#&gt; [1] &quot;C:\\Users\\xy-huang\\AppData\\Local\\Temp\\Rtmp2vvo5F\\file1260dd724d4.data&quot;</span></code></pre>
+<p>设置参数 <code>n = -1</code> 表示将文件 fil 的内容从头读到尾</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(fil, <span class="dt">n =</span> <span class="dv">-1</span>)
+<span class="co">#&gt; [1] &quot;TITLE extra line&quot; &quot;2 3 5 7&quot;          &quot;&quot;                 &quot;11 13 17&quot;</span></code></pre>
+<p>作为拥有良好习惯的 R 用户，这种垃圾文件最好用后即焚</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlink</span>(fil) <span class="co"># tidy up</span></code></pre>
+<p>再举个例子，我们创建一个新的临时文件 <code>fil</code>，文件内容只有</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;123</span><span class="ch">\n</span><span class="st">abc&quot;</span>)
+<span class="co">#&gt; 123</span>
+<span class="co">#&gt; abc</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">fil &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="st">&quot;test&quot;</span>)
+<span class="kw">cat</span>(<span class="st">&quot;123</span><span class="ch">\n</span><span class="st">abc&quot;</span>, <span class="dt">file =</span> fil, <span class="dt">append =</span> <span class="ot">TRUE</span>)
+fil
+<span class="co">#&gt; [1] &quot;C:\\Users\\xy-huang\\AppData\\Local\\Temp\\Rtmp2vvo5F\\test126022ed434b&quot;</span>
+<span class="kw">readLines</span>(fil)
+<span class="co">#&gt; Warning in readLines(fil): incomplete final line found on &#39;C:\Users\xy-</span>
+<span class="co">#&gt; huang\AppData\Local\Temp\Rtmp2vvo5F\test126022ed434b&#39;</span>
+<span class="co">#&gt; [1] &quot;123&quot; &quot;abc&quot;</span></code></pre>
+<p>这次读取文件的过程给出了警告，原因是 fil 没有以空行结尾，<code>warn = TRUE</code> 表示这种情况要给出警告，如果设置参数 <code>warn = FALSE</code> 就没有警告。我们还是建议大家尽量遵循规范。</p>
+<p>再举一个例子，从一个连接读取数据，建立连接的方式有很多，参见 <code>?file</code>，下面设置参数 <code>blocking</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span><span class="kw">file</span>(fil, <span class="st">&quot;r&quot;</span>, <span class="dt">blocking =</span> <span class="ot">FALSE</span>)
+<span class="kw">readLines</span>(con)
+<span class="co">#&gt; [1] &quot;123&quot;</span>
+
+<span class="kw">cat</span>(<span class="st">&quot; def</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">file =</span> fil, <span class="dt">append =</span> <span class="ot">TRUE</span>)
+<span class="kw">readLines</span>(con)
+<span class="co">#&gt; [1] &quot;abc def&quot;</span>
+<span class="co"># 关闭连接</span>
+<span class="kw">close</span>(con)
+<span class="co"># 清理垃圾文件</span>
+<span class="kw">unlink</span>(fil)</code></pre>
+</div>
+<div id="read-save-rds" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> <code>readRDS</code></h3>
+<p>序列化数据操作，Mark Klik 开发的 <a href="https://github.com/fstpackage/fst">fst</a> 和 <a href="https://travers.im/">Travers Ching</a> 开发的 <a href="https://github.com/traversc/qs">qs</a>， Hadley Wickham 开发的 <a href="https://github.com/wesm/feather/tree/master/R">feather</a> 包实现跨语言环境快速的读写数据</p>
+<table>
+<caption><span id="tab:fst-vs-others">表 5.1: </span> fst 序列化数据框对象性能比较 BaseR、 data.table 和 feather<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></caption>
+<thead>
+<tr class="header">
+<th align="left">Method</th>
+<th align="left">Format</th>
+<th align="left">Time (ms)</th>
+<th align="left">Size (MB)</th>
+<th align="left">Speed (MB/s)</th>
+<th align="left">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">readRDS</td>
+<td align="left">bin</td>
+<td align="left">1577</td>
+<td align="left">1000</td>
+<td align="left">633</td>
+<td align="left">112</td>
+</tr>
+<tr class="even">
+<td align="left">saveRDS</td>
+<td align="left">bin</td>
+<td align="left">2042</td>
+<td align="left">1000</td>
+<td align="left">489</td>
+<td align="left">112</td>
+</tr>
+<tr class="odd">
+<td align="left">fread</td>
+<td align="left">csv</td>
+<td align="left">2925</td>
+<td align="left">1038</td>
+<td align="left">410</td>
+<td align="left">232</td>
+</tr>
+<tr class="even">
+<td align="left">fwrite</td>
+<td align="left">csv</td>
+<td align="left">2790</td>
+<td align="left">1038</td>
+<td align="left">358</td>
+<td align="left">241</td>
+</tr>
+<tr class="odd">
+<td align="left">read_feather</td>
+<td align="left">bin</td>
+<td align="left">3950</td>
+<td align="left">813</td>
+<td align="left">253</td>
+<td align="left">112</td>
+</tr>
+<tr class="even">
+<td align="left">write_feather</td>
+<td align="left">bin</td>
+<td align="left">1820</td>
+<td align="left">813</td>
+<td align="left">549</td>
+<td align="left">112</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>read_fst</strong></td>
+<td align="left"><strong>bin</strong></td>
+<td align="left"><strong>457</strong></td>
+<td align="left"><strong>303</strong></td>
+<td align="left"><strong>2184</strong></td>
+<td align="left"><strong>282</strong></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>write_fst</strong></td>
+<td align="left"><strong>bin</strong></td>
+<td align="left"><strong>314</strong></td>
+<td align="left"><strong>303</strong></td>
+<td align="left"><strong>3180</strong></td>
+<td align="left"><strong>291</strong></td>
+</tr>
+</tbody>
+</table>
+<p>目前比较好的是 qs 和 fst 包</p>
+</div>
+</div>
+<div id="load-save" class="section level2">
+<h2><span class="header-section-number">5.2</span> 保存输出结果</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">capture.output</span>(..., <span class="dt">file =</span> <span class="ot">NULL</span>, <span class="dt">append =</span> <span class="ot">FALSE</span>,
+               <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;output&quot;</span>, <span class="st">&quot;message&quot;</span>), <span class="dt">split =</span> <span class="ot">FALSE</span>)</code></pre>
+<p><code>capture.output</code> 将一段R代码执行结果，保存到文件，参数为表达式。<code>capture.output</code> 和 <code>sink</code> 的关系相当于 <code>with</code> 和 <code>attach</code> 的关系。</p>
+<pre class="sourceCode r"><code class="sourceCode r">glmout &lt;-<span class="st"> </span><span class="kw">capture.output</span>(<span class="kw">summary</span>(<span class="kw">glm</span>(case <span class="op">~</span><span class="st"> </span>spontaneous <span class="op">+</span><span class="st"> </span>induced,
+  <span class="dt">data =</span> infert, <span class="dt">family =</span> <span class="kw">binomial</span>()
+)), <span class="dt">file =</span> <span class="st">&quot;data/capture.txt&quot;</span>)
+<span class="kw">capture.output</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>)
+<span class="co">#&gt; [1] &quot;[1] 2&quot; &quot;[1] 4&quot;</span>
+<span class="kw">capture.output</span>({
+  <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>
+})
+<span class="co">#&gt; [1] &quot;[1] 4&quot;</span></code></pre>
+<p><code>sink</code> 函数将控制台输出结果保存到文件，只将 <code>outer</code> 函数运行的结果保存到 <code>ex-sink.txt</code> 文件，outer 函数计算的是直积，在这里相当于 <code>seq(10) %*% t(seq(10))</code>，而在 R 语言中，更加有效的计算方式是 <code>tcrossprod(seq(10),seq(10))</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sink</span>(<span class="st">&quot;data/ex-sink.txt&quot;</span>)
+i &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+<span class="kw">outer</span>(i, i, <span class="st">&quot;*&quot;</span>) 
+<span class="co">#&gt;       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]</span>
+<span class="co">#&gt;  [1,]    1    2    3    4    5    6    7    8    9    10</span>
+<span class="co">#&gt;  [2,]    2    4    6    8   10   12   14   16   18    20</span>
+<span class="co">#&gt;  [3,]    3    6    9   12   15   18   21   24   27    30</span>
+<span class="co">#&gt;  [4,]    4    8   12   16   20   24   28   32   36    40</span>
+<span class="co">#&gt;  [5,]    5   10   15   20   25   30   35   40   45    50</span>
+<span class="co">#&gt;  [6,]    6   12   18   24   30   36   42   48   54    60</span>
+<span class="co">#&gt;  [7,]    7   14   21   28   35   42   49   56   63    70</span>
+<span class="co">#&gt;  [8,]    8   16   24   32   40   48   56   64   72    80</span>
+<span class="co">#&gt;  [9,]    9   18   27   36   45   54   63   72   81    90</span>
+<span class="co">#&gt; [10,]   10   20   30   40   50   60   70   80   90   100</span>
+<span class="kw">sink</span>()</code></pre>
+</div>
+<div id="save-data-object" class="section level2">
+<h2><span class="header-section-number">5.3</span> 保存数据对象</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(file, <span class="dt">envir =</span> <span class="kw">parent.frame</span>(), <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">save</span>(..., <span class="dt">list =</span> <span class="kw">character</span>(),
+     <span class="dt">file =</span> <span class="kw">stop</span>(<span class="st">&quot;&#39;file&#39; must be specified&quot;</span>),
+     <span class="dt">ascii =</span> <span class="ot">FALSE</span>, <span class="dt">version =</span> <span class="ot">NULL</span>, <span class="dt">envir =</span> <span class="kw">parent.frame</span>(),
+     <span class="dt">compress =</span> <span class="kw">isTRUE</span>(<span class="op">!</span>ascii), compression_level,
+     <span class="dt">eval.promises =</span> <span class="ot">TRUE</span>, <span class="dt">precheck =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">save.image</span>(<span class="dt">file =</span> <span class="st">&quot;.RData&quot;</span>, <span class="dt">version =</span> <span class="ot">NULL</span>, <span class="dt">ascii =</span> <span class="ot">FALSE</span>,
+           <span class="dt">compress =</span> <span class="op">!</span>ascii, <span class="dt">safe =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><code>load</code> 和<code>save</code> 函数加载或保存包含工作环境信息的数据对象，<code>save.image</code> 保存当前工作环境到磁盘，即保存工作空间中所有数据对象，数据格式为 <code>.RData</code>，即相当于</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(<span class="dt">list =</span> <span class="kw">ls</span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>), <span class="dt">file =</span> <span class="st">&quot;.RData&quot;</span>, <span class="dt">envir =</span> .GlobalEnv)</code></pre>
+<p><code>dump</code> 保存数据对象 AirPassengers 到文件 <code>AirPassengers.txt</code>，文件内容是 R 命令，可把<code>AirPassengers.txt</code>看作代码文档执行，dput 保存数据对象内容到文件<code>AirPassengers.dat</code>，文件中不包含变量名 AirPassengers。注意到 <code>dump</code> 输入是一个字符串，而 <code>dput</code> 要求输入数据对象的名称，<code>source</code> 函数与 <code>dump</code> 对应，而 <code>dget</code> 与 <code>dput</code>对应。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 加载数据</span>
+<span class="kw">data</span>(AirPassengers, <span class="dt">package =</span> <span class="st">&quot;datasets&quot;</span>)
+<span class="co"># 将数据以R代码块的形式保存到文件</span>
+<span class="kw">dump</span>(<span class="st">&#39;AirPassengers&#39;</span>, <span class="dt">file =</span> <span class="st">&#39;data/AirPassengers.txt&#39;</span>) 
+<span class="co"># source(file = &#39;data/AirPassengers.txt&#39;)</span></code></pre>
+<p>接下来，我们读取 <code>AirPassengers.txt</code> 的文件内容，可见它是一段完整的 R 代码，可以直接复制到 R 的控制台中运行，并且得到一个与原始 AirPassengers 变量一样的结果</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">readLines</span>(<span class="st">&#39;data/AirPassengers.txt&#39;</span>), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="co">#&gt; AirPassengers &lt;-</span>
+<span class="co">#&gt; structure(c(112, 118, 132, 129, 121, 135, 148, 148, 136, 119, </span>
+<span class="co">#&gt; 104, 118, 115, 126, 141, 135, 125, 149, 170, 170, 158, 133, 114, </span>
+<span class="co">#&gt; 140, 145, 150, 178, 163, 172, 178, 199, 199, 184, 162, 146, 166, </span>
+<span class="co">#&gt; 171, 180, 193, 181, 183, 218, 230, 242, 209, 191, 172, 194, 196, </span>
+<span class="co">#&gt; 196, 236, 235, 229, 243, 264, 272, 237, 211, 180, 201, 204, 188, </span>
+<span class="co">#&gt; 235, 227, 234, 264, 302, 293, 259, 229, 203, 229, 242, 233, 267, </span>
+<span class="co">#&gt; 269, 270, 315, 364, 347, 312, 274, 237, 278, 284, 277, 317, 313, </span>
+<span class="co">#&gt; 318, 374, 413, 405, 355, 306, 271, 306, 315, 301, 356, 348, 355, </span>
+<span class="co">#&gt; 422, 465, 467, 404, 347, 305, 336, 340, 318, 362, 348, 363, 435, </span>
+<span class="co">#&gt; 491, 505, 404, 359, 310, 337, 360, 342, 406, 396, 420, 472, 548, </span>
+<span class="co">#&gt; 559, 463, 407, 362, 405, 417, 391, 419, 461, 472, 535, 622, 606, </span>
+<span class="co">#&gt; 508, 461, 390, 432), .Tsp = c(1949, 1960.91666666667, 12), class = &quot;ts&quot;)</span></code></pre>
+<p><code>dput</code> 函数类似 <code>dump</code> 函数，保存数据对象到磁盘文件</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dput</span>(AirPassengers, <span class="dt">file =</span> <span class="st">&#39;data/AirPassengers.dat&#39;</span>)
+<span class="co"># AirPassengers &lt;- dget(file = &#39;data/AirPassengers.dat&#39;)</span></code></pre>
+<p>同样地，现在我们观察 <code>dput</code> 函数保存的文件 <code>AirPassengers.dat</code> 内容，和<code>dump</code> 函数保存的文件 <code>AirPassengers.txt</code>相比，就缺一个赋值变量</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">readLines</span>(<span class="st">&#39;data/AirPassengers.dat&#39;</span>), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="co">#&gt; structure(c(112, 118, 132, 129, 121, 135, 148, 148, 136, 119, </span>
+<span class="co">#&gt; 104, 118, 115, 126, 141, 135, 125, 149, 170, 170, 158, 133, 114, </span>
+<span class="co">#&gt; 140, 145, 150, 178, 163, 172, 178, 199, 199, 184, 162, 146, 166, </span>
+<span class="co">#&gt; 171, 180, 193, 181, 183, 218, 230, 242, 209, 191, 172, 194, 196, </span>
+<span class="co">#&gt; 196, 236, 235, 229, 243, 264, 272, 237, 211, 180, 201, 204, 188, </span>
+<span class="co">#&gt; 235, 227, 234, 264, 302, 293, 259, 229, 203, 229, 242, 233, 267, </span>
+<span class="co">#&gt; 269, 270, 315, 364, 347, 312, 274, 237, 278, 284, 277, 317, 313, </span>
+<span class="co">#&gt; 318, 374, 413, 405, 355, 306, 271, 306, 315, 301, 356, 348, 355, </span>
+<span class="co">#&gt; 422, 465, 467, 404, 347, 305, 336, 340, 318, 362, 348, 363, 435, </span>
+<span class="co">#&gt; 491, 505, 404, 359, 310, 337, 360, 342, 406, 396, 420, 472, 548, </span>
+<span class="co">#&gt; 559, 463, 407, 362, 405, 417, 391, 419, 461, 472, 535, 622, 606, </span>
+<span class="co">#&gt; 508, 461, 390, 432), .Tsp = c(1949, 1960.91666666667, 12), class = &quot;ts&quot;)</span></code></pre>
+</div>
+<div id="other-data-source" class="section level2">
+<h2><span class="header-section-number">5.4</span> 其它数据格式</h2>
+<p><a href="https://github.com/jeroen/jsonlite">jsonlite</a> 读取 <code>*.json</code> 格式的文件，<code>jsonlite::write_json</code> 函数将 R对象保存为 JSON 文件，<code>jsonlite::fromJSON</code> 将 json 字符串或文件转化为 R 对象，<code>jsonlite::toJSON</code> 函数正好与之相反</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jsonlite)
+jsonlite<span class="op">::</span><span class="kw">read_json</span>(<span class="dt">path =</span> <span class="st">&quot;path/to/filename.json&quot;</span>)</code></pre>
+<p>yaml 包读取 <code>*.yml</code> 格式文件，返回一个列表，<code>yaml::write_yaml</code> 函数将 R 对象写入 yaml 格式</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(yaml)
+yaml<span class="op">::</span><span class="kw">read_yaml</span>(<span class="dt">file =</span> <span class="st">&#39;_bookdown.yml&#39;</span>)
+<span class="co">#&gt; $book_filename</span>
+<span class="co">#&gt; [1] &quot;RGraphics&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $delete_merged_file</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $language</span>
+<span class="co">#&gt; $language$label</span>
+<span class="co">#&gt; $language$label$fig</span>
+<span class="co">#&gt; [1] &quot;图 &quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $language$label$tab</span>
+<span class="co">#&gt; [1] &quot;表 &quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $language$ui</span>
+<span class="co">#&gt; $language$ui$edit</span>
+<span class="co">#&gt; [1] &quot;编辑&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $language$ui$chapter_name</span>
+<span class="co">#&gt; [1] &quot;第 &quot; &quot; 章&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $output_dir</span>
+<span class="co">#&gt; [1] &quot;_book&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $new_session</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $before_chapter_script</span>
+<span class="co">#&gt; [1] &quot;_common.R&quot;</span></code></pre>
+<table>
+<caption><span id="tab:other-softwares">表 5.2: </span> 导入来自其它数据分析软件产生的数据集</caption>
+<thead>
+<tr class="header">
+<th align="left">统计软件</th>
+<th align="left">R函数</th>
+<th align="left">R包</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ERSI ArcGIS</td>
+<td align="left"><code>read.shapefile</code></td>
+<td align="left">shapefiles</td>
+</tr>
+<tr class="even">
+<td align="left">Matlab</td>
+<td align="left"><code>readMat</code></td>
+<td align="left">R.matlab</td>
+</tr>
+<tr class="odd">
+<td align="left">minitab</td>
+<td align="left"><code>read.mtp</code></td>
+<td align="left">foreign</td>
+</tr>
+<tr class="even">
+<td align="left">SAS (permanent data)</td>
+<td align="left"><code>read.ssd</code></td>
+<td align="left">foreign</td>
+</tr>
+<tr class="odd">
+<td align="left">SAS (XPORT format)</td>
+<td align="left"><code>read.xport</code></td>
+<td align="left">foreign</td>
+</tr>
+<tr class="even">
+<td align="left">SPSS</td>
+<td align="left"><code>read.spss</code></td>
+<td align="left">foreign</td>
+</tr>
+<tr class="odd">
+<td align="left">Stata</td>
+<td align="left"><code>read.dta</code></td>
+<td align="left">foreign</td>
+</tr>
+<tr class="even">
+<td align="left">Systat</td>
+<td align="left"><code>read.systat</code></td>
+<td align="left">foreign</td>
+</tr>
+<tr class="odd">
+<td align="left">Octave</td>
+<td align="left"><code>read.octave</code></td>
+<td align="left">foreign</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:other-read-functions">表 5.3: </span> 导入来自其它格式的数据集</caption>
+<thead>
+<tr class="header">
+<th align="left">文件格式</th>
+<th align="left">R函数</th>
+<th align="left">R包</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">列联表数据</td>
+<td align="left"><code>read.ftable</code></td>
+<td align="left">stats</td>
+</tr>
+<tr class="even">
+<td align="left">二进制数据</td>
+<td align="left"><code>readBin</code></td>
+<td align="left">base</td>
+</tr>
+<tr class="odd">
+<td align="left">字符串数据</td>
+<td align="left"><code>readChar</code></td>
+<td align="left">base</td>
+</tr>
+<tr class="even">
+<td align="left">剪贴板数据</td>
+<td align="left"><code>readClipboard</code></td>
+<td align="left">utils</td>
+</tr>
+</tbody>
+</table>
+<p><code>read.dcf</code> 函数读取 Debian 控制格式文件，这种类型的文件以人眼可读的形式在存储数据，如 R 包的 DESCRIPTION 文件或者包含所有 CRAN 上 R 包描述的文件 <a href="https://cran.r-project.org/src/contrib/PACKAGES" class="uri">https://cran.r-project.org/src/contrib/PACKAGES</a></p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read.dcf</span>(<span class="dt">file =</span> <span class="kw">system.file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;splines&quot;</span>),
+              <span class="dt">fields =</span> <span class="kw">c</span>(<span class="st">&quot;Package&quot;</span>, <span class="st">&quot;Version&quot;</span>, <span class="st">&quot;Title&quot;</span>))
+x
+<span class="co">#&gt;      Package   Version Title                                    </span>
+<span class="co">#&gt; [1,] &quot;splines&quot; &quot;3.6.0&quot; &quot;Regression Spline Functions and Classes&quot;</span></code></pre>
+<p>最后要提及拥有瑞士军刀之称的 <a href="https://github.com/leeper/rio">rio</a> 包，它集合了当前 R 可以读取的所有统计分析软件导出的数据。</p>
+</div>
+<div id="batch-import-data" class="section level2">
+<h2><span class="header-section-number">5.5</span> 批量导入数据</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">read_list &lt;-<span class="st"> </span><span class="cf">function</span>(list_of_datasets, read_func) {
+  read_and_assign &lt;-<span class="st"> </span><span class="cf">function</span>(dataset, read_func) {
+    dataset_name &lt;-<span class="st"> </span><span class="kw">as.name</span>(dataset)
+    dataset_name &lt;-<span class="st"> </span><span class="kw">read_func</span>(dataset)
+  }
+
+  <span class="co"># invisible is used to suppress the unneeded output</span>
+  output &lt;-<span class="st"> </span><span class="kw">invisible</span>(
+    <span class="kw">sapply</span>(list_of_datasets,
+      read_and_assign,
+      <span class="dt">read_func =</span> read_func, <span class="dt">simplify =</span> <span class="ot">FALSE</span>, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>
+    )
+  )
+
+  <span class="co"># Remove the extension at the end of the data set names</span>
+  names_of_datasets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(list_of_datasets, <span class="st">&quot;[.]&quot;</span>))[<span class="kw">c</span>(T, F)])
+  <span class="kw">names</span>(output) &lt;-<span class="st"> </span>names_of_datasets
+  <span class="kw">return</span>(output)
+}</code></pre>
+<p>批量导入文件扩展名为 <code>.csv</code> 的数据文件，即逗号分割的文件</p>
+<pre class="sourceCode r"><code class="sourceCode r">data_files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;path/to/csv/dir&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;.csv&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+<span class="kw">print</span>(data_files)</code></pre>
+<p>相比于 Base R 提供的 <code>read.csv</code> 函数，使用 readr 包的 <code>read_csv</code> 函数可以更快地读取csv格式文件，特别是在读取GB级数据文件时，效果特别明显。</p>
+<pre class="sourceCode r"><code class="sourceCode r">list_of_data_sets &lt;-<span class="st"> </span><span class="kw">read_list</span>(data_files, readr<span class="op">::</span>read_csv)</code></pre>
+<p>使用 tibble 包的<code>glimpse</code>函数可以十分方便地对整个数据集有一个大致的了解，展示方式和信息量相当于 <code>str</code> 加 <code>head</code> 函数</p>
+<pre class="sourceCode r"><code class="sourceCode r">tibble<span class="op">::</span><span class="kw">glimpse</span>(list_of_data_sets)</code></pre>
+</div>
+<div id="batch-export-data" class="section level2">
+<h2><span class="header-section-number">5.6</span> 批量导出数据</h2>
+<p>假定我们有一个列表，其每个元素都是一个数据框，现在要把每个数据框分别存入 xlsx 表的工作薄中，以 mtcars 数据集为例，将其按分类变量 cyl 分组拆分，获得一个列表 list</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">split</span>(mtcars, mtcars<span class="op">$</span>cyl)
+dat
+<span class="co">#&gt; $`4`</span>
+<span class="co">#&gt;                 mpg cyl  disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; Datsun 710     22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span>
+<span class="co">#&gt; Merc 240D      24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span>
+<span class="co">#&gt; Merc 230       22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span>
+<span class="co">#&gt; Fiat 128       32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span>
+<span class="co">#&gt; Honda Civic    30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span>
+<span class="co">#&gt; Toyota Corolla 33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span>
+<span class="co">#&gt; Toyota Corona  21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span>
+<span class="co">#&gt; Fiat X1-9      27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span>
+<span class="co">#&gt; Porsche 914-2  26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span>
+<span class="co">#&gt; Lotus Europa   30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span>
+<span class="co">#&gt; Volvo 142E     21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`6`</span>
+<span class="co">#&gt;                 mpg cyl disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; Mazda RX4      21.0   6  160 110 3.90 2.62 16.5  0  1    4    4</span>
+<span class="co">#&gt; Mazda RX4 Wag  21.0   6  160 110 3.90 2.88 17.0  0  1    4    4</span>
+<span class="co">#&gt; Hornet 4 Drive 21.4   6  258 110 3.08 3.21 19.4  1  0    3    1</span>
+<span class="co">#&gt; Valiant        18.1   6  225 105 2.76 3.46 20.2  1  0    3    1</span>
+<span class="co">#&gt; Merc 280       19.2   6  168 123 3.92 3.44 18.3  1  0    4    4</span>
+<span class="co">#&gt; Merc 280C      17.8   6  168 123 3.92 3.44 18.9  1  0    4    4</span>
+<span class="co">#&gt; Ferrari Dino   19.7   6  145 175 3.62 2.77 15.5  0  1    5    6</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`8`</span>
+<span class="co">#&gt;                      mpg cyl disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; Hornet Sportabout   18.7   8  360 175 3.15 3.44 17.0  0  0    3    2</span>
+<span class="co">#&gt; Duster 360          14.3   8  360 245 3.21 3.57 15.8  0  0    3    4</span>
+<span class="co">#&gt; Merc 450SE          16.4   8  276 180 3.07 4.07 17.4  0  0    3    3</span>
+<span class="co">#&gt; Merc 450SL          17.3   8  276 180 3.07 3.73 17.6  0  0    3    3</span>
+<span class="co">#&gt; Merc 450SLC         15.2   8  276 180 3.07 3.78 18.0  0  0    3    3</span>
+<span class="co">#&gt; Cadillac Fleetwood  10.4   8  472 205 2.93 5.25 18.0  0  0    3    4</span>
+<span class="co">#&gt; Lincoln Continental 10.4   8  460 215 3.00 5.42 17.8  0  0    3    4</span>
+<span class="co">#&gt; Chrysler Imperial   14.7   8  440 230 3.23 5.34 17.4  0  0    3    4</span>
+<span class="co">#&gt; Dodge Challenger    15.5   8  318 150 2.76 3.52 16.9  0  0    3    2</span>
+<span class="co">#&gt; AMC Javelin         15.2   8  304 150 3.15 3.44 17.3  0  0    3    2</span>
+<span class="co">#&gt; Camaro Z28          13.3   8  350 245 3.73 3.84 15.4  0  0    3    4</span>
+<span class="co">#&gt; Pontiac Firebird    19.2   8  400 175 3.08 3.85 17.1  0  0    3    2</span>
+<span class="co">#&gt; Ford Pantera L      15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span>
+<span class="co">#&gt; Maserati Bora       15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></code></pre>
+<p>将 xlsx 表格初始化，创建空白的工作薄</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## 加载 openxlsx 包</span>
+<span class="kw">library</span>(<span class="st">&#39;openxlsx&#39;</span>)
+<span class="co">## 创建空白的工作薄</span>
+wb &lt;-<span class="st"> </span><span class="kw">createWorkbook</span>()</code></pre>
+<p>将列表里的每张表分别存入 xlsx 表格的每个 worksheet，worksheet 的名字就是分组变量的名字</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Map</span>(<span class="cf">function</span>(data, name){
+    <span class="kw">addWorksheet</span>(wb, name)
+    <span class="kw">writeData</span>(wb, name, data)
+ 
+}, dat, <span class="kw">names</span>(dat))
+<span class="co">#&gt; $`4`</span>
+<span class="co">#&gt; [1] 0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`6`</span>
+<span class="co">#&gt; [1] 0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`8`</span>
+<span class="co">#&gt; [1] 0</span></code></pre>
+<p>最后保存数据到磁盘，见图 <a href="06-data-import-export.html#fig:batch-export-xlsx">5.1</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">saveWorkbook</span>(wb, <span class="dt">file =</span> <span class="st">&quot;data/matcars.xlsx&quot;</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; Note: zip::zip() is deprecated, please use zip::zipr() instead</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="dt">path =</span> <span class="st">&#39;figures/batch-export-xlsx.png&#39;</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:batch-export-xlsx"></span>
+<img src="figures/batch-export-xlsx.png" alt="批量导出数据" width="70%" />
+<p class="caption">
+图 5.1: 批量导出数据
+</p>
+</div>
+<div class="sidebar">
+<p>处理 Excel 2003 (XLS) 和 Excel 2007 (XLSX) 文件还可以使用 <a href="https://github.com/marcschwartz/WriteXLS">WriteXLS</a> 包，不过它依赖于 Perl，另一个 R 包 <a href="https://github.com/dragua/rexcel">xlsx</a> 与之功能类似，依赖 Java 环境。 Jennifer Bryan 和 Hadley Wickham 开发的 <a href="https://github.com/tidyverse/readxl">readxl</a> 包和 Jeroen Ooms 开发的 <a href="https://github.com/ropensci/writexl">writexl</a> 包专门处理 xlsx 格式并且无任何系统依赖</p>
+</div>
+</div>
+<div id="import-large-csv-files" class="section level2">
+<h2><span class="header-section-number">5.7</span> 导入大数据集</h2>
+<p>在不使用数据库的情况下，从命令行导入大数据集，如几百 M 或几个 G 的 csv 文件</p>
+<p><a href="https://stackoverflow.com/questions/1727772/" class="uri">https://stackoverflow.com/questions/1727772/</a></p>
+</div>
+<div id="import-data-from-database" class="section level2">
+<h2><span class="header-section-number">5.8</span> 从数据库导入</h2>
+<p><a href="https://rstudio-education.github.io/hopr">Hands-On Programming with R</a> 数据读写章节<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> 以及 <a href="https://smithjd.github.io/sql-pet/">R, Databases, and Docker</a></p>
+<p>将大量的 txt 文本存进 MySQL 数据库中，通过操作数据库来聚合文本，极大降低内存消耗<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>，而 ODBC 与 DBI 包是其它数据库接口的基础，knitr 提供了一个支持 SQL 代码的引擎，它便是基于 DBI，因此可以在 R Markdown 文档中直接使用 SQL 代码块<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>。这里制作一个归纳表格，左边数据库右边对应其 R 接口，两边都包含链接，如表 <a href="06-data-import-export.html#tab:dbi">5.4</a> 所示</p>
+<table>
+<caption><span id="tab:dbi">表 5.4: </span>数据库接口</caption>
+<thead>
+<tr class="header">
+<th align="left">数据库</th>
+<th align="left">官网</th>
+<th align="left">R接口</th>
+<th align="left">开发仓</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MySQL</td>
+<td align="left"><a href="https://www.mysql.com/" class="uri">https://www.mysql.com/</a></td>
+<td align="left">RMySQL</td>
+<td align="left"><a href="https://github.com/r-dbi/RMySQL" class="uri">https://github.com/r-dbi/RMySQL</a></td>
+</tr>
+<tr class="even">
+<td align="left">SQLite</td>
+<td align="left"><a href="https://www.sqlite.org" class="uri">https://www.sqlite.org</a></td>
+<td align="left">RSQLite</td>
+<td align="left"><a href="https://github.com/r-dbi/RSQLite" class="uri">https://github.com/r-dbi/RSQLite</a></td>
+</tr>
+<tr class="odd">
+<td align="left">PostgreSQL</td>
+<td align="left"><a href="https://www.postgresql.org/" class="uri">https://www.postgresql.org/</a></td>
+<td align="left">RPostgres</td>
+<td align="left"><a href="https://github.com/r-dbi/RPostgres" class="uri">https://github.com/r-dbi/RPostgres</a></td>
+</tr>
+<tr class="even">
+<td align="left">MariaDB</td>
+<td align="left"><a href="https://mariadb.org/" class="uri">https://mariadb.org/</a></td>
+<td align="left">RMariaDB</td>
+<td align="left"><a href="https://github.com/r-dbi/RMariaDB" class="uri">https://github.com/r-dbi/RMariaDB</a></td>
+</tr>
+</tbody>
+</table>
+<div id="rsqlite" class="section level3">
+<h3><span class="header-section-number">5.8.1</span> RSQLite</h3>
+<pre class="sourceCode r"><code class="sourceCode r">db &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;:memory:&quot;</span>)
+DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(db, <span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite=</span><span class="ot">TRUE</span>)
+subjects =<span class="st"> </span><span class="dv">6</span></code></pre>
+<p><code>max.print=10</code> 控制显示的行数</p>
+<pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> mtcars <span class="kw">where</span> gear <span class="kw">IN</span> (<span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">and</span> cyl <span class="op">&gt;=</span> ?subjects</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-43">表 5.5: </span>My Caption</caption>
+<thead>
+<tr class="header">
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+<th align="right">hp</th>
+<th align="right">drat</th>
+<th align="right">wt</th>
+<th align="right">qsec</th>
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">gear</th>
+<th align="right">carb</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.62</td>
+<td align="right">16.5</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.88</td>
+<td align="right">17.0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258</td>
+<td align="right">110</td>
+<td align="right">3.08</td>
+<td align="right">3.21</td>
+<td align="right">19.4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360</td>
+<td align="right">175</td>
+<td align="right">3.15</td>
+<td align="right">3.44</td>
+<td align="right">17.0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">18.1</td>
+<td align="right">6</td>
+<td align="right">225</td>
+<td align="right">105</td>
+<td align="right">2.76</td>
+<td align="right">3.46</td>
+<td align="right">20.2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">14.3</td>
+<td align="right">8</td>
+<td align="right">360</td>
+<td align="right">245</td>
+<td align="right">3.21</td>
+<td align="right">3.57</td>
+<td align="right">15.8</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">19.2</td>
+<td align="right">6</td>
+<td align="right">168</td>
+<td align="right">123</td>
+<td align="right">3.92</td>
+<td align="right">3.44</td>
+<td align="right">18.3</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">17.8</td>
+<td align="right">6</td>
+<td align="right">168</td>
+<td align="right">123</td>
+<td align="right">3.92</td>
+<td align="right">3.44</td>
+<td align="right">18.9</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">16.4</td>
+<td align="right">8</td>
+<td align="right">276</td>
+<td align="right">180</td>
+<td align="right">3.07</td>
+<td align="right">4.07</td>
+<td align="right">17.4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">17.3</td>
+<td align="right">8</td>
+<td align="right">276</td>
+<td align="right">180</td>
+<td align="right">3.07</td>
+<td align="right">3.73</td>
+<td align="right">17.6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>output.var="mtcars34"</code> 将查询的结果保存到变量 <code>mtcars34</code>，此时不再输出打印到控制台，此外，还支持 SQL 语句中包含变量 subjects</p>
+<pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> mtcars <span class="kw">where</span> gear <span class="kw">IN</span> (<span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">and</span> cyl <span class="op">&gt;=</span> ?subjects</code></pre>
+<p>我们再来查看 <code>mtcars34</code> 变量的内容</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mtcars34)
+<span class="co">#&gt;    mpg cyl disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; 1 21.0   6  160 110 3.90 2.62 16.5  0  1    4    4</span>
+<span class="co">#&gt; 2 21.0   6  160 110 3.90 2.88 17.0  0  1    4    4</span>
+<span class="co">#&gt; 3 21.4   6  258 110 3.08 3.21 19.4  1  0    3    1</span>
+<span class="co">#&gt; 4 18.7   8  360 175 3.15 3.44 17.0  0  0    3    2</span>
+<span class="co">#&gt; 5 18.1   6  225 105 2.76 3.46 20.2  1  0    3    1</span>
+<span class="co">#&gt; 6 14.3   8  360 245 3.21 3.57 15.8  0  0    3    4</span></code></pre>
+</div>
+<div id="postgresql" class="section level3">
+<h3><span class="header-section-number">5.8.2</span> PostgreSQL</h3>
+<p><a href="https://github.com/r-dbi/odbc">odbc</a> 可以支持很多数据库，下面以连接 <a href="https://www.postgresql.org/">PostgreSQL</a> 数据库为例介绍其过程</p>
+<p>首先在某台机器上，拉取 PostgreSQL 的 Docker 镜像</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> pull postgres</code></pre>
+<p>在 Docker 上运行 PostgreSQL，主机端口号 8181 映射给数据库 PostgreSQL 的默认端口号 5432（或其它你的 DBA 分配给你的端口）</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run --name psql -d -p 8181:5432 -e ROOT=TRUE \
+   -e USER=xiangyun -e PASSWORD=cloud postgres</code></pre>
+<p>在主机 Ubuntu 上配置</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install unixodbc unixodbc-dev odbc-postgresql</code></pre>
+<p>端口 5432 是分配给 PostgreSQL 的默认端口，<code>host</code> 可以是云端的地址，如 你的亚马逊账户下的 PostgreSQL 数据库地址 <code>&lt;ec2-54-83-201-96.compute-1.amazonaws.com&gt;</code>，也可以是本地局域网IP地址，如<code>&lt;192.168.1.200&gt;</code>。通过参数 <code>dbname</code> 连接到指定的 PostgreSQL 数据库，如 Heroku，这里作为演示就以默认的数据库 <code>postgres</code> 为例</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DBI)
+con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),
+  <span class="dt">dbname =</span> <span class="st">&quot;DATABASE_NAME&quot;</span>,
+  <span class="dt">host =</span> <span class="st">&quot;HOST&quot;</span>,
+  <span class="dt">port =</span> <span class="dv">8181</span>,
+  <span class="dt">user =</span> <span class="st">&quot;USERNAME&quot;</span>,
+  <span class="dt">password =</span> <span class="st">&quot;PASSWORD&quot;</span>
+)</code></pre>
+<p>列出数据库中的所有表</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbListTables</span>(con)
+<span class="co">#&gt; [1] &quot;mtcars&quot;</span></code></pre>
+<p>第一次启动从 Docker Hub 上下载的镜像，默认的数据库是 postgres 里面没有任何表，所以将 R 环境中的 mtcars 数据集写入 postgres 数据库</p>
+<pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite=</span><span class="ot">TRUE</span>)</code></pre>
+<p>现在可以看到数据表 mtcars 的各个字段</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbListFields</span>(con, <span class="st">&quot;mtcars&quot;</span>)
+<span class="co">#&gt;  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;</span>
+<span class="co">#&gt; [11] &quot;carb&quot;</span></code></pre>
+<p>最后执行一条 SQL 语句</p>
+<pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">dbSendQuery</span>(con, <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = 4&quot;</span>) <span class="co"># 发送 SQL 语句</span>
+<span class="kw">dbFetch</span>(res) <span class="co"># 获取查询结果</span>
+<span class="co">#&gt;     mpg cyl  disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; 1  22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span>
+<span class="co">#&gt; 2  24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span>
+<span class="co">#&gt; 3  22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span>
+<span class="co">#&gt; 4  32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span>
+<span class="co">#&gt; 5  30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span>
+<span class="co">#&gt; 6  33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span>
+<span class="co">#&gt; 7  21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span>
+<span class="co">#&gt; 8  27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span>
+<span class="co">#&gt; 9  26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span>
+<span class="co">#&gt; 10 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span>
+<span class="co">#&gt; 11 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span>
+<span class="kw">dbClearResult</span>(res) <span class="co"># 清理查询通道</span></code></pre>
+<p>或者一条命令搞定</p>
+<pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = 4&quot;</span>)
+<span class="co">#&gt;     mpg cyl  disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; 1  22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span>
+<span class="co">#&gt; 2  24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span>
+<span class="co">#&gt; 3  22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span>
+<span class="co">#&gt; 4  32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span>
+<span class="co">#&gt; 5  30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span>
+<span class="co">#&gt; 6  33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span>
+<span class="co">#&gt; 7  21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span>
+<span class="co">#&gt; 8  27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span>
+<span class="co">#&gt; 9  26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span>
+<span class="co">#&gt; 10 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span>
+<span class="co">#&gt; 11 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></code></pre>
+<p>最后用完数据库查询要记得关闭连接</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbDisconnect</span>(<span class="dt">conn =</span> con)</code></pre>
+</div>
+<div id="clickhouse" class="section level3">
+<h3><span class="header-section-number">5.8.3</span> ClickHouse</h3>
+<p>对系统的要求是 System requirements: Linux, x86_64 with SSE 4.2.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install dirmngr    <span class="co"># optional</span>
+<span class="co"># 导入 key</span>
+<span class="fu">sudo</span> apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4    <span class="co"># optional</span>
+<span class="co"># 添加源</span>
+<span class="bu">echo</span> <span class="st">&quot;deb http://repo.yandex.ru/clickhouse/deb/stable/ main/&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/sources.list.d/clickhouse.list
+<span class="fu">sudo</span> apt-get update
+<span class="co"># 安装客户端</span>
+<span class="fu">sudo</span> apt-get install -y clickhouse-server clickhouse-client
+<span class="co"># 启动服务</span>
+<span class="fu">sudo</span> service clickhouse-server start
+<span class="co"># 进入客户端</span>
+<span class="ex">clickhouse-client</span></code></pre>
+<p><a href="https://clickhouse.yandex/docs/zh/">ClickHouse 中文用户手册</a> 和新浪高鹏在北京 <a href="https://clickhouse.yandex/blog/en/clickhouse-community-meetup-in-beijing-on-january-27-2018">ClickHouse社区分享会</a> 上给的报告 <a href="https://yandex.github.io/clickhouse-presentations/meetup12/power_your_data.pdf">MySQL DBA解锁数据分析的新姿势-ClickHouse</a></p>
+<p>开源社区对 ClickHouse 提供了很多语言的支持，比如 R 语言接口有 <a href="https://github.com/IMSMWU/RClickhouse">RClickhouse</a> 和 <a href="https://github.com/hannesmuehleisen/clickhouse-r">clickhouse-r</a>，其它接口请看 <a href="https://clickhouse.yandex/docs/zh/interfaces/third-party/client_libraries/">官方文档链接</a></p>
+<p>由于 clickhouse-r 还在开发中，从未提交到 CRAN，提供的功能也相对有限，这里我们推荐使用 RClickhouse，首先安装 RClickhouse</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 安装 CRAN 版本</span>
+<span class="kw">install.packages</span>(<span class="st">&quot;RClickhouse&quot;</span>)
+<span class="co"># 安装Github上的开发版</span>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;IMSMWU/RClickhouse&quot;</span>)</code></pre>
+<p>建立数据库的连接，离不开 <code>dbConnect</code> 函数，它提供的 <code>config_paths</code> 参数用来指定配置文件 <code>RClickhouse.yaml</code> 的路径，在该文件中指定一系列的参数值 <code>host, port, db, user, password, compression</code></p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">host:</span><span class="at"> example-db.com</span>
+<span class="fu">port:</span><span class="at"> </span><span class="dv">1111</span></code></pre>
+<p>如果没有手动配置，会使用默认的参数配置 <code>host="localhost", port = 9000, db = "default", user = "default", password = "", compression = "lz4"</code>。现在，我们考虑更加实用的场景，服务器上安装了 Docker，ClickHouse 部署在Docker集群上，下面介绍如何从本机连接上集群。</p>
+<p>首先在某台机器上，拉取 ClickHouse 的 Docker 镜像</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> pull yandex/clickhouse-server</code></pre>
+<p>从 Yandex 官网打包的 <a href="https://hub.docker.com/r/yandex/clickhouse-server/dockerfile">Dockerfile</a> 来看，其默认暴露了 9000、 8123 和 9009 三个端口，所以我在运行 ClickHouse 容器的时候，需要选择其中一个端口映射给主机端口，这里我选择 8282，值得注意的是，我主机的8787端口已经分配给了 RStudio，所以不要再把该主机端口映射给 9000</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run --name ck -d -p 8282:9000 -e ROOT=TRUE \
+   -e USER=xiangyun -e PASSWORD=cloud yandex/clickhouse-server</code></pre>
+<p>最后是建立连接，需要远端 Docker 容器内 Clickhouse 的 IP 地址，分配给它的主机端口，用来访问数据库，数据库的用户账户和具体的数据库名称，默认账户和密码以及数据库都是 default，下面展示连接远程 ClickHouse 数据库</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DBI)
+<span class="kw">library</span>(RClickhouse)
+con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RClickhouse<span class="op">::</span><span class="kw">clickhouse</span>(),
+  <span class="dt">host =</span> <span class="st">&quot;192.168.99.100&quot;</span>, <span class="dt">port =</span> <span class="dv">8282</span>, <span class="dt">db =</span> <span class="st">&quot;default&quot;</span>,
+  <span class="dt">user =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">password =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">compression =</span> <span class="st">&quot;lz4&quot;</span>
+)</code></pre>
+<div class="sidebar">
+<p>连接远程数据库的方式，实现本地数据分析环境和数据库环境分离，分别管理和使用</p>
+</div>
+<p>下面是连接本地 ClickHouse 数据库，数据库和数据分析环境都在本地，我们使用默认的9000端口和默认default数据库，而默认的账户名在安装 ClickHouse 时指定为 cloud，因此连接参数设置如下</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DBI)
+<span class="kw">library</span>(RClickhouse)
+<span class="co"># con &lt;- DBI::dbConnect(RClickhouse::clickhouse(), config_paths = &quot;~/.R/RClickhouse.yaml&quot;)</span>
+con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RClickhouse<span class="op">::</span><span class="kw">clickhouse</span>(),
+  <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>, <span class="dt">port =</span> <span class="dv">9000</span>, <span class="dt">db =</span> <span class="st">&quot;default&quot;</span>,
+  <span class="dt">user =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">password =</span> <span class="st">&quot;cloud&quot;</span>, <span class="dt">compression =</span> <span class="st">&quot;lz4&quot;</span>
+)</code></pre>
+<p>RClickHouse 包提供部分 dplyr 式的数据操作，使用比较方便，这里便使用它了，往 ClickHouse 中写入数据</p>
+<pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite=</span><span class="ot">TRUE</span>)</code></pre>
+<p>查看数据库中的 mtcars 表</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 列出 ClickHouse 中存放的表</span>
+<span class="kw">dbListTables</span>(con)
+<span class="co">#&gt; [1] &quot;mtcars&quot;</span>
+<span class="co"># 列出表 mtcars 中的所有字段</span>
+<span class="kw">dbListFields</span>(con, <span class="st">&quot;mtcars&quot;</span>)
+<span class="co">#&gt;  [1] &quot;mpg&quot;       &quot;cyl&quot;       &quot;disp&quot;      &quot;hp&quot;        &quot;drat&quot;      &quot;wt&quot;       </span>
+<span class="co">#&gt;  [7] &quot;qsec&quot;      &quot;vs&quot;        &quot;am&quot;        &quot;gear&quot;      &quot;carb&quot;      &quot;row_names&quot;</span></code></pre>
+<p>RClickHouse 包支持的聚合操作（其实是 dplyr）和 Base R 提供的聚合操作对比，测试一下正确与否</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="co"># 按变量 cyl 分组对 mpg 求和</span>
+<span class="kw">tbl</span>(con, <span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">smpg=</span><span class="kw">sum</span>(mpg, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="co"># SQL 总是要移除缺失值</span>
+<span class="co">#&gt; Warning: Translator is missing window variants of the following aggregate functions:</span>
+<span class="co">#&gt; * %||%</span>
+<span class="co">#&gt; Warning in evalq((function (..., call. = TRUE, immediate. = FALSE, noBreaks. =</span>
+<span class="co">#&gt; FALSE, : column uptime converted from UInt32 to Numeric</span>
+<span class="co">#&gt; # Source:   lazy query [?? x 2]</span>
+<span class="co">#&gt; # Database: clickhouse 19.5.2.6 [default@192.168.99.100:8282/default; uptime:</span>
+<span class="co">#&gt; #   0 days ]</span>
+<span class="co">#&gt;     cyl  smpg</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     4  293.</span>
+<span class="co">#&gt; 2     8  211.</span>
+<span class="co">#&gt; 3     6  138.</span>
+<span class="co"># 等价于</span>
+<span class="kw">aggregate</span>(mpg <span class="op">~</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars, sum)
+<span class="co">#&gt;   cyl mpg</span>
+<span class="co">#&gt; 1   4 293</span>
+<span class="co">#&gt; 2   6 138</span>
+<span class="co">#&gt; 3   8 211</span>
+
+<span class="co"># 先筛选出 cyl = 8 并且 vs = 0 的数据，然后按 am 分组，最后对 qsec 求平均值</span>
+<span class="kw">tbl</span>(con, <span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span>, vs <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(am) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">mean</span>(qsec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+<span class="co">#&gt; Warning: Translator is missing window variants of the following aggregate functions:</span>
+<span class="co">#&gt; * %||%</span>
+<span class="co">#&gt; Warning: Translator is missing window variants of the following aggregate functions:</span>
+<span class="co">#&gt; * %||%</span>
+
+<span class="co">#&gt; Warning: Translator is missing window variants of the following aggregate functions:</span>
+<span class="co">#&gt; * %||%</span>
+<span class="co">#&gt; Warning in evalq((function (..., call. = TRUE, immediate. = FALSE, noBreaks. =</span>
+<span class="co">#&gt; FALSE, : column uptime converted from UInt32 to Numeric</span>
+<span class="co">#&gt; # Source:   lazy query [?? x 2]</span>
+<span class="co">#&gt; # Database: clickhouse 19.5.2.6 [default@192.168.99.100:8282/default; uptime:</span>
+<span class="co">#&gt; #   0 days ]</span>
+<span class="co">#&gt;      am `mean(qsec, na.rm = TRUE)`</span>
+<span class="co">#&gt;   &lt;dbl&gt;                      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     0                       17.1</span>
+<span class="co">#&gt; 2     1                       14.6</span>
+<span class="co"># 等价于</span>
+<span class="kw">aggregate</span>(qsec <span class="op">~</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars, mean, <span class="dt">subset =</span> cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span> <span class="op">&amp;</span><span class="st"> </span>vs <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
+<span class="co">#&gt;   am qsec</span>
+<span class="co">#&gt; 1  0 17.1</span>
+<span class="co">#&gt; 2  1 14.6</span></code></pre>
+<div class="sidebar">
+<p>aggregate 聚合函数默认对缺失值的处理是忽略， sum 和 mean 函数的参数 <code>na.rm=TRUE</code> 实际由聚合函数 aggregate 的参数 <code>na.action</code> 传递，它的默认值是 <code>na.omit</code> ，就是将缺失值移除后返回。值得注意的是 <code>na.omit</code> 是一个缺失值处理的函数，所以如果对缺失值有特殊要求，比如插补，可以自己写函数传递给 <code>na.action</code> 参数</p>
+</div>
+<p>你当然可以继续使用 SQL 语句做查询，而不使用 dplyr 提供的现代化的管道操作语法</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 传递 SQL 查询语句</span>
+DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, 
+<span class="st">&quot;SELECT</span>
+<span class="st">    vs,</span>
+<span class="st">    COUNT(*) AS n_vc,</span>
+<span class="st">    AVG(qsec) AS avg_qsec</span>
+<span class="st">FROM mtcars</span>
+<span class="st">GROUP BY vs&quot;</span>)
+<span class="co">#&gt; Warning in evalq((function (..., call. = TRUE, immediate. = FALSE, noBreaks. =</span>
+<span class="co">#&gt; FALSE, : column n_vc converted from UInt64 to Numeric</span>
+<span class="co">#&gt;   vs n_vc avg_qsec</span>
+<span class="co">#&gt; 1  0   18     16.7</span>
+<span class="co">#&gt; 2  1   14     19.3</span></code></pre>
+<div class="sidebar">
+<p>如果数据集比较小，可以将 ClickHouse 的整张表读进内存，但是对于大数据集，只有使用远程服务器才可以获得更好的性能</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 读取数据库中的整张表</span>
+copy_mtcars &lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(con, <span class="st">&quot;mtcars&quot;</span>)
+tibble<span class="op">::</span><span class="kw">glimpse</span>(copy_mtcars)
+<span class="co">#&gt; Observations: 32</span>
+<span class="co">#&gt; Variables: 12</span>
+<span class="co">#&gt; $ mpg       &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19...</span>
+<span class="co">#&gt; $ cyl       &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4,...</span>
+<span class="co">#&gt; $ disp      &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, ...</span>
+<span class="co">#&gt; $ hp        &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180,...</span>
+<span class="co">#&gt; $ drat      &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3....</span>
+<span class="co">#&gt; $ wt        &lt;dbl&gt; 2.62, 2.88, 2.32, 3.21, 3.44, 3.46, 3.57, 3.19, 3.15, 3....</span>
+<span class="co">#&gt; $ qsec      &lt;dbl&gt; 16.5, 17.0, 18.6, 19.4, 17.0, 20.2, 15.8, 20.0, 22.9, 18...</span>
+<span class="co">#&gt; $ vs        &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,...</span>
+<span class="co">#&gt; $ am        &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,...</span>
+<span class="co">#&gt; $ gear      &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4,...</span>
+<span class="co">#&gt; $ carb      &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2,...</span>
+<span class="co">#&gt; $ row_names &lt;chr&gt; &quot;Mazda RX4&quot;, &quot;Mazda RX4 Wag&quot;, &quot;Datsun 710&quot;, &quot;Hornet 4 Dr...</span></code></pre>
+</div>
+<p>还有 RClickhouse 使用 SQL 查询的时候，同样支持 ClickHouse 的内置函数，如 <code>multiIf</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 查看 ClickHouse 中所有的数据库名称</span>
+DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;SHOW DATABASES&quot;</span>)
+<span class="co">#&gt;      name</span>
+<span class="co">#&gt; 1 default</span>
+<span class="co">#&gt; 2  system</span>
+<span class="co"># 查看所有存储的表</span>
+DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;SHOW TABLES&quot;</span>)
+<span class="co">#&gt;     name</span>
+<span class="co">#&gt; 1 mtcars</span>
+<span class="co"># 获取 ClickHouse 中 mtcars 表的变量名和类型描述</span>
+DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;DESCRIBE TABLE mtcars&quot;</span>)
+<span class="co">#&gt;         name    type default_type default_expression comment codec_expression</span>
+<span class="co">#&gt; 1        mpg Float64                                                         </span>
+<span class="co">#&gt; 2        cyl Float64                                                         </span>
+<span class="co">#&gt; 3       disp Float64                                                         </span>
+<span class="co">#&gt; 4         hp Float64                                                         </span>
+<span class="co">#&gt; 5       drat Float64                                                         </span>
+<span class="co">#&gt; 6         wt Float64                                                         </span>
+<span class="co">#&gt; 7       qsec Float64                                                         </span>
+<span class="co">#&gt; 8         vs Float64                                                         </span>
+<span class="co">#&gt; 9         am Float64                                                         </span>
+<span class="co">#&gt; 10      gear Float64                                                         </span>
+<span class="co">#&gt; 11      carb Float64                                                         </span>
+<span class="co">#&gt; 12 row_names  String</span>
+<span class="co"># Compact CASE - WHEN - THEN conditionals</span>
+DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;</span>
+<span class="st">SELECT multiIf(am=1, &#39;automatic&#39;, &#39;manual&#39;) AS transmission,</span>
+<span class="st">       multiIf(vs=1, &#39;straight&#39;, &#39;V-shaped&#39;) AS engine</span>
+<span class="st">FROM mtcars</span>
+<span class="st">&quot;</span>)
+<span class="co">#&gt;    transmission   engine</span>
+<span class="co">#&gt; 1     automatic V-shaped</span>
+<span class="co">#&gt; 2     automatic V-shaped</span>
+<span class="co">#&gt; 3     automatic straight</span>
+<span class="co">#&gt; 4        manual straight</span>
+<span class="co">#&gt; 5        manual V-shaped</span>
+<span class="co">#&gt; 6        manual straight</span>
+<span class="co">#&gt; 7        manual V-shaped</span>
+<span class="co">#&gt; 8        manual straight</span>
+<span class="co">#&gt; 9        manual straight</span>
+<span class="co">#&gt; 10       manual straight</span>
+<span class="co">#&gt; 11       manual straight</span>
+<span class="co">#&gt; 12       manual V-shaped</span>
+<span class="co">#&gt; 13       manual V-shaped</span>
+<span class="co">#&gt; 14       manual V-shaped</span>
+<span class="co">#&gt; 15       manual V-shaped</span>
+<span class="co">#&gt; 16       manual V-shaped</span>
+<span class="co">#&gt; 17       manual V-shaped</span>
+<span class="co">#&gt; 18    automatic straight</span>
+<span class="co">#&gt; 19    automatic straight</span>
+<span class="co">#&gt; 20    automatic straight</span>
+<span class="co">#&gt; 21       manual straight</span>
+<span class="co">#&gt; 22       manual V-shaped</span>
+<span class="co">#&gt; 23       manual V-shaped</span>
+<span class="co">#&gt; 24       manual V-shaped</span>
+<span class="co">#&gt; 25       manual V-shaped</span>
+<span class="co">#&gt; 26    automatic straight</span>
+<span class="co">#&gt; 27    automatic V-shaped</span>
+<span class="co">#&gt; 28    automatic straight</span>
+<span class="co">#&gt; 29    automatic V-shaped</span>
+<span class="co">#&gt; 30    automatic V-shaped</span>
+<span class="co">#&gt; 31    automatic V-shaped</span>
+<span class="co">#&gt; 32    automatic straight</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbDisconnect</span>(<span class="dt">conn =</span> con)</code></pre>
+<p>这是一个存放在 Github 上的包，随着 ClikHouse 在大厂的流行，此包也受到越来越多的关注
+与数据仓库如何连接，如何查询数据，背后的接口 DBI 如何使用，实例化一个新的接口，如 clickhouse2r</p>
+<p><a href="https://clickhouse.yandex/">ClickHouse</a> 独辟蹊径，基于 C++ 的实现，数据查询速度超级快，官网介绍碾压大量传统数据库。还有不少接口，其中还有 R 的 <a href="https://github.com/hannesmuehleisen/clickhouse-r">clickhouse-r</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 安装clickhouse接口</span>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;hannesmuehleisen/clickhouse-r&quot;</span>)
+<span class="co"># 调用接口</span>
+<span class="kw">library</span>(DBI)
+con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(clickhouse<span class="op">::</span><span class="kw">clickhouse</span>(),
+  <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,
+  <span class="dt">port =</span> 8123L,
+  <span class="dt">user =</span> <span class="st">&quot;default&quot;</span>,
+  <span class="dt">password =</span> <span class="st">&quot;&quot;</span>
+)
+<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;mtcars&quot;</span>, mtcars)
+<span class="kw">dbListTables</span>(con)
+<span class="kw">dbGetQuery</span>(con, <span class="st">&quot;SELECT COUNT(*) FROM mtcars&quot;</span>)
+d &lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(con, <span class="st">&quot;mtcars&quot;</span>)
+<span class="kw">dbDisconnect</span>(con)</code></pre>
+<p>发现它和 knitr 里的 SQL 钩子，都用 <a href="https://github.com/rstats-db/DBI">DBI包</a></p>
+<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="dt">path =</span> <span class="st">&quot;figures/clickhouse.png&quot;</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:clickhouse"></span>
+<img src="figures/clickhouse.png" alt="ClickHouse 与 R" width="70%" />
+<p class="caption">
+图 5.2: ClickHouse 与 R
+</p>
+</div>
+<p>学习博文 <a href="https://www.bjt.name/2016/11/19/jdbc-hive-r.html">利用 JDBC 驱动连接 R 和 Hive</a> 和 <a href="https://github.com/yandex/clickhouse-jdbc">clickhouse-jdbc</a> 试试 [RJDBC] 包远程连接 ClickHouse 仓库</p>
+</div>
+<div id="mysql" class="section level3">
+<h3><span class="header-section-number">5.8.4</span> MySQL</h3>
+<p>MySQL 是一个很常见，应用也很广泛的数据库，数据分析的常见环境是在一个R Notebook 里，我们可以在正文之前先设定数据库连接信息</p>
+<pre><code>```{r setup}
+library(DBI)
+# 指定数据库连接信息
+db &lt;- dbConnect(RMySQL::MySQL(),
+  dbname = &#39;dbtest&#39;,
+  username = &#39;user_test&#39;,
+  password = &#39;password&#39;,
+  host = &#39;10.10.101.10&#39;,
+  port = 3306
+)
+# 创建默认连接
+knitr::opts_chunk$set(connection = &#39;db&#39;)
+# 设置字符编码，以免中文查询乱码
+DBI::dbSendQuery(db, &#39;SET NAMES utf8&#39;)
+# 设置日期变量，以运用在SQL中
+idate &lt;- &#39;2019-05-03&#39;
+```</code></pre>
+<p>SQL 代码块中使用 R 环境中的变量，并将查询结果输出为R环境中的数据框</p>
+<pre><code>```{sql, output.var=&#39;data_output&#39;}
+SELECT * FROM user_table where date_format(created_date,&#39;%Y-%m-%d&#39;)&gt;=?idate
+```</code></pre>
+<p>以上代码会将 SQL 的运行结果存在 <code>data_output</code> 这是数据库中，idate 取之前设置的日期<code>2019-05-03</code>，<code>user_table</code> 是 MySQL 数据库中的表名，<code>created_date</code> 是创建<code>user_table</code>时，指定的日期名。</p>
+<p>如果 SQL 比较长，为了代码美观，把带有变量的 SQL 保存为<code>demo.sql</code>脚本，只需要在 SQL 的 chunk 中直接读取 SQL 文件<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>。</p>
+<pre><code>```{sql, code=readLines(&#39;demo.sql&#39;), output.var=&#39;data_output&#39;}
+```</code></pre>
+<p>如果我们需要每天或者按照指定的日期重复地运行这个 R Markdown 文件，可以在 YAML 部分引入参数<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown">---
+params:
+  date: &quot;2019-05-03&quot;  # 参数化日期
+---</code></pre>
+<pre><code>```{r setup, include=FALSE}
+idate = params$date # 将参数化日期传递给 idate 变量
+```</code></pre>
+<p>我们将这个 Rmd 文件命名为 <code>MyDocument.Rmd</code>，运行这个文件可以从 R 控制台执行或在 RStudio 点击 knit。</p>
+<pre class="sourceCode r"><code class="sourceCode r">rmarkdown<span class="op">::</span><span class="kw">render</span>(<span class="st">&quot;MyDocument.Rmd&quot;</span>, <span class="dt">params =</span> <span class="kw">list</span>(
+  <span class="dt">date =</span> <span class="st">&quot;2019-05-03&quot;</span>
+))</code></pre>
+<p>如果在文档的 YAML 位置已经指定日期，这里可以不指定。注意在这里设置日期会覆盖 YAML 处指定的参数值，这样做的好处是可以批量化操作。</p>
+</div>
+<div id="spark" class="section level3">
+<h3><span class="header-section-number">5.8.5</span> Spark</h3>
+<p>当数据分析报告遇上 Spark 时，就需要 <a href="https://github.com/apache/spark/tree/master/R">SparkR</a>、 <a href="https://github.com/rstudio/sparklyr">sparklyr</a>、 <a href="https://github.com/apache/arrow/tree/master/r">arrow</a> 或 <a href="https://github.com/h2oai/sparkling-water/tree/master/r">rsparking</a> 接口了， Javier Luraschi 写了一本书 <a href="https://therinspark.com/">The R in Spark: Learning Apache Spark with R</a> 详细介绍了相关扩展和应用</p>
+<p>首先安装 sparklyr 包，RStudio 公司 Javier Lurasch 开发了 sparklyr 包，作为 Spark 与 R 语言之间的接口，安装完 sparklyr 包，还是需要 Spark 和 Hadoop 环境</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;sparklyr&#39;</span>)
+<span class="kw">library</span>(sparklyr)
+<span class="kw">spark_install</span>()
+<span class="co"># Installing Spark 2.4.0 for Hadoop 2.7 or later.</span>
+<span class="co"># Downloading from:</span>
+<span class="co"># - &#39;https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz&#39;</span>
+<span class="co"># Installing to:</span>
+<span class="co"># - &#39;~/spark/spark-2.4.0-bin-hadoop2.7&#39;</span>
+<span class="co"># trying URL &#39;https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz&#39;</span>
+<span class="co"># Content type &#39;application/x-gzip&#39; length 227893062 bytes (217.3 MB)</span>
+<span class="co"># ==================================================</span>
+<span class="co"># downloaded 217.3 MB</span>
+<span class="co"># </span>
+<span class="co"># Installation complete.</span></code></pre>
+<p>既然 sparklyr 已经安装了 Spark 和 Hadoop 环境，安装 SparkR 后，只需配置好路径，就可以加载 SparkR 包</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;SparkR&#39;</span>)
+<span class="cf">if</span> (<span class="kw">nchar</span>(<span class="kw">Sys.getenv</span>(<span class="st">&quot;SPARK_HOME&quot;</span>)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>) {
+  <span class="kw">Sys.setenv</span>(<span class="dt">SPARK_HOME =</span> <span class="st">&quot;~/spark/spark-2.4.0-bin-hadoop2.7&quot;</span>)
+}
+<span class="kw">library</span>(SparkR, <span class="dt">lib.loc =</span> <span class="kw">c</span>(<span class="kw">file.path</span>(<span class="kw">Sys.getenv</span>(<span class="st">&quot;SPARK_HOME&quot;</span>), <span class="st">&quot;R&quot;</span>, <span class="st">&quot;lib&quot;</span>)))
+<span class="kw">sparkR.session</span>(<span class="dt">master =</span> <span class="st">&quot;local[*]&quot;</span>, <span class="dt">sparkConfig =</span> <span class="kw">list</span>(<span class="dt">spark.driver.memory =</span> <span class="st">&quot;2g&quot;</span>))</code></pre>
+<p><a href="https://github.com/dbdahl/rscala">rscala</a> 架起了 R 和 Scala 两门语言之间交流的桥梁，使得彼此之间可以互相调用</p>
+<blockquote>
+<p>是否存在这样的可能， Spark 提供了大量的 MLib 库的调用接口，R 的功能支持是最少的，Java/Scala 是原生的，那么要么自己开发新的功能整合到 SparkR 中，要么借助 rscala 将 scala 接口代码封装进来</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p><a href="https://www.fstpackage.org/" class="uri">https://www.fstpackage.org/</a><a href="06-data-import-export.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p><a href="https://rstudio-education.github.io/hopr/dataio.html" class="uri">https://rstudio-education.github.io/hopr/dataio.html</a><a href="06-data-import-export.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p><a href="https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql" class="uri">https://brucezhaor.github.io/blog/2016/08/04/batch-process-txt-to-mysql</a><a href="06-data-import-export.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p><a href="https://bookdown.org/yihui/rmarkdown/language-engines.html#sql" class="uri">https://bookdown.org/yihui/rmarkdown/language-engines.html#sql</a>
+[rstudio-spark]: <a href="https://spark.rstudio.com/" class="uri">https://spark.rstudio.com/</a><a href="06-data-import-export.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p><a href="https://d.cosx.org/d/419974" class="uri">https://d.cosx.org/d/419974</a><a href="06-data-import-export.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p><a href="https://bookdown.org/yihui/rmarkdown/params-knit.html" class="uri">https://bookdown.org/yihui/rmarkdown/params-knit.html</a><a href="06-data-import-export.html#fnref12" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="05-data-object.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="07-data-rectangling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/XiangyunHuang/RGraphics/edit/master/06-data-import-export.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["RGraphics.pdf", "RGraphics.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

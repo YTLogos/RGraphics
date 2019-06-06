@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 7 章 数据操作手 | 数据可视化与R语言</title>
+  <meta name="description" content="学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情。数据操作和数据清理部分以Base R为主，在sidebar中给出tidyverse的等价表示。数据可视化部分以ggplot2为主，在sidebar中给出Base R的等价表示" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 7 章 数据操作手 | 数据可视化与R语言" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/xiangyun/RGraphics/" />
+  
+  <meta property="og:description" content="学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情。数据操作和数据清理部分以Base R为主，在sidebar中给出tidyverse的等价表示。数据可视化部分以ggplot2为主，在sidebar中给出Base R的等价表示" />
+  <meta name="github-repo" content="XiangyunHuang/RGraphics" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 7 章 数据操作手 | 数据可视化与R语言" />
+  
+  <meta name="twitter:description" content="学习 R Graphics 部分的测试代码，函数各参数含义的查询手册，主要目的是帮助读者读懂参考手册，写作过程分步走：学习知识，记笔记，可写本书上，博客侧重在某个点的内容扩展上，书籍需要照顾覆盖面，各部分平衡一点，整理心得，再次修改笔记以符合书籍。所有的案例都基于真实数据集，基础 R 打包的数据集都是真实的，扩展案例就是在规模上进行扩展，选用基础 R 中的数据，原因是收集清洗真实数据是比较麻烦和费时间的事情。数据操作和数据清理部分以Base R为主，在sidebar中给出tidyverse的等价表示。数据可视化部分以ggplot2为主，在sidebar中给出Base R的等价表示" />
+  
+
+<meta name="author" content="黄湘云" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="07-data-rectangling.html">
+<link rel="next" href="09-vector-manipulation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">数据可视化与R语言</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>欢迎</a></li>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html#what-talk-about"><i class="fa fa-check"></i>关于本书</a></li>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html#structure-of-book"><i class="fa fa-check"></i>本书结构</a></li>
+<li class="chapter" data-level="" data-path="01-preface.html"><a href="01-preface.html#about-author"><i class="fa fa-check"></i>关于作者</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="02-introduction.html"><a href="02-introduction.html"><i class="fa fa-check"></i><b>1</b> 介绍</a><ul>
+<li class="chapter" data-level="1.1" data-path="02-introduction.html"><a href="02-introduction.html#why-r"><i class="fa fa-check"></i><b>1.1</b> Why R</a></li>
+<li class="chapter" data-level="1.2" data-path="02-introduction.html"><a href="02-introduction.html#who-read-this-book"><i class="fa fa-check"></i><b>1.2</b> 目标读者</a></li>
+<li class="chapter" data-level="1.3" data-path="02-introduction.html"><a href="02-introduction.html#Getting-Help-with-R"><i class="fa fa-check"></i><b>1.3</b> 获取帮助</a></li>
+<li class="chapter" data-level="1.4" data-path="02-introduction.html"><a href="02-introduction.html#history-of-r"><i class="fa fa-check"></i><b>1.4</b> 发展历史</a></li>
+<li class="chapter" data-level="1.5" data-path="02-introduction.html"><a href="02-introduction.html#conventions"><i class="fa fa-check"></i><b>1.5</b> 记号约定</a></li>
+<li class="chapter" data-level="1.6" data-path="02-introduction.html"><a href="02-introduction.html#softwares-rsession-info"><i class="fa fa-check"></i><b>1.6</b> 软件信息</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="03-setup.html"><a href="03-setup.html"><i class="fa fa-check"></i><b>2</b> 安装与配置</a><ul>
+<li class="chapter" data-level="2.1" data-path="03-setup.html"><a href="03-setup.html#repo-install"><i class="fa fa-check"></i><b>2.1</b> 仓库安装</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="03-setup.html"><a href="03-setup.html#ubuntu"><i class="fa fa-check"></i><b>2.1.1</b> Ubuntu</a></li>
+<li class="chapter" data-level="2.1.2" data-path="03-setup.html"><a href="03-setup.html#centos"><i class="fa fa-check"></i><b>2.1.2</b> CentOS</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="03-setup.html"><a href="03-setup.html#source-install"><i class="fa fa-check"></i><b>2.2</b> 源码安装</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="03-setup.html"><a href="03-setup.html#ubuntu-1"><i class="fa fa-check"></i><b>2.2.1</b> Ubuntu</a></li>
+<li class="chapter" data-level="2.2.2" data-path="03-setup.html"><a href="03-setup.html#centos-1"><i class="fa fa-check"></i><b>2.2.2</b> CentOS</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="03-setup.html"><a href="03-setup.html#ninja-install"><i class="fa fa-check"></i><b>2.3</b> 忍者安装</a></li>
+<li class="chapter" data-level="2.4" data-path="03-setup.html"><a href="03-setup.html#settings"><i class="fa fa-check"></i><b>2.4</b> 配置</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="03-setup.html"><a href="03-setup.html#init-session"><i class="fa fa-check"></i><b>2.4.1</b> 初始会话 <code>.Rprofile</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="03-setup.html"><a href="03-setup.html#environ-vars"><i class="fa fa-check"></i><b>2.4.2</b> 环境变量 <code>.Renviron</code></a></li>
+<li class="chapter" data-level="2.4.3" data-path="03-setup.html"><a href="03-setup.html#make-vars"><i class="fa fa-check"></i><b>2.4.3</b> 编译选项 <code>Makevars</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="03-setup.html"><a href="03-setup.html#command-line-arguments"><i class="fa fa-check"></i><b>2.5</b> 命令行参数</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="04-file-system.html"><a href="04-file-system.html"><i class="fa fa-check"></i><b>3</b> 文件管理员</a><ul>
+<li class="chapter" data-level="3.1" data-path="04-file-system.html"><a href="04-file-system.html#list"><i class="fa fa-check"></i><b>3.1</b> 查看文件</a></li>
+<li class="chapter" data-level="3.2" data-path="04-file-system.html"><a href="04-file-system.html#manipulation"><i class="fa fa-check"></i><b>3.2</b> 操作文件</a></li>
+<li class="chapter" data-level="3.3" data-path="04-file-system.html"><a href="04-file-system.html#compression"><i class="fa fa-check"></i><b>3.3</b> 压缩文件</a></li>
+<li class="chapter" data-level="3.4" data-path="04-file-system.html"><a href="04-file-system.html#paths"><i class="fa fa-check"></i><b>3.4</b> 路径操作</a></li>
+<li class="chapter" data-level="3.5" data-path="04-file-system.html"><a href="04-file-system.html#find"><i class="fa fa-check"></i><b>3.5</b> 查找文件</a></li>
+<li class="chapter" data-level="3.6" data-path="04-file-system.html"><a href="04-file-system.html#permissions"><i class="fa fa-check"></i><b>3.6</b> 文件权限</a></li>
+<li class="chapter" data-level="3.7" data-path="04-file-system.html"><a href="04-file-system.html#locale"><i class="fa fa-check"></i><b>3.7</b> 区域设置</a></li>
+<li class="chapter" data-level="3.8" data-path="04-file-system.html"><a href="04-file-system.html#process"><i class="fa fa-check"></i><b>3.8</b> 进程管理</a></li>
+<li class="chapter" data-level="3.9" data-path="04-file-system.html"><a href="04-file-system.html#system-commands"><i class="fa fa-check"></i><b>3.9</b> 系统命令</a></li>
+<li class="chapter" data-level="3.10" data-path="04-file-system.html"><a href="04-file-system.html#time"><i class="fa fa-check"></i><b>3.10</b> 时间管理</a></li>
+<li class="chapter" data-level="3.11" data-path="04-file-system.html"><a href="04-file-system.html#package"><i class="fa fa-check"></i><b>3.11</b> R 包管理</a></li>
+<li class="chapter" data-level="3.12" data-path="04-file-system.html"><a href="04-file-system.html#lookup-function"><i class="fa fa-check"></i><b>3.12</b> 查找函数</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="05-data-object.html"><a href="05-data-object.html"><i class="fa fa-check"></i><b>4</b> 对象在哪里</a><ul>
+<li class="chapter" data-level="4.1" data-path="05-data-object.html"><a href="05-data-object.html#oop-vector"><i class="fa fa-check"></i><b>4.1</b> 向量</a></li>
+<li class="chapter" data-level="4.2" data-path="05-data-object.html"><a href="05-data-object.html#oop-matrix"><i class="fa fa-check"></i><b>4.2</b> 矩阵</a></li>
+<li class="chapter" data-level="4.3" data-path="05-data-object.html"><a href="05-data-object.html#oop-array"><i class="fa fa-check"></i><b>4.3</b> 数组</a></li>
+<li class="chapter" data-level="4.4" data-path="05-data-object.html"><a href="05-data-object.html#oop-data.frame"><i class="fa fa-check"></i><b>4.4</b> 数据框</a></li>
+<li class="chapter" data-level="4.5" data-path="05-data-object.html"><a href="05-data-object.html#oop-table"><i class="fa fa-check"></i><b>4.5</b> 表格</a></li>
+<li class="chapter" data-level="4.6" data-path="05-data-object.html"><a href="05-data-object.html#oop-list"><i class="fa fa-check"></i><b>4.6</b> 列表</a></li>
+<li class="chapter" data-level="4.7" data-path="05-data-object.html"><a href="05-data-object.html#oop-ts"><i class="fa fa-check"></i><b>4.7</b> 时间序列</a></li>
+<li class="chapter" data-level="4.8" data-path="05-data-object.html"><a href="05-data-object.html#oop-sf"><i class="fa fa-check"></i><b>4.8</b> 空间数据</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="06-data-import-export.html"><a href="06-data-import-export.html"><i class="fa fa-check"></i><b>5</b> 数据搬运工</a><ul>
+<li class="chapter" data-level="5.1" data-path="06-data-import-export.html"><a href="06-data-import-export.html#import-data-files"><i class="fa fa-check"></i><b>5.1</b> 导入数据文件</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="06-data-import-export.html"><a href="06-data-import-export.html#scan-file"><i class="fa fa-check"></i><b>5.1.1</b> <code>scan</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="06-data-import-export.html"><a href="06-data-import-export.html#read-write-table"><i class="fa fa-check"></i><b>5.1.2</b> <code>read.table</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="06-data-import-export.html"><a href="06-data-import-export.html#read-write-lines"><i class="fa fa-check"></i><b>5.1.3</b> <code>readLines</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="06-data-import-export.html"><a href="06-data-import-export.html#read-save-rds"><i class="fa fa-check"></i><b>5.1.4</b> <code>readRDS</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="06-data-import-export.html"><a href="06-data-import-export.html#load-save"><i class="fa fa-check"></i><b>5.2</b> 保存输出结果</a></li>
+<li class="chapter" data-level="5.3" data-path="06-data-import-export.html"><a href="06-data-import-export.html#save-data-object"><i class="fa fa-check"></i><b>5.3</b> 保存数据对象</a></li>
+<li class="chapter" data-level="5.4" data-path="06-data-import-export.html"><a href="06-data-import-export.html#other-data-source"><i class="fa fa-check"></i><b>5.4</b> 其它数据格式</a></li>
+<li class="chapter" data-level="5.5" data-path="06-data-import-export.html"><a href="06-data-import-export.html#batch-import-data"><i class="fa fa-check"></i><b>5.5</b> 批量导入数据</a></li>
+<li class="chapter" data-level="5.6" data-path="06-data-import-export.html"><a href="06-data-import-export.html#batch-export-data"><i class="fa fa-check"></i><b>5.6</b> 批量导出数据</a></li>
+<li class="chapter" data-level="5.7" data-path="06-data-import-export.html"><a href="06-data-import-export.html#import-large-csv-files"><i class="fa fa-check"></i><b>5.7</b> 导入大数据集</a></li>
+<li class="chapter" data-level="5.8" data-path="06-data-import-export.html"><a href="06-data-import-export.html#import-data-from-database"><i class="fa fa-check"></i><b>5.8</b> 从数据库导入</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="06-data-import-export.html"><a href="06-data-import-export.html#rsqlite"><i class="fa fa-check"></i><b>5.8.1</b> RSQLite</a></li>
+<li class="chapter" data-level="5.8.2" data-path="06-data-import-export.html"><a href="06-data-import-export.html#postgresql"><i class="fa fa-check"></i><b>5.8.2</b> PostgreSQL</a></li>
+<li class="chapter" data-level="5.8.3" data-path="06-data-import-export.html"><a href="06-data-import-export.html#clickhouse"><i class="fa fa-check"></i><b>5.8.3</b> ClickHouse</a></li>
+<li class="chapter" data-level="5.8.4" data-path="06-data-import-export.html"><a href="06-data-import-export.html#mysql"><i class="fa fa-check"></i><b>5.8.4</b> MySQL</a></li>
+<li class="chapter" data-level="5.8.5" data-path="06-data-import-export.html"><a href="06-data-import-export.html#spark"><i class="fa fa-check"></i><b>5.8.5</b> Spark</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="07-data-rectangling.html"><a href="07-data-rectangling.html"><i class="fa fa-check"></i><b>6</b> 数据异形者</a></li>
+<li class="chapter" data-level="7" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html"><i class="fa fa-check"></i><b>7</b> 数据操作手</a><ul>
+<li class="chapter" data-level="7.1" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#show"><i class="fa fa-check"></i><b>7.1</b> 查看数据</a></li>
+<li class="chapter" data-level="7.2" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-reshape"><i class="fa fa-check"></i><b>7.2</b> 数据变形</a></li>
+<li class="chapter" data-level="7.3" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-transform"><i class="fa fa-check"></i><b>7.3</b> 数据转换</a></li>
+<li class="chapter" data-level="7.4" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-subset"><i class="fa fa-check"></i><b>7.4</b> 提取子集</a></li>
+<li class="chapter" data-level="7.5" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-order"><i class="fa fa-check"></i><b>7.5</b> 按列排序</a></li>
+<li class="chapter" data-level="7.6" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-split"><i class="fa fa-check"></i><b>7.6</b> 数据拆分</a></li>
+<li class="chapter" data-level="7.7" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-merge"><i class="fa fa-check"></i><b>7.7</b> 数据合并</a></li>
+<li class="chapter" data-level="7.8" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-duplicated"><i class="fa fa-check"></i><b>7.8</b> 数据去重</a></li>
+<li class="chapter" data-level="7.9" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-aggregate"><i class="fa fa-check"></i><b>7.9</b> 数据聚合</a></li>
+<li class="chapter" data-level="7.10" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-table"><i class="fa fa-check"></i><b>7.10</b> 表格统计</a></li>
+<li class="chapter" data-level="7.11" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-index"><i class="fa fa-check"></i><b>7.11</b> 索引访问</a></li>
+<li class="chapter" data-level="7.12" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-array"><i class="fa fa-check"></i><b>7.12</b> 多维数组</a></li>
+<li class="chapter" data-level="7.13" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#base-others"><i class="fa fa-check"></i><b>7.13</b> 其它操作</a><ul>
+<li class="chapter" data-level="7.13.1" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#list-or-unlist"><i class="fa fa-check"></i><b>7.13.1</b> 列表属性</a></li>
+<li class="chapter" data-level="7.13.2" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#stack-or-unstack"><i class="fa fa-check"></i><b>7.13.2</b> 堆叠向量</a></li>
+<li class="chapter" data-level="7.13.3" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#class-or-unclass"><i class="fa fa-check"></i><b>7.13.3</b> 属性转化</a></li>
+<li class="chapter" data-level="7.13.4" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#attach-or-detach"><i class="fa fa-check"></i><b>7.13.4</b> 绑定环境</a></li>
+<li class="chapter" data-level="7.13.5" data-path="08-data-manipulation.html"><a href="08-data-manipulation.html#with-or-within"><i class="fa fa-check"></i><b>7.13.5</b> 数据环境</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html"><i class="fa fa-check"></i><b>8</b> 向量化操作</a><ul>
+<li class="chapter" data-level="8.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#common-operations"><i class="fa fa-check"></i><b>8.1</b> 常用操作</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#tibble-show"><i class="fa fa-check"></i><b>8.1.1</b> 查看</a></li>
+<li class="chapter" data-level="8.1.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-subset"><i class="fa fa-check"></i><b>8.1.2</b> 筛选</a></li>
+<li class="chapter" data-level="8.1.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-order"><i class="fa fa-check"></i><b>8.1.3</b> 排序</a></li>
+<li class="chapter" data-level="8.1.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-aggregate"><i class="fa fa-check"></i><b>8.1.4</b> 聚合</a></li>
+<li class="chapter" data-level="8.1.5" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-merge"><i class="fa fa-check"></i><b>8.1.5</b> 合并</a></li>
+<li class="chapter" data-level="8.1.6" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-reshape"><i class="fa fa-check"></i><b>8.1.6</b> 重塑</a></li>
+<li class="chapter" data-level="8.1.7" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#dplyr-transform"><i class="fa fa-check"></i><b>8.1.7</b> 变换</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#common-dataframe-operations"><i class="fa fa-check"></i><b>8.2</b> 高频问题</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#create-empty-dataframe"><i class="fa fa-check"></i><b>8.2.1</b> 初始化数据框</a></li>
+<li class="chapter" data-level="8.2.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#remove-missing-values"><i class="fa fa-check"></i><b>8.2.2</b> 移除缺失记录</a></li>
+<li class="chapter" data-level="8.2.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#coerce-data-type"><i class="fa fa-check"></i><b>8.2.3</b> 数据类型转化</a></li>
+<li class="chapter" data-level="8.2.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#cross-group-by"><i class="fa fa-check"></i><b>8.2.4</b> 跨列分组求和</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#parallel-computing"><i class="fa fa-check"></i><b>8.3</b> 并行计算</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#apply"><i class="fa fa-check"></i><b>8.3.1</b> apply</a></li>
+<li class="chapter" data-level="8.3.2" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#map-reduce"><i class="fa fa-check"></i><b>8.3.2</b> MapReduce</a></li>
+<li class="chapter" data-level="8.3.3" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#parallel"><i class="fa fa-check"></i><b>8.3.3</b> parallel</a></li>
+<li class="chapter" data-level="8.3.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#rmpi"><i class="fa fa-check"></i><b>8.3.4</b> Rmpi</a></li>
+<li class="chapter" data-level="8.3.5" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#gpur"><i class="fa fa-check"></i><b>8.3.5</b> gpuR</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="09-vector-manipulation.html"><a href="09-vector-manipulation.html#pipe-manipulation"><i class="fa fa-check"></i><b>8.4</b> 管道操作</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html"><i class="fa fa-check"></i><b>9</b> 字符串操作</a><ul>
+<li class="chapter" data-level="9.1" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-count"><i class="fa fa-check"></i><b>9.1</b> 字符数统计</a></li>
+<li class="chapter" data-level="9.2" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-translations"><i class="fa fa-check"></i><b>9.2</b> 字符串翻译</a></li>
+<li class="chapter" data-level="9.3" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-concatenate"><i class="fa fa-check"></i><b>9.3</b> 字符串连接</a></li>
+<li class="chapter" data-level="9.4" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-strsplit"><i class="fa fa-check"></i><b>9.4</b> 字符串拆分</a></li>
+<li class="chapter" data-level="9.5" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-match"><i class="fa fa-check"></i><b>9.5</b> 字符串匹配</a></li>
+<li class="chapter" data-level="9.6" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-search"><i class="fa fa-check"></i><b>9.6</b> 字符串查询</a></li>
+<li class="chapter" data-level="9.7" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-replacement"><i class="fa fa-check"></i><b>9.7</b> 字符串替换</a></li>
+<li class="chapter" data-level="9.8" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#base-extract"><i class="fa fa-check"></i><b>9.8</b> 字符串提取</a></li>
+<li class="chapter" data-level="9.9" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#other-string-op"><i class="fa fa-check"></i><b>9.9</b> 其它字符串操作</a><ul>
+<li class="chapter" data-level="9.9.1" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#strwrap"><i class="fa fa-check"></i><b>9.9.1</b> strwrap</a></li>
+<li class="chapter" data-level="9.9.2" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#strtrim"><i class="fa fa-check"></i><b>9.9.2</b> strtrim</a></li>
+<li class="chapter" data-level="9.9.3" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#strrep"><i class="fa fa-check"></i><b>9.9.3</b> strrep</a></li>
+<li class="chapter" data-level="9.9.4" data-path="10-data-cleaning-with-string.html"><a href="10-data-cleaning-with-string.html#trimws"><i class="fa fa-check"></i><b>9.9.4</b> trimws</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html"><i class="fa fa-check"></i><b>10</b> 数据清洁工</a><ul>
+<li class="chapter" data-level="10.1" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html#performance"><i class="fa fa-check"></i><b>10.1</b> 处理性能</a></li>
+<li class="chapter" data-level="10.2" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html#Web-crawler"><i class="fa fa-check"></i><b>10.2</b> 网络爬虫</a></li>
+<li class="chapter" data-level="10.3" data-path="11-data-cleaning-with-stringr.html"><a href="11-data-cleaning-with-stringr.html#text-mining"><i class="fa fa-check"></i><b>10.3</b> 文本挖掘</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html"><i class="fa fa-check"></i><b>11</b> 正则表达式</a><ul>
+<li class="chapter" data-level="11.1" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#character-constants"><i class="fa fa-check"></i><b>11.1</b> 字符常量</a></li>
+<li class="chapter" data-level="11.2" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#environments"><i class="fa fa-check"></i><b>11.2</b> 软件环境</a></li>
+<li class="chapter" data-level="11.3" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#foundations"><i class="fa fa-check"></i><b>11.3</b> 基本概念</a></li>
+<li class="chapter" data-level="11.4" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#match"><i class="fa fa-check"></i><b>11.4</b> 字符串匹配</a></li>
+<li class="chapter" data-level="11.5" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#concatenation"><i class="fa fa-check"></i><b>11.5</b> 级联表达式</a></li>
+<li class="chapter" data-level="11.6" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#backreference"><i class="fa fa-check"></i><b>11.6</b> 反向引用</a></li>
+<li class="chapter" data-level="11.7" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#named-capture"><i class="fa fa-check"></i><b>11.7</b> 命名捕捉</a></li>
+<li class="chapter" data-level="11.8" data-path="12-data-cleaning-with-regexp.html"><a href="12-data-cleaning-with-regexp.html#comment"><i class="fa fa-check"></i><b>11.8</b> 表达式注释</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html"><i class="fa fa-check"></i><b>12</b> 绘图素材库</a><ul>
+<li class="chapter" data-level="12.1" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#elements"><i class="fa fa-check"></i><b>12.1</b> 基本要素</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-points"><i class="fa fa-check"></i><b>12.1.1</b> 点线</a></li>
+<li class="chapter" data-level="12.1.2" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-rect"><i class="fa fa-check"></i><b>12.1.2</b> 区域</a></li>
+<li class="chapter" data-level="12.1.3" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-lines"><i class="fa fa-check"></i><b>12.1.3</b> 参考线</a></li>
+<li class="chapter" data-level="12.1.4" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-axis"><i class="fa fa-check"></i><b>12.1.4</b> 坐标轴</a></li>
+<li class="chapter" data-level="12.1.5" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-title"><i class="fa fa-check"></i><b>12.1.5</b> 标题</a></li>
+<li class="chapter" data-level="12.1.6" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-annotation"><i class="fa fa-check"></i><b>12.1.6</b> 注释</a></li>
+<li class="chapter" data-level="12.1.7" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-legend"><i class="fa fa-check"></i><b>12.1.7</b> 图例</a></li>
+<li class="chapter" data-level="12.1.8" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-par"><i class="fa fa-check"></i><b>12.1.8</b> 边空</a></li>
+<li class="chapter" data-level="12.1.9" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-layer"><i class="fa fa-check"></i><b>12.1.9</b> 图层</a></li>
+<li class="chapter" data-level="12.1.10" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-layout"><i class="fa fa-check"></i><b>12.1.10</b> 布局</a></li>
+<li class="chapter" data-level="12.1.11" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-combine"><i class="fa fa-check"></i><b>12.1.11</b> 组合</a></li>
+<li class="chapter" data-level="12.1.12" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-screen"><i class="fa fa-check"></i><b>12.1.12</b> 分屏</a></li>
+<li class="chapter" data-level="12.1.13" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#identify-locator"><i class="fa fa-check"></i><b>12.1.13</b> 交互</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-gallary"><i class="fa fa-check"></i><b>12.2</b> 统计图形</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-bar"><i class="fa fa-check"></i><b>12.2.1</b> 条形图</a></li>
+<li class="chapter" data-level="12.2.2" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-hist"><i class="fa fa-check"></i><b>12.2.2</b> 直方图</a></li>
+<li class="chapter" data-level="12.2.3" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-density"><i class="fa fa-check"></i><b>12.2.3</b> 密度图</a></li>
+<li class="chapter" data-level="12.2.4" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-ecdf"><i class="fa fa-check"></i><b>12.2.4</b> 经验图</a></li>
+<li class="chapter" data-level="12.2.5" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-qqnorm"><i class="fa fa-check"></i><b>12.2.5</b> QQ 图</a></li>
+<li class="chapter" data-level="12.2.6" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-ts"><i class="fa fa-check"></i><b>12.2.6</b> 时序图</a></li>
+<li class="chapter" data-level="12.2.7" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-pie"><i class="fa fa-check"></i><b>12.2.7</b> 饼图</a></li>
+<li class="chapter" data-level="12.2.8" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-stem-leaf"><i class="fa fa-check"></i><b>12.2.8</b> 茎叶图</a></li>
+<li class="chapter" data-level="12.2.9" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-scatter"><i class="fa fa-check"></i><b>12.2.9</b> 散点图</a></li>
+<li class="chapter" data-level="12.2.10" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#base-jitter"><i class="fa fa-check"></i><b>12.2.10</b> 抖动图</a></li>
+<li class="chapter" data-level="12.2.11" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-box"><i class="fa fa-check"></i><b>12.2.11</b> 箱线图</a></li>
+<li class="chapter" data-level="12.2.12" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#error-bars"><i class="fa fa-check"></i><b>12.2.12</b> 残差图</a></li>
+<li class="chapter" data-level="12.2.13" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-violin"><i class="fa fa-check"></i><b>12.2.13</b> 提琴图</a></li>
+<li class="chapter" data-level="12.2.14" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-contour"><i class="fa fa-check"></i><b>12.2.14</b> 轮廓图</a></li>
+<li class="chapter" data-level="12.2.15" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-line"><i class="fa fa-check"></i><b>12.2.15</b> 折线图</a></li>
+<li class="chapter" data-level="12.2.16" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#function"><i class="fa fa-check"></i><b>12.2.16</b> 函数图</a></li>
+<li class="chapter" data-level="12.2.17" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-mosaic"><i class="fa fa-check"></i><b>12.2.17</b> 马赛克图</a></li>
+<li class="chapter" data-level="12.2.18" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#dotchart"><i class="fa fa-check"></i><b>12.2.18</b> 克利夫兰点图</a></li>
+<li class="chapter" data-level="12.2.19" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-matrix"><i class="fa fa-check"></i><b>12.2.19</b> 矩阵图</a></li>
+<li class="chapter" data-level="12.2.20" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-radar"><i class="fa fa-check"></i><b>12.2.20</b> 雷达图</a></li>
+<li class="chapter" data-level="12.2.21" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-rose"><i class="fa fa-check"></i><b>12.2.21</b> 玫瑰图</a></li>
+<li class="chapter" data-level="12.2.22" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#plot-map"><i class="fa fa-check"></i><b>12.2.22</b> 地形图</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#tikz"><i class="fa fa-check"></i><b>12.3</b> TikZ 绘图</a></li>
+<li class="chapter" data-level="12.4" data-path="13-data-visualization-with-plot.html"><a href="13-data-visualization-with-plot.html#export-save"><i class="fa fa-check"></i><b>12.4</b> 图形导出</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html"><i class="fa fa-check"></i><b>13</b> 三维可视化</a><ul>
+<li class="chapter" data-level="13.1" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#pie-3d"><i class="fa fa-check"></i><b>13.1</b> 饼图</a></li>
+<li class="chapter" data-level="13.2" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#bar-3d"><i class="fa fa-check"></i><b>13.2</b> 柱形图</a></li>
+<li class="chapter" data-level="13.3" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#scatter-3d"><i class="fa fa-check"></i><b>13.3</b> 散点图</a></li>
+<li class="chapter" data-level="13.4" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#curve-3d"><i class="fa fa-check"></i><b>13.4</b> 函数图</a></li>
+<li class="chapter" data-level="13.5" data-path="14-data-visualization-with-plot3d.html"><a href="14-data-visualization-with-plot3d.html#persp-3d"><i class="fa fa-check"></i><b>13.5</b> 透视图</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html"><i class="fa fa-check"></i><b>14</b> 数据可视化</a><ul>
+<li class="chapter" data-level="14.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#intro-ggplot2"><i class="fa fa-check"></i><b>14.1</b> 基础语法</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-layer"><i class="fa fa-check"></i><b>14.1.1</b> 图层</a></li>
+<li class="chapter" data-level="14.1.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-theme"><i class="fa fa-check"></i><b>14.1.2</b> 主题</a></li>
+<li class="chapter" data-level="14.1.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-color"><i class="fa fa-check"></i><b>14.1.3</b> 配色</a></li>
+<li class="chapter" data-level="14.1.4" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-scale"><i class="fa fa-check"></i><b>14.1.4</b> 刻度</a></li>
+<li class="chapter" data-level="14.1.5" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-annotate"><i class="fa fa-check"></i><b>14.1.5</b> 注释</a></li>
+<li class="chapter" data-level="14.1.6" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-legend"><i class="fa fa-check"></i><b>14.1.6</b> 图例</a></li>
+<li class="chapter" data-level="14.1.7" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-grid"><i class="fa fa-check"></i><b>14.1.7</b> 组合</a></li>
+<li class="chapter" data-level="14.1.8" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-coord"><i class="fa fa-check"></i><b>14.1.8</b> 坐标系</a></li>
+<li class="chapter" data-level="14.1.9" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-axes"><i class="fa fa-check"></i><b>14.1.9</b> 坐标轴</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-gallary"><i class="fa fa-check"></i><b>14.2</b> 统计图形</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-scatter"><i class="fa fa-check"></i><b>14.2.1</b> 散点图</a></li>
+<li class="chapter" data-level="14.2.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-boxplot"><i class="fa fa-check"></i><b>14.2.2</b> 箱线图</a></li>
+<li class="chapter" data-level="14.2.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-barplot"><i class="fa fa-check"></i><b>14.2.3</b> 条形图</a></li>
+<li class="chapter" data-level="14.2.4" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-line"><i class="fa fa-check"></i><b>14.2.4</b> 折线图</a></li>
+<li class="chapter" data-level="14.2.5" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-histogram"><i class="fa fa-check"></i><b>14.2.5</b> 直方图</a></li>
+<li class="chapter" data-level="14.2.6" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-violin"><i class="fa fa-check"></i><b>14.2.6</b> 提琴图</a></li>
+<li class="chapter" data-level="14.2.7" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-jitter"><i class="fa fa-check"></i><b>14.2.7</b> 抖动图</a></li>
+<li class="chapter" data-level="14.2.8" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-ridge"><i class="fa fa-check"></i><b>14.2.8</b> 密度图</a></li>
+<li class="chapter" data-level="14.2.9" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-rose"><i class="fa fa-check"></i><b>14.2.9</b> 玫瑰图</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-spatial"><i class="fa fa-check"></i><b>14.3</b> 空间数据</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-raster"><i class="fa fa-check"></i><b>14.3.1</b> raster</a></li>
+<li class="chapter" data-level="14.3.2" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-sp"><i class="fa fa-check"></i><b>14.3.2</b> sp</a></li>
+<li class="chapter" data-level="14.3.3" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-sf"><i class="fa fa-check"></i><b>14.3.3</b> sf</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-network"><i class="fa fa-check"></i><b>14.4</b> 网络数据</a></li>
+<li class="chapter" data-level="14.5" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#analysis-cran"><i class="fa fa-check"></i><b>14.5</b> CRAN 分析</a></li>
+<li class="chapter" data-level="14.6" data-path="15-data-visualization-with-ggplot2.html"><a href="15-data-visualization-with-ggplot2.html#ggplot2-session-info"><i class="fa fa-check"></i><b>14.6</b> 软件信息</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html"><i class="fa fa-check"></i><b>15</b> 色彩与字体</a><ul>
+<li class="chapter" data-level="15.1" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html#colors"><i class="fa fa-check"></i><b>15.1</b> 配色</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html#colourlovers"><i class="fa fa-check"></i><b>15.1.1</b> colourlovers</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="16-data-visualization-with-colors-fonts.html"><a href="16-data-visualization-with-colors-fonts.html#fonts"><i class="fa fa-check"></i><b>15.2</b> 字体</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="99-references.html"><a href="99-references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://r4charts.netlify.com/" target="blank">Published with netlify</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">数据可视化与R语言</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-manipulator" class="section level1">
+<h1><span class="header-section-number">第 7 章</span> 数据操作手</h1>
+<blockquote>
+<p>参考 Data Manipulation With R <span class="citation">(Spector <a href="#ref-Spector_2008_Manipulation" role="doc-biblioref">2008</a>)</span> 重新捋一遍本章</p>
+</blockquote>
+<div class="sidebar">
+<p>主要介绍 Base R 提供的数据操作，关于采用 Base R 还是 tidyverse 做数据操作的 <a href="https://d.cosx.org/d/420697">讨论</a></p>
+</div>
+<p>什么是 Base R? Base R 指的是 R 语言/软件的核心组件，由 R Core Team 维护</p>
+<pre class="sourceCode r"><code class="sourceCode r">Pkgs &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">list.files</span>(<span class="kw">R.home</span>(<span class="st">&quot;library&quot;</span>)), <span class="cf">function</span>(x)
+  <span class="kw">packageDescription</span>(<span class="dt">pkg =</span> x, <span class="dt">fields =</span> <span class="st">&quot;Priority&quot;</span>))
+<span class="kw">names</span>(Pkgs[Pkgs <span class="op">==</span><span class="st"> &quot;base&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(Pkgs)])
+<span class="co">#&gt;  [1] &quot;base&quot;      &quot;compiler&quot;  &quot;datasets&quot;  &quot;graphics&quot;  &quot;grDevices&quot; &quot;grid&quot;     </span>
+<span class="co">#&gt;  [7] &quot;methods&quot;   &quot;parallel&quot;  &quot;splines&quot;   &quot;stats&quot;     &quot;stats4&quot;    &quot;tcltk&quot;    </span>
+<span class="co">#&gt; [13] &quot;tools&quot;     &quot;utils&quot;</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Pkgs[Pkgs <span class="op">==</span><span class="st"> &quot;recommended&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(Pkgs)])
+<span class="co">#&gt;  [1] &quot;boot&quot;       &quot;class&quot;      &quot;cluster&quot;    &quot;codetools&quot;  &quot;foreign&quot;   </span>
+<span class="co">#&gt;  [6] &quot;KernSmooth&quot; &quot;lattice&quot;    &quot;MASS&quot;       &quot;Matrix&quot;     &quot;mgcv&quot;      </span>
+<span class="co">#&gt; [11] &quot;nlme&quot;       &quot;nnet&quot;       &quot;rpart&quot;      &quot;spatial&quot;    &quot;survival&quot;</span></code></pre>
+<p>数据变形，分组统计聚合等，用以作为模型的输入，绘图的对象，操作的数据对象是数据框(data.frame)类型的，而且如果没有特别说明，文中出现的数据集都是 Base R 内置的，第三方 R 包或者来源于网上的数据集都会加以说明。</p>
+<div id="show" class="section level2">
+<h2><span class="header-section-number">7.1</span> 查看数据</h2>
+<p>查看属性</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(iris)
+<span class="co">#&gt; &#39;data.frame&#39;:    150 obs. of  5 variables:</span>
+<span class="co">#&gt;  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...</span>
+<span class="co">#&gt;  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...</span>
+<span class="co">#&gt;  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...</span>
+<span class="co">#&gt;  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...</span>
+<span class="co">#&gt;  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1..</span></code></pre>
+<p>查看部分数据集</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(iris, <span class="dv">5</span>)
+<span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span>
+<span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span>
+<span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span>
+<span class="co">#&gt; 4          4.6         3.1          1.5         0.2  setosa</span>
+<span class="co">#&gt; 5          5.0         3.6          1.4         0.2  setosa</span>
+<span class="kw">tail</span>(iris, <span class="dv">5</span>)
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span>
+<span class="co">#&gt; 146          6.7         3.0          5.2         2.3 virginica</span>
+<span class="co">#&gt; 147          6.3         2.5          5.0         1.9 virginica</span>
+<span class="co">#&gt; 148          6.5         3.0          5.2         2.0 virginica</span>
+<span class="co">#&gt; 149          6.2         3.4          5.4         2.3 virginica</span>
+<span class="co">#&gt; 150          5.9         3.0          5.1         1.8 virginica</span></code></pre>
+<p>查看文件前（后）5行</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">head</span> -n 5 clientip.csv
+<span class="fu">tail</span> -n 5 clientip.csv</code></pre>
+<p>对象的类型，存储方式</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(iris)
+<span class="co">#&gt; [1] &quot;data.frame&quot;</span>
+<span class="kw">mode</span>(iris)
+<span class="co">#&gt; [1] &quot;list&quot;</span>
+<span class="kw">typeof</span>(iris)
+<span class="co">#&gt; [1] &quot;list&quot;</span></code></pre>
+<p>查看对象在R环境中所占空间的大小</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(iris)
+<span class="co">#&gt; 7256 bytes</span>
+<span class="kw">object.size</span>(letters)
+<span class="co">#&gt; 1712 bytes</span>
+<span class="kw">object.size</span>(ls)
+<span class="co">#&gt; 89904 bytes</span>
+<span class="kw">format</span>(<span class="kw">object.size</span>(library), <span class="dt">units =</span> <span class="st">&quot;auto&quot;</span>)
+<span class="co">#&gt; [1] &quot;1.8 Mb&quot;</span></code></pre>
+</div>
+<div id="base-reshape" class="section level2">
+<h2><span class="header-section-number">7.2</span> 数据变形</h2>
+<p>重复测量数据的变形 Reshape Grouped Data，数据框宽格式 wide 变长格式 long</p>
+<p>reshape 还支持正则表达式</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(Indometh)
+<span class="co">#&gt; Classes &#39;nfnGroupedData&#39;, &#39;nfGroupedData&#39;, &#39;groupedData&#39; and &#39;data.frame&#39;:   66 obs. of  3 variables:</span>
+<span class="co">#&gt;  $ Subject: Ord.factor w/ 6 levels &quot;1&quot;&lt;&quot;4&quot;&lt;&quot;2&quot;&lt;&quot;5&quot;&lt;..: 1 1 1 1 1 1 1 1 1 1 ...</span>
+<span class="co">#&gt;  $ time   : num  0.25 0.5 0.75 1 1.25 2 3 4 5 6 ...</span>
+<span class="co">#&gt;  $ conc   : num  1.5 0.94 0.78 0.48 0.37 0.19 0.12 0.11 0.08 0.07 ...</span>
+<span class="co">#&gt;  - attr(*, &quot;formula&quot;)=Class &#39;formula&#39;  language conc ~ time | Subject</span>
+<span class="co">#&gt;   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_EmptyEnv&gt; </span>
+<span class="co">#&gt;  - attr(*, &quot;labels&quot;)=List of 2</span>
+<span class="co">#&gt;   ..$ x: chr &quot;Time since drug administration&quot;</span>
+<span class="co">#&gt;   ..$ y: chr &quot;Indomethacin concentration&quot;</span>
+<span class="co">#&gt;  - attr(*, &quot;units&quot;)=List of 2</span>
+<span class="co">#&gt;   ..$ x: chr &quot;(hr)&quot;</span>
+<span class="co">#&gt;   ..$ y: chr &quot;(mcg/ml)&quot;</span>
+<span class="kw">summary</span>(Indometh)
+<span class="co">#&gt;  Subject      time           conc      </span>
+<span class="co">#&gt;  1:11    Min.   :0.25   Min.   :0.050  </span>
+<span class="co">#&gt;  4:11    1st Qu.:0.75   1st Qu.:0.110  </span>
+<span class="co">#&gt;  2:11    Median :2.00   Median :0.340  </span>
+<span class="co">#&gt;  5:11    Mean   :2.89   Mean   :0.592  </span>
+<span class="co">#&gt;  6:11    3rd Qu.:5.00   3rd Qu.:0.832  </span>
+<span class="co">#&gt;  3:11    Max.   :8.00   Max.   :2.720</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">wide &lt;-<span class="st"> </span><span class="kw">reshape</span>(Indometh,
+  <span class="dt">v.names =</span> <span class="st">&quot;conc&quot;</span>, <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>,
+  <span class="dt">timevar =</span> <span class="st">&quot;time&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;wide&quot;</span>
+)
+wide[, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]
+<span class="co">#&gt;    Subject conc.0.25 conc.0.5 conc.0.75 conc.1 conc.1.25</span>
+<span class="co">#&gt; 1        1      1.50     0.94      0.78   0.48      0.37</span>
+<span class="co">#&gt; 12       2      2.03     1.63      0.71   0.70      0.64</span>
+<span class="co">#&gt; 23       3      2.72     1.49      1.16   0.80      0.80</span>
+<span class="co">#&gt; 34       4      1.85     1.39      1.02   0.89      0.59</span>
+<span class="co">#&gt; 45       5      2.05     1.04      0.81   0.39      0.30</span>
+<span class="co">#&gt; 56       6      2.31     1.44      1.03   0.84      0.64</span></code></pre>
+<p>长 long 变 wide 宽格式</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(gambia, <span class="dt">package =</span> <span class="st">&quot;geoR&quot;</span>)
+<span class="co"># Building a &quot;village-level&quot; data frame</span>
+ind &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;x&quot;</span>, gambia[, <span class="dv">1</span>], <span class="st">&quot;y&quot;</span>, gambia[, <span class="dv">2</span>], <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+village &lt;-<span class="st"> </span>gambia[<span class="op">!</span><span class="kw">duplicated</span>(ind), <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">7</span><span class="op">:</span><span class="dv">8</span>)]
+village<span class="op">$</span>prev &lt;-<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">tapply</span>(gambia<span class="op">$</span>pos, ind, mean))
+<span class="kw">head</span>(village)</code></pre>
+</div>
+<div id="base-transform" class="section level2">
+<h2><span class="header-section-number">7.3</span> 数据转换</h2>
+<p>transform 对数据框中的某些列做计算，取对数，将计算的结果单存一列加到数据框中</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">transform</span>(iris, <span class="dt">scale.sl =</span> (<span class="kw">max</span>(Sepal.Length) <span class="op">-</span><span class="st"> </span>Sepal.Length) <span class="op">/</span><span class="st"> </span>(<span class="kw">max</span>(Sepal.Length) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(Sepal.Length)))
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species scale.sl</span>
+<span class="co">#&gt; 1            5.1         3.5          1.4         0.2     setosa   0.7778</span>
+<span class="co">#&gt; 2            4.9         3.0          1.4         0.2     setosa   0.8333</span>
+<span class="co">#&gt; 3            4.7         3.2          1.3         0.2     setosa   0.8889</span>
+<span class="co">#&gt; 4            4.6         3.1          1.5         0.2     setosa   0.9167</span>
+<span class="co">#&gt; 5            5.0         3.6          1.4         0.2     setosa   0.8056</span>
+<span class="co">#&gt; 6            5.4         3.9          1.7         0.4     setosa   0.6944</span>
+<span class="co">#&gt; 7            4.6         3.4          1.4         0.3     setosa   0.9167</span>
+<span class="co">#&gt; 8            5.0         3.4          1.5         0.2     setosa   0.8056</span>
+<span class="co">#&gt; 9            4.4         2.9          1.4         0.2     setosa   0.9722</span>
+<span class="co">#&gt; 10           4.9         3.1          1.5         0.1     setosa   0.8333</span>
+<span class="co">#&gt; 11           5.4         3.7          1.5         0.2     setosa   0.6944</span>
+<span class="co">#&gt; 12           4.8         3.4          1.6         0.2     setosa   0.8611</span>
+<span class="co">#&gt; 13           4.8         3.0          1.4         0.1     setosa   0.8611</span>
+<span class="co">#&gt; 14           4.3         3.0          1.1         0.1     setosa   1.0000</span>
+<span class="co">#&gt; 15           5.8         4.0          1.2         0.2     setosa   0.5833</span>
+<span class="co">#&gt; 16           5.7         4.4          1.5         0.4     setosa   0.6111</span>
+<span class="co">#&gt; 17           5.4         3.9          1.3         0.4     setosa   0.6944</span>
+<span class="co">#&gt; 18           5.1         3.5          1.4         0.3     setosa   0.7778</span>
+<span class="co">#&gt; 19           5.7         3.8          1.7         0.3     setosa   0.6111</span>
+<span class="co">#&gt; 20           5.1         3.8          1.5         0.3     setosa   0.7778</span>
+<span class="co">#&gt; 21           5.4         3.4          1.7         0.2     setosa   0.6944</span>
+<span class="co">#&gt; 22           5.1         3.7          1.5         0.4     setosa   0.7778</span>
+<span class="co">#&gt; 23           4.6         3.6          1.0         0.2     setosa   0.9167</span>
+<span class="co">#&gt; 24           5.1         3.3          1.7         0.5     setosa   0.7778</span>
+<span class="co">#&gt; 25           4.8         3.4          1.9         0.2     setosa   0.8611</span>
+<span class="co">#&gt; 26           5.0         3.0          1.6         0.2     setosa   0.8056</span>
+<span class="co">#&gt; 27           5.0         3.4          1.6         0.4     setosa   0.8056</span>
+<span class="co">#&gt; 28           5.2         3.5          1.5         0.2     setosa   0.7500</span>
+<span class="co">#&gt; 29           5.2         3.4          1.4         0.2     setosa   0.7500</span>
+<span class="co">#&gt; 30           4.7         3.2          1.6         0.2     setosa   0.8889</span>
+<span class="co">#&gt; 31           4.8         3.1          1.6         0.2     setosa   0.8611</span>
+<span class="co">#&gt; 32           5.4         3.4          1.5         0.4     setosa   0.6944</span>
+<span class="co">#&gt; 33           5.2         4.1          1.5         0.1     setosa   0.7500</span>
+<span class="co">#&gt; 34           5.5         4.2          1.4         0.2     setosa   0.6667</span>
+<span class="co">#&gt; 35           4.9         3.1          1.5         0.2     setosa   0.8333</span>
+<span class="co">#&gt; 36           5.0         3.2          1.2         0.2     setosa   0.8056</span>
+<span class="co">#&gt; 37           5.5         3.5          1.3         0.2     setosa   0.6667</span>
+<span class="co">#&gt; 38           4.9         3.6          1.4         0.1     setosa   0.8333</span>
+<span class="co">#&gt; 39           4.4         3.0          1.3         0.2     setosa   0.9722</span>
+<span class="co">#&gt; 40           5.1         3.4          1.5         0.2     setosa   0.7778</span>
+<span class="co">#&gt; 41           5.0         3.5          1.3         0.3     setosa   0.8056</span>
+<span class="co">#&gt; 42           4.5         2.3          1.3         0.3     setosa   0.9444</span>
+<span class="co">#&gt; 43           4.4         3.2          1.3         0.2     setosa   0.9722</span>
+<span class="co">#&gt; 44           5.0         3.5          1.6         0.6     setosa   0.8056</span>
+<span class="co">#&gt; 45           5.1         3.8          1.9         0.4     setosa   0.7778</span>
+<span class="co">#&gt; 46           4.8         3.0          1.4         0.3     setosa   0.8611</span>
+<span class="co">#&gt; 47           5.1         3.8          1.6         0.2     setosa   0.7778</span>
+<span class="co">#&gt; 48           4.6         3.2          1.4         0.2     setosa   0.9167</span>
+<span class="co">#&gt; 49           5.3         3.7          1.5         0.2     setosa   0.7222</span>
+<span class="co">#&gt; 50           5.0         3.3          1.4         0.2     setosa   0.8056</span>
+<span class="co">#&gt; 51           7.0         3.2          4.7         1.4 versicolor   0.2500</span>
+<span class="co">#&gt; 52           6.4         3.2          4.5         1.5 versicolor   0.4167</span>
+<span class="co">#&gt; 53           6.9         3.1          4.9         1.5 versicolor   0.2778</span>
+<span class="co">#&gt; 54           5.5         2.3          4.0         1.3 versicolor   0.6667</span>
+<span class="co">#&gt; 55           6.5         2.8          4.6         1.5 versicolor   0.3889</span>
+<span class="co">#&gt; 56           5.7         2.8          4.5         1.3 versicolor   0.6111</span>
+<span class="co">#&gt; 57           6.3         3.3          4.7         1.6 versicolor   0.4444</span>
+<span class="co">#&gt; 58           4.9         2.4          3.3         1.0 versicolor   0.8333</span>
+<span class="co">#&gt; 59           6.6         2.9          4.6         1.3 versicolor   0.3611</span>
+<span class="co">#&gt; 60           5.2         2.7          3.9         1.4 versicolor   0.7500</span>
+<span class="co">#&gt; 61           5.0         2.0          3.5         1.0 versicolor   0.8056</span>
+<span class="co">#&gt; 62           5.9         3.0          4.2         1.5 versicolor   0.5556</span>
+<span class="co">#&gt; 63           6.0         2.2          4.0         1.0 versicolor   0.5278</span>
+<span class="co">#&gt; 64           6.1         2.9          4.7         1.4 versicolor   0.5000</span>
+<span class="co">#&gt; 65           5.6         2.9          3.6         1.3 versicolor   0.6389</span>
+<span class="co">#&gt; 66           6.7         3.1          4.4         1.4 versicolor   0.3333</span>
+<span class="co">#&gt; 67           5.6         3.0          4.5         1.5 versicolor   0.6389</span>
+<span class="co">#&gt; 68           5.8         2.7          4.1         1.0 versicolor   0.5833</span>
+<span class="co">#&gt; 69           6.2         2.2          4.5         1.5 versicolor   0.4722</span>
+<span class="co">#&gt; 70           5.6         2.5          3.9         1.1 versicolor   0.6389</span>
+<span class="co">#&gt; 71           5.9         3.2          4.8         1.8 versicolor   0.5556</span>
+<span class="co">#&gt; 72           6.1         2.8          4.0         1.3 versicolor   0.5000</span>
+<span class="co">#&gt; 73           6.3         2.5          4.9         1.5 versicolor   0.4444</span>
+<span class="co">#&gt; 74           6.1         2.8          4.7         1.2 versicolor   0.5000</span>
+<span class="co">#&gt; 75           6.4         2.9          4.3         1.3 versicolor   0.4167</span>
+<span class="co">#&gt; 76           6.6         3.0          4.4         1.4 versicolor   0.3611</span>
+<span class="co">#&gt; 77           6.8         2.8          4.8         1.4 versicolor   0.3056</span>
+<span class="co">#&gt; 78           6.7         3.0          5.0         1.7 versicolor   0.3333</span>
+<span class="co">#&gt; 79           6.0         2.9          4.5         1.5 versicolor   0.5278</span>
+<span class="co">#&gt; 80           5.7         2.6          3.5         1.0 versicolor   0.6111</span>
+<span class="co">#&gt; 81           5.5         2.4          3.8         1.1 versicolor   0.6667</span>
+<span class="co">#&gt; 82           5.5         2.4          3.7         1.0 versicolor   0.6667</span>
+<span class="co">#&gt; 83           5.8         2.7          3.9         1.2 versicolor   0.5833</span>
+<span class="co">#&gt; 84           6.0         2.7          5.1         1.6 versicolor   0.5278</span>
+<span class="co">#&gt; 85           5.4         3.0          4.5         1.5 versicolor   0.6944</span>
+<span class="co">#&gt; 86           6.0         3.4          4.5         1.6 versicolor   0.5278</span>
+<span class="co">#&gt; 87           6.7         3.1          4.7         1.5 versicolor   0.3333</span>
+<span class="co">#&gt; 88           6.3         2.3          4.4         1.3 versicolor   0.4444</span>
+<span class="co">#&gt; 89           5.6         3.0          4.1         1.3 versicolor   0.6389</span>
+<span class="co">#&gt; 90           5.5         2.5          4.0         1.3 versicolor   0.6667</span>
+<span class="co">#&gt; 91           5.5         2.6          4.4         1.2 versicolor   0.6667</span>
+<span class="co">#&gt; 92           6.1         3.0          4.6         1.4 versicolor   0.5000</span>
+<span class="co">#&gt; 93           5.8         2.6          4.0         1.2 versicolor   0.5833</span>
+<span class="co">#&gt; 94           5.0         2.3          3.3         1.0 versicolor   0.8056</span>
+<span class="co">#&gt; 95           5.6         2.7          4.2         1.3 versicolor   0.6389</span>
+<span class="co">#&gt; 96           5.7         3.0          4.2         1.2 versicolor   0.6111</span>
+<span class="co">#&gt; 97           5.7         2.9          4.2         1.3 versicolor   0.6111</span>
+<span class="co">#&gt; 98           6.2         2.9          4.3         1.3 versicolor   0.4722</span>
+<span class="co">#&gt; 99           5.1         2.5          3.0         1.1 versicolor   0.7778</span>
+<span class="co">#&gt; 100          5.7         2.8          4.1         1.3 versicolor   0.6111</span>
+<span class="co">#&gt; 101          6.3         3.3          6.0         2.5  virginica   0.4444</span>
+<span class="co">#&gt; 102          5.8         2.7          5.1         1.9  virginica   0.5833</span>
+<span class="co">#&gt; 103          7.1         3.0          5.9         2.1  virginica   0.2222</span>
+<span class="co">#&gt; 104          6.3         2.9          5.6         1.8  virginica   0.4444</span>
+<span class="co">#&gt; 105          6.5         3.0          5.8         2.2  virginica   0.3889</span>
+<span class="co">#&gt; 106          7.6         3.0          6.6         2.1  virginica   0.0833</span>
+<span class="co">#&gt; 107          4.9         2.5          4.5         1.7  virginica   0.8333</span>
+<span class="co">#&gt; 108          7.3         2.9          6.3         1.8  virginica   0.1667</span>
+<span class="co">#&gt; 109          6.7         2.5          5.8         1.8  virginica   0.3333</span>
+<span class="co">#&gt; 110          7.2         3.6          6.1         2.5  virginica   0.1944</span>
+<span class="co">#&gt; 111          6.5         3.2          5.1         2.0  virginica   0.3889</span>
+<span class="co">#&gt; 112          6.4         2.7          5.3         1.9  virginica   0.4167</span>
+<span class="co">#&gt; 113          6.8         3.0          5.5         2.1  virginica   0.3056</span>
+<span class="co">#&gt; 114          5.7         2.5          5.0         2.0  virginica   0.6111</span>
+<span class="co">#&gt; 115          5.8         2.8          5.1         2.4  virginica   0.5833</span>
+<span class="co">#&gt; 116          6.4         3.2          5.3         2.3  virginica   0.4167</span>
+<span class="co">#&gt; 117          6.5         3.0          5.5         1.8  virginica   0.3889</span>
+<span class="co">#&gt; 118          7.7         3.8          6.7         2.2  virginica   0.0556</span>
+<span class="co">#&gt; 119          7.7         2.6          6.9         2.3  virginica   0.0556</span>
+<span class="co">#&gt; 120          6.0         2.2          5.0         1.5  virginica   0.5278</span>
+<span class="co">#&gt; 121          6.9         3.2          5.7         2.3  virginica   0.2778</span>
+<span class="co">#&gt; 122          5.6         2.8          4.9         2.0  virginica   0.6389</span>
+<span class="co">#&gt; 123          7.7         2.8          6.7         2.0  virginica   0.0556</span>
+<span class="co">#&gt; 124          6.3         2.7          4.9         1.8  virginica   0.4444</span>
+<span class="co">#&gt; 125          6.7         3.3          5.7         2.1  virginica   0.3333</span>
+<span class="co">#&gt; 126          7.2         3.2          6.0         1.8  virginica   0.1944</span>
+<span class="co">#&gt; 127          6.2         2.8          4.8         1.8  virginica   0.4722</span>
+<span class="co">#&gt; 128          6.1         3.0          4.9         1.8  virginica   0.5000</span>
+<span class="co">#&gt; 129          6.4         2.8          5.6         2.1  virginica   0.4167</span>
+<span class="co">#&gt; 130          7.2         3.0          5.8         1.6  virginica   0.1944</span>
+<span class="co">#&gt; 131          7.4         2.8          6.1         1.9  virginica   0.1389</span>
+<span class="co">#&gt; 132          7.9         3.8          6.4         2.0  virginica   0.0000</span>
+<span class="co">#&gt; 133          6.4         2.8          5.6         2.2  virginica   0.4167</span>
+<span class="co">#&gt; 134          6.3         2.8          5.1         1.5  virginica   0.4444</span>
+<span class="co">#&gt; 135          6.1         2.6          5.6         1.4  virginica   0.5000</span>
+<span class="co">#&gt; 136          7.7         3.0          6.1         2.3  virginica   0.0556</span>
+<span class="co">#&gt; 137          6.3         3.4          5.6         2.4  virginica   0.4444</span>
+<span class="co">#&gt; 138          6.4         3.1          5.5         1.8  virginica   0.4167</span>
+<span class="co">#&gt; 139          6.0         3.0          4.8         1.8  virginica   0.5278</span>
+<span class="co">#&gt; 140          6.9         3.1          5.4         2.1  virginica   0.2778</span>
+<span class="co">#&gt; 141          6.7         3.1          5.6         2.4  virginica   0.3333</span>
+<span class="co">#&gt; 142          6.9         3.1          5.1         2.3  virginica   0.2778</span>
+<span class="co">#&gt; 143          5.8         2.7          5.1         1.9  virginica   0.5833</span>
+<span class="co">#&gt; 144          6.8         3.2          5.9         2.3  virginica   0.3056</span>
+<span class="co">#&gt; 145          6.7         3.3          5.7         2.5  virginica   0.3333</span>
+<span class="co">#&gt; 146          6.7         3.0          5.2         2.3  virginica   0.3333</span>
+<span class="co">#&gt; 147          6.3         2.5          5.0         1.9  virginica   0.4444</span>
+<span class="co">#&gt; 148          6.5         3.0          5.2         2.0  virginica   0.3889</span>
+<span class="co">#&gt; 149          6.2         3.4          5.4         2.3  virginica   0.4722</span>
+<span class="co">#&gt; 150          5.9         3.0          5.1         1.8  virginica   0.5556</span></code></pre>
+<p>验证一下 <code>scale.sl</code> 变量的第一个值</p>
+<pre class="sourceCode r"><code class="sourceCode r">(<span class="kw">max</span>(iris<span class="op">$</span>Sepal.Length) <span class="op">-</span><span class="st"> </span><span class="fl">5.1</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">max</span>(iris<span class="op">$</span>Sepal.Length) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(iris<span class="op">$</span>Sepal.Length))
+<span class="co">#&gt; [1] 0.778</span></code></pre>
+<div class="sidebar">
+<p>Warning: This is a convenience function intended for use interactively. For programming it is better to use the standard subsetting arithmetic functions, and in particular the non-standard evaluation of argument <code>transform</code> can have unanticipated consequences.</p>
+</div>
+</div>
+<div id="base-subset" class="section level2">
+<h2><span class="header-section-number">7.4</span> 提取子集</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(x, subset, select, <span class="dt">drop =</span> <span class="ot">FALSE</span>, ...)</code></pre>
+<p>参数 <code>subset</code>代表行操作，<code>select</code> 代表列操作，函数 <code>subset</code> 从数据框中提取部分数据</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(iris, Species <span class="op">==</span><span class="st"> &quot;virginica&quot;</span>)
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span>
+<span class="co">#&gt; 101          6.3         3.3          6.0         2.5 virginica</span>
+<span class="co">#&gt; 102          5.8         2.7          5.1         1.9 virginica</span>
+<span class="co">#&gt; 103          7.1         3.0          5.9         2.1 virginica</span>
+<span class="co">#&gt; 104          6.3         2.9          5.6         1.8 virginica</span>
+<span class="co">#&gt; 105          6.5         3.0          5.8         2.2 virginica</span>
+<span class="co">#&gt; 106          7.6         3.0          6.6         2.1 virginica</span>
+<span class="co">#&gt; 107          4.9         2.5          4.5         1.7 virginica</span>
+<span class="co">#&gt; 108          7.3         2.9          6.3         1.8 virginica</span>
+<span class="co">#&gt; 109          6.7         2.5          5.8         1.8 virginica</span>
+<span class="co">#&gt; 110          7.2         3.6          6.1         2.5 virginica</span>
+<span class="co">#&gt; 111          6.5         3.2          5.1         2.0 virginica</span>
+<span class="co">#&gt; 112          6.4         2.7          5.3         1.9 virginica</span>
+<span class="co">#&gt; 113          6.8         3.0          5.5         2.1 virginica</span>
+<span class="co">#&gt; 114          5.7         2.5          5.0         2.0 virginica</span>
+<span class="co">#&gt; 115          5.8         2.8          5.1         2.4 virginica</span>
+<span class="co">#&gt; 116          6.4         3.2          5.3         2.3 virginica</span>
+<span class="co">#&gt; 117          6.5         3.0          5.5         1.8 virginica</span>
+<span class="co">#&gt; 118          7.7         3.8          6.7         2.2 virginica</span>
+<span class="co">#&gt; 119          7.7         2.6          6.9         2.3 virginica</span>
+<span class="co">#&gt; 120          6.0         2.2          5.0         1.5 virginica</span>
+<span class="co">#&gt; 121          6.9         3.2          5.7         2.3 virginica</span>
+<span class="co">#&gt; 122          5.6         2.8          4.9         2.0 virginica</span>
+<span class="co">#&gt; 123          7.7         2.8          6.7         2.0 virginica</span>
+<span class="co">#&gt; 124          6.3         2.7          4.9         1.8 virginica</span>
+<span class="co">#&gt; 125          6.7         3.3          5.7         2.1 virginica</span>
+<span class="co">#&gt; 126          7.2         3.2          6.0         1.8 virginica</span>
+<span class="co">#&gt; 127          6.2         2.8          4.8         1.8 virginica</span>
+<span class="co">#&gt; 128          6.1         3.0          4.9         1.8 virginica</span>
+<span class="co">#&gt; 129          6.4         2.8          5.6         2.1 virginica</span>
+<span class="co">#&gt; 130          7.2         3.0          5.8         1.6 virginica</span>
+<span class="co">#&gt; 131          7.4         2.8          6.1         1.9 virginica</span>
+<span class="co">#&gt; 132          7.9         3.8          6.4         2.0 virginica</span>
+<span class="co">#&gt; 133          6.4         2.8          5.6         2.2 virginica</span>
+<span class="co">#&gt; 134          6.3         2.8          5.1         1.5 virginica</span>
+<span class="co">#&gt; 135          6.1         2.6          5.6         1.4 virginica</span>
+<span class="co">#&gt; 136          7.7         3.0          6.1         2.3 virginica</span>
+<span class="co">#&gt; 137          6.3         3.4          5.6         2.4 virginica</span>
+<span class="co">#&gt; 138          6.4         3.1          5.5         1.8 virginica</span>
+<span class="co">#&gt; 139          6.0         3.0          4.8         1.8 virginica</span>
+<span class="co">#&gt; 140          6.9         3.1          5.4         2.1 virginica</span>
+<span class="co">#&gt; 141          6.7         3.1          5.6         2.4 virginica</span>
+<span class="co">#&gt; 142          6.9         3.1          5.1         2.3 virginica</span>
+<span class="co">#&gt; 143          5.8         2.7          5.1         1.9 virginica</span>
+<span class="co">#&gt; 144          6.8         3.2          5.9         2.3 virginica</span>
+<span class="co">#&gt; 145          6.7         3.3          5.7         2.5 virginica</span>
+<span class="co">#&gt; 146          6.7         3.0          5.2         2.3 virginica</span>
+<span class="co">#&gt; 147          6.3         2.5          5.0         1.9 virginica</span>
+<span class="co">#&gt; 148          6.5         3.0          5.2         2.0 virginica</span>
+<span class="co">#&gt; 149          6.2         3.4          5.4         2.3 virginica</span>
+<span class="co">#&gt; 150          5.9         3.0          5.1         1.8 virginica</span>
+<span class="co"># summary(iris$Sepal.Length)  mean(iris$Sepal.Length)</span>
+<span class="co"># 且的逻辑</span>
+<span class="co"># subset(iris, Species == &quot;virginica&quot; &amp; Sepal.Length &gt; 5.84333)</span>
+<span class="kw">subset</span>(iris, Species <span class="op">==</span><span class="st"> &quot;virginica&quot;</span> <span class="op">&amp;</span>
+<span class="st">  </span>Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(Sepal.Length))
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span>
+<span class="co">#&gt; 101          6.3         3.3          6.0         2.5 virginica</span>
+<span class="co">#&gt; 103          7.1         3.0          5.9         2.1 virginica</span>
+<span class="co">#&gt; 104          6.3         2.9          5.6         1.8 virginica</span>
+<span class="co">#&gt; 105          6.5         3.0          5.8         2.2 virginica</span>
+<span class="co">#&gt; 106          7.6         3.0          6.6         2.1 virginica</span>
+<span class="co">#&gt; 108          7.3         2.9          6.3         1.8 virginica</span>
+<span class="co">#&gt; 109          6.7         2.5          5.8         1.8 virginica</span>
+<span class="co">#&gt; 110          7.2         3.6          6.1         2.5 virginica</span>
+<span class="co">#&gt; 111          6.5         3.2          5.1         2.0 virginica</span>
+<span class="co">#&gt; 112          6.4         2.7          5.3         1.9 virginica</span>
+<span class="co">#&gt; 113          6.8         3.0          5.5         2.1 virginica</span>
+<span class="co">#&gt; 116          6.4         3.2          5.3         2.3 virginica</span>
+<span class="co">#&gt; 117          6.5         3.0          5.5         1.8 virginica</span>
+<span class="co">#&gt; 118          7.7         3.8          6.7         2.2 virginica</span>
+<span class="co">#&gt; 119          7.7         2.6          6.9         2.3 virginica</span>
+<span class="co">#&gt; 120          6.0         2.2          5.0         1.5 virginica</span>
+<span class="co">#&gt; 121          6.9         3.2          5.7         2.3 virginica</span>
+<span class="co">#&gt; 123          7.7         2.8          6.7         2.0 virginica</span>
+<span class="co">#&gt; 124          6.3         2.7          4.9         1.8 virginica</span>
+<span class="co">#&gt; 125          6.7         3.3          5.7         2.1 virginica</span>
+<span class="co">#&gt; 126          7.2         3.2          6.0         1.8 virginica</span>
+<span class="co">#&gt; 127          6.2         2.8          4.8         1.8 virginica</span>
+<span class="co">#&gt; 128          6.1         3.0          4.9         1.8 virginica</span>
+<span class="co">#&gt; 129          6.4         2.8          5.6         2.1 virginica</span>
+<span class="co">#&gt; 130          7.2         3.0          5.8         1.6 virginica</span>
+<span class="co">#&gt; 131          7.4         2.8          6.1         1.9 virginica</span>
+<span class="co">#&gt; 132          7.9         3.8          6.4         2.0 virginica</span>
+<span class="co">#&gt; 133          6.4         2.8          5.6         2.2 virginica</span>
+<span class="co">#&gt; 134          6.3         2.8          5.1         1.5 virginica</span>
+<span class="co">#&gt; 135          6.1         2.6          5.6         1.4 virginica</span>
+<span class="co">#&gt; 136          7.7         3.0          6.1         2.3 virginica</span>
+<span class="co">#&gt; 137          6.3         3.4          5.6         2.4 virginica</span>
+<span class="co">#&gt; 138          6.4         3.1          5.5         1.8 virginica</span>
+<span class="co">#&gt; 139          6.0         3.0          4.8         1.8 virginica</span>
+<span class="co">#&gt; 140          6.9         3.1          5.4         2.1 virginica</span>
+<span class="co">#&gt; 141          6.7         3.1          5.6         2.4 virginica</span>
+<span class="co">#&gt; 142          6.9         3.1          5.1         2.3 virginica</span>
+<span class="co">#&gt; 144          6.8         3.2          5.9         2.3 virginica</span>
+<span class="co">#&gt; 145          6.7         3.3          5.7         2.5 virginica</span>
+<span class="co">#&gt; 146          6.7         3.0          5.2         2.3 virginica</span>
+<span class="co">#&gt; 147          6.3         2.5          5.0         1.9 virginica</span>
+<span class="co">#&gt; 148          6.5         3.0          5.2         2.0 virginica</span>
+<span class="co">#&gt; 149          6.2         3.4          5.4         2.3 virginica</span>
+<span class="co">#&gt; 150          5.9         3.0          5.1         1.8 virginica</span>
+<span class="co"># 在行的子集范围内</span>
+<span class="kw">subset</span>(iris, Species <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;virginica&quot;</span>, <span class="st">&quot;versicolor&quot;</span>) <span class="op">&amp;</span>
+<span class="st">  </span>Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(Sepal.Length))
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span>
+<span class="co">#&gt; 51           7.0         3.2          4.7         1.4 versicolor</span>
+<span class="co">#&gt; 52           6.4         3.2          4.5         1.5 versicolor</span>
+<span class="co">#&gt; 53           6.9         3.1          4.9         1.5 versicolor</span>
+<span class="co">#&gt; 55           6.5         2.8          4.6         1.5 versicolor</span>
+<span class="co">#&gt; 57           6.3         3.3          4.7         1.6 versicolor</span>
+<span class="co">#&gt; 59           6.6         2.9          4.6         1.3 versicolor</span>
+<span class="co">#&gt; 62           5.9         3.0          4.2         1.5 versicolor</span>
+<span class="co">#&gt; 63           6.0         2.2          4.0         1.0 versicolor</span>
+<span class="co">#&gt; 64           6.1         2.9          4.7         1.4 versicolor</span>
+<span class="co">#&gt; 66           6.7         3.1          4.4         1.4 versicolor</span>
+<span class="co">#&gt; 69           6.2         2.2          4.5         1.5 versicolor</span>
+<span class="co">#&gt; 71           5.9         3.2          4.8         1.8 versicolor</span>
+<span class="co">#&gt; 72           6.1         2.8          4.0         1.3 versicolor</span>
+<span class="co">#&gt; 73           6.3         2.5          4.9         1.5 versicolor</span>
+<span class="co">#&gt; 74           6.1         2.8          4.7         1.2 versicolor</span>
+<span class="co">#&gt; 75           6.4         2.9          4.3         1.3 versicolor</span>
+<span class="co">#&gt; 76           6.6         3.0          4.4         1.4 versicolor</span>
+<span class="co">#&gt; 77           6.8         2.8          4.8         1.4 versicolor</span>
+<span class="co">#&gt; 78           6.7         3.0          5.0         1.7 versicolor</span>
+<span class="co">#&gt; 79           6.0         2.9          4.5         1.5 versicolor</span>
+<span class="co">#&gt; 84           6.0         2.7          5.1         1.6 versicolor</span>
+<span class="co">#&gt; 86           6.0         3.4          4.5         1.6 versicolor</span>
+<span class="co">#&gt; 87           6.7         3.1          4.7         1.5 versicolor</span>
+<span class="co">#&gt; 88           6.3         2.3          4.4         1.3 versicolor</span>
+<span class="co">#&gt; 92           6.1         3.0          4.6         1.4 versicolor</span>
+<span class="co">#&gt; 98           6.2         2.9          4.3         1.3 versicolor</span>
+<span class="co">#&gt; 101          6.3         3.3          6.0         2.5  virginica</span>
+<span class="co">#&gt; 103          7.1         3.0          5.9         2.1  virginica</span>
+<span class="co">#&gt; 104          6.3         2.9          5.6         1.8  virginica</span>
+<span class="co">#&gt; 105          6.5         3.0          5.8         2.2  virginica</span>
+<span class="co">#&gt; 106          7.6         3.0          6.6         2.1  virginica</span>
+<span class="co">#&gt; 108          7.3         2.9          6.3         1.8  virginica</span>
+<span class="co">#&gt; 109          6.7         2.5          5.8         1.8  virginica</span>
+<span class="co">#&gt; 110          7.2         3.6          6.1         2.5  virginica</span>
+<span class="co">#&gt; 111          6.5         3.2          5.1         2.0  virginica</span>
+<span class="co">#&gt; 112          6.4         2.7          5.3         1.9  virginica</span>
+<span class="co">#&gt; 113          6.8         3.0          5.5         2.1  virginica</span>
+<span class="co">#&gt; 116          6.4         3.2          5.3         2.3  virginica</span>
+<span class="co">#&gt; 117          6.5         3.0          5.5         1.8  virginica</span>
+<span class="co">#&gt; 118          7.7         3.8          6.7         2.2  virginica</span>
+<span class="co">#&gt; 119          7.7         2.6          6.9         2.3  virginica</span>
+<span class="co">#&gt; 120          6.0         2.2          5.0         1.5  virginica</span>
+<span class="co">#&gt; 121          6.9         3.2          5.7         2.3  virginica</span>
+<span class="co">#&gt; 123          7.7         2.8          6.7         2.0  virginica</span>
+<span class="co">#&gt; 124          6.3         2.7          4.9         1.8  virginica</span>
+<span class="co">#&gt; 125          6.7         3.3          5.7         2.1  virginica</span>
+<span class="co">#&gt; 126          7.2         3.2          6.0         1.8  virginica</span>
+<span class="co">#&gt; 127          6.2         2.8          4.8         1.8  virginica</span>
+<span class="co">#&gt; 128          6.1         3.0          4.9         1.8  virginica</span>
+<span class="co">#&gt; 129          6.4         2.8          5.6         2.1  virginica</span>
+<span class="co">#&gt; 130          7.2         3.0          5.8         1.6  virginica</span>
+<span class="co">#&gt; 131          7.4         2.8          6.1         1.9  virginica</span>
+<span class="co">#&gt; 132          7.9         3.8          6.4         2.0  virginica</span>
+<span class="co">#&gt; 133          6.4         2.8          5.6         2.2  virginica</span>
+<span class="co">#&gt; 134          6.3         2.8          5.1         1.5  virginica</span>
+<span class="co">#&gt; 135          6.1         2.6          5.6         1.4  virginica</span>
+<span class="co">#&gt; 136          7.7         3.0          6.1         2.3  virginica</span>
+<span class="co">#&gt; 137          6.3         3.4          5.6         2.4  virginica</span>
+<span class="co">#&gt; 138          6.4         3.1          5.5         1.8  virginica</span>
+<span class="co">#&gt; 139          6.0         3.0          4.8         1.8  virginica</span>
+<span class="co">#&gt; 140          6.9         3.1          5.4         2.1  virginica</span>
+<span class="co">#&gt; 141          6.7         3.1          5.6         2.4  virginica</span>
+<span class="co">#&gt; 142          6.9         3.1          5.1         2.3  virginica</span>
+<span class="co">#&gt; 144          6.8         3.2          5.9         2.3  virginica</span>
+<span class="co">#&gt; 145          6.7         3.3          5.7         2.5  virginica</span>
+<span class="co">#&gt; 146          6.7         3.0          5.2         2.3  virginica</span>
+<span class="co">#&gt; 147          6.3         2.5          5.0         1.9  virginica</span>
+<span class="co">#&gt; 148          6.5         3.0          5.2         2.0  virginica</span>
+<span class="co">#&gt; 149          6.2         3.4          5.4         2.3  virginica</span>
+<span class="co">#&gt; 150          5.9         3.0          5.1         1.8  virginica</span>
+<span class="co"># 在列的子集内 先选中列</span>
+<span class="kw">subset</span>(iris, Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(Sepal.Length),
+  <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Species&quot;</span>)
+)
+<span class="co">#&gt;     Sepal.Length    Species</span>
+<span class="co">#&gt; 51           7.0 versicolor</span>
+<span class="co">#&gt; 52           6.4 versicolor</span>
+<span class="co">#&gt; 53           6.9 versicolor</span>
+<span class="co">#&gt; 55           6.5 versicolor</span>
+<span class="co">#&gt; 57           6.3 versicolor</span>
+<span class="co">#&gt; 59           6.6 versicolor</span>
+<span class="co">#&gt; 62           5.9 versicolor</span>
+<span class="co">#&gt; 63           6.0 versicolor</span>
+<span class="co">#&gt; 64           6.1 versicolor</span>
+<span class="co">#&gt; 66           6.7 versicolor</span>
+<span class="co">#&gt; 69           6.2 versicolor</span>
+<span class="co">#&gt; 71           5.9 versicolor</span>
+<span class="co">#&gt; 72           6.1 versicolor</span>
+<span class="co">#&gt; 73           6.3 versicolor</span>
+<span class="co">#&gt; 74           6.1 versicolor</span>
+<span class="co">#&gt; 75           6.4 versicolor</span>
+<span class="co">#&gt; 76           6.6 versicolor</span>
+<span class="co">#&gt; 77           6.8 versicolor</span>
+<span class="co">#&gt; 78           6.7 versicolor</span>
+<span class="co">#&gt; 79           6.0 versicolor</span>
+<span class="co">#&gt; 84           6.0 versicolor</span>
+<span class="co">#&gt; 86           6.0 versicolor</span>
+<span class="co">#&gt; 87           6.7 versicolor</span>
+<span class="co">#&gt; 88           6.3 versicolor</span>
+<span class="co">#&gt; 92           6.1 versicolor</span>
+<span class="co">#&gt; 98           6.2 versicolor</span>
+<span class="co">#&gt; 101          6.3  virginica</span>
+<span class="co">#&gt; 103          7.1  virginica</span>
+<span class="co">#&gt; 104          6.3  virginica</span>
+<span class="co">#&gt; 105          6.5  virginica</span>
+<span class="co">#&gt; 106          7.6  virginica</span>
+<span class="co">#&gt; 108          7.3  virginica</span>
+<span class="co">#&gt; 109          6.7  virginica</span>
+<span class="co">#&gt; 110          7.2  virginica</span>
+<span class="co">#&gt; 111          6.5  virginica</span>
+<span class="co">#&gt; 112          6.4  virginica</span>
+<span class="co">#&gt; 113          6.8  virginica</span>
+<span class="co">#&gt; 116          6.4  virginica</span>
+<span class="co">#&gt; 117          6.5  virginica</span>
+<span class="co">#&gt; 118          7.7  virginica</span>
+<span class="co">#&gt; 119          7.7  virginica</span>
+<span class="co">#&gt; 120          6.0  virginica</span>
+<span class="co">#&gt; 121          6.9  virginica</span>
+<span class="co">#&gt; 123          7.7  virginica</span>
+<span class="co">#&gt; 124          6.3  virginica</span>
+<span class="co">#&gt; 125          6.7  virginica</span>
+<span class="co">#&gt; 126          7.2  virginica</span>
+<span class="co">#&gt; 127          6.2  virginica</span>
+<span class="co">#&gt; 128          6.1  virginica</span>
+<span class="co">#&gt; 129          6.4  virginica</span>
+<span class="co">#&gt; 130          7.2  virginica</span>
+<span class="co">#&gt; 131          7.4  virginica</span>
+<span class="co">#&gt; 132          7.9  virginica</span>
+<span class="co">#&gt; 133          6.4  virginica</span>
+<span class="co">#&gt; 134          6.3  virginica</span>
+<span class="co">#&gt; 135          6.1  virginica</span>
+<span class="co">#&gt; 136          7.7  virginica</span>
+<span class="co">#&gt; 137          6.3  virginica</span>
+<span class="co">#&gt; 138          6.4  virginica</span>
+<span class="co">#&gt; 139          6.0  virginica</span>
+<span class="co">#&gt; 140          6.9  virginica</span>
+<span class="co">#&gt; 141          6.7  virginica</span>
+<span class="co">#&gt; 142          6.9  virginica</span>
+<span class="co">#&gt; 144          6.8  virginica</span>
+<span class="co">#&gt; 145          6.7  virginica</span>
+<span class="co">#&gt; 146          6.7  virginica</span>
+<span class="co">#&gt; 147          6.3  virginica</span>
+<span class="co">#&gt; 148          6.5  virginica</span>
+<span class="co">#&gt; 149          6.2  virginica</span>
+<span class="co">#&gt; 150          5.9  virginica</span></code></pre>
+<p>高级操作：加入正则表达式筛选</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## sometimes requiring a logical &#39;subset&#39; argument is a nuisance</span>
+nm &lt;-<span class="st"> </span><span class="kw">rownames</span>(state.x77)
+start_with_M &lt;-<span class="st"> </span>nm <span class="op">%in%</span><span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;^M&quot;</span>, nm, <span class="dt">value =</span> <span class="ot">TRUE</span>)
+<span class="kw">subset</span>(state.x77, start_with_M, Illiteracy<span class="op">:</span>Murder)
+<span class="co">#&gt;               Illiteracy Life Exp Murder</span>
+<span class="co">#&gt; Maine                0.7     70.4    2.7</span>
+<span class="co">#&gt; Maryland             0.9     70.2    8.5</span>
+<span class="co">#&gt; Massachusetts        1.1     71.8    3.3</span>
+<span class="co">#&gt; Michigan             0.9     70.6   11.1</span>
+<span class="co">#&gt; Minnesota            0.6     73.0    2.3</span>
+<span class="co">#&gt; Mississippi          2.4     68.1   12.5</span>
+<span class="co">#&gt; Missouri             0.8     70.7    9.3</span>
+<span class="co">#&gt; Montana              0.6     70.6    5.0</span>
+<span class="co"># 简化</span>
+<span class="co"># subset(state.x77, subset = grepl(&quot;^M&quot;, rownames(state.x77)), select = Illiteracy:Murder)</span>
+<span class="co"># 继续简化</span>
+<span class="kw">subset</span>(state.x77, <span class="kw">grepl</span>(<span class="st">&quot;^M&quot;</span>, <span class="kw">rownames</span>(state.x77)), Illiteracy<span class="op">:</span>Murder)
+<span class="co">#&gt;               Illiteracy Life Exp Murder</span>
+<span class="co">#&gt; Maine                0.7     70.4    2.7</span>
+<span class="co">#&gt; Maryland             0.9     70.2    8.5</span>
+<span class="co">#&gt; Massachusetts        1.1     71.8    3.3</span>
+<span class="co">#&gt; Michigan             0.9     70.6   11.1</span>
+<span class="co">#&gt; Minnesota            0.6     73.0    2.3</span>
+<span class="co">#&gt; Mississippi          2.4     68.1   12.5</span>
+<span class="co">#&gt; Missouri             0.8     70.7    9.3</span>
+<span class="co">#&gt; Montana              0.6     70.6    5.0</span></code></pre>
+<div class="sidebar">
+<p>警告：这是一个为了交互使用打造的便捷函数。对于编程，最好使用标准的子集函数，如 <code>[</code>，特别地，参数 <code>subset</code> 的非标准计算(non-standard evaluation)<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> 可能带来意想不到的后果。</p>
+</div>
+<p>使用索引 <code>[</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">iris[iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &quot;virginica&quot;</span>, ]
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span>
+<span class="co">#&gt; 101          6.3         3.3          6.0         2.5 virginica</span>
+<span class="co">#&gt; 102          5.8         2.7          5.1         1.9 virginica</span>
+<span class="co">#&gt; 103          7.1         3.0          5.9         2.1 virginica</span>
+<span class="co">#&gt; 104          6.3         2.9          5.6         1.8 virginica</span>
+<span class="co">#&gt; 105          6.5         3.0          5.8         2.2 virginica</span>
+<span class="co">#&gt; 106          7.6         3.0          6.6         2.1 virginica</span>
+<span class="co">#&gt; 107          4.9         2.5          4.5         1.7 virginica</span>
+<span class="co">#&gt; 108          7.3         2.9          6.3         1.8 virginica</span>
+<span class="co">#&gt; 109          6.7         2.5          5.8         1.8 virginica</span>
+<span class="co">#&gt; 110          7.2         3.6          6.1         2.5 virginica</span>
+<span class="co">#&gt; 111          6.5         3.2          5.1         2.0 virginica</span>
+<span class="co">#&gt; 112          6.4         2.7          5.3         1.9 virginica</span>
+<span class="co">#&gt; 113          6.8         3.0          5.5         2.1 virginica</span>
+<span class="co">#&gt; 114          5.7         2.5          5.0         2.0 virginica</span>
+<span class="co">#&gt; 115          5.8         2.8          5.1         2.4 virginica</span>
+<span class="co">#&gt; 116          6.4         3.2          5.3         2.3 virginica</span>
+<span class="co">#&gt; 117          6.5         3.0          5.5         1.8 virginica</span>
+<span class="co">#&gt; 118          7.7         3.8          6.7         2.2 virginica</span>
+<span class="co">#&gt; 119          7.7         2.6          6.9         2.3 virginica</span>
+<span class="co">#&gt; 120          6.0         2.2          5.0         1.5 virginica</span>
+<span class="co">#&gt; 121          6.9         3.2          5.7         2.3 virginica</span>
+<span class="co">#&gt; 122          5.6         2.8          4.9         2.0 virginica</span>
+<span class="co">#&gt; 123          7.7         2.8          6.7         2.0 virginica</span>
+<span class="co">#&gt; 124          6.3         2.7          4.9         1.8 virginica</span>
+<span class="co">#&gt; 125          6.7         3.3          5.7         2.1 virginica</span>
+<span class="co">#&gt; 126          7.2         3.2          6.0         1.8 virginica</span>
+<span class="co">#&gt; 127          6.2         2.8          4.8         1.8 virginica</span>
+<span class="co">#&gt; 128          6.1         3.0          4.9         1.8 virginica</span>
+<span class="co">#&gt; 129          6.4         2.8          5.6         2.1 virginica</span>
+<span class="co">#&gt; 130          7.2         3.0          5.8         1.6 virginica</span>
+<span class="co">#&gt; 131          7.4         2.8          6.1         1.9 virginica</span>
+<span class="co">#&gt; 132          7.9         3.8          6.4         2.0 virginica</span>
+<span class="co">#&gt; 133          6.4         2.8          5.6         2.2 virginica</span>
+<span class="co">#&gt; 134          6.3         2.8          5.1         1.5 virginica</span>
+<span class="co">#&gt; 135          6.1         2.6          5.6         1.4 virginica</span>
+<span class="co">#&gt; 136          7.7         3.0          6.1         2.3 virginica</span>
+<span class="co">#&gt; 137          6.3         3.4          5.6         2.4 virginica</span>
+<span class="co">#&gt; 138          6.4         3.1          5.5         1.8 virginica</span>
+<span class="co">#&gt; 139          6.0         3.0          4.8         1.8 virginica</span>
+<span class="co">#&gt; 140          6.9         3.1          5.4         2.1 virginica</span>
+<span class="co">#&gt; 141          6.7         3.1          5.6         2.4 virginica</span>
+<span class="co">#&gt; 142          6.9         3.1          5.1         2.3 virginica</span>
+<span class="co">#&gt; 143          5.8         2.7          5.1         1.9 virginica</span>
+<span class="co">#&gt; 144          6.8         3.2          5.9         2.3 virginica</span>
+<span class="co">#&gt; 145          6.7         3.3          5.7         2.5 virginica</span>
+<span class="co">#&gt; 146          6.7         3.0          5.2         2.3 virginica</span>
+<span class="co">#&gt; 147          6.3         2.5          5.0         1.9 virginica</span>
+<span class="co">#&gt; 148          6.5         3.0          5.2         2.0 virginica</span>
+<span class="co">#&gt; 149          6.2         3.4          5.4         2.3 virginica</span>
+<span class="co">#&gt; 150          5.9         3.0          5.1         1.8 virginica</span>
+iris[iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &quot;virginica&quot;</span> <span class="op">&amp;</span>
+<span class="st">  </span>iris<span class="op">$</span>Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length), ]
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span>
+<span class="co">#&gt; 101          6.3         3.3          6.0         2.5 virginica</span>
+<span class="co">#&gt; 103          7.1         3.0          5.9         2.1 virginica</span>
+<span class="co">#&gt; 104          6.3         2.9          5.6         1.8 virginica</span>
+<span class="co">#&gt; 105          6.5         3.0          5.8         2.2 virginica</span>
+<span class="co">#&gt; 106          7.6         3.0          6.6         2.1 virginica</span>
+<span class="co">#&gt; 108          7.3         2.9          6.3         1.8 virginica</span>
+<span class="co">#&gt; 109          6.7         2.5          5.8         1.8 virginica</span>
+<span class="co">#&gt; 110          7.2         3.6          6.1         2.5 virginica</span>
+<span class="co">#&gt; 111          6.5         3.2          5.1         2.0 virginica</span>
+<span class="co">#&gt; 112          6.4         2.7          5.3         1.9 virginica</span>
+<span class="co">#&gt; 113          6.8         3.0          5.5         2.1 virginica</span>
+<span class="co">#&gt; 116          6.4         3.2          5.3         2.3 virginica</span>
+<span class="co">#&gt; 117          6.5         3.0          5.5         1.8 virginica</span>
+<span class="co">#&gt; 118          7.7         3.8          6.7         2.2 virginica</span>
+<span class="co">#&gt; 119          7.7         2.6          6.9         2.3 virginica</span>
+<span class="co">#&gt; 120          6.0         2.2          5.0         1.5 virginica</span>
+<span class="co">#&gt; 121          6.9         3.2          5.7         2.3 virginica</span>
+<span class="co">#&gt; 123          7.7         2.8          6.7         2.0 virginica</span>
+<span class="co">#&gt; 124          6.3         2.7          4.9         1.8 virginica</span>
+<span class="co">#&gt; 125          6.7         3.3          5.7         2.1 virginica</span>
+<span class="co">#&gt; 126          7.2         3.2          6.0         1.8 virginica</span>
+<span class="co">#&gt; 127          6.2         2.8          4.8         1.8 virginica</span>
+<span class="co">#&gt; 128          6.1         3.0          4.9         1.8 virginica</span>
+<span class="co">#&gt; 129          6.4         2.8          5.6         2.1 virginica</span>
+<span class="co">#&gt; 130          7.2         3.0          5.8         1.6 virginica</span>
+<span class="co">#&gt; 131          7.4         2.8          6.1         1.9 virginica</span>
+<span class="co">#&gt; 132          7.9         3.8          6.4         2.0 virginica</span>
+<span class="co">#&gt; 133          6.4         2.8          5.6         2.2 virginica</span>
+<span class="co">#&gt; 134          6.3         2.8          5.1         1.5 virginica</span>
+<span class="co">#&gt; 135          6.1         2.6          5.6         1.4 virginica</span>
+<span class="co">#&gt; 136          7.7         3.0          6.1         2.3 virginica</span>
+<span class="co">#&gt; 137          6.3         3.4          5.6         2.4 virginica</span>
+<span class="co">#&gt; 138          6.4         3.1          5.5         1.8 virginica</span>
+<span class="co">#&gt; 139          6.0         3.0          4.8         1.8 virginica</span>
+<span class="co">#&gt; 140          6.9         3.1          5.4         2.1 virginica</span>
+<span class="co">#&gt; 141          6.7         3.1          5.6         2.4 virginica</span>
+<span class="co">#&gt; 142          6.9         3.1          5.1         2.3 virginica</span>
+<span class="co">#&gt; 144          6.8         3.2          5.9         2.3 virginica</span>
+<span class="co">#&gt; 145          6.7         3.3          5.7         2.5 virginica</span>
+<span class="co">#&gt; 146          6.7         3.0          5.2         2.3 virginica</span>
+<span class="co">#&gt; 147          6.3         2.5          5.0         1.9 virginica</span>
+<span class="co">#&gt; 148          6.5         3.0          5.2         2.0 virginica</span>
+<span class="co">#&gt; 149          6.2         3.4          5.4         2.3 virginica</span>
+<span class="co">#&gt; 150          5.9         3.0          5.1         1.8 virginica</span>
+
+iris[
+  iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &quot;virginica&quot;</span> <span class="op">&amp;</span>
+<span class="st">    </span>iris<span class="op">$</span>Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length),
+  <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Species&quot;</span>)
+]
+<span class="co">#&gt;     Sepal.Length   Species</span>
+<span class="co">#&gt; 101          6.3 virginica</span>
+<span class="co">#&gt; 103          7.1 virginica</span>
+<span class="co">#&gt; 104          6.3 virginica</span>
+<span class="co">#&gt; 105          6.5 virginica</span>
+<span class="co">#&gt; 106          7.6 virginica</span>
+<span class="co">#&gt; 108          7.3 virginica</span>
+<span class="co">#&gt; 109          6.7 virginica</span>
+<span class="co">#&gt; 110          7.2 virginica</span>
+<span class="co">#&gt; 111          6.5 virginica</span>
+<span class="co">#&gt; 112          6.4 virginica</span>
+<span class="co">#&gt; 113          6.8 virginica</span>
+<span class="co">#&gt; 116          6.4 virginica</span>
+<span class="co">#&gt; 117          6.5 virginica</span>
+<span class="co">#&gt; 118          7.7 virginica</span>
+<span class="co">#&gt; 119          7.7 virginica</span>
+<span class="co">#&gt; 120          6.0 virginica</span>
+<span class="co">#&gt; 121          6.9 virginica</span>
+<span class="co">#&gt; 123          7.7 virginica</span>
+<span class="co">#&gt; 124          6.3 virginica</span>
+<span class="co">#&gt; 125          6.7 virginica</span>
+<span class="co">#&gt; 126          7.2 virginica</span>
+<span class="co">#&gt; 127          6.2 virginica</span>
+<span class="co">#&gt; 128          6.1 virginica</span>
+<span class="co">#&gt; 129          6.4 virginica</span>
+<span class="co">#&gt; 130          7.2 virginica</span>
+<span class="co">#&gt; 131          7.4 virginica</span>
+<span class="co">#&gt; 132          7.9 virginica</span>
+<span class="co">#&gt; 133          6.4 virginica</span>
+<span class="co">#&gt; 134          6.3 virginica</span>
+<span class="co">#&gt; 135          6.1 virginica</span>
+<span class="co">#&gt; 136          7.7 virginica</span>
+<span class="co">#&gt; 137          6.3 virginica</span>
+<span class="co">#&gt; 138          6.4 virginica</span>
+<span class="co">#&gt; 139          6.0 virginica</span>
+<span class="co">#&gt; 140          6.9 virginica</span>
+<span class="co">#&gt; 141          6.7 virginica</span>
+<span class="co">#&gt; 142          6.9 virginica</span>
+<span class="co">#&gt; 144          6.8 virginica</span>
+<span class="co">#&gt; 145          6.7 virginica</span>
+<span class="co">#&gt; 146          6.7 virginica</span>
+<span class="co">#&gt; 147          6.3 virginica</span>
+<span class="co">#&gt; 148          6.5 virginica</span>
+<span class="co">#&gt; 149          6.2 virginica</span>
+<span class="co">#&gt; 150          5.9 virginica</span></code></pre>
+</div>
+<div id="base-order" class="section level2">
+<h2><span class="header-section-number">7.5</span> 按列排序</h2>
+<p>在数据框内，根据(order)某一列或几列对行进行排序(sort)，根据鸢尾花(iris)的类别(Species)对萼片(sepal)的长度进行排序，其余的列随之变化</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 对萼片的长度排序</span>
+iris[<span class="kw">order</span>(iris<span class="op">$</span>Species, iris<span class="op">$</span>Sepal.Length), ]
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span>
+<span class="co">#&gt; 14           4.3         3.0          1.1         0.1     setosa</span>
+<span class="co">#&gt; 9            4.4         2.9          1.4         0.2     setosa</span>
+<span class="co">#&gt; 39           4.4         3.0          1.3         0.2     setosa</span>
+<span class="co">#&gt; 43           4.4         3.2          1.3         0.2     setosa</span>
+<span class="co">#&gt; 42           4.5         2.3          1.3         0.3     setosa</span>
+<span class="co">#&gt; 4            4.6         3.1          1.5         0.2     setosa</span>
+<span class="co">#&gt; 7            4.6         3.4          1.4         0.3     setosa</span>
+<span class="co">#&gt; 23           4.6         3.6          1.0         0.2     setosa</span>
+<span class="co">#&gt; 48           4.6         3.2          1.4         0.2     setosa</span>
+....
+<span class="co"># 对花瓣的长度排序</span>
+iris[<span class="kw">order</span>(iris<span class="op">$</span>Species, iris<span class="op">$</span>Petal.Length), ]
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span>
+<span class="co">#&gt; 23           4.6         3.6          1.0         0.2     setosa</span>
+<span class="co">#&gt; 14           4.3         3.0          1.1         0.1     setosa</span>
+<span class="co">#&gt; 15           5.8         4.0          1.2         0.2     setosa</span>
+<span class="co">#&gt; 36           5.0         3.2          1.2         0.2     setosa</span>
+<span class="co">#&gt; 3            4.7         3.2          1.3         0.2     setosa</span>
+<span class="co">#&gt; 17           5.4         3.9          1.3         0.4     setosa</span>
+<span class="co">#&gt; 37           5.5         3.5          1.3         0.2     setosa</span>
+<span class="co">#&gt; 39           4.4         3.0          1.3         0.2     setosa</span>
+<span class="co">#&gt; 41           5.0         3.5          1.3         0.3     setosa</span>
+....
+<span class="co"># 先对花瓣的宽度排序，再对花瓣的长度排序</span>
+iris[<span class="kw">order</span>(iris<span class="op">$</span>Petal.Width, iris<span class="op">$</span>Petal.Length), ]
+<span class="co">#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span>
+<span class="co">#&gt; 14           4.3         3.0          1.1         0.1     setosa</span>
+<span class="co">#&gt; 13           4.8         3.0          1.4         0.1     setosa</span>
+<span class="co">#&gt; 38           4.9         3.6          1.4         0.1     setosa</span>
+<span class="co">#&gt; 10           4.9         3.1          1.5         0.1     setosa</span>
+<span class="co">#&gt; 33           5.2         4.1          1.5         0.1     setosa</span>
+<span class="co">#&gt; 23           4.6         3.6          1.0         0.2     setosa</span>
+<span class="co">#&gt; 15           5.8         4.0          1.2         0.2     setosa</span>
+<span class="co">#&gt; 36           5.0         3.2          1.2         0.2     setosa</span>
+<span class="co">#&gt; 3            4.7         3.2          1.3         0.2     setosa</span>
+....</code></pre>
+<p>sort/ordered 排序， 默认是升序</p>
+<pre class="sourceCode r"><code class="sourceCode r">dd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">b =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;Hi&quot;</span>, <span class="st">&quot;Med&quot;</span>, <span class="st">&quot;Hi&quot;</span>, <span class="st">&quot;Low&quot;</span>),
+    <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Med&quot;</span>, <span class="st">&quot;Hi&quot;</span>), <span class="dt">ordered =</span> <span class="ot">TRUE</span>
+  ),
+  <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">9</span>),
+  <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+)
+<span class="kw">str</span>(dd)
+<span class="co">#&gt; &#39;data.frame&#39;:    4 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ b: Ord.factor w/ 3 levels &quot;Low&quot;&lt;&quot;Med&quot;&lt;&quot;Hi&quot;: 3 2 3 1</span>
+<span class="co">#&gt;  $ x: chr  &quot;A&quot; &quot;D&quot; &quot;A&quot; &quot;C&quot;</span>
+<span class="co">#&gt;  $ y: num  8 3 9 9</span>
+<span class="co">#&gt;  $ z: num  1 1 1 2</span>
+dd[<span class="kw">order</span>(<span class="op">-</span>dd[,<span class="dv">4</span>], dd[,<span class="dv">1</span>]), ]
+<span class="co">#&gt;     b x y z</span>
+<span class="co">#&gt; 4 Low C 9 2</span>
+<span class="co">#&gt; 2 Med D 3 1</span>
+<span class="co">#&gt; 1  Hi A 8 1</span>
+<span class="co">#&gt; 3  Hi A 9 1</span></code></pre>
+<p>根据变量 z</p>
+<pre class="sourceCode r"><code class="sourceCode r">dd[<span class="kw">order</span>(dd<span class="op">$</span>z, dd<span class="op">$</span>b), ]
+<span class="co">#&gt;     b x y z</span>
+<span class="co">#&gt; 2 Med D 3 1</span>
+<span class="co">#&gt; 1  Hi A 8 1</span>
+<span class="co">#&gt; 3  Hi A 9 1</span>
+<span class="co">#&gt; 4 Low C 9 2</span></code></pre>
+</div>
+<div id="base-split" class="section level2">
+<h2><span class="header-section-number">7.6</span> 数据拆分</h2>
+<p>数据拆分通常是按找某一个分类变量分组，分完组就是计算，计算完就把结果按照原来的分组方式合并</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## Notice that assignment form is not used since a variable is being added</span>
+g &lt;-<span class="st"> </span>airquality<span class="op">$</span>Month
+l &lt;-<span class="st"> </span><span class="kw">split</span>(airquality, g) <span class="co"># 分组</span>
+l &lt;-<span class="st"> </span><span class="kw">lapply</span>(l, transform, <span class="dt">Oz.Z =</span> <span class="kw">scale</span>(Ozone)) <span class="co"># 计算：按月对 Ozone 标准化</span>
+aq2 &lt;-<span class="st"> </span><span class="kw">unsplit</span>(l, g) <span class="co"># 合并</span>
+<span class="kw">head</span>(aq2)
+<span class="co">#&gt;   Ozone Solar.R Wind Temp Month Day   Oz.Z</span>
+<span class="co">#&gt; 1    41     190  7.4   67     5   1  0.782</span>
+<span class="co">#&gt; 2    36     118  8.0   72     5   2  0.557</span>
+<span class="co">#&gt; 3    12     149 12.6   74     5   3 -0.523</span>
+<span class="co">#&gt; 4    18     313 11.5   62     5   4 -0.253</span>
+<span class="co">#&gt; 5    NA      NA 14.3   56     5   5     NA</span>
+<span class="co">#&gt; 6    28      NA 14.9   66     5   6  0.197</span></code></pre>
+<p>tapply 自带分组的功能，按月份 Month 对 Ozone 中心标准化，其返回一个列表</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(airquality, <span class="kw">tapply</span>(Ozone, Month, scale))
+<span class="co">#&gt; $`5`</span>
+<span class="co">#&gt;          [,1]</span>
+<span class="co">#&gt;  [1,]  0.7822</span>
+<span class="co">#&gt;  [2,]  0.5573</span>
+<span class="co">#&gt;  [3,] -0.5226</span>
+<span class="co">#&gt;  [4,] -0.2527</span>
+<span class="co">#&gt;  [5,]      NA</span>
+<span class="co">#&gt;  [6,]  0.1973</span>
+<span class="co">#&gt;  [7,] -0.0277</span>
+<span class="co">#&gt;  [8,] -0.2077</span>
+....</code></pre>
+<p>上面的过程等价于</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">lapply</span>(<span class="kw">split</span>(airquality, airquality<span class="op">$</span>Month), transform, <span class="dt">Oz.Z =</span> <span class="kw">scale</span>(Ozone)))
+<span class="co">#&gt;       Ozone Solar.R Wind Temp Month Day     Oz.Z</span>
+<span class="co">#&gt; 5.1      41     190  7.4   67     5   1  0.78223</span>
+<span class="co">#&gt; 5.2      36     118  8.0   72     5   2  0.55725</span>
+<span class="co">#&gt; 5.3      12     149 12.6   74     5   3 -0.52264</span>
+<span class="co">#&gt; 5.4      18     313 11.5   62     5   4 -0.25267</span>
+<span class="co">#&gt; 5.5      NA      NA 14.3   56     5   5       NA</span>
+<span class="co">#&gt; 5.6      28      NA 14.9   66     5   6  0.19729</span>
+<span class="co">#&gt; 5.7      23     299  8.6   65     5   7 -0.02769</span>
+<span class="co">#&gt; 5.8      19      99 13.8   59     5   8 -0.20767</span>
+<span class="co">#&gt; 5.9       8      19 20.1   61     5   9 -0.70262</span>
+....</code></pre>
+<p>由于上面对 Ozone 正态标准化，所以标准化后的 <code>Oz.z</code> 再按月分组计算方差自然每个月都是 1，而均值都是 0。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(aq2, <span class="kw">tapply</span>(Oz.Z, Month, sd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+<span class="co">#&gt; 5 6 7 8 9 </span>
+<span class="co">#&gt; 1 1 1 1 1</span>
+<span class="kw">with</span>(aq2, <span class="kw">tapply</span>(Oz.Z, Month, mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+<span class="co">#&gt;         5         6         7         8         9 </span>
+<span class="co">#&gt; -4.24e-17  1.05e-16  5.84e-17  5.90e-17  2.57e-17</span></code></pre>
+<blockquote>
+<p>循着这个思路，我们可以用 tapply 实现分组计算，上面函数 <code>sd</code> 和 <code>mean</code> 完全可以用自定义的更加复杂的函数替代</p>
+</blockquote>
+<p><code>cut</code> 函数可以将连续型变量划分为分类变量</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2019</span>)
+Z &lt;-<span class="st"> </span>stats<span class="op">::</span><span class="kw">rnorm</span>(<span class="dv">10</span>)
+<span class="kw">cut</span>(Z, <span class="dt">breaks =</span> <span class="dv">-6</span><span class="op">:</span><span class="dv">6</span>)
+<span class="co">#&gt;  [1] (0,1]   (-1,0]  (-2,-1] (0,1]   (-2,-1] (0,1]   (-1,0]  (0,1]   (-2,-1]</span>
+<span class="co">#&gt; [10] (-1,0] </span>
+<span class="co">#&gt; 12 Levels: (-6,-5] (-5,-4] (-4,-3] (-3,-2] (-2,-1] (-1,0] (0,1] ... (5,6]</span>
+<span class="co"># labels = FALSE 返回每个数所落的区间位置</span>
+<span class="kw">cut</span>(Z, <span class="dt">breaks =</span> <span class="dv">-6</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">labels =</span> <span class="ot">FALSE</span>)
+<span class="co">#&gt;  [1] 7 6 5 7 5 7 6 7 5 6</span></code></pre>
+<p>我们还可以指定参数 <code>dig.lab</code> 设置分组的精度，<code>ordered</code> 将分组变量看作是有序的，<code>breaks</code> 传递单个数时，表示分组数，而不是断点</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(Z, <span class="dt">breaks =</span> <span class="dv">3</span>, <span class="dt">dig.lab =</span> <span class="dv">4</span>, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt;  [1] (0.06396,0.9186]  (-0.7881,0.06396] (-1.643,-0.7881]  (0.06396,0.9186] </span>
+<span class="co">#&gt;  [5] (-1.643,-0.7881]  (0.06396,0.9186]  (-0.7881,0.06396] (0.06396,0.9186] </span>
+<span class="co">#&gt;  [9] (-1.643,-0.7881]  (-0.7881,0.06396]</span>
+<span class="co">#&gt; Levels: (-1.643,-0.7881] &lt; (-0.7881,0.06396] &lt; (0.06396,0.9186]</span></code></pre>
+<p>此时，统计每组的频数，如图 <a href="08-data-manipulation.html#fig:cut">7.1</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 条形图</span>
+<span class="kw">plot</span>(<span class="kw">cut</span>(Z, <span class="dt">breaks =</span> <span class="dv">-6</span><span class="op">:</span><span class="dv">6</span>))
+<span class="co"># 直方图</span>
+<span class="kw">hist</span>(Z, <span class="dt">breaks =</span> <span class="dv">-6</span><span class="op">:</span><span class="dv">6</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:cut"></span>
+<img src="08-data-manipulation_files/figure-html/cut-1.png" alt="连续型变量分组统计" width="35%" /><img src="08-data-manipulation_files/figure-html/cut-2.png" alt="连续型变量分组统计" width="35%" />
+<p class="caption">
+图 7.1: 连续型变量分组统计
+</p>
+</div>
+<p>在指定分组数的情况下，我们还想获取分组的断点</p>
+<pre class="sourceCode r"><code class="sourceCode r">labs &lt;-<span class="st"> </span><span class="kw">levels</span>(<span class="kw">cut</span>(Z, <span class="dv">3</span>))
+labs
+<span class="co">#&gt; [1] &quot;(-1.64,-0.788]&quot; &quot;(-0.788,0.064]&quot; &quot;(0.064,0.919]&quot;</span></code></pre>
+<p>用正则表达式抽取断点</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(
+  <span class="dt">lower =</span> <span class="kw">as.numeric</span>(<span class="kw">sub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">((.+),.*&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, labs)),
+  <span class="dt">upper =</span> <span class="kw">as.numeric</span>(<span class="kw">sub</span>(<span class="st">&quot;[^,]*,([^]]*)</span><span class="ch">\\</span><span class="st">]&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, labs))
+)
+<span class="co">#&gt;       lower  upper</span>
+<span class="co">#&gt; [1,] -1.640 -0.788</span>
+<span class="co">#&gt; [2,] -0.788  0.064</span>
+<span class="co">#&gt; [3,]  0.064  0.919</span></code></pre>
+<p>更多相关函数可以参考 <code>findInterval</code> 和 <code>embed</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">combn</span>(<span class="dv">8</span>, <span class="dv">4</span>, tabulate, <span class="dt">nbins =</span> <span class="dv">8</span>))</code></pre>
+</div>
+<div id="base-merge" class="section level2">
+<h2><span class="header-section-number">7.7</span> 数据合并</h2>
+<p>merge 合并两个数据框</p>
+<pre class="sourceCode r"><code class="sourceCode r">authors &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="co">## I(*) : use character columns of names to get sensible sort order</span>
+  <span class="dt">surname =</span> <span class="kw">I</span>(<span class="kw">c</span>(<span class="st">&quot;Tukey&quot;</span>, <span class="st">&quot;Venables&quot;</span>, <span class="st">&quot;Tierney&quot;</span>, <span class="st">&quot;Ripley&quot;</span>, <span class="st">&quot;McNeil&quot;</span>)),
+  <span class="dt">nationality =</span> <span class="kw">c</span>(<span class="st">&quot;US&quot;</span>, <span class="st">&quot;Australia&quot;</span>, <span class="st">&quot;US&quot;</span>, <span class="st">&quot;UK&quot;</span>, <span class="st">&quot;Australia&quot;</span>),
+  <span class="dt">deceased =</span> <span class="kw">c</span>(<span class="st">&quot;yes&quot;</span>, <span class="kw">rep</span>(<span class="st">&quot;no&quot;</span>, <span class="dv">4</span>))
+)
+authorN &lt;-<span class="st"> </span><span class="kw">within</span>(authors, {
+  name &lt;-<span class="st"> </span>surname
+  <span class="kw">rm</span>(surname)
+})
+books &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">name =</span> <span class="kw">I</span>(<span class="kw">c</span>(
+    <span class="st">&quot;Tukey&quot;</span>, <span class="st">&quot;Venables&quot;</span>, <span class="st">&quot;Tierney&quot;</span>,
+    <span class="st">&quot;Ripley&quot;</span>, <span class="st">&quot;Ripley&quot;</span>, <span class="st">&quot;McNeil&quot;</span>, <span class="st">&quot;R Core&quot;</span>
+  )),
+  <span class="dt">title =</span> <span class="kw">c</span>(
+    <span class="st">&quot;Exploratory Data Analysis&quot;</span>,
+    <span class="st">&quot;Modern Applied Statistics ...&quot;</span>,
+    <span class="st">&quot;LISP-STAT&quot;</span>,
+    <span class="st">&quot;Spatial Statistics&quot;</span>, <span class="st">&quot;Stochastic Simulation&quot;</span>,
+    <span class="st">&quot;Interactive Data Analysis&quot;</span>,
+    <span class="st">&quot;An Introduction to R&quot;</span>
+  ),
+  <span class="dt">other.author =</span> <span class="kw">c</span>(
+    <span class="ot">NA</span>, <span class="st">&quot;Ripley&quot;</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>,
+    <span class="st">&quot;Venables &amp; Smith&quot;</span>
+  )
+)
+
+authors
+<span class="co">#&gt;    surname nationality deceased</span>
+<span class="co">#&gt; 1    Tukey          US      yes</span>
+<span class="co">#&gt; 2 Venables   Australia       no</span>
+<span class="co">#&gt; 3  Tierney          US       no</span>
+<span class="co">#&gt; 4   Ripley          UK       no</span>
+<span class="co">#&gt; 5   McNeil   Australia       no</span>
+authorN
+<span class="co">#&gt;   nationality deceased     name</span>
+<span class="co">#&gt; 1          US      yes    Tukey</span>
+<span class="co">#&gt; 2   Australia       no Venables</span>
+<span class="co">#&gt; 3          US       no  Tierney</span>
+<span class="co">#&gt; 4          UK       no   Ripley</span>
+<span class="co">#&gt; 5   Australia       no   McNeil</span>
+books
+<span class="co">#&gt;       name                         title     other.author</span>
+<span class="co">#&gt; 1    Tukey     Exploratory Data Analysis             &lt;NA&gt;</span>
+<span class="co">#&gt; 2 Venables Modern Applied Statistics ...           Ripley</span>
+<span class="co">#&gt; 3  Tierney                     LISP-STAT             &lt;NA&gt;</span>
+<span class="co">#&gt; 4   Ripley            Spatial Statistics             &lt;NA&gt;</span>
+<span class="co">#&gt; 5   Ripley         Stochastic Simulation             &lt;NA&gt;</span>
+<span class="co">#&gt; 6   McNeil     Interactive Data Analysis             &lt;NA&gt;</span>
+<span class="co">#&gt; 7   R Core          An Introduction to R Venables &amp; Smith</span></code></pre>
+<p>默认找到同名的列，然后是同名的行合并，多余的没有匹配到的就丢掉</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">merge</span>(authorN, books)
+<span class="co">#&gt;       name nationality deceased                         title other.author</span>
+<span class="co">#&gt; 1   McNeil   Australia       no     Interactive Data Analysis         &lt;NA&gt;</span>
+<span class="co">#&gt; 2   Ripley          UK       no            Spatial Statistics         &lt;NA&gt;</span>
+<span class="co">#&gt; 3   Ripley          UK       no         Stochastic Simulation         &lt;NA&gt;</span>
+<span class="co">#&gt; 4  Tierney          US       no                     LISP-STAT         &lt;NA&gt;</span>
+<span class="co">#&gt; 5    Tukey          US      yes     Exploratory Data Analysis         &lt;NA&gt;</span>
+<span class="co">#&gt; 6 Venables   Australia       no Modern Applied Statistics ...       Ripley</span></code></pre>
+<p>还可以指定合并的列，先按照 surname 合并，留下 surname</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">merge</span>(authors, books, <span class="dt">by.x =</span> <span class="st">&quot;surname&quot;</span>, <span class="dt">by.y =</span> <span class="st">&quot;name&quot;</span>)
+<span class="co">#&gt;    surname nationality deceased                         title other.author</span>
+<span class="co">#&gt; 1   McNeil   Australia       no     Interactive Data Analysis         &lt;NA&gt;</span>
+<span class="co">#&gt; 2   Ripley          UK       no            Spatial Statistics         &lt;NA&gt;</span>
+<span class="co">#&gt; 3   Ripley          UK       no         Stochastic Simulation         &lt;NA&gt;</span>
+<span class="co">#&gt; 4  Tierney          US       no                     LISP-STAT         &lt;NA&gt;</span>
+<span class="co">#&gt; 5    Tukey          US      yes     Exploratory Data Analysis         &lt;NA&gt;</span>
+<span class="co">#&gt; 6 Venables   Australia       no Modern Applied Statistics ...       Ripley</span></code></pre>
+<p>留下的是 name</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">merge</span>(books, authors, <span class="dt">by.x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">by.y =</span> <span class="st">&quot;surname&quot;</span>)
+<span class="co">#&gt;       name                         title other.author nationality deceased</span>
+<span class="co">#&gt; 1   McNeil     Interactive Data Analysis         &lt;NA&gt;   Australia       no</span>
+<span class="co">#&gt; 2   Ripley            Spatial Statistics         &lt;NA&gt;          UK       no</span>
+<span class="co">#&gt; 3   Ripley         Stochastic Simulation         &lt;NA&gt;          UK       no</span>
+<span class="co">#&gt; 4  Tierney                     LISP-STAT         &lt;NA&gt;          US       no</span>
+<span class="co">#&gt; 5    Tukey     Exploratory Data Analysis         &lt;NA&gt;          US      yes</span>
+<span class="co">#&gt; 6 Venables Modern Applied Statistics ...       Ripley   Australia       no</span></code></pre>
+<p>为了比较清楚地观察几种合并的区别，这里提供对应的动画展示 <a href="https://github.com/gadenbuie/tidyexplain" class="uri">https://github.com/gadenbuie/tidyexplain</a></p>
+<p>cbind
+rbind</p>
+<p>left join
+right join</p>
+</div>
+<div id="base-duplicated" class="section level2">
+<h2><span class="header-section-number">7.8</span> 数据去重</h2>
+<p>单个数值型向量去重，此时和 unique 函数作用一样</p>
+<pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">9</span><span class="op">:</span><span class="dv">20</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">0</span><span class="op">:</span><span class="dv">8</span>))
+<span class="co">#&gt;  [1]  9 10 11 12 13 14 15 16 17 18 19 20  1  2  3  4  5  3  4  5  6  7  0  1  2</span>
+<span class="co">#&gt; [26]  3  4  5  6  7  8</span>
+<span class="co">## extract unique elements</span>
+x[<span class="op">!</span><span class="kw">duplicated</span>(x)]
+<span class="co">#&gt;  [1]  9 10 11 12 13 14 15 16 17 18 19 20  1  2  3  4  5  6  7  0  8</span>
+<span class="kw">unique</span>(x)
+<span class="co">#&gt;  [1]  9 10 11 12 13 14 15 16 17 18 19 20  1  2  3  4  5  6  7  0  8</span></code></pre>
+<p>数据框类型数据中，去除重复的行，这个重复可以是多个变量对应的向量</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">x =</span> <span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">replace =</span> T),
+  <span class="dt">y =</span> <span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">replace =</span> T),
+  <span class="dt">z =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+)
+df
+<span class="co">#&gt;    x y  z</span>
+<span class="co">#&gt; 1  0 1  1</span>
+<span class="co">#&gt; 2  0 1  2</span>
+<span class="co">#&gt; 3  0 1  3</span>
+<span class="co">#&gt; 4  1 0  4</span>
+<span class="co">#&gt; 5  0 1  5</span>
+<span class="co">#&gt; 6  1 0  6</span>
+<span class="co">#&gt; 7  1 1  7</span>
+<span class="co">#&gt; 8  1 0  8</span>
+<span class="co">#&gt; 9  0 0  9</span>
+<span class="co">#&gt; 10 0 0 10</span>
+df[<span class="op">!</span><span class="kw">duplicated</span>(df[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), ]
+<span class="co">#&gt;   x y z</span>
+<span class="co">#&gt; 1 0 1 1</span>
+<span class="co">#&gt; 4 1 0 4</span>
+<span class="co">#&gt; 7 1 1 7</span>
+<span class="co">#&gt; 9 0 0 9</span></code></pre>
+<div class="sidebar">
+<p>数据去重在 dplyr 中的实现<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(x, y) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">row_number</span>(z) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+<span class="co">#&gt; # A tibble: 4 x 3</span>
+<span class="co">#&gt; # Groups:   x, y [4]</span>
+<span class="co">#&gt;       x     y     z</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1     0     1     1</span>
+<span class="co">#&gt; 2     1     0     4</span>
+<span class="co">#&gt; 3     1     1     7</span>
+<span class="co">#&gt; 4     0     0     9</span></code></pre>
+</div>
+</div>
+<div id="base-aggregate" class="section level2">
+<h2><span class="header-section-number">7.9</span> 数据聚合</h2>
+<p>主要是分组统计</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apropos</span>(<span class="st">&quot;apply&quot;</span>)
+<span class="co">#&gt;  [1] &quot;apply&quot;      &quot;dendrapply&quot; &quot;eapply&quot;     &quot;kernapply&quot;  &quot;lapply&quot;    </span>
+<span class="co">#&gt;  [6] &quot;mapply&quot;     &quot;rapply&quot;     &quot;sapply&quot;     &quot;tapply&quot;     &quot;vapply&quot;</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 分组求和 colSums colMeans max</span>
+<span class="kw">unique</span>(iris<span class="op">$</span>Species)
+<span class="co">#&gt; [1] setosa     versicolor virginica </span>
+<span class="co">#&gt; Levels: setosa versicolor virginica</span>
+<span class="co"># 分类求和</span>
+<span class="co"># colSums(iris[iris$Species == &quot;setosa&quot;, -5])</span>
+<span class="co"># colSums(iris[iris$Species == &quot;virginica&quot;, -5])</span>
+<span class="kw">colSums</span>(iris[iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &quot;versicolor&quot;</span>, <span class="dv">-5</span>])
+<span class="co">#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span>
+<span class="co">#&gt;        296.8        138.5        213.0         66.3</span>
+<span class="co"># apply(iris[iris$Species == &quot;setosa&quot;, -5], 2, sum)</span>
+<span class="co"># apply(iris[iris$Species == &quot;setosa&quot;, -5], 2, mean)</span>
+<span class="co"># apply(iris[iris$Species == &quot;setosa&quot;, -5], 2, min)</span>
+<span class="co"># apply(iris[iris$Species == &quot;setosa&quot;, -5], 2, max)</span>
+<span class="kw">apply</span>(iris[iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>, <span class="dv">-5</span>], <span class="dv">2</span>, quantile)
+<span class="co">#&gt;      Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
+<span class="co">#&gt; 0%            4.3        2.30         1.00         0.1</span>
+<span class="co">#&gt; 25%           4.8        3.20         1.40         0.2</span>
+<span class="co">#&gt; 50%           5.0        3.40         1.50         0.2</span>
+<span class="co">#&gt; 75%           5.2        3.68         1.58         0.3</span>
+<span class="co">#&gt; 100%          5.8        4.40         1.90         0.6</span></code></pre>
+<p>aggregate: Compute Summary Statistics of Data Subsets</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 按分类变量 Species 分组求和</span>
+<span class="co"># aggregate(subset(iris, select = -Species), by = list(iris[, &quot;Species&quot;]), FUN = sum)</span>
+<span class="kw">aggregate</span>(iris[, <span class="dv">-5</span>], <span class="kw">list</span>(iris[, <span class="dv">5</span>]), sum)
+<span class="co">#&gt;      Group.1 Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
+<span class="co">#&gt; 1     setosa          250         171         73.1        12.3</span>
+<span class="co">#&gt; 2 versicolor          297         138        213.0        66.3</span>
+<span class="co">#&gt; 3  virginica          329         149        277.6       101.3</span>
+<span class="co"># 先确定位置，假设有很多分类变量</span>
+ind &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="st">&quot;Species&quot;</span> <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(iris))
+<span class="co"># 分组统计</span>
+<span class="kw">aggregate</span>(iris[, <span class="op">-</span>ind], <span class="kw">list</span>(iris[, ind]), sum)
+<span class="co">#&gt;      Group.1 Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
+<span class="co">#&gt; 1     setosa          250         171         73.1        12.3</span>
+<span class="co">#&gt; 2 versicolor          297         138        213.0        66.3</span>
+<span class="co">#&gt; 3  virginica          329         149        277.6       101.3</span></code></pre>
+<p>按照 Species 划分的类别，分组计算，使用公式表示形式，右边一定是分类变量，否则会报错误或者警告，输出奇怪的结果，请读者尝试运行<code>aggregate(Species ~ Sepal.Length, data = iris, mean)</code>。公式法表示分组计算，<code>~</code> 左手边可以做加 <code>+</code> 减 <code>-</code> 乘 <code>*</code> 除 <code>/</code> 取余 <code>%%</code> 等数学运算。下面以数据集 iris 为例，只对 Sepal.Length 按 Species 分组计算</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris, mean)
+<span class="co">#&gt;      Species Sepal.Length</span>
+<span class="co">#&gt; 1     setosa         5.01</span>
+<span class="co">#&gt; 2 versicolor         5.94</span>
+<span class="co">#&gt; 3  virginica         6.59</span></code></pre>
+<p>与上述分组统计结果一样的命令，在大数据集上， 与 aggregate 相比，tapply 要快很多，by 是 tapply 的包裹，处理速度差不多。读者可以构造伪随机数据集验证。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tapply(iris$Sepal.Length, list(iris$Species), mean)</span>
+<span class="kw">with</span>(iris, <span class="kw">tapply</span>(Sepal.Length, Species, mean))
+<span class="co">#&gt;     setosa versicolor  virginica </span>
+<span class="co">#&gt;       5.01       5.94       6.59</span>
+<span class="kw">by</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Species, mean)
+<span class="co">#&gt; iris$Species: setosa</span>
+<span class="co">#&gt; [1] 5.01</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; iris$Species: versicolor</span>
+<span class="co">#&gt; [1] 5.94</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; iris$Species: virginica</span>
+<span class="co">#&gt; [1] 6.59</span></code></pre>
+<p>对所有变量按 Species 分组计算</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(. <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris, mean)
+<span class="co">#&gt;      Species Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
+<span class="co">#&gt; 1     setosa         5.01        3.43         1.46       0.246</span>
+<span class="co">#&gt; 2 versicolor         5.94        2.77         4.26       1.326</span>
+<span class="co">#&gt; 3  virginica         6.59        2.97         5.55       2.026</span></code></pre>
+<p>对变量 Sepal.Length 和 Sepal.Width 求和后，按 Species 分组计算</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris, mean)
+<span class="co">#&gt;      Species Sepal.Length + Sepal.Width</span>
+<span class="co">#&gt; 1     setosa                       8.43</span>
+<span class="co">#&gt; 2 versicolor                       8.71</span>
+<span class="co">#&gt; 3  virginica                       9.56</span></code></pre>
+<p>对多个分类变量做分组计算，在数据集 ChickWeight 中 Chick和Diet都是数字编码的分类变量，其中 Chick 是有序的因子变量，Diet 是无序的因子变量，而 Time 是数值型的变量，表示小鸡出生的天数。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 查看数据</span>
+<span class="kw">str</span>(ChickWeight)
+<span class="co">#&gt; Classes &#39;nfnGroupedData&#39;, &#39;nfGroupedData&#39;, &#39;groupedData&#39; and &#39;data.frame&#39;:   578 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ weight: num  42 51 59 64 76 93 106 125 149 171 ...</span>
+<span class="co">#&gt;  $ Time  : num  0 2 4 6 8 10 12 14 16 18 ...</span>
+<span class="co">#&gt;  $ Chick : Ord.factor w/ 50 levels &quot;18&quot;&lt;&quot;16&quot;&lt;&quot;15&quot;&lt;..: 15 15 15 15 15 15 15 15..</span>
+<span class="co">#&gt;  $ Diet  : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span>
+<span class="co">#&gt;  - attr(*, &quot;formula&quot;)=Class &#39;formula&#39;  language weight ~ Time | Chick</span>
+<span class="co">#&gt;   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_EmptyEnv&gt; </span>
+<span class="co">#&gt;  - attr(*, &quot;outer&quot;)=Class &#39;formula&#39;  language ~Diet</span>
+<span class="co">#&gt;   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_EmptyEnv&gt; </span>
+<span class="co">#&gt;  - attr(*, &quot;labels&quot;)=List of 2</span>
+<span class="co">#&gt;   ..$ x: chr &quot;Time&quot;</span>
+<span class="co">#&gt;   ..$ y: chr &quot;Body weight&quot;</span>
+<span class="co">#&gt;  - attr(*, &quot;units&quot;)=List of 2</span>
+<span class="co">#&gt;   ..$ x: chr &quot;(days)&quot;</span>
+<span class="co">#&gt;   ..$ y: chr &quot;(gm)&quot;</span></code></pre>
+<p>查看数据集ChickWeight的前几行</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># head(ChickWeight)</span>
+ChickWeight
+<span class="co">#&gt; Grouped Data: weight ~ Time | Chick</span>
+<span class="co">#&gt;     weight Time Chick Diet</span>
+<span class="co">#&gt; 1       42    0     1    1</span>
+<span class="co">#&gt; 2       51    2     1    1</span>
+<span class="co">#&gt; 3       59    4     1    1</span>
+<span class="co">#&gt; 4       64    6     1    1</span>
+....</code></pre>
+<p>对于数据集ChickWeight中的有序变量Chick，aggregate 会按照既定顺序返回分组计算的结果</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(weight <span class="op">~</span><span class="st"> </span>Chick, <span class="dt">data =</span> ChickWeight, mean)
+<span class="co">#&gt;    Chick weight</span>
+<span class="co">#&gt; 1     18   37.0</span>
+<span class="co">#&gt; 2     16   49.7</span>
+<span class="co">#&gt; 3     15   60.1</span>
+<span class="co">#&gt; 4     13   67.8</span>
+<span class="co">#&gt; 5      9   81.2</span>
+....
+<span class="kw">aggregate</span>(weight <span class="op">~</span><span class="st"> </span>Diet, <span class="dt">data =</span> ChickWeight, mean)
+<span class="co">#&gt;   Diet weight</span>
+<span class="co">#&gt; 1    1    103</span>
+<span class="co">#&gt; 2    2    123</span>
+<span class="co">#&gt; 3    3    143</span>
+<span class="co">#&gt; 4    4    135</span></code></pre>
+<p>分类变量没有用数字编码，以 CO2 数据集为例，该数据集描述草植对二氧化碳的吸收情况，Plant 是具有12个水平的有序的因子变量，Type表示植物的源头分别是魁北克(Quebec)和密西西比(Mississippi)，Treatment表示冷却(chilled)和不冷却(nonchilled)两种处理方式，conc表示周围环境中二氧化碳的浓度，uptake表示植物吸收二氧化碳的速率。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 查看数据集</span>
+<span class="kw">head</span>(CO2)
+<span class="co">#&gt; Grouped Data: uptake ~ conc | Plant</span>
+<span class="co">#&gt;   Plant   Type  Treatment conc uptake</span>
+<span class="co">#&gt; 1   Qn1 Quebec nonchilled   95   16.0</span>
+<span class="co">#&gt; 2   Qn1 Quebec nonchilled  175   30.4</span>
+<span class="co">#&gt; 3   Qn1 Quebec nonchilled  250   34.8</span>
+<span class="co">#&gt; 4   Qn1 Quebec nonchilled  350   37.2</span>
+<span class="co">#&gt; 5   Qn1 Quebec nonchilled  500   35.3</span>
+<span class="co">#&gt; 6   Qn1 Quebec nonchilled  675   39.2</span>
+<span class="kw">str</span>(CO2)
+<span class="co">#&gt; Classes &#39;nfnGroupedData&#39;, &#39;nfGroupedData&#39;, &#39;groupedData&#39; and &#39;data.frame&#39;:   84 obs. of  5 variables:</span>
+<span class="co">#&gt;  $ Plant    : Ord.factor w/ 12 levels &quot;Qn1&quot;&lt;&quot;Qn2&quot;&lt;&quot;Qn3&quot;&lt;..: 1 1 1 1 1 1 1 2 2..</span>
+<span class="co">#&gt;  $ Type     : Factor w/ 2 levels &quot;Quebec&quot;,&quot;Mississippi&quot;: 1 1 1 1 1 1 1 1 1 1 ..</span>
+<span class="co">#&gt;  $ Treatment: Factor w/ 2 levels &quot;nonchilled&quot;,&quot;chilled&quot;: 1 1 1 1 1 1 1 1 1 1 ..</span>
+<span class="co">#&gt;  $ conc     : num  95 175 250 350 500 675 1000 95 175 250 ...</span>
+<span class="co">#&gt;  $ uptake   : num  16 30.4 34.8 37.2 35.3 39.2 39.7 13.6 27.3 37.1 ...</span>
+<span class="co">#&gt;  - attr(*, &quot;formula&quot;)=Class &#39;formula&#39;  language uptake ~ conc | Plant</span>
+<span class="co">#&gt;   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_EmptyEnv&gt; </span>
+<span class="co">#&gt;  - attr(*, &quot;outer&quot;)=Class &#39;formula&#39;  language ~Treatment * Type</span>
+<span class="co">#&gt;   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_EmptyEnv&gt; </span>
+<span class="co">#&gt;  - attr(*, &quot;labels&quot;)=List of 2</span>
+<span class="co">#&gt;   ..$ x: chr &quot;Ambient carbon dioxide concentration&quot;</span>
+<span class="co">#&gt;   ..$ y: chr &quot;CO2 uptake rate&quot;</span>
+<span class="co">#&gt;  - attr(*, &quot;units&quot;)=List of 2</span>
+<span class="co">#&gt;   ..$ x: chr &quot;(uL/L)&quot;</span>
+<span class="co">#&gt;   ..$ y: chr &quot;(umol/m^2 s)&quot;</span></code></pre>
+<p>对单个变量分组统计</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(uptake <span class="op">~</span><span class="st"> </span>Plant, <span class="dt">data =</span> CO2, mean)
+<span class="co">#&gt;    Plant uptake</span>
+<span class="co">#&gt; 1    Qn1   33.2</span>
+<span class="co">#&gt; 2    Qn2   35.2</span>
+<span class="co">#&gt; 3    Qn3   37.6</span>
+<span class="co">#&gt; 4    Qc1   30.0</span>
+<span class="co">#&gt; 5    Qc3   32.6</span>
+<span class="co">#&gt; 6    Qc2   32.7</span>
+<span class="co">#&gt; 7    Mn3   24.1</span>
+<span class="co">#&gt; 8    Mn2   27.3</span>
+<span class="co">#&gt; 9    Mn1   26.4</span>
+<span class="co">#&gt; 10   Mc2   12.1</span>
+<span class="co">#&gt; 11   Mc3   17.3</span>
+<span class="co">#&gt; 12   Mc1   18.0</span>
+<span class="kw">aggregate</span>(uptake <span class="op">~</span><span class="st"> </span>Type, <span class="dt">data =</span> CO2, mean)
+<span class="co">#&gt;          Type uptake</span>
+<span class="co">#&gt; 1      Quebec   33.5</span>
+<span class="co">#&gt; 2 Mississippi   20.9</span>
+<span class="kw">aggregate</span>(uptake <span class="op">~</span><span class="st"> </span>Treatment, <span class="dt">data =</span> CO2, mean)
+<span class="co">#&gt;    Treatment uptake</span>
+<span class="co">#&gt; 1 nonchilled   30.6</span>
+<span class="co">#&gt; 2    chilled   23.8</span></code></pre>
+<p>对多个变量分组统计，查看二氧化碳吸收速率uptake随类型Type和处理方式Treatment</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(uptake <span class="op">~</span><span class="st"> </span>Type <span class="op">+</span><span class="st"> </span>Treatment, <span class="dt">data =</span> CO2, mean)
+<span class="co">#&gt;          Type  Treatment uptake</span>
+<span class="co">#&gt; 1      Quebec nonchilled   35.3</span>
+<span class="co">#&gt; 2 Mississippi nonchilled   26.0</span>
+<span class="co">#&gt; 3      Quebec    chilled   31.8</span>
+<span class="co">#&gt; 4 Mississippi    chilled   15.8</span>
+<span class="kw">tapply</span>(CO2<span class="op">$</span>uptake, <span class="kw">list</span>(CO2<span class="op">$</span>Type, CO2<span class="op">$</span>Treatment), mean)
+<span class="co">#&gt;             nonchilled chilled</span>
+<span class="co">#&gt; Quebec            35.3    31.8</span>
+<span class="co">#&gt; Mississippi       26.0    15.8</span>
+<span class="kw">by</span>(CO2<span class="op">$</span>uptake, <span class="kw">list</span>(CO2<span class="op">$</span>Type, CO2<span class="op">$</span>Treatment), mean)
+<span class="co">#&gt; : Quebec</span>
+<span class="co">#&gt; : nonchilled</span>
+<span class="co">#&gt; [1] 35.3</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : Mississippi</span>
+<span class="co">#&gt; : nonchilled</span>
+<span class="co">#&gt; [1] 26</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : Quebec</span>
+<span class="co">#&gt; : chilled</span>
+<span class="co">#&gt; [1] 31.8</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : Mississippi</span>
+<span class="co">#&gt; : chilled</span>
+<span class="co">#&gt; [1] 15.8</span></code></pre>
+<p>在这个例子中 tapply 和 by 的输出结果的表示形式不一样，aggregate 返回一个 data.frame 数据框，tapply 返回一个表格 table，by 返回特殊的数据类型 by。</p>
+<p>Function <code>by</code> is an object-oriented wrapper for <code>tapply</code> applied to data frames.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 分组求和</span>
+<span class="co"># by(iris[, 1], INDICES = list(iris$Species), FUN = sum)</span>
+<span class="co"># by(iris[, 2], INDICES = list(iris$Species), FUN = sum)</span>
+<span class="kw">by</span>(iris[, <span class="dv">3</span>], <span class="dt">INDICES =</span> <span class="kw">list</span>(iris<span class="op">$</span>Species), <span class="dt">FUN =</span> sum)
+<span class="co">#&gt; : setosa</span>
+<span class="co">#&gt; [1] 73.1</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : versicolor</span>
+<span class="co">#&gt; [1] 213</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : virginica</span>
+<span class="co">#&gt; [1] 278</span>
+<span class="kw">by</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">INDICES =</span> <span class="kw">list</span>(iris<span class="op">$</span>Species), <span class="dt">FUN =</span> sum)
+<span class="co">#&gt; : setosa</span>
+<span class="co">#&gt; [1] 495</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : versicolor</span>
+<span class="co">#&gt; [1] 648</span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : virginica</span>
+<span class="co">#&gt; [1] 756</span>
+<span class="kw">by</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">INDICES =</span> <span class="kw">list</span>(iris<span class="op">$</span>Species), <span class="dt">FUN =</span> summary)
+<span class="co">#&gt; : setosa</span>
+<span class="co">#&gt;   Sepal.Length   Sepal.Width    Petal.Length </span>
+<span class="co">#&gt;  Min.   :4.30   Min.   :2.30   Min.   :1.00  </span>
+<span class="co">#&gt;  1st Qu.:4.80   1st Qu.:3.20   1st Qu.:1.40  </span>
+<span class="co">#&gt;  Median :5.00   Median :3.40   Median :1.50  </span>
+<span class="co">#&gt;  Mean   :5.01   Mean   :3.43   Mean   :1.46  </span>
+<span class="co">#&gt;  3rd Qu.:5.20   3rd Qu.:3.67   3rd Qu.:1.57  </span>
+<span class="co">#&gt;  Max.   :5.80   Max.   :4.40   Max.   :1.90  </span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : versicolor</span>
+<span class="co">#&gt;   Sepal.Length   Sepal.Width    Petal.Length </span>
+<span class="co">#&gt;  Min.   :4.90   Min.   :2.00   Min.   :3.00  </span>
+<span class="co">#&gt;  1st Qu.:5.60   1st Qu.:2.52   1st Qu.:4.00  </span>
+<span class="co">#&gt;  Median :5.90   Median :2.80   Median :4.35  </span>
+<span class="co">#&gt;  Mean   :5.94   Mean   :2.77   Mean   :4.26  </span>
+<span class="co">#&gt;  3rd Qu.:6.30   3rd Qu.:3.00   3rd Qu.:4.60  </span>
+<span class="co">#&gt;  Max.   :7.00   Max.   :3.40   Max.   :5.10  </span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : virginica</span>
+<span class="co">#&gt;   Sepal.Length   Sepal.Width    Petal.Length </span>
+<span class="co">#&gt;  Min.   :4.90   Min.   :2.20   Min.   :4.50  </span>
+<span class="co">#&gt;  1st Qu.:6.22   1st Qu.:2.80   1st Qu.:5.10  </span>
+<span class="co">#&gt;  Median :6.50   Median :3.00   Median :5.55  </span>
+<span class="co">#&gt;  Mean   :6.59   Mean   :2.97   Mean   :5.55  </span>
+<span class="co">#&gt;  3rd Qu.:6.90   3rd Qu.:3.17   3rd Qu.:5.88  </span>
+<span class="co">#&gt;  Max.   :7.90   Max.   :3.80   Max.   :6.90</span>
+<span class="kw">by</span>(iris, <span class="dt">INDICES =</span> <span class="kw">list</span>(iris<span class="op">$</span>Species), <span class="dt">FUN =</span> summary)
+<span class="co">#&gt; : setosa</span>
+<span class="co">#&gt;   Sepal.Length   Sepal.Width    Petal.Length   Petal.Width          Species  </span>
+<span class="co">#&gt;  Min.   :4.30   Min.   :2.30   Min.   :1.00   Min.   :0.100   setosa    :50  </span>
+<span class="co">#&gt;  1st Qu.:4.80   1st Qu.:3.20   1st Qu.:1.40   1st Qu.:0.200   versicolor: 0  </span>
+<span class="co">#&gt;  Median :5.00   Median :3.40   Median :1.50   Median :0.200   virginica : 0  </span>
+<span class="co">#&gt;  Mean   :5.01   Mean   :3.43   Mean   :1.46   Mean   :0.246                  </span>
+<span class="co">#&gt;  3rd Qu.:5.20   3rd Qu.:3.67   3rd Qu.:1.57   3rd Qu.:0.300                  </span>
+<span class="co">#&gt;  Max.   :5.80   Max.   :4.40   Max.   :1.90   Max.   :0.600                  </span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : versicolor</span>
+<span class="co">#&gt;   Sepal.Length   Sepal.Width    Petal.Length   Petal.Width         Species  </span>
+<span class="co">#&gt;  Min.   :4.90   Min.   :2.00   Min.   :3.00   Min.   :1.00   setosa    : 0  </span>
+<span class="co">#&gt;  1st Qu.:5.60   1st Qu.:2.52   1st Qu.:4.00   1st Qu.:1.20   versicolor:50  </span>
+<span class="co">#&gt;  Median :5.90   Median :2.80   Median :4.35   Median :1.30   virginica : 0  </span>
+<span class="co">#&gt;  Mean   :5.94   Mean   :2.77   Mean   :4.26   Mean   :1.33                  </span>
+<span class="co">#&gt;  3rd Qu.:6.30   3rd Qu.:3.00   3rd Qu.:4.60   3rd Qu.:1.50                  </span>
+<span class="co">#&gt;  Max.   :7.00   Max.   :3.40   Max.   :5.10   Max.   :1.80                  </span>
+<span class="co">#&gt; ----------------------------------------------------------- </span>
+<span class="co">#&gt; : virginica</span>
+<span class="co">#&gt;   Sepal.Length   Sepal.Width    Petal.Length   Petal.Width         Species  </span>
+<span class="co">#&gt;  Min.   :4.90   Min.   :2.20   Min.   :4.50   Min.   :1.40   setosa    : 0  </span>
+<span class="co">#&gt;  1st Qu.:6.22   1st Qu.:2.80   1st Qu.:5.10   1st Qu.:1.80   versicolor: 0  </span>
+<span class="co">#&gt;  Median :6.50   Median :3.00   Median :5.55   Median :2.00   virginica :50  </span>
+<span class="co">#&gt;  Mean   :6.59   Mean   :2.97   Mean   :5.55   Mean   :2.03                  </span>
+<span class="co">#&gt;  3rd Qu.:6.90   3rd Qu.:3.17   3rd Qu.:5.88   3rd Qu.:2.30                  </span>
+<span class="co">#&gt;  Max.   :7.90   Max.   :3.80   Max.   :6.90   Max.   :2.50</span></code></pre>
+<p>Group Averages Over Level Combinations of Factors 分组平均</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(warpbreaks)
+<span class="co">#&gt; &#39;data.frame&#39;:    54 obs. of  3 variables:</span>
+<span class="co">#&gt;  $ breaks : num  26 30 54 25 70 52 51 26 67 18 ...</span>
+<span class="co">#&gt;  $ wool   : Factor w/ 2 levels &quot;A&quot;,&quot;B&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span>
+<span class="co">#&gt;  $ tension: Factor w/ 3 levels &quot;L&quot;,&quot;M&quot;,&quot;H&quot;: 1 1 1 1 1 1 1 1 1 2 ...</span>
+<span class="kw">ave</span>(warpbreaks<span class="op">$</span>breaks, warpbreaks<span class="op">$</span>wool)
+<span class="co">#&gt;  [1] 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0</span>
+<span class="co">#&gt; [16] 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 31.0 25.3 25.3 25.3</span>
+<span class="co">#&gt; [31] 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3</span>
+<span class="co">#&gt; [46] 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3 25.3</span>
+warpbreaks <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">5</span>)
+<span class="co">#&gt;   breaks wool tension</span>
+<span class="co">#&gt; 1     26    A       L</span>
+<span class="co">#&gt; 2     30    A       L</span>
+<span class="co">#&gt; 3     54    A       L</span>
+<span class="co">#&gt; 4     25    A       L</span>
+<span class="co">#&gt; 5     70    A       L</span>
+<span class="kw">with</span>(warpbreaks, <span class="kw">ave</span>(breaks, tension, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">trim =</span> <span class="fl">0.1</span>)))
+<span class="co">#&gt;  [1] 35.7 35.7 35.7 35.7 35.7 35.7 35.7 35.7 35.7 26.3 26.3 26.3 26.3 26.3 26.3</span>
+<span class="co">#&gt; [16] 26.3 26.3 26.3 21.1 21.1 21.1 21.1 21.1 21.1 21.1 21.1 21.1 35.7 35.7 35.7</span>
+<span class="co">#&gt; [31] 35.7 35.7 35.7 35.7 35.7 35.7 26.3 26.3 26.3 26.3 26.3 26.3 26.3 26.3 26.3</span>
+<span class="co">#&gt; [46] 21.1 21.1 21.1 21.1 21.1 21.1 21.1 21.1 21.1</span>
+<span class="co"># 分组求和</span>
+<span class="kw">with</span>(warpbreaks, <span class="kw">ave</span>(breaks, tension, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(x)))
+<span class="co">#&gt;  [1] 655 655 655 655 655 655 655 655 655 475 475 475 475 475 475 475 475 475</span>
+<span class="co">#&gt; [19] 390 390 390 390 390 390 390 390 390 655 655 655 655 655 655 655 655 655</span>
+<span class="co">#&gt; [37] 475 475 475 475 475 475 475 475 475 390 390 390 390 390 390 390 390 390</span>
+<span class="co"># 分组求和</span>
+<span class="kw">with</span>(iris, <span class="kw">ave</span>(Sepal.Length, Species, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(x)))
+<span class="co">#&gt;   [1] 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250</span>
+<span class="co">#&gt;  [19] 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250 250</span>
+<span class="co">#&gt;  [37] 250 250 250 250 250 250 250 250 250 250 250 250 250 250 297 297 297 297</span>
+<span class="co">#&gt;  [55] 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297</span>
+<span class="co">#&gt;  [73] 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297 297</span>
+<span class="co">#&gt;  [91] 297 297 297 297 297 297 297 297 297 297 329 329 329 329 329 329 329 329</span>
+<span class="co">#&gt; [109] 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329</span>
+<span class="co">#&gt; [127] 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329 329</span>
+<span class="co">#&gt; [145] 329 329 329 329 329 329</span></code></pre>
+</div>
+<div id="base-table" class="section level2">
+<h2><span class="header-section-number">7.10</span> 表格统计</h2>
+<blockquote>
+<p>介绍操作表格的 table, addmargins, prop.table, xtabs, margin.table, ftabe 等函数</p>
+</blockquote>
+<p>table 多个分类变量分组计数统计</p>
+<ul>
+<li>介绍 warpbreaks 和 airquality 纽约空气质量监测数据集 二维的数据框</li>
+<li>UCBAdmissions 1973 年加州大学伯克利分校的院系录取数据集 3维的列联表</li>
+<li>Titanic 4维的列联表数据 泰坦尼克号幸存者数据集</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(warpbreaks, <span class="kw">table</span>(wool, tension))
+<span class="co">#&gt;     tension</span>
+<span class="co">#&gt; wool L M H</span>
+<span class="co">#&gt;    A 9 9 9</span>
+<span class="co">#&gt;    B 9 9 9</span></code></pre>
+<p>以 iris 数据集为例，table 的第一个参数是自己制造的第二个分类变量，原始分类变量是 Species</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(iris, <span class="kw">table</span>(<span class="dt">Sepal.check =</span> Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>, Species))
+<span class="co">#&gt;            Species</span>
+<span class="co">#&gt; Sepal.check setosa versicolor virginica</span>
+<span class="co">#&gt;       FALSE     50         50        38</span>
+<span class="co">#&gt;       TRUE       0          0        12</span>
+<span class="kw">with</span>(iris, <span class="kw">table</span>(<span class="dt">Sepal.check =</span> Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(Sepal.Length), Species))
+<span class="co">#&gt;            Species</span>
+<span class="co">#&gt; Sepal.check setosa versicolor virginica</span>
+<span class="co">#&gt;       FALSE     50         24         6</span>
+<span class="co">#&gt;       TRUE       0         26        44</span></code></pre>
+<p>以 airquality 数据集为例，看看月份中臭氧含量比较高的几天</p>
+<pre class="sourceCode r"><code class="sourceCode r">aiq.tab &lt;-<span class="st"> </span><span class="kw">with</span>(airquality, <span class="kw">table</span>(<span class="dt">Oz.high =</span> Ozone <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>, Month))
+aiq.tab
+<span class="co">#&gt;        Month</span>
+<span class="co">#&gt; Oz.high  5  6  7  8  9</span>
+<span class="co">#&gt;   FALSE 25  9 20 19 27</span>
+<span class="co">#&gt;   TRUE   1  0  6  7  2</span></code></pre>
+<p>对表格按行和列求和，即求表格的边际，查看总体情况</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addmargins</span>(aiq.tab, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
+<span class="co">#&gt;        Month</span>
+<span class="co">#&gt; Oz.high   5   6   7   8   9 Sum</span>
+<span class="co">#&gt;   FALSE  25   9  20  19  27 100</span>
+<span class="co">#&gt;   TRUE    1   0   6   7   2  16</span>
+<span class="co">#&gt;   Sum    26   9  26  26  29 116</span></code></pre>
+<p>臭氧含量超 80 的天数在每个月的占比，<code>addmargins</code> 的第二个参数 1 表示对列求和</p>
+<pre class="sourceCode r"><code class="sourceCode r">aiq.prop &lt;-<span class="st"> </span><span class="kw">prop.table</span>(aiq.tab, <span class="dv">2</span>)
+aiq.prop
+<span class="co">#&gt;        Month</span>
+<span class="co">#&gt; Oz.high      5      6      7      8      9</span>
+<span class="co">#&gt;   FALSE 0.9615 1.0000 0.7692 0.7308 0.9310</span>
+<span class="co">#&gt;   TRUE  0.0385 0.0000 0.2308 0.2692 0.0690</span>
+aiq.marprop &lt;-<span class="st"> </span><span class="kw">addmargins</span>(aiq.prop, <span class="dv">1</span>)
+aiq.marprop
+<span class="co">#&gt;        Month</span>
+<span class="co">#&gt; Oz.high      5      6      7      8      9</span>
+<span class="co">#&gt;   FALSE 0.9615 1.0000 0.7692 0.7308 0.9310</span>
+<span class="co">#&gt;   TRUE  0.0385 0.0000 0.2308 0.2692 0.0690</span>
+<span class="co">#&gt;   Sum   1.0000 1.0000 1.0000 1.0000 1.0000</span></code></pre>
+<p>转换成百分比，将小数四舍五入转化为百分数，保留两位小数点</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>aiq.marprop, <span class="dv">2</span>)
+<span class="co">#&gt;        Month</span>
+<span class="co">#&gt; Oz.high      5      6      7      8      9</span>
+<span class="co">#&gt;   FALSE  96.15 100.00  76.92  73.08  93.10</span>
+<span class="co">#&gt;   TRUE    3.85   0.00  23.08  26.92   6.90</span>
+<span class="co">#&gt;   Sum   100.00 100.00 100.00 100.00 100.00</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(airquality, <span class="dt">panel =</span> panel.smooth, <span class="dt">main =</span> <span class="st">&quot;airquality data&quot;</span>)</code></pre>
+<p>以 UCBAdmissions 数据集为例，使用 <code>xtabs</code> 函数把数据组织成列联表，先查看数据的内容</p>
+<pre class="sourceCode r"><code class="sourceCode r">UCBAdmissions
+<span class="co">#&gt; , , Dept = A</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;           Gender</span>
+<span class="co">#&gt; Admit      Male Female</span>
+<span class="co">#&gt;   Admitted  512     89</span>
+<span class="co">#&gt;   Rejected  313     19</span>
+....
+UCBA2DF &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(UCBAdmissions)
+UCBA2DF
+<span class="co">#&gt;       Admit Gender Dept Freq</span>
+<span class="co">#&gt; 1  Admitted   Male    A  512</span>
+<span class="co">#&gt; 2  Rejected   Male    A  313</span>
+<span class="co">#&gt; 3  Admitted Female    A   89</span>
+<span class="co">#&gt; 4  Rejected Female    A   19</span>
+<span class="co">#&gt; 5  Admitted   Male    B  353</span>
+....</code></pre>
+<p>接着将 <code>UCBA2DF</code> 数据集转化为表格的形式</p>
+<pre class="sourceCode r"><code class="sourceCode r">UCBA2DF.tab &lt;-<span class="st"> </span><span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Admit <span class="op">+</span><span class="st"> </span>Dept, <span class="dt">data =</span> UCBA2DF)
+<span class="kw">ftable</span>(UCBA2DF.tab)
+<span class="co">#&gt;                 Dept   A   B   C   D   E   F</span>
+<span class="co">#&gt; Gender Admit                                </span>
+<span class="co">#&gt; Male   Admitted      512 353 120 138  53  22</span>
+<span class="co">#&gt;        Rejected      313 207 205 279 138 351</span>
+<span class="co">#&gt; Female Admitted       89  17 202 131  94  24</span>
+<span class="co">#&gt;        Rejected       19   8 391 244 299 317</span></code></pre>
+<p>将录取性别和院系进行对比</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">margin.table</span>(UCBA2DF.tab, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)), <span class="dv">1</span>)
+<span class="co">#&gt;         Dept</span>
+<span class="co">#&gt; Gender        A      B      C      D      E      F</span>
+<span class="co">#&gt;   Male   0.3066 0.2081 0.1208 0.1550 0.0710 0.1386</span>
+<span class="co">#&gt;   Female 0.0589 0.0136 0.3232 0.2044 0.2142 0.1858</span></code></pre>
+<p>男生倾向于申请院系 A 和 B，女生倾向于申请院系 C 到 F，院系 A 和 B 是最容易录取的。</p>
+</div>
+<div id="base-index" class="section level2">
+<h2><span class="header-section-number">7.11</span> 索引访问</h2>
+<p>which 与引用 <code>[</code> 性能比较，在区间 <span class="math inline">\([0,1]\)</span> 上生成 10 万个服从均匀分布的随机数，随机抽取其中<span class="math inline">\(\frac{1}{4}\)</span>。</p>
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">100000</span>
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(n)
+i &lt;-<span class="st"> </span><span class="kw">logical</span>(n)
+i[<span class="kw">sample</span>(n, n <span class="op">/</span><span class="st"> </span><span class="dv">4</span>)] &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(x[i], x[<span class="kw">which</span>(i)], <span class="dt">times =</span> <span class="dv">1000</span>)
+<span class="co">#&gt; Unit: microseconds</span>
+<span class="co">#&gt;         expr min  lq mean median  uq  max neval</span>
+<span class="co">#&gt;         x[i] 303 321  379    330 348 4193  1000</span>
+<span class="co">#&gt;  x[which(i)] 369 391  452    401 419 4108  1000</span></code></pre>
+</div>
+<div id="base-array" class="section level2">
+<h2><span class="header-section-number">7.12</span> 多维数组</h2>
+<p>多维数组的行列是怎么定义的 <code>?array</code> 轴的概念，画个图表示数组</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">27</span>, <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>))
+<span class="co">#&gt; , , 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;      [,1] [,2] [,3]</span>
+<span class="co">#&gt; [1,]    1    4    7</span>
+<span class="co">#&gt; [2,]    2    5    8</span>
+<span class="co">#&gt; [3,]    3    6    9</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; , , 2</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;      [,1] [,2] [,3]</span>
+<span class="co">#&gt; [1,]   10   13   16</span>
+<span class="co">#&gt; [2,]   11   14   17</span>
+<span class="co">#&gt; [3,]   12   15   18</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; , , 3</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;      [,1] [,2] [,3]</span>
+<span class="co">#&gt; [1,]   19   22   25</span>
+<span class="co">#&gt; [2,]   20   23   26</span>
+<span class="co">#&gt; [3,]   21   24   27</span></code></pre>
+<p>垂直于Z轴的平面去截三维立方体，3 代表 z 轴，得到三个截面（二维矩阵）</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">asplit</span>(<span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">27</span>, <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>)), <span class="dv">3</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt;      [,1] [,2] [,3]</span>
+<span class="co">#&gt; [1,]    1    4    7</span>
+<span class="co">#&gt; [2,]    2    5    8</span>
+<span class="co">#&gt; [3,]    3    6    9</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt;      [,1] [,2] [,3]</span>
+<span class="co">#&gt; [1,]   10   13   16</span>
+<span class="co">#&gt; [2,]   11   14   17</span>
+<span class="co">#&gt; [3,]   12   15   18</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt;      [,1] [,2] [,3]</span>
+<span class="co">#&gt; [1,]   19   22   25</span>
+<span class="co">#&gt; [2,]   20   23   26</span>
+<span class="co">#&gt; [3,]   21   24   27</span></code></pre>
+<p>对每个二维矩阵按列求和</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">asplit</span>(<span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">27</span>, <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>)), <span class="dv">3</span>), apply, <span class="dv">2</span>, sum)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1]  6 15 24</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] 33 42 51</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] 60 69 78</span></code></pre>
+<p><code>asplit</code> 和 <code>lapply</code> 组合处理多维数组的计算问题，多维数组<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
+</div>
+<div id="base-others" class="section level2">
+<h2><span class="header-section-number">7.13</span> 其它操作</h2>
+<p>成对的数据操作有 <code>list</code> 与 <code>unlist</code>、<code>stack</code> 与 <code>unstack</code>、<code>class</code> 与 <code>unclass</code>、<code>attach</code> 与 <code>detach</code> 以及 <code>with</code> 和 <code>within</code>，它们在数据操作过程中有时会起到一定的补充作用。</p>
+<div id="list-or-unlist" class="section level3">
+<h3><span class="header-section-number">7.13.1</span> 列表属性</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 创建列表</span>
+<span class="kw">list</span>(...)
+<span class="kw">pairlist</span>(...)
+<span class="co"># 转化列表</span>
+<span class="kw">as.list</span>(x, ...)
+<span class="co">## S3 method for class &#39;environment&#39;</span>
+<span class="kw">as.list</span>(x, <span class="dt">all.names =</span> <span class="ot">FALSE</span>, <span class="dt">sorted =</span> <span class="ot">FALSE</span>, ...)
+<span class="kw">as.pairlist</span>(x)
+<span class="co"># 检查列表</span>
+<span class="kw">is.list</span>(x)
+<span class="kw">is.pairlist</span>(x)
+
+<span class="kw">alist</span>(...)</code></pre>
+<p><code>list</code> 函数用来构造、转化和检查 R 列表对象。下面创建一个临时列表对象 tmp ，它包含两个元素 A 和 B，两个元素都是向量，前者是数值型，后者是字符型</p>
+<pre class="sourceCode r"><code class="sourceCode r">(tmp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="dt">B =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))
+<span class="co">#&gt; $A</span>
+<span class="co">#&gt; [1] 1 2 3</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $B</span>
+<span class="co">#&gt; [1] &quot;a&quot; &quot;b&quot;</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(x, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">use.names =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><code>unlist</code> 函数将给定的列表对象 <code>x</code> 简化为原子向量 (atomic vector)，我们发现简化之后变成一个字符型向量</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(tmp)
+<span class="co">#&gt;  A1  A2  A3  B1  B2 </span>
+<span class="co">#&gt; &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;a&quot; &quot;b&quot;</span>
+<span class="kw">unlist</span>(tmp, <span class="dt">use.names =</span> <span class="ot">FALSE</span>)
+<span class="co">#&gt; [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;a&quot; &quot;b&quot;</span></code></pre>
+</div>
+<div id="stack-or-unstack" class="section level3">
+<h3><span class="header-section-number">7.13.2</span> 堆叠向量</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stack</span>(x, ...)
+<span class="co">## Default S3 method:</span>
+<span class="kw">stack</span>(x, <span class="dt">drop =</span> <span class="ot">FALSE</span>, ...)
+<span class="co">## S3 method for class &#39;data.frame&#39;</span>
+<span class="kw">stack</span>(x, select, <span class="dt">drop =</span> <span class="ot">FALSE</span>, ...)
+
+<span class="kw">unstack</span>(x, ...)
+<span class="co">## Default S3 method:</span>
+<span class="kw">unstack</span>(x, form, ...)
+<span class="co">## S3 method for class &#39;data.frame&#39;</span>
+<span class="kw">unstack</span>(x, form, ...)</code></pre>
+<p><code>stack</code> 与 <code>unstack</code> 将多个向量堆在一起组成一个向量</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 查看数据集 PlantGrowth</span>
+<span class="kw">class</span>(PlantGrowth)
+<span class="co">#&gt; [1] &quot;data.frame&quot;</span>
+<span class="kw">head</span>(PlantGrowth)
+<span class="co">#&gt;   weight group</span>
+<span class="co">#&gt; 1   4.17  ctrl</span>
+<span class="co">#&gt; 2   5.58  ctrl</span>
+<span class="co">#&gt; 3   5.18  ctrl</span>
+<span class="co">#&gt; 4   6.11  ctrl</span>
+<span class="co">#&gt; 5   4.50  ctrl</span>
+<span class="co">#&gt; 6   4.61  ctrl</span>
+<span class="co"># 检查默认的公式</span>
+<span class="kw">formula</span>(PlantGrowth) 
+<span class="co">#&gt; weight ~ group</span>
+<span class="co"># 根据公式解除堆叠</span>
+<span class="co"># 下面等价于 unstack(PlantGrowth, form = weight ~ group)</span>
+(pg &lt;-<span class="st"> </span><span class="kw">unstack</span>(PlantGrowth)) 
+<span class="co">#&gt;    ctrl trt1 trt2</span>
+<span class="co">#&gt; 1  4.17 4.81 6.31</span>
+<span class="co">#&gt; 2  5.58 4.17 5.12</span>
+<span class="co">#&gt; 3  5.18 4.41 5.54</span>
+<span class="co">#&gt; 4  6.11 3.59 5.50</span>
+<span class="co">#&gt; 5  4.50 5.87 5.37</span>
+<span class="co">#&gt; 6  4.61 3.83 5.29</span>
+<span class="co">#&gt; 7  5.17 6.03 4.92</span>
+<span class="co">#&gt; 8  4.53 4.89 6.15</span>
+<span class="co">#&gt; 9  5.33 4.32 5.80</span>
+<span class="co">#&gt; 10 5.14 4.69 5.26</span></code></pre>
+<p>现在再将变量 pg 堆叠起来，还可以指定要堆叠的列</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stack</span>(pg)
+<span class="co">#&gt;    values  ind</span>
+<span class="co">#&gt; 1    4.17 ctrl</span>
+<span class="co">#&gt; 2    5.58 ctrl</span>
+<span class="co">#&gt; 3    5.18 ctrl</span>
+<span class="co">#&gt; 4    6.11 ctrl</span>
+<span class="co">#&gt; 5    4.50 ctrl</span>
+<span class="co">#&gt; 6    4.61 ctrl</span>
+<span class="co">#&gt; 7    5.17 ctrl</span>
+<span class="co">#&gt; 8    4.53 ctrl</span>
+<span class="co">#&gt; 9    5.33 ctrl</span>
+<span class="co">#&gt; 10   5.14 ctrl</span>
+<span class="co">#&gt; 11   4.81 trt1</span>
+<span class="co">#&gt; 12   4.17 trt1</span>
+<span class="co">#&gt; 13   4.41 trt1</span>
+<span class="co">#&gt; 14   3.59 trt1</span>
+<span class="co">#&gt; 15   5.87 trt1</span>
+<span class="co">#&gt; 16   3.83 trt1</span>
+<span class="co">#&gt; 17   6.03 trt1</span>
+<span class="co">#&gt; 18   4.89 trt1</span>
+<span class="co">#&gt; 19   4.32 trt1</span>
+<span class="co">#&gt; 20   4.69 trt1</span>
+<span class="co">#&gt; 21   6.31 trt2</span>
+<span class="co">#&gt; 22   5.12 trt2</span>
+<span class="co">#&gt; 23   5.54 trt2</span>
+<span class="co">#&gt; 24   5.50 trt2</span>
+<span class="co">#&gt; 25   5.37 trt2</span>
+<span class="co">#&gt; 26   5.29 trt2</span>
+<span class="co">#&gt; 27   4.92 trt2</span>
+<span class="co">#&gt; 28   6.15 trt2</span>
+<span class="co">#&gt; 29   5.80 trt2</span>
+<span class="co">#&gt; 30   5.26 trt2</span>
+<span class="kw">stack</span>(pg, <span class="dt">select =</span> <span class="op">-</span>ctrl)
+<span class="co">#&gt;    values  ind</span>
+<span class="co">#&gt; 1    4.81 trt1</span>
+<span class="co">#&gt; 2    4.17 trt1</span>
+<span class="co">#&gt; 3    4.41 trt1</span>
+<span class="co">#&gt; 4    3.59 trt1</span>
+<span class="co">#&gt; 5    5.87 trt1</span>
+<span class="co">#&gt; 6    3.83 trt1</span>
+<span class="co">#&gt; 7    6.03 trt1</span>
+<span class="co">#&gt; 8    4.89 trt1</span>
+<span class="co">#&gt; 9    4.32 trt1</span>
+<span class="co">#&gt; 10   4.69 trt1</span>
+<span class="co">#&gt; 11   6.31 trt2</span>
+<span class="co">#&gt; 12   5.12 trt2</span>
+<span class="co">#&gt; 13   5.54 trt2</span>
+<span class="co">#&gt; 14   5.50 trt2</span>
+<span class="co">#&gt; 15   5.37 trt2</span>
+<span class="co">#&gt; 16   5.29 trt2</span>
+<span class="co">#&gt; 17   4.92 trt2</span>
+<span class="co">#&gt; 18   6.15 trt2</span>
+<span class="co">#&gt; 19   5.80 trt2</span>
+<span class="co">#&gt; 20   5.26 trt2</span></code></pre>
+<div class="sidebar">
+<p>形式上和 reshape 有一些相似之处，数据框可以由长变宽或由宽变长</p>
+</div>
+</div>
+<div id="class-or-unclass" class="section level3">
+<h3><span class="header-section-number">7.13.3</span> 属性转化</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)
+<span class="kw">class</span>(x) &lt;-<span class="st"> </span>value
+<span class="kw">unclass</span>(x)
+<span class="kw">inherits</span>(x, what, <span class="dt">which =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">oldClass</span>(x)
+<span class="kw">oldClass</span>(x) &lt;-<span class="st"> </span>value</code></pre>
+<p><code>class</code> 和 <code>unclass</code> 函数用来查看、设置类属性和取消类属性，常用于面向对象的编程设计中</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(iris)
+<span class="co">#&gt; [1] &quot;data.frame&quot;</span>
+<span class="kw">class</span>(iris<span class="op">$</span>Species)
+<span class="co">#&gt; [1] &quot;factor&quot;</span>
+<span class="kw">unclass</span>(iris<span class="op">$</span>Species)
+<span class="co">#&gt;   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class="co">#&gt;  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span>
+<span class="co">#&gt;  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3</span>
+<span class="co">#&gt; [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</span>
+<span class="co">#&gt; [149] 3 3</span>
+<span class="co">#&gt; attr(,&quot;levels&quot;)</span>
+....</code></pre>
+</div>
+<div id="attach-or-detach" class="section level3">
+<h3><span class="header-section-number">7.13.4</span> 绑定环境</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(what,
+  <span class="dt">pos =</span> 2L, <span class="dt">name =</span> <span class="kw">deparse</span>(<span class="kw">substitute</span>(what), <span class="dt">backtick =</span> <span class="ot">FALSE</span>),
+  <span class="dt">warn.conflicts =</span> <span class="ot">TRUE</span>
+)
+<span class="kw">detach</span>(name,
+  <span class="dt">pos =</span> 2L, <span class="dt">unload =</span> <span class="ot">FALSE</span>, <span class="dt">character.only =</span> <span class="ot">FALSE</span>,
+  <span class="dt">force =</span> <span class="ot">FALSE</span>
+)</code></pre>
+<p><code>attach</code> 和 <code>detach</code> 是否绑定数据框的列名，不推荐操作，推荐使用 <code>with</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(iris)
+<span class="kw">head</span>(Species)
+<span class="co">#&gt; [1] setosa setosa setosa setosa setosa setosa</span>
+<span class="co">#&gt; Levels: setosa versicolor virginica</span>
+<span class="kw">detach</span>(iris)</code></pre>
+</div>
+<div id="with-or-within" class="section level3">
+<h3><span class="header-section-number">7.13.5</span> 数据环境</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(data, expr, ...)
+<span class="kw">within</span>(data, expr, ...)
+<span class="co">## S3 method for class &#39;list&#39;</span>
+<span class="kw">within</span>(data, expr, <span class="dt">keepAttrs =</span> <span class="ot">TRUE</span>, ...)</code></pre>
+<dl>
+<dt><code>data</code></dt>
+<dd>参数 <code>data</code> 用来构造表达式计算的环境。其默认值可以是一个环境，列表，数据框。在 <code>within</code> 函数中 <code>data</code> 参数只能是列表或数据框。
+</dd>
+<dt><code>expr</code></dt>
+<dd><p>参数 <code>expr</code> 包含要计算的表达式。在 <code>within</code> 中通常包含一个复合表达式，比如</p>
+<pre class="sourceCode r"><code class="sourceCode r">{
+  a &lt;-<span class="st"> </span><span class="kw">somefun</span>()
+  b &lt;-<span class="st"> </span><span class="kw">otherfun</span>()
+  ...
+  <span class="kw">rm</span>(unused1, temp)
+}</code></pre>
+</dd>
+</dl>
+<p><code>with</code> 和 <code>within</code> 计算一组表达式，计算的环境是由数据构造的，后者可以修改原始的数据</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(mtcars, mpg[cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span> <span class="op">&amp;</span><span class="st"> </span>disp <span class="op">&gt;</span><span class="st"> </span><span class="dv">350</span>])
+<span class="co">#&gt; [1] 18.7 14.3 10.4 10.4 14.7 19.2 15.8</span></code></pre>
+<p>和下面计算的结果一样，但是更加简洁漂亮</p>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars<span class="op">$</span>mpg[mtcars<span class="op">$</span>cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span> <span class="op">&amp;</span><span class="st"> </span>mtcars<span class="op">$</span>disp <span class="op">&gt;</span><span class="st"> </span><span class="dv">350</span>]
+<span class="co">#&gt; [1] 18.7 14.3 10.4 10.4 14.7 19.2 15.8</span></code></pre>
+<p><code>within</code> 函数可以修改原数据环境中的多个变量，比如删除、修改和添加等</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 原数据集 airquality</span>
+<span class="kw">head</span>(airquality)
+<span class="co">#&gt;   Ozone Solar.R Wind Temp Month Day</span>
+<span class="co">#&gt; 1    41     190  7.4   67     5   1</span>
+<span class="co">#&gt; 2    36     118  8.0   72     5   2</span>
+<span class="co">#&gt; 3    12     149 12.6   74     5   3</span>
+<span class="co">#&gt; 4    18     313 11.5   62     5   4</span>
+<span class="co">#&gt; 5    NA      NA 14.3   56     5   5</span>
+<span class="co">#&gt; 6    28      NA 14.9   66     5   6</span>
+aq &lt;-<span class="st"> </span><span class="kw">within</span>(airquality, {
+  lOzone &lt;-<span class="st"> </span><span class="kw">log</span>(Ozone) <span class="co"># 取对数</span>
+  Month &lt;-<span class="st"> </span><span class="kw">factor</span>(month.abb[Month]) <span class="co"># 字符串型转因子型</span>
+  cTemp &lt;-<span class="st"> </span><span class="kw">round</span>((Temp <span class="op">-</span><span class="st"> </span><span class="dv">32</span>) <span class="op">*</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">9</span>, <span class="dv">1</span>) <span class="co"># 从华氏温度到摄氏温度转化</span>
+  S.cT &lt;-<span class="st"> </span>Solar.R <span class="op">/</span><span class="st"> </span>cTemp <span class="co"># 使用新创建的变量</span>
+  <span class="kw">rm</span>(Day, Temp)
+})
+<span class="co"># 修改后的数据集</span>
+<span class="kw">head</span>(aq)
+<span class="co">#&gt;   Ozone Solar.R Wind Month  S.cT cTemp lOzone</span>
+<span class="co">#&gt; 1    41     190  7.4   May  9.79  19.4   3.71</span>
+<span class="co">#&gt; 2    36     118  8.0   May  5.32  22.2   3.58</span>
+<span class="co">#&gt; 3    12     149 12.6   May  6.39  23.3   2.48</span>
+<span class="co">#&gt; 4    18     313 11.5   May 18.74  16.7   2.89</span>
+<span class="co">#&gt; 5    NA      NA 14.3   May    NA  13.3     NA</span>
+<span class="co">#&gt; 6    28      NA 14.9   May    NA  18.9   3.33</span></code></pre>
+<p>下面再举一个复杂的绘图例子，这个例子来自 <code>boxplot</code> 函数</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(ToothGrowth, {
+  <span class="kw">boxplot</span>(len <span class="op">~</span><span class="st"> </span>dose,
+    <span class="dt">boxwex =</span> <span class="fl">0.25</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.2</span>,
+    <span class="dt">subset =</span> (supp <span class="op">==</span><span class="st"> &quot;VC&quot;</span>), <span class="dt">col =</span> <span class="st">&quot;#4285f4&quot;</span>,
+    <span class="dt">main =</span> <span class="st">&quot;Guinea Pigs&#39; Tooth Growth&quot;</span>,
+    <span class="dt">xlab =</span> <span class="st">&quot;Vitamin C dose mg&quot;</span>,
+    <span class="dt">ylab =</span> <span class="st">&quot;tooth length&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">35</span>)
+  )
+  <span class="kw">boxplot</span>(len <span class="op">~</span><span class="st"> </span>dose,
+    <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">boxwex =</span> <span class="fl">0.25</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span>,
+    <span class="dt">subset =</span> supp <span class="op">==</span><span class="st"> &quot;OJ&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;#EA4335&quot;</span>
+  )
+  <span class="kw">legend</span>(<span class="dv">2</span>, <span class="dv">9</span>, <span class="kw">c</span>(<span class="st">&quot;Ascorbic acid&quot;</span>, <span class="st">&quot;Orange juice&quot;</span>),
+    <span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;#4285f4&quot;</span>, <span class="st">&quot;#EA4335&quot;</span>)
+  )
+})</code></pre>
+<p><img src="08-data-manipulation_files/figure-html/subset-in-boxplot-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>将 <code>boxplot</code> 函数的 <code>subset</code> 参数单独提出来，调用数据子集选择函数 <code>subset</code> ，这里 <code>with</code> 中只包含一个表达式，所以也可以不用大括号</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(
+  <span class="kw">subset</span>(ToothGrowth, supp <span class="op">==</span><span class="st"> &quot;VC&quot;</span>),
+  <span class="kw">boxplot</span>(len <span class="op">~</span><span class="st"> </span>dose,
+    <span class="dt">boxwex =</span> <span class="fl">0.25</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.2</span>,
+    <span class="dt">col =</span> <span class="st">&quot;#4285f4&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Guinea Pigs&#39; Tooth Growth&quot;</span>,
+    <span class="dt">xlab =</span> <span class="st">&quot;Vitamin C dose mg&quot;</span>,
+    <span class="dt">ylab =</span> <span class="st">&quot;tooth length&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">35</span>)
+  )
+)
+<span class="kw">with</span>(
+  <span class="kw">subset</span>(ToothGrowth, supp <span class="op">==</span><span class="st"> &quot;OJ&quot;</span>),
+  <span class="kw">boxplot</span>(len <span class="op">~</span><span class="st"> </span>dose,
+    <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">boxwex =</span> <span class="fl">0.25</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span>,
+    <span class="dt">col =</span> <span class="st">&quot;#EA4335&quot;</span>
+  )
+)
+<span class="kw">legend</span>(<span class="dv">2</span>, <span class="dv">9</span>, <span class="kw">c</span>(<span class="st">&quot;Ascorbic acid&quot;</span>, <span class="st">&quot;Orange juice&quot;</span>),
+  <span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;#4285f4&quot;</span>, <span class="st">&quot;#EA4335&quot;</span>)
+)</code></pre>
+<p><img src="08-data-manipulation_files/figure-html/subset-out-boxplot-1.png" width="70%" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references">
+<div id="ref-Spector_2008_Manipulation">
+<p>Spector, Phil. 2008. <em>Data Manipulation with R</em>. New York, NY: Springer. <a href="https://doi.org/10.1663/978-0-387-%204731-6">https://doi.org/10.1663/978-0-387- 4731-6</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="13">
+<li id="fn13"><p>Thomas Lumley (2003) Standard nonstandard evaluation rules. <a href="https://developer.r-project.org/nonstandard-eval.pdf" class="uri">https://developer.r-project.org/nonstandard-eval.pdf</a><a href="08-data-manipulation.html#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p><a href="https://stackoverflow.com/questions/22959635/" class="uri">https://stackoverflow.com/questions/22959635/</a><a href="08-data-manipulation.html#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p><a href="https://www.brodieg.com/2018/11/23/is-your-matrix-running-slow-try-lists/" class="uri">https://www.brodieg.com/2018/11/23/is-your-matrix-running-slow-try-lists/</a><a href="08-data-manipulation.html#fnref15" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="07-data-rectangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="09-vector-manipulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/XiangyunHuang/RGraphics/edit/master/08-data-manipulation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["RGraphics.pdf", "RGraphics.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
