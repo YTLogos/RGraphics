@@ -683,6 +683,14 @@ p + geom_bar(colour = "white") +
 
 ## 空间数据 {#ggplot2-spatial}
 
+课程案例学习
+
+1. [2018-Introduction to Geospatial Raster and Vector Data with R](https://datacarpentry.org/r-raster-vector-geospatial/) 空间数据分析课程
+1. [Peter Ellis](http://freerangestats.info) 新西兰大选和普查数据 [More cartograms of New Zealand census data: district and city level](http://freerangestats.info/blog/nz.html)
+1. [2017-Mapping oil production by country in R](http://sharpsightlabs.com/blog/map-oil-production-country-r/) 石油产量在全球的分布
+1. [2017-How to highlight countries on a map](https://www.sharpsightlabs.com/blog/highlight-countries-on-map/) 高亮地图上的国家
+1. [2017-Mapping With Sf: Part 3](https://ryanpeek.github.io/2017-11-21-mapping-with-sf-part-3/) 
+
 美国各州的犯罪率数据 USArrests
 
 准备数据集
@@ -959,6 +967,12 @@ BiocManager::install("Rgraphviz", version = "3.8")
 
 Gephi [@ICWSM_2009_Gephi] 和 igraph 能处理的最大网络，R 包和作者依赖关系图 14000+ 包和 7000+ 作者，CRAN 是全球R包开发者之网，自发布 R 1.0.0 (February, 2000) 距今19年
 
+案例学习
+
+1. [2017-Help Us Map TrumpWorld](https://www.buzzfeed.com/johntemplon/help-us-map-trumpworld)
+1. [2017-Trumpworld Analysis: Ownership Relations in his Business Network](https://lucidmanager.org/trumpworld-analysis/)
+1. [2017-Social Network Analysis and Topic Modeling of codecentric’s Twitter friends and followers](https://shirinsplayground.netlify.com/2017/07/twitter-analysis-codecentric/)
+
 ```{r,eval=FALSE}
 library(DiagrammeR)
 library(DiagrammeRsvg)
@@ -1042,6 +1056,8 @@ cat(sprintf("--- elapsed user-time: %fs ", (proc.time() - start)[1]))
 ```
 
 ## CRAN 分析 {#analysis-cran}
+
+> ggraph 和 igraph 可视化
 
 首先我们从 CRAN 官网下载 R 包描述信息[^download-cran-metadata] 
 

@@ -81,6 +81,12 @@ https://www.r-project.org/help.html
 - UseR 2016: [Forty years of S](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Forty-years-of-S)
 - UseR 2017: [20 years of CRAN](https://channel9.msdn.com/Events/useR-international-R-User-conferences/useR-International-R-User-2017-Conference/KEYNOTE-20-years-of-CRAN)
 
+> 统计软件
+
+1. [JASP](https://jasp-stats.org/)
+1. [Rcmdr](https://socialsciences.mcmaster.ca/jfox/Misc/Rcmdr/)
+1. [rattle](https://rattle.togaware.com/)
+1. [radiant](https://github.com/radiant-rstats/radiant)
 
 ## 记号约定 {#conventions}
 

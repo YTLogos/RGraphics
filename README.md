@@ -7,22 +7,41 @@
 
 ---
 
-## 参考材料
+## 部分参考材料
 
-- [John W. Tukey](https://www.ams.org/notices/200202/fea-tukey.pdf) 生平介绍
 - Winston Chang [R Graphics Cookbook](https://r-graphics.org/)
 - Claus O. Wilke [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
 - Garrett Grolemund and Hadley Wickham [R for data science](https://r4ds.had.co.nz/)
 - Kieran Healy [Data Visualization: A practical introduction](https://socviz.co/)
 - Carson Sievert [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
-- R Graphics, Third ---  [出版商页面](https://www.crcpress.com/p/book/9781498789059) [书籍补充材料](https://www.stat.auckland.ac.nz/~paul/RG3e/)
+- Brian Lee Yung Rowe [Modeling data with functional programming](https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf)
+- [John W. Tukey's Life](https://www.ams.org/notices/200202/fea-tukey.pdf)
+- [R Graphics, Third](https://www.stat.auckland.ac.nz/~paul/RG3e/)
 - [Online regex tester and debugger](https://regex101.com/)
 - [Martin Mächler](https://github.com/mmaechler) [Good Practices in R Programming](https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf) 
-- 数据科学速查表 <https://github.com/FavioVazquez/ds-cheatsheets>
-- [Modeling data with functional programming](https://cartesianfaith.com/2016/05/19/modeling-data-with-functional-programming-state-based-systems/) [PDF 下载链接](https://cartesianfaith.files.wordpress.com/2015/12/rowe-modeling-data-with-functional-programming-in-r.pdf)
+- [List of Data Science Cheatsheets to rule the world](https://github.com/FavioVazquez/ds-cheatsheets#r)
 - [Getting to Know Grid Graphics](https://www.stat.auckland.ac.nz/~paul/useR2015-grid/)
-- [R 参考卡片](https://github.com/sunbjt/r_reference)
-- [R 常见问题解答](https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf)
+- [R Reference Card (Chinese version)](https://github.com/sunbjt/r_reference) by [Sizhe Liu](https://www.bjt.name/)
+- [Frequently asked questionsR](https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf) by [Sizhe Liu](https://www.bjt.name/)
+
+
+## 部署到 Github Pages
+
+```bash
+git checkout gh-pages
+git rm -rf .
+
+rm -rf _bookdown_files images RGraphics.rds packages.bib .Rhistory
+mv _book/* .
+
+echo ".Rproj.user/" >> .gitignore
+git add .
+git commit -m "update book"
+git push origin gh-pages
+
+git checkout master
+```
+
 ---
 
 > **Warning**
