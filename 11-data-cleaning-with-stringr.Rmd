@@ -4,13 +4,12 @@
 
 [Handling Strings with R](https://www.gastonsanchez.com/r4strings/) 和 [R for Data Science](https://r4ds.had.co.nz/strings.html) 提供字符串入门介绍 ，Sara Stoudt 整理了 stringr 包与 Base R 正则表达式函数的对应表 <https://stringr.tidyverse.org/articles/from-base.html>
 
-[stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包， [re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份 [正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)
+[stringr](https://stringr.tidyverse.org/) 基于 [stringi](https://github.com/gagolews/stringi) 包字符串处理包， [re2r](https://github.com/qinwf/re2r/) 包基于 Google 开发的 C++ 库 [re2](https://github.com/google/re2)，Google 编程之夏项目提供了一份 [正则表达式性能综述](https://github.com/rstats-gsoc/gsoc2016/wiki/re2-regular-expressions)， [stringdist](https://github.com/markvanderloo/stringdist) Approximate String Matching and String Distance Functions 近似字符串匹配和字符串距离计算函数 [@Mark_2014_stringdist]
 
 - [janitor](https://github.com/sfirke/janitor)
 - [Manipulating strings with the stringr package](https://www.brodrigues.co/blog/2019-02-10-stringr_package/)
 - [filesstrings](https://github.com/rorynolan/filesstrings) 基于 stringr 操作字符串
 - [strex](https://github.com/rorynolan/strex) 一些没有包含在 stringr 或者 stringi 中的字符串操作函数
-
 
 
 ## 处理性能 {#performance}
@@ -35,7 +34,7 @@ sapply(c("PCRE_limit_recursion", "PCRE_study", "PCRE_use_JIT"), getOption)
 
 ## 网络爬虫 {#Web-crawler}
 
-用 R 语言写爬虫 curl、httr、 xml2、XML 和 rvest 解析网页[^RCurl]
+用 R 语言写爬虫 [curl](https://github.com/jeroen/curl)、[httr](https://github.com/r-lib/httr)、 [xml2](https://github.com/r-lib/xml2)、[XML](https://CRAN.R-project.org/package=XML) 和 [rvest](https://github.com/tidyverse/rvest) 解析网页[^RCurl]
 
 ```{r}
 # 查看 libcurl 库的版本

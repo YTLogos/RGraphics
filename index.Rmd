@@ -10,7 +10,7 @@ fontsize: 10pt
 secnumdepth: 3
 colorlinks: yes
 classoption: "UTF8,oneside"
-bibliography: [latex/book.bib, latex/refer.bib, latex/packages.bib]
+bibliography: [latex/refer.bib]
 biblio-style: apalike
 link-citations: yes
 subparagraph: true
@@ -64,12 +64,5 @@ par(op)
 
 注意
 : 本书要求复现环境是 R 3.6.0 因为书中涉及 `barplot` 新增的公式方法，新增多维数组操作函数 `asplit`， `axis` 函数的 `gap.axis` ，新增 `hcl.colors` 函数等，完整列表见官网 [What's New?](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)
-
-```{r include=FALSE,cache=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tikzDevice'
-), 'latex/packages.bib')
-```
 
 `r if (knitr::is_latex_output()) '-->'`

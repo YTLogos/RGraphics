@@ -75,7 +75,7 @@ mtext(expression(italic(f) ~ group("(",list(x[1],x[2]),")") == frac(1, 2 ~ pi ~ 
   ), side = 1, line = 3)
 ```
 
-早在 2006 年的时候，Paul Murrell 就提出来一种解决方法^[<https://www.stat.auckland.ac.nz/~paul/Talks/fonts.pdf>]，可是比较复杂，后来谢大大接手了 tikzDevice 包 [@R-tikzDevice] 的开发，算是比较好的解决了这个问题。
+早在 2006 年的时候，Paul Murrell 就提出来一种解决方法^[<https://www.stat.auckland.ac.nz/~paul/Talks/fonts.pdf>]，可是比较复杂，后来谢大大接手了 [tikzDevice](https://github.com/daqana/tikzDevice) 包的开发，算是比较好的解决了这个问题，目前该 R 包由 Ralf Stubner 接手维护。
 
 ```{r bivariate-normal-density-2,dev='tikz',fig.cap="二元正态密度函数",fig.asp=1,fig.process=to_png}
 # 代码来自  http://www.ejwagenmakers.com/misc/Plotting_3d_in_R.pdf

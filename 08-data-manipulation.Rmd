@@ -627,6 +627,8 @@ lapply(asplit(array(1:27, c(3, 3, 3)), 3), apply, 2, sum)
 
 `asplit` 和 `lapply` 组合处理多维数组的计算问题，多维数组[^matrix-list]
 
+[三维数组的矩阵运算](https://d.cosx.org/d/107493)
+
 [^matrix-list]: https://www.brodieg.com/2018/11/23/is-your-matrix-running-slow-try-lists/
 
 ## 其它操作 {#base-others}

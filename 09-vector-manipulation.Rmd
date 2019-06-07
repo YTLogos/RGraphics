@@ -300,8 +300,51 @@ Charles Determan 开发的 [gpuR](https://github.com/cdeterman/gpuR) [@R-gpuR] �
 
 此外还有 [gputools](https://github.com/nullsatz/gputools)
 
+```{r,eval=FALSE}
+library(gpuR)
+set.seed(2019)
+gpuA <- gpuMatrix(rnorm(16), nrow = 4, ncol = 4)
+gpuA
+```
+```
+An object of class "fgpuMatrix"
+Slot "address":
+<pointer: 0x000000000fbe9760>
+
+Slot ".context_index":
+[1] 1
+
+Slot ".platform_index":
+[1] 1
+
+Slot ".platform":
+[1] "Intel(R) OpenCL"
+
+Slot ".device_index":
+[1] 1
+
+Slot ".device":
+[1] "Intel(R) HD Graphics 4600"
+```
+```{r,eval=FALSE}
+gpuB <- gpuA %*% gpuA
+print(gpuB)
+```
+```
+Source: gpuR Matrix [4 x 4]
+
+            [,1]      [,2]      [,3]       [,4]
+[1,]  2.61787200 -1.274909 -2.150301 -2.0073860
+[2,] -0.02231596  1.566433  0.986027  0.7339008
+[3,] -0.12862393  1.848340  3.261899  1.6919358
+[4,] -1.90084898 -1.863014 -1.312350 -0.2553876
+```
 
 ## 管道操作 {#pipe-manipulation}
+
+[Stefan Milton Bache](http://stefanbache.dk/) 开发了 [magrittr](https://github.com/tidyverse/magrittr) 包实现管道操作，增加代码的可读性和维护性，大家都抱怨这个 R 包的名字取的太奇葩，因为 [记不住](https://d.cosx.org/d/420697/21)，它其实是一个复杂的[法语发音][pronounce-magrittr]，中式英语就叫它马格里特吧！这下应该好记多了吧！
+
+[pronounce-magrittr]: https://magrittr.tidyverse.org/articles/magrittr.html
 
 我要查看是否需要新添加一个 R 包依赖，假设该 R 包是 reticulate 没有出现在 DESCRIPTION 文件中，但是可能已经被其中某（个）些 R 包依赖了
 
@@ -351,6 +394,13 @@ one_abs <- abs(one_prob - 0.2)
 ```
 
 似然估计
+
+
+## 软件信息 {#vector-session-info}
+
+```{r}
+sessionInfo()
+```
 
 [^pipe-r]: https://www.datacamp.com/community/tutorials/pipe-r-tutorial
 [^create-an-empty-data-frame]: https://stackoverflow.com/questions/10689055

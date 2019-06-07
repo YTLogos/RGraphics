@@ -1,3 +1,6 @@
+library(magrittr) # https://magrittr.tidyverse.org 复杂的法语发音 马格里特
+# [Stefan Milton Bache](http://stefanbache.dk/) 开发
+
 # 下载 CRAN R 包 metadata 信息
 if (file.exists("data/packages.rds")) {
   pdb <- readRDS("data/packages.rds")
@@ -38,18 +41,37 @@ net_pdb <- subset(pdb, subset = !duplicated(pdb[, "Package"]), select = c("Maint
 
 # 如果两人多次有相互贡献，可以将此贡献次数累加，说明二人合作频繁，在网络图中可以用线的粗细、颜色深浅、明暗程度表示
 
-clean_net_pdb <- function(vec_name) {
-  # vec_name 是一个长度为 2 的字符串向量
-  # 函数返回一个数据矩阵
-  name_df <- cbind(
-    Maintainer = clean_maintainer(vec_name[1]),
+# 作者字段的清理是没完没了的，所以要避免
+
+clean_net_pdb <- function(name) {
+  # name 是一个长度为 2 的字符串向量
+  # 函数返回一个数据矩阵 行数是贡献者的数量 列是2
+  cbind(
+    Maintainer = clean_maintainer(name[1]),
     # 以逗号作为拆分依据，然后去掉首尾空格
-    Author = trimws(strsplit(clean_author(vec_name[2]), split = ",")[[1]])
+    # 约定每个开发者自己也是贡献者，自己指向自己的边
+    # 有些 Author 字段信息中包含开发者，有些不包含，所以后续去重即可
+    # Author 字段的分隔符包含逗号、分号、&
+    Author = unique(c(clean_maintainer(name[1]), trimws(strsplit(clean_author(name[2]), split = ",")[[1]])))
   )
 }
 
+
 # 相互贡献关系矩阵
 net_ctb <- Reduce("rbind", apply(net_pdb, 1, clean_net_pdb))
+
+
+# tmp_aut <- unique(net_ctb[, "Author"])
+# tmp_cre <- unique(net_ctb[, "Maintainer"])
+# tmp_ctb <- setdiff(tmp_aut, tmp_cre)
+# write.table(sort(tmp_ctb),
+#   file = "data/tmp_ctb.csv",
+#   row.names = FALSE, col.names = FALSE, quote = FALSE
+# )
+# write.table(sort(tmp_cre),
+#   file = "data/tmp_cre.csv",
+#   row.names = FALSE, col.names = FALSE, quote = FALSE
+# )
 
 # Author 字段的贡献者集合和 Maintainer 字段的开发者集合应该是一样大，
 # 如果出现了在 Author 集合而不在 Maintainer 集合说明这样的贡献者自己没开发过 R 包，
@@ -59,7 +81,7 @@ net_ctb <- Reduce("rbind", apply(net_pdb, 1, clean_net_pdb))
 # 自己开发有 R 包，还给别人贡献代码，分享、开源精神
 # 既是开发者又是贡献者
 
-sub_net_ctb <- net_ctb[net_ctb[, "Author"] %in% as.character(unique(net_ctb[, "Maintainer"])), ]
+sub_net_ctb <- net_ctb[net_ctb[, "Author"] %in% unique(net_ctb[, "Maintainer"]), ]
 # 去掉自己指向自己的关系
 ctb_aut <- sub_net_ctb[sub_net_ctb[, 1] != sub_net_ctb[, 2], ]
 # 边 4300+
