@@ -439,7 +439,7 @@ substr(x, c(2, 4), c(4, 5, 8))
 substring(x, c(2, 4), c(4, 5, 8))
 ```
 
-## 其它字符串操作 {#other-string-op}
+## 其它操作 {#other-string-op}
 
 ### strwrap
 
@@ -523,5 +523,10 @@ trimws(x, "l")
 trimws(x, "r")
 ```
 
+## 软件信息 {#string-manipulation-session-info}
+
+```{r}
+sessionInfo()
+```
 
 [^regexp]: https://homepage.divms.uiowa.edu/~luke/R/regexp.html

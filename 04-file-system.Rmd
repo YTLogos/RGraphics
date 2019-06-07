@@ -50,7 +50,7 @@ library(fs)
     rinternals <- file.path(R.home("include"), "Rinternals.h")
     # file.show(rinternals)
     ```
-    ```{r show-file,fig.cap = "file.show 打开文件"}
+    ```{r show-file,fig.cap = "file.show 打开文件",echo=FALSE}
     knitr::include_graphics(path = 'figures/show-file.png')
     ```
 

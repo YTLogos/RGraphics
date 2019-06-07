@@ -160,10 +160,16 @@ ggplot(mtcars, aes(x = mpg * 0.43, y = wt * 0.4535924, colour = factor(cyl))) +
   scale_colour_fira()
 ```
 
-在 Ubuntu 系统上安装微软字体，如果因为网络原因，下载出现问题，也有可能是长期没有维护更新，默认字体下载链接失效了
+在 Ubuntu 系统上安装微软字体
 
 ```bash
 sudo apt-get install ttf-mscorefonts-installer
+```
+
+如果因为网络原因，下载出现问题，可能是长期没有维护更新，默认字体下载链接失效了
+
+```{r missing-fonts,fig.cap="字体缺失",eval=FALSE,echo=FALSE}
+knitr::include_graphics(path = "figures/msfonts.png")
 ```
 
 因此，需要手动下载字体到目录 `~/msfonts/`下
@@ -288,9 +294,6 @@ axis(1,
 dev.off()
 ```
 
-```{r missing-fonts,fig.cap="字体缺失",eval=FALSE}
-knitr::include_graphics(path = "figures/missing-fonts.png")
-```
 
 
 ```{r,eval=FALSE}
@@ -367,7 +370,7 @@ PDF 格式图片转 PNG 格式
 convert -quality 100 -density 300x300 font_Impact.pdf font_Impact.png
 ```
 
-```{r fonts-Impact,fig.cap="Impact 字体"}
+```{r fonts-Impact,fig.cap="Impact 字体",echo=FALSE}
 knitr::include_graphics(path = "figures/font_Impact.png")
 ```
 
