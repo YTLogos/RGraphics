@@ -9,12 +9,8 @@ Imports:
   desc,
   firatheme,
   gapminder,
-  gifski,
-  gganimate,
   ggridges,
   ggthemes,
-  highcharter,
-  leaflet,
   magick,
   mapdata,
   mapproj,
@@ -24,7 +20,6 @@ Imports:
   openxlsx,
   patchwork,
   pdftools,
-  plotly,
   pracma,
   RClickhouse,
   reticulate,
@@ -32,10 +27,8 @@ Imports:
   showtext,
   stars,
   tidyverse,
-  tikzDevice,
-  visNetwork,
-  vegawidget
-URL: https://r4charts.netlify.com, https://bookdown.org/xiangyun/RGraphics/
+  tikzDevice
+URL: https://r-graphics.netlify.com, https://bookdown.org/xiangyun/RGraphics/
 BugReports: https://github.com/XiangyunHuang/RGraphics/issues
 Suggests:
   extrafont,
